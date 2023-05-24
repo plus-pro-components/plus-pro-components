@@ -1,0 +1,11 @@
+{
+  "name": "@plus-pro-components/components",
+  "version": "0.0.1",
+  "description": "all components are settled here",
+  "main": "index.ts",
+  "module": "index.ts",
+  "unpkg": "index.js",
+  "jsdelivr": "index.js",
+  "types": "index.d.ts",
+  "sideEffects": false
+}

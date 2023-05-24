@@ -1,0 +1,17 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "module": "CommonJS",
+    "composite": true,
+    "lib": ["ESNext"],
+    "types": ["node"],
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true
+  },
+  "ts-node": {
+    "files": true // 增加这一条配置即可，其他同默认配置
+  },
+  "include": ["scripts", "packages/utils/build.config.ts"],
+  "exclude": ["**/__tests__/**", "**/tests/**", "**/dist"]
+}

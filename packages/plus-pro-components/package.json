@@ -1,0 +1,71 @@
+{
+  "name": "plus-pro-components",
+  "version": "0.0.1-alpha.1",
+  "description": "Page level components developed based on Element Plus.",
+  "author": "xiaofei",
+  "keywords": [
+    "plus-pro-components",
+    "element-plus",
+    "Page level components",
+    "component library",
+    "ui framework",
+    "ui",
+    "vue",
+    "echarts"
+  ],
+  "homepage": "https://github.com/plus-pro-components/plus-pro-components",
+  "bugs": {
+    "url": "https://github.com/plus-pro-components/plus-pro-components/issues"
+  },
+  "license": "MIT",
+  "main": "lib/index.js",
+  "module": "es/index.mjs",
+  "types": "es/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./es/index.d.ts",
+      "import": "./es/index.mjs",
+      "require": "./lib/index.js"
+    },
+    "./es": "./es/index.mjs",
+    "./lib": "./lib/index.js",
+    "./es/*.mjs": "./es/*.mjs",
+    "./es/*": "./es/*.mjs",
+    "./lib/*.js": "./lib/*.js",
+    "./lib/*": "./lib/*.js",
+    "./*": "./*"
+  },
+  "unpkg": "dist/index.js",
+  "jsdelivr": "dist/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/plus-pro-components/plus-pro-components.git"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
+  },
+  "style": "dist/index.css",
+  "sideEffects": [
+    "dist/*"
+  ],
+  "peerDependencies": {
+    "vue": "^3.2.0"
+  },
+  "dependencies": {
+    "@element-plus/icons-vue": "^2.1.0",
+    "@types/lodash-es": "^4.17.6",
+    "element-plus": "^2.3.4",
+    "dayjs": "^1.11.3",
+    "lodash-es": "^4.17.21"
+  },
+  "devDependencies": {
+    "@types/node": "*",
+    "vue": "^3.2.37"
+  },
+  "browserslist": [
+    "> 1%",
+    "not ie 11",
+    "not op_mini all"
+  ]
+}

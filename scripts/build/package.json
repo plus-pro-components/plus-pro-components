@@ -1,0 +1,13 @@
+{
+  "name": "@plus-pro-components/build",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Build Toolchain for plus-pro-components",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "node .",
+    "stub": "npx unbuild --stub"
+  }
+}

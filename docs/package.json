@@ -1,0 +1,21 @@
+{
+  "name": "@plus-pro-components/docs",
+  "version": "0.0.1",
+  "private": true,
+  "description": "plus-pro-components docs",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vitepress dev",
+    "build": "vitepress build",
+    "preview": "vitepress preview"
+  },
+  "keywords": [],
+  "author": "xiaofei",
+  "license": "ISC",
+  "devDependencies": {
+    "vitepress": "1.0.0-alpha.75"
+  },
+  "dependencies": {
+    "plus-pro-components": "0.0.1-alpha.1"
+  }
+}

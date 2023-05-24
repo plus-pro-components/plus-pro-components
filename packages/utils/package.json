@@ -1,0 +1,46 @@
+{
+  "name": "@plus-pro-components/utils",
+  "version": "0.0.1",
+  "description": "utils of plus-pro-components",
+  "license": "MIT",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
+  },
+  "scripts": {
+    "dev": "pnpm run stub",
+    "build": "npx unbuild",
+    "stub": "npx unbuild --stub"
+  },
+  "peerDependencies": {
+    "vue": "^3.2.0"
+  },
+  "dependencies": {
+    "accounting": "^0.4.1",
+    "axios": "^1.4.0",
+    "crypto-js": "^4.1.1",
+    "dayjs": "^1.11.7",
+    "file-saver": "^2.0.5",
+    "good-storage": "^1.1.1",
+    "js-cookie": "^3.0.5",
+    "lodash-es": "^4.17.21",
+    "numeral": "^2.0.6",
+    "qs": "^6.11.1"
+  },
+  "devDependencies": {
+    "@types/accounting": "^0.4.2",
+    "@types/crypto-js": "^4.1.1",
+    "@types/file-saver": "^2.0.5",
+    "@types/good-storage": "^1.1.0",
+    "@types/js-cookie": "^3.0.3",
+    "@types/lodash-es": "^4.17.7",
+    "@types/numeral": "^2.0.2",
+    "@types/qs": "^6.9.7"
+  }
+}

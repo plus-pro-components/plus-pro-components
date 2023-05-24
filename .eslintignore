@@ -1,0 +1,9 @@
+build
+src/assets
+public
+dist
+tests/
+src/components/Markdown/zh-ch.js
+coverage
+*.html
+styles
