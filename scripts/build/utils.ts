@@ -15,7 +15,7 @@ export function formatBundleFilename(name: string, minify?: boolean, ext?: strin
 
 export const PKG_NAME = 'plus-pro-components'
 
-export const PKG_CAMEL_CASE_NAME = 'PlusComponents'
+export const PKG_CAMEL_CASE_NAME = 'PlusProComponents'
 
 export const PKG_PREFIX = '@plus-pro-components'
 
