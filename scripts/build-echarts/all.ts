@@ -5,7 +5,7 @@ import consola from 'consola'
 import { nodeResolve } from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
 import esbuild, { minify as minifyPlugin } from 'rollup-plugin-esbuild'
-import { pcOutput, pcRoot } from './paths'
+import { ecOutput, ecRoot } from './paths'
 import { writeBundles, formatBundleFilename, PKG_CAMEL_CASE_NAME, external } from './utils'
 
 const buildAll = async (minify?: boolean) => {
@@ -34,7 +34,7 @@ const buildAll = async (minify?: boolean) => {
   }
 
   const bundle = await rollup({
-    input: resolve(pcRoot, 'index.ts'),
+    input: resolve(ecRoot, 'index.ts'),
     plugins,
     external: external,
     treeshake: true
@@ -43,7 +43,7 @@ const buildAll = async (minify?: boolean) => {
   await writeBundles(bundle, [
     {
       format: 'umd',
-      file: resolve(pcOutput, formatBundleFilename('index', minify, 'js')),
+      file: resolve(ecOutput, formatBundleFilename('index', minify, 'js')),
       exports: 'named',
       name: PKG_CAMEL_CASE_NAME,
       globals: {
@@ -53,7 +53,7 @@ const buildAll = async (minify?: boolean) => {
     },
     {
       format: 'esm',
-      file: resolve(pcOutput, formatBundleFilename('index', minify, 'mjs')),
+      file: resolve(ecOutput, formatBundleFilename('index', minify, 'mjs')),
       sourcemap: false
     }
   ])

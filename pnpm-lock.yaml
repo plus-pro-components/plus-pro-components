@@ -86,9 +86,6 @@ importers:
       cz-git:
         specifier: ^1.6.1
         version: 1.6.1
-      echarts:
-        specifier: ^5.4.2
-        version: 5.4.2
       execa:
         specifier: 5.1.0
         version: 5.1.0
@@ -148,7 +145,7 @@ importers:
     dependencies:
       plus-pro-components:
         specifier: 0.0.1-alpha.1
-        version: link:../packages/plus-pro-components
+        version: 0.0.1-alpha.1(vue@3.2.47)
     devDependencies:
       vitepress:
         specifier: 1.0.0-alpha.75
@@ -163,6 +160,12 @@ importers:
       '@plus-pro-components/hooks':
         specifier: workspace:*
         version: link:../hooks
+      echarts:
+        specifier: ^5.4.2
+        version: 5.4.2
+      vue:
+        specifier: ^3.2.0
+        version: 3.2.47
 
   packages/eslint-config:
     devDependencies:
@@ -3487,7 +3490,7 @@ packages:
     dependencies:
       tslib: 2.3.0
       zrender: 5.4.3
-    dev: true
+    dev: false
 
   /editor@1.0.0:
     resolution: {integrity: sha512-SoRmbGStwNYHgKfjOrX2L0mUvp9bUVv0uPppZSOMAntEbcFtoC3MKF5b3T6HQPXKIV+QGY3xPO3JK5it5lVkuw==}
@@ -6229,6 +6232,21 @@ packages:
       pathe: 1.1.0
     dev: true
 
+  /plus-pro-components@0.0.1-alpha.1(vue@3.2.47):
+    resolution: {integrity: sha512-jS0XRIWPCRy1kru6VVYdGsYqjDXFUNSQJYFmGZteUoWw4brx/m4zmxqLT7y+L+vm43ujs34G/DOsV0UX8mI6Fw==}
+    peerDependencies:
+      vue: ^3.2.0
+    dependencies:
+      '@element-plus/icons-vue': 2.1.0(vue@3.2.47)
+      '@types/lodash-es': 4.17.7
+      dayjs: 1.11.7
+      element-plus: 2.3.4(vue@3.2.47)
+      lodash-es: 4.17.21
+      vue: 3.2.47
+    transitivePeerDependencies:
+      - '@vue/composition-api'
+    dev: false
+
   /postcss-calc@8.2.4(postcss@8.4.23):
     resolution: {integrity: sha512-SmWMSJmB8MRnnULldx0lQIyhSNvuDl9HfrZkaqqE/WHAhToYsAvDq+yAsA/kIyINDszOp3Rh0GFoNuH5Ypsm3Q==}
     peerDependencies:
@@ -7622,7 +7640,7 @@ packages:
 
   /tslib@2.3.0:
     resolution: {integrity: sha512-N82ooyxVNm6h1riLCoyS9e3fuJ3AMG2zIZs2Gd1ATcSFjSA23Q0fzjjZeh0jbJvWVDZ0cJT8yaNNaaXHzueNjg==}
-    dev: true
+    dev: false
 
   /tslib@2.5.2:
     resolution: {integrity: sha512-5svOrSA2w3iGFDs1HibEVBGbDrAY82bFQ3HZ3ixB+88nsbsWQoKqDRb5UBYAUPEzbBn6dAp5gRNXglySbx1MlA==}
@@ -8239,4 +8257,4 @@ packages:
     resolution: {integrity: sha512-DRUM4ZLnoaT0PBVvGBDO9oWIDBKFdAVieNWxWwK0niYzJCMwGchRk21/hsE+RKkIveH3XHCyvXcJDkgLVvfizQ==}
     dependencies:
       tslib: 2.3.0
-    dev: true
+    dev: false

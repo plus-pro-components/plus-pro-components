@@ -1,8 +1,8 @@
 {
-  "name": "@plus-pro-components/build",
+  "name": "@plus-pro-components/build-echarts",
   "version": "0.0.1",
   "private": true,
-  "description": "Build Toolchain for plus-pro-components",
+  "description": "Build Toolchain for @plus-pro-components/echarts",
   "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",

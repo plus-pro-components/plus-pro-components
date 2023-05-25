@@ -8,6 +8,12 @@ npm publish
 echo "Successfully published plus-pro-components"
 cd -
 
+cd packages/echarts
+echo "publish echarts..."
+npm publish
+echo "Successfully published echarts"
+cd -
+
 cd packages/eslint-config
 echo "publish eslint-config..."
 npm publish

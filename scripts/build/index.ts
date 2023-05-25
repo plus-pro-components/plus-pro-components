@@ -1,7 +1,7 @@
 import { resolve, join } from 'path'
 import { copyFile } from 'fs/promises'
 import consola from 'consola'
-import { buildOutput, pcOutput, projRoot, pcPackage } from '../paths'
+import { buildOutput, pcOutput, projRoot, pcPackage } from './paths'
 import { copy } from 'fs-extra'
 import all from './all'
 import modules from './modules'
@@ -22,7 +22,9 @@ const copyDts = async () => {
   await copy(src, targetLib)
 }
 
-Promise.all([...all, ...modules, ...dts]).then(async () => {
+const task = [...all, ...modules, ...dts]
+
+Promise.all(task).then(async () => {
   await copyDts()
   consola.success('Successfully copied definition file!')
   await copyFiles()

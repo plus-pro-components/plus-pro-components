@@ -5,10 +5,9 @@ import { nodeResolve } from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
 import esbuild from 'rollup-plugin-esbuild'
 import glob from 'fast-glob'
-import { pcOutput, pkgRoot, pcRoot } from './paths'
 import vuePlugin from 'rollup-plugin-vue'
-
 import type { OutputOptions, ModuleFormat } from 'rollup'
+import { ecOutput, ecRoot } from './paths'
 import { excludeFiles, writeBundles, external } from './utils'
 
 const buildConfig = {
@@ -18,7 +17,7 @@ const buildConfig = {
     ext: 'mjs',
     output: {
       name: 'es',
-      path: resolve(pcOutput, 'es')
+      path: resolve(ecOutput, 'es')
     }
   },
   cjs: {
@@ -27,7 +26,7 @@ const buildConfig = {
     ext: 'js',
     output: {
       name: 'lib',
-      path: resolve(pcOutput, 'lib')
+      path: resolve(ecOutput, 'lib')
     }
   }
 }
@@ -36,7 +35,7 @@ const buildConfigEntries = Object.entries(buildConfig)
 const buildModules = async () => {
   const input = excludeFiles(
     await glob('**/*.{js,ts,vue}', {
-      cwd: pkgRoot,
+      cwd: ecRoot,
       absolute: true,
       onlyFiles: true
     })
@@ -69,8 +68,8 @@ const buildModules = async () => {
         dir: config.output.path,
         exports: module === 'cjs' ? 'named' : undefined,
         preserveModules: true,
-        preserveModulesRoot: pcRoot,
         sourcemap: false,
+        preserveModulesRoot: ecRoot,
         entryFileNames: `[name].${config.ext}`
       }
     })

@@ -5,7 +5,7 @@
 <script lang="ts" setup>
 import type { PropType } from 'vue'
 import { onMounted, shallowReactive, watch, ref, onBeforeUnmount } from 'vue'
-import { echarts } from '@plus-pro-components/echarts/echarts'
+import echarts from 'echarts'
 import { useResize } from '@plus-pro-components/hooks'
 
 const props = defineProps({
@@ -75,9 +75,6 @@ const setOption = () => {
       axisPointer: {
         show: true,
         type: 'cross'
-      },
-      label: {
-        show: true
       }
     },
     dataZoom: [

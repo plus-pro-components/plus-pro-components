@@ -3,7 +3,7 @@ import path from 'node:path'
 const resolve = path.resolve
 
 /** 项目根目录 `/`  */
-export const projRoot = resolve(__dirname, '../')
+export const projRoot = resolve(__dirname, '../../')
 /** 包目录 `/packages` */
 export const pkgRoot = resolve(projRoot, 'packages')
 /** 组件目录 `/packages/components` */

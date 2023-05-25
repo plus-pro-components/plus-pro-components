@@ -1,11 +1,32 @@
 {
   "name": "@plus-pro-components/echarts",
   "version": "0.0.1",
-  "main": "index.js",
+  "main": "lib/index.js",
+  "module": "es/index.mjs",
+  "types": "es/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./es/index.d.ts",
+      "import": "./es/index.mjs",
+      "require": "./lib/index.js"
+    },
+    "./es": "./es/index.mjs",
+    "./lib": "./lib/index.js",
+    "./es/*.mjs": "./es/*.mjs",
+    "./es/*": "./es/*.mjs",
+    "./lib/*.js": "./lib/*.js",
+    "./lib/*": "./lib/*.js",
+    "./*": "./*"
+  },
   "dependencies": {
-    "@plus-pro-components/hooks": "workspace:*"    
+    "@plus-pro-components/hooks": "workspace:*",
+    "echarts": "^5.4.2"
+  },
+  "peerDependencies": {
+    "vue": "^3.2.0"
   },
   "publishConfig": {
+    "registry": "https://registry.npmjs.org",
     "access": "public"
   }
 }
