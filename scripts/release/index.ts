@@ -131,7 +131,7 @@ async function commit(version?: string) {
       await run('git', ['push', '--tags'])
     }
     await run('git', ['push'])
-    echo(`\ncommit success${version}`)
+    echo(`\ncommit success ${version}`)
   } catch (error: any) {
     throw new Error(error)
   }
