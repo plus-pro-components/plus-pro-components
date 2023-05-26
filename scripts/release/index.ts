@@ -174,7 +174,7 @@ const main = async () => {
     consola.success(`Successfully updated version ${name}!`)
   }
 
-  if (pcPackage.includes(PKG_NAME)) {
+  if (selectPackages.includes(PKG_NAME)) {
     // 主包更新
     const mainPkg = JSON.parse(fs.readFileSync(pcPackage, 'utf-8'))
     commit(mainPkg.version)
