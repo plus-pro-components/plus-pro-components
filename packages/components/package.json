@@ -1,6 +1,7 @@
 {
   "name": "@plus-pro-components/components",
   "version": "0.0.1",
+  "private": true,
   "description": "all components are settled here",
   "main": "index.ts",
   "module": "index.ts",
