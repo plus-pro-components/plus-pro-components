@@ -5,11 +5,15 @@ import consola from 'consola'
 import { nodeResolve } from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
 import esbuild, { minify as minifyPlugin } from 'rollup-plugin-esbuild'
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+import DefineOptions from 'unplugin-vue-define-options/rollup'
 import { ecOutput, ecRoot } from './paths'
 import { writeBundles, formatBundleFilename, PKG_CAMEL_CASE_NAME, external } from './utils'
 
 const buildAll = async (minify?: boolean) => {
   const plugins = [
+    DefineOptions(),
     vuePlugin(),
     nodeResolve({
       extensions: ['.mjs', '.js', '.json', '.ts']
