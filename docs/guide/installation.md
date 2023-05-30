@@ -43,7 +43,7 @@ $ pnpm install plus-pro-components
   <!-- 导入element-plus -->
   <script src="//unpkg.com/element-plus"></script>
 
-  <!--导入lus-pro-components"  -->
+  <!--导入plus-pro-components"  -->
   <script src="//unpkg.com/plus-pro-components"></script>
 </head>
 ```
@@ -59,7 +59,7 @@ $ pnpm install plus-pro-components
   <!-- 导入element-plus -->
   <script src="//cdn.jsdelivr.net/element-plus"></script>
 
-  <!--导入lus-pro-components"  -->
+  <!--导入plus-pro-components"  -->
   <script src="//cdn.jsdelivr.net/plus-pro-components"></script>
 </head>
 ```
