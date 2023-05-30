@@ -60,7 +60,7 @@ export default defineConfig({
       //   link: '/utils/'
       // },
       {
-        text: 'v0.0.1-alpha.2',
+        text: 'v0.0.1-alpha.3',
         items: [
           {
             text: '历史版本',
