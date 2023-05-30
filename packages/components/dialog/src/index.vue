@@ -19,16 +19,18 @@
     </div>
 
     <template v-if="hasFooter" #footer>
-      <div>
-        <span class="dialog-footer">
-          <el-button @click="handleCancel">
-            {{ cancelText || t('el.popconfirm.cancelButtonText') }}
-          </el-button>
-          <el-button type="primary" :loading="confirmLoading" @click="handleConfirm">
-            {{ confirmText || t('el.popconfirm.confirmButtonText') }}
-          </el-button>
-        </span>
-      </div>
+      <slot name="footer">
+        <div>
+          <span class="dialog-footer">
+            <el-button @click="handleCancel">
+              {{ cancelText || t('el.popconfirm.cancelButtonText') }}
+            </el-button>
+            <el-button type="primary" :loading="confirmLoading" @click="handleConfirm">
+              {{ confirmText || t('el.popconfirm.confirmButtonText') }}
+            </el-button>
+          </span>
+        </div>
+      </slot>
     </template>
   </el-dialog>
 </template>

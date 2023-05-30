@@ -37,7 +37,7 @@ defineOptions({
 })
 
 const props = withDefaults(defineProps<PlusPaginationProps>(), {
-  show: false,
+  show: true,
   total: 0,
   pageSizeList: () => [...defaultPageSizeList],
   modelValue: () => ({ ...defaultPageInfo })

@@ -13,7 +13,8 @@
   "author": "xiaofei",
   "license": "ISC",
   "devDependencies": {
-    "vitepress": "1.0.0-alpha.75"
+    "sass": "^1.62.1",
+    "vitepress": "1.0.0-beta.1"
   },
   "dependencies": {
     "plus-pro-components": "0.0.1-alpha.1"
