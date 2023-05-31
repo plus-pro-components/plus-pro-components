@@ -14,7 +14,6 @@
     "registry": "https://registry.npmjs.org"
   },
   "scripts": {
-    "dev": "pnpm run stub",
     "build": "npx unbuild",
     "stub": "npx unbuild --stub"
   },

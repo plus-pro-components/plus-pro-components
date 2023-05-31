@@ -11,7 +11,7 @@
     v-bind="$attrs"
   >
     <template #header>
-      <slot name="header" />
+      <slot name="header">{{ header }}</slot>
     </template>
 
     <div class="plus-dialog">
@@ -47,6 +47,7 @@ export interface PlusDialogProps {
   hasFooter?: boolean
   top?: string
   width?: string
+  header?: string
 }
 
 export interface PlusDialogEmits {
@@ -67,6 +68,7 @@ const props = withDefaults(defineProps<PlusDialogProps>(), {
   confirmLoading: false,
   cancelText: '',
   hasFooter: true,
+  header: '',
   top: '15vh',
   width: '460px'
 })
