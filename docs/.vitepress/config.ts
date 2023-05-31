@@ -35,6 +35,7 @@ export default defineConfig({
       }
     ],
     ['meta', { name: 'keywords', content }],
+    ['script', { src: '/hmt.js' }],
     ['link', { rel: 'icon', href: '/logo.png' }]
   ],
   themeConfig: {
