@@ -13,7 +13,7 @@ const content = [
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  base: '/plus-pro-components/',
+  base: '/',
   title: 'PlusProComponents',
   description: 'plus-pro-components',
   head: [
@@ -35,7 +35,7 @@ export default defineConfig({
       }
     ],
     ['meta', { name: 'keywords', content }],
-    ['link', { rel: 'icon', href: '/plus-pro-components/logo.png' }]
+    ['link', { rel: 'icon', href: '/logo.png' }]
   ],
   themeConfig: {
     darkModeSwitchLabel: '主题',
