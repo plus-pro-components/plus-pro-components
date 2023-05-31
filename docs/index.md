@@ -3,13 +3,20 @@
 layout: home
 
 hero:
-  name: 'PlusProComponents'
-  text: ''
-  tagline: 页面级别的前端组件
+  name: PlusProComponents
+  text: 页面级别的前端组件
+  tagline: 基于vue3.2和element-plus构建。
+  image:
+    src: /logo.png
+    alt: Logo image
   actions:
     - theme: brand
+      text: 开始
+      link: /guide/installation
+
+    - theme: alt
       text: 组件
-      link: /components/index
+      link: /components/
 
 features:
   - icon: 🛠️

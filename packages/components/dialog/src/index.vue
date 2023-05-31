@@ -1,124 +1,89 @@
 <template>
   <el-dialog
-    ref="dialog"
     v-model="subVisible"
     :top="top"
-    :before-close="handleCancel"
     :width="width"
-    :close-on-click-modal="closeOnClickModal"
+    :close-on-click-modal="false"
     :close-on-press-escape="false"
-    :destroy-on-close="destroyOnClose"
-    :show-close="showClose"
+    :before-close="handleCancel"
     append-to-body
-    class="app-dialog"
+    class="plus-dialog"
+    v-bind="$attrs"
   >
     <template #header>
-      <div v-if="title">
-        <span class="el-dialog__title" style="user-select: none">
-          {{ title }}
-        </span>
-        <span v-if="subTitle" class="sub-title"> {{ subTitle }}</span>
-      </div>
+      <slot name="header" />
     </template>
 
-    <div :class="[contentClass, 'dialog-slot-content']">
+    <div class="plus-dialog">
       <slot />
     </div>
 
     <template v-if="hasFooter" #footer>
-      <div>
-        <span class="dialog-footer">
-          <el-button @click="handleCancel"> {{ cancelText }} </el-button>
-          <el-button type="primary" :loading="confirmLoading" @click="handleConfirm">
-            {{ confirmText }}
-          </el-button>
-        </span>
-      </div>
+      <slot name="footer">
+        <div>
+          <span class="dialog-footer">
+            <el-button @click="handleCancel">
+              {{ cancelText || t('el.popconfirm.cancelButtonText') }}
+            </el-button>
+            <el-button type="primary" :loading="confirmLoading" @click="handleConfirm">
+              {{ confirmText || t('el.popconfirm.confirmButtonText') }}
+            </el-button>
+          </span>
+        </div>
+      </slot>
     </template>
   </el-dialog>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref, watch } from 'vue'
+<script lang="ts" setup>
+import { ref, watchEffect } from 'vue'
+import { useLocale } from 'element-plus'
 
-export default defineComponent({
-  name: 'PlusDialog',
-  props: {
-    modelValue: {
-      type: Boolean,
-      default: false
-    },
-    showClose: {
-      type: Boolean,
-      default: true
-    },
-    destroyOnClose: {
-      type: Boolean,
-      default: false
-    },
-    title: {
-      type: String,
-      default: ''
-    },
-    subTitle: {
-      type: String,
-      default: ''
-    },
-    top: {
-      type: String,
-      default: '15vh'
-    },
-    width: {
-      type: String,
-      default: '690px'
-    },
-    hasFooter: {
-      type: Boolean,
-      default: false
-    },
-    confirmLoading: {
-      type: Boolean,
-      default: false
-    },
-    closeOnClickModal: {
-      type: Boolean,
-      default: false
-    },
-    contentClass: {
-      type: String,
-      default: ''
-    },
+export interface PlusDialogProps {
+  modelValue?: boolean
+  confirmText?: string
+  cancelText?: string
+  confirmLoading?: boolean
+  hasFooter?: boolean
+  top?: string
+  width?: string
+}
 
-    confirmText: {
-      type: String,
-      default: '确定'
-    },
-    cancelText: {
-      type: String,
-      default: '关闭'
-    }
-  },
-  emits: ['confirm', 'cancel', 'change', 'update:modelValue'],
-  setup(props, { emit }) {
-    const subVisible = ref(false)
-    const handleConfirm = (): void => {
-      emit('confirm')
-    }
-    const handleCancel = (): void => {
-      emit('update:modelValue', false)
-      emit('cancel')
-      emit('change', false)
-    }
-    watch(
-      () => props.modelValue,
-      val => {
-        subVisible.value = val
-      },
-      {
-        immediate: true
-      }
-    )
-    return { subVisible, handleConfirm, handleCancel }
-  }
+export interface PlusDialogEmits {
+  (e: 'update:modelValue', visible: boolean): void
+  (e: 'cancel'): void
+  (e: 'confirm'): void
+}
+
+defineOptions({
+  name: 'PlusDialog'
 })
+
+const { t } = useLocale()
+
+const props = withDefaults(defineProps<PlusDialogProps>(), {
+  modelValue: false,
+  confirmText: '',
+  confirmLoading: false,
+  cancelText: '',
+  hasFooter: true,
+  top: '15vh',
+  width: '460px'
+})
+
+const emit = defineEmits<PlusDialogEmits>()
+
+const subVisible = ref(false)
+
+watchEffect(() => {
+  subVisible.value = props.modelValue
+})
+
+const handleConfirm = (): void => {
+  emit('confirm')
+}
+const handleCancel = (): void => {
+  emit('update:modelValue', false)
+  emit('cancel')
+}
 </script>

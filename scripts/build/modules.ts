@@ -7,7 +7,9 @@ import esbuild from 'rollup-plugin-esbuild'
 import glob from 'fast-glob'
 import { pcOutput, pkgRoot, pcRoot } from './paths'
 import vuePlugin from 'rollup-plugin-vue'
-
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+import DefineOptions from 'unplugin-vue-define-options/rollup'
 import type { OutputOptions, ModuleFormat } from 'rollup'
 import { excludeFiles, writeBundles, external } from './utils'
 
@@ -46,6 +48,7 @@ const buildModules = async () => {
     input,
     external: external,
     plugins: [
+      DefineOptions(),
       vuePlugin(),
       nodeResolve({
         extensions: ['.mjs', '.js', '.json', '.ts']

@@ -1,0 +1,22 @@
+:root {
+  --vp-c-green: #0072ff;
+  --vp-c-green-light: #2a87f8;
+  --vp-c-green-lighter: #3e93fb;
+
+  --vp-c-green-dark: #046ae7;
+  --vp-c-green-darker: #0362d7;
+}
+
+.VPSidebar {
+  .nav {
+    .item {
+      h2.text {
+        font-size: 18px;
+      }
+    }
+
+    .items {
+      padding-left: 10px;
+    }
+  }
+}

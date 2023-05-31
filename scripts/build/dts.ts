@@ -69,7 +69,7 @@ export const main = async () => {
 }
 
 async function addSourceFiles(project: Project) {
-  project.addSourceFileAtPath(path.resolve(projRoot, 'typings/index.d.ts'))
+  project.addSourceFileAtPath(path.resolve(projRoot, 'typings/page.d.ts'))
 
   const globSourceFile = '**/*.{js?(x),ts?(x),vue}'
   const filePaths = excludeFiles(

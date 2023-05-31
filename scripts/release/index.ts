@@ -5,7 +5,7 @@ import consola from 'consola'
 import execa from 'execa'
 import { checkbox, select, input } from '@inquirer/prompts'
 import { findWorkspacePackages } from '@pnpm/find-workspace-packages'
-import { projRoot, pcPackage } from '../build/paths'
+import { projRoot, pcPackage, projPackage } from '../build/paths'
 import { PKG_NAME } from '../build/utils'
 
 type SemverRow = {
@@ -115,11 +115,17 @@ const getVersion = async (currentVersion: string) => {
   return version
 }
 
-// 打tag
+// 提交
 async function commit(version?: string) {
   try {
+    // 生成changelog
+    if (version) {
+      await run('npm', ['run', '--name', 'changelog'])
+    }
+
     await run('git', ['add', '-A'])
 
+    // 打tag
     if (version) {
       await run('git', ['tag', '-a', version, '-m', `v${version}`])
     }
@@ -127,6 +133,7 @@ async function commit(version?: string) {
     await run('npm', ['run', '--name', 'gitcz'])
     await run('git', ['pull'])
 
+    // push tag
     if (version) {
       await run('git', ['push', '--tags'])
     }
@@ -177,6 +184,7 @@ const main = async () => {
   if (selectPackages.includes(PKG_NAME)) {
     // 主包更新
     const mainPkg = JSON.parse(fs.readFileSync(pcPackage, 'utf-8'))
+    updatePackage(mainPkg.version as string, projPackage)
     commit(mainPkg.version)
   } else {
     commit()
