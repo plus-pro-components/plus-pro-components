@@ -8,6 +8,6 @@
     "paths": {
       "@/*": ["./src/*"]
     },
-    "types": ["vite/client", "element-plus/global", "../../global"]
+    "types": ["vite/client", "../../global"]
   }
 }
