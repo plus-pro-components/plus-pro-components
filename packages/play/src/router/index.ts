@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { capitalize } from 'lodash-es'
-import data from './routes'
+import data from './__routes'
 
 const moduleFiles = import.meta.glob('../views/**/*.vue', {
   eager: true
@@ -20,7 +20,7 @@ const getRoutes = (moduleFiles: Record<string, any>) => {
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
-  routes: [...getRoutes(moduleFiles)]
+  routes: [{ path: '/', redirect: '/dialog' }, ...getRoutes(moduleFiles)]
 })
 
 export default router
