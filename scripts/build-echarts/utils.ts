@@ -1,7 +1,7 @@
 import type { RollupBuild, OutputOptions } from 'rollup'
 
 export const excludeFiles = (files: string[]) => {
-  const excludes = ['node_modules', 'test', 'mock', 'dist', 'eslint-config', 'utils']
+  const excludes = ['node_modules', 'test', 'mock', 'dist', 'eslint-config', 'utils', 'play']
   return files.filter(path => !excludes.some(exclude => path.includes(exclude)))
 }
 
