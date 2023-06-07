@@ -34,8 +34,8 @@ const main = async () => {
   const srcFile = path.resolve(srcDir, 'index.vue')
 
   try {
-    await fs.access(targetDir)
-    throw new Error(`${componentName} component already exists!`)
+    await fs.stat(targetDir)
+    return Promise.reject(`${componentName} component already exists!`)
   } catch (error) {
     // 创建文件夹
     await fs.mkdir(targetDir, { recursive: true })
@@ -45,12 +45,14 @@ const main = async () => {
     await fs.writeFile(targetFile, '')
     await fs.writeFile(testFile, '')
     await fs.writeFile(srcFile, '')
+
+    return componentName
   }
 }
 
 main()
-  .then(() => {
-    consola.success('success')
+  .then(name => {
+    consola.success(`Successfully created ${name} component!`)
   })
   .catch(err => {
     consola.error(err)
