@@ -37,7 +37,8 @@
     "prettier": "prettier ./**/*.{js,jsx,ts,tsx,vue,css,less,sass,scss} --write",
     "docs:dev": "pnpm run -C docs dev",
     "docs:build": "pnpm run -C docs build",
-    "docs:preview": "pnpm run -C docs preview"
+    "docs:preview": "pnpm run -C docs preview",
+    "new": "tsx scripts/create-component/index.ts"
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.1.0",

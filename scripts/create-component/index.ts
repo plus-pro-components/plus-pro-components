@@ -1,0 +1,57 @@
+import path from 'path'
+import fs from 'fs/promises'
+import consola from 'consola'
+import { confirm, input } from '@inquirer/prompts'
+import { compRoot } from '../build/paths'
+
+const main = async () => {
+  const componentName = await input({
+    message: 'Please Enter component name?'
+  })
+
+  if (!componentName) {
+    throw new Error('Please Enter component name!')
+  }
+
+  const is = await confirm({
+    message: `Confirm create ${componentName} component?`
+  })
+
+  if (!is) {
+    process.exit()
+  }
+
+  // 主文件
+  const targetDir = path.resolve(compRoot, componentName)
+  const targetFile = path.resolve(targetDir, 'index.ts')
+
+  // 测试文件
+  const testDir = path.resolve(targetDir, '__test__')
+  const testFile = path.resolve(testDir, `${componentName}.test.tsx`)
+
+  // 实际代码文件
+  const srcDir = path.resolve(targetDir, 'src')
+  const srcFile = path.resolve(srcDir, 'index.vue')
+
+  try {
+    await fs.access(targetDir)
+    throw new Error(`${componentName} component already exists!`)
+  } catch (error) {
+    // 创建文件夹
+    await fs.mkdir(targetDir, { recursive: true })
+    await fs.mkdir(testDir, { recursive: true })
+    await fs.mkdir(srcDir, { recursive: true })
+    // 创建文件
+    await fs.writeFile(targetFile, '')
+    await fs.writeFile(testFile, '')
+    await fs.writeFile(srcFile, '')
+  }
+}
+
+main()
+  .then(() => {
+    consola.success('success')
+  })
+  .catch(err => {
+    consola.error(err)
+  })
