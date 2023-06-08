@@ -6,11 +6,11 @@ import { compRoot } from '../build/paths'
 
 const main = async () => {
   const componentName = await input({
-    message: 'Please Enter component name?'
+    message: 'Please enter component name?'
   })
 
   if (!componentName) {
-    throw new Error('Please Enter component name!')
+    return Promise.reject('Please enter component name!')
   }
 
   const is = await confirm({
@@ -18,7 +18,7 @@ const main = async () => {
   })
 
   if (!is) {
-    process.exit()
+    return Promise.reject('Not sure!')
   }
 
   // 主文件
