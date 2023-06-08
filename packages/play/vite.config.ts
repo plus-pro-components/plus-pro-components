@@ -12,6 +12,10 @@ import { gFiles } from './gFiles'
 
 const resolve = (dir: string) => fileURLToPath(new URL(dir, import.meta.url))
 
+/**
+ *  `src/__nav.vue`和`src/router/__routes.ts` 文件为自动生成文件，无需修改。
+ */
+
 // https://vitejs.dev/config/
 export default async () => {
   await gFiles()

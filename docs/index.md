@@ -16,7 +16,7 @@ hero:
 
     - theme: alt
       text: 组件
-      link: /components/
+      link: /components/dialog
 
 features:
   - icon: 🛠️

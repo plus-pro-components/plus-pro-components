@@ -6,24 +6,30 @@ import Pagination from '../src/index.vue'
 
 describe('pagination/index.vue', () => {
   test('render test', async () => {
-    const value = ref()
-    const wrapper = mount(() => <Pagination show modelValue={value}></Pagination>, {
-      global: {
-        plugins: [ElementPlus]
+    const pageInfo = ref()
+    const wrapper = mount(
+      () => <Pagination show total={100} modelValue={pageInfo.value}></Pagination>,
+      {
+        global: {
+          plugins: [ElementPlus]
+        }
       }
-    })
+    )
     await nextTick()
     expect(wrapper.find('.el-pagination').text()).includes('Total')
   })
 
   test('total test', async () => {
     const total = 100
-    const value = ref()
-    const wrapper = mount(() => <Pagination total={total} show modelValue={value}></Pagination>, {
-      global: {
-        plugins: [ElementPlus]
+    const pageInfo = ref()
+    const wrapper = mount(
+      () => <Pagination total={total} show modelValue={pageInfo.value}></Pagination>,
+      {
+        global: {
+          plugins: [ElementPlus]
+        }
       }
-    })
+    )
     await nextTick()
     expect(wrapper.find('.el-pagination__total').text()).includes(total)
   })

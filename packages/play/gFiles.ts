@@ -17,6 +17,7 @@ export const gFiles = async () => {
   })
 
   const routes = []
+  const navData = []
 
   for (let index = 0; index < components.length; index++) {
     const item = components[index]
@@ -39,12 +40,30 @@ export const gFiles = async () => {
       name: `${routeName}`,
       component: `@/views/${routeName}/index.vue`
     })
+    navData.push(`<router-link class="link" to="/${routeName}">${routeName}</router-link>`)
   }
 
   const result = `export default ${JSON.stringify(routes)}`
   const data = format(result, { ...formatConfig, parser: 'babel-ts' })
-  const routesFile = resolve('./src/router/routes.ts')
+  const routesFile = resolve('./src/router/__routes.ts')
+  const navFile = resolve('./src/__nav.vue')
+  const navDataStr = format(`<template>${navData.join(' ')}</template>`, {
+    ...formatConfig,
+    parser: 'vue'
+  })
 
-  // 生成路由routes文件
-  await fs.writeFile(routesFile, data)
+  try {
+    await fs.access(routesFile)
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    const originRoutes = await import('./src/router/__routes.ts')
+    if (originRoutes.default?.length !== routes.length) {
+      // 生成路由routes文件
+      await fs.writeFile(routesFile, data)
+      await fs.writeFile(navFile, navDataStr)
+    }
+  } catch {
+    await fs.writeFile(routesFile, data)
+    await fs.writeFile(navFile, navDataStr)
+  }
 }
