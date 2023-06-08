@@ -35,6 +35,8 @@
     "gitcz": "git-cz",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx,.vue --fix",
     "prettier": "prettier ./**/*.{js,jsx,ts,tsx,vue,css,less,sass,scss} --write",
+    "typecheck": "vue-tsc -p tsconfig.web.json --composite false --noEmit",
+    "typecheck:play": "vue-tsc -p packages/play/tsconfig.json --composite false --noEmit",
     "docs:dev": "pnpm run -C docs dev",
     "docs:build": "pnpm run -C docs build",
     "docs:preview": "pnpm run -C docs preview",

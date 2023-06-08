@@ -8,5 +8,5 @@
     "skipLibCheck": true
   },
   "include": ["packages", "typings"],
-  "exclude": ["node_modules", "**/dist", "**/__tests__/**/*", "**/*.md"]
+  "exclude": ["node_modules", "**/dist", "**/__tests__/**/*", "**/*.md", "packages/play/**/*"]
 }
