@@ -12,7 +12,7 @@ const copyFiles = () =>
     copyFile(pcPackage, join(pcOutput, 'package.json')),
     copyFile(resolve(projRoot, 'README.md'), resolve(pcOutput, 'README.md')),
     copyFile(resolve(projRoot, 'global.d.ts'), resolve(pcOutput, 'global.d.ts')),
-    copyFile(resolve(projRoot, 'typings/page.d.ts'), resolve(pcOutput, 'page.d.ts'))
+    copyFile(resolve(projRoot, 'typings/plus.d.ts'), resolve(pcOutput, 'plus.d.ts'))
   ])
 
 const copyDts = async () => {

@@ -1,5 +1,71 @@
 # 本地开发指南
 
+## 开发环境
+
+| 类型          | 名称              | 版本           |
+| ------------- | ----------------- | -------------- |
+| 操作系统      | Windows 11 专业版 | 22000.1098     |
+| 开发工具      | Microsoft VS Code | 1.79.0         |
+| 调试工具      | Google Chrome     | 104.0.5112.102 |
+| 代码版本控制  | git               | 2.37.0         |
+| 语言环境      | node              | 16.18.0        |
+| 包管理器      | npm               | 8.19.2         |
+| 包管理器      | yarn              | 1.22.19        |
+| 包管理器      | pnpm              | 8.5.0          |
+| node 版本管理 | nvm               | 1.1.7          |
+| npm 源管理    | nrm               | 1.2.5          |
+
+## 项目结构
+
+```sh
+
+├── changelog.config.js     #changelog 配置
+├── CHANGELOG.md            #changelog文件
+├── commitlint.config.js    #commitlint配置
+├── DEVELOPMENT.md          #本地开发指南
+├── docs                    #文档所在目录
+|  ├── components           #组件文档
+|  ├── deploy.sh            #文档部署脚本
+|  ├── guide                #快速开始文档
+|  ├── index.md
+|  ├── package.json
+|  ├── public
+|  └── utils
+├── global.d.ts              #全局组件ts提示
+├── LICENSE                  #LICENSE 文件
+├── package.json
+├── packages                 #包文件夹
+|  ├── components            #主组件包
+|  ├── constants             #固定变量
+|  ├── echarts               #echarts独立组件包
+|  ├── eslint-config         #eslint配置独立包
+|  ├── hooks                 #hooks包
+|  ├── play                  #组件预览包
+|  ├── plus-pro-components   #主包入口
+|  └── utils                 #工具包
+├── pnpm-lock.yaml
+├── pnpm-workspace.yaml      #工作空间配置
+├── README.md                #项目介绍
+├── scripts                  #脚本
+|  ├── build                 #主包components打包
+|  ├── build-echarts         #echarts独立组件包打包
+|  ├── commit.sh             #代码提交
+|  ├── create-component      #新增组件
+|  ├── publish.sh            #发包到npm
+|  └── release               #整包release
+├── tsconfig.base.json       #tsconfig配置
+├── tsconfig.echarts.json
+├── tsconfig.json
+├── tsconfig.node.json
+├── tsconfig.vitest.json
+├── tsconfig.web.json
+├── typings                   #全局d.ts
+|  ├── env.d.ts
+|  └── plus.d.ts
+└── vitest.config.ts          #vitest配置
+
+```
+
 ## 启动项目
 
 ```sh
@@ -50,7 +116,7 @@ pnpm docs:dev
   Confirm create table component? yes
   ```
 
-- 此时 packages/components/table 文件夹下有了如下目录
+- 此时 packages/components/table 文件夹已经生成并且有了如下目录
 
   ```sh
 
@@ -58,7 +124,7 @@ pnpm docs:dev
   ├── src
   |  └── index.vue      #组件实际代码
   └── __tests__
-    └── table.test.tsx #单元测试代码  主要测试 props slots event
+    └── table.test.tsx #单元测试代码  主要测试组件中的 props、event、slots、样式、CSS class 名、生命周期钩子，和其他相关的问题。
   ```
 
   然后添加组件实际代码和对应的单元测试
@@ -79,7 +145,7 @@ pnpm docs:dev
   pnpm run dev
   ```
 
-- 打开 packages/play/src/views/table.vue 里面新增代码
+- 打开 packages/play/src/views/table.vue(文件自动生成) 里面新增代码
 
   ```html
   <template>
@@ -89,7 +155,19 @@ pnpm docs:dev
 
 - 打开终端地址即可预览组件
 
-### 3. 组件的测试
+### 3. 组件全局类型的添加
+
+在 global.d.ts 添加
+
+```ts
+declare module '@vue/runtime-core' {
+  export interface GlobalComponents {
+    PlusTable: typeof import('plus-pro-components')['PlusTable']
+  }
+}
+```
+
+### 4. 组件的测试
 
 单元测试 写完之后 执行
 
@@ -103,7 +181,7 @@ pnpm run test
 pnpm run test:coverage
 ```
 
-### 4. 文档的添加
+### 5. 文档的添加
 
 - 进入 docs/components
 
