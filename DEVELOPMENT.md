@@ -183,7 +183,7 @@ pnpm run test:coverage
 
 ### 5. 文档的添加
 
-- 进入 docs/components
+- 在 docs/components 文件下
 
 - 新建文件 table.md 内容写法参考之前的
 
