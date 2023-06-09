@@ -2,6 +2,11 @@
 
 本节将介绍如何在项目中使用 PlusProComponents。
 
+## 前置条件
+
+PlusProComponents 依赖 ElementPlus，在开始之前建议先安装 ElementPlus。
+[ElementPlus 安装指南](https://element.eleme.cn/#/zh-CN/component/quickstart)，采用适合的安装方式即可。
+
 ## 用法
 
 ### 完整引入
@@ -32,7 +37,7 @@ app.mount('#app')
 {
   "compilerOptions": {
     // ...
-    "types": ["plus-pro-components/global"]
+    "types": ["plus-pro-components/global", "plus-pro-components/plus"]
   }
 }
 ```
