@@ -1,3 +1,13 @@
+# Dialog 弹窗
+
+## 基础用法
+
+:::demo
+
+dialog/basic
+
+:::
+
 ## Dialog API
 
 ### Dialog Attributes

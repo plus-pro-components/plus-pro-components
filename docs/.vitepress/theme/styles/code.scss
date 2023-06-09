@@ -1,0 +1,43 @@
+@use 'prism-theme-vars/base.css';
+@use 'prism-theme-vars/marker.css';
+
+:root {
+  --prism-builtin: #3182bd;
+  --prism-comment: #848486;
+  --prism-deleted: #3182bd;
+  --prism-function: #6196cc;
+  --prism-boolean: #c25205;
+  --prism-number: #c25205;
+  --prism-property: #717c11;
+  --prism-punctuation: #a8a9cc;
+  --prism-keyword: #c792ea;
+  --prism-variable: #0b8235;
+  --prism-url-decoration: #67cdcc;
+  --prism-symbol: green;
+  --prism-selector: #0b8235;
+}
+
+.main {
+  .vp-doc {
+    .el-pager li {
+      margin: 0;
+    }
+    .language-vue {
+      margin: 0;
+      border-radius: 0;
+      background-color: #f5f7fa;
+
+      pre {
+        font-family: monospace, monospace;
+        font-size: 1em;
+      }
+
+      code {
+        padding: 0;
+        line-height: 1.4;
+        font-size: 14rpx;
+        color: #303133;
+      }
+    }
+  }
+}

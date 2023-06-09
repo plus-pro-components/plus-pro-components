@@ -1,4 +1,5 @@
 import { defineConfig } from 'vitepress'
+import { mdPlugin } from './plugins/mdPlugin'
 
 const content = [
   'plus-pro-components',
@@ -115,6 +116,7 @@ export default defineConfig({
     }
   },
   markdown: {
-    lineNumbers: true
+    lineNumbers: true,
+    config: md => mdPlugin(md)
   }
 })
