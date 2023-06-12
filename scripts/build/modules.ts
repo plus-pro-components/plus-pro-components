@@ -12,6 +12,7 @@ import vuePlugin from 'rollup-plugin-vue'
 import DefineOptions from 'unplugin-vue-define-options/rollup'
 import type { OutputOptions, ModuleFormat } from 'rollup'
 import { excludeFiles, writeBundles, external } from './utils'
+import postcss from 'rollup-plugin-postcss'
 
 const buildConfig = {
   esm: {
@@ -49,7 +50,9 @@ const buildModules = async () => {
     external: external,
     plugins: [
       DefineOptions(),
-      vuePlugin(),
+      vuePlugin({
+        postcssPlugins: [postcss()]
+      }),
       nodeResolve({
         extensions: ['.mjs', '.js', '.json', '.ts']
       }),
@@ -60,7 +63,8 @@ const buildModules = async () => {
         loaders: {
           '.vue': 'ts'
         }
-      })
+      }),
+      postcss()
     ],
     treeshake: false
   })

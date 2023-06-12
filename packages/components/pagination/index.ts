@@ -1,6 +1,6 @@
 import PlusPagination from './src/index.vue'
 
-export type { PaginationProps } from './src/type'
+export type { PlusPaginationProps } from './src/type'
 
 export { PlusPagination }
 

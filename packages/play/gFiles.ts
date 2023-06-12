@@ -10,7 +10,7 @@ export const gFiles = async () => {
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const formatConfig = require(formatConfigPath)
 
-  const components = await glob('**/*.vue', {
+  const components = await glob('**/src/index.vue', {
     cwd: '../components',
     absolute: true,
     onlyFiles: true
@@ -21,7 +21,7 @@ export const gFiles = async () => {
 
   for (let index = 0; index < components.length; index++) {
     const item = components[index]
-    const reg = /\/components\/(\w+)\//g
+    const reg = /\/components\/([a-zA-Z_-]+)\/src/g
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const routeName = reg.exec(item)![1]
     const viewFile = resolve(`./src/views/${routeName}.vue`)
@@ -47,7 +47,7 @@ export const gFiles = async () => {
   const data = format(result, { ...formatConfig, parser: 'babel-ts' })
   const routesFile = resolve('./src/router/__routes.ts')
   const navFile = resolve('./src/__nav.vue')
-  const navDataStr = format(`<template>${navData.join(' ')}</template>`, {
+  const navDataStr = format(`<template><div>${navData.join(' ')}</div></template>`, {
     ...formatConfig,
     parser: 'vue'
   })
@@ -60,10 +60,9 @@ export const gFiles = async () => {
     if (originRoutes.default?.length !== routes.length) {
       // 生成路由routes文件
       await fs.writeFile(routesFile, data)
-      await fs.writeFile(navFile, navDataStr)
     }
   } catch {
     await fs.writeFile(routesFile, data)
-    await fs.writeFile(navFile, navDataStr)
   }
+  await fs.writeFile(navFile, navDataStr)
 }

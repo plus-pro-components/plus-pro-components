@@ -1,5 +1,6 @@
 import { resolve } from 'path'
 import vuePlugin from 'rollup-plugin-vue'
+import postcss from 'rollup-plugin-postcss'
 import { rollup } from 'rollup'
 import consola from 'consola'
 import { nodeResolve } from '@rollup/plugin-node-resolve'
@@ -11,9 +12,14 @@ import DefineOptions from 'unplugin-vue-define-options/rollup'
 import { pcOutput, pcRoot } from './paths'
 import { writeBundles, formatBundleFilename, PKG_CAMEL_CASE_NAME, external } from './utils'
 
+import autoprefixer from 'autoprefixer'
+import cssnano from 'cssnano'
+
 const buildAll = async (minify?: boolean) => {
   const plugins = [
-    vuePlugin(),
+    vuePlugin({
+      exposeFilename: true
+    }),
     DefineOptions(),
     nodeResolve({
       extensions: ['.mjs', '.js', '.json', '.ts']
@@ -33,6 +39,19 @@ const buildAll = async (minify?: boolean) => {
       minifyPlugin({
         target: 'es2018',
         sourceMap: false
+      })
+    )
+    plugins.push(
+      postcss({
+        extract: true,
+        plugins: [autoprefixer(), cssnano()]
+      })
+    )
+  } else {
+    plugins.push(
+      postcss({
+        extract: true,
+        plugins: [autoprefixer()]
       })
     )
   }

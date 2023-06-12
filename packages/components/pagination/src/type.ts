@@ -1,4 +1,4 @@
-export interface PaginationProps {
+export interface PlusPaginationProps {
   total: number
   show?: boolean
   pageSizeList?: number[]
