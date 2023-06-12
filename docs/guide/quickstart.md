@@ -15,7 +15,7 @@ PlusProComponents 依赖 ElementPlus，在开始之前建议先安装 ElementPlu
 
 > main.ts
 
-```typescript{5,10}
+```typescript{4,9}
  import { createApp } from 'vue'
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'

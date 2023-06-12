@@ -25,7 +25,7 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, reactive, toRefs } from 'vue'
+import { ref, computed } from 'vue'
 import { DocumentCopy, ArrowDown, ArrowUp } from '@element-plus/icons-vue'
 import { getComponent } from '../../utils/getComponent'
 
@@ -35,29 +35,21 @@ const moduleFiles = import.meta.glob('../../../examples/**/*.vue', {
 })
 
 const props = defineProps<{
-  demos: object
   source: string
   path: string
   rawSource: string
-  description?: string
 }>()
 
-const state = reactive({ decoded: '', show: false, content: '' })
+const show = ref(false)
 
 const AppAsyncComponent = getComponent(moduleFiles, props.path)
 
-console.log(AppAsyncComponent)
-
 const handleToggle = () => {
-  state.show = !state.show
+  show.value = !show.value
 }
 
-onMounted(() => {
-  state.decoded = decodeURIComponent(props.source)
-  state.content = decodeURIComponent(props.rawSource)
-})
-
-const { decoded, show, content } = toRefs(state)
+const decoded = computed(() => decodeURIComponent(props.source))
+const content = computed(() => decodeURIComponent(props.rawSource))
 </script>
 
 <style lang="scss" scoped>

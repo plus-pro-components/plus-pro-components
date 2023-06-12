@@ -1,5 +1,6 @@
 import { defineConfig } from 'vitepress'
 import { mdPlugin } from './plugins/mdPlugin'
+import pkg from '../../package.json'
 
 const content = [
   'plus-pro-components',
@@ -40,6 +41,9 @@ export default defineConfig({
     ['link', { rel: 'icon', href: '/logo.png' }]
   ],
   themeConfig: {
+    search: {
+      provider: 'local'
+    },
     darkModeSwitchLabel: '主题',
     sidebarMenuLabel: '菜单',
     returnToTopLabel: '返回顶部',
@@ -62,7 +66,7 @@ export default defineConfig({
       //   link: '/utils/'
       // },
       {
-        text: 'v0.0.1-alpha.3',
+        text: `v${pkg.version}`,
         items: [
           {
             text: '历史版本',

@@ -5,7 +5,7 @@ import 'element-plus/dist/index.css'
 import zhCn from 'element-plus/dist/locale/zh-cn.mjs'
 
 import PlusProComponents from 'plus-pro-components'
-import Demo from './components/code-demo.vue'
+import CodeDemo from './components/code-demo.vue'
 import directive from './directives'
 
 import './styles/index.scss'
@@ -17,7 +17,7 @@ export default {
       locale: zhCn
     })
     app.use(PlusProComponents as unknown as any)
-    app.component('code-demo', Demo)
+    app.component('code-demo', CodeDemo)
     directive(app)
   }
 }
