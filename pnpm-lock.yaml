@@ -198,8 +198,8 @@ importers:
   docs:
     dependencies:
       plus-pro-components:
-        specifier: 0.0.1-alpha.3
-        version: link:../packages/plus-pro-components
+        specifier: 0.0.1-alpha.5
+        version: 0.0.1-alpha.5(vue@3.3.4)
     devDependencies:
       '@types/escape-html':
         specifier: ^1.0.2
@@ -244,9 +244,6 @@ importers:
 
   packages/echarts:
     dependencies:
-      '@plus-pro-components/hooks':
-        specifier: workspace:*
-        version: link:../hooks
       echarts:
         specifier: ^5.4.2
         version: 5.4.2
@@ -365,6 +362,9 @@ importers:
         specifier: ^4.17.21
         version: 4.17.21
     devDependencies:
+      '@plus-pro-components/utils':
+        specifier: 0.0.1
+        version: link:../utils
       '@types/node':
         specifier: '*'
         version: 20.1.4
@@ -7853,6 +7853,21 @@ packages:
       mlly: 1.2.1
       pathe: 1.1.0
     dev: true
+
+  /plus-pro-components@0.0.1-alpha.5(vue@3.3.4):
+    resolution: {integrity: sha512-ALSAXu95Q1v7jpjmhg3bG8MS8zcJbevrKsk+oqYRywugNIhhpQutYJeLWdHwHZ7ZRSIWB1No7srpsijYn1lBjg==}
+    peerDependencies:
+      vue: ^3.2.0
+    dependencies:
+      '@element-plus/icons-vue': 2.1.0(vue@3.3.4)
+      '@types/lodash-es': 4.17.7
+      dayjs: 1.11.7
+      element-plus: 2.3.4(vue@3.3.4)
+      lodash-es: 4.17.21
+      vue: 3.3.4
+    transitivePeerDependencies:
+      - '@vue/composition-api'
+    dev: false
 
   /postcss-calc@8.2.4(postcss@8.4.24):
     resolution: {integrity: sha512-SmWMSJmB8MRnnULldx0lQIyhSNvuDl9HfrZkaqqE/WHAhToYsAvDq+yAsA/kIyINDszOp3Rh0GFoNuH5Ypsm3Q==}
