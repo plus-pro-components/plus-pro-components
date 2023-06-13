@@ -1,6 +1,6 @@
 import { resolve } from 'path'
-import vuePlugin from '@vitejs/plugin-vue'
-// import vuePlugin from 'rollup-plugin-vue'
+// import vuePlugin from '@vitejs/plugin-vue'
+import vuePlugin from 'rollup-plugin-vue'
 import postcss from 'rollup-plugin-postcss'
 import autoprefixer from 'autoprefixer'
 import cssnano from 'cssnano'

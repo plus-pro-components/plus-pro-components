@@ -6,7 +6,8 @@ import commonjs from '@rollup/plugin-commonjs'
 import esbuild from 'rollup-plugin-esbuild'
 import glob from 'fast-glob'
 import { pcOutput, pkgRoot, pcRoot } from './paths'
-import vuePlugin from '@vitejs/plugin-vue'
+import vuePlugin from 'rollup-plugin-vue'
+// import vuePlugin from '@vitejs/plugin-vue'
 import postcss from 'rollup-plugin-postcss'
 import autoprefixer from 'autoprefixer'
 import cssnano from 'cssnano'
@@ -52,9 +53,7 @@ const buildModules = async () => {
     external: externalModules,
     plugins: [
       DefineOptions(),
-      vuePlugin({
-        style: undefined
-      }),
+      vuePlugin(),
       nodeResolve({
         extensions: ['.mjs', '.js', '.json', '.ts']
       }),
@@ -67,7 +66,6 @@ const buildModules = async () => {
         }
       }),
       postcss({
-        name: ['index'],
         namedExports: true,
         extract: true,
         plugins: [autoprefixer(), cssnano()]
