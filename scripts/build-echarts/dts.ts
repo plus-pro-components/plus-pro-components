@@ -7,7 +7,7 @@ import glob from 'fast-glob'
 import chalk from 'chalk'
 import { Project } from 'ts-morph'
 import type { CompilerOptions, SourceFile } from 'ts-morph'
-import { ecRoot, projRoot, ecOutput, hooksRoot } from './paths'
+import { ecRoot, projRoot, typeOutput } from './paths'
 import { excludeFiles, pathRewriter } from './utils'
 
 const TSCONFIG_PATH = path.resolve(projRoot, 'tsconfig.echarts.json')
@@ -15,10 +15,10 @@ const TSCONFIG_PATH = path.resolve(projRoot, 'tsconfig.echarts.json')
 /**
  * fork = require( https://github.com/egoist/vue-dts-gen/blob/main/src/index.ts
  */
-export const main = async (outDir: string) => {
+export const main = async () => {
   const compilerOptions: CompilerOptions = {
     emitDeclarationOnly: true,
-    outDir: outDir,
+    outDir: typeOutput,
     baseUrl: projRoot,
     preserveSymlinks: true,
     skipLibCheck: true,
@@ -79,13 +79,6 @@ async function addSourceFiles(project: Project) {
     })
   )
 
-  const hookPaths = excludeFiles(
-    await glob(globSourceFile, {
-      cwd: hooksRoot,
-      onlyFiles: true
-    })
-  )
-
   const sourceFiles: SourceFile[] = []
   await Promise.all([
     ...filePaths.map(async file => {
@@ -116,10 +109,6 @@ async function addSourceFiles(project: Project) {
         const sourceFile = project.addSourceFileAtPath(file)
         sourceFiles.push(sourceFile)
       }
-    }),
-    ...hookPaths.map(async file => {
-      const content = await readFile(path.resolve(hooksRoot, file), 'utf-8')
-      sourceFiles.push(project.createSourceFile(path.resolve(ecRoot, 'hooks', file), content))
     })
   ])
 
@@ -136,7 +125,4 @@ function typeCheck(project: Project) {
   }
 }
 
-const outDirEs = path.resolve(ecOutput, 'es')
-const outDirLib = path.resolve(ecOutput, 'lib')
-
-export default [main(outDirEs), main(outDirLib)]
+export default [main()]

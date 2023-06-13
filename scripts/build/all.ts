@@ -1,6 +1,9 @@
 import { resolve } from 'path'
-import vuePlugin from 'rollup-plugin-vue'
+import vuePlugin from '@vitejs/plugin-vue'
+// import vuePlugin from 'rollup-plugin-vue'
 import postcss from 'rollup-plugin-postcss'
+import autoprefixer from 'autoprefixer'
+import cssnano from 'cssnano'
 import { rollup } from 'rollup'
 import consola from 'consola'
 import { nodeResolve } from '@rollup/plugin-node-resolve'
@@ -12,14 +15,9 @@ import DefineOptions from 'unplugin-vue-define-options/rollup'
 import { pcOutput, pcRoot } from './paths'
 import { writeBundles, formatBundleFilename, PKG_CAMEL_CASE_NAME, external } from './utils'
 
-import autoprefixer from 'autoprefixer'
-import cssnano from 'cssnano'
-
 const buildAll = async (minify?: boolean) => {
   const plugins = [
-    vuePlugin({
-      exposeFilename: true
-    }),
+    vuePlugin(),
     DefineOptions(),
     nodeResolve({
       extensions: ['.mjs', '.js', '.json', '.ts']

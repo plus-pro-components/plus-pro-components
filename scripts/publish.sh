@@ -8,7 +8,7 @@ npm publish
 echo "Successfully published plus-pro-components"
 cd -
 
-cd packages/echarts
+cd dist/echarts
 echo "publish echarts..."
 npm publish
 echo "Successfully published echarts"

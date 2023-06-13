@@ -6,7 +6,7 @@
 import type { PropType } from 'vue'
 import { onMounted, shallowReactive, watch, ref, onBeforeUnmount } from 'vue'
 import echarts from 'echarts'
-import { useResize } from '@plus-pro-components/hooks'
+import useResize from '../../utils/useResize'
 
 const props = defineProps({
   className: {
@@ -98,6 +98,8 @@ const setOption = () => {
       bottom: '12%',
       containLabel: true
     },
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     xAxis: {
       type: 'category',
       boundaryGap: [0, 0.01],

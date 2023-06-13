@@ -18,8 +18,9 @@
     "./lib/*": "./lib/*.js",
     "./*": "./*"
   },
+  "unpkg": "index.js",
+  "jsdelivr": "index.js",
   "dependencies": {
-    "@plus-pro-components/hooks": "workspace:*",
     "echarts": "^5.4.2"
   },
   "peerDependencies": {

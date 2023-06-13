@@ -6,13 +6,15 @@ import commonjs from '@rollup/plugin-commonjs'
 import esbuild from 'rollup-plugin-esbuild'
 import glob from 'fast-glob'
 import { pcOutput, pkgRoot, pcRoot } from './paths'
-import vuePlugin from 'rollup-plugin-vue'
+import vuePlugin from '@vitejs/plugin-vue'
+import postcss from 'rollup-plugin-postcss'
+import autoprefixer from 'autoprefixer'
+import cssnano from 'cssnano'
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import DefineOptions from 'unplugin-vue-define-options/rollup'
 import type { OutputOptions, ModuleFormat } from 'rollup'
-import { excludeFiles, writeBundles, external } from './utils'
-import postcss from 'rollup-plugin-postcss'
+import { excludeFiles, writeBundles, externalModules } from './utils'
 
 const buildConfig = {
   esm: {
@@ -47,11 +49,11 @@ const buildModules = async () => {
 
   const bundle = await rollup({
     input,
-    external: external,
+    external: externalModules,
     plugins: [
       DefineOptions(),
       vuePlugin({
-        postcssPlugins: [postcss()]
+        style: undefined
       }),
       nodeResolve({
         extensions: ['.mjs', '.js', '.json', '.ts']
@@ -64,7 +66,12 @@ const buildModules = async () => {
           '.vue': 'ts'
         }
       }),
-      postcss()
+      postcss({
+        name: ['index'],
+        namedExports: true,
+        extract: true,
+        plugins: [autoprefixer(), cssnano()]
+      })
     ],
     treeshake: false
   })

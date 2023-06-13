@@ -60,7 +60,8 @@
   },
   "devDependencies": {
     "@types/node": "*",
-    "vue": "^3.2.37"
+    "vue": "^3.2.37",
+    "@plus-pro-components/utils": "0.0.1"
   },
   "browserslist": [
     "> 1%",

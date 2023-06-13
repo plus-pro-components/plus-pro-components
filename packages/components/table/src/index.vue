@@ -1,15 +1,15 @@
 <template>
   <!--  eslint-disable vue/no-v-html  -->
   <div class="plus-table">
-    <div v-if="tableTitle" class="table-title">{{ tableTitle }}</div>
+    <div v-if="tableTitle" class="plus-table-title">{{ tableTitle }}</div>
 
-    <div class="title">
+    <div class="plus-table-title">
       <slot name="title" />
     </div>
 
     <div
       v-if="hasFilterTableHeader"
-      class="table-setting"
+      class="plus-table-title-setting"
       :style="{
         top: tableTitle ? '-20px' : '-50px'
       }"
@@ -50,7 +50,7 @@
       <!-- 展开行 -->
       <el-table-column v-if="hasExpand" type="expand">
         <template #default="{ row, $index }">
-          <div class="expand-col">
+          <div class="plus-table-expand-col">
             <slot name="expand" :row="row" :index="$index" />
           </div>
         </template>
@@ -117,12 +117,50 @@ import { defaultPageSizeList, defaultPageInfo } from '@plus-pro-components/const
 import type { PlusImagePreviewRow } from '@plus-pro-components/components/image-preview'
 import PlusImagePreview from '@plus-pro-components/components/image-preview'
 import PlusDialog from '@plus-pro-components/components/dialog'
+import type { PlusPaginationProps } from '@plus-pro-components/components/pagination'
+import type { CSSProperties } from 'vue'
 import PlusTableActionBar from './table-action-bar.vue'
 import CustomColumn from './table-column.vue'
 import IndexColumn from './table-column-index.vue'
-import type { ButtonsCallBackParams, TableState, SortParams, PlusTableProps } from './type'
+import type {
+  ButtonsCallBackParams,
+  TableState,
+  SortParams,
+  ActionBarProps,
+  TableConfigRow
+} from './type'
 
 const LabelLength = 6
+
+/**
+ * 表格数据
+ */
+export interface PlusTableProps {
+  /* 分页参数*/
+  pagination: PlusPaginationProps
+  /* 操作栏参数*/
+  actionBar: ActionBarProps
+  /* 是否需要序号*/
+  isShowNumber: boolean
+  /* 是否需要过滤表格表头*/
+  hasFilterTableHeader: boolean
+  /* 是否是多选表格*/
+  isSelection: boolean
+  /* 是否需要展开行*/
+  hasExpand: boolean
+  /* loading状态*/
+  loadingStatus: boolean
+  /* 自定义表格标题*/
+  tableTitle: string
+  /* 表格高度*/
+  height: string
+  /* 表格数据*/
+  tableData: any[]
+  /* 表格配置信息*/
+  config: TableConfigRow[]
+  /* 表格头样式*/
+  headerCellStyle: CSSProperties
+}
 
 export interface PlusTableEmits {
   (e: 'subPaginationChange', pageInfo: PageInfo): void
@@ -280,11 +318,7 @@ defineExpose({
 .plus-table {
   position: relative;
 
-  .expand-col {
-    padding: 0;
-  }
-
-  .table-setting {
+  .plus-table-title-setting {
     position: absolute;
     top: -50px;
     right: 0;
@@ -298,48 +332,12 @@ defineExpose({
     border: 1px solid #e6e6e6;
     border-radius: 3px;
   }
-  .table-title {
+  .plus-table-title-title {
     margin-bottom: 21px;
     color: #333;
   }
-  .table {
-    background-color: #fff;
-
-    :deep(.el-table__body tr.current-row > td) {
-      // background-color: #e5eaf1 !important;
-      background-color: #e6f1fe !important;
-    }
-
-    :deep(.el-scrollbar__view) {
-      height: 100%;
-    }
-    :deep(.el-table__empty-text) {
-      display: inline-block;
-      height: 180px;
-      line-height: 260px;
-      text-align: center;
-      position: relative;
-      &::before {
-        position: absolute;
-        top: 4px;
-        left: 50%;
-
-        background-repeat: no-repeat;
-        background-size: contain;
-        content: '';
-        height: 120px;
-        transform: translateX(-50%);
-        width: 120px;
-      }
-    }
-
-    :deep(.el-table__body .cell) {
-      line-height: unset;
-      > span {
-        line-height: 1.2;
-        min-height: 15px;
-      }
-    }
+  .plus-table-title-expand-col {
+    padding: 0;
   }
 }
 

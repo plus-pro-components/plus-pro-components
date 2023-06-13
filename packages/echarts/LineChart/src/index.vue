@@ -6,7 +6,7 @@
 import type { PropType } from 'vue'
 import { onMounted, shallowReactive, watch, ref, computed, onBeforeUnmount } from 'vue'
 import echarts from 'echarts'
-import { useResize } from '@plus-pro-components/hooks'
+import useResize from '../../utils/useResize'
 
 const props = defineProps({
   className: {

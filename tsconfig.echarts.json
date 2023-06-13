@@ -20,5 +20,6 @@
     "packages/echarts/**/*.vue",
     "typings",
     "packages/hooks/*.ts"
-  ]
+  ],
+  "exclude": ["node_modules", "**/dist", "**/__tests__/**/*", "**/*.md"]
 }

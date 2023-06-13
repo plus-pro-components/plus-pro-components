@@ -10,8 +10,7 @@ export const pkgRoot = resolve(projRoot, 'packages')
 /** `/packages/echarts` */
 export const ecRoot = resolve(pkgRoot, 'echarts')
 
-/** `/packages/echarts/dist` */
-export const ecOutput = resolve(ecRoot, 'dist')
-
-/** `/packages/hooks` */
-export const hooksRoot = resolve(pkgRoot, 'hooks')
+/** `/dist/types/echarts` */
+export const typeOutput = resolve(projRoot, 'dist', 'types', 'echarts')
+/** `/dist/echarts` */
+export const ecOutput = resolve(projRoot, 'dist', 'echarts')

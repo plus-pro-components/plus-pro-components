@@ -4,7 +4,7 @@ import consola from 'consola'
 import { buildOutput, pcOutput, projRoot, pcPackage } from './paths'
 import { copy } from 'fs-extra'
 import all from './all'
-// import modules from './modules'
+import modules from './modules'
 import dts from './dts'
 
 const copyFiles = () =>
@@ -23,8 +23,7 @@ const copyDts = async () => {
   await copy(src, targetLib)
 }
 
-// const task = [...all, ...modules, ...dts]
-const task = [...all]
+const task = [...all, ...modules, ...dts]
 
 Promise.all(task).then(async () => {
   await copyDts()

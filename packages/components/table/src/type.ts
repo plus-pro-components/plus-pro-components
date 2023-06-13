@@ -1,6 +1,5 @@
-import type { CSSProperties, ComputedRef } from 'vue'
+import type { ComputedRef } from 'vue'
 import type { PlusImagePreviewRow } from '@plus-pro-components/components/image-preview'
-import type { PlusPaginationProps } from '@plus-pro-components/components/pagination'
 
 /**
  * 表格表头配置
@@ -227,33 +226,3 @@ export interface TableState {
  * 排序回调参数
  */
 export type SortParams = { order: string; prop: string; column: RecordType }
-
-/**
- * 表格数据
- */
-export interface PlusTableProps {
-  /* 分页参数*/
-  pagination: PlusPaginationProps
-  /* 操作栏参数*/
-  actionBar: ActionBarProps
-  /* 是否需要序号*/
-  isShowNumber: boolean
-  /* 是否需要过滤表格表头*/
-  hasFilterTableHeader: boolean
-  /* 是否是多选表格*/
-  isSelection: boolean
-  /* 是否需要展开行*/
-  hasExpand: boolean
-  /* loading状态*/
-  loadingStatus: boolean
-  /* 自定义表格标题*/
-  tableTitle: string
-  /* 表格高度*/
-  height: string
-  /* 表格数据*/
-  tableData: any[]
-  /* 表格配置信息*/
-  config: TableConfigRow[]
-  /* 表格头样式*/
-  headerCellStyle: CSSProperties
-}

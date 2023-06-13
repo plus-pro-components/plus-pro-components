@@ -1,7 +1,16 @@
 import type { RollupBuild, OutputOptions } from 'rollup'
 
 export const excludeFiles = (files: string[]) => {
-  const excludes = ['node_modules', 'test', 'mock', 'dist', 'eslint-config', 'utils', 'echarts','play']
+  const excludes = [
+    'node_modules',
+    'test',
+    'mock',
+    'dist',
+    'eslint-config',
+    'utils',
+    'echarts',
+    'play'
+  ]
   return files.filter(path => !excludes.some(exclude => path.includes(exclude)))
 }
 
@@ -25,3 +34,9 @@ export const pathRewriter = (id: string) => {
 }
 
 export const external = ['vue', 'element-plus']
+export const externalModules = [
+  ...external,
+  '@plus-pro-components/utils',
+  'lodash-es',
+  '@element-plus/icons-vue'
+]
