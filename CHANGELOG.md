@@ -1,3 +1,17 @@
+## [0.0.1-alpha.5](https://github.com/plus-pro-components/plus-pro-components/compare/0.0.1-alpha.4...0.0.1-alpha.5) (2023-06-13)
+
+
+### ✨ Features
+
+* :sparkles: release v0.0.1-alpha.4 ([6ea1e34](https://github.com/plus-pro-components/plus-pro-components/commit/6ea1e34))
+
+
+### 🐛 Bug Fixes
+
+* **scripts:** :bug: fix rollup-plugin-vue causes DefineOptions to fail. ([c401d5c](https://github.com/plus-pro-components/plus-pro-components/commit/c401d5c))
+
+
+
 ## [0.0.1-alpha.4](https://github.com/plus-pro-components/plus-pro-components/compare/0.0.1-alpha.3...0.0.1-alpha.4) (2023-06-13)
 
 

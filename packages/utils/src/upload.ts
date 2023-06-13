@@ -1,5 +1,4 @@
-/* eslint-disable no-useless-catch */
-import { toLower } from 'lodash-es'
+const toLower = (str: string) => str.toLowerCase()
 
 /**
  * 获取文件类型
@@ -145,6 +144,6 @@ export const isAppropriateResolution = async (
     }
     return true
   } catch (error) {
-    throw error
+    return Promise.reject('error')
   }
 }
