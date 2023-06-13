@@ -165,6 +165,7 @@ const handelClickToEnlargeImage = (srcList: PlusImagePreviewRow[]) => {
 }
 
 const plusStatus = (item: TableConfigRow, row: any): PlusTableTableColumnStatus => {
+  if (!item?.valueEnum) return { text: '', color: '' }
   const PlusTableTableColumnStatusObj: PlusTableTableColumnStatus = {
     text: '',
     color: ''

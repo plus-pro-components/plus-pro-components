@@ -14,11 +14,9 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, ref } from 'vue'
-
+import { ref } from 'vue'
 import { useTable } from '@plus-pro-components/hooks'
 import type { TableConfigRow, PlusTableInstance } from '@plus-pro-components/components/table'
-import PlusTable from '@plus-pro-components/components/table'
 
 defineOptions({
   name: 'PlusTableTest'
@@ -58,7 +56,7 @@ const plusTable = ref<PlusTableInstance>()
 
 const { tableData, pageInfo, total, loadingStatus } = useTable()
 
-const tableConfig = computed<TableConfigRow[]>(() => [
+const tableConfig: TableConfigRow[] = [
   {
     label: '名称',
     width: 280,
@@ -144,7 +142,7 @@ const tableConfig = computed<TableConfigRow[]>(() => [
     prop: 'time',
     valueType: 'date'
   }
-])
+]
 
 const formatTableItem = (item: any) => {
   return {
