@@ -97,7 +97,7 @@ export default defineConfig({
       ],
       '/components/': [
         {
-          text: '基础',
+          text: '基础组件',
           items: [
             {
               text: '弹窗',
@@ -106,6 +106,19 @@ export default defineConfig({
             {
               text: '分页',
               link: '/components/pagination'
+            },
+            {
+              text: '图片预览',
+              link: '/components/image-preview'
+            }
+          ]
+        },
+        {
+          text: '组合组件',
+          items: [
+            {
+              text: '表格',
+              link: '/components/table'
             }
           ]
         }

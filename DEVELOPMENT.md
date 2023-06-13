@@ -129,6 +129,13 @@ pnpm docs:dev
 
   然后添加组件实际代码和对应的单元测试
 
+- 导出组件
+  packages/components/index.ts 新增
+
+```ts
+export * from './table'
+```
+
 ### 2. 预览组件
 
 - 在 packages/plus-pro-components/component.ts 添加新增的组件 `PlusTable`

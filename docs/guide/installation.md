@@ -43,6 +43,8 @@ $ pnpm install plus-pro-components
   <!-- 导入element-plus -->
   <script src="//unpkg.com/element-plus"></script>
 
+  <!-- 导入plus-pro-components样式 -->
+  <link rel="stylesheet" href="//unpkg.com/plus-pro-components/index.css" />
   <!--导入plus-pro-components"  -->
   <script src="//unpkg.com/plus-pro-components"></script>
 </head>
@@ -59,13 +61,15 @@ $ pnpm install plus-pro-components
   <!-- 导入element-plus -->
   <script src="//cdn.jsdelivr.net/element-plus"></script>
 
+  <!-- 导入plus-pro-components样式 -->
+  <link rel="stylesheet" href="//unpkg.com/plus-pro-components/index.css" />
   <!--导入plus-pro-components"  -->
   <script src="//cdn.jsdelivr.net/plus-pro-components"></script>
 </head>
 ```
 
 ::: warning 建议
-默认使用最新版本，使用时建议加上版本号 如使用`0.0.1-alpha.2`版本，防止因版本导致应用出现问题。
+默认使用最新版本，使用时建议加上版本号 如使用`0.0.1-alpha.4`版本，防止因版本导致应用出现问题。
 
-[https://cdn.jsdelivr.net/npm/plus-pro-components@0.0.1-alpha.2/dist/index.min.js](https://cdn.jsdelivr.net/npm/plus-pro-components@0.0.1-alpha.2/dist/index.min.js)
+[https://cdn.jsdelivr.net/npm/plus-pro-components@0.0.1-alpha.4/dist/index.min.js](https://cdn.jsdelivr.net/npm/plus-pro-components@0.0.1-alpha.2/dist/index.min.js)
 :::

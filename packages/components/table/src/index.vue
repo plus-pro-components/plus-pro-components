@@ -68,9 +68,7 @@
       v-model="subPageInfo"
       v-bind="pagination"
       :loading-status="loadingStatus"
-    >
-      <slot name="pagination-left" />
-    </PlusPagination>
+    />
 
     <!-- 大图预览 -->
     <PlusImagePreview v-model="bigImageVisible" :src-list="srcList" />
@@ -137,29 +135,29 @@ const LabelLength = 6
  */
 export interface PlusTableProps {
   /* 分页参数*/
-  pagination: PlusPaginationProps
+  pagination?: PlusPaginationProps
   /* 操作栏参数*/
-  actionBar: ActionBarProps
+  actionBar?: ActionBarProps
   /* 是否需要序号*/
-  isShowNumber: boolean
+  isShowNumber?: boolean
   /* 是否需要过滤表格表头*/
-  hasFilterTableHeader: boolean
+  hasFilterTableHeader?: boolean
   /* 是否是多选表格*/
-  isSelection: boolean
+  isSelection?: boolean
   /* 是否需要展开行*/
-  hasExpand: boolean
+  hasExpand?: boolean
   /* loading状态*/
-  loadingStatus: boolean
+  loadingStatus?: boolean
   /* 自定义表格标题*/
-  tableTitle: string
+  tableTitle?: string
   /* 表格高度*/
-  height: string
+  height?: string
   /* 表格数据*/
   tableData: any[]
   /* 表格配置信息*/
   config: TableConfigRow[]
   /* 表格头样式*/
-  headerCellStyle: CSSProperties
+  headerCellStyle?: CSSProperties
 }
 
 export interface PlusTableEmits {

@@ -27,6 +27,7 @@
     "vitepress": "1.0.0-beta.1"
   },
   "dependencies": {
-    "plus-pro-components": "0.0.1-alpha.3"
+    "plus-pro-components":  "npm:plus-pro-components@latest",
+    "@plus-pro-components/utils": "0.0.1"
   }
 }
