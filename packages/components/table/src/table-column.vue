@@ -13,9 +13,9 @@
   >
     <template #default="{ row }">
       <!--显示图片 -->
-      <span v-if="item.format === 'img'">
+      <span v-if="item.valueType === 'img'">
         <img
-          v-if="row[item.prop] && row[item.prop].url"
+          v-if="row[item.prop] && row[item.prop].img"
           class="plus-table-column-image-col"
           fit="cover"
           :src="row[item.prop].url"
@@ -25,7 +25,7 @@
 
       <!--显示链接 -->
       <el-link
-        v-else-if="item.format === 'link'"
+        v-else-if="item.valueType === 'link'"
         v-permission.link="item.perms"
         type="primary"
         class="plus-table-column-link"
@@ -47,17 +47,17 @@
       </el-link>
 
       <!-- 格式化时间 -->
-      <span v-else-if="item.format === 'date' && row[item.prop]">
+      <span v-else-if="item.valueType === 'date' && row[item.prop]">
         {{ dateFormat(row[item.prop]) }}
       </span>
 
       <!-- 格式化金钱 -->
-      <span v-else-if="item.format === 'money'">
+      <span v-else-if="item.valueType === 'money'">
         {{ formatToCurrency(row[item.prop]) }}
       </span>
 
       <!-- 输入框 -->
-      <span v-else-if="item.format === 'input'">
+      <span v-else-if="item.valueType === 'input'">
         <el-input
           v-model="row[item.prop]"
           placeholder="请输入"
@@ -68,32 +68,59 @@
       </span>
 
       <!-- 自定义格式化 -->
-      <span v-else-if="item.format === 'formatter'">
+      <span v-else-if="item.valueType === 'formatter'">
         {{ item.formatter && item.formatter(row[item.prop], row) }}
       </span>
 
       <!-- 状态显示 -->
-      <span v-else-if="item.format === 'status'">
+      <span v-else-if="item.valueType === 'status'" class="plus-table-column-badge-status">
         <span
-          class="plus-table-column-status-cell"
-          :style="{ color: row[item.statusColorField as string] || row?.statusColor }"
-        >
-          <i
-            class="plus-table-column-status-dot"
-            :style="{ backgroundColor: row[item.statusColorField as string] || row?.statusColor }"
-          />
-          {{ row[item.prop] }}
-        </span>
+          class="plus-table-column-badge-status-dot"
+          :style="{ backgroundColor: plusStatus(item, row).color }"
+        />
+        {{ plusStatus(item, row).text }}
       </span>
 
       <!--是否显示 -->
-      <span v-else-if="item.format === 'is'">
+      <span v-else-if="item.valueType === 'is'">
         {{ row[item.prop] === 0 ? '是' : row[item.prop] === 1 ? '否' : '' }}
       </span>
-
+      <!-- switch -->
+      <span v-else-if="item.valueType === 'switch'">
+        <el-switch
+          v-model="row[item.prop]"
+          class="ml-2"
+          disabled
+          :style="`--el-switch-on-color: ${item?.elSwitchOnColor}; --el-switch-off-color: ${item?.elSwitchOffColor}`"
+        />
+      </span>
+      <!-- 标签 -->
+      <span v-else-if="item.valueType === 'tag'">
+        <el-tag class="ml-2" :type="plusStatus(item, row).color">{{
+          plusStatus(item, row).text
+        }}</el-tag>
+      </span>
+      <!-- 进度条 -->
+      <span v-else-if="item.valueType === 'progress'">
+        <el-progress
+          :percentage="row[item.prop].progress"
+          :format="formatProgress"
+          :status="row[item.prop]?.status"
+        />
+      </span>
+      <!-- 评分 -->
+      <span v-else-if="item.valueType === 'rate'">
+        <el-rate
+          v-model="row[item.prop]"
+          disabled
+          allow-half
+          text-color="#ff9900"
+          score-template="{row[item.prop]} points"
+        />
+      </span>
       <!-- 自定义显示节点 -->
       <slot
-        v-else-if="item.format === 'custom'"
+        v-else-if="item.valueType === 'custom'"
         name="custom-cell"
         :data="{ row, data: row[item.prop] }"
       />
@@ -118,7 +145,10 @@ export interface PlusTableTableColumnProps {
 export interface PlusTableTableColumnEmits {
   (e: 'clickToEnlargeImage', data: PlusImagePreviewRow[]): void
 }
-
+export interface PlusTableTableColumnStatus {
+  text: string
+  color: string
+}
 defineOptions({
   name: 'PlusTableTableColumn'
 })
@@ -133,6 +163,17 @@ const emit = defineEmits<PlusTableTableColumnEmits>()
 const handelClickToEnlargeImage = (srcList: PlusImagePreviewRow[]) => {
   emit('clickToEnlargeImage', srcList)
 }
+
+const plusStatus = (item: TableConfigRow, row: any): PlusTableTableColumnStatus => {
+  const PlusTableTableColumnStatusObj: PlusTableTableColumnStatus = {
+    text: '',
+    color: ''
+  }
+  return item?.valueEnum[row[item?.prop]]
+    ? item?.valueEnum[row[item?.prop]]
+    : PlusTableTableColumnStatusObj
+}
+const formatProgress = (percentage: number) => (percentage === 100 ? 'Full' : `${percentage}%`)
 </script>
 
 <style lang="scss">
@@ -158,17 +199,15 @@ const handelClickToEnlargeImage = (srcList: PlusImagePreviewRow[]) => {
       display: inline-block;
     }
   }
-
-  .plus-table-column-status-cell {
-    font-size: 13px;
-    align-items: center;
-    display: flex;
-    .plus-table-column-status-cell-dot {
-      border-radius: 50%;
+  .plus-table-column-badge-status {
+    .plus-table-column-badge-status-dot {
+      position: relative;
+      top: -1px;
       display: inline-block;
-      height: 4px;
-      margin-right: 4px;
-      width: 4px;
+      width: 6px;
+      height: 6px;
+      vertical-align: middle;
+      border-radius: 50%;
     }
   }
 }

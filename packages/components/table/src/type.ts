@@ -25,9 +25,22 @@ export interface TableConfigRow {
   /**
    * 特殊格式显示
    */
-  format?: 'img' | 'link' | 'date' | 'money' | 'input' | 'custom' | 'formatter' | 'status' | 'is'
+  valueType?:
+    | 'img'
+    | 'link'
+    | 'date'
+    | 'money'
+    | 'input'
+    | 'custom'
+    | 'formatter'
+    | 'status'
+    | 'is'
+    | 'tag'
+    | 'progress'
+    | 'rate'
+    | 'switch'
   /**
-   * format='link' 时链接的文字
+   * valueType='link' 时链接的文字
    */
   linkText?: string
   /**
@@ -75,7 +88,7 @@ export interface TableConfigRow {
   /**
    *  format = 'status' 时状态颜色字段  默认取的是表格数据`tableData`的`statusColor`
    */
-  statusColorField?: string
+  // statusColorField?: string
   /**
    * 权限
    */
@@ -95,8 +108,19 @@ export interface TableConfigRow {
   type?: 'select' | 'inputNumber' | 'textarea' | 'text'
 
   attrs?: RecordIndexType
+  // switch开关打开颜色
+  elSwitchOnColor: string
+  // switch开关关闭颜色
+  elSwitchOffColor: string
+  // 自定义文字 颜色的obj
+  valueEnum: Record<
+    string,
+    {
+      text: string
+      color: string
+    }
+  >
 }
-
 /**
  * 按钮配置项的值的类型
  */
