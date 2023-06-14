@@ -118,6 +118,23 @@
           score-template="{row[item.prop]} points"
         />
       </span>
+      <!-- 复制 -->
+      <span v-else-if="item.valueType === 'copy'">
+        <el-icon
+          size="16"
+          color="var(--el-color-primary)"
+          class="plus-table-icon-copy"
+          @click="handelClickCopy(item, row)"
+        >
+          <DocumentCopy v-if="!row.isCopy" />
+          <Select v-else />
+        </el-icon>
+        {{ row[item.prop] }}
+      </span>
+      <!-- 代码块 -->
+      <pre v-else-if="item.valueType === 'code'" class="plus-table-pre">
+          {{ row[item.prop] }}
+      </pre>
       <!-- 自定义显示节点 -->
       <slot
         v-else-if="item.valueType === 'custom'"
@@ -132,7 +149,7 @@
 </template>
 
 <script lang="ts" setup>
-import { Loading } from '@element-plus/icons-vue'
+import { Loading, DocumentCopy, Select } from '@element-plus/icons-vue'
 import type { PlusImagePreviewRow } from '@plus-pro-components/components/image-preview'
 import { dateFormat, formatToCurrency } from '@plus-pro-components/utils'
 import type { TableConfigRow } from './type'
@@ -149,6 +166,9 @@ export interface PlusTableTableColumnStatus {
   text: string
   color: string
 }
+export interface PlusTableColumnState {
+  isCopy?: boolean
+}
 defineOptions({
   name: 'PlusTableTableColumn'
 })
@@ -158,7 +178,6 @@ withDefaults(defineProps<PlusTableTableColumnProps>(), {
   config: () => []
 })
 const emit = defineEmits<PlusTableTableColumnEmits>()
-
 // 点击放大图片
 const handelClickToEnlargeImage = (srcList: PlusImagePreviewRow[]) => {
   emit('clickToEnlargeImage', srcList)
@@ -175,10 +194,36 @@ const plusStatus = (item: TableConfigRow, row: any): PlusTableTableColumnStatus 
     : PlusTableTableColumnStatusObj
 }
 const formatProgress = (percentage: number) => (percentage === 100 ? 'Full' : `${percentage}%`)
+const handelClickCopy = (item: TableConfigRow, row: any) => {
+  copy(row[item.prop])
+  row.isCopy = true
+  setTimeout(() => {
+    row.isCopy = false
+  }, 3000)
+}
+const copy = (data: string) => {
+  const url = data
+  const oInput = document.createElement('input')
+  oInput.value = url
+  document.body.appendChild(oInput)
+  oInput.select() // 选择对象;
+  console.log(oInput.value)
+  document.execCommand('Copy') // 执行浏览器复制命令
+  oInput.remove()
+}
 </script>
 
 <style lang="scss">
 .plus-table-column {
+  .plus-table-icon-copy {
+    cursor: pointer;
+    color: #1677ff;
+    text-decoration: none;
+    outline: none;
+    transition: color 0.3s;
+    margin-inline-start: 4px;
+    vertical-align: sub;
+  }
   .plus-table-column-image-col {
     cursor: pointer;
     object-fit: cover;
@@ -210,6 +255,15 @@ const formatProgress = (percentage: number) => (percentage === 100 ? 'Full' : `$
       vertical-align: middle;
       border-radius: 50%;
     }
+  }
+  .plus-table-pre {
+    padding: 0;
+    overflow: auto;
+    font-size: 85%;
+    line-height: 1.45;
+    background-color: rgb(246, 248, 250);
+    border-radius: 3px;
+    width: min-content;
   }
 }
 </style>
