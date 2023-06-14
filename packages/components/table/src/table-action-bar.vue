@@ -5,6 +5,7 @@
     class-name="plus-table-action-bar"
     align="center"
     label="操作"
+    :width="optionColumnWidth + 'px'"
   >
     <template #default="{ row, $index }">
       <!-- 显示出来的按钮 -->
@@ -68,6 +69,7 @@ export interface PlusTableActionBarProps {
   buttonCount?: number
   buttonType?: 'icon' | 'button' | 'link'
   buttonsName?: Partial<ButtonsNameRow>
+  optionColumnWidth?: number
 }
 
 export interface PlusTableActionBarEmits {
@@ -82,7 +84,8 @@ const props = withDefaults(defineProps<PlusTableActionBarProps>(), {
   show: true,
   buttonCount: 3,
   buttonType: 'link',
-  buttonsName: () => ({})
+  buttonsName: () => ({}),
+  optionColumnWidth: 200
 })
 const emit = defineEmits<PlusTableActionBarEmits>()
 
@@ -114,3 +117,12 @@ const handleClickOption = (
   }
 }
 </script>
+<style lang="scss" scoped>
+.action-bar-column-button {
+  margin-right: 10px;
+}
+.el-dropdown {
+  vertical-align: unset;
+  cursor: pointer;
+}
+</style>

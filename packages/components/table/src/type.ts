@@ -38,6 +38,8 @@ export interface TableConfigRow {
     | 'progress'
     | 'rate'
     | 'switch'
+    | 'copy'
+    | 'code'
   /**
    * valueType='link' 时链接的文字
    */

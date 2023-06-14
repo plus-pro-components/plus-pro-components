@@ -6,9 +6,11 @@
       :loading-status="loadingStatus"
       :config="tableConfig"
       :table-data="tableData"
-      :pagination="{ total, modelValue: pageInfo }"
-      :action-bar="{ show: false }"
+      :is-show-number="true"
+      :pagination="{ show: true, total, modelValue: pageInfo }"
+      :action-bar="{ show: true, buttonsName, buttonCount: 3, optionColumnWidth: 200 }"
       @subPaginationChange="handlePaginationChange"
+      @subClickButton="subClickButton"
     />
   </div>
 </template>
@@ -16,7 +18,11 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 import { useTable } from '@plus-pro-components/hooks'
-import type { TableConfigRow, PlusTableInstance } from '@plus-pro-components/components/table'
+import type {
+  TableConfigRow,
+  PlusTableInstance,
+  ButtonsCallBackParams
+} from '@plus-pro-components/components/table'
 
 defineOptions({
   name: 'PlusTableTest'
@@ -27,9 +33,9 @@ const TestServe = {
     const data = [...new Array(100)].map((item, index) => {
       return {
         index,
-        name: index + 'name',
+        name: index === 0 ? 'name'.repeat(50) : index + 'name',
         status: index > 3 ? 'open' : 'closed',
-        tag: index > 3 ? 'success' : 'danger',
+        tag: index < 3 ? 'success' : 'danger',
         progress:
           index > 3
             ? {
@@ -39,32 +45,68 @@ const TestServe = {
             : { progress: 50 },
         rate: index > 3 ? 2 : 3.5,
         switch: index > 3 ? true : false,
-        img: {
-          url: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg'
-        },
-        time: new Date()
+        indexColStyle:
+          index < 3
+            ? {
+                backgroundColor: '#314659'
+              }
+            : {
+                backgroundColor: '#979797'
+              },
+        time: new Date(),
+        code: `
+const getData = async params => {
+  const data = await getData(params)
+  return { list: data.data, ...data }
+}`
       }
     })
     return {
       data,
-      total: 100
+      total: data.length
     }
   }
 }
 
 const plusTable = ref<PlusTableInstance>()
 
-const { tableData, pageInfo, total, loadingStatus } = useTable()
+const { tableData, pageInfo, total, buttonsName, loadingStatus } = useTable()
+
+buttonsName.value = {
+  normal: [
+    {
+      // 查看
+      text: '查看',
+      type: 'primary'
+    },
+    {
+      // 修改
+      text: '修改',
+      type: 'primary'
+    },
+    {
+      // 删除
+      text: '删除',
+      type: 'danger'
+    },
+    {
+      // 复制
+      text: '复制',
+      type: 'primary'
+    }
+  ]
+}
 
 const tableConfig: TableConfigRow[] = [
   {
     label: '名称',
-    width: 280,
-    prop: 'name'
+    width: 120,
+    prop: 'name',
+    valueType: 'copy'
   },
   {
     label: '状态',
-    width: 200,
+    width: 120,
     prop: 'status',
     valueType: 'status',
     valueEnum: {
@@ -88,7 +130,7 @@ const tableConfig: TableConfigRow[] = [
   },
   {
     label: '标签',
-    width: 200,
+    width: 120,
     prop: 'tag',
     valueType: 'tag',
     valueEnum: {
@@ -112,13 +154,19 @@ const tableConfig: TableConfigRow[] = [
   },
   {
     label: '执行进度',
-    width: 300,
+    width: 200,
     prop: 'progress',
     valueType: 'progress'
   },
   {
+    label: '代码块',
+    width: 250,
+    prop: 'code',
+    valueType: 'code'
+  },
+  {
     label: '评分',
-    width: 300,
+    width: 200,
     prop: 'rate',
     valueType: 'rate'
   },
@@ -129,12 +177,6 @@ const tableConfig: TableConfigRow[] = [
     valueType: 'switch',
     elSwitchOnColor: '#13ce66',
     elSwitchOffColor: '#ff4949'
-  },
-  {
-    label: '图片',
-    width: 120,
-    prop: 'img',
-    valueType: 'img'
   },
   {
     label: '时间',
@@ -167,6 +209,9 @@ getList()
 const handlePaginationChange = (_pageInfo: PageInfo): void => {
   pageInfo.value = _pageInfo
   getList()
+}
+const subClickButton = (data: ButtonsCallBackParams) => {
+  console.log(data.buttonRow.text)
 }
 </script>
 
