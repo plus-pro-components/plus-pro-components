@@ -8,7 +8,13 @@
       :table-data="tableData"
       :is-show-number="true"
       :pagination="{ show: true, total, modelValue: pageInfo }"
-      :action-bar="{ show: true, buttonsName, buttonCount: 3, optionColumnWidth: 200 }"
+      :action-bar="{
+        show: true,
+        buttonsName,
+        buttonType: 'link',
+        buttonCount: 3,
+        optionColumnWidth: 300
+      }"
       @subPaginationChange="handlePaginationChange"
       @subClickButton="subClickButton"
     />
@@ -82,7 +88,7 @@ buttonsName.value = {
     {
       // 修改
       text: '修改',
-      type: 'primary'
+      type: 'success'
     },
     {
       // 删除
@@ -90,7 +96,6 @@ buttonsName.value = {
       type: 'danger'
     },
     {
-      // 复制
       text: '复制',
       type: 'primary'
     }

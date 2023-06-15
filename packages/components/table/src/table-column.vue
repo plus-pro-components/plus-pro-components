@@ -26,7 +26,6 @@
       <!--显示链接 -->
       <el-link
         v-else-if="item.valueType === 'link'"
-        v-permission.link="item.perms"
         type="primary"
         class="plus-table-column-link"
         @click="item.click && !item.disabled && item.click(row)"
