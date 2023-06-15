@@ -47,9 +47,9 @@ table/basic
 ```json
 {
   "show": true,
-  "label": "",
   "fixed": "right",
-  "optionColumnWidth": 200,
+  "buttonType": "link",
+  "optionColumnWidth": 300,
   "buttonCount": 3,
   "buttonsName": {}
 }

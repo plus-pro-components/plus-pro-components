@@ -1,5 +1,4 @@
 <template>
-  <component :is="render()" />
   <el-table-column
     v-if="show"
     key="actionBar"
