@@ -22,3 +22,17 @@
     }
   }
 }
+
+.vp-doc {
+  .el-link:hover {
+    text-decoration: none;
+  }
+
+  .el-table__header,
+  .el-table__body {
+    margin: 0;
+  }
+}
+.plus-image-preview-footer__icon {
+  box-sizing: content-box;
+}

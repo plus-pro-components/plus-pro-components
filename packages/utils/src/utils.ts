@@ -229,14 +229,20 @@ export function generateBig(): string[] {
 }
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-export const deepClone = (obj: any): any => {
+export const deepClone = <T extends object>(obj: T): T => {
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
   if (obj === null) return null
   const clone = Object.assign({}, obj)
   Object.keys(clone).forEach(
     key => (clone[key] = typeof obj[key] === 'object' ? deepClone(obj[key]) : obj[key])
   )
   if (Array.isArray(obj)) {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     clone.length = obj.length
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     return Array.from(clone)
   }
   return clone

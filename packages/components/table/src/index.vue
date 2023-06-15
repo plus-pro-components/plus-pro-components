@@ -104,7 +104,7 @@
 <script lang="ts" setup>
 import { reactive, toRefs, watch, ref, nextTick } from 'vue'
 import { ElTable } from 'element-plus'
-import { cloneDeep } from 'lodash-es'
+import { deepClone as cloneDeep } from '@plus-pro-components/utils'
 import { Setting } from '@element-plus/icons-vue'
 import PlusPagination from '@plus-pro-components/components/pagination'
 import { defaultPageSizeList, defaultPageInfo } from '@plus-pro-components/constants'
