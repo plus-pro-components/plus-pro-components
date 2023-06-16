@@ -19,7 +19,7 @@ type ValueType = string | number | boolean
 
 export interface PlusRadioProps {
   modelValue?: ValueType
-  data: { label: ValueType; value: ValueType }[]
+  data: { label: string; value: ValueType }[]
   isCancel?: boolean
 }
 export interface PlusRadioEmits {
