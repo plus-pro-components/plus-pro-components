@@ -1,9 +1,5 @@
 lockfileVersion: '6.0'
 
-settings:
-  autoInstallPeers: true
-  excludeLinksFromLockfile: false
-
 importers:
 
   .:
@@ -202,8 +198,8 @@ importers:
   docs:
     dependencies:
       plus-pro-components:
-        specifier: 0.0.1-alpha.6
-        version: 0.0.1-alpha.6(vue@3.3.4)
+        specifier: 0.0.1-alpha.7
+        version: 0.0.1-alpha.7(vue@3.3.4)
     devDependencies:
       '@types/escape-html':
         specifier: ^1.0.2
@@ -7868,8 +7864,8 @@ packages:
       pathe: 1.1.0
     dev: true
 
-  /plus-pro-components@0.0.1-alpha.6(vue@3.3.4):
-    resolution: {integrity: sha512-8FEeG6sMBDgC1l7+yDF3kRE6wr/otPXoTinfMj4lJZqFg3BbU6ap4v9iEuHU5bfYBZtz0cR1PohMCfYTRzhYww==}
+  /plus-pro-components@0.0.1-alpha.7(vue@3.3.4):
+    resolution: {integrity: sha512-FfPmjnA9IzzazgYqj4SH0v4U2LsfzR3ONw5cD2mIffTICc7yqtIc3Ca8SxPbjGDRFdLqHE9wzwL4NF3QJqiySg==}
     peerDependencies:
       vue: ^3.2.0
     dependencies:
@@ -10817,3 +10813,7 @@ packages:
     dependencies:
       tslib: 2.3.0
     dev: false
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
