@@ -1,3 +1,25 @@
+## [0.0.1-alpha.7](https://github.com/plus-pro-components/plus-pro-components/compare/0.0.1-alpha.6...0.0.1-alpha.7) (2023-06-16)
+
+
+### ✨ Features
+
+* :sparkles: merge zpp ([cc55f17](https://github.com/plus-pro-components/plus-pro-components/commit/cc55f17))
+* **all:** :sparkles: release v0.0.1-alpha.6 ([326bc09](https://github.com/plus-pro-components/plus-pro-components/commit/326bc09))
+* **components:** :sparkles: add radio and date-picker component. ([5a781ce](https://github.com/plus-pro-components/plus-pro-components/commit/5a781ce))
+* **packages:** :sparkles: edit table component ([68eb4c2](https://github.com/plus-pro-components/plus-pro-components/commit/68eb4c2))
+* **packages:** :sparkles: remove lodash-es. ([e9a3d2a](https://github.com/plus-pro-components/plus-pro-components/commit/e9a3d2a))
+* **packages:** :sparkles: select buttons or links for table operations ([153df13](https://github.com/plus-pro-components/plus-pro-components/commit/153df13))
+* **table:** :sparkles: Extend table column (code block copy ordinal ([a9eae33](https://github.com/plus-pro-components/plus-pro-components/commit/a9eae33))
+* **table:** :sparkles: extend table column,add code copy,edit index column and table style. ([398b2fb](https://github.com/plus-pro-components/plus-pro-components/commit/398b2fb))
+
+
+### 🐛 Bug Fixes
+
+* **packages:** :bug: eidt utils/upload. ([0d35b3b](https://github.com/plus-pro-components/plus-pro-components/commit/0d35b3b))
+* **scripts:** :bug: release v0.0.1-alpha.5. ([5849cb1](https://github.com/plus-pro-components/plus-pro-components/commit/5849cb1))
+
+
+
 ## [0.0.1-alpha.5](https://github.com/plus-pro-components/plus-pro-components/compare/0.0.1-alpha.4...0.0.1-alpha.5) (2023-06-13)
 
 

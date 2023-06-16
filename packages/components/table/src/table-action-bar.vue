@@ -5,22 +5,12 @@
     class-name="plus-table-action-bar"
     align="center"
     label="操作"
+    :width="optionColumnWidth + 'px'"
   >
     <template #default="{ row, $index }">
       <!-- 显示出来的按钮 -->
       <template v-for="buttonRow in getPreButtonOptions(row)" :key="buttonRow.text">
-        <el-link
-          class="action-bar-column-button"
-          :title="buttonRow.text"
-          :class="{
-            disabled: buttonRow.disabled
-          }"
-          :type="buttonRow.type"
-          :size="buttonRow.size || 'small'"
-          @click.stop="handleClickOption(row, buttonRow, $index, $event)"
-        >
-          {{ buttonRow.text }}
-        </el-link>
+        <component :is="() => render(row, buttonRow, $index)" />
       </template>
 
       <!-- 隐藏的按钮 -->
@@ -28,7 +18,7 @@
         <span class="dropdown-link">
           更多
           <el-icon class="el-icon-caret-bottom language-icon">
-            <ArrowDown />
+            <MoreFilled />
           </el-icon>
         </span>
         <!-- 下拉按钮 -->
@@ -39,18 +29,7 @@
               :key="buttonRow.text"
               class="custom-dropdown-menu-item"
             >
-              <el-link
-                class="action-bar-column-button link"
-                :title="buttonRow.text"
-                :class="{
-                  disabled: buttonRow.disabled
-                }"
-                :type="buttonRow.type"
-                :size="buttonRow.size || 'small'"
-                @click.stop="handleClickOption(row, buttonRow, $index, $event)"
-              >
-                {{ buttonRow.text }}
-              </el-link>
+              <component :is="() => render(row, buttonRow, $index)" />
             </el-dropdown-item>
           </el-dropdown-menu>
         </template>
@@ -60,7 +39,10 @@
 </template>
 
 <script lang="ts" setup>
-import { ArrowDown } from '@element-plus/icons-vue'
+import type { VNode } from 'vue'
+import { h } from 'vue'
+import { MoreFilled } from '@element-plus/icons-vue'
+import { ElButton, ElLink } from 'element-plus'
 import type { ButtonsCallBackParams, ButtonsNameKeyRow, ButtonsNameRow } from './type'
 
 export interface PlusTableActionBarProps {
@@ -68,6 +50,7 @@ export interface PlusTableActionBarProps {
   buttonCount?: number
   buttonType?: 'icon' | 'button' | 'link'
   buttonsName?: Partial<ButtonsNameRow>
+  optionColumnWidth?: number
 }
 
 export interface PlusTableActionBarEmits {
@@ -82,10 +65,36 @@ const props = withDefaults(defineProps<PlusTableActionBarProps>(), {
   show: true,
   buttonCount: 3,
   buttonType: 'link',
-  buttonsName: () => ({})
+  buttonsName: () => ({}),
+  optionColumnWidth: 300
 })
 const emit = defineEmits<PlusTableActionBarEmits>()
-
+const render = (row: any, buttonRow: ButtonsNameKeyRow, index: number): VNode => {
+  if (props.buttonType === 'button') {
+    return h(
+      ElButton,
+      {
+        type: buttonRow?.type,
+        title: buttonRow?.text,
+        size: buttonRow?.size || 'small',
+        onClick: (event: MouseEvent) => handleClickOption(row, buttonRow, index, event)
+      },
+      () => buttonRow?.text
+    )
+  } else {
+    return h(
+      ElLink,
+      {
+        class: 'action-bar-column-link',
+        type: buttonRow?.type,
+        title: buttonRow?.text,
+        size: buttonRow?.size || 'small',
+        onClick: (event: MouseEvent) => handleClickOption(row, buttonRow, index, event)
+      },
+      () => buttonRow?.text
+    )
+  }
+}
 // 获取当前操作的按钮组
 const getOptionsName = (buttonKey: string): ButtonsNameKeyRow[] =>
   props.buttonsName[buttonKey] || []
@@ -109,8 +118,20 @@ const handleClickOption = (
   e: MouseEvent
 ) => {
   if (buttonRow.disabled !== true) {
+    console.log(row, buttonRow, index, e)
+
     const data: ButtonsCallBackParams = { row, buttonRow, index, e }
     emit('subClickButton', data)
   }
 }
 </script>
+<style lang="scss" scoped>
+.action-bar-column-link {
+  margin-right: 10px;
+}
+.el-dropdown {
+  vertical-align: baseline;
+  cursor: pointer;
+  margin-left: 5px;
+}
+</style>

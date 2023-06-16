@@ -110,6 +110,14 @@ export default defineConfig({
             {
               text: '图片预览',
               link: '/components/image-preview'
+            },
+            {
+              text: '单选',
+              link: '/components/radio'
+            },
+            {
+              text: '日期时间',
+              link: '/components/date-picker'
             }
           ]
         },

@@ -6,19 +6,29 @@
       :loading-status="loadingStatus"
       :config="tableConfig"
       :table-data="tableData"
-      :pagination="{ total, modelValue: pageInfo }"
-      :action-bar="{ show: false }"
+      :is-show-number="true"
+      :pagination="{ show: true, total, modelValue: pageInfo }"
+      :action-bar="{
+        show: true,
+        buttonsName,
+        buttonType: 'link',
+        buttonCount: 3,
+        optionColumnWidth: 300
+      }"
       @subPaginationChange="handlePaginationChange"
+      @subClickButton="subClickButton"
     />
   </div>
 </template>
 
 <script lang="ts" setup>
-import { computed, ref } from 'vue'
-
+import { ref } from 'vue'
 import { useTable } from '@plus-pro-components/hooks'
-import type { TableConfigRow, PlusTableInstance } from '@plus-pro-components/components/table'
-import PlusTable from '@plus-pro-components/components/table'
+import type {
+  TableConfigRow,
+  PlusTableInstance,
+  ButtonsCallBackParams
+} from '@plus-pro-components/components/table'
 
 defineOptions({
   name: 'PlusTableTest'
@@ -29,34 +39,157 @@ const TestServe = {
     const data = [...new Array(100)].map((item, index) => {
       return {
         index,
-        name: index + 'name',
-        time: new Date()
+        name: index === 0 ? 'name'.repeat(50) : index + 'name',
+        status: index > 3 ? 'open' : 'closed',
+        tag: index < 3 ? 'success' : 'danger',
+        progress:
+          index > 3
+            ? {
+                progress: 100,
+                status: 'success'
+              }
+            : { progress: 50 },
+        rate: index > 3 ? 2 : 3.5,
+        switch: index > 3 ? true : false,
+        indexColStyle:
+          index < 3
+            ? {
+                backgroundColor: '#314659'
+              }
+            : {
+                backgroundColor: '#979797'
+              },
+        time: new Date(),
+        code: `
+const getData = async params => {
+  const data = await getData(params)
+  return { list: data.data, ...data }
+}`
       }
     })
     return {
       data,
-      total: 100
+      total: data.length
     }
   }
 }
 
 const plusTable = ref<PlusTableInstance>()
 
-const { tableData, pageInfo, total, loadingStatus } = useTable()
+const { tableData, pageInfo, total, buttonsName, loadingStatus } = useTable()
 
-const tableConfig = computed<TableConfigRow[]>(() => [
+buttonsName.value = {
+  normal: [
+    {
+      // 查看
+      text: '查看',
+      type: 'primary'
+    },
+    {
+      // 修改
+      text: '修改',
+      type: 'success'
+    },
+    {
+      // 删除
+      text: '删除',
+      type: 'danger'
+    },
+    {
+      text: '复制',
+      type: 'primary'
+    }
+  ]
+}
+
+const tableConfig: TableConfigRow[] = [
   {
     label: '名称',
-    width: 280,
-    prop: 'name'
+    width: 120,
+    prop: 'name',
+    valueType: 'copy'
+  },
+  {
+    label: '状态',
+    width: 120,
+    prop: 'status',
+    valueType: 'status',
+    valueEnum: {
+      open: {
+        text: '未解决',
+        color: '#D4380D'
+      },
+      closed: {
+        text: '已解决',
+        color: 'green'
+      },
+      processing: {
+        text: '解决中',
+        color: 'blue'
+      },
+      error: {
+        text: '失败',
+        color: 'red'
+      }
+    }
+  },
+  {
+    label: '标签',
+    width: 120,
+    prop: 'tag',
+    valueType: 'tag',
+    valueEnum: {
+      success: {
+        text: 'bug',
+        color: 'success'
+      },
+      danger: {
+        text: 'question',
+        color: 'danger'
+      },
+      info: {
+        text: 'info',
+        color: 'info'
+      },
+      warning: {
+        text: 'warning',
+        color: 'warning'
+      }
+    }
+  },
+  {
+    label: '执行进度',
+    width: 200,
+    prop: 'progress',
+    valueType: 'progress'
+  },
+  {
+    label: '代码块',
+    width: 250,
+    prop: 'code',
+    valueType: 'code'
+  },
+  {
+    label: '评分',
+    width: 200,
+    prop: 'rate',
+    valueType: 'rate'
+  },
+  {
+    label: '开关',
+    width: 100,
+    prop: 'switch',
+    valueType: 'switch',
+    elSwitchOnColor: '#13ce66',
+    elSwitchOffColor: '#ff4949'
   },
   {
     label: '时间',
     width: 190,
     prop: 'time',
-    format: 'date'
+    valueType: 'date'
   }
-])
+]
 
 const formatTableItem = (item: any) => {
   return {
@@ -81,6 +214,9 @@ getList()
 const handlePaginationChange = (_pageInfo: PageInfo): void => {
   pageInfo.value = _pageInfo
   getList()
+}
+const subClickButton = (data: ButtonsCallBackParams) => {
+  console.log(data.buttonRow.text)
 }
 </script>
 

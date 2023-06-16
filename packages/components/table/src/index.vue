@@ -41,11 +41,7 @@
       <!-- 选择栏 -->
       <el-table-column v-if="isSelection" key="selection" type="selection" width="34" />
       <!-- 序号栏 -->
-      <IndexColumn
-        :is-show-number="isShowNumber"
-        :sub-page-info="pagination.modelValue"
-        align="left"
-      />
+      <IndexColumn :show="isShowNumber" :sub-page-info="pagination.modelValue" align="left" />
 
       <!-- 展开行 -->
       <el-table-column v-if="hasExpand" type="expand">
@@ -108,7 +104,7 @@
 <script lang="ts" setup>
 import { reactive, toRefs, watch, ref, nextTick } from 'vue'
 import { ElTable } from 'element-plus'
-import { cloneDeep } from 'lodash-es'
+import { deepClone as cloneDeep } from '@plus-pro-components/utils'
 import { Setting } from '@element-plus/icons-vue'
 import PlusPagination from '@plus-pro-components/components/pagination'
 import { defaultPageSizeList, defaultPageInfo } from '@plus-pro-components/constants'
@@ -127,8 +123,6 @@ import type {
   ActionBarProps,
   TableConfigRow
 } from './type'
-
-const LabelLength = 6
 
 /**
  * 表格数据
@@ -173,7 +167,7 @@ export interface PlusTableEmits {
 defineOptions({
   name: 'PlusTable'
 })
-
+const LabelLength = 6
 const props = withDefaults(defineProps<PlusTableProps>(), {
   pagination: () => ({
     show: true,
@@ -354,6 +348,26 @@ defineExpose({
     .el-checkbox:nth-of-type(4n) {
       margin: 0;
     }
+  }
+}
+.el-table .cell {
+  line-height: 12px;
+}
+.el-table .el-table__body-wrapper .el-table__body .el-table__row td {
+  border-right: 0 !important;
+}
+.el-table--border th.el-table__cell {
+  border: none;
+  ::before {
+    position: absolute;
+    top: 50%;
+    inset-inline-end: 0;
+    width: 1px;
+    height: 1.6em;
+    background-color: #ccc;
+    transform: translateY(-50%);
+    transition: background-color 0.2s;
+    content: '';
   }
 }
 </style>

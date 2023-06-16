@@ -27,6 +27,6 @@
     "vitepress": "1.0.0-beta.1"
   },
   "dependencies": {
-    "plus-pro-components": "0.0.1-alpha.5"
+    "plus-pro-components": "0.0.1-alpha.7"
   }
 }

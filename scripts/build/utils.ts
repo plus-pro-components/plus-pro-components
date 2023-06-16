@@ -37,6 +37,5 @@ export const external = ['vue', 'element-plus']
 export const externalModules = [
   ...external,
   '@plus-pro-components/utils',
-  'lodash-es',
   '@element-plus/icons-vue'
 ]
