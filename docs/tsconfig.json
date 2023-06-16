@@ -15,6 +15,6 @@
     "types": ["vite/client"],
     "jsx": "preserve"
   },
-  "include": ["**/*", ".vitepress/**/*"],
+  "include": ["**/*", ".vitepress/**/*", "../typings/plus.d.ts"],
   "exclude": ["node_modules"]
 }
