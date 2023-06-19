@@ -4,12 +4,16 @@ import { PlusDialog } from '@plus-pro-components/components/dialog'
 import { PlusPagination } from '@plus-pro-components/components/pagination'
 import { PlusImagePreview } from '@plus-pro-components/components/image-preview'
 import { PlusTable } from '@plus-pro-components/components/table'
+import { PlusRadio } from '@plus-pro-components/components/radio'
+import { PlusDatePicker } from '@plus-pro-components/components/date-picker'
 
 const plugins: DefineComponent[] = [
   PlusDialog,
   PlusPagination,
   PlusImagePreview,
-  PlusTable
+  PlusTable,
+  PlusRadio,
+  PlusDatePicker
 ] as unknown as DefineComponent[]
 
 export default plugins
