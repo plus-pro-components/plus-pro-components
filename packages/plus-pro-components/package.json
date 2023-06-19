@@ -56,10 +56,12 @@
     "@types/lodash-es": "^4.17.6",
     "element-plus": "^2.3.4",
     "dayjs": "^1.11.3",
-    "lodash-es": "^4.17.21"
+    "lodash-es": "^4.17.21",
+    "sortablejs": "^1.15.0"
   },
   "devDependencies": {
     "@types/node": "*",
+    "@types/sortablejs": "^1.15.1",
     "vue": "^3.2.37",
     "@plus-pro-components/utils": "^0.0.1"
   },

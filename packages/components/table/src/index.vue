@@ -96,6 +96,7 @@
       scrollbar-always-on
       class="table"
       v-bind="$attrs"
+      :row-key="rowKey"
       @selection-change="handleSelectionChange"
       @sort-change="handleSortChange"
       @row-click="handleClickRow"
@@ -106,7 +107,8 @@
       <el-table-column v-if="isSelection" key="selection" type="selection" width="34" />
       <!-- 序号栏 -->
       <IndexColumn :show="isShowNumber" :sub-page-info="pagination.modelValue" align="left" />
-
+      <DragSortColumn :show-drag-sort="isShowDragSort" @subSortEnd="subSortEnd" />
+      <!-- <el-table-column v-if="isShowDragSort" label="排序">111</el-table-column> -->
       <!-- 展开行 -->
       <el-table-column v-if="hasExpand" type="expand">
         <template #default="{ row, $index }">
@@ -151,6 +153,7 @@ import PlusPopover from '../../popover/src/index.vue'
 import PlusTableActionBar from './table-action-bar.vue'
 import CustomColumn from './table-column.vue'
 import IndexColumn from './table-column-index.vue'
+import DragSortColumn from './table-column-drag-sort.vue'
 import type {
   ButtonsCallBackParams,
   TableState,
@@ -189,6 +192,9 @@ export interface PlusTableProps {
   config: TableConfigRow[]
   /* 表格头样式*/
   headerCellStyle?: CSSProperties
+  // 是否可拖拽
+  isShowDragSort?: boolean
+  rowKey?: string
 }
 
 export interface PlusTableEmits {
@@ -200,6 +206,7 @@ export interface PlusTableEmits {
   (e: 'subClickRow', row: any, column: any, event: any): void
   (e: 'subClickButton', data: any): void
   (e: 'subClickButton'): void
+  (e: 'subSortEnd', newIndex: number, oldIndex: number): void
 }
 
 defineOptions({
@@ -234,7 +241,9 @@ const props = withDefaults(defineProps<PlusTableProps>(), {
   headerCellStyle: () => ({
     backgroundColor: '#F5F9FD',
     color: '#777'
-  })
+  }),
+  isShowDragSort: false,
+  rowKey: 'id'
 })
 
 const emit = defineEmits<PlusTableEmits>()
@@ -392,6 +401,9 @@ const handleClickDensity = (data: string) => {
     }
   })
   state.size = data
+}
+const subSortEnd = (newIndex: number, oldIndex: number) => {
+  emit('subSortEnd', newIndex, oldIndex)
 }
 
 handleClickDensity(state.size || props.size || 'small')

@@ -53,6 +53,7 @@
     "dayjs": "^1.11.7",
     "element-plus": "^2.3.4",
     "lodash-es": "^4.17.21",
+    "sortablejs": "^1.15.0",
     "vue": "^3.2.47"
   },
   "devDependencies": {
@@ -68,6 +69,7 @@
     "@types/lodash-es": "^4.17.7",
     "@types/node": "^20.1.4",
     "@types/node-sass": "^4.11.3",
+    "@types/sortablejs": "^1.15.1",
     "@vitejs/plugin-vue": "^4.2.3",
     "@vitejs/plugin-vue-jsx": "^3.0.1",
     "@vitest/coverage-c8": "^0.31.1",

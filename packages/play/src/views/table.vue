@@ -8,6 +8,7 @@
       :config="tableConfig"
       :table-data="tableData"
       :is-show-number="true"
+      :is-show-drag-sort="true"
       table-title="表格"
       :pagination="{ show: true, total, modelValue: pageInfo }"
       :action-bar="{
@@ -19,6 +20,7 @@
       }"
       @subPaginationChange="handlePaginationChange"
       @subClickButton="subClickButton"
+      @subSortEnd="subSortEnd"
     >
       <template #button>
         <el-button plain size="small">查看日志</el-button>
@@ -47,6 +49,7 @@ const TestServe = {
     const data = [...new Array(100)].map((item, index) => {
       return {
         index,
+        id: index,
         name: index === 0 ? 'name'.repeat(20) : index + 'name',
         status:
           index === 0 ? 'processing' : index === 1 ? 'error' : index === 2 ? 'open' : 'closed',
@@ -235,12 +238,9 @@ const handlePaginationChange = (_pageInfo: PageInfo): void => {
 const subClickButton = (data: ButtonsCallBackParams) => {
   console.log(data.buttonRow.text)
 }
-</script>
-
-<style lang="scss" scoped>
-.button-row {
-  display: flex;
-  justify-content: flex-start;
-  margin-bottom: 20px;
+const subSortEnd = (newIndex: number, oldIndex: number) => {
+  const currRow = tableData.value.splice(oldIndex, 1)[0]
+  tableData.value.splice(newIndex, 0, currRow)
+  console.log(newIndex, oldIndex, tableData.value)
 }
-</style>
+</script>
