@@ -148,14 +148,6 @@ const tableConfig: TableConfigRow[] = [
     prop: 'tag',
     valueType: 'tag',
     valueEnum: {
-      primary: {
-        text: 'primarys',
-        color: 'primary'
-      },
-      success: {
-        text: 'successs',
-        color: 'success'
-      },
       danger: {
         text: 'dangers',
         color: 'danger'

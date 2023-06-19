@@ -217,11 +217,20 @@ export interface ActionBarProps {
    */
   buttonsName?: ButtonsNameRow
 }
-
+export interface ButtonNameDensity {
+  id: number
+  color: string
+  size: string
+  text: string
+  style?: string
+}
 /**
  * 表格自身状态
  */
 export interface TableState {
+  checkAll?: boolean
+  isIndeterminate?: boolean
+  size?: string
   /**
    * 显示大图预览
    */
@@ -235,10 +244,6 @@ export interface TableState {
    */
   subPageInfo: PageInfo
   /**
-   * 过滤表头弹窗
-   */
-  filterTableDialogVisible: boolean
-  /**
    * 过滤后的表头配置
    */
   subConfig: TableConfigRow[]
@@ -246,6 +251,7 @@ export interface TableState {
    * 表头选择项
    */
   checkList: any[]
+  buttonNameDensity: ButtonNameDensity[]
 }
 
 /**
