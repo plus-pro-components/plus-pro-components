@@ -3,10 +3,12 @@
     <PlusTable
       ref="plusTable"
       row-key="id"
+      size="small"
       :loading-status="loadingStatus"
       :config="tableConfig"
       :table-data="tableData"
       :is-show-number="true"
+      table-title="表格"
       :pagination="{ show: true, total, modelValue: pageInfo }"
       :action-bar="{
         show: true,
@@ -17,7 +19,13 @@
       }"
       @subPaginationChange="handlePaginationChange"
       @subClickButton="subClickButton"
-    />
+    >
+      <template #button>
+        <el-button plain size="small">查看日志</el-button>
+        <el-button plain size="small">导出数据</el-button>
+        <el-button type="primary" size="small">创建应用</el-button>
+      </template>
+    </PlusTable>
   </div>
 </template>
 
@@ -39,11 +47,16 @@ const TestServe = {
     const data = [...new Array(100)].map((item, index) => {
       return {
         index,
-        name: index === 0 ? 'name'.repeat(50) : index + 'name',
-        status: index > 3 ? 'open' : 'closed',
-        tag: index < 3 ? 'success' : 'danger',
+        name: index === 0 ? 'name'.repeat(20) : index + 'name',
+        status:
+          index === 0 ? 'processing' : index === 1 ? 'error' : index === 2 ? 'open' : 'closed',
+        tag: index === 1 ? 'success' : index === 2 ? 'warning' : index === 3 ? 'info' : 'danger',
         progress:
-          index > 3
+          index === 0
+            ? { progress: 30, status: 'exception' }
+            : index === 1
+            ? { progress: 60, status: 'warning' }
+            : index > 3
             ? {
                 progress: 100,
                 status: 'success'
@@ -59,12 +72,12 @@ const TestServe = {
             : {
                 backgroundColor: '#979797'
               },
-        time: new Date(),
-        code: `
-const getData = async params => {
-  const data = await getData(params)
-  return { list: data.data, ...data }
-}`
+        time: new Date()
+        //         code: `
+        // const getData = async params => {
+        //   const data = await getData(params)
+        //   return { list: data.data, ...data }
+        // }`
       }
     })
     return {
@@ -117,7 +130,7 @@ const tableConfig: TableConfigRow[] = [
     valueEnum: {
       open: {
         text: '未解决',
-        color: '#D4380D'
+        color: '#666'
       },
       closed: {
         text: '已解决',
@@ -139,20 +152,24 @@ const tableConfig: TableConfigRow[] = [
     prop: 'tag',
     valueType: 'tag',
     valueEnum: {
+      primary: {
+        text: 'primarys',
+        color: 'primary'
+      },
       success: {
-        text: 'bug',
+        text: 'successs',
         color: 'success'
       },
       danger: {
-        text: 'question',
+        text: 'dangers',
         color: 'danger'
       },
       info: {
-        text: 'info',
+        text: 'infos',
         color: 'info'
       },
       warning: {
-        text: 'warning',
+        text: 'warnings',
         color: 'warning'
       }
     }
@@ -163,12 +180,12 @@ const tableConfig: TableConfigRow[] = [
     prop: 'progress',
     valueType: 'progress'
   },
-  {
-    label: '代码块',
-    width: 250,
-    prop: 'code',
-    valueType: 'code'
-  },
+  // {
+  //   label: '代码块',
+  //   width: 250,
+  //   prop: 'code',
+  //   valueType: 'code'
+  // },
   {
     label: '评分',
     width: 200,

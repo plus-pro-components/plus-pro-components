@@ -3,10 +3,12 @@
     <PlusTable
       ref="plusTable"
       row-key="id"
+      size="small"
       :loading-status="loadingStatus"
       :config="tableConfig"
       :table-data="tableData"
       :is-show-number="true"
+      table-title="表格"
       :pagination="{ show: true, total, modelValue: pageInfo }"
       :action-bar="{
         show: true,
@@ -17,7 +19,13 @@
       }"
       @subPaginationChange="handlePaginationChange"
       @subClickButton="subClickButton"
-    />
+    >
+      <template #button>
+        <el-button plain size="small">查看日志</el-button>
+        <el-button plain size="small">导出数据</el-button>
+        <el-button type="primary" size="small">创建应用</el-button>
+      </template>
+    </PlusTable>
   </div>
 </template>
 
@@ -36,22 +44,13 @@ defineOptions({
 
 const TestServe = {
   getList: async () => {
-    const data = [...new Array(50)].map((item, index) => {
+    const data = [...new Array(100)].map((item, index) => {
       return {
         index,
         name: index === 0 ? 'name'.repeat(20) : index + 'name',
         status:
           index === 0 ? 'processing' : index === 1 ? 'error' : index === 2 ? 'open' : 'closed',
-        tag:
-          index === 0
-            ? 'primary'
-            : index === 1
-            ? 'success'
-            : index === 2
-            ? 'warning'
-            : index === 3
-            ? 'info'
-            : 'danger',
+        tag: index === 1 ? 'success' : index === 2 ? 'warning' : index === 3 ? 'info' : 'danger',
         progress:
           index === 0
             ? { progress: 30, status: 'exception' }
@@ -74,6 +73,11 @@ const TestServe = {
                 backgroundColor: '#979797'
               },
         time: new Date()
+        //         code: `
+        // const getData = async params => {
+        //   const data = await getData(params)
+        //   return { list: data.data, ...data }
+        // }`
       }
     })
     return {
@@ -176,6 +180,12 @@ const tableConfig: TableConfigRow[] = [
     prop: 'progress',
     valueType: 'progress'
   },
+  // {
+  //   label: '代码块',
+  //   width: 250,
+  //   prop: 'code',
+  //   valueType: 'code'
+  // },
   {
     label: '评分',
     width: 200,
