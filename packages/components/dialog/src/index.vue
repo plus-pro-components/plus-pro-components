@@ -3,6 +3,7 @@
     v-model="subVisible"
     :top="top"
     :width="width"
+    :title="width"
     :close-on-click-modal="false"
     :close-on-press-escape="false"
     :before-close="handleCancel"
@@ -11,7 +12,7 @@
     v-bind="$attrs"
   >
     <template #header>
-      <slot name="header">{{ header }}</slot>
+      <slot name="header" />
     </template>
 
     <div class="plus-dialog">
@@ -23,10 +24,10 @@
         <div>
           <span class="dialog-footer">
             <el-button @click="handleCancel">
-              {{ cancelText || t('el.popconfirm.cancelButtonText') }}
+              {{ cancelText }}
             </el-button>
             <el-button type="primary" :loading="confirmLoading" @click="handleConfirm">
-              {{ confirmText || t('el.popconfirm.confirmButtonText') }}
+              {{ confirmText }}
             </el-button>
           </span>
         </div>
@@ -37,9 +38,10 @@
 
 <script lang="ts" setup>
 import { ref, watchEffect } from 'vue'
-import { useLocale } from 'element-plus'
+import type { DialogProps } from 'element-plus'
 
-export interface PlusDialogProps {
+export interface PlusDialogProps
+  extends /* @vue-ignore */ Omit<DialogProps, 'modelValue' | 'title'> {
   modelValue?: boolean
   confirmText?: string
   cancelText?: string
@@ -47,7 +49,7 @@ export interface PlusDialogProps {
   hasFooter?: boolean
   top?: string
   width?: string
-  header?: string
+  title?: string
 }
 
 export interface PlusDialogEmits {
@@ -60,15 +62,13 @@ defineOptions({
   name: 'PlusDialog'
 })
 
-const { t } = useLocale()
-
 const props = withDefaults(defineProps<PlusDialogProps>(), {
   modelValue: false,
-  confirmText: '',
+  confirmText: '取消',
   confirmLoading: false,
-  cancelText: '',
+  cancelText: '确定',
   hasFooter: true,
-  header: '',
+  title: '弹窗',
   top: '15vh',
   width: '460px'
 })

@@ -19,6 +19,10 @@ hero:
       link: /components/dialog
 
 features:
+  - icon: ✅
+    title: 兼容性高
+    details: - plus-pro-components 100%兼容和 element-plus 同名的组件，包括属性，事件，方法，插槽等。
+
   - icon: 🛠️
     title: 丰富的组件库
     details: PlusProComponents 基于 element-plus 提供了大量的 UI 组件，包括表格、表单、图表等，能够满足大多数企业应用的需求。
