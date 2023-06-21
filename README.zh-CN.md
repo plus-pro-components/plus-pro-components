@@ -6,6 +6,10 @@
 
 [![ docs by vitepress](https://img.shields.io/badge/docs%20by-vitepress-10b981)](https://vitepress.dev/)[![Build With Vite](https://img.shields.io/badge/build%20with-rollup-646cff.svg)](https://rollupjs.org/)[![pnpm](https://img.shields.io/badge/maintained%20with-pnpm-cc00ff.svg)](https://www.pnpm.cn/)[![element-plus](https://img.shields.io/badge/ui%20-element%20plus-409eff.svg)](https://www.pnpm.cn/)
 
+## 文档
+
+[文档](https://plus-pro-components.github.io/)| [国内镜像文档](https://plus-pro-components.com)
+
 ## 简介
 
 plus-pro-components 是一个基于 Vue 和 element-plus 的页面级别的组件库，它具有以下优点：
