@@ -1,25 +1,88 @@
 <template>
   <!--  eslint-disable vue/no-v-html  -->
   <div class="plus-table">
-    <div v-if="tableTitle" class="plus-table-title">{{ tableTitle }}</div>
+    <div class="plus-table-header">
+      <div>
+        <div v-if="tableTitle" class="plus-table-title">{{ tableTitle }}</div>
 
-    <div class="plus-table-title">
-      <slot name="title" />
+        <div class="plus-table-title">
+          <slot name="title" />
+        </div>
+      </div>
+      <div>
+        <slot name="button" />
+        <!-- 表格密度 -->
+        <PlusPopover
+          :has-filter-table-header="hasFilterTableHeader"
+          placement="bottom"
+          :width="150"
+          trigger="click"
+          title="密度"
+        >
+          <el-button
+            v-for="item in buttonNameDensity"
+            :key="item.id"
+            :color="item.color"
+            plain
+            :style="item?.style"
+            size="small"
+            @click="handleClickDensity(item.size)"
+          >
+            {{ item.text }}
+          </el-button>
+          <template #icon>
+            <el-icon :size="20" color="#919191" class="plus-table-popover">
+              <Guide />
+            </el-icon>
+          </template>
+        </PlusPopover>
+        <!-- 筛选表格 -->
+        <PlusPopover
+          :has-filter-table-header="hasFilterTableHeader"
+          placement="bottom"
+          :width="100"
+          trigger="click"
+          title="筛选表格"
+          :has-show-bottom-button="true"
+          @confirm="handleFilterTableConfirm"
+          @show="handleShow"
+        >
+          <el-checkbox
+            v-model="checkAll"
+            :indeterminate="isIndeterminate"
+            @change="handleCheckAllChange"
+            >全选</el-checkbox
+          >
+          <el-checkbox-group
+            v-model="checkList"
+            class="plus-table-filter-dialog-checkbox"
+            @change="handleCheckGroupChange"
+          >
+            <el-checkbox
+              v-for="(item, index) in config"
+              :key="item.label"
+              :label="item.label"
+              :disabled="index === config.length - 1 || item.disableHeaderFilter"
+            >
+              <el-tooltip
+                v-if="item.label?.length > LabelLength"
+                class="plus-table-filter-dialog-checkbox-item"
+                :content="item.label"
+                placement="right-start"
+              >
+                {{ getLabel(item.label) }}
+              </el-tooltip>
+              <span v-else> {{ getLabel(item.label) }}</span>
+            </el-checkbox>
+          </el-checkbox-group>
+          <template #icon>
+            <el-icon :size="20" color="#919191" class="plus-table-popover">
+              <Setting />
+            </el-icon>
+          </template>
+        </PlusPopover>
+      </div>
     </div>
-
-    <div
-      v-if="hasFilterTableHeader"
-      class="plus-table-title-setting"
-      :style="{
-        top: tableTitle ? '-20px' : '-50px'
-      }"
-      @click="filterTableDialogVisible = true"
-    >
-      <el-icon :size="20" color="#919191">
-        <Setting />
-      </el-icon>
-    </div>
-
     <el-table
       ref="multipleTable"
       v-loading="loadingStatus"
@@ -28,6 +91,7 @@
       :border="true"
       :height="height"
       :header-cell-style="headerCellStyle"
+      :size="size"
       highlight-current-row
       scrollbar-always-on
       class="table"
@@ -69,50 +133,21 @@
     <!-- 大图预览 -->
     <PlusImagePreview v-model="bigImageVisible" :src-list="srcList" />
   </div>
-
-  <!-- 过滤表头弹窗 -->
-  <PlusDialog
-    v-model="filterTableDialogVisible"
-    title="筛选表格"
-    width="640px"
-    top="20vh"
-    class="plus-table-filter-dialog"
-    has-footer
-    @confirm="handleFilterTableConfirm"
-  >
-    <el-checkbox-group v-model="checkList" class="plus-table-filter-dialog-checkbox">
-      <el-checkbox
-        v-for="(item, index) in config"
-        :key="item.label"
-        :label="item.label"
-        :disabled="index === config.length - 1 || item.disableHeaderFilter"
-      >
-        <el-tooltip
-          v-if="item.label?.length > LabelLength"
-          class="plus-table-filter-dialog-checkbox-item"
-          :content="item.label"
-          placement="right-start"
-        >
-          {{ getLabel(item.label) }}
-        </el-tooltip>
-        <span v-else> {{ getLabel(item.label) }}</span>
-      </el-checkbox>
-    </el-checkbox-group>
-  </PlusDialog>
 </template>
 
 <script lang="ts" setup>
 import { reactive, toRefs, watch, ref, nextTick } from 'vue'
 import { ElTable } from 'element-plus'
 import { deepClone as cloneDeep } from '@plus-pro-components/utils'
-import { Setting } from '@element-plus/icons-vue'
+import { Setting, Guide } from '@element-plus/icons-vue'
 import PlusPagination from '@plus-pro-components/components/pagination'
 import { defaultPageSizeList, defaultPageInfo } from '@plus-pro-components/constants'
 import type { PlusImagePreviewRow } from '@plus-pro-components/components/image-preview'
 import PlusImagePreview from '@plus-pro-components/components/image-preview'
-import PlusDialog from '@plus-pro-components/components/dialog'
 import type { PlusPaginationProps } from '@plus-pro-components/components/pagination'
 import type { CSSProperties } from 'vue'
+import type { ComponentSize } from 'element-plus/es/constants'
+import PlusPopover from '../../popover/src/index.vue'
 import PlusTableActionBar from './table-action-bar.vue'
 import CustomColumn from './table-column.vue'
 import IndexColumn from './table-column-index.vue'
@@ -128,6 +163,8 @@ import type {
  * 表格数据
  */
 export interface PlusTableProps {
+  // 密度
+  size?: ComponentSize
   /* 分页参数*/
   pagination?: PlusPaginationProps
   /* 操作栏参数*/
@@ -162,6 +199,7 @@ export interface PlusTableEmits {
   (e: 'subSortChange', data: any): void
   (e: 'subClickRow', row: any, column: any, event: any): void
   (e: 'subClickButton', data: any): void
+  (e: 'subClickButton'): void
 }
 
 defineOptions({
@@ -169,6 +207,7 @@ defineOptions({
 })
 const LabelLength = 6
 const props = withDefaults(defineProps<PlusTableProps>(), {
+  size: 'small',
   pagination: () => ({
     show: true,
     total: 0,
@@ -202,12 +241,37 @@ const emit = defineEmits<PlusTableEmits>()
 
 const multipleTable = ref<InstanceType<typeof ElTable>>()
 const state = reactive<TableState>({
+  checkAll: false,
+  isIndeterminate: true,
   bigImageVisible: false,
   srcList: [],
   subPageInfo: { ...((props.pagination.modelValue || defaultPageInfo) as PageInfo) },
-  filterTableDialogVisible: false,
   subConfig: cloneDeep(props.config),
-  checkList: cloneDeep(props.config).map(i => i.label)
+  checkList: cloneDeep(props.config).map(i => i.label),
+  size: 'small',
+  buttonNameDensity: [
+    {
+      id: 1,
+      color: '#666',
+      size: 'small',
+      text: '紧凑',
+      style: 'display: block;margin-left: 12px;margin-bottom: 10px'
+    },
+    {
+      id: 2,
+      color: '#666',
+      size: 'default',
+      text: '中等',
+      style: 'display: block;margin-bottom: 10px'
+    },
+    {
+      id: 3,
+      color: '#666',
+      size: 'large',
+      text: '默认',
+      style: 'display: block;margin-bottom: 10px'
+    }
+  ]
 })
 // 监听配置更改
 watch(
@@ -229,7 +293,33 @@ watch(
     deep: true
   }
 )
-
+watch(
+  () => props.size,
+  (val: string) => {
+    state.size = val
+  },
+  {
+    immediate: true
+  }
+)
+const handleCheckAllChange = (val: boolean) => {
+  state.checkList = val
+    ? cloneDeep(props.config).map(i => i.label)
+    : cloneDeep(props.config)
+        .map(i => i.label)
+        .slice(-1)
+  state.isIndeterminate = false
+}
+const handleCheckGroupChange = (value: string[]) => {
+  const checkedCount = value.length
+  state.checkAll = checkedCount === props.config.length
+  state.isIndeterminate = checkedCount > 0 && checkedCount < props.config.length
+}
+const handleShow = () => {
+  const checkedCount = state.checkList.length
+  state.checkAll = checkedCount === props.config.length
+  state.isIndeterminate = checkedCount > 0 && checkedCount < props.config.length
+}
 // 选中表格行
 const handleTableCurrentChange = (row: any) => {
   emit('subCurrent', row)
@@ -280,7 +370,6 @@ const handelClickToEnlargeImage = (srcList: PlusImagePreviewRow[]) => {
 const handleFilterTableConfirm = () => {
   const config = cloneDeep(props.config)
   state.subConfig = config.filter(item => state.checkList.includes(item.label)) as any
-  state.filterTableDialogVisible = false
 }
 
 const getLabel = (label: string) => {
@@ -293,9 +382,30 @@ const getLabel = (label: string) => {
 const handleSelectionChange = (data: any) => {
   emit('subSelected', data)
 }
+// 密度
+const handleClickDensity = (data: string) => {
+  state.buttonNameDensity.forEach(el => {
+    if (el.size === data) {
+      el.color = '#1677ff'
+    } else {
+      el.color = '#666'
+    }
+  })
+  state.size = data
+}
 
-const { bigImageVisible, srcList, subPageInfo, filterTableDialogVisible, subConfig, checkList } =
-  toRefs(state)
+handleClickDensity(state.size || props.size || 'small')
+const {
+  bigImageVisible,
+  srcList,
+  subPageInfo,
+  subConfig,
+  checkList,
+  size,
+  buttonNameDensity,
+  checkAll,
+  isIndeterminate
+} = toRefs(state)
 
 // 暴露画布生成图片方法到外部调用
 defineExpose({
@@ -309,6 +419,16 @@ defineExpose({
 <style lang="scss">
 .plus-table {
   position: relative;
+  .plus-table-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    .plus-table-popover {
+      margin-left: 10px;
+      vertical-align: bottom;
+      cursor: pointer;
+    }
+  }
 
   .plus-table-title-setting {
     position: absolute;
@@ -321,8 +441,6 @@ defineExpose({
     justify-content: center;
     width: 36px;
     height: 36px;
-    border: 1px solid #e6e6e6;
-    border-radius: 3px;
   }
   .plus-table-title-title {
     margin-bottom: 21px;

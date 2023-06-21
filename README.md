@@ -6,6 +6,8 @@
 
 plus-pro-components 是一个基于 Vue 和 element-plus 的页面级别的组件库，它具有以下优点：
 
+- 兼容性高：plus-pro-components 100%兼容和 element-plus 同名的组件，包括属性，事件，方法，插槽等。
+
 - 丰富的组件库：plus-pro-components 基于 element-plus 提供了大量的 UI 组件，包括表格、表单、图表等，能够满足大多数企业应用的需求。
 
 - 功能强大：plus-pro-components 的组件不仅提供了基本的 UI 展示功能，还具备了复杂的数据操作和业务逻辑处理能力，能够快速构建出功能强大的企业应用。

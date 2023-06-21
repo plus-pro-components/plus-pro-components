@@ -118,8 +118,6 @@ const handleClickOption = (
   e: MouseEvent
 ) => {
   if (buttonRow.disabled !== true) {
-    console.log(row, buttonRow, index, e)
-
     const data: ButtonsCallBackParams = { row, buttonRow, index, e }
     emit('subClickButton', data)
   }

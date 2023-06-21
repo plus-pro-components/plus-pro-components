@@ -21,7 +21,7 @@ dialog/basic
 | `hasFooter`             | 是否需要底部按钮   | `boolean` | `true`  | 否       |
 | `top`                   | 弹窗距离顶部的距离 | `string`  | `15vh`  | 否       |
 | `width`                 | 弹窗宽             | `string`  | `460px` | 否       |
-| `header`                | 弹窗标题           | `string`  | ``      | 否       |
+| `title`                 | 弹窗标题           | `string`  | `弹窗`  | 否       |
 | ...                     | ...                | ...       | ...     | ...      |
 
 **`...`表示同时支持所有 `el-dialog` Attributes**
