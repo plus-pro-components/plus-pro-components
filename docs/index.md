@@ -21,7 +21,7 @@ hero:
 features:
   - icon: ✅
     title: 兼容性高
-    details: - plus-pro-components 100%兼容和 element-plus 同名的组件，包括属性，事件，方法，插槽等。
+    details: plus-pro-components 100%兼容和 element-plus 同名的组件，包括属性，事件，方法，插槽等。
 
   - icon: 🛠️
     title: 丰富的组件库
