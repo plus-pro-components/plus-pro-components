@@ -19,4 +19,6 @@ git commit -m 'deploy'
 # if you are deploying to https://<USERNAME>.github.io
 git push -f https://github.com/plus-pro-components/plus-pro-components.github.io.git master:gh-pages
 
+# rsync -av --exclude=".*" ./  root@39.103.160.178:/root/plus-pro-components
+
 cd -

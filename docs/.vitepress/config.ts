@@ -61,10 +61,6 @@ export default defineConfig({
         text: '组件',
         link: '/components/dialog'
       },
-      // {
-      //   text: '工具',
-      //   link: '/utils/'
-      // },
       {
         text: `v${pkg.version}`,
         items: [
@@ -77,6 +73,10 @@ export default defineConfig({
             link: 'https://github.com/plus-pro-components/plus-pro-components/blob/main/CHANGELOG.md'
           }
         ]
+      },
+      {
+        text: '国内镜像',
+        link: 'https://plus-pro-components.com/'
       }
     ],
     sidebar: {
