@@ -90,7 +90,7 @@
           v-model="row[item.prop]"
           class="ml-2"
           disabled
-          :style="`--el-switch-on-color: ${item?.elSwitchOnColor}; --el-switch-off-color: ${item?.elSwitchOffColor}`"
+          :style="`--el-switch-on-color: ${item?.attrs?.activeColor}; --el-switch-off-color: ${item?.attrs?.inactiveColor}`"
         />
       </span>
       <!-- 标签 -->

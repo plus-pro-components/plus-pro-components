@@ -6,8 +6,8 @@
     :title="width"
     :close-on-click-modal="false"
     :close-on-press-escape="false"
+    :append-to-body="false"
     :before-close="handleCancel"
-    append-to-body
     class="plus-dialog"
     v-bind="$attrs"
   >
@@ -41,7 +41,7 @@ import { ref, watchEffect } from 'vue'
 import type { DialogProps } from 'element-plus'
 
 export interface PlusDialogProps
-  extends /* @vue-ignore */ Omit<DialogProps, 'modelValue' | 'title'> {
+  extends /* @vue-ignore */ Partial<Omit<DialogProps, 'modelValue' | 'title'>> {
   modelValue?: boolean
   confirmText?: string
   cancelText?: string

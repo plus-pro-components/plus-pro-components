@@ -85,7 +85,7 @@ watch(
   val => {
     state.subSrcList = val as PlusImagePreviewRow[]
     state.subSrc = val[0]?.url
-    state.subName = val[0]?.name
+    state.subName = val[0]?.name || ''
   },
   {
     immediate: true,
@@ -100,7 +100,7 @@ const handleLeft = () => {
     state.currentIndex = 0
   }
   state.subSrc = state.subSrcList[state.currentIndex]?.url
-  state.subName = state.subSrcList[state.currentIndex]?.name
+  state.subName = state.subSrcList[state.currentIndex]?.name || ''
 }
 // 右移
 const handleRight = () => {
@@ -109,7 +109,7 @@ const handleRight = () => {
     state.currentIndex = srcListLength.value - 1
   }
   state.subSrc = state.subSrcList[state.currentIndex]?.url
-  state.subName = state.subSrcList[state.currentIndex]?.name
+  state.subName = state.subSrcList[state.currentIndex]?.name || ''
 }
 
 const { subShow, subSrc, currentIndex } = toRefs(state)

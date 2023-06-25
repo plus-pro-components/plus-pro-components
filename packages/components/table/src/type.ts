@@ -109,10 +109,6 @@ export interface TableConfigRow {
   type?: 'select' | 'inputNumber' | 'textarea' | 'text'
 
   attrs?: RecordIndexType
-  // switch开关打开颜色
-  elSwitchOnColor?: string
-  // switch开关关闭颜色
-  elSwitchOffColor?: string
   // 自定义文字 颜色的obj
   valueEnum?: Record<
     string,
