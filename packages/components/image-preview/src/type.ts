@@ -1,6 +1,6 @@
 export interface PlusImagePreviewRow {
   url: string
-  name: string
+  name?: string
 }
 
 export interface State {

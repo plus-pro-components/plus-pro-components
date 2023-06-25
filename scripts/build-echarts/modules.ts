@@ -10,8 +10,9 @@ import vuePlugin from 'rollup-plugin-vue'
 // @ts-ignore
 import DefineOptions from 'unplugin-vue-define-options/rollup'
 import type { OutputOptions, ModuleFormat } from 'rollup'
-import { ecOutput, ecRoot } from './paths'
-import { excludeFiles, writeBundles, external } from './utils'
+import { ecOutput, ecRoot } from '../utils/paths'
+import { writeBundles } from '../utils'
+import { external, excludeFiles } from '../utils/echarts'
 
 const buildConfig = {
   esm: {

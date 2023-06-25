@@ -6,9 +6,10 @@ import * as vueCompiler from 'vue/compiler-sfc'
 import glob from 'fast-glob'
 import chalk from 'chalk'
 import { Project } from 'ts-morph'
-import { buildOutput, pcRoot, pkgRoot, projRoot } from './paths'
+import { buildOutput, pcRoot, pkgRoot, projRoot } from '../utils/paths'
 import type { CompilerOptions, SourceFile } from 'ts-morph'
-import { excludeFiles, pathRewriter, PKG_NAME } from './utils'
+import { pathRewriter, PKG_NAME } from '../utils'
+import { excludeFiles } from '../utils/main'
 
 const TSCONFIG_PATH = path.resolve(projRoot, 'tsconfig.web.json')
 const outDir = path.resolve(buildOutput, 'types')

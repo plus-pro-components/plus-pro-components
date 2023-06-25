@@ -3,7 +3,7 @@ import { copyFile } from 'fs/promises'
 import consola from 'consola'
 import { copy } from 'fs-extra'
 
-import { typeOutput, ecOutput, ecRoot } from './paths'
+import { typeOutput, ecOutput, ecRoot } from '../utils/paths'
 import all from './all'
 import modules from './modules'
 import dts from './dts'
