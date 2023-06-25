@@ -5,8 +5,8 @@ import consola from 'consola'
 import execa from 'execa'
 import { checkbox, select, input } from '@inquirer/prompts'
 import { findWorkspacePackages } from '@pnpm/find-workspace-packages'
-import { projRoot, pcPackage, projPackage } from '../build/paths'
-import { PKG_NAME } from '../build/utils'
+import { projRoot, projPackage } from '../utils/paths'
+import { PKG_NAME } from '../utils'
 
 type SemverRow = {
   release: semver.ReleaseType
@@ -78,7 +78,7 @@ const updatePackage = (version: string, pkgPath: string) => {
 }
 
 // 获取版本
-const getVersion = async (currentVersion: string) => {
+const getVersion = async (currentVersion: string, pkgName: string) => {
   // 发布版本
   let version: string | null
   const selectChoices = versionIncrements
@@ -99,7 +99,7 @@ const getVersion = async (currentVersion: string) => {
     .concat({ name: 'custom', value: 'custom' })
 
   version = await select({
-    message: 'Select release type',
+    message: `Select release type (${pkgName})`,
     choices: selectChoices
   })
 
@@ -151,7 +151,7 @@ const main = async () => {
     dir: item.dir,
     name: item.manifest.name,
     version: item.manifest.version,
-    pkg: path.resolve(item.dir, 'package.json')
+    pkgPath: path.resolve(item.dir, 'package.json')
   }))
 
   // 选择需要更新的包
@@ -176,15 +176,15 @@ const main = async () => {
   for (let index = 0; index < selectPackages.length; index++) {
     const name = selectPackages[index]
     const packageInfo = workspaceMaps.find(i => i.name === name)
-    const version = await getVersion(packageInfo?.version as string)
-    updatePackage(version as string, packageInfo?.pkg as string)
+    const pkg = name === PKG_NAME ? JSON.parse(fs.readFileSync(projPackage, 'utf-8')) : packageInfo
+    const pkgPath = name === PKG_NAME ? projPackage : packageInfo?.pkgPath
+    const version = await getVersion(pkg.version as string, packageInfo?.name as string)
+    updatePackage(version as string, pkgPath as string)
     consola.success(`Successfully updated version ${name}!`)
   }
 
   if (selectPackages.includes(PKG_NAME)) {
-    // 主包更新
-    const mainPkg = JSON.parse(fs.readFileSync(pcPackage, 'utf-8'))
-    updatePackage(mainPkg.version as string, projPackage)
+    const mainPkg = JSON.parse(fs.readFileSync(projPackage, 'utf-8'))
     commit(mainPkg.version)
   } else {
     commit()

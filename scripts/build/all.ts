@@ -1,5 +1,4 @@
 import { resolve } from 'path'
-// import vuePlugin from '@vitejs/plugin-vue'
 import vuePlugin from 'rollup-plugin-vue'
 import postcss from 'rollup-plugin-postcss'
 import autoprefixer from 'autoprefixer'
@@ -12,8 +11,9 @@ import esbuild, { minify as minifyPlugin } from 'rollup-plugin-esbuild'
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import DefineOptions from 'unplugin-vue-define-options/rollup'
-import { pcOutput, pcRoot } from './paths'
-import { writeBundles, formatBundleFilename, PKG_CAMEL_CASE_NAME, external } from './utils'
+import { pcOutput, pcRoot } from '../utils/paths'
+import { writeBundles, formatBundleFilename, PKG_CAMEL_CASE_NAME } from '../utils'
+import { external } from '../utils/main'
 
 const buildAll = async (minify?: boolean) => {
   const plugins = [

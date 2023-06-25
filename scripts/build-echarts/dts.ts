@@ -7,8 +7,9 @@ import glob from 'fast-glob'
 import chalk from 'chalk'
 import { Project } from 'ts-morph'
 import type { CompilerOptions, SourceFile } from 'ts-morph'
-import { ecRoot, projRoot, typeOutput } from './paths'
-import { excludeFiles, pathRewriter } from './utils'
+import { excludeFiles } from '../utils/echarts'
+import { ecRoot, projRoot, typeOutput } from '../utils/paths'
+import { pathRewriter } from '../utils'
 
 const TSCONFIG_PATH = path.resolve(projRoot, 'tsconfig.echarts.json')
 
