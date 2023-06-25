@@ -36,3 +36,11 @@
 .plus-image-preview-footer__icon {
   box-sizing: content-box;
 }
+
+.copyright {
+  white-space: pre;
+
+  .copyright-link {
+    color: var(--vp-c-brand);
+  }
+}
