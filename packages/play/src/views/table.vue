@@ -259,6 +259,5 @@ const subClickButton = (data: ButtonsCallBackParams) => {
 const subSortEnd = (newIndex: number, oldIndex: number) => {
   const currRow = tableData.value.splice(oldIndex, 1)[0]
   tableData.value.splice(newIndex, 0, currRow)
-  console.log(newIndex, oldIndex, tableData.value)
 }
 </script>

@@ -1,5 +1,9 @@
 lockfileVersion: '6.0'
 
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
 importers:
 
   .:
@@ -204,8 +208,8 @@ importers:
   docs:
     dependencies:
       plus-pro-components:
-        specifier: npm:plus-pro-components@latest
-        version: 0.0.1-alpha.7(vue@3.3.4)
+        specifier: 0.0.1-alpha.9
+        version: 0.0.1-alpha.9(vue@3.3.4)
     devDependencies:
       '@types/escape-html':
         specifier: ^1.0.2
@@ -7924,8 +7928,8 @@ packages:
       pathe: 1.1.0
     dev: true
 
-  /plus-pro-components@0.0.1-alpha.7(vue@3.3.4):
-    resolution: {integrity: sha512-FfPmjnA9IzzazgYqj4SH0v4U2LsfzR3ONw5cD2mIffTICc7yqtIc3Ca8SxPbjGDRFdLqHE9wzwL4NF3QJqiySg==}
+  /plus-pro-components@0.0.1-alpha.9(vue@3.3.4):
+    resolution: {integrity: sha512-ib/oArgifp1gRwg2ZRFe4PkharyGPzrVTh+1H0v1u+uE1Nv41+buEKX9FAh26oUZ+Q4bOBX4tLivfCw55RbySQ==}
     peerDependencies:
       vue: ^3.2.0
     dependencies:
@@ -7934,6 +7938,7 @@ packages:
       dayjs: 1.11.7
       element-plus: 2.3.4(vue@3.3.4)
       lodash-es: 4.17.21
+      sortablejs: 1.15.0
       vue: 3.3.4
     transitivePeerDependencies:
       - '@vue/composition-api'
@@ -10916,7 +10921,3 @@ packages:
     dependencies:
       tslib: 2.3.0
     dev: false
-
-settings:
-  autoInstallPeers: true
-  excludeLinksFromLockfile: false
