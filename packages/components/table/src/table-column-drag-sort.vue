@@ -6,7 +6,7 @@
     width="60"
     class-name="plus-table-column-drag-sort"
   >
-    <span class="plus-table-column-drag-sort__icon">☷</span>
+    <span class="plus-table-column-drag-icon">☷</span>
   </el-table-column>
 </template>
 
@@ -54,7 +54,7 @@ const rowDrop = () => {
 
 <style lang="scss">
 .plus-table-column-drag-sort {
-  .plus-table-column-drag-sort__icon {
+  .plus-table-column-drag-icon {
     cursor: move;
     padding: 4px;
     box-sizing: border-box;
