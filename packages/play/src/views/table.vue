@@ -46,7 +46,7 @@ defineOptions({
 
 const TestServe = {
   getList: async () => {
-    const data = [...new Array(100)].map((item, index) => {
+    const data = [...new Array(10)].map((item, index) => {
       return {
         index,
         id: index,
@@ -75,7 +75,18 @@ const TestServe = {
             : {
                 backgroundColor: '#979797'
               },
-        time: new Date()
+        img: {
+          img: '1',
+          url: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
+          name: '1'
+        },
+        time: new Date(),
+        srcList: [
+          {
+            url: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
+            name: '1'
+          }
+        ]
         //         code: `
         // const getData = async params => {
         //   const data = await getData(params)
@@ -202,6 +213,12 @@ const tableConfig: TableConfigRow[] = [
     valueType: 'switch',
     elSwitchOnColor: '#13ce66',
     elSwitchOffColor: '#ff4949'
+  },
+  {
+    label: '图片',
+    prop: 'img',
+    width: 100,
+    valueType: 'img'
   },
   {
     label: '时间',
