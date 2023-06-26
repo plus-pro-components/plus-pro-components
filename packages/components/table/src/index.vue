@@ -96,6 +96,7 @@
       scrollbar-always-on
       class="table"
       v-bind="$attrs"
+      :row-key="rowKey"
       @selection-change="handleSelectionChange"
       @sort-change="handleSortChange"
       @row-click="handleClickRow"
@@ -106,7 +107,8 @@
       <el-table-column v-if="isSelection" key="selection" type="selection" width="34" />
       <!-- 序号栏 -->
       <IndexColumn :show="isShowNumber" :sub-page-info="pagination.modelValue" align="left" />
-
+      <DragSortColumn :show-drag-sort="isShowDragSort" @subSortEnd="subSortEnd" />
+      <!-- <el-table-column v-if="isShowDragSort" label="排序">111</el-table-column> -->
       <!-- 展开行 -->
       <el-table-column v-if="hasExpand" type="expand">
         <template #default="{ row, $index }">
@@ -151,6 +153,7 @@ import PlusPopover from '../../popover/src/index.vue'
 import PlusTableActionBar from './table-action-bar.vue'
 import CustomColumn from './table-column.vue'
 import IndexColumn from './table-column-index.vue'
+import DragSortColumn from './table-column-drag-sort.vue'
 import type {
   ButtonsCallBackParams,
   TableState,
@@ -189,6 +192,9 @@ export interface PlusTableProps {
   config: TableConfigRow[]
   /* 表格头样式*/
   headerCellStyle?: CSSProperties
+  // 是否可拖拽
+  isShowDragSort?: boolean
+  rowKey?: string
 }
 
 export interface PlusTableEmits {
@@ -199,11 +205,13 @@ export interface PlusTableEmits {
   (e: 'subSortChange', sortParams: SortParams): void
   (e: 'subClickRow', row: any, column: any, event: MouseEvent): void
   (e: 'subClickButton', data: ButtonsCallBackParams): void
+  (e: 'subSortEnd', newIndex: number, oldIndex: number): void
 }
 
 defineOptions({
   name: 'PlusTable'
 })
+
 const LabelLength = 6
 const props = withDefaults(defineProps<PlusTableProps>(), {
   size: 'small',
@@ -233,7 +241,9 @@ const props = withDefaults(defineProps<PlusTableProps>(), {
   headerCellStyle: () => ({
     backgroundColor: '#F5F9FD',
     color: '#777'
-  })
+  }),
+  isShowDragSort: false,
+  rowKey: 'id'
 })
 
 const emit = defineEmits<PlusTableEmits>()
@@ -392,6 +402,9 @@ const handleClickDensity = (data: string) => {
   })
   state.size = data
 }
+const subSortEnd = (newIndex: number, oldIndex: number) => {
+  emit('subSortEnd', newIndex, oldIndex)
+}
 
 handleClickDensity(state.size || props.size || 'small')
 const {
@@ -406,7 +419,7 @@ const {
   isIndeterminate
 } = toRefs(state)
 
-// 暴露画布生成图片方法到外部调用
+// 暴露方法到外部调用
 defineExpose({
   scrollTo,
   doLayout,
@@ -448,6 +461,27 @@ defineExpose({
   .plus-table-title-expand-col {
     padding: 0;
   }
+
+  .el-table .cell {
+    line-height: 12px;
+  }
+  .el-table__body-wrapper .el-table__body .el-table__row td {
+    border-right: 0;
+  }
+  .el-table--border th.el-table__cell {
+    border: none;
+    ::before {
+      position: absolute;
+      top: 50%;
+      inset-inline-end: 0;
+      width: 1px;
+      height: 1.6em;
+      background-color: #ccc;
+      transform: translateY(-50%);
+      transition: background-color 0.2s;
+      content: '';
+    }
+  }
 }
 
 .plus-table-filter-dialog {
@@ -465,26 +499,6 @@ defineExpose({
     .el-checkbox:nth-of-type(4n) {
       margin: 0;
     }
-  }
-}
-.el-table .cell {
-  line-height: 12px;
-}
-.el-table .el-table__body-wrapper .el-table__body .el-table__row td {
-  border-right: 0 !important;
-}
-.el-table--border th.el-table__cell {
-  border: none;
-  ::before {
-    position: absolute;
-    top: 50%;
-    inset-inline-end: 0;
-    width: 1px;
-    height: 1.6em;
-    background-color: #ccc;
-    transform: translateY(-50%);
-    transition: background-color 0.2s;
-    content: '';
   }
 }
 </style>

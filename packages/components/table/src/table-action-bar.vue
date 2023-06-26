@@ -85,7 +85,7 @@ const render = (row: any, buttonRow: ButtonsNameKeyRow, index: number): VNode =>
     return h(
       ElLink,
       {
-        class: 'action-bar-column-link',
+        class: 'plus-table-action-bar__column__link',
         type: buttonRow?.type,
         title: buttonRow?.text,
         size: buttonRow?.size || 'small',
@@ -123,13 +123,20 @@ const handleClickOption = (
   }
 }
 </script>
-<style lang="scss" scoped>
-.action-bar-column-link {
-  margin-right: 10px;
-}
-.el-dropdown {
-  vertical-align: baseline;
-  cursor: pointer;
-  margin-left: 5px;
+
+<style lang="scss">
+.plus-table-action-bar {
+  .cell {
+    display: flex;
+    align-items: center;
+  }
+  .plus-table-action-bar__column__link {
+    margin-right: 10px;
+  }
+  .el-dropdown {
+    vertical-align: baseline;
+    cursor: pointer;
+    margin-left: 5px;
+  }
 }
 </style>

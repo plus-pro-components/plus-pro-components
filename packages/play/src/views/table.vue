@@ -8,6 +8,7 @@
       :config="tableConfig"
       :table-data="tableData"
       :is-show-number="true"
+      :is-show-drag-sort="true"
       table-title="表格"
       :pagination="{ show: true, total, modelValue: pageInfo }"
       :action-bar="{
@@ -15,10 +16,11 @@
         buttonsName,
         buttonType: 'link',
         buttonCount: 3,
-        optionColumnWidth: 300
+        optionColumnWidth: 200
       }"
       @subPaginationChange="handlePaginationChange"
       @subClickButton="subClickButton"
+      @subSortEnd="subSortEnd"
     >
       <template #button>
         <el-button plain size="small">查看日志</el-button>
@@ -44,9 +46,10 @@ defineOptions({
 
 const TestServe = {
   getList: async () => {
-    const data = [...new Array(100)].map((item, index) => {
+    const data = [...new Array(10)].map((item, index) => {
       return {
         index,
+        id: index,
         name: index === 0 ? 'name'.repeat(20) : index + 'name',
         status:
           index === 0 ? 'processing' : index === 1 ? 'error' : index === 2 ? 'open' : 'closed',
@@ -72,7 +75,18 @@ const TestServe = {
             : {
                 backgroundColor: '#979797'
               },
-        time: new Date()
+        img: {
+          img: '1',
+          url: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
+          name: '1'
+        },
+        time: new Date(),
+        srcList: [
+          {
+            url: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
+            name: '1'
+          }
+        ]
         //         code: `
         // const getData = async params => {
         //   const data = await getData(params)
@@ -203,8 +217,13 @@ const tableConfig: TableConfigRow[] = [
     }
   },
   {
+    label: '图片',
+    prop: 'img',
+    width: 100,
+    valueType: 'img'
+  },
+  {
     label: '时间',
-    width: 190,
     prop: 'time',
     valueType: 'date'
   }
@@ -237,12 +256,8 @@ const handlePaginationChange = (_pageInfo: PageInfo): void => {
 const subClickButton = (data: ButtonsCallBackParams) => {
   console.log(data.buttonRow.text)
 }
-</script>
-
-<style lang="scss" scoped>
-.button-row {
-  display: flex;
-  justify-content: flex-start;
-  margin-bottom: 20px;
+const subSortEnd = (newIndex: number, oldIndex: number) => {
+  const currRow = tableData.value.splice(oldIndex, 1)[0]
+  tableData.value.splice(newIndex, 0, currRow)
 }
-</style>
+</script>

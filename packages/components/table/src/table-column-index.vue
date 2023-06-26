@@ -62,22 +62,23 @@ const getTableIndex = (index: number) => {
 </script>
 
 <style lang="scss">
-.plus-table-index-column {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  word-break: keep-all;
-  white-space: nowrap;
-  width: 20px;
-  height: 20px;
-}
-.plus-table-index-col-border {
-  color: #fff;
-  font-size: 12px;
-  line-height: 12px;
-  border-radius: 50%;
-}
 .plus-table-column-index {
+  .plus-table-index-column {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    word-break: keep-all;
+    white-space: nowrap;
+    width: 20px;
+    height: 20px;
+  }
+  .plus-table-index-col-border {
+    color: #fff;
+    font-size: 12px;
+    line-height: 12px;
+    border-radius: 50%;
+  }
+
   .cell {
     line-height: 32px !important;
     .plus-table-column-index-content {

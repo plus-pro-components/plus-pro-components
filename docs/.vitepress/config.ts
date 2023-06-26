@@ -127,6 +127,10 @@ export default defineConfig({
             {
               text: '表格',
               link: '/components/table'
+            },
+            {
+              text: '描述列表',
+              link: '/components/description'
             }
           ]
         }
