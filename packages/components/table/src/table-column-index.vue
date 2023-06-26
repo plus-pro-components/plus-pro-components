@@ -17,7 +17,7 @@
         placement="top-start"
       >
         <div
-          class="plus-table-index-cloumn plus-table-index-col-border plus-table-column-index-content"
+          class="plus-table-index-column plus-table-index-col-border plus-table-column-index-content"
           :style="row?.indexColStyle || {}"
         >
           {{ getTableIndex($index) }}
@@ -25,7 +25,7 @@
       </el-tooltip>
       <div
         v-else
-        class="plus-table-index-cloumn plus-table-index-col-border plus-table-column-index-content"
+        class="plus-table-index-column plus-table-index-col-border plus-table-column-index-content"
         :style="row?.indexColStyle || {}"
       >
         {{ getTableIndex($index) }}
@@ -62,7 +62,7 @@ const getTableIndex = (index: number) => {
 </script>
 
 <style lang="scss">
-.plus-table-index-cloumn {
+.plus-table-index-column {
   display: inline-flex;
   align-items: center;
   justify-content: center;

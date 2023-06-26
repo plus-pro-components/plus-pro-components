@@ -8,8 +8,9 @@ import esbuild, { minify as minifyPlugin } from 'rollup-plugin-esbuild'
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import DefineOptions from 'unplugin-vue-define-options/rollup'
-import { ecOutput, ecRoot } from './paths'
-import { writeBundles, formatBundleFilename, PKG_CAMEL_CASE_NAME, external } from './utils'
+import { ecOutput, ecRoot } from '../utils/paths'
+import { writeBundles, formatBundleFilename, PKG_CAMEL_CASE_NAME } from '../utils'
+import { external } from '../utils/echarts'
 
 const buildAll = async (minify?: boolean) => {
   const plugins = [

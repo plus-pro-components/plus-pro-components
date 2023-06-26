@@ -199,13 +199,12 @@ export interface PlusTableProps {
 
 export interface PlusTableEmits {
   (e: 'subPaginationChange', pageInfo: PageInfo): void
-  (e: 'subSelected', data: any): void
-  (e: 'subCurrent', data: any): void
-  (e: 'subExpandChange', data: any): void
-  (e: 'subSortChange', data: any): void
-  (e: 'subClickRow', row: any, column: any, event: any): void
-  (e: 'subClickButton', data: any): void
-  (e: 'subClickButton'): void
+  (e: 'subSelected', data: any[]): void
+  (e: 'subCurrent', row: any): void
+  (e: 'subExpandChange', row: any): void
+  (e: 'subSortChange', sortParams: SortParams): void
+  (e: 'subClickRow', row: any, column: any, event: MouseEvent): void
+  (e: 'subClickButton', data: ButtonsCallBackParams): void
   (e: 'subSortEnd', newIndex: number, oldIndex: number): void
 }
 
@@ -342,7 +341,7 @@ const handleSortChange = (sortParams: SortParams) => {
   emit('subSortChange', sortParams)
 }
 // 当某一行被点击时会触发该事件
-const handleClickRow = (row: any, column: any, event: PointerEvent) => {
+const handleClickRow = (row: any, column: any, event: MouseEvent) => {
   emit('subClickRow', row, column, event)
 }
 // 点击按钮传递给父组件
@@ -388,7 +387,7 @@ const getLabel = (label: string) => {
   return label?.slice(0, LabelLength) + '...'
 }
 // 多选处理
-const handleSelectionChange = (data: any) => {
+const handleSelectionChange = (data: any[]) => {
   emit('subSelected', data)
 }
 // 密度

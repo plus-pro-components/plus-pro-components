@@ -19,8 +19,9 @@
 <script lang="ts" setup>
 import { ref, watchEffect } from 'vue'
 import { defaultPageSizeList, defaultPageInfo } from '@plus-pro-components/constants'
+import type { PaginationProps } from 'element-plus'
 
-export interface PlusPaginationProps {
+export interface PlusPaginationProps extends /* @vue-ignore */ Partial<PaginationProps> {
   modelValue: PageInfo
   total: number
   show?: boolean
@@ -30,6 +31,8 @@ export interface PlusPaginationProps {
 export interface PlusPaginationEmits {
   (e: 'update:modelValue', pageInfo: PageInfo): void
   (e: 'change', pageInfo: PageInfo): void
+  (e: 'size-change', value: number): void
+  (e: 'current-change', value: number): void
 }
 
 defineOptions({
@@ -62,11 +65,13 @@ const handleSizeChange = (pageSize: number) => {
   // 改变翻页数目，必须将页面=1
   pageInfo.value.page = 1
   handleEmit()
+  emit('size-change', pageSize)
 }
 
 // 跳到当前是第几页
-const handleCurrentChange = (val: number) => {
-  pageInfo.value.page = val
+const handleCurrentChange = (page: number) => {
+  pageInfo.value.page = page
   handleEmit()
+  emit('current-change', page)
 }
 </script>

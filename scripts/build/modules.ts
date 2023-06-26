@@ -5,9 +5,7 @@ import { nodeResolve } from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
 import esbuild from 'rollup-plugin-esbuild'
 import glob from 'fast-glob'
-import { pcOutput, pkgRoot, pcRoot } from './paths'
 import vuePlugin from 'rollup-plugin-vue'
-// import vuePlugin from '@vitejs/plugin-vue'
 import postcss from 'rollup-plugin-postcss'
 import autoprefixer from 'autoprefixer'
 import cssnano from 'cssnano'
@@ -15,7 +13,9 @@ import cssnano from 'cssnano'
 // @ts-ignore
 import DefineOptions from 'unplugin-vue-define-options/rollup'
 import type { OutputOptions, ModuleFormat } from 'rollup'
-import { excludeFiles, writeBundles, externalModules } from './utils'
+import { pcOutput, pcRoot, pkgRoot } from '../utils/paths'
+import { writeBundles } from '../utils'
+import { externalModules, excludeFiles } from '../utils/main'
 
 const buildConfig = {
   esm: {

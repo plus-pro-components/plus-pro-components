@@ -1,5 +1,5 @@
 <template>
-  <PlusRadio v-model="state.value" :data="state.data" @change="change" />
+  <PlusRadio v-model="state.value" is-cancel :data="state.data" @change="change" />
 </template>
 
 <script setup lang="ts">

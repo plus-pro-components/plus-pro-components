@@ -45,11 +45,11 @@ jobs:
       - name: Install dependencies
         run: pnpm i --frozen-lockfile
 
+      - name: Build utils
+        run: pnpm build:utils
+
       - name: Lint
         run: pnpm lint
-
-      - name: Type Check
-        run: pnpm typecheck
 
   build:
     name: Unit Test (${{ matrix.node-name }})

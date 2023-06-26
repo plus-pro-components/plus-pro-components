@@ -211,8 +211,10 @@ const tableConfig: TableConfigRow[] = [
     width: 100,
     prop: 'switch',
     valueType: 'switch',
-    elSwitchOnColor: '#13ce66',
-    elSwitchOffColor: '#ff4949'
+    attrs: {
+      activeColor: '#13ce66',
+      inactiveColor: '#ff4949'
+    }
   },
   {
     label: '图片',

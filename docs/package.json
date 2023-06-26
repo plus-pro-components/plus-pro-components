@@ -24,9 +24,9 @@
     "prismjs": "^1.29.0",
     "sass": "^1.62.1",
     "vite-plugin-inspect": "^0.7.28",
-    "vitepress": "1.0.0-beta.1"
+    "vitepress": "1.0.0-beta.3"
   },
   "dependencies": {
-    "plus-pro-components": "0.0.1-alpha.7"
+    "plus-pro-components": "npm:plus-pro-components@latest"
   }
 }

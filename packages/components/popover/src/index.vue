@@ -22,7 +22,7 @@
         size="small"
         type="primary"
         :loading="confirmLoading"
-        @click="handleConfrimPopover"
+        @click="handleConfirmPopover"
         >{{ confirmText || t('el.popconfirm.confirmButtonText') }}</el-button
       >
     </div>
@@ -64,7 +64,7 @@ const state = reactive({
   visible: false
 })
 withDefaults(defineProps<PlusPopoverProps>(), {
-  // 是否显示 popver 弹出框
+  // 是否显示 popover 弹出框
   hasFilterTableHeader: false,
   // 是否显示底部按钮
   hasShowBottomButton: false,
@@ -84,7 +84,7 @@ const handleCancelPopover = (): void => {
   emit('cancel')
   state.visible = false
 }
-const handleConfrimPopover = (): void => {
+const handleConfirmPopover = (): void => {
   emit('confirm')
   state.visible = false
 }
