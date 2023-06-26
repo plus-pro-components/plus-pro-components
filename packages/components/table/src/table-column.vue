@@ -12,8 +12,8 @@
     :show-overflow-tooltip="item.showOverflowTooltip !== false"
   >
     <template #default="{ row }">
-      <PlusCommonItems
-        :common-items="item"
+      <PlusFieldItem
+        :config-item="item"
         :rows="row"
         @clickToEnlargeImage="handelClickToEnlargeImage"
       />
@@ -23,13 +23,13 @@
 
 <script lang="ts" setup>
 import type { PlusImagePreviewRow } from '@plus-pro-components/components/image-preview'
-import PlusCommonItems from './item.vue'
+import PlusFieldItem from '@plus-pro-components/components/field-item'
 import type { TableConfigRow } from './type'
+
 export interface PlusTableTableColumnProps {
   config?: TableConfigRow[]
   sortable?: string | boolean
 }
-
 export interface PlusTableTableColumnStatus {
   text: string
   color: string
@@ -40,6 +40,7 @@ export interface PlusTableColumnState {
 export interface PlusTableTableColumnEmits {
   (e: 'clickToEnlargeImage', data: PlusImagePreviewRow[]): void
 }
+
 defineOptions({
   name: 'PlusTableTableColumn'
 })

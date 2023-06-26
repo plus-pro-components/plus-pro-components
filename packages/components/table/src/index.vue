@@ -211,6 +211,7 @@ export interface PlusTableEmits {
 defineOptions({
   name: 'PlusTable'
 })
+
 const LabelLength = 6
 const props = withDefaults(defineProps<PlusTableProps>(), {
   size: 'small',
@@ -418,7 +419,7 @@ const {
   isIndeterminate
 } = toRefs(state)
 
-// 暴露画布生成图片方法到外部调用
+// 暴露方法到外部调用
 defineExpose({
   scrollTo,
   doLayout,

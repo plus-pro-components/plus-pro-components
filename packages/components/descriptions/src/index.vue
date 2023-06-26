@@ -19,14 +19,16 @@
         :label-class-name="labelClassName"
         class="plus-descriptions-item"
       >
-        <PlusCommonItems :common-items="items" :rows="rowItem" />
+        <PlusFieldItem :config-item="items" :rows="rowItem" />
       </el-descriptions-item>
     </el-descriptions>
   </template>
 </template>
+
 <script lang="ts" setup>
-import PlusCommonItems from '../../table/src/item.vue'
-import type { TableConfigRow } from '../../table/src/type'
+import PlusFieldItem from '@plus-pro-components/components/field-item'
+import type { TableConfigRow } from '@plus-pro-components/components/table'
+
 export interface PlusDescriptionsProps {
   descriptionsData: any
   columns?: TableConfigRow[]
@@ -43,6 +45,7 @@ export interface PlusTableTableColumnStatus {
   text: string
   color: string
 }
+
 defineOptions({
   name: 'PlusDescriptions'
 })

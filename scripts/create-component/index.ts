@@ -2,7 +2,7 @@ import path from 'path'
 import fs from 'fs/promises'
 import consola from 'consola'
 import { confirm, input } from '@inquirer/prompts'
-import { compRoot } from '../build/paths'
+import { compRoot } from '../utils/paths'
 
 const main = async () => {
   const componentName = await input({

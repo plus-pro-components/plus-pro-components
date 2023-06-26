@@ -123,13 +123,16 @@ const handleClickOption = (
   }
 }
 </script>
-<style lang="scss" scoped>
-.action-bar-column-link {
-  margin-right: 10px;
-}
-.el-dropdown {
-  vertical-align: baseline;
-  cursor: pointer;
-  margin-left: 5px;
+
+<style lang="scss">
+.plus-table-action-bar {
+  .plus-table-action-bar-column-link {
+    margin-right: 10px;
+  }
+  .el-dropdown {
+    vertical-align: baseline;
+    cursor: pointer;
+    margin-left: 5px;
+  }
 }
 </style>
