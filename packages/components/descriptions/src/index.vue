@@ -1,0 +1,74 @@
+<template>
+  <template v-for="rowItem in descriptionsData" :key="rowItem">
+    <el-descriptions
+      :title="rowItem.title || ''"
+      :column="column"
+      :border="border"
+      :size="size"
+      :direction="direction"
+    >
+      <el-descriptions-item
+        v-for="(items, index) in columns"
+        :key="index"
+        :label="items.label"
+        :width="items?.width || 150"
+        :min-width="items?.minWidth"
+        :align="align"
+        :label-align="labelAlign"
+        :class-name="className"
+        :label-class-name="labelClassName"
+        class="plus-descriptions-item"
+      >
+        <PlusCommonItems :common-items="items" :rows="rowItem" />
+      </el-descriptions-item>
+    </el-descriptions>
+  </template>
+</template>
+<script lang="ts" setup>
+import PlusCommonItems from '../../table/src/item.vue'
+import type { TableConfigRow } from '../../table/src/type'
+export interface PlusDescriptionsProps {
+  descriptionsData: any
+  columns?: TableConfigRow[]
+  column?: number
+  direction?: string
+  size?: string
+  border?: boolean
+  align?: string
+  labelAlign?: string
+  className?: string
+  labelClassName?: string
+}
+export interface PlusTableTableColumnStatus {
+  text: string
+  color: string
+}
+defineOptions({
+  name: 'PlusDescriptions'
+})
+
+withDefaults(defineProps<PlusDescriptionsProps>(), {
+  // 数据
+  descriptionsData: () => [],
+  // 描述列表label
+  columns: () => [],
+  // 一行 Descriptions Item 的数量
+  column: 3,
+  // 排列的方向
+  direction: 'horizontal',
+  //   列表的尺寸
+  size: 'default',
+  // 操作区文本，显示在右上方
+  extra: '',
+  // 是否显示边框
+  border: false,
+  // 列的内容对齐方式（如无 border，对标签和内容均生效）
+  align: 'left',
+  // 列的标签对齐方式，若不设置该项，则使用内容的对齐方式（如无 border，请使用 align 参数）
+  labelAlign: 'left',
+  // 列的内容自定义类名
+  className: '',
+  // column label custom class name
+  labelClassName: ''
+})
+</script>
