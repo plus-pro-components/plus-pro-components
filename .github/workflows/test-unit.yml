@@ -2,7 +2,7 @@ name: 🧪 Unit Test
 
 on:
   push:
-    branches: [main]
+    branches: [main, dev]
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.number || github.sha }}
