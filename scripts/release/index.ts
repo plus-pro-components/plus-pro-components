@@ -127,7 +127,7 @@ async function commit(version?: string) {
 
     // 打tag
     if (version) {
-      await run('git', ['tag', '-a', version, '-m', `v${version}`])
+      await run('git', ['tag', '-a', `v${version}`, '-m', `v${version}`])
     }
 
     await run('npm', ['run', '--name', 'gitcz'])
