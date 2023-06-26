@@ -137,8 +137,7 @@ export default defineConfig({
     ],
     footer: {
       message: 'MIT Licensed.',
-      copyright:
-        'Copyright © 2023-present xiaofei \n<a href="https://beian.miit.gov.cn" class="copyright-link">陕ICP备2021003270号-2</a>'
+      copyright: 'Copyright © 2023-present xiaofei'
     }
   },
   markdown: {
