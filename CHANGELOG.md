@@ -1,3 +1,14 @@
+## [0.0.1-alpha.9](https://github.com/plus-pro-components/plus-pro-components/compare/0.0.1-alpha.8...0.0.1-alpha.9) (2023-06-26)
+
+
+### ✨ Features
+
+* **components:** :sparkles: add field-item component. ([77d15c1](https://github.com/plus-pro-components/plus-pro-components/commit/77d15c1))
+* **packages:** :sparkles: add description lists ([7df0948](https://github.com/plus-pro-components/plus-pro-components/commit/7df0948))
+* **packages:** :sparkles: drag sort table ([d48427f](https://github.com/plus-pro-components/plus-pro-components/commit/d48427f))
+
+
+
 ## [0.0.1-alpha.8](https://github.com/plus-pro-components/plus-pro-components/compare/0.0.1-alpha.7...0.0.1-alpha.8) (2023-06-25)
 
 
