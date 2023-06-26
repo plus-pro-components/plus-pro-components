@@ -247,6 +247,6 @@ const { commonRows } = toRefs(state)
   line-height: 1.45;
   background-color: rgb(246, 248, 250);
   border-radius: 3px;
-  width: min-content;
+  width: unset;
 }
 </style>

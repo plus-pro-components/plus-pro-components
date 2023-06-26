@@ -1,5 +1,5 @@
 <template>
-  <PlusDescriptions :column="3" :columns="columns" :descriptions-data="descriptionsData" border />
+  <PlusDescriptions :column="3" :columns="columns" :data="dataList" border />
 </template>
 <script lang="ts" setup>
 import { ref } from 'vue'
@@ -142,11 +142,11 @@ const columns: TableConfigRow[] = [
     valueType: 'date'
   }
 ]
-const descriptionsData = ref<any>([])
+const dataList = ref<any>([])
 const getList = async () => {
   try {
     const { data } = await TestServe.getList()
-    descriptionsData.value = data || []
+    dataList.value = data || []
   } catch (error) {}
 }
 getList()

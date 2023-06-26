@@ -1,11 +1,13 @@
 <template>
-  <template v-for="rowItem in descriptionsData" :key="rowItem">
+  <template v-for="rowItem in data" :key="rowItem">
     <el-descriptions
       :title="rowItem.title || ''"
+      :extra="extra"
       :column="column"
       :border="border"
       :size="size"
       :direction="direction"
+      class="plus-description"
     >
       <el-descriptions-item
         v-for="(items, index) in columns"
@@ -15,20 +17,20 @@
         :min-width="items?.minWidth"
         :align="align"
         :label-align="labelAlign"
-        :class-name="className"
-        :label-class-name="labelClassName"
-        class="plus-descriptions-item"
+        :class-name="className || 'plus-description__name'"
+        :label-class-name="labelClassName || 'plus-description__label'"
       >
         <PlusCommonItems :common-items="items" :rows="rowItem" />
       </el-descriptions-item>
     </el-descriptions>
   </template>
 </template>
+
 <script lang="ts" setup>
 import PlusCommonItems from '../../table/src/item.vue'
 import type { TableConfigRow } from '../../table/src/type'
 export interface PlusDescriptionsProps {
-  descriptionsData: any
+  data: any
   columns?: TableConfigRow[]
   column?: number
   direction?: string
@@ -38,6 +40,7 @@ export interface PlusDescriptionsProps {
   labelAlign?: string
   className?: string
   labelClassName?: string
+  extra?: string
 }
 export interface PlusTableTableColumnStatus {
   text: string
@@ -72,3 +75,18 @@ withDefaults(defineProps<PlusDescriptionsProps>(), {
   labelClassName: ''
 })
 </script>
+
+<style lang="scss">
+.plus-description {
+  .plus-description__name {
+    max-width: 200px;
+    /**  
+      内容超出宽度自动显示换行
+    */
+    word-wrap: break-word;
+  }
+  .plus-description__label {
+    min-width: 80px;
+  }
+}
+</style>
