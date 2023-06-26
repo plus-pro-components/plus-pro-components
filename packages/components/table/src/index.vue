@@ -461,6 +461,27 @@ defineExpose({
   .plus-table-title-expand-col {
     padding: 0;
   }
+
+  .el-table .cell {
+    line-height: 12px;
+  }
+  .el-table__body-wrapper .el-table__body .el-table__row td {
+    border-right: 0;
+  }
+  .el-table--border th.el-table__cell {
+    border: none;
+    ::before {
+      position: absolute;
+      top: 50%;
+      inset-inline-end: 0;
+      width: 1px;
+      height: 1.6em;
+      background-color: #ccc;
+      transform: translateY(-50%);
+      transition: background-color 0.2s;
+      content: '';
+    }
+  }
 }
 
 .plus-table-filter-dialog {
@@ -478,26 +499,6 @@ defineExpose({
     .el-checkbox:nth-of-type(4n) {
       margin: 0;
     }
-  }
-}
-.el-table .cell {
-  line-height: 12px;
-}
-.el-table .el-table__body-wrapper .el-table__body .el-table__row td {
-  border-right: 0 !important;
-}
-.el-table--border th.el-table__cell {
-  border: none;
-  ::before {
-    position: absolute;
-    top: 50%;
-    inset-inline-end: 0;
-    width: 1px;
-    height: 1.6em;
-    background-color: #ccc;
-    transform: translateY(-50%);
-    transition: background-color 0.2s;
-    content: '';
   }
 }
 </style>

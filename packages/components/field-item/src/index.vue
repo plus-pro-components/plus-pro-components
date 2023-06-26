@@ -73,7 +73,7 @@
       v-model="subRow[configItem.prop]"
       class="ml-2"
       disabled
-      :style="`--el-switch-on-color: ${configItem?.attrs?.elSwitchOnColor}; --el-switch-off-color: ${configItem?.attrs?.elSwitchOffColor}`"
+      :style="`--el-switch-on-color: ${configItem?.attrs?.activeColor}; --el-switch-off-color: ${configItem?.attrs?.inactiveColor}`"
     />
   </span>
 
@@ -138,12 +138,12 @@
 import { Loading, DocumentCopy, Select } from '@element-plus/icons-vue'
 import type { PlusImagePreviewRow } from '@plus-pro-components/components/image-preview'
 import { dateFormat, formatToCurrency } from '@plus-pro-components/utils'
-import { reactive, toRefs } from 'vue'
+import { reactive, toRefs, watch } from 'vue'
 import type { TableConfigRow } from '@plus-pro-components/components/table'
 
 export interface PlusFieldItemProps {
   configItem?: TableConfigRow
-  rows: Record<string, any>
+  row: Record<string, any>
 }
 export interface PlusTableTableColumnEmits {
   (e: 'clickToEnlargeImage', data: PlusImagePreviewRow[]): void
@@ -159,11 +159,19 @@ defineOptions({
 
 const props = withDefaults(defineProps<PlusFieldItemProps>(), {
   configItem: () => ({ prop: '', label: '' }),
-  rows: () => ({})
+  row: () => ({})
 })
 const state = reactive<{ subRow: Record<string, any> }>({
-  subRow: props.rows
+  subRow: props.row
 })
+
+watch(
+  () => props.row,
+  val => {
+    state.subRow = { ...val }
+  }
+)
+
 const emit = defineEmits<PlusTableTableColumnEmits>()
 // 点击放大图片
 const handelClickToEnlargeImage = (srcList: PlusImagePreviewRow[]) => {
@@ -248,6 +256,6 @@ const { subRow } = toRefs(state)
   line-height: 1.45;
   background-color: rgb(246, 248, 250);
   border-radius: 3px;
-  width: min-content;
+  width: unset;
 }
 </style>

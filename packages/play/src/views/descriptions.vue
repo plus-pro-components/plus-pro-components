@@ -1,5 +1,5 @@
 <template>
-  <PlusDescriptions :column="3" :columns="columns" :descriptions-data="descriptionsData" border />
+  <PlusDescriptions :column="3" :columns="columns" :data="dataList" border />
 </template>
 <script lang="ts" setup>
 import { ref } from 'vue'
@@ -132,8 +132,10 @@ const columns: TableConfigRow[] = [
     width: 100,
     prop: 'switch',
     valueType: 'switch',
-    elSwitchOnColor: '#13ce66',
-    elSwitchOffColor: '#ff4949'
+    attrs: {
+      activeColor: '#13ce66',
+      inactiveColor: '#ff4949'
+    }
   },
   {
     label: '时间',
@@ -142,11 +144,11 @@ const columns: TableConfigRow[] = [
     valueType: 'date'
   }
 ]
-const descriptionsData = ref<any>([])
+const dataList = ref<any>([])
 const getList = async () => {
   try {
     const { data } = await TestServe.getList()
-    descriptionsData.value = data || []
+    dataList.value = data || []
   } catch (error) {}
 }
 getList()

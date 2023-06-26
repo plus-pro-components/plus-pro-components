@@ -14,7 +14,7 @@
     <template #default="{ row }">
       <PlusFieldItem
         :config-item="item"
-        :rows="row"
+        :row="row"
         @clickToEnlargeImage="handelClickToEnlargeImage"
       />
     </template>

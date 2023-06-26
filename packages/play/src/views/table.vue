@@ -16,7 +16,7 @@
         buttonsName,
         buttonType: 'link',
         buttonCount: 3,
-        optionColumnWidth: 300
+        optionColumnWidth: 200
       }"
       @subPaginationChange="handlePaginationChange"
       @subClickButton="subClickButton"
@@ -224,7 +224,6 @@ const tableConfig: TableConfigRow[] = [
   },
   {
     label: '时间',
-    width: 190,
     prop: 'time',
     valueType: 'date'
   }
