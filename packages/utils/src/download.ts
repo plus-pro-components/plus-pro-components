@@ -1,9 +1,9 @@
 import type { FileSaverOptions } from 'file-saver'
 
-interface IDownload<T = Blob | string> {
+interface Download<T = Blob | string> {
   (
     data: T,
-    filename?: string,
+    filename: string,
     options?: FileSaverOptions & {
       errorCode?: number
     }
@@ -16,7 +16,7 @@ interface IDownload<T = Blob | string> {
  * @param filename
  * @param options
  */
-export const download: IDownload = async (data, filename, options?) => {
+export const download: Download = async (data, filename, options) => {
   // 处理没有数据的情况
   if (!data) {
     return Promise.reject('download fail: data is empt!')
