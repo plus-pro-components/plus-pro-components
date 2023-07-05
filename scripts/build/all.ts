@@ -2,6 +2,7 @@ import { resolve } from 'path'
 import vuePlugin from 'rollup-plugin-vue'
 import postcss from 'rollup-plugin-postcss'
 import autoprefixer from 'autoprefixer'
+import fs from 'fs'
 import cssnano from 'cssnano'
 import { rollup } from 'rollup'
 import consola from 'consola'
@@ -11,11 +12,16 @@ import esbuild, { minify as minifyPlugin } from 'rollup-plugin-esbuild'
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import DefineOptions from 'unplugin-vue-define-options/rollup'
-import { pcOutput, pcRoot } from '../utils/paths'
-import { writeBundles, formatBundleFilename, PKG_CAMEL_CASE_NAME } from '../utils'
+import { pcOutput, pcRoot, projPackage } from '../utils/paths'
+import { writeBundles, formatBundleFilename, PKG_CAMEL_CASE_NAME, PKG_NAME } from '../utils'
 import { external } from '../utils/main'
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+import banner2 from 'rollup-plugin-banner2'
 
 const buildAll = async (minify?: boolean) => {
+  const pkg = JSON.parse(fs.readFileSync(projPackage, 'utf-8'))
+
   const plugins = [
     vuePlugin(),
     DefineOptions(),
@@ -23,6 +29,7 @@ const buildAll = async (minify?: boolean) => {
       extensions: ['.mjs', '.js', '.json', '.ts']
     }),
     commonjs(),
+    banner2(() => `/*! ${PKG_NAME} v${pkg.version} */\n`),
     esbuild({
       sourceMap: false,
       target: 'es2018',
