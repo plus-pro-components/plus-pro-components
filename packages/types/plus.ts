@@ -1,3 +1,4 @@
+import type { RecordType } from './global'
 export {}
 
 /**
@@ -25,4 +26,5 @@ export interface OptionsRow {
   label: number | string
   value: number | string
   color?: string
+  fieldItemProps?: RecordType
 }
