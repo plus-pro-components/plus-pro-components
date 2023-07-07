@@ -2,23 +2,44 @@ import path from 'path'
 import fs from 'fs/promises'
 import consola from 'consola'
 import { confirm, input } from '@inquirer/prompts'
+import minimist from 'minimist'
+import chalk from 'chalk'
 import { compRoot } from '../utils/paths'
+import { getTargetFileTemplate, getSrcFileTemplate, getTestFileTemplate } from './template'
+
+const args = minimist(process.argv.slice(2))
+
+const arg = args._[0]
+
+let componentName = arg
+
+const validateComponentName = (name: string) => {
+  // eslint-disable-next-line no-useless-escape
+  const reg = /^[a-z]+\-?[a-z]+$/
+  return reg.test(name)
+}
 
 const main = async () => {
-  const componentName = await input({
-    message: 'Please enter component name?'
-  })
+  if (!arg) {
+    componentName = await input({
+      message: 'Please enter component name?'
+    })
+  }
 
   if (!componentName) {
     return Promise.reject('Please enter component name!')
   }
 
   const is = await confirm({
-    message: `Confirm create ${componentName} component?`
+    message: `Confirm create ${chalk.blue(componentName)} component?`
   })
 
   if (!is) {
     return Promise.reject('Not sure!')
+  }
+
+  if (!validateComponentName(componentName)) {
+    return Promise.reject(`${chalk.blue(componentName)} is not a illegal component name!`)
   }
 
   // 主文件
@@ -31,7 +52,7 @@ const main = async () => {
 
   // 实际代码文件
   const srcDir = path.resolve(targetDir, 'src')
-  const srcFile = path.resolve(srcDir, 'index.vue')
+  const srcIndexFile = path.resolve(srcDir, 'index.vue')
 
   try {
     await fs.stat(targetDir)
@@ -42,17 +63,17 @@ const main = async () => {
     await fs.mkdir(testDir, { recursive: true })
     await fs.mkdir(srcDir, { recursive: true })
     // 创建文件
-    await fs.writeFile(targetFile, '')
-    await fs.writeFile(testFile, '')
-    await fs.writeFile(srcFile, '')
+    await fs.writeFile(targetFile, getTargetFileTemplate(componentName))
+    await fs.writeFile(testFile, getTestFileTemplate(componentName))
+    await fs.writeFile(srcIndexFile, getSrcFileTemplate(componentName))
 
     return componentName
   }
 }
 
 main()
-  .then(name => {
-    consola.success(`Successfully created ${name} component!`)
+  .then(componentName => {
+    consola.success(`Successfully created ${chalk.blue(componentName)} component!`)
   })
   .catch(err => {
     consola.error(err)

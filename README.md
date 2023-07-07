@@ -1,6 +1,5 @@
 # plus-pro-components
 
-
 [![ElementPlus version badge](https://img.shields.io/npm/v/plus-pro-components.svg?style=flat-square)](https://www.npmjs.org/package/plus-pro-components)[![ docs by vitepress](https://img.shields.io/badge/docs%20by-vitepress-10b981)](https://vitepress.dev/)[![Build With Vite](https://img.shields.io/badge/build%20with-rollup-646cff.svg)](https://rollupjs.org/)[![pnpm](https://img.shields.io/badge/maintained%20with-pnpm-cc00ff.svg)](https://www.pnpm.cn/)[![element-plus](https://img.shields.io/badge/ui%20-element%20plus-409eff.svg)](https://element-plus.org/)
 
 **Frontend components at the page level**
@@ -32,8 +31,8 @@ plus-pro-components is a page level component library based on Vue and element p
 - [x] Radio -- Finished
 - [x] DatePicker -- Finished
 - [ ] Table -- Developing
-- [ ] Search -- To be developed
-- [ ] Form -- To be developed
+- [ ] Search -- Developing
+- [ ] Form -- Developing
 - [ ] Descriptions -- Developing
 
 ## shortcoming

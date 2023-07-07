@@ -147,6 +147,9 @@ importers:
       lint-staged:
         specifier: ^13.2.2
         version: 13.2.2(enquirer@2.3.6)
+      minimist:
+        specifier: ^1.2.8
+        version: 1.2.8
       postcss:
         specifier: ^8.4.24
         version: 8.4.24
@@ -417,9 +420,6 @@ importers:
       qs:
         specifier: ^6.11.1
         version: 6.11.1
-      vue:
-        specifier: ^3.2.0
-        version: 3.2.47
     devDependencies:
       '@types/accounting':
         specifier: ^0.4.2
