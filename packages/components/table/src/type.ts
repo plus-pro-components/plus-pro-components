@@ -1,5 +1,6 @@
 import type { ComputedRef } from 'vue'
 import type { PlusImagePreviewRow } from '@plus-pro-components/components/image-preview'
+import type { RecordType, PageInfo } from '@plus-pro-components/types'
 
 /**
  * 表格表头配置
@@ -108,11 +109,7 @@ export interface TableConfigRow {
    */
   type?: 'select' | 'inputNumber' | 'textarea' | 'text'
 
-  attrs?: RecordIndexType
-  // switch开关打开颜色
-  elSwitchOnColor?: string
-  // switch开关关闭颜色
-  elSwitchOffColor?: string
+  attrs?: any
   // 自定义文字 颜色的obj
   valueEnum?: Record<
     string,

@@ -6,6 +6,7 @@
 import type { PropType } from 'vue'
 import { onMounted, shallowReactive, watch, ref, computed, onBeforeUnmount } from 'vue'
 import echarts from 'echarts'
+import type { ElementRefType } from '@plus-pro-components/types'
 import useResize from '../../utils/useResize'
 
 const props = defineProps({

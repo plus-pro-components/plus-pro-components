@@ -23,6 +23,10 @@
   }
 }
 
+.vp-doc [class*='language-'] pre {
+  padding: 0;
+}
+
 .vp-doc {
   .el-link:hover {
     text-decoration: none;
@@ -35,4 +39,12 @@
 }
 .plus-image-preview-footer__icon {
   box-sizing: content-box;
+}
+
+.copyright {
+  white-space: pre;
+
+  .copyright-link {
+    color: var(--vp-c-brand);
+  }
 }

@@ -17,7 +17,7 @@
         placement="top-start"
       >
         <div
-          class="plus-table-index-cloumn plus-table-index-col-border plus-table-column-index-content"
+          class="plus-table-index-column plus-table-index-col-border plus-table-column-index-content"
           :style="row?.indexColStyle || {}"
         >
           {{ getTableIndex($index) }}
@@ -25,7 +25,7 @@
       </el-tooltip>
       <div
         v-else
-        class="plus-table-index-cloumn plus-table-index-col-border plus-table-column-index-content"
+        class="plus-table-index-column plus-table-index-col-border plus-table-column-index-content"
         :style="row?.indexColStyle || {}"
       >
         {{ getTableIndex($index) }}
@@ -36,6 +36,7 @@
 
 <script lang="ts" setup>
 import { defaultPageInfo } from '@plus-pro-components/constants'
+import type { PageInfo } from '@plus-pro-components/types'
 
 export interface PlusTableTableColumnIndexProps {
   show?: boolean
@@ -62,22 +63,23 @@ const getTableIndex = (index: number) => {
 </script>
 
 <style lang="scss">
-.plus-table-index-cloumn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  word-break: keep-all;
-  white-space: nowrap;
-  width: 20px;
-  height: 20px;
-}
-.plus-table-index-col-border {
-  color: #fff;
-  font-size: 12px;
-  line-height: 12px;
-  border-radius: 50%;
-}
 .plus-table-column-index {
+  .plus-table-index-column {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    word-break: keep-all;
+    white-space: nowrap;
+    width: 20px;
+    height: 20px;
+  }
+  .plus-table-index-col-border {
+    color: #fff;
+    font-size: 12px;
+    line-height: 12px;
+    border-radius: 50%;
+  }
+
   .cell {
     line-height: 32px !important;
     .plus-table-column-index-content {

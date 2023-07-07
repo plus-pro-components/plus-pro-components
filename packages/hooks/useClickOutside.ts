@@ -1,5 +1,6 @@
 import type { Ref } from 'vue'
 import { ref, onMounted, onBeforeUnmount } from 'vue'
+import type { ElementRefType } from '@plus-pro-components/types'
 
 /**
  * 判断是否是点击元素外面

@@ -7,8 +7,9 @@ import glob from 'fast-glob'
 import chalk from 'chalk'
 import { Project } from 'ts-morph'
 import type { CompilerOptions, SourceFile } from 'ts-morph'
-import { ecRoot, projRoot, typeOutput } from './paths'
-import { excludeFiles, pathRewriter } from './utils'
+import { excludeFiles } from '../utils/echarts'
+import { ecRoot, projRoot, typeOutput } from '../utils/paths'
+import { pathRewriter } from '../utils'
 
 const TSCONFIG_PATH = path.resolve(projRoot, 'tsconfig.echarts.json')
 
@@ -68,8 +69,6 @@ export const main = async () => {
 }
 
 async function addSourceFiles(project: Project) {
-  project.addSourceFileAtPath(path.resolve(projRoot, 'typings/plus.d.ts'))
-
   const globSourceFile = '**/*.{js?(x),ts?(x),vue}'
   const filePaths = excludeFiles(
     await glob([globSourceFile], {

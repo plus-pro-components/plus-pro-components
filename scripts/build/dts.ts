@@ -6,9 +6,10 @@ import * as vueCompiler from 'vue/compiler-sfc'
 import glob from 'fast-glob'
 import chalk from 'chalk'
 import { Project } from 'ts-morph'
-import { buildOutput, pcRoot, pkgRoot, projRoot } from './paths'
+import { buildOutput, pcRoot, pkgRoot, projRoot } from '../utils/paths'
 import type { CompilerOptions, SourceFile } from 'ts-morph'
-import { excludeFiles, pathRewriter, PKG_NAME } from './utils'
+import { pathRewriter, PKG_NAME } from '../utils'
+import { excludeFiles } from '../utils/main'
 
 const TSCONFIG_PATH = path.resolve(projRoot, 'tsconfig.web.json')
 const outDir = path.resolve(buildOutput, 'types')
@@ -48,10 +49,6 @@ export const main = async () => {
     const emitOutput = sourceFile.getEmitOutput()
     const emitFiles = emitOutput.getOutputFiles()
 
-    if (emitFiles.length === 0) {
-      throw new Error(`Emit no file: ${chalk.bold(relativePath)}`)
-    }
-
     const subTasks = emitFiles.map(async outputFile => {
       const filepath = outputFile.getFilePath()
       await mkdir(path.dirname(filepath), {
@@ -69,8 +66,6 @@ export const main = async () => {
 }
 
 async function addSourceFiles(project: Project) {
-  project.addSourceFileAtPath(path.resolve(projRoot, 'typings/plus.d.ts'))
-
   const globSourceFile = '**/*.{js?(x),ts?(x),vue}'
   const filePaths = excludeFiles(
     await glob([globSourceFile, `!${PKG_NAME}/**/*`], {

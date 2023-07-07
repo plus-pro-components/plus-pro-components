@@ -93,6 +93,15 @@ export default defineConfig({
               link: '/guide/quickstart'
             }
           ]
+        },
+        {
+          text: '开发',
+          items: [
+            {
+              text: '开发指南',
+              link: '/guide/dev'
+            }
+          ]
         }
       ],
       '/components/': [
@@ -127,6 +136,10 @@ export default defineConfig({
             {
               text: '表格',
               link: '/components/table'
+            },
+            {
+              text: '描述列表',
+              link: '/components/description'
             }
           ]
         }

@@ -31,8 +31,8 @@ plus-pro-components 是一个基于 Vue 和 element-plus 的页面级别的组�
 - [x] 单选 -- 完成
 - [x] 日期 -- 完成
 - [ ] 表格 -- 开发中
-- [ ] 搜索 -- 待开发
-- [ ] 表单 -- 待开发
+- [ ] 搜索 -- 开发中
+- [ ] 表单 -- 开发中
 - [ ] 详情 -- 待开发
 
 ## 缺点
@@ -53,7 +53,7 @@ plus-pro-components 是一个基于 Vue 和 element-plus 的组件库，它提�
 
 ## 本地开发指南
 
-**本地开发指南** [DEVELOPMENT](./DEVELOPMENT.md)
+**本地开发指南** [DEVELOPMENT](https://plus-pro-components.com/guide/dev.html)
 
 ## LICENSE
 

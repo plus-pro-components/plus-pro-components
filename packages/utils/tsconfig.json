@@ -15,5 +15,5 @@
     "resolveJsonModule": true,
     "skipLibCheck": true
   },
-  "include": ["src/**/*.ts", "../../typings/plus.d.ts"]
+  "include": ["src/**/*.ts"]
 }

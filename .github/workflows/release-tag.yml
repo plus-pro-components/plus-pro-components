@@ -1,0 +1,27 @@
+on:
+  push:
+    tags:
+      - 'v*'  
+
+name: 📦️ Create Release
+
+permissions: {}
+jobs:
+  build:
+    permissions:
+      contents: write  
+
+    name: Create Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@master
+      - name: Create Release for Tag
+        id: release_tag
+        uses: yyx990803/release-tag@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          body: |
+            Please refer to [CHANGELOG.md](https://github.com/plus-pro-components/plus-pro-components/blob/main/CHANGELOG.md) for details.

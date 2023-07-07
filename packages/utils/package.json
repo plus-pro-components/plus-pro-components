@@ -1,6 +1,6 @@
 {
   "name": "@plus-pro-components/utils",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "utils of plus-pro-components",
   "license": "MIT",
   "main": "./dist/index.cjs",
@@ -16,9 +16,6 @@
   "scripts": {
     "build": "npx unbuild",
     "stub": "npx unbuild --stub"
-  },
-  "peerDependencies": {
-    "vue": "^3.2.0"
   },
   "dependencies": {
     "accounting": "^0.4.1",

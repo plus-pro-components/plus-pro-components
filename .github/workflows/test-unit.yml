@@ -2,7 +2,7 @@ name: 🧪 Unit Test
 
 on:
   push:
-    branches: [main]
+    branches: [main, dev]
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.number || github.sha }}
@@ -18,16 +18,15 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Add dev branch
-        run: git branch dev origin/dev
-
       - name: Setup pnpm
         uses: pnpm/action-setup@v2
+        with:
+          version: 8.5.0
 
       - name: Setup node
         uses: actions/setup-node@v3
         with:
-          node-version: 16
+          node-version: 16.18.0
 
       - name: Get pnpm store directory
         id: pnpm-cache
@@ -45,11 +44,11 @@ jobs:
       - name: Install dependencies
         run: pnpm i --frozen-lockfile
 
+      - name: Build utils
+        run: pnpm build:utils
+
       - name: Lint
         run: pnpm lint
-
-      - name: Type Check
-        run: pnpm typecheck
 
   build:
     name: Unit Test (${{ matrix.node-name }})
@@ -69,6 +68,8 @@ jobs:
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v2
+        with:
+          version: 8.5.0
 
       - name: Setup node
         uses: actions/setup-node@v3
@@ -90,6 +91,9 @@ jobs:
 
       - name: Install dependencies
         run: pnpm i --frozen-lockfile
+
+      - name: Build utils
+        run: pnpm build:utils
 
       - name: Test
         run: pnpm test

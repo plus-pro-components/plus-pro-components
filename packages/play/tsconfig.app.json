@@ -8,6 +8,6 @@
     "paths": {
       "@/*": ["./src/*"]
     },
-    "types": ["vite/client", "../../global", "../../typings/plus.d.ts"]
+    "types": ["vite/client", "../../global"]
   }
 }

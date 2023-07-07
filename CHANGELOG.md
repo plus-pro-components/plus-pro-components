@@ -1,14 +1,29 @@
-## [0.0.1-alpha.7](https://github.com/plus-pro-components/plus-pro-components/compare/0.0.1-alpha.6...0.0.1-alpha.7) (2023-06-16)
+## [0.0.1-alpha.10](https://github.com/plus-pro-components/plus-pro-components/compare/0.0.1-alpha.9...0.0.1-alpha.10) (2023-06-26)
+
+
+### ✨ Features
+
+* **components:** :sparkles: add field-item component. ([77d15c1](https://github.com/plus-pro-components/plus-pro-components/commit/77d15c1))
+* **packages:** :sparkles: add description lists ([7df0948](https://github.com/plus-pro-components/plus-pro-components/commit/7df0948))
+* **packages:** :sparkles: drag sort table ([d48427f](https://github.com/plus-pro-components/plus-pro-components/commit/d48427f))
+* **packages:** :sparkles: update drag sort icon ([3096dc8](https://github.com/plus-pro-components/plus-pro-components/commit/3096dc8))
+
+
+
+## [0.0.1-alpha.8](https://github.com/plus-pro-components/plus-pro-components/compare/0.0.1-alpha.7...0.0.1-alpha.8) (2023-06-25)
 
 
 ### ✨ Features
 
 * :sparkles: merge zpp ([cc55f17](https://github.com/plus-pro-components/plus-pro-components/commit/cc55f17))
+* :sparkles: release v0.0.1-alpha.7 ([abfbe10](https://github.com/plus-pro-components/plus-pro-components/commit/abfbe10))
 * **all:** :sparkles: release v0.0.1-alpha.6 ([326bc09](https://github.com/plus-pro-components/plus-pro-components/commit/326bc09))
 * **components:** :sparkles: add radio and date-picker component. ([5a781ce](https://github.com/plus-pro-components/plus-pro-components/commit/5a781ce))
+* **components:** :sparkles: dialog and pagination component extend type. ([bda84d4](https://github.com/plus-pro-components/plus-pro-components/commit/bda84d4))
 * **packages:** :sparkles: edit table component ([68eb4c2](https://github.com/plus-pro-components/plus-pro-components/commit/68eb4c2))
 * **packages:** :sparkles: remove lodash-es. ([e9a3d2a](https://github.com/plus-pro-components/plus-pro-components/commit/e9a3d2a))
 * **packages:** :sparkles: select buttons or links for table operations ([153df13](https://github.com/plus-pro-components/plus-pro-components/commit/153df13))
+* **packages:** :sparkles: table setting ([2a89cfa](https://github.com/plus-pro-components/plus-pro-components/commit/2a89cfa))
 * **table:** :sparkles: Extend table column (code block copy ordinal ([a9eae33](https://github.com/plus-pro-components/plus-pro-components/commit/a9eae33))
 * **table:** :sparkles: extend table column,add code copy,edit index column and table style. ([398b2fb](https://github.com/plus-pro-components/plus-pro-components/commit/398b2fb))
 
