@@ -23,6 +23,10 @@
   }
 }
 
+.vp-doc [class*='language-'] pre {
+  padding: 0;
+}
+
 .vp-doc {
   .el-link:hover {
     text-decoration: none;

@@ -20,15 +20,15 @@
         :class-name="className || 'plus-description__name'"
         :label-class-name="labelClassName || 'plus-description__label'"
       >
-        <PlusFieldItem :config-item="items" :row="rowItem" />
+        <PlusDisplayItem :config-item="items" :row="rowItem" />
       </el-descriptions-item>
     </el-descriptions>
   </template>
 </template>
 
 <script lang="ts" setup>
-import PlusFieldItem from '@plus-pro-components/components/field-item'
 import type { TableConfigRow } from '@plus-pro-components/components/table'
+import PlusDisplayItem from '@plus-pro-components/components/display-item'
 
 export interface PlusDescriptionsProps {
   data: any

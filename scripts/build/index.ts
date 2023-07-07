@@ -11,8 +11,7 @@ const copyFiles = () =>
   Promise.all([
     copyFile(pcPackage, resolve(pcOutput, 'package.json')),
     copyFile(resolve(projRoot, 'README.md'), resolve(pcOutput, 'README.md')),
-    copyFile(resolve(projRoot, 'global.d.ts'), resolve(pcOutput, 'global.d.ts')),
-    copyFile(resolve(projRoot, 'typings/plus.d.ts'), resolve(pcOutput, 'plus.d.ts'))
+    copyFile(resolve(projRoot, 'global.d.ts'), resolve(pcOutput, 'global.d.ts'))
   ])
 
 const copyDts = async () => {

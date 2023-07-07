@@ -233,7 +233,7 @@ const getList = async () => {
 }
 getList()
 
-const handlePaginationChange = (_pageInfo: PageInfo): void => {
+const handlePaginationChange = (_pageInfo: any): void => {
   pageInfo.value = _pageInfo
   getList()
 }

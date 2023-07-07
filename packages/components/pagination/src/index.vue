@@ -20,6 +20,7 @@
 import { ref, watchEffect } from 'vue'
 import { defaultPageSizeList, defaultPageInfo } from '@plus-pro-components/constants'
 import type { PaginationProps } from 'element-plus'
+import type { PageInfo } from '@plus-pro-components/types'
 
 export interface PlusPaginationProps extends /* @vue-ignore */ Partial<PaginationProps> {
   modelValue: PageInfo

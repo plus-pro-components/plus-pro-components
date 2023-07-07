@@ -53,7 +53,7 @@ plus-pro-components is a Vue and element plus based component library that provi
 
 ## Local Development Guidelines
 
-**Local Development Guidelines** [DEVELOPMENT](./DEVELOPMENT.md)
+**Local Development Guidelines** [DEVELOPMENT](https://plus-pro-components.github.io/guide/dev.html)
 
 ## LICENSE
 

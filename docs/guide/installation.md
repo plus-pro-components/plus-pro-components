@@ -28,13 +28,13 @@ $ pnpm install plus-pro-components
 
 ## 浏览器直接引入
 
-直接通过浏览器的 HTML 标签导入 plus-pro-components，然后就可以使用全局变量 PlusProComponents 了。
+直接通过浏览器的 HTML 标签导入 plus-pro-components，然后就可以使用全局变量 `PlusProComponents` 了。
 
 根据不同的 CDN 提供商有不同的引入方式， 我们在这里以[unpkg](https://unpkg.com) 和 [jsDelivr](https://jsdelivr.com) 举例。 你也可以使用其它的 CDN 供应商。
 
 ### unpkg
 
-```html{10}
+```html{10,12}
 <head>
   <!-- 导入element-plus样式 -->
   <link rel="stylesheet" href="//unpkg.com/element-plus/dist/index.css" />
@@ -52,7 +52,7 @@ $ pnpm install plus-pro-components
 
 ### jsDelivr
 
-```html{10}
+```html{10,12}
 <head>
   <!-- 导入element-plus样式 -->
   <link rel="stylesheet" href="//cdn.jsdelivr.net/element-plus/dist/index.css" />

@@ -42,7 +42,8 @@
 |  ├── hooks                 #hooks包
 |  ├── play                  #组件预览包
 |  ├── plus-pro-components   #主包入口
-|  └── utils                 #工具包
+|  ├── utils                 #工具包
+|  └── types                 #公共TS类型
 ├── pnpm-lock.yaml
 ├── pnpm-workspace.yaml      #工作空间配置
 ├── README.md                #项目介绍
@@ -60,8 +61,7 @@
 ├── tsconfig.vitest.json
 ├── tsconfig.web.json
 ├── typings                   #全局d.ts
-|  ├── env.d.ts
-|  └── plus.d.ts
+|  └── env.d.ts
 └── vitest.config.ts          #vitest配置
 
 ```
@@ -94,20 +94,14 @@ pnpm docs:dev
 
 ## 添加新的组件步骤
 
-例如现在需要新增一个新的组件 组件名叫 `table` 对应的 vue 组件名称叫 `PlusTable`（所有组件名字以`Plus` 开头。）
+例如现在需要新增一个新的组件 组件名叫 `table` 对应的 vue 组件名称叫 `PlusTable`（所有组件名字以`Plus` 开头，组件的基本代码全部会自动生成。）
 
 ### 1. 组件创建
 
 - 执行创建组件脚本
 
   ```sh
-  pnpm run new
-  ```
-
-- 终端输入组件名称
-
-  ```
-  ? Please Enter component name? table
+  pnpm run new table
   ```
 
 - 确定
@@ -120,7 +114,7 @@ pnpm docs:dev
 
   ```sh
 
-  ├── index.ts          #主文件 导出组件和类型
+  ├── index.ts          #主文件
   ├── src
   |  └── index.vue      #组件实际代码
   └── __tests__
@@ -132,11 +126,9 @@ pnpm docs:dev
 - 导出组件
   packages/components/index.ts 新增
 
-```ts
-export * from './table'
-```
-
-### 2. 预览组件
+  ```ts
+  export * from './table'
+  ```
 
 - 在 packages/plus-pro-components/component.ts 添加新增的组件 `PlusTable`
 
@@ -146,13 +138,25 @@ export * from './table'
   const plugins: DefineComponent[] = [PlusDialog, PlusPagination, PlusTable]
   ```
 
+- 在 `global.d.ts` 添加类型
+
+  ```ts
+  declare module '@vue/runtime-core' {
+    export interface GlobalComponents {
+      PlusTable: typeof import('plus-pro-components')['PlusTable']
+    }
+  }
+  ```
+
+### 2. 预览组件
+
 - 执行下面的命令
 
   ```sh
   pnpm run dev
   ```
 
-- 打开 packages/play/src/views/table.vue(文件自动生成) 里面新增代码
+- 打开 packages/play/src/views/table.vue(文件自动生成) 里面新增如下代码
 
   ```html
   <template>
@@ -162,21 +166,7 @@ export * from './table'
 
 - 打开终端地址即可预览组件
 
-### 3. 组件全局类型的添加
-
-在 global.d.ts 添加
-
-```ts
-declare module '@vue/runtime-core' {
-  export interface GlobalComponents {
-    PlusTable: typeof import('plus-pro-components')['PlusTable']
-  }
-}
-```
-
-### 4. 组件的测试
-
-单元测试 写完之后 执行
+### 3. 组件的测试 单元测试 写完之后 执行
 
 ```sh
 pnpm run test
@@ -188,7 +178,7 @@ pnpm run test
 pnpm run test:coverage
 ```
 
-### 5. 文档的添加
+### 4. 文档的添加
 
 - 在 docs/components 文件下
 
@@ -221,4 +211,8 @@ pnpm run release
 
 ```sh
 pnpm run publish
+```
+
+```
+
 ```

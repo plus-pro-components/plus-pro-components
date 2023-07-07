@@ -43,6 +43,7 @@ import type { VNode } from 'vue'
 import { h } from 'vue'
 import { MoreFilled } from '@element-plus/icons-vue'
 import { ElButton, ElLink } from 'element-plus'
+import type { RecordType } from '@plus-pro-components/types'
 import type { ButtonsCallBackParams, ButtonsNameKeyRow, ButtonsNameRow } from './type'
 
 export interface PlusTableActionBarProps {

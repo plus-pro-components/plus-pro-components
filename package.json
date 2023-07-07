@@ -50,6 +50,7 @@
     "@plus-pro-components/eslint-config": "workspace:*",
     "@plus-pro-components/hooks": "workspace:*",
     "@plus-pro-components/utils": "workspace:*",
+    "@plus-pro-components/types": "workspace:*",
     "dayjs": "^1.11.7",
     "element-plus": "^2.3.4",
     "lodash-es": "^4.17.21",

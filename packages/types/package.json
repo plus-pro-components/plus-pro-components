@@ -1,0 +1,10 @@
+{
+  "name": "@plus-pro-components/types",
+  "version": "1.0.0",
+  "private": true,
+  "description": "",
+  "main": "index.ts",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

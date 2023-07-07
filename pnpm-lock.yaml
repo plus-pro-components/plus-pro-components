@@ -26,6 +26,9 @@ importers:
       '@plus-pro-components/hooks':
         specifier: workspace:*
         version: link:packages/hooks
+      '@plus-pro-components/types':
+        specifier: workspace:*
+        version: link:packages/types
       '@plus-pro-components/utils':
         specifier: workspace:*
         version: link:packages/utils
@@ -387,6 +390,8 @@ importers:
       vue:
         specifier: ^3.2.37
         version: 3.2.47
+
+  packages/types: {}
 
   packages/utils:
     dependencies:

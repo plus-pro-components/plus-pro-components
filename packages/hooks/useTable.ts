@@ -1,6 +1,7 @@
 import { ref } from 'vue'
-import type { ButtonsNameRow } from '@plus-pro-components/components/table'
 import { defaultPageInfo } from '@plus-pro-components/constants'
+import type { ButtonsNameRow } from '@plus-pro-components/components/table'
+import type { PageInfo } from '@plus-pro-components/types'
 
 /**
  * 初始化表格基本数据

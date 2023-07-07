@@ -18,17 +18,7 @@
     @click="configItem.click && !configItem.disabled && configItem.click(subRow)"
   >
     <span class="plus-table-column-link-content">
-      {{
-        (configItem.linkText || subRow[configItem.prop]) +
-        (subRow[configItem.linkLoadingField as string] ? '中...' : '')
-      }}
-      <el-icon
-        v-if="subRow[configItem.linkLoadingField as string]"
-        class="plus-table-column-link-loading is-loading"
-        :size="20"
-      >
-        <Loading />
-      </el-icon>
+      {{ configItem.linkText || subRow[configItem.prop] }}
     </span>
   </el-link>
 
@@ -135,29 +125,29 @@
 </template>
 
 <script lang="ts" setup>
-import { Loading, DocumentCopy, Select } from '@element-plus/icons-vue'
+import { DocumentCopy, Select } from '@element-plus/icons-vue'
 import type { PlusImagePreviewRow } from '@plus-pro-components/components/image-preview'
 import { dateFormat, formatToCurrency } from '@plus-pro-components/utils'
 import { reactive, toRefs, watch } from 'vue'
 import type { TableConfigRow } from '@plus-pro-components/components/table'
 
-export interface PlusFieldItemProps {
+export interface PlusDisplayItemProps {
   configItem?: TableConfigRow
   row: Record<string, any>
 }
 export interface PlusTableTableColumnEmits {
   (e: 'clickToEnlargeImage', data: PlusImagePreviewRow[]): void
 }
-export interface PlusFieldItemStatus {
+export interface PlusDisplayItemStatus {
   text: string
   color: string
 }
 
 defineOptions({
-  name: 'PlusFieldItem'
+  name: 'PlusDisplayItem'
 })
 
-const props = withDefaults(defineProps<PlusFieldItemProps>(), {
+const props = withDefaults(defineProps<PlusDisplayItemProps>(), {
   configItem: () => ({ prop: '', label: '' }),
   row: () => ({})
 })
@@ -177,15 +167,15 @@ const emit = defineEmits<PlusTableTableColumnEmits>()
 const handelClickToEnlargeImage = (srcList: PlusImagePreviewRow[]) => {
   emit('clickToEnlargeImage', srcList)
 }
-const plusStatus = (item: TableConfigRow, row: any): PlusFieldItemStatus => {
+const plusStatus = (item: TableConfigRow, row: any): PlusDisplayItemStatus => {
   if (!item?.valueEnum) return { text: '', color: '' }
-  const PlusFieldItemStatusObj: PlusFieldItemStatus = {
+  const PlusDisplayItemStatusObj: PlusDisplayItemStatus = {
     text: '',
     color: ''
   }
   return item?.valueEnum[row[item?.prop]]
     ? item?.valueEnum[row[item?.prop]]
-    : PlusFieldItemStatusObj
+    : PlusDisplayItemStatusObj
 }
 const formatProgress = (percentage: number) => (percentage === 100 ? 'Full' : `${percentage}%`)
 const handelClickCopy = (item: TableConfigRow, row: any) => {

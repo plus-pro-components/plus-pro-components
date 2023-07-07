@@ -1,6 +1,21 @@
 import qs from 'qs'
 
 /**
+ * setTimeout 类型
+ */
+type Timeout = ReturnType<typeof setTimeout>
+
+/**
+ * setInterval 类型
+ */
+type Interval = ReturnType<typeof setInterval>
+
+/**
+ * 允许null的泛型
+ */
+type Nullable<T> = T | null
+
+/**
  * 默认重连次数
  */
 const reconnectMaxCount = 3

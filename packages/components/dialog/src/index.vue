@@ -3,7 +3,7 @@
     v-model="subVisible"
     :top="top"
     :width="width"
-    :title="width"
+    :title="title"
     :close-on-click-modal="false"
     :close-on-press-escape="false"
     :append-to-body="false"

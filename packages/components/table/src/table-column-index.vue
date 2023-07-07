@@ -36,6 +36,7 @@
 
 <script lang="ts" setup>
 import { defaultPageInfo } from '@plus-pro-components/constants'
+import type { PageInfo } from '@plus-pro-components/types'
 
 export interface PlusTableTableColumnIndexProps {
   show?: boolean

@@ -53,7 +53,7 @@ plus-pro-components 是一个基于 Vue 和 element-plus 的组件库，它提�
 
 ## 本地开发指南
 
-**本地开发指南** [DEVELOPMENT](./DEVELOPMENT.md)
+**本地开发指南** [DEVELOPMENT](https://plus-pro-components.com/guide/dev.html)
 
 ## LICENSE
 

@@ -12,7 +12,7 @@
     :show-overflow-tooltip="item.showOverflowTooltip !== false"
   >
     <template #default="{ row }">
-      <PlusFieldItem
+      <PlusDisplayItem
         :config-item="item"
         :row="row"
         @clickToEnlargeImage="handelClickToEnlargeImage"
@@ -22,8 +22,8 @@
 </template>
 
 <script lang="ts" setup>
+import PlusDisplayItem from '@plus-pro-components/components/display-item'
 import type { PlusImagePreviewRow } from '@plus-pro-components/components/image-preview'
-import PlusFieldItem from '@plus-pro-components/components/field-item'
 import type { TableConfigRow } from './type'
 
 export interface PlusTableTableColumnProps {

@@ -39,6 +39,7 @@ import type {
   PlusTableInstance,
   ButtonsCallBackParams
 } from '@plus-pro-components/components/table'
+import type { PageInfo } from '@plus-pro-components/types'
 
 defineOptions({
   name: 'PlusTableTest'

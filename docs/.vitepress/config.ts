@@ -93,6 +93,15 @@ export default defineConfig({
               link: '/guide/quickstart'
             }
           ]
+        },
+        {
+          text: '开发',
+          items: [
+            {
+              text: '开发指南',
+              link: '/guide/dev'
+            }
+          ]
         }
       ],
       '/components/': [
