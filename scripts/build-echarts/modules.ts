@@ -5,11 +5,8 @@ import { nodeResolve } from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
 import esbuild from 'rollup-plugin-esbuild'
 import glob from 'fast-glob'
-import vuePlugin from 'rollup-plugin-vue'
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-import DefineOptions from 'unplugin-vue-define-options/rollup'
-import type { OutputOptions, ModuleFormat } from 'rollup'
+import vuePlugin from '@vitejs/plugin-vue'
+import type { OutputOptions, ModuleFormat, Plugin } from 'rollup'
 import { ecOutput, ecRoot } from '../utils/paths'
 import { writeBundles } from '../utils'
 import { external, excludeFiles } from '../utils/echarts'
@@ -49,8 +46,7 @@ const buildModules = async () => {
     input,
     external: external,
     plugins: [
-      DefineOptions(),
-      vuePlugin(),
+      vuePlugin() as Plugin,
       nodeResolve({
         extensions: ['.mjs', '.js', '.json', '.ts']
       }),

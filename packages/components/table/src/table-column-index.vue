@@ -9,6 +9,7 @@
     width="60"
     align="center"
     :index="getTableIndex"
+    v-bind="$attrs"
   >
     <template #default="{ row, $index }">
       <el-tooltip

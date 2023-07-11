@@ -1,10 +1,25 @@
 <template>
-  <el-form-item :label="label" :prop="prop" v-bind="formItemProps" class="plus-form-item">
+  <el-form-item
+    v-if="hideInForm !== true"
+    v-bind="customFormItemProps"
+    ref="formItemInstance"
+    :label="label"
+    :prop="prop"
+    class="plus-form-item"
+  >
+    <component
+      :is="() => renderFormItem && renderFormItem(props, formItemInstance)"
+      v-if="renderFormItem && isFunction(renderFormItem)"
+      v-model="state"
+      v-bind="customFieldProps"
+      @change="handleChange"
+    />
+
     <el-autocomplete
-      v-if="valueType === 'autocomplete'"
+      v-else-if="valueType === 'autocomplete'"
       v-model="state"
       class="plus-form-item-field"
-      v-bind="fieldProps"
+      v-bind="customFieldProps"
       @change="handleChange"
     />
 
@@ -12,7 +27,7 @@
       v-else-if="valueType === 'cascader'"
       v-model="state"
       class="plus-form-item-field"
-      v-bind="fieldProps"
+      v-bind="customFieldProps"
       @change="handleChange"
     />
 
@@ -22,11 +37,11 @@
       :placeholder="'请选择' + label"
       class="plus-form-item-field"
       clearable
-      v-bind="fieldProps"
+      v-bind="customFieldProps"
       @change="handleChange"
     >
       <el-checkbox
-        v-for="item in getOptions()"
+        v-for="item in options"
         :key="item.label"
         :label="item.value"
         v-bind="item.fieldItemProps"
@@ -39,7 +54,7 @@
       v-else-if="valueType === 'color-picker'"
       v-model="state"
       class="plus-form-item-field"
-      v-bind="fieldProps"
+      v-bind="customFieldProps"
       @change="handleChange"
     />
 
@@ -49,7 +64,7 @@
       class="plus-form-item-field"
       format="YYYY-MM-DD HH:mm:ss"
       value-format="YYYY-MM-DD HH:mm:ss"
-      v-bind="fieldProps"
+      v-bind="customFieldProps"
       @change="handleChange"
     />
 
@@ -62,7 +77,7 @@
       clearable
       :value-on-clear="null"
       :precision="2"
-      v-bind="fieldProps"
+      v-bind="customFieldProps"
       @change="handleChange"
     />
 
@@ -72,11 +87,11 @@
       :placeholder="'请选择' + label"
       class="plus-form-item-field"
       clearable
-      v-bind="fieldProps"
+      v-bind="customFieldProps"
       @change="handleChange"
     >
       <el-radio
-        v-for="item in getOptions()"
+        v-for="item in options"
         :key="item.label"
         :label="item.label"
         :value="item.value"
@@ -90,7 +105,7 @@
       v-else-if="valueType === 'rate'"
       v-model="state"
       class="plus-form-item-field"
-      v-bind="fieldProps"
+      v-bind="customFieldProps"
       @change="handleChange"
     />
 
@@ -100,11 +115,11 @@
       :placeholder="'请选择' + label"
       class="plus-form-item-field"
       clearable
-      v-bind="fieldProps"
+      v-bind="customFieldProps"
       @change="handleChange"
     >
       <el-option
-        v-for="item in getOptions()"
+        v-for="item in options"
         :key="item.label"
         :label="item.label"
         :value="item.value"
@@ -116,7 +131,7 @@
       v-else-if="valueType === 'slider'"
       v-model="state"
       class="plus-form-item-field"
-      v-bind="fieldProps"
+      v-bind="customFieldProps"
       @change="handleChange"
     />
 
@@ -124,7 +139,7 @@
       v-else-if="valueType === 'switch'"
       v-model="state"
       class="plus-form-item-field"
-      v-bind="fieldProps"
+      v-bind="customFieldProps"
       @change="handleChange"
     />
 
@@ -132,7 +147,7 @@
       v-else-if="valueType === 'time-select'"
       v-model="state"
       class="plus-form-item-field"
-      v-bind="fieldProps"
+      v-bind="customFieldProps"
       @change="handleChange"
     />
 
@@ -144,15 +159,7 @@
       :placeholder="'请输入' + label"
       autocomplete="off"
       clearable
-      v-bind="fieldProps"
-      @change="handleChange"
-    />
-
-    <component
-      :is="() => renderFormItem && renderFormItem(props)"
-      v-else-if="valueType === 'custom'"
-      v-model="state"
-      v-bind="fieldProps"
+      v-bind="customFieldProps"
       @change="handleChange"
     />
 
@@ -162,34 +169,30 @@
       :placeholder="'请输入' + label"
       autocomplete="off"
       clearable
-      v-bind="fieldProps"
+      v-bind="customFieldProps"
       @change="handleChange"
     />
   </el-form-item>
 </template>
 
 <script lang="ts" setup>
-import type { VNode } from 'vue'
 import { ref, watch } from 'vue'
-// eslint-disable-next-line vue/prefer-import-from-vue
-import { isPromise, isFunction } from '@vue/shared'
-import type { OptionsRow } from '@plus-pro-components/types'
+import { isFunction } from '@plus-pro-components/utils'
+import type { PlusColumn } from '@plus-pro-components/types'
+import { useGetOptions, useGetCustomProps } from '@plus-pro-components/hooks'
 
 type ValueType = string | number | string[]
 
 export interface PlusFormItemProps {
   modelValue: ValueType
-  label: string
-  prop: string
-  valueType: string
-  formItemProps?: any
-  fieldProps?: any
-  options?:
-    | OptionsRow[]
-    | ((props?: PlusFormItemProps, item?: OptionsRow) => OptionsRow[])
-    | ((props?: PlusFormItemProps, item?: OptionsRow) => Promise<OptionsRow[]>)
-  // eslint-disable-next-line vue/require-default-prop
-  renderFormItem?: (props?: PlusFormItemProps) => VNode
+  label: PlusColumn['label']
+  prop: PlusColumn['prop']
+  fieldProps: PlusColumn['fieldProps']
+  valueType: PlusColumn['valueType']
+  options: PlusColumn['options']
+  hideInForm: PlusColumn['hideInForm']
+  formItemProps: PlusColumn['formItemProps']
+  renderFormItem: PlusColumn['renderFormItem']
 }
 
 export interface PlusFormItemEmits {
@@ -201,8 +204,11 @@ defineOptions({
   name: 'PlusFormItem'
 })
 
+const formItemInstance = ref()
+
 const props = withDefaults(defineProps<PlusFormItemProps>(), {
   modelValue: '',
+  hideInForm: false,
   formItemProps: () => ({}),
   fieldProps: () => ({}),
   options: () => []
@@ -212,34 +218,27 @@ const emit = defineEmits<PlusFormItemEmits>()
 
 const state = ref<ValueType>()
 
+const options = useGetOptions(props)
+const customFieldProps = useGetCustomProps(props.fieldProps, state, props)
+const customFormItemProps = useGetCustomProps(props.formItemProps, state, props)
+
 const range = ['datetimerange', 'daterange', 'monthrange']
 
 const isArrayValue = () => {
   if (props.valueType === 'checkbox') {
     return true
   }
-  if (props.valueType === 'select' && props.fieldProps?.multiple) {
+  if (props.valueType === 'select' && customFieldProps.value?.multiple) {
     return true
   }
-  if (props.valueType === 'date-picker' && range.includes(props.fieldProps?.type)) {
+  if (props.valueType === 'date-picker' && range.includes(customFieldProps.value?.type)) {
     return true
   }
-  if (props.valueType === 'cascader' && props.fieldProps?.props?.multiple) {
+  if (props.valueType === 'cascader' && customFieldProps.value?.multiple) {
     return true
   }
 
   return false
-}
-
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-//  @ts-ignore
-const getOptions = async (): OptionsRow[] => {
-  if (isPromise(props.options)) {
-    return await (props.options as any)(props)
-  } else if (isFunction(props.options)) {
-    return props.options(props)
-  }
-  return props.options
 }
 
 watch(

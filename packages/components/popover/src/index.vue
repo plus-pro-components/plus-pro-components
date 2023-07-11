@@ -14,22 +14,21 @@
       <slot />
     </div>
 
-    <div v-if="hasShowBottomButton" style="text-align: right; margin: 0">
-      <el-button size="small" text @click="handleCancelPopover">{{
-        cancelText || t('el.popconfirm.cancelButtonText')
-      }}</el-button>
+    <div v-if="hasShowBottomButton" style="padding-top: 12px">
+      <el-button size="small" text @click="handleCancelPopover">
+        {{ cancelText || t('el.popconfirm.cancelButtonText') }}
+      </el-button>
       <el-button
         size="small"
         type="primary"
         :loading="confirmLoading"
         @click="handleConfirmPopover"
-        >{{ confirmText || t('el.popconfirm.confirmButtonText') }}</el-button
       >
+        {{ confirmText || t('el.popconfirm.confirmButtonText') }}
+      </el-button>
     </div>
+
     <template #reference>
-      <!-- <el-icon :size="20" color="#919191">
-        <Setting />
-      </el-icon> -->
       <span @click="handleClick">
         <slot name="icon" />
       </span>

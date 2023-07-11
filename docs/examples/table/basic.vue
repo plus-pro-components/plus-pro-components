@@ -5,7 +5,7 @@
       row-key="id"
       size="small"
       :loading-status="loadingStatus"
-      :config="tableConfig"
+      :columns="tableConfig"
       :table-data="tableData"
       :is-show-number="true"
       :is-show-drag-sort="true"
@@ -16,7 +16,7 @@
         buttonsName,
         buttonType: 'link',
         buttonCount: 3,
-        optionColumnWidth: 300
+        optionColumnWidth: 200
       }"
       @subPaginationChange="handlePaginationChange"
       @subClickButton="subClickButton"
@@ -32,13 +32,16 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { ref, h } from 'vue'
 import { useTable } from '@plus-pro-components/hooks'
 import type {
-  TableConfigRow,
   PlusTableInstance,
   ButtonsCallBackParams
 } from '@plus-pro-components/components/table'
+import type { PageInfo, PlusColumn } from '@plus-pro-components/types'
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+import { ElAlert } from 'element-plus'
 
 defineOptions({
   name: 'PlusTableTest'
@@ -46,25 +49,14 @@ defineOptions({
 
 const TestServe = {
   getList: async () => {
-    const data = [...new Array(100)].map((item, index) => {
+    const data = [...new Array(10)].map((item, index) => {
       return {
         index,
         id: index,
         name: index === 0 ? 'name'.repeat(20) : index + 'name',
-        status:
-          index === 0 ? 'processing' : index === 1 ? 'error' : index === 2 ? 'open' : 'closed',
+        status: String(index % 3),
         tag: index === 1 ? 'success' : index === 2 ? 'warning' : index === 3 ? 'info' : 'danger',
-        progress:
-          index === 0
-            ? { progress: 30, status: 'exception' }
-            : index === 1
-            ? { progress: 60, status: 'warning' }
-            : index > 3
-            ? {
-                progress: 100,
-                status: 'success'
-              }
-            : { progress: 50 },
+        progress: Math.ceil(Math.random() * index * 10),
         rate: index > 3 ? 2 : 3.5,
         switch: index > 3 ? true : false,
         indexColStyle:
@@ -75,12 +67,14 @@ const TestServe = {
             : {
                 backgroundColor: '#979797'
               },
-        time: new Date()
-        //         code: `
-        // const getData = async params => {
-        //   const data = await getData(params)
-        //   return { list: data.data, ...data }
-        // }`
+        img: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
+        time: new Date(),
+        code: `
+        const getData = async params => {
+          const data = await getData(params)
+          return { list: data.data, ...data }
+        }`,
+        custom: 'custom' + index
       }
     })
     return {
@@ -118,7 +112,25 @@ buttonsName.value = {
   ]
 }
 
-const tableConfig: TableConfigRow[] = [
+const statusOptions = [
+  {
+    label: '待审核',
+    value: '0',
+    type: 'info'
+  },
+  {
+    label: '进行中',
+    value: '1',
+    type: 'success'
+  },
+  {
+    label: '已结束',
+    value: '2',
+    type: 'warning'
+  }
+]
+
+const tableConfig: PlusColumn[] = [
   {
     label: '名称',
     width: 120,
@@ -129,69 +141,66 @@ const tableConfig: TableConfigRow[] = [
     label: '状态',
     width: 120,
     prop: 'status',
-    valueType: 'status',
-    valueEnum: {
-      open: {
-        text: '未解决',
-        color: '#666'
+    valueType: 'select',
+    options: [
+      {
+        label: '未解决',
+        value: '0',
+        color: 'red'
       },
-      closed: {
-        text: '已解决',
-        color: 'green'
-      },
-      processing: {
-        text: '解决中',
+      {
+        label: '已解决',
+        value: '1',
         color: 'blue'
       },
-      error: {
-        text: '失败',
+      {
+        label: '解决中',
+        value: '2',
+        color: 'yellow'
+      },
+      {
+        label: '失败',
+        value: '3',
         color: 'red'
       }
-    }
+    ]
   },
   {
     label: '标签',
     width: 120,
     prop: 'tag',
     valueType: 'tag',
-    valueEnum: {
-      primary: {
-        text: 'primarys',
-        color: 'primary'
-      },
-      success: {
-        text: 'successs',
-        color: 'success'
-      },
-      danger: {
-        text: 'dangers',
-        color: 'danger'
-      },
-      info: {
-        text: 'infos',
-        color: 'info'
-      },
-      warning: {
-        text: 'warnings',
-        color: 'warning'
-      }
+    fieldProps: (value: string) => {
+      return { type: value }
     }
   },
   {
     label: '执行进度',
     width: 200,
     prop: 'progress',
-    valueType: 'progress'
+    valueType: 'progress',
+    fieldProps: (value: number) => {
+      const data =
+        value === 0
+          ? { status: 'exception' }
+          : value > 5
+          ? { status: 'warning' }
+          : value > 3
+          ? { status: 'success' }
+          : { status: 'exception' }
+
+      return data
+    }
   },
-  // {
-  //   label: '代码块',
-  //   width: 250,
-  //   prop: 'code',
-  //   valueType: 'code'
-  // },
+  {
+    label: '代码块',
+    width: 250,
+    prop: 'code',
+    valueType: 'code'
+  },
   {
     label: '评分',
-    width: 200,
+    width: 100,
     prop: 'rate',
     valueType: 'rate'
   },
@@ -199,17 +208,37 @@ const tableConfig: TableConfigRow[] = [
     label: '开关',
     width: 100,
     prop: 'switch',
-    valueType: 'switch',
-    attrs: {
-      activeColor: '#13ce66',
-      inactiveColor: '#ff4949'
-    }
+    valueType: 'switch'
+  },
+  {
+    label: '图片',
+    prop: 'img',
+    width: 100,
+    valueType: 'img'
   },
   {
     label: '时间',
-    width: 190,
     prop: 'time',
-    valueType: 'date'
+    valueType: 'date-picker'
+  },
+  {
+    label: '自定义组件',
+    prop: 'status',
+    render: value => {
+      const item = statusOptions.find(item => item.value === value)
+      return h(
+        () => ElAlert,
+        { type: item?.type },
+        () => item?.label
+      )
+    }
+  },
+  {
+    label: '自定义html',
+    prop: 'custom',
+    renderHTML: (value: any) => {
+      return `<div style='color:red;'>${value}</div>`
+    }
   }
 ]
 
@@ -233,7 +262,7 @@ const getList = async () => {
 }
 getList()
 
-const handlePaginationChange = (_pageInfo: any): void => {
+const handlePaginationChange = (_pageInfo: PageInfo): void => {
   pageInfo.value = _pageInfo
   getList()
 }
@@ -243,6 +272,5 @@ const subClickButton = (data: ButtonsCallBackParams) => {
 const subSortEnd = (newIndex: number, oldIndex: number) => {
   const currRow = tableData.value.splice(oldIndex, 1)[0]
   tableData.value.splice(newIndex, 0, currRow)
-  console.log(newIndex, oldIndex, tableData.value)
 }
 </script>

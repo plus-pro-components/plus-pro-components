@@ -25,13 +25,15 @@ defineOptions({
   name: 'PlusTableColumnDragSort'
 })
 
-withDefaults(defineProps<PlusTableColumnDragSortProps>(), {
+const props = withDefaults(defineProps<PlusTableColumnDragSortProps>(), {
   showDragSort: false
 })
 const emit = defineEmits<PlusTableColumnDragSortEmits>()
 
 onMounted(() => {
-  rowDrop()
+  if (props.showDragSort) {
+    rowDrop()
+  }
 })
 
 // 行拖拽

@@ -3,7 +3,7 @@
   "compilerOptions": {
     "composite": true,
     "lib": ["ES2021", "DOM", "DOM.Iterable"],
-    "types": ["node", "jsdom", "unplugin-vue-define-options/macros-global"],
+    "types": ["node", "jsdom"],
     "skipLibCheck": true
   },
   "include": ["packages", "typings"],

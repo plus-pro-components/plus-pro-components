@@ -1,146 +1,119 @@
 <template>
+  <!-- 自定义显示 -->
+  <component
+    :is="() => column.render && column.render(subRow[column.prop], subRow, column)"
+    v-if="column.render && isFunction(column.render)"
+    v-bind="customFieldProps"
+  />
+
+  <span
+    v-else-if="column.renderHTML && isFunction(column.renderHTML)"
+    v-html="column.renderHTML && column.renderHTML(subRow[column.prop], subRow, column)"
+  />
+
   <!--显示图片 -->
-  <span v-if="configItem.valueType === 'img'">
-    <img
-      v-if="subRow[configItem.prop] && subRow[configItem.prop].img"
-      class="plus-table-column-image-col"
-      fit="cover"
-      :src="subRow[configItem.prop].url"
-      @click="handelClickToEnlargeImage(subRow.srcList)"
-    />
-  </span>
+  <img
+    v-else-if="column.valueType === 'img'"
+    title="点击预览"
+    class="plus-table-column-image-col"
+    fit="cover"
+    :src="getImageUrl().url"
+    v-bind="customFieldProps"
+    @click="handelClickToEnlargeImage"
+  />
 
   <!--显示链接 -->
   <el-link
-    v-else-if="configItem.valueType === 'link'"
+    v-else-if="column.valueType === 'link'"
     type="primary"
     class="plus-table-column-link"
-    @click="configItem.click && !configItem.disabled && configItem.click(subRow)"
+    v-bind="customFieldProps"
   >
-    <span class="plus-table-column-link-content">
-      {{ configItem.linkText || subRow[configItem.prop] }}
-    </span>
+    {{ column.linkText || subRow[column.prop] }}
   </el-link>
 
   <!-- 格式化时间 -->
-  <span v-else-if="configItem.valueType === 'date' && subRow[configItem.prop]">
-    {{ dateFormat(subRow[configItem.prop]) }}
+  <span
+    v-else-if="column.valueType === 'date-picker' && subRow[column.prop]"
+    v-bind="customFieldProps"
+  >
+    {{ dateFormat(subRow[column.prop]) }}
   </span>
 
   <!-- 格式化金钱 -->
-  <span v-else-if="configItem.valueType === 'money'">
-    {{ formatToCurrency(subRow[configItem.prop]) }}
-  </span>
-
-  <!-- 输入框 -->
-  <span v-else-if="configItem.valueType === 'input'">
-    <el-input
-      v-model="subRow[configItem.prop]"
-      placeholder="请输入"
-      :disabled="(configItem.disabled as any)"
-      v-bind="configItem.formatProps"
-      @blur="configItem.change && configItem.change(subRow[configItem.prop], subRow)"
-    />
-  </span>
-
-  <!-- 自定义格式化 -->
-  <span v-else-if="configItem.valueType === 'formatter'">
-    {{ configItem.formatter && configItem.formatter(subRow[configItem.prop], subRow) }}
+  <span v-else-if="column.valueType === 'money'" v-bind="customFieldProps">
+    {{ formatToCurrency(subRow[column.prop]) }}
   </span>
 
   <!-- 状态显示 -->
-  <span v-else-if="configItem.valueType === 'status'" class="plus-table-column-badge-status">
+  <span
+    v-else-if="
+      column.valueType === 'select' ||
+      column.valueType === 'radio' ||
+      column.valueType === 'checkbox'
+    "
+    class="plus-table-column-badge-status"
+    v-bind="customFieldProps"
+  >
     <span
+      v-if="getStatus().color"
       class="plus-table-column-badge-status-dot"
-      :style="{ backgroundColor: plusStatus(configItem, subRow).color }"
+      :style="{ backgroundColor: getStatus().color }"
     />
-    {{ plusStatus(configItem, subRow).text }}
-  </span>
-
-  <!-- switch -->
-  <span v-else-if="configItem.valueType === 'switch'">
-    <el-switch
-      v-model="subRow[configItem.prop]"
-      class="ml-2"
-      disabled
-      :style="`--el-switch-on-color: ${configItem?.attrs?.activeColor}; --el-switch-off-color: ${configItem?.attrs?.inactiveColor}`"
-    />
+    {{ getStatus().label }}
   </span>
 
   <!-- 标签 -->
-  <span v-else-if="configItem.valueType === 'tag'">
-    <el-tag class="ml-2" :type="plusStatus(configItem, subRow).color">{{
-      plusStatus(configItem, subRow).text
-    }}</el-tag>
-  </span>
+  <el-tag v-else-if="column.valueType === 'tag'" type="info" v-bind="customFieldProps">
+    {{ subRow[column.prop] }}
+  </el-tag>
 
   <!-- 进度条 -->
-  <span v-else-if="configItem.valueType === 'progress'">
-    <el-progress
-      :percentage="subRow[configItem.prop].progress"
-      :format="formatProgress"
-      :status="subRow[configItem.prop]?.status"
-    />
-  </span>
-
-  <!-- 评分 -->
-  <span v-else-if="configItem.valueType === 'rate'">
-    <el-rate
-      v-model="subRow[configItem.prop]"
-      disabled
-      allow-half
-      text-color="#ff9900"
-      score-template="{subRow[configItem.prop]} points"
-    />
-  </span>
+  <el-progress
+    v-else-if="column.valueType === 'progress'"
+    :percentage="subRow[column.prop]"
+    v-bind="customFieldProps"
+  />
 
   <!-- 复制 -->
-  <span v-else-if="configItem.valueType === 'copy'">
+  <span v-else-if="column.valueType === 'copy'">
     <el-icon
       size="16"
       color="var(--el-color-primary)"
       class="plus-table-icon-copy"
-      @click="handelClickCopy(configItem, subRow)"
+      v-bind="customFieldProps"
+      @click="handelClickCopy(column, subRow)"
     >
       <DocumentCopy v-if="!subRow.isCopy" />
       <Select v-else />
     </el-icon>
-    {{ subRow[configItem.prop] }}
+    {{ subRow[column.prop] }}
   </span>
 
   <!-- 代码块 -->
-  <pre v-else-if="configItem.valueType === 'code'" class="plus-table-pre">
-      {{ subRow[configItem.prop] }}
+  <pre v-else-if="column.valueType === 'code'" class="plus-table-pre" v-bind="customFieldProps">
+      {{ subRow[column.prop] }}
   </pre>
 
-  <!-- 自定义显示节点 -->
-  <slot
-    v-else-if="configItem.valueType === 'custom'"
-    name="custom-cell"
-    :data="{ subRow, data: subRow[configItem.prop] }"
-  />
-
   <!-- 没有format -->
-  <span v-else>{{ subRow[configItem.prop] }} </span>
+  <span v-else v-bind="customFieldProps">{{ subRow[column.prop] }} </span>
 </template>
 
 <script lang="ts" setup>
 import { DocumentCopy, Select } from '@element-plus/icons-vue'
 import type { PlusImagePreviewRow } from '@plus-pro-components/components/image-preview'
-import { dateFormat, formatToCurrency } from '@plus-pro-components/utils'
-import { reactive, toRefs, watch } from 'vue'
-import type { TableConfigRow } from '@plus-pro-components/components/table'
+import { dateFormat, formatToCurrency, isFunction } from '@plus-pro-components/utils'
+import { ref, watch } from 'vue'
+import type { PlusColumn, RecordType } from '@plus-pro-components/types'
+import { useGetOptions, useGetCustomProps } from '@plus-pro-components/hooks'
 
 export interface PlusDisplayItemProps {
-  configItem?: TableConfigRow
-  row: Record<string, any>
+  column?: PlusColumn
+  row: RecordType
 }
+
 export interface PlusTableTableColumnEmits {
   (e: 'clickToEnlargeImage', data: PlusImagePreviewRow[]): void
-}
-export interface PlusDisplayItemStatus {
-  text: string
-  color: string
 }
 
 defineOptions({
@@ -148,53 +121,101 @@ defineOptions({
 })
 
 const props = withDefaults(defineProps<PlusDisplayItemProps>(), {
-  configItem: () => ({ prop: '', label: '' }),
+  column: () => ({ prop: '', label: '' }),
   row: () => ({})
 })
-const state = reactive<{ subRow: Record<string, any> }>({
-  subRow: props.row
-})
+
+const subRow = ref(props.row)
+const currentStatus = ref({})
+
+const customFieldProps = useGetCustomProps(
+  props.column.fieldProps,
+  subRow.value[props.column.prop],
+  subRow
+)
+const options = useGetOptions(props.column)
+
+watch(
+  options,
+  val => {
+    const option = val?.find(i => i.value === subRow.value[props.column?.prop])
+    currentStatus.value = option || {}
+  },
+  {
+    immediate: true,
+    deep: true
+  }
+)
+
+const copy = (data: string) => {
+  const url = data
+  const textarea = document.createElement('textarea')
+  textarea.readOnly = true
+  textarea.style.position = 'absolute'
+  textarea.style.left = '-9999px'
+  textarea.value = url
+  document.body.appendChild(textarea)
+  textarea.select()
+  document.execCommand('Copy')
+  textarea.remove()
+}
 
 watch(
   () => props.row,
   val => {
-    state.subRow = { ...val }
+    subRow.value = { ...val }
+  },
+  {
+    immediate: true,
+    deep: true
   }
 )
 
 const emit = defineEmits<PlusTableTableColumnEmits>()
-// 点击放大图片
-const handelClickToEnlargeImage = (srcList: PlusImagePreviewRow[]) => {
-  emit('clickToEnlargeImage', srcList)
-}
-const plusStatus = (item: TableConfigRow, row: any): PlusDisplayItemStatus => {
-  if (!item?.valueEnum) return { text: '', color: '' }
-  const PlusDisplayItemStatusObj: PlusDisplayItemStatus = {
-    text: '',
-    color: ''
+
+const getImageUrl = () => {
+  const option = subRow.value[props.column.prop]
+  if (typeof option === 'string' && option) {
+    return {
+      options: [{ url: option, name: option }],
+      url: option
+    }
   }
-  return item?.valueEnum[row[item?.prop]]
-    ? item?.valueEnum[row[item?.prop]]
-    : PlusDisplayItemStatusObj
+  if (Array.isArray(option)) {
+    return {
+      options: option,
+      url: option[0]?.url
+    }
+  }
+  return {
+    options: [],
+    url: ''
+  }
 }
-const formatProgress = (percentage: number) => (percentage === 100 ? 'Full' : `${percentage}%`)
-const handelClickCopy = (item: TableConfigRow, row: any) => {
+
+// 点击放大图片
+const handelClickToEnlargeImage = () => {
+  if (props.column.preview !== false) {
+    const { options } = getImageUrl()
+    emit('clickToEnlargeImage', options)
+  }
+}
+
+const getStatus = () => {
+  const option = options.value?.find(i => i.value === subRow.value[props.column?.prop])
+  if (!option) {
+    return { label: '', value: '' }
+  }
+  return option
+}
+
+const handelClickCopy = (item: PlusColumn, row: RecordType) => {
   copy(row[item.prop])
   row.isCopy = true
   setTimeout(() => {
     row.isCopy = false
   }, 3000)
 }
-const copy = (data: string) => {
-  const url = data
-  const oInput = document.createElement('input')
-  oInput.value = url
-  document.body.appendChild(oInput)
-  oInput.select() // 选择对象;
-  document.execCommand('Copy') // 执行浏览器复制命令
-  oInput.remove()
-}
-const { subRow } = toRefs(state)
 </script>
 
 <style lang="scss">

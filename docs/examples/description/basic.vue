@@ -1,9 +1,11 @@
 <template>
   <PlusDescriptions :column="3" :columns="columns" :data="dataList" border />
 </template>
+
 <script lang="ts" setup>
 import { ref } from 'vue'
-import type { TableConfigRow } from '@plus-pro-components/components/table'
+import type { PlusColumn } from '@plus-pro-components/types'
+
 const TestServe = {
   getList: async () => {
     const data = [...new Array(2)].map((item, index) => {
@@ -39,7 +41,7 @@ const TestServe = {
   }
 }
 
-const columns: TableConfigRow[] = [
+const columns: PlusColumn[] = [
   {
     label: '名称',
     width: 120,
@@ -50,53 +52,31 @@ const columns: TableConfigRow[] = [
     label: '状态',
     width: 120,
     prop: 'status',
-    valueType: 'status',
-    valueEnum: {
-      open: {
-        text: '未解决',
-        color: '#666'
+    valueType: 'select',
+    options: [
+      {
+        label: '未解决',
+        value: '#666'
       },
-      closed: {
-        text: '已解决',
-        color: 'green'
+      {
+        label: '已解决',
+        value: 'green'
       },
-      processing: {
-        text: '解决中',
-        color: 'blue'
+      {
+        label: '解决中',
+        value: 'blue'
       },
-      error: {
-        text: '失败',
-        color: 'red'
+      {
+        label: '失败',
+        value: 'red'
       }
-    }
+    ]
   },
   {
     label: '标签',
     width: 120,
     prop: 'tag',
-    valueType: 'tag',
-    valueEnum: {
-      primary: {
-        text: 'primarys',
-        color: 'primary'
-      },
-      success: {
-        text: 'successs',
-        color: 'success'
-      },
-      danger: {
-        text: 'dangers',
-        color: 'danger'
-      },
-      info: {
-        text: 'infos',
-        color: 'info'
-      },
-      warning: {
-        text: 'warnings',
-        color: 'warning'
-      }
-    }
+    valueType: 'tag'
   },
   {
     label: '执行进度',
@@ -120,17 +100,13 @@ const columns: TableConfigRow[] = [
     label: '开关',
     width: 100,
     prop: 'switch',
-    valueType: 'switch',
-    attrs: {
-      activeColor: '#13ce66',
-      inactiveColor: '#ff4949'
-    }
+    valueType: 'switch'
   },
   {
     label: '时间',
     width: 190,
     prop: 'time',
-    valueType: 'date'
+    valueType: 'date-picker'
   }
 ]
 const dataList = ref<any>([])

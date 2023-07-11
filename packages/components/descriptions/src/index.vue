@@ -1,48 +1,34 @@
 <template>
-  <template v-for="rowItem in data" :key="rowItem">
-    <el-descriptions
-      :title="rowItem.title || ''"
-      :extra="extra"
-      :column="column"
-      :border="border"
-      :size="size"
-      :direction="direction"
-      class="plus-description"
-    >
+  <el-descriptions :title="title" :column="column" class="plus-description" border v-bind="$attrs">
+    <template v-for="item in columns" :key="item.label">
       <el-descriptions-item
-        v-for="(items, index) in columns"
-        :key="index"
-        :label="items.label"
-        :width="items?.width || 150"
-        :min-width="items?.minWidth"
-        :align="align"
-        :label-align="labelAlign"
-        :class-name="className || 'plus-description__name'"
-        :label-class-name="labelClassName || 'plus-description__label'"
+        v-if="item.hideInDescriptions !== true"
+        :label="item.label"
+        :class-name="item.descriptionsItemProps?.className || 'plus-description__name'"
+        :label-class-name="item.descriptionsItemProps?.labelClassName || 'plus-description__label'"
+        v-bind="item.descriptionsItemProps"
       >
-        <PlusDisplayItem :config-item="items" :row="rowItem" />
+        <PlusDisplayItem :column="item" :row="data" />
       </el-descriptions-item>
-    </el-descriptions>
-  </template>
+    </template>
+  </el-descriptions>
 </template>
 
 <script lang="ts" setup>
-import type { TableConfigRow } from '@plus-pro-components/components/table'
+import type { ExtractPropTypes } from 'vue'
+import type { descriptionProps } from 'element-plus'
+import type { PlusColumn, RecordType } from '@plus-pro-components/types'
 import PlusDisplayItem from '@plus-pro-components/components/display-item'
 
-export interface PlusDescriptionsProps {
-  data: any
-  columns?: TableConfigRow[]
+type DescriptionProps = ExtractPropTypes<typeof descriptionProps>
+
+export interface PlusDescriptionsProps extends /* @vue-ignore */ Partial<DescriptionProps> {
+  data: RecordType
+  columns?: PlusColumn[]
   column?: number
-  direction?: string
-  size?: string
-  border?: boolean
-  align?: string
-  labelAlign?: string
-  className?: string
-  labelClassName?: string
-  extra?: string
+  title?: string
 }
+
 export interface PlusTableTableColumnStatus {
   text: string
   color: string
@@ -53,28 +39,10 @@ defineOptions({
 })
 
 withDefaults(defineProps<PlusDescriptionsProps>(), {
-  // 数据
-  descriptionsData: () => [],
-  // 描述列表label
+  data: () => ({}),
   columns: () => [],
-  // 一行 Descriptions Item 的数量
-  column: 3,
-  // 排列的方向
-  direction: 'horizontal',
-  //   列表的尺寸
-  size: 'default',
-  // 操作区文本，显示在右上方
-  extra: '',
-  // 是否显示边框
-  border: false,
-  // 列的内容对齐方式（如无 border，对标签和内容均生效）
-  align: 'left',
-  // 列的标签对齐方式，若不设置该项，则使用内容的对齐方式（如无 border，请使用 align 参数）
-  labelAlign: 'left',
-  // 列的内容自定义类名
-  className: '',
-  // column label custom class name
-  labelClassName: ''
+  title: '',
+  column: 3
 })
 </script>
 
@@ -82,9 +50,6 @@ withDefaults(defineProps<PlusDescriptionsProps>(), {
 .plus-description {
   .plus-description__name {
     max-width: 200px;
-    /**  
-      内容超出宽度自动显示换行
-    */
     word-wrap: break-word;
   }
   .plus-description__label {

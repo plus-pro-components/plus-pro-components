@@ -2,7 +2,7 @@
 
 ## 项目结构
 
-文件带`__`表示自动生成文件 无需修改
+**`src/__nav.vue`和`src/router/__routes.ts` 文件为自动生成文件，无需修改。**
 
 ```sh
 ├── README.md

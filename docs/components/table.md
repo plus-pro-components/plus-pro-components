@@ -14,7 +14,7 @@ table/basic
 
 | 名称             | 说明           | 类型                  | 默认值    | 是否必须 |
 | ---------------- | -------------- | --------------------- | --------- | -------- |
-| `config`         | 表格配置信息   | `TableConfigRow[]`    | `[]`      | 是       |
+| `config`         | 表格配置信息   | `PlusColumn[]`        | `[]`      | 是       |
 | `tableData`      | 表格数据       | `any[]`               | `[]`      | 是       |
 | `pagination`     | 分页参数       | `PlusPaginationProps` | `见下文`  | 否       |
 | `actionBar`      | 操作栏参数     | `ActionBarProps`      | `见下文`  | 否       |

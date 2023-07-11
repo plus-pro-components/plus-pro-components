@@ -1,56 +1,46 @@
 <template>
-  <PlusDescriptions :column="3" :columns="columns" :data="dataList" border />
+  <PlusDescriptions :column="3" :columns="columns" :data="descriptionsData" />
 </template>
+
 <script lang="ts" setup>
 import { ref } from 'vue'
-import type { TableConfigRow } from '@plus-pro-components/components/table'
+import type { PlusColumn } from '@plus-pro-components/types'
+
 const TestServe = {
   getList: async () => {
-    const data = [...new Array(2)].map((item, index) => {
-      return {
-        index,
-        id: index,
-        title: '序号' + (index + 1),
-        name: index === 0 ? 'name'.repeat(20) : index + 'name',
-        status:
-          index === 0 ? 'processing' : index === 1 ? 'error' : index === 2 ? 'open' : 'closed',
-        tag: index === 1 ? 'success' : index === 2 ? 'warning' : index === 3 ? 'info' : 'danger',
-        progress:
-          index === 0
-            ? { progress: 30, status: 'exception' }
-            : index === 1
-            ? { progress: 60, status: 'warning' }
-            : index > 3
-            ? {
-                progress: 100,
-                status: 'success'
-              }
-            : { progress: 50 },
-        rate: index > 3 ? 2 : 3.5,
-        switch: index > 3 ? true : false,
-        indexColStyle:
-          index < 3
-            ? {
-                backgroundColor: '#314659'
-              }
-            : {
-                backgroundColor: '#979797'
-              },
-        time: new Date(),
-        code: `
-const getData = async params => {
-  const data = await getData(params)
-  return { list: data.data, ...data }
-}`
-      }
-    })
+    const index = Math.random() * 10
+    const data = {
+      index,
+      id: index,
+      title: '序号' + (index + 1),
+      name: 'name'.repeat(10),
+      status: '1',
+      tag: index === 1 ? 'success' : 'danger',
+      progress: 30,
+      rate: index > 3 ? 2 : 3.5,
+      switch: index > 3 ? true : false,
+      indexColStyle:
+        index < 3
+          ? {
+              backgroundColor: '#314659'
+            }
+          : {
+              backgroundColor: '#979797'
+            },
+      time: new Date(),
+      code: `
+  const getData = async params => {
+    const data = await getData(params)
+    return { list: data.data, ...data }
+  }`
+    }
     return {
       data
     }
   }
 }
 
-const columns: TableConfigRow[] = [
+const columns: PlusColumn[] = [
   {
     label: '名称',
     width: 120,
@@ -61,53 +51,35 @@ const columns: TableConfigRow[] = [
     label: '状态',
     width: 120,
     prop: 'status',
-    valueType: 'status',
-    valueEnum: {
-      open: {
-        text: '未解决',
-        color: '#666'
+    valueType: 'select',
+    options: [
+      {
+        label: '未解决',
+        value: '0',
+        color: 'red'
       },
-      closed: {
-        text: '已解决',
-        color: 'green'
-      },
-      processing: {
-        text: '解决中',
+      {
+        label: '已解决',
+        value: '1',
         color: 'blue'
       },
-      error: {
-        text: '失败',
+      {
+        label: '解决中',
+        value: '2',
+        color: 'yellow'
+      },
+      {
+        label: '失败',
+        value: '3',
         color: 'red'
       }
-    }
+    ]
   },
   {
     label: '标签',
     width: 120,
     prop: 'tag',
-    valueType: 'tag',
-    valueEnum: {
-      primary: {
-        text: 'primarys',
-        color: 'primary'
-      },
-      success: {
-        text: 'successs',
-        color: 'success'
-      },
-      danger: {
-        text: 'dangers',
-        color: 'danger'
-      },
-      info: {
-        text: 'infos',
-        color: 'info'
-      },
-      warning: {
-        text: 'warnings',
-        color: 'warning'
-      }
-    }
+    valueType: 'tag'
   },
   {
     label: '执行进度',
@@ -131,24 +103,20 @@ const columns: TableConfigRow[] = [
     label: '开关',
     width: 100,
     prop: 'switch',
-    valueType: 'switch',
-    attrs: {
-      activeColor: '#13ce66',
-      inactiveColor: '#ff4949'
-    }
+    valueType: 'switch'
   },
   {
     label: '时间',
     width: 190,
     prop: 'time',
-    valueType: 'date'
+    valueType: 'date-picker'
   }
 ]
-const dataList = ref<any>([])
+const descriptionsData = ref<any>({})
 const getList = async () => {
   try {
     const { data } = await TestServe.getList()
-    dataList.value = data || []
+    descriptionsData.value = data || {}
   } catch (error) {}
 }
 getList()

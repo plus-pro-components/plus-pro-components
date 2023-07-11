@@ -6,6 +6,7 @@
     align="center"
     label="操作"
     :width="optionColumnWidth + 'px'"
+    v-bind="$attrs"
   >
     <template #default="{ row, $index }">
       <!-- 显示出来的按钮 -->
@@ -14,21 +15,18 @@
       </template>
 
       <!-- 隐藏的按钮 -->
-      <el-dropdown v-if="isShowMore(row)" trigger="click" class="dropdown">
-        <span class="dropdown-link">
+      <el-dropdown v-if="isShowMore(row)" trigger="click" class="plus-table-action-bar__dropdown">
+        <span class="plus-table-action-bar__dropdown__link">
           更多
-          <el-icon class="el-icon-caret-bottom language-icon">
-            <MoreFilled />
+          <el-icon>
+            <ArrowDownBold />
           </el-icon>
         </span>
+
         <!-- 下拉按钮 -->
         <template #dropdown>
-          <el-dropdown-menu class="custom-dropdown-menu">
-            <el-dropdown-item
-              v-for="buttonRow in getNextButtonOptions(row)"
-              :key="buttonRow.text"
-              class="custom-dropdown-menu-item"
-            >
+          <el-dropdown-menu>
+            <el-dropdown-item v-for="buttonRow in getNextButtonOptions(row)" :key="buttonRow.text">
               <component :is="() => render(row, buttonRow, $index)" />
             </el-dropdown-item>
           </el-dropdown-menu>
@@ -41,7 +39,7 @@
 <script lang="ts" setup>
 import type { VNode } from 'vue'
 import { h } from 'vue'
-import { MoreFilled } from '@element-plus/icons-vue'
+import { ArrowDownBold } from '@element-plus/icons-vue'
 import { ElButton, ElLink } from 'element-plus'
 import type { RecordType } from '@plus-pro-components/types'
 import type { ButtonsCallBackParams, ButtonsNameKeyRow, ButtonsNameRow } from './type'
@@ -131,10 +129,13 @@ const handleClickOption = (
     display: flex;
     align-items: center;
   }
+  .plus-table-action-bar__dropdown__link {
+    cursor: pointer;
+  }
   .plus-table-action-bar__column__link {
     margin-right: 10px;
   }
-  .el-dropdown {
+  .plus-table-action-bar__dropdown {
     vertical-align: baseline;
     cursor: pointer;
     margin-left: 5px;

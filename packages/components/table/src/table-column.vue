@@ -1,42 +1,35 @@
 <template>
-  <el-table-column
-    v-for="item in config"
-    :key="item.prop"
-    class-name="plus-table-column"
-    :prop="item.prop"
-    :label="item.label"
-    :width="(item.width as any)"
-    :min-width="item.minWidth"
-    :fixed="item.fixed"
-    :sortable="item.sortable ?? sortable"
-    :show-overflow-tooltip="item.showOverflowTooltip !== false"
-  >
-    <template #default="{ row }">
-      <PlusDisplayItem
-        :config-item="item"
-        :row="row"
-        @clickToEnlargeImage="handelClickToEnlargeImage"
-      />
-    </template>
-  </el-table-column>
+  <template v-for="item in columns" :key="item.prop">
+    <el-table-column
+      v-if="item.hideInTable !== true"
+      class-name="plus-table-column"
+      :prop="item.prop"
+      :label="item.label"
+      :width="item.width"
+      :min-width="item.minWidth"
+      show-overflow-tooltip
+      v-bind="item.tableColumnProps"
+    >
+      <template #default="{ row }">
+        <PlusDisplayItem
+          :column="item"
+          :row="row"
+          @clickToEnlargeImage="handelClickToEnlargeImage"
+        />
+      </template>
+    </el-table-column>
+  </template>
 </template>
 
 <script lang="ts" setup>
 import PlusDisplayItem from '@plus-pro-components/components/display-item'
 import type { PlusImagePreviewRow } from '@plus-pro-components/components/image-preview'
-import type { TableConfigRow } from './type'
+// import type { PlusColumn } from '@plus-pro-components/types'
 
 export interface PlusTableTableColumnProps {
-  config?: TableConfigRow[]
-  sortable?: string | boolean
+  columns?: any
 }
-export interface PlusTableTableColumnStatus {
-  text: string
-  color: string
-}
-export interface PlusTableColumnState {
-  isCopy?: boolean
-}
+
 export interface PlusTableTableColumnEmits {
   (e: 'clickToEnlargeImage', data: PlusImagePreviewRow[]): void
 }
@@ -46,8 +39,7 @@ defineOptions({
 })
 
 withDefaults(defineProps<PlusTableTableColumnProps>(), {
-  sortable: false,
-  config: () => []
+  columns: () => []
 })
 const emit = defineEmits<PlusTableTableColumnEmits>()
 // 点击放大图片
