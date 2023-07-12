@@ -2,7 +2,7 @@
   <PlusDialog
     v-model="subShow"
     width="780px"
-    :header="title"
+    :title="title"
     :close-on-click-modal="true"
     :has-footer="false"
     @cancel="handleCancel"

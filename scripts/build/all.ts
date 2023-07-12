@@ -1,17 +1,14 @@
 import { resolve } from 'path'
-import vuePlugin from 'rollup-plugin-vue'
+import vuePlugin from '@vitejs/plugin-vue'
 import postcss from 'rollup-plugin-postcss'
 import autoprefixer from 'autoprefixer'
 import fs from 'fs'
 import cssnano from 'cssnano'
-import { rollup } from 'rollup'
+import { rollup, Plugin } from 'rollup'
 import consola from 'consola'
 import { nodeResolve } from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
 import esbuild, { minify as minifyPlugin } from 'rollup-plugin-esbuild'
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-import DefineOptions from 'unplugin-vue-define-options/rollup'
 import { pcOutput, pcRoot, projPackage } from '../utils/paths'
 import { writeBundles, formatBundleFilename, PKG_CAMEL_CASE_NAME, PKG_NAME } from '../utils'
 import { external } from '../utils/main'
@@ -23,8 +20,7 @@ const buildAll = async (minify?: boolean) => {
   const pkg = JSON.parse(fs.readFileSync(projPackage, 'utf-8'))
 
   const plugins = [
-    vuePlugin(),
-    DefineOptions(),
+    vuePlugin() as Plugin,
     nodeResolve({
       extensions: ['.mjs', '.js', '.json', '.ts']
     }),

@@ -1,12 +1,19 @@
-## [0.0.1-alpha.10](https://github.com/plus-pro-components/plus-pro-components/compare/0.0.1-alpha.9...0.0.1-alpha.10) (2023-06-26)
+## [0.0.1-alpha.11](https://github.com/plus-pro-components/plus-pro-components/compare/0.0.1-alpha.10...0.0.1-alpha.11) (2023-07-12)
 
 
 ### ✨ Features
 
 * **components:** :sparkles: add field-item component. ([77d15c1](https://github.com/plus-pro-components/plus-pro-components/commit/77d15c1))
+* **components:** :sparkles: add form and form-item component. ([4607f59](https://github.com/plus-pro-components/plus-pro-components/commit/4607f59))
 * **packages:** :sparkles: add description lists ([7df0948](https://github.com/plus-pro-components/plus-pro-components/commit/7df0948))
 * **packages:** :sparkles: drag sort table ([d48427f](https://github.com/plus-pro-components/plus-pro-components/commit/d48427f))
+* **packages:** :sparkles: edit  table,form,descriptions,popover and display-item component. ([1f161cc](https://github.com/plus-pro-components/plus-pro-components/commit/1f161cc))
+* **packages:** :sparkles: edit components. ([7458e50](https://github.com/plus-pro-components/plus-pro-components/commit/7458e50))
 * **packages:** :sparkles: update drag sort icon ([3096dc8](https://github.com/plus-pro-components/plus-pro-components/commit/3096dc8))
+* **scripts:** :sparkles: create-component add template. ([005cad8](https://github.com/plus-pro-components/plus-pro-components/commit/005cad8))
+* **scripts:** :sparkles: edit tag name. ([52e6460](https://github.com/plus-pro-components/plus-pro-components/commit/52e6460))
+* **utils:** :sparkles: edit utils/downlaod ([a1f20d4](https://github.com/plus-pro-components/plus-pro-components/commit/a1f20d4))
+* **utils:** :sparkles: edit utils/download ([cb130df](https://github.com/plus-pro-components/plus-pro-components/commit/cb130df))
 
 
 

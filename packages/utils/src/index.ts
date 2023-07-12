@@ -1,3 +1,4 @@
+export * from './is'
 export * from './cookie'
 export * from './download'
 export * from './parseModuleFiles'

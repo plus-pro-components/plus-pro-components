@@ -4,10 +4,10 @@ import numeral from 'numeral'
 import accounting from 'accounting'
 
 /**
- * 格式化时间到秒
- * @param  {number | string | Date} date
- * @param  {string} format
- * @returns YYYY-MM-DD HH:mm:ss
+ *
+ * @param date
+ * @param format
+ * @returns
  */
 export function dateFormat(date: ConfigType, format = 'YYYY-MM-DD HH:mm:ss'): string {
   if (!date) return ''

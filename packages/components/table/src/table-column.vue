@@ -1,44 +1,37 @@
 <template>
-  <el-table-column
-    v-for="item in config"
-    :key="item.prop"
-    class-name="plus-table-column"
-    :prop="item.prop"
-    :label="item.label"
-    :width="(item.width as any)"
-    :min-width="item.minWidth"
-    :fixed="item.fixed"
-    :sortable="item.sortable ?? sortable"
-    :show-overflow-tooltip="item.showOverflowTooltip !== false"
-  >
-    <template #default="{ row }">
-      <PlusDisplayItem
-        :config-item="item"
-        :row="row"
-        @clickToEnlargeImage="handelClickToEnlargeImage"
-      />
-    </template>
-  </el-table-column>
+  <template v-for="item in columns" :key="item.prop">
+    <el-table-column
+      v-if="item.hideInTable !== true"
+      class-name="plus-table-column"
+      :prop="item.prop"
+      :label="item.label"
+      :width="item.width"
+      :min-width="item.minWidth"
+      v-bind="item.tableColumnProps"
+    >
+      <template #default="{ row, column, $index }">
+        <PlusDisplayItem
+          :column="item"
+          :row="row"
+          @clickToEnlargeImage="handelClickToEnlargeImage"
+          @change="data => handleChange(data, $index, column, item)"
+        />
+      </template>
+    </el-table-column>
+  </template>
 </template>
 
 <script lang="ts" setup>
 import PlusDisplayItem from '@plus-pro-components/components/display-item'
 import type { PlusImagePreviewRow } from '@plus-pro-components/components/image-preview'
-import type { TableConfigRow } from './type'
 
 export interface PlusTableTableColumnProps {
-  config?: TableConfigRow[]
-  sortable?: string | boolean
+  columns?: any
 }
-export interface PlusTableTableColumnStatus {
-  text: string
-  color: string
-}
-export interface PlusTableColumnState {
-  isCopy?: boolean
-}
+
 export interface PlusTableTableColumnEmits {
   (e: 'clickToEnlargeImage', data: PlusImagePreviewRow[]): void
+  (e: 'change', data: { value: any; prop: string; row: any; index: number; column: any }): void
 }
 
 defineOptions({
@@ -46,12 +39,23 @@ defineOptions({
 })
 
 withDefaults(defineProps<PlusTableTableColumnProps>(), {
-  sortable: false,
-  config: () => []
+  columns: () => []
 })
+
 const emit = defineEmits<PlusTableTableColumnEmits>()
+
 // 点击放大图片
 const handelClickToEnlargeImage = (srcList: PlusImagePreviewRow[]) => {
   emit('clickToEnlargeImage', srcList)
+}
+
+// 表单发生变化
+const handleChange = (
+  data: { value: any; prop: string; row: any },
+  index: number,
+  column: any,
+  item: any
+) => {
+  emit('change', { ...data, index, column: { ...column, ...item } })
 }
 </script>

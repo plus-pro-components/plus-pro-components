@@ -1,45 +1,48 @@
 <template>
   <div class="plus-date-picker">
     <el-date-picker
+      ref="startPickerInstance"
       v-model="state.start"
       type="datetime"
-      :placeholder="startPlaceholder"
+      placeholder="请选择开始时间"
       :format="format"
       :value-format="valueFormat"
-      :readonly="readonly"
-      :disabled="disabled"
-      :disabled-date="disabledStartDate"
+      :disabled-date="subStartDisabledDate"
       class="plus-date-picker__start"
+      v-bind="startProps"
       @change="handleChange"
     />
     <span class="plus-date-picker__middle"> {{ rangeSeparator }} </span>
     <el-date-picker
+      ref="endPickerInstance"
       v-model="state.end"
-      :disabled="disabled"
       type="datetime"
       :format="format"
       :value-format="valueFormat"
-      :placeholder="endPlaceholder"
-      :readonly="readonly"
-      :disabled-date="disabledEndDate"
+      placeholder="请选择结束时间"
+      :disabled-date="subEndDisabledDate"
       class="plus-date-picker__end"
+      v-bind="endProps"
       @change="handleChange"
     />
   </div>
 </template>
 
 <script setup lang="ts">
-import { reactive, watch } from 'vue'
+import { reactive, watch, ref } from 'vue'
+import { ElDatePicker } from 'element-plus'
+import { isFunction } from '@plus-pro-components/utils'
 
 export interface PlusDatePickerProps {
   modelValue?: string[]
-  startPlaceholder?: string
   format?: string
   valueFormat?: string
-  readonly?: boolean
-  disabled?: boolean
   rangeSeparator?: string
-  endPlaceholder?: string
+  type?: 'year' | 'month' | 'date' | 'dates' | 'datetime' | 'week'
+  startProps?: any
+  endProps?: any
+  startDisabledDate?: (startTime: Date, endValue: string) => boolean
+  endDisabledDate?: (endTime: Date, startValue: string) => boolean
 }
 export interface PlusRadioEmits {
   (e: 'change', value: string[]): void
@@ -53,31 +56,47 @@ export interface DatePickerState {
 defineOptions({
   name: 'PlusDatePicker'
 })
+
 const props = withDefaults(defineProps<PlusDatePickerProps>(), {
   modelValue: () => [],
   valueFormat: 'YYYY-MM-DD HH:mm:ss',
   format: 'YYYY-MM-D HH:mm:ss',
   rangeSeparator: '/',
-  startPlaceholder: '请输入开始时间',
-  endPlaceholder: '请输入结束时间',
-  readonly: false,
-  disabled: false
+  type: 'datetime',
+  startProps: () => ({}),
+  endProps: () => ({}),
+  startDisabledDate: (startTime, endValue) => {
+    if (!endValue) return false
+    return startTime.getTime() > new Date(endValue).getTime()
+  },
+  endDisabledDate: (endTime, startValue) => {
+    if (!startValue) return false
+    return endTime.getTime() < new Date(startValue).getTime()
+  }
 })
 
 const emit = defineEmits<PlusRadioEmits>()
+
+const startPickerInstance = ref<InstanceType<typeof ElDatePicker> | null>()
+const endPickerInstance = ref<InstanceType<typeof ElDatePicker> | null>()
 
 const state: DatePickerState = reactive({
   start: '',
   end: ''
 })
-const disabledStartDate = (time: Date) => {
-  if (!state.end) return false
-  return time.getTime() > new Date(state.end).getTime()
+
+const subStartDisabledDate = (time: Date) => {
+  if (props.startDisabledDate && isFunction(props.startDisabledDate)) {
+    return props.startDisabledDate(time, state.end)
+  }
+  return false
 }
 
-const disabledEndDate = (time: Date) => {
-  if (!state.start) return false
-  return time.getTime() + 24 * 60 * 60 * 1000 < new Date(state.start).getTime()
+const subEndDisabledDate = (time: Date) => {
+  if (props.endDisabledDate && isFunction(props.endDisabledDate)) {
+    return props.endDisabledDate(time, state.start)
+  }
+  return false
 }
 
 watch(
@@ -98,6 +117,11 @@ const handleChange = () => {
   emit('update:modelValue', res)
   emit('change', res)
 }
+
+defineExpose({
+  startPickerInstance,
+  endPickerInstance
+})
 </script>
 
 <style lang="scss">

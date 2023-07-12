@@ -24,7 +24,9 @@ dialog/basic
 | `title`                 | 弹窗标题           | `string`  | `弹窗`  | 否       |
 | ...                     | ...                | ...       | ...     | ...      |
 
+:::tip 提示
 **`...`表示同时支持所有 `el-dialog` Attributes**
+:::
 
 ### Dialog Events
 

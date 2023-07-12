@@ -38,7 +38,7 @@ export const gFiles = async () => {
     routes.push({
       path: `/${routeName}`,
       name: `${routeName}`,
-      component: `@/views/${routeName}/index.vue`
+      component: `@/views/${routeName}.vue`
     })
     navData.push(`<router-link class="link" to="/${routeName}">${routeName}</router-link>`)
   }
