@@ -36,7 +36,7 @@
 </template>
 
 <script lang="ts" setup>
-import { defaultPageInfo } from '@plus-pro-components/constants'
+import { DefaultPageInfo } from '@plus-pro-components/constants'
 import type { PageInfo } from '@plus-pro-components/types'
 
 export interface PlusTableTableColumnIndexProps {
@@ -51,7 +51,7 @@ defineOptions({
 
 const props = withDefaults(defineProps<PlusTableTableColumnIndexProps>(), {
   show: true,
-  pageInfo: () => ({ ...defaultPageInfo }),
+  pageInfo: () => ({ ...DefaultPageInfo }),
   max: 999
 })
 

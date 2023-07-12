@@ -1,5 +1,5 @@
 <template>
-  <PlusDescriptions :column="3" :columns="columns" :data="dataList" border />
+  <PlusDescriptions :column="3" :columns="columns" :data="descriptionsData" />
 </template>
 
 <script lang="ts" setup>
@@ -8,33 +8,32 @@ import type { PlusColumn } from '@plus-pro-components/types'
 
 const TestServe = {
   getList: async () => {
-    const data = [...new Array(2)].map((item, index) => {
-      return {
-        index,
-        id: index,
-        title: '序号' + (index + 1),
-        name: 'name'.repeat(10),
-        status: index === 0 ? 'processing' : index === 1 ? 'error' : 'closed',
-        tag: index === 1 ? 'success' : index === 2 ? 'warning' : 'danger',
-        progress: index === 0 ? { progress: 30, status: 'exception' } : { progress: 50 },
-        rate: index > 3 ? 2 : 3.5,
-        switch: index > 3 ? true : false,
-        indexColStyle:
-          index < 3
-            ? {
-                backgroundColor: '#314659'
-              }
-            : {
-                backgroundColor: '#979797'
-              },
-        time: new Date(),
-        code: `
+    const index = Math.random() * 10
+    const data = {
+      index,
+      id: index,
+      title: '序号' + (index + 1),
+      name: 'name'.repeat(10),
+      status: '1',
+      tag: index === 1 ? 'success' : 'danger',
+      progress: 30,
+      rate: index > 3 ? 2 : 3.5,
+      switch: index > 3 ? true : false,
+      indexColStyle:
+        index < 3
+          ? {
+              backgroundColor: '#314659'
+            }
+          : {
+              backgroundColor: '#979797'
+            },
+      time: new Date(),
+      code: `
   const getData = async params => {
     const data = await getData(params)
     return { list: data.data, ...data }
   }`
-      }
-    })
+    }
     return {
       data
     }
@@ -56,19 +55,23 @@ const columns: PlusColumn[] = [
     options: [
       {
         label: '未解决',
-        value: '#666'
+        value: '0',
+        color: 'red'
       },
       {
         label: '已解决',
-        value: 'green'
+        value: '1',
+        color: 'blue'
       },
       {
         label: '解决中',
-        value: 'blue'
+        value: '2',
+        color: 'yellow'
       },
       {
         label: '失败',
-        value: 'red'
+        value: '3',
+        color: 'red'
       }
     ]
   },
@@ -109,11 +112,11 @@ const columns: PlusColumn[] = [
     valueType: 'date-picker'
   }
 ]
-const dataList = ref<any>([])
+const descriptionsData = ref<any>({})
 const getList = async () => {
   try {
     const { data } = await TestServe.getList()
-    dataList.value = data || []
+    descriptionsData.value = data || {}
   } catch (error) {}
 }
 getList()

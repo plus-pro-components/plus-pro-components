@@ -106,6 +106,15 @@ export default defineConfig({
       ],
       '/components/': [
         {
+          text: '基础Ts类型',
+          items: [
+            {
+              text: '基础Ts类型',
+              link: '/components/type'
+            }
+          ]
+        },
+        {
           text: '基础组件',
           items: [
             {
@@ -134,8 +143,16 @@ export default defineConfig({
           text: '组合组件',
           items: [
             {
+              text: '通用配置',
+              link: '/components/config'
+            },
+            {
               text: '表格',
               link: '/components/table'
+            },
+            {
+              text: '表单',
+              link: '/components/form'
             },
             {
               text: '描述列表',

@@ -1,10 +1,9 @@
 <template>
   <el-form
     ref="formInstance"
-    :model="modelValue"
-    :rules="state.rules"
+    :model="state.values"
+    :rules="rules"
     :label-width="labelWidth"
-    :size="size"
     class="plus-form"
     :label-position="labelPosition"
     :validate-on-rule-change="false"
@@ -12,7 +11,19 @@
     v-bind="formProps"
   >
     <slot>
-      <PlusFormItem v-for="item in columns" :key="item.prop" v-bind="item" />
+      <PlusFormItem
+        v-for="item in columns"
+        :key="item.prop"
+        v-model="state.values[item.prop]"
+        :label="item.label"
+        :prop="item.prop"
+        :field-item="item.fieldProps"
+        :value-type="item.valueType"
+        :options="item.options"
+        :hide-in-form="item.hideInForm"
+        :form-item-item="item.formItemProps"
+        :render-form-item="item.renderFormItem"
+      />
     </slot>
 
     <div v-if="hasFooter" class="plus-form-footer">
@@ -32,15 +43,16 @@
 </template>
 
 <script lang="ts" setup>
-import { reactive, ref } from 'vue'
-import type { FormInstance, ComponentSize, FormRules, FormProps } from 'element-plus'
+import { reactive, ref, watch } from 'vue'
+import type { FormInstance, FormRules, FormProps } from 'element-plus'
 import { ElMessage } from 'element-plus'
 import PlusFormItem from '@plus-pro-components/components/form-item'
+import type { PlusColumn, RecordType } from '@plus-pro-components/types'
 
 export interface PlusFormProps {
-  modelValue: any
+  modelValue: RecordType
+  columns: PlusColumn[]
   labelWidth?: string
-  size?: ComponentSize
   labelPosition?: 'left' | 'right' | 'top'
   labelSuffix?: string
   hasErrorTip?: boolean
@@ -49,18 +61,20 @@ export interface PlusFormProps {
   confirmText?: string
   cancelText?: string
   submitLoading?: boolean
+  rules?: FormRules
   formProps?: Partial<FormProps>
-  columns?: any[]
 }
 
 export interface PlusFormState {
-  rules: FormRules
+  values: any
 }
 
 export interface PlusFormEmits {
-  (e: 'subSubmit'): void
-  (e: 'subCancel'): void
-  (e: 'subSubmitError', errors: any): void
+  (e: 'update:modelValue', values: any): void
+  (e: 'submit', values: any): void
+  (e: 'change', values: any): void
+  (e: 'cancel'): void
+  (e: 'submitError', errors: any): void
 }
 
 defineOptions({
@@ -70,7 +84,6 @@ defineOptions({
 const props = withDefaults(defineProps<PlusFormProps>(), {
   modelValue: () => ({}),
   labelWidth: '80px',
-  size: 'default',
   labelPosition: 'left',
   labelSuffix: ':',
   hasErrorTip: true,
@@ -80,6 +93,7 @@ const props = withDefaults(defineProps<PlusFormProps>(), {
   confirmText: '确定',
   cancelText: '取消',
   formProps: () => ({}),
+  rules: () => ({}),
   columns: () => []
 })
 
@@ -88,8 +102,19 @@ const emit = defineEmits<PlusFormEmits>()
 const formInstance = ref<FormInstance>()
 
 const state = reactive<PlusFormState>({
-  rules: {}
+  values: { ...props.modelValue }
 })
+
+watch(
+  () => state.values,
+  val => {
+    emit('change', val)
+    emit('update:modelValue', val)
+  },
+  {
+    deep: true
+  }
+)
 
 // 清空校验
 const clearValidate = (): void => {
@@ -100,7 +125,7 @@ const handleSubmit = async () => {
   try {
     const valid = await formInstance.value?.validate()
     if (valid) {
-      emit('subSubmit')
+      emit('submit', state.values)
     }
   } catch (errors: any) {
     if (props.hasErrorTip) {
@@ -108,13 +133,13 @@ const handleSubmit = async () => {
       const values: any[] = Object.values(errors)
       ElMessage.warning(values[0]?.[0]?.message || '请完整填写表单并再次提交！')
     }
-    emit('subSubmitError', errors)
+    emit('submitError', errors)
   }
 }
 
 const handleCancel = (): void => {
   clearValidate()
-  emit('subCancel')
+  emit('cancel')
 }
 
 defineExpose({

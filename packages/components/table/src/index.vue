@@ -7,8 +7,13 @@
       @sub-density="handleClickDensity"
       @sub-filter-table="handleFilterTableConfirm"
     >
-      <slot name="title" />
-      <slot name="toolbar" />
+      <template #title>
+        <slot name="title" />
+      </template>
+
+      <template #toolbar>
+        <slot name="toolbar" />
+      </template>
     </PlusTableToolbar>
 
     <el-table
@@ -56,6 +61,7 @@
       <PlusTableTableColumn
         :columns="subColumns"
         @clickToEnlargeImage="handelClickToEnlargeImage"
+        @change="handleChange"
       />
 
       <!-- 操作栏 -->
@@ -71,7 +77,7 @@
     />
 
     <!-- 大图预览 -->
-    <PlusImagePreview v-model="bigImageVisible" :src-list="srcList" />
+    <PlusImagePreview v-model="bigImageVisible" title="图片预览" :src-list="srcList" />
   </div>
 </template>
 
@@ -79,7 +85,7 @@
 import { reactive, toRefs, watch, ref, nextTick } from 'vue'
 import { cloneDeep } from 'lodash-es'
 import PlusPagination from '@plus-pro-components/components/pagination'
-import { defaultPageInfo } from '@plus-pro-components/constants'
+import { DefaultPageInfo } from '@plus-pro-components/constants'
 import type { PlusImagePreviewRow } from '@plus-pro-components/components/image-preview'
 import PlusImagePreview from '@plus-pro-components/components/image-preview'
 import type { PlusPaginationProps } from '@plus-pro-components/components/pagination'
@@ -117,6 +123,7 @@ export interface PlusTableProps {
   /* 自定义表格标题*/
   tableTitle?: string
   /* 表格高度*/
+  // eslint-disable-next-line vue/require-default-prop
   height?: string
   /* 表格数据*/
   tableData: any[]
@@ -139,6 +146,7 @@ export interface PlusTableEmits {
   (e: 'subClickRow', row: any, column: any, event: MouseEvent): void
   (e: 'subClickButton', data: ButtonsCallBackParams): void
   (e: 'subSortEnd', newIndex: number, oldIndex: number): void
+  (e: 'subChange', data: { value: any; prop: string; row: any; index: number; column: any }): void
 }
 
 defineOptions({
@@ -155,7 +163,6 @@ const props = withDefaults(defineProps<PlusTableProps>(), {
   hasExpand: false,
   loadingStatus: false,
   tableTitle: '',
-  height: '60vh',
   tableData: () => [],
   columns: () => [],
   headerCellStyle: () => ({
@@ -175,7 +182,7 @@ const tableInstance = ref<TableInstance | null>(null)
 const state = reactive<TableState>({
   bigImageVisible: false,
   srcList: [],
-  subPageInfo: { ...((props.pagination.modelValue || defaultPageInfo) as PageInfo) },
+  subPageInfo: { ...((props.pagination.modelValue || DefaultPageInfo) as PageInfo) },
   size: props.defaultSize
 })
 // 监听配置更改
@@ -263,6 +270,10 @@ const handleClickDensity = (data: ComponentSize) => {
 
 const subSortEnd = (newIndex: number, oldIndex: number) => {
   emit('subSortEnd', newIndex, oldIndex)
+}
+
+const handleChange = (data: { value: any; prop: string; row: any; index: number; column: any }) => {
+  emit('subChange', data)
 }
 
 const { bigImageVisible, srcList, subPageInfo, size } = toRefs(state)

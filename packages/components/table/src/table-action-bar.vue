@@ -5,8 +5,9 @@
     class-name="plus-table-action-bar"
     align="center"
     label="操作"
+    fixed="right"
     :width="optionColumnWidth + 'px'"
-    v-bind="$attrs"
+    v-bind="actionBarProps"
   >
     <template #default="{ row, $index }">
       <!-- 显示出来的按钮 -->
@@ -44,12 +45,19 @@ import { ElButton, ElLink } from 'element-plus'
 import type { RecordType } from '@plus-pro-components/types'
 import type { ButtonsCallBackParams, ButtonsNameKeyRow, ButtonsNameRow } from './type'
 
+/**
+ * 表格操作栏数据类型
+ */
 export interface PlusTableActionBarProps {
   show?: boolean
   buttonCount?: number
   buttonType?: 'icon' | 'button' | 'link'
   buttonsName?: Partial<ButtonsNameRow>
   optionColumnWidth?: number
+  /**
+   * 表格操作栏 el-table-column 的其他props
+   */
+  actionBarProps?: RecordType
 }
 
 export interface PlusTableActionBarEmits {
@@ -65,6 +73,7 @@ const props = withDefaults(defineProps<PlusTableActionBarProps>(), {
   buttonCount: 3,
   buttonType: 'link',
   buttonsName: () => ({}),
+  actionBarProps: () => ({}),
   optionColumnWidth: 300
 })
 const emit = defineEmits<PlusTableActionBarEmits>()

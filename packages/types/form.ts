@@ -19,7 +19,6 @@ export type FormItemValueType =
   | 'switch'
   | 'time-select'
   | 'textarea'
-  | 'custom'
   | 'text'
 
 /**
@@ -31,5 +30,16 @@ export interface FormColumnProps {
    */
   formItemProps?: PropsItemType
 
-  renderFormItem?: (props: any, formItemInstance: InstanceType<typeof ElFormItem>) => VNode
+  /**
+   * 自定义渲染   el-form-item 下的field-item组件
+   * @param props
+   * @param onChange
+   * @param formItemInstance
+   * @returns
+   */
+  renderFormItem?: (
+    props: any,
+    onChange: (value: any) => void,
+    formItemInstance: InstanceType<typeof ElFormItem>
+  ) => VNode
 }

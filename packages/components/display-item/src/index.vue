@@ -11,6 +11,13 @@
     v-html="column.renderHTML && column.renderHTML(subRow[column.prop], subRow, column)"
   />
 
+  <PlusFormFieldItem
+    v-else-if="FormFieldType.includes(column.valueType as string) && column.editable === true"
+    v-model="subRow[column.prop]"
+    v-bind="column"
+    @change="handleChange"
+  />
+
   <!--显示图片 -->
   <img
     v-else-if="column.valueType === 'img'"
@@ -64,7 +71,7 @@
   </span>
 
   <!-- 标签 -->
-  <el-tag v-else-if="column.valueType === 'tag'" type="info" v-bind="customFieldProps">
+  <el-tag v-else-if="column.valueType === 'tag'" v-bind="customFieldProps">
     {{ subRow[column.prop] }}
   </el-tag>
 
@@ -100,12 +107,16 @@
 </template>
 
 <script lang="ts" setup>
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
 import { DocumentCopy, Select } from '@element-plus/icons-vue'
 import type { PlusImagePreviewRow } from '@plus-pro-components/components/image-preview'
+import { PlusFormFieldItem } from '@plus-pro-components/components/form-item'
 import { dateFormat, formatToCurrency, isFunction } from '@plus-pro-components/utils'
 import { ref, watch } from 'vue'
 import type { PlusColumn, RecordType } from '@plus-pro-components/types'
 import { useGetOptions, useGetCustomProps } from '@plus-pro-components/hooks'
+import { FormFieldType } from '@plus-pro-components/constants'
 
 export interface PlusDisplayItemProps {
   column?: PlusColumn
@@ -114,6 +125,7 @@ export interface PlusDisplayItemProps {
 
 export interface PlusTableTableColumnEmits {
   (e: 'clickToEnlargeImage', data: PlusImagePreviewRow[]): void
+  (e: 'change', value: any, prop: string, row: any): void
 }
 
 defineOptions({
@@ -215,6 +227,10 @@ const handelClickCopy = (item: PlusColumn, row: RecordType) => {
   setTimeout(() => {
     row.isCopy = false
   }, 3000)
+}
+
+const handleChange = (value: any) => {
+  emit('change', { value, prop: props.column.prop, row: subRow })
 }
 </script>
 

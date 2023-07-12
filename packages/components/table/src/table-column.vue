@@ -7,14 +7,14 @@
       :label="item.label"
       :width="item.width"
       :min-width="item.minWidth"
-      show-overflow-tooltip
       v-bind="item.tableColumnProps"
     >
-      <template #default="{ row }">
+      <template #default="{ row, column, $index }">
         <PlusDisplayItem
           :column="item"
           :row="row"
           @clickToEnlargeImage="handelClickToEnlargeImage"
+          @change="data => handleChange(data, $index, column, item)"
         />
       </template>
     </el-table-column>
@@ -24,7 +24,6 @@
 <script lang="ts" setup>
 import PlusDisplayItem from '@plus-pro-components/components/display-item'
 import type { PlusImagePreviewRow } from '@plus-pro-components/components/image-preview'
-// import type { PlusColumn } from '@plus-pro-components/types'
 
 export interface PlusTableTableColumnProps {
   columns?: any
@@ -32,6 +31,7 @@ export interface PlusTableTableColumnProps {
 
 export interface PlusTableTableColumnEmits {
   (e: 'clickToEnlargeImage', data: PlusImagePreviewRow[]): void
+  (e: 'change', data: { value: any; prop: string; row: any; index: number; column: any }): void
 }
 
 defineOptions({
@@ -41,9 +41,21 @@ defineOptions({
 withDefaults(defineProps<PlusTableTableColumnProps>(), {
   columns: () => []
 })
+
 const emit = defineEmits<PlusTableTableColumnEmits>()
+
 // 点击放大图片
 const handelClickToEnlargeImage = (srcList: PlusImagePreviewRow[]) => {
   emit('clickToEnlargeImage', srcList)
+}
+
+// 表单发生变化
+const handleChange = (
+  data: { value: any; prop: string; row: any },
+  index: number,
+  column: any,
+  item: any
+) => {
+  emit('change', { ...data, index, column: { ...column, ...item } })
 }
 </script>

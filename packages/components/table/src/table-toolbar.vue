@@ -194,10 +194,11 @@ const handleFilterTableConfirm = () => {
 .plus-table-header {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   margin-bottom: 10px;
   .plus-table-popover {
     margin-left: 10px;
-    vertical-align: bottom;
+    vertical-align: middle;
     cursor: pointer;
   }
 }

@@ -2,15 +2,7 @@ import type { RecordType } from './global'
 /**
  * 所有表格的类型 默认是 ''
  */
-export type TableValueType =
-  | 'img'
-  | 'link'
-  | 'money'
-  | 'input'
-  | 'tag'
-  | 'progress'
-  | 'copy'
-  | 'code'
+export type TableValueType = 'img' | 'link' | 'money' | 'tag' | 'progress' | 'copy' | 'code' | ''
 
 /**
  * 所有表单的类型 默认是 text

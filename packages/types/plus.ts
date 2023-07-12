@@ -36,41 +36,56 @@ export interface OptionsRow {
   label: number | string
   value: number | string
   color?: string
+  /**
+   * 表单子项的props  如 el-checkbox-group下的el-checkbox的props
+   */
   fieldItemProps?: PropsItemType
 }
+/**
+ * 选择类型
+ */
+export type OptionsType =
+  | OptionsRow[]
+  | ((props?: PlusColumn) => OptionsRow[] | Promise<OptionsRow[]>)
 
 export interface CommentType {
   [index: string]: any
   /**
-   * 表格表头显示的标题 ；在form 中是 el-form-item的label；
+   * 表格表头显示的标题 ；在form 中是 el-form-item的label；在descriptions 是 el-descriptions-item的label；
    */
   label: string
   /**
-   * 表格对应列内容的字段名 ；在form 中是 el-input等所有表单项的双向绑定的值
+   * 表格对应列内容的字段名 ；在form 中是 el-input等所有表单项的双向绑定的值；在descriptions 是 el-descriptions-item的值对应的字段；
    */
   prop: string
 
   /**
-   *  宽
+   *  表格宽
    */
   width?: string | number
   /**
-   *  最小宽
+   *  表格最小宽
    */
   minWidth?: string | number
+
+  /**
+   * @desc 当开启时  valueType 为 `FormItemValueType` 其中之一时 表格中显示的是对应的表单
+   * @default false
+   */
+  editable?: boolean
 
   /**
    * @desc 值的类型
    */
   valueType?: TableValueType | FormItemValueType
 
-  /** @desc 在 descriptions 隐藏 */
+  /** @desc 在 PlusDescriptions组件中 隐藏 */
   hideInDescriptions?: boolean
 
-  /** @desc 在 Form 中隐藏 */
+  /** @desc 在 PlusForm 组件中隐藏 */
   hideInForm?: boolean
 
-  /** @desc 在 table 中隐藏 */
+  /** @desc 在 PlusTable 组件中隐藏 */
   hideInTable?: boolean
 
   /** @desc 在 table的查询表单 中隐藏 */
@@ -89,14 +104,14 @@ export interface CommentType {
   /**
    * el-select，el-radio-group，el-checkbox-group 选项 ，支持数组，函数，和Promise
    */
-  options?: OptionsRow[] | ((props?: PlusColumn) => OptionsRow[] | Promise<OptionsRow[]>)
+  options?: OptionsType
 
   /** @desc 展示一个 icon，hover 是展示一些提示信息 */
   tooltip?: ElTooltipProps | string
 
   /**
    *
-   * 自定义渲染单行显示内容 需要返回一个 VNode，`render`的优先级最高
+   * 自定义渲染表格单行显示内容 需要返回一个 VNode，`render`的优先级最高
    *
    * 示例：
    * ```js
@@ -109,7 +124,7 @@ export interface CommentType {
    *     prop: 'tag',
    *     render: value => {
    *       const item = statusOptions.find(item => item.value === value)
-   *        return h(() => ElTag, { type: item.type }, () => item.label)
+   *        return h(ElTag, { type: item.type }, () => item.label)
    *     }
    *  }
    * ]
@@ -118,7 +133,7 @@ export interface CommentType {
   render?: (value?: any, row?: RecordType, column?: PlusColumn) => VNode
 
   /**
-   * 自定义渲染单行显示内容 需要返回一个 html字符串，`renderHTML`的优先级低于`render`，高于valueType。
+   * 自定义渲染单行显示内容 需要返回一个 html字符串，`renderHTML`的优先级低于`render`，高于`valueType`。
    *
    * 注意：renderHTML 内部使用`v-html`渲染，使用时需要保证 html字符串 可信。
    *

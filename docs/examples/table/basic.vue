@@ -22,7 +22,7 @@
       @subClickButton="subClickButton"
       @subSortEnd="subSortEnd"
     >
-      <template #button>
+      <template #toolbar>
         <el-button plain size="small">查看日志</el-button>
         <el-button plain size="small">导出数据</el-button>
         <el-button type="primary" size="small">创建应用</el-button>
@@ -39,8 +39,6 @@ import type {
   ButtonsCallBackParams
 } from '@plus-pro-components/components/table'
 import type { PageInfo, PlusColumn } from '@plus-pro-components/types'
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
 import { ElAlert } from 'element-plus'
 
 defineOptions({
@@ -58,7 +56,7 @@ const TestServe = {
         tag: index === 1 ? 'success' : index === 2 ? 'warning' : index === 3 ? 'info' : 'danger',
         progress: Math.ceil(Math.random() * index * 10),
         rate: index > 3 ? 2 : 3.5,
-        switch: index > 3 ? true : false,
+        switch: index % 2 === 0 ? true : false,
         indexColStyle:
           index < 3
             ? {
@@ -135,7 +133,10 @@ const tableConfig: PlusColumn[] = [
     label: '名称',
     width: 120,
     prop: 'name',
-    valueType: 'copy'
+    valueType: 'copy',
+    tableColumnProps: {
+      'show-overflow-tooltip': true
+    }
   },
   {
     label: '状态',
@@ -200,15 +201,17 @@ const tableConfig: PlusColumn[] = [
   },
   {
     label: '评分',
-    width: 100,
+    width: 200,
     prop: 'rate',
-    valueType: 'rate'
+    valueType: 'rate',
+    editable: true
   },
   {
     label: '开关',
     width: 100,
     prop: 'switch',
-    valueType: 'switch'
+    valueType: 'switch',
+    editable: true
   },
   {
     label: '图片',
@@ -219,22 +222,23 @@ const tableConfig: PlusColumn[] = [
   {
     label: '时间',
     prop: 'time',
+    width: 180,
     valueType: 'date-picker'
   },
   {
     label: '自定义组件',
+    width: 200,
     prop: 'status',
     render: value => {
       const item = statusOptions.find(item => item.value === value)
-      return h(
-        () => ElAlert,
-        { type: item?.type },
-        () => item?.label
-      )
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      return h(ElAlert, { type: item?.type }, () => item?.label)
     }
   },
   {
     label: '自定义html',
+    width: 100,
     prop: 'custom',
     renderHTML: (value: any) => {
       return `<div style='color:red;'>${value}</div>`
