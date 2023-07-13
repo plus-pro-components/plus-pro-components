@@ -1,4 +1,18 @@
-## [0.0.1-alpha.11](https://github.com/plus-pro-components/plus-pro-components/compare/0.0.1-alpha.10...0.0.1-alpha.11) (2023-07-12)
+## [0.0.1-alpha.12](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-alpha.11...v0.0.1-alpha.12) (2023-07-13)
+
+
+### ✨ Features
+
+* **components:** :sparkles: add tooltip. ([c183f50](https://github.com/plus-pro-components/plus-pro-components/commit/c183f50))
+
+
+### 🐛 Bug Fixes
+
+* **docs:** :bug: modify TS type：linkText ([6b538b6](https://github.com/plus-pro-components/plus-pro-components/commit/6b538b6))
+
+
+
+## [0.0.1-alpha.11](https://github.com/plus-pro-components/plus-pro-components/compare/0.0.1-alpha.10...v0.0.1-alpha.11) (2023-07-12)
 
 
 ### ✨ Features
