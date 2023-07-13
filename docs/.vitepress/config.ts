@@ -3,6 +3,7 @@ import { mdPlugin } from './plugins/mdPlugin'
 import pkg from '../../package.json'
 
 const content = [
+  'PlusProComponents',
   'plus-pro-components',
   'element-plus',
   'Page level components',
@@ -17,7 +18,7 @@ const content = [
 export default defineConfig({
   base: '/',
   title: 'PlusProComponents',
-  description: 'plus-pro-components',
+  description: content,
   head: [
     ['meta', { name: 'author', content: 'xiaofei' }],
 
