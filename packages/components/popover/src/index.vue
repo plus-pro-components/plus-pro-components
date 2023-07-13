@@ -15,7 +15,7 @@
     </div>
 
     <div v-if="hasShowBottomButton" style="padding-top: 12px">
-      <el-button size="small" text @click="handleCancelPopover">
+      <el-button size="small" plain @click="handleCancelPopover">
         {{ cancelText }}
       </el-button>
       <el-button
@@ -35,9 +35,11 @@
     </template>
   </el-popover>
 </template>
+
 <script lang="ts" setup>
 import { reactive } from 'vue'
 import { ClickOutside as vClickOutside } from 'element-plus'
+
 export interface PlusPopoverProps {
   hasFilterTableHeader?: boolean
   hasShowBottomButton?: boolean
@@ -76,8 +78,8 @@ withDefaults(defineProps<PlusPopoverProps>(), {
   trigger: 'hover',
   title: '',
   confirmLoading: false,
-  cancelText: '确认',
-  confirmText: '取消'
+  cancelText: '取消',
+  confirmText: '确认'
 })
 const emit = defineEmits<PlusPopoverEmits>()
 const handleCancelPopover = (): void => {

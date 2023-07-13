@@ -19,6 +19,7 @@
     v-model="state"
     :placeholder="'请选择' + label"
     class="plus-form-item-field"
+    :options="options"
     v-bind="customFieldProps"
     @change="handleChange"
   />
@@ -55,8 +56,11 @@
     v-else-if="valueType === 'date-picker'"
     v-model="state"
     :placeholder="'请选择' + label"
+    start-placeholder="请选择开始日期"
+    end-placeholder="请结束开始日期"
     class="plus-form-item-field"
     format="YYYY-MM-DD HH:mm:ss"
+    type="datetime"
     value-format="YYYY-MM-DD HH:mm:ss"
     v-bind="customFieldProps"
     @change="handleChange"
@@ -69,8 +73,6 @@
     :placeholder="'请输入' + label"
     autocomplete="off"
     clearable
-    :value-on-clear="null"
-    :precision="2"
     v-bind="customFieldProps"
     @change="handleChange"
   />
@@ -91,7 +93,7 @@
       :value="item.value"
       v-bind="item.fieldItemProps"
     >
-      {{ item.value }}
+      {{ item.label }}
     </el-radio>
   </el-radio-group>
 
@@ -237,10 +239,18 @@ const isArrayValue = () => {
   return false
 }
 
+const isNumberValue = () => {
+  const list = ['rate', 'input-number']
+  if (list.includes(props.valueType as string)) {
+    return true
+  }
+  return false
+}
+
 const setValue = (val: any) => {
   if (isArrayValue()) {
     state.value = Array.isArray(val) ? val : []
-  } else if (props.valueType === 'rate') {
+  } else if (isNumberValue()) {
     state.value = Number(val)
   } else if (props.valueType === 'switch') {
     state.value = Boolean(val)
@@ -264,3 +274,9 @@ const handleChange = (val: ValueType) => {
   emit('change', val)
 }
 </script>
+
+<style lang="scss">
+.plus-form-item-field {
+  width: 100%;
+}
+</style>

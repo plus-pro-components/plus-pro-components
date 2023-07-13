@@ -40,6 +40,7 @@ export interface OptionsRow {
    * 表单子项的props  如 el-checkbox-group下的el-checkbox的props
    */
   fieldItemProps?: PropsItemType
+  children?: OptionsRow[]
 }
 /**
  * 选择类型
@@ -69,7 +70,7 @@ export interface CommentType {
   minWidth?: string | number
 
   /**
-   * @desc 当开启时  valueType 为 `FormItemValueType` 其中之一时 表格中显示的是对应的表单
+   * @desc 当开启时  valueType 为 `FormItemValueType` 其中之一时 表格中显示的是对应的可编辑的表单
    * @default false
    */
   editable?: boolean

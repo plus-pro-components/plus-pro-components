@@ -52,6 +52,7 @@ export const gFiles = async () => {
     parser: 'vue'
   })
 
+  // __routes.ts 文件处理
   try {
     await fs.access(routesFile)
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -64,5 +65,18 @@ export const gFiles = async () => {
   } catch {
     await fs.writeFile(routesFile, data)
   }
-  await fs.writeFile(navFile, navDataStr)
+
+  // __nav.vue 文件处理
+  try {
+    await fs.access(navFile)
+    const originNav = await fs.readFile('./src/__nav.vue', 'utf-8')
+    const reg = /<router-link/g
+    const originNavArray = [...originNav.matchAll(reg)]
+    if (originNavArray?.length !== routes.length) {
+      // 生成路由导航文件
+      await fs.writeFile(navFile, navDataStr)
+    }
+  } catch {
+    await fs.writeFile(navFile, navDataStr)
+  }
 }

@@ -16,30 +16,45 @@
         trigger="click"
         title="密度"
       >
-        <el-button
-          v-for="item in buttonNameDensity"
-          :key="item.id"
-          :color="item.color"
-          plain
-          size="small"
-          @click="handleClickDensity(item.size)"
-        >
-          {{ item.text }}
-        </el-button>
+        <div class="plus-table-toolbar__density">
+          <el-button
+            v-for="item in buttonNameDensity"
+            :key="item.size"
+            :plain="defaultSize !== item.size"
+            type="primary"
+            size="small"
+            @click="handleClickDensity(item.size)"
+          >
+            {{ item.text }}
+          </el-button>
+        </div>
+
         <template #icon>
-          <el-icon :size="20" color="#919191" class="plus-table-popover">
-            <Guide />
-          </el-icon>
+          <el-tooltip effect="dark" content="密度" placement="top">
+            <el-icon :size="18" color="#919191" class="plus-table-popover">
+              <svg
+                viewBox="0 0 1024 1024"
+                focusable="false"
+                data-icon="column-height"
+                fill="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  d="M840 836H184c-4.4 0-8 3.6-8 8v60c0 4.4 3.6 8 8 8h656c4.4 0 8-3.6 8-8v-60c0-4.4-3.6-8-8-8zm0-724H184c-4.4 0-8 3.6-8 8v60c0 4.4 3.6 8 8 8h656c4.4 0 8-3.6 8-8v-60c0-4.4-3.6-8-8-8zM610.8 378c6 0 9.4-7 5.7-11.7L515.7 238.7a7.14 7.14 0 00-11.3 0L403.6 366.3a7.23 7.23 0 005.7 11.7H476v268h-62.8c-6 0-9.4 7-5.7 11.7l100.8 127.5c2.9 3.7 8.5 3.7 11.3 0l100.8-127.5c3.7-4.7.4-11.7-5.7-11.7H548V378h62.8z"
+                />
+              </svg>
+            </el-icon>
+          </el-tooltip>
         </template>
       </PlusPopover>
 
-      <!-- 筛选表格 -->
+      <!-- 列设置 -->
       <PlusPopover
         :has-filter-table-header="hasFilterTableHeader"
         placement="bottom"
         :width="100"
         trigger="click"
-        title="筛选表格"
+        title="列设置"
         :has-show-bottom-button="true"
         @confirm="handleFilterTableConfirm"
         @show="handleShow"
@@ -55,12 +70,12 @@
           <el-checkbox
             v-for="item in columns"
             :key="item.label"
-            :label="item.label"
+            :label="item.label + item.prop"
             :disabled="item.headerFilter"
             class="plus-table-toolbar__checkbox__item"
           >
             <el-tooltip
-              v-if="item.label?.length > LabelLength"
+              v-if="item.label?.length > filterTableHeaderOverflowLabelLength"
               :content="item.label"
               placement="right-start"
             >
@@ -71,9 +86,11 @@
         </el-checkbox-group>
 
         <template #icon>
-          <el-icon :size="20" color="#919191" class="plus-table-popover">
-            <Setting />
-          </el-icon>
+          <el-tooltip effect="dark" content="列设置" placement="top">
+            <el-icon :size="20" color="#919191" class="plus-table-popover">
+              <Setting />
+            </el-icon>
+          </el-tooltip>
         </template>
       </PlusPopover>
     </div>
@@ -84,14 +101,16 @@
 import { reactive } from 'vue'
 import { cloneDeep } from 'lodash-es'
 import type { PlusColumn } from '@plus-pro-components/types'
-import { Setting, Guide } from '@element-plus/icons-vue'
+import { Setting } from '@element-plus/icons-vue'
 import PlusPopover from '@plus-pro-components/components/popover'
 import type { ComponentSize } from 'element-plus/es/constants'
 
 export interface PlusTableToolbarProps {
-  tableTitle: string
-  columns: PlusColumn[]
-  hasFilterTableHeader: boolean
+  columns?: PlusColumn[]
+  tableTitle?: string
+  hasFilterTableHeader?: boolean
+  filterTableHeaderOverflowLabelLength?: number
+  defaultSize?: ComponentSize
 }
 
 export interface PlusTableToolbarEmits {
@@ -106,8 +125,6 @@ export interface State {
 }
 
 export interface ButtonNameDensity {
-  id: number
-  color: string
   size: ComponentSize
   text: string
 }
@@ -116,30 +133,30 @@ defineOptions({
   name: 'PlusTableToolbar'
 })
 
-const props = withDefaults(defineProps<PlusTableToolbarProps>(), {})
+const props = withDefaults(defineProps<PlusTableToolbarProps>(), {
+  columns: () => [],
+  tableTitle: '',
+  hasFilterTableHeader: true,
+  filterTableHeaderOverflowLabelLength: 6,
+  defaultSize: 'default'
+})
+
+console.log(props.defaultSize, 'defaultSize')
 
 const emit = defineEmits<PlusTableToolbarEmits>()
 
-const LabelLength = 6
-
 const buttonNameDensity: ButtonNameDensity[] = [
   {
-    id: 1,
-    color: '#666',
+    size: 'default',
+    text: '默认'
+  },
+  {
+    size: 'large',
+    text: '宽松'
+  },
+  {
     size: 'small',
     text: '紧凑'
-  },
-  {
-    id: 2,
-    color: '#666',
-    size: 'default',
-    text: '中等'
-  },
-  {
-    id: 3,
-    color: '#666',
-    size: 'large',
-    text: '默认'
   }
 ]
 const state: State = reactive({
@@ -147,15 +164,11 @@ const state: State = reactive({
   isIndeterminate: true,
   bigImageVisible: false,
   srcList: [],
-  checkList: cloneDeep(props.columns).map(i => i.label)
+  checkList: cloneDeep(props.columns).map(item => item.label + item.prop)
 })
 
 const handleCheckAllChange = (val: boolean) => {
-  state.checkList = val
-    ? cloneDeep(props.columns).map(i => i.label)
-    : cloneDeep(props.columns)
-        .map(i => i.label)
-        .slice(-1)
+  state.checkList = val ? cloneDeep(props.columns).map(item => item.label + item.prop) : []
   state.isIndeterminate = false
 }
 
@@ -177,10 +190,10 @@ const handleClickDensity = (size: ComponentSize) => {
 }
 
 const getLabel = (label: string) => {
-  if (label?.length <= LabelLength) {
+  if (label?.length <= props.filterTableHeaderOverflowLabelLength) {
     return label
   }
-  return label?.slice(0, LabelLength) + '...'
+  return label?.slice(0, props.filterTableHeaderOverflowLabelLength) + '...'
 }
 
 const handleFilterTableConfirm = () => {
@@ -202,6 +215,19 @@ const handleFilterTableConfirm = () => {
     cursor: pointer;
   }
 }
+.plus-table-toolbar__density {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .el-button {
+    margin-top: 10px;
+    width: 80px;
+  }
+  .el-button + .el-button {
+    margin-left: 0;
+  }
+}
+
 .plus-table-toolbar__checkbox__item {
   margin-left: 20px;
 }

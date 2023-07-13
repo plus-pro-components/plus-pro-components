@@ -3,6 +3,7 @@
     <PlusTableToolbar
       :has-filter-table-header="hasFilterTableHeader"
       :columns="columns"
+      :default-size="size"
       :table-title="tableTitle"
       @sub-density="handleClickDensity"
       @sub-filter-table="handleFilterTableConfirm"
@@ -59,7 +60,7 @@
 
       <!--配置渲染栏  -->
       <PlusTableTableColumn
-        :columns="subColumns"
+        :columns="(subColumns as any)"
         @clickToEnlargeImage="handelClickToEnlargeImage"
         @change="handleChange"
       />
@@ -154,7 +155,7 @@ defineOptions({
 })
 
 const props = withDefaults(defineProps<PlusTableProps>(), {
-  defaultSize: '',
+  defaultSize: 'default',
   pagination: () => ({}),
   actionBar: () => ({}),
   isShowNumber: true,
@@ -189,7 +190,7 @@ const state = reactive<TableState>({
 watch(
   () => props.columns,
   val => {
-    subColumns.value = val as any
+    subColumns.value = val.filter(item => item.hideInTable !== true) as any
   },
   {
     deep: true
@@ -256,7 +257,7 @@ const handelClickToEnlargeImage = (srcList: PlusImagePreviewRow[]) => {
 }
 
 const handleFilterTableConfirm = (data: PlusColumn[]) => {
-  subColumns.value = data as any
+  subColumns.value = data.filter(item => item.hideInTable !== true) as any
 }
 
 // 多选处理
@@ -289,25 +290,7 @@ defineExpose({
 </script>
 
 <style lang="scss">
-.plus-table {
-  position: relative;
-
-  .el-table__body-wrapper .el-table__body .el-table__row td {
-    border-right: 0;
-  }
-  .el-table--border th.el-table__cell {
-    border: none;
-    ::before {
-      position: absolute;
-      top: 50%;
-      inset-inline-end: 0;
-      width: 1px;
-      height: 1.6em;
-      background-color: #ccc;
-      transform: translateY(-50%);
-      transition: background-color 0.2s;
-      content: '';
-    }
-  }
+.el-popper {
+  max-width: 200px;
 }
 </style>

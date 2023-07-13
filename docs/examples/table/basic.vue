@@ -19,8 +19,9 @@
         optionColumnWidth: 200
       }"
       @subPaginationChange="handlePaginationChange"
-      @subClickButton="subClickButton"
-      @subSortEnd="subSortEnd"
+      @subClickButton="handleClickButton"
+      @subSortEnd="handleSortEnd"
+      @subChange="handleChange"
     >
       <template #toolbar>
         <el-button plain size="small">查看日志</el-button>
@@ -32,6 +33,7 @@
 </template>
 
 <script lang="ts" setup>
+import type { DefineComponent } from 'vue'
 import { ref, h } from 'vue'
 import { useTable } from '@plus-pro-components/hooks'
 import type {
@@ -131,6 +133,7 @@ const statusOptions = [
 const tableConfig: PlusColumn[] = [
   {
     label: '名称',
+    tooltip: '名称最多显示6个字符',
     width: 120,
     prop: 'name',
     valueType: 'copy',
@@ -231,9 +234,7 @@ const tableConfig: PlusColumn[] = [
     prop: 'status',
     render: value => {
       const item = statusOptions.find(item => item.value === value)
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
-      return h(ElAlert, { type: item?.type }, () => item?.label)
+      return h(ElAlert as unknown as DefineComponent, { type: item?.type }, () => item?.label)
     }
   },
   {
@@ -270,11 +271,14 @@ const handlePaginationChange = (_pageInfo: PageInfo): void => {
   pageInfo.value = _pageInfo
   getList()
 }
-const subClickButton = (data: ButtonsCallBackParams) => {
+const handleClickButton = (data: ButtonsCallBackParams) => {
   console.log(data.buttonRow.text)
 }
-const subSortEnd = (newIndex: number, oldIndex: number) => {
+const handleSortEnd = (newIndex: number, oldIndex: number) => {
   const currRow = tableData.value.splice(oldIndex, 1)[0]
   tableData.value.splice(newIndex, 0, currRow)
+}
+const handleChange = (data: { value: any; prop: string; row: any; index: number; column: any }) => {
+  console.log(data)
 }
 </script>
