@@ -7,18 +7,16 @@
     :prop="prop"
     class="plus-form-item"
   >
-    <PlusFieldItem
-      v-model="state"
-      :label="props.label"
-      :prop="props.prop"
-      :field-props="props.fieldProps"
-      :value-type="props.valueType"
-      :options="props.options"
-      :hide-in-form="props.hideInForm"
-      :form-item-props="props.formItemProps"
-      :render-form-item="props.renderFormItem"
-      @change="handleChange"
-    />
+    <template #label="{ label: currentLabel }">
+      <span class="plus-form-item__label">
+        {{ currentLabel }}
+        <el-tooltip v-if="tooltip" placement="top" v-bind="getTooltip(tooltip)">
+          <el-icon class="plus-table-column__label__icon" :size="16"><QuestionFilled /></el-icon>
+        </el-tooltip>
+      </span>
+    </template>
+
+    <PlusFieldItem v-bind="props" @change="handleChange" />
   </el-form-item>
 </template>
 
@@ -26,6 +24,8 @@
 import { ref } from 'vue'
 import type { PlusColumn } from '@plus-pro-components/types'
 import { useGetCustomProps } from '@plus-pro-components/hooks'
+import { isString, isPlainObject } from '@plus-pro-components/utils'
+import { QuestionFilled } from '@element-plus/icons-vue'
 import PlusFieldItem from './field-item.vue'
 import type { ValueType } from './type'
 
@@ -41,6 +41,7 @@ export interface PlusFormItemProps {
   formItemProps?: PlusColumn['formItemProps']
   // eslint-disable-next-line vue/require-default-prop
   renderFormItem?: PlusColumn['renderFormItem']
+  tooltip?: PlusColumn['tooltip']
 }
 
 export interface PlusFormItemEmits {
@@ -56,6 +57,7 @@ const formItemInstance = ref()
 
 const props = withDefaults(defineProps<PlusFormItemProps>(), {
   modelValue: '',
+  tooltip: '',
   hideInForm: false,
   formItemProps: () => ({}),
   fieldProps: () => ({}),
@@ -72,13 +74,24 @@ const handleChange = (val: ValueType) => {
   emit('update:modelValue', val)
   emit('change', val)
 }
+
+const getTooltip = (tooltip: PlusColumn['tooltip']) => {
+  if (isString(tooltip)) {
+    return {
+      content: tooltip
+    }
+  }
+  if (isPlainObject(tooltip)) {
+    return tooltip
+  }
+}
 </script>
 
 <style lang="scss">
 .plus-form-item {
   width: 100%;
-  .plus-form-item-field {
-    width: 100%;
-  }
+}
+.el-form-item.plus-form-item .plus-form-item-field {
+  width: 100%;
 }
 </style>

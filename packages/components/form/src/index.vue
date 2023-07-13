@@ -15,14 +15,7 @@
         v-for="item in columns"
         :key="item.prop"
         v-model="state.values[item.prop]"
-        :label="item.label"
-        :prop="item.prop"
-        :field-item="item.fieldProps"
-        :value-type="item.valueType"
-        :options="item.options"
-        :hide-in-form="item.hideInForm"
-        :form-item-item="item.formItemProps"
-        :render-form-item="item.renderFormItem"
+        v-bind="item"
       />
     </slot>
 

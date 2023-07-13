@@ -4,8 +4,11 @@
 
 ## 前置条件
 
-PlusProComponents 依赖 ElementPlus，在开始之前建议先安装 ElementPlus。
-[ElementPlus 安装指南](https://element.eleme.cn/#/zh-CN/component/quickstart)，采用适合的安装方式即可。
+PlusProComponents 依赖 Vue 和 ElementPlus，在开始之前建议先配置 Vue 和 ElementPlus 环境。
+
+[Vue 快速上手](https://cn.vuejs.org/guide/quick-start.html#creating-a-vue-application)
+
+[ElementPlus 安装指南](https://element.eleme.cn/#/zh-CN/component/quickstart)
 
 ## 用法
 
@@ -48,6 +51,12 @@ app.mount('#app')
 ### 按需手动导入
 
 PlusProComponents 提供了基于 ES Module 的开箱即用的 [Tree Shaking](https://webpack.js.org/guides/tree-shaking/) 功能。
+
+> main.ts
+
+```ts
+import PlusProComponents from 'plus-pro-components/index.css'
+```
 
 > App.vue
 

@@ -40,6 +40,7 @@ export interface OptionsRow {
    * 表单子项的props  如 el-checkbox-group下的el-checkbox的props
    */
   fieldItemProps?: PropsItemType
+  children?: OptionsRow[]
 }
 /**
  * 选择类型
