@@ -11,14 +11,12 @@
     :label-suffix="labelSuffix"
     v-bind="formProps"
   >
-    <slot>
-      <PlusFormItem
-        v-for="item in subColumns"
-        :key="item.prop"
-        v-model="state.values[item.prop]"
-        v-bind="item"
-      />
-    </slot>
+    <PlusFormItem
+      v-for="item in subColumns"
+      :key="item.prop"
+      v-model="state.values[item.prop]"
+      v-bind="item"
+    />
 
     <el-form-item v-if="hasFooter" class="plus-search-footer">
       <slot name="footer">
@@ -128,8 +126,11 @@ watch(
 state.originData = computed<any>(() => {
   return props.columns.filter(data => data.hideInSearch !== true)
 })
-
-state.subColumns = cloneDeep(state.originData).slice(0, props.showNumber)
+if (props.hasUnfold) {
+  state.subColumns = cloneDeep(state.originData).slice(0, props.showNumber)
+} else {
+  state.subColumns = cloneDeep(state.originData)
+}
 
 const handleSearch = async () => {
   emit('search', state.values)

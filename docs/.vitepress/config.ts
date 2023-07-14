@@ -156,6 +156,10 @@ export default defineConfig({
               link: '/components/form'
             },
             {
+              text: '搜索',
+              link: '/components/search'
+            },
+            {
               text: '描述列表',
               link: '/components/description'
             }
