@@ -198,7 +198,7 @@ const getLabel = (label: string) => {
 
 const handleFilterTableConfirm = () => {
   const columns = cloneDeep(props.columns)
-  const subColumns = columns.filter(item => state.checkList.includes(item.label))
+  const subColumns = columns.filter(item => state.checkList.includes(item.label + item.prop))
   emit('subFilterTable', subColumns)
 }
 </script>
