@@ -19,7 +19,7 @@ radio/basic
 
 ## Radio API
 
-### Radio Attributes
+## Radio Attributes
 
 | 名称                    | 说明                            | 类型                                                | 默认值  | 是否必须 |
 | ----------------------- | ------------------------------- | --------------------------------------------------- | ------- | -------- |
@@ -29,13 +29,13 @@ radio/basic
 | `groupProps`            | `el-radio-group` 的所有 `props` | `object`                                            | `{}`    | 否       |
 | `radioProps`            | `el-radio` 的所有 `props`       | `object`                                            | `{}`    | 否       |
 
-### Radio Events
+## Radio Events
 
 | 名称          | 说明                      | 类型                                               |
 | ------------- | ------------------------- | -------------------------------------------------- |
 | `radioChange` | 单个 value 变化触发的事件 | [Function] `(value:string/number/boolean) => void` |
 
-### Exposes
+## Exposes
 
 | 名称                 | 说明                   | 类型                                |
 | -------------------- | ---------------------- | ----------------------------------- |

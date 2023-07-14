@@ -10,7 +10,7 @@ table/basic
 
 ## Table API
 
-### Table Attributes
+## Table Attributes
 
 | 名称             | 说明                      | 类型                                                                     | 默认值                                      | 是否必须 |
 | ---------------- | ------------------------- | ------------------------------------------------------------------------ | ------------------------------------------- | -------- |
@@ -27,7 +27,7 @@ table/basic
 | `height`         | 表格高度                  | `string`                                                                 | ``                                          | 否       |
 | `tableProps`     | `el-table` 的其他 `props` | `object`                                                                 | `{}`                                        | 否       |
 
-### pagination
+## pagination
 
 `pagination` 默认值
 
@@ -43,7 +43,7 @@ table/basic
 }
 ```
 
-### actionBar
+## actionBar
 
 `actionBar` 默认值
 
@@ -58,7 +58,7 @@ table/basic
 }
 ```
 
-### Table Events
+## Table Events
 
 | 名称                  | 说明                                 | 类型                                                                                      |
 | --------------------- | ------------------------------------ | ----------------------------------------------------------------------------------------- |
@@ -72,7 +72,7 @@ table/basic
 | `subSortEnd`          | 拖拽排序列图标触发                   | [Function] `({newIndex: number, oldIndex: number}) => void`                               |
 | `subChange`           | 表格中有可以编辑的表单项目改变时触发 | [Function] `({ value: any; prop: string; row: any; index: number; column: any }) => void` |
 
-### Table Slots
+## Table Slots
 
 | 插槽名    | 说明       |
 | --------- | ---------- |

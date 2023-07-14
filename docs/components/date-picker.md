@@ -14,7 +14,7 @@ date-picker/basic
 
 ## DatePicker API
 
-### DatePicker Attributes
+## DatePicker Attributes
 
 | 名称                    | 说明                                      | 类型                                             | 默认值                                                              | 是否必须 |
 | ----------------------- | ----------------------------------------- | ------------------------------------------------ | ------------------------------------------------------------------- | -------- |
@@ -28,7 +28,7 @@ date-picker/basic
 | `startDisabledDate`     | 开始的`el-date-picker` 的 disabledDate    | `(startTime: Date, endValue: string) => boolean` | [startDisabledDate](/components/date-picker.html#startdisableddate) | 否       |
 | `endDisabledDate`       | 结束的`el-date-picker` 的 disabledDate    | `(endTime: Date, startValue: string) => boolean` | [endDisabledDate](/components/date-picker.html#enddisableddate)`    | 否       |
 
-#### startDisabledDate
+### startDisabledDate
 
 默认值
 
@@ -39,7 +39,7 @@ const startDisabledDate = (startTime, endValue) => {
 }
 ```
 
-#### endDisabledDate
+### endDisabledDate
 
 默认值
 
@@ -50,7 +50,7 @@ const endDisabledDate = (endTime, startValue) => {
 }
 ```
 
-### DatePicker Events
+## DatePicker Events
 
 | 名称     | 说明           | 类型                                  |
 | -------- | -------------- | ------------------------------------- |
@@ -65,7 +65,7 @@ el-date-picker 的其他事件的支持写法 如 blur
 
 :::
 
-### Exposes
+## Exposes
 
 | 名称                  | 说明                   | 类型                                |
 | --------------------- | ---------------------- | ----------------------------------- |

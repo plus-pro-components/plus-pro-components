@@ -10,11 +10,12 @@ search/basic
 
 ## Search API
 
-### Search Attributes
+## Search Attributes
 
 | 名称                    | 说明                     | 类型                                                                                             | 默认值  | 是否必须 |
 | ----------------------- | ------------------------ | ------------------------------------------------------------------------------------------------ | ------- | -------- |
 | `model-value / v-model` | 搜索表单绑定值           | [RecordType](/components/type.html#recordtype)                                                   |         | 否       |
+| `columns`               | 搜索配置信息             | [PlusColumn[]](/components/config.html)                                                          | `[]`    | 是       |
 | `labelWidth`            | el-form 的 labelWidth    | `string`                                                                                         | `84px`  | 否       |
 | `labelPosition`         | el-form 的 labelPosition | `'left' / 'right' / 'top'`                                                                       | `left`  | 否       |
 | `labelSuffix`           | labelSuffix labelSuffix  | `string`                                                                                         | `:`     | 否       |
@@ -29,7 +30,7 @@ search/basic
 | `rules`                 | 表单校验                 | el-form 的 rules [FormRules](https://element-plus.org/zh-CN/component/form.html#form-attributes) | `{}`    | 否       |
 | `formProps`             | 其他的 el-form 的 props  | [RecordType](/components/type.html#recordtype)                                                   | `{}`    | 否       |
 
-### Search Events
+## Search Events
 
 | 名称     | 说明                   | 类型                               |
 | -------- | ---------------------- | ---------------------------------- |
@@ -37,13 +38,13 @@ search/basic
 | `change` | 表单变化触发的事件     | [Function] `(values:any) => void`  |
 | `reset`  | 点击重置按钮触发的事件 | [Function] `() => void`            |
 
-### Search Slots
+## Search Slots
 
 | 插槽名   | 说明         |
 | -------- | ------------ |
 | `footer` | 表单底部按钮 |
 
-### Exposes
+## Exposes
 
 | 名称           | 说明           | 类型                          |
 | -------------- | -------------- | ----------------------------- |
