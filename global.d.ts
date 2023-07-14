@@ -9,6 +9,7 @@ declare module '@vue/runtime-core' {
     PlusDatePicker: typeof import('plus-pro-components')['PlusDatePicker']
     PlusDescriptions: typeof import('plus-pro-components')['PlusDescriptions']
     PlusForm: typeof import('plus-pro-components')['PlusForm']
+    PlusSearch: typeof import('plus-pro-components')['PlusSearch']
   }
 }
 
