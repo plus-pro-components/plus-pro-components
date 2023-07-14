@@ -32,7 +32,7 @@ features:
     details: PlusProComponents 的组件支持多种配置和样式自定义，能够满足不同项目的需求。
 
   - icon: ✅
-    title: 兼容性高
+    title: 兼容element-plus
     details: plus-pro-components 100%兼容和 element-plus 同名的组件，包括属性，事件，方法，插槽等。
 
   - icon: 🛠️
