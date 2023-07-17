@@ -2,7 +2,7 @@
   <div class="plus-table-header">
     <div class="plus-table-title">
       <slot name="title">
-        {{ tableTitle }}
+        {{ title }}
       </slot>
     </div>
 
@@ -107,15 +107,15 @@ import type { ComponentSize } from 'element-plus/es/constants'
 
 export interface PlusTableToolbarProps {
   columns?: PlusColumn[]
-  tableTitle?: string
+  title?: string
   hasFilterTableHeader?: boolean
   filterTableHeaderOverflowLabelLength?: number
   defaultSize?: ComponentSize
 }
 
 export interface PlusTableToolbarEmits {
-  (e: 'subFilterTable', columns: PlusColumn[]): void
-  (e: 'subDensity', size: ComponentSize): void
+  (e: 'filterTable', columns: PlusColumn[]): void
+  (e: 'clickDensity', size: ComponentSize): void
 }
 
 export interface State {
@@ -135,7 +135,7 @@ defineOptions({
 
 const props = withDefaults(defineProps<PlusTableToolbarProps>(), {
   columns: () => [],
-  tableTitle: '',
+  title: '',
   hasFilterTableHeader: true,
   filterTableHeaderOverflowLabelLength: 6,
   defaultSize: 'default'
@@ -186,7 +186,7 @@ const handleShow = () => {
 
 // 密度
 const handleClickDensity = (size: ComponentSize) => {
-  emit('subDensity', size)
+  emit('clickDensity', size)
 }
 
 const getLabel = (label: string) => {
@@ -199,7 +199,7 @@ const getLabel = (label: string) => {
 const handleFilterTableConfirm = () => {
   const columns = cloneDeep(props.columns)
   const subColumns = columns.filter(item => state.checkList.includes(item.label + item.prop))
-  emit('subFilterTable', subColumns)
+  emit('filterTable', subColumns)
 }
 </script>
 

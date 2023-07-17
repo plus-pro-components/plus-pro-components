@@ -41,7 +41,7 @@ export interface PlusTableTableColumnProps {
 
 export interface PlusTableTableColumnEmits {
   (e: 'clickToEnlargeImage', data: PlusImagePreviewRow[]): void
-  (e: 'change', data: { value: any; prop: string; row: any; index: number; column: any }): void
+  (e: 'formChange', data: { value: any; prop: string; row: any; index: number; column: any }): void
 }
 
 defineOptions({
@@ -77,7 +77,7 @@ const handleChange = (
   column: any,
   item: any
 ) => {
-  emit('change', { ...data, index, column: { ...column, ...item } })
+  emit('formChange', { ...data, index, column: { ...column, ...item } })
 }
 </script>
 

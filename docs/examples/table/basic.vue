@@ -18,10 +18,10 @@
         buttonCount: 3,
         optionColumnWidth: 200
       }"
-      @subPaginationChange="handlePaginationChange"
-      @subClickButton="handleClickButton"
-      @subSortEnd="handleSortEnd"
-      @subChange="handleChange"
+      @paginationChange="handlePaginationChange"
+      @clickAction="handleClickButton"
+      @dragSortEnd="handleSortEnd"
+      @formChange="handleChange"
     >
       <template #toolbar>
         <el-button plain size="small">查看日志</el-button>
@@ -33,7 +33,6 @@
 </template>
 
 <script lang="ts" setup>
-import type { DefineComponent } from 'vue'
 import { ref, h } from 'vue'
 import { useTable } from '@plus-pro-components/hooks'
 import type {
@@ -41,6 +40,8 @@ import type {
   ButtonsCallBackParams
 } from '@plus-pro-components/components/table'
 import type { PageInfo, PlusColumn } from '@plus-pro-components/types'
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 import { ElAlert } from 'element-plus'
 
 defineOptions({
@@ -234,7 +235,7 @@ const tableConfig: PlusColumn[] = [
     prop: 'status',
     render: value => {
       const item = statusOptions.find(item => item.value === value)
-      return h(ElAlert as unknown as DefineComponent, { type: item?.type }, () => item?.label)
+      return h(ElAlert, { type: item?.type }, () => item?.label)
     }
   },
   {

@@ -24,7 +24,7 @@ import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 
 import PlusProComponents from 'plus-pro-components'
-import PlusProComponents from 'plus-pro-components/index.css'
+import 'plus-pro-components/index.css'
 
 import App from './App.vue'
 
@@ -52,22 +52,22 @@ app.mount('#app')
 
 PlusProComponents 提供了基于 ES Module 的开箱即用的 [Tree Shaking](https://webpack.js.org/guides/tree-shaking/) 功能。
 
-> main.ts
+- 导入基础样式
+  > main.ts
 
 ```ts
-import PlusProComponents from 'plus-pro-components/index.css'
+import 'plus-pro-components/index.css'
 ```
 
-> App.vue
+- 导入组件
+  > App.vue
 
-```html
+```html{2,6}
 <template>
   <plus-pagination :total="100" show />
 </template>
-<script>
+
+<script setup>
   import { PlusPagination } from 'plus-pro-components'
-  export default {
-    components: { PlusPagination }
-  }
 </script>
 ```

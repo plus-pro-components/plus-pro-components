@@ -5,9 +5,9 @@ import { defineConfig } from 'vite'
 
 const pathResolve = (dir: string): string => fileURLToPath(new URL(dir, import.meta.url))
 
-const isEnvProduction = process.env.NODE_ENV === 'production'
+const isWrite = process.env.WRITE === 'true'
 
-const alias: AliasOptions = isEnvProduction
+const alias: AliasOptions = isWrite
   ? {}
   : {
       'plus-pro-components': pathResolve('../dist/plus-pro-components')

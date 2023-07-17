@@ -49,3 +49,9 @@ search/basic
 | 名称           | 说明           | 类型                          |
 | -------------- | -------------- | ----------------------------- |
 | `formInstance` | `el-form` 实例 | `InstanceType<typeof ElForm>` |
+
+**支持所有[ElForm 方法](https://element-plus.org/zh-CN/component/form.html#form-exposes)**
+
+::: tip 提示
+如 `validate`,`validateField`等
+:::

@@ -4,9 +4,9 @@
       :has-filter-table-header="hasFilterTableHeader"
       :columns="columns"
       :default-size="size"
-      :table-title="tableTitle"
-      @sub-density="handleClickDensity"
-      @sub-filter-table="handleFilterTableConfirm"
+      :title="title"
+      @click-density="handleClickDensity"
+      @filter-table="handleFilterTableConfirm"
     >
       <template #title>
         <slot name="title" />
@@ -30,11 +30,6 @@
       scrollbar-always-on
       v-bind="tableProps"
       :row-key="rowKey"
-      @selection-change="handleSelectionChange"
-      @sort-change="handleSortChange"
-      @row-click="handleClickRow"
-      @current-change="handleTableCurrentChange"
-      @expand-change="handleExpandChange"
     >
       <!-- 选择栏 -->
       <el-table-column v-if="isSelection" key="selection" type="selection" width="34" />
@@ -42,12 +37,12 @@
       <!-- 序号栏 -->
       <PlusTableTableColumnIndex
         :show="isShowNumber"
-        :sub-page-info="pagination.modelValue"
+        :page-info="pagination.modelValue"
         align="left"
       />
 
       <!-- 拖拽行 -->
-      <PlusTableColumnDragSort :show-drag-sort="isShowDragSort" @subSortEnd="subSortEnd" />
+      <PlusTableColumnDragSort :sortable="dragSortable" @dragSortEnd="handleDragSortEnd" />
 
       <!-- 展开行 -->
       <el-table-column v-if="hasExpand" type="expand">
@@ -62,20 +57,25 @@
       <PlusTableTableColumn
         :columns="(subColumns as any)"
         @clickToEnlargeImage="handelClickToEnlargeImage"
-        @change="handleChange"
+        @formChange="handleFormChange"
       />
 
       <!-- 操作栏 -->
-      <PlusTableActionBar v-bind="actionBar" @subClickButton="handleClickOption" />
+      <PlusTableActionBar v-bind="actionBar" @clickAction="handleAction" />
+
+      <!-- 插入至表格最后一行之后的内容 -->
+      <template #append>
+        <slot name="append" />
+      </template>
+
+      <!-- 当数据为空时自定义的内容 -->
+      <template #empty>
+        <slot name="empty" />
+      </template>
     </el-table>
 
     <!-- 分页 -->
-    <PlusPagination
-      v-if="pagination.show"
-      v-model="subPageInfo"
-      v-bind="pagination"
-      :loading-status="loadingStatus"
-    />
+    <PlusPagination v-model="subPageInfo" v-bind="pagination" :loading-status="loadingStatus" />
 
     <!-- 大图预览 -->
     <PlusImagePreview v-model="bigImageVisible" title="图片预览" :src-list="srcList" />
@@ -83,7 +83,7 @@
 </template>
 
 <script lang="ts" setup>
-import { reactive, toRefs, watch, ref, nextTick } from 'vue'
+import { reactive, toRefs, watch, ref } from 'vue'
 import { cloneDeep } from 'lodash-es'
 import PlusPagination from '@plus-pro-components/components/pagination'
 import { DefaultPageInfo } from '@plus-pro-components/constants'
@@ -94,12 +94,13 @@ import type { CSSProperties } from 'vue'
 import type { ComponentSize } from 'element-plus/es/constants'
 import type { TableInstance } from 'element-plus'
 import type { PageInfo, PlusColumn, RecordType } from '@plus-pro-components/types'
+import type { Options as SortableOptions } from 'sortablejs'
 import PlusTableActionBar from './table-action-bar.vue'
 import PlusTableTableColumn from './table-column.vue'
 import PlusTableTableColumnIndex from './table-column-index.vue'
 import PlusTableColumnDragSort from './table-column-drag-sort.vue'
 import PlusTableToolbar from './table-toolbar.vue'
-import type { ButtonsCallBackParams, TableState, SortParams, ActionBarProps } from './type'
+import type { ButtonsCallBackParams, TableState, ActionBarProps } from './type'
 
 /**
  * 表格数据
@@ -122,7 +123,7 @@ export interface PlusTableProps {
   /* loading状态*/
   loadingStatus?: boolean
   /* 自定义表格标题*/
-  tableTitle?: string
+  title?: string
   /* 表格高度*/
   // eslint-disable-next-line vue/require-default-prop
   height?: string
@@ -132,26 +133,24 @@ export interface PlusTableProps {
   columns: PlusColumn[]
   /* 表格头样式*/
   headerCellStyle?: CSSProperties
-  // 是否可拖拽
-  isShowDragSort?: boolean
+  /** rowKey */
   rowKey?: string
+  /** 表格的其他配置 */
   tableProps?: RecordType
+  /** sortablejs配置 */
+  dragSortable?: SortableOptions | boolean
 }
 
 export interface PlusTableEmits {
-  (e: 'subPaginationChange', pageInfo: PageInfo): void
-  (e: 'subSelected', data: any[]): void
-  (e: 'subCurrent', row: any): void
-  (e: 'subExpandChange', row: any): void
-  (e: 'subSortChange', sortParams: SortParams): void
-  (e: 'subClickRow', row: any, column: any, event: MouseEvent): void
-  (e: 'subClickButton', data: ButtonsCallBackParams): void
-  (e: 'subSortEnd', newIndex: number, oldIndex: number): void
-  (e: 'subChange', data: { value: any; prop: string; row: any; index: number; column: any }): void
+  (e: 'paginationChange', pageInfo: PageInfo): void
+  (e: 'clickAction', data: ButtonsCallBackParams): void
+  (e: 'dragSortEnd', newIndex: number, oldIndex: number): void
+  (e: 'formChange', data: { value: any; prop: string; row: any; index: number; column: any }): void
 }
 
 defineOptions({
-  name: 'PlusTable'
+  name: 'PlusTable',
+  inheritAttrs: false
 })
 
 const props = withDefaults(defineProps<PlusTableProps>(), {
@@ -163,15 +162,15 @@ const props = withDefaults(defineProps<PlusTableProps>(), {
   isSelection: false,
   hasExpand: false,
   loadingStatus: false,
-  tableTitle: '',
+  title: '',
   tableData: () => [],
   columns: () => [],
   headerCellStyle: () => ({
     backgroundColor: '#F5F9FD',
     color: '#777'
   }),
-  isShowDragSort: false,
   rowKey: 'id',
+  dragSortable: true,
   tableProps: () => ({})
 })
 
@@ -201,53 +200,16 @@ watch(
 watch(
   () => state.subPageInfo,
   pageInfo => {
-    emit('subPaginationChange', { ...pageInfo })
+    emit('paginationChange', { ...pageInfo })
   },
   {
     deep: true
   }
 )
 
-// 选中表格行
-const handleTableCurrentChange = (row: any) => {
-  emit('subCurrent', row)
-}
-// 展开行
-const handleExpandChange = (row: any) => {
-  emit('subExpandChange', row)
-}
-// 排序
-const handleSortChange = (sortParams: SortParams) => {
-  emit('subSortChange', sortParams)
-}
-// 当某一行被点击时会触发该事件
-const handleClickRow = (row: any, column: any, event: MouseEvent) => {
-  emit('subClickRow', row, column, event)
-}
-// 点击按钮传递给父组件
-const handleClickOption = (res: ButtonsCallBackParams) => {
+const handleAction = (res: ButtonsCallBackParams) => {
   const { row, buttonRow, index, e } = res
-  emit('subClickButton', { row, buttonRow, index, e })
-}
-// 设置当前行
-const setCurrent = (row: any) => {
-  tableInstance.value?.setCurrentRow(row)
-}
-// 设置checkedBox行
-const toggleRowSelection = (row: any, selected: boolean) => {
-  tableInstance.value?.toggleRowSelection(row, selected)
-}
-// 重新布局
-const doLayout = () => {
-  nextTick(() => {
-    tableInstance.value?.doLayout()
-  })
-}
-// 滚动
-const scrollTo = (data: ScrollToOptions = { left: 0, top: 0 }) => {
-  nextTick(() => {
-    tableInstance.value?.scrollTo(data)
-  })
+  emit('clickAction', { row, buttonRow, index, e })
 }
 
 // 点击放大图片
@@ -260,31 +222,29 @@ const handleFilterTableConfirm = (data: PlusColumn[]) => {
   subColumns.value = data.filter(item => item.hideInTable !== true) as any
 }
 
-// 多选处理
-const handleSelectionChange = (data: any[]) => {
-  emit('subSelected', data)
-}
 // 密度
 const handleClickDensity = (data: ComponentSize) => {
   state.size = data
 }
 
-const subSortEnd = (newIndex: number, oldIndex: number) => {
-  emit('subSortEnd', newIndex, oldIndex)
+const handleDragSortEnd = (newIndex: number, oldIndex: number) => {
+  emit('dragSortEnd', newIndex, oldIndex)
 }
 
-const handleChange = (data: { value: any; prop: string; row: any; index: number; column: any }) => {
-  emit('subChange', data)
+const handleFormChange = (data: {
+  value: any
+  prop: string
+  row: any
+  index: number
+  column: any
+}) => {
+  emit('formChange', data)
 }
 
 const { bigImageVisible, srcList, subPageInfo, size } = toRefs(state)
 
 // 暴露方法到外部调用
 defineExpose({
-  scrollTo,
-  doLayout,
-  toggleRowSelection,
-  setCurrent,
   tableInstance
 })
 </script>

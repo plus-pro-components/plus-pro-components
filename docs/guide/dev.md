@@ -86,6 +86,12 @@ pnpm docs:dev
   pnpm stub
   ```
 
+- 打包工具
+
+  ```sh
+  pnpm build:utils
+  ```
+
 - 启动
 
   ```sh
@@ -180,11 +186,17 @@ pnpm run test:coverage
 
 ### 4. 文档的添加
 
+- 执行打包命令
+
+```sh
+pnpm run build
+```
+
 - 在 docs/components 文件下
 
 - 新建文件 table.md 内容写法参考之前的
 
-- 执行 `pnpm run docs:dev` 后的地址即可预览组件文档
+- 执行 `pnpm run start` 后的地址即可预览本地组件
 
 ## 代码提交
 
@@ -195,8 +207,7 @@ pnpm run commit
 ## 打包组件 components
 
 ```sh
-pnpm stub  # 打桩 只需本地执行一次，后面就不需要执行了
-pnpm build:main
+ pnpm build:main
 ```
 
 ## 发布组件 components `谨慎使用`
@@ -211,8 +222,4 @@ pnpm run release
 
 ```sh
 pnpm run publish
-```
-
-```
-
 ```

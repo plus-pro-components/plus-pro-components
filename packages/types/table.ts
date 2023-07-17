@@ -9,7 +9,7 @@ export type TableValueType = 'img' | 'link' | 'money' | 'tag' | 'progress' | 'co
  */
 export type TableColumnProps = {
   /**
-   *  @desc 禁止表头过滤 默认`true`
+   *  @desc 禁止表头过滤 默认`false`
    */
   headerFilter?: boolean
 

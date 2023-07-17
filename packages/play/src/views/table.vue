@@ -2,26 +2,16 @@
   <div>
     <PlusTable
       ref="plusTable"
-      row-key="id"
-      size="small"
       :loading-status="loadingStatus"
       :columns="tableConfig"
       :table-data="tableData"
-      :is-show-number="true"
-      :is-show-drag-sort="true"
       table-title="表格"
-      :pagination="{ show: true, total, modelValue: pageInfo }"
-      :action-bar="{
-        show: true,
-        buttonsName,
-        buttonType: 'link',
-        buttonCount: 3,
-        optionColumnWidth: 200
-      }"
-      @subPaginationChange="handlePaginationChange"
-      @subClickButton="handleClickButton"
-      @subSortEnd="handleSortEnd"
-      @subChange="handleChange"
+      :pagination="{ total, modelValue: pageInfo }"
+      :action-bar="{ buttonsName }"
+      @paginationChange="handlePaginationChange"
+      @clickAction="handleClickButton"
+      @dragSortEnd="handleSortEnd"
+      @formChange="handleChange"
     >
       <template #toolbar>
         <el-button plain size="small">查看日志</el-button>
@@ -50,7 +40,7 @@ defineOptions({
 
 const TestServe = {
   getList: async () => {
-    const data = [...new Array(10)].map((item, index) => {
+    const data = [...new Array(100)].map((item, index) => {
       return {
         index,
         id: index,
@@ -258,7 +248,6 @@ const formatTableItem = (item: any) => {
 const getList = async () => {
   try {
     loadingStatus.value = true
-
     const { data, total: dataTotal } = await TestServe.getList()
     const items = data.map(item => formatTableItem(item))
     tableData.value = items || []
