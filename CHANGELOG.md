@@ -1,10 +1,11 @@
-## [0.0.1-alpha.13](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-alpha.12...v0.0.1-alpha.13) (2023-07-14)
+## [0.0.1-alpha.14](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-alpha.13...v0.0.1-alpha.14) (2023-07-17)
 
 
 ### ✨ Features
 
 * **components:** :sparkles: add tooltip. ([c183f50](https://github.com/plus-pro-components/plus-pro-components/commit/c183f50))
 * **components:** :sparkles: release v0.0.1-alpha.12 ([ca2806c](https://github.com/plus-pro-components/plus-pro-components/commit/ca2806c))
+* **docs:** :sparkles: edit table,config,form,search docs. ([a877b2e](https://github.com/plus-pro-components/plus-pro-components/commit/a877b2e))
 * **packages:** :sparkles: add search component ([01aefc8](https://github.com/plus-pro-components/plus-pro-components/commit/01aefc8))
 * **plus-pro-components:** :sparkles: update @plus-pro-components/utils version. ([d57f2e4](https://github.com/plus-pro-components/plus-pro-components/commit/d57f2e4))
 
