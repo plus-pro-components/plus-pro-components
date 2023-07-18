@@ -30,7 +30,7 @@
     "commit": "bash scripts/commit.sh",
     "release": "tsx scripts/release/index.ts",
     "clean": "rimraf dist && rimraf packages/echarts/dist",
-    "changelog": "conventional-changelog -p custom-config -i CHANGELOG.md -s -r 0  -n changelog.config.js",
+    "changelog": "tsx scripts/changelog.ts",
     "prepare": "husky install",
     "gitcz": "git-cz",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx,.vue --fix",

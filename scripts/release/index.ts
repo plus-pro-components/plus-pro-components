@@ -118,16 +118,16 @@ const getVersion = async (currentVersion: string, pkgName: string) => {
 // 提交
 async function commit(version?: string) {
   try {
-    // 生成changelog
-    if (version) {
-      await run('npm', ['run', '--name', 'changelog'])
-    }
-
     await run('git', ['add', '-A'])
 
     // 打tag
     if (version) {
       await run('git', ['tag', '-a', `v${version}`, '-m', `v${version}`])
+    }
+
+    // 生成changelog
+    if (version) {
+      await run('npm', ['run', '--name', 'changelog'])
     }
 
     await run('npm', ['run', '--name', 'gitcz'])
