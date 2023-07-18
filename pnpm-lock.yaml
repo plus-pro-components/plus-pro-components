@@ -208,8 +208,8 @@ importers:
   docs:
     dependencies:
       plus-pro-components:
-        specifier: 0.0.1-alpha.13
-        version: 0.0.1-alpha.13(vue@3.3.4)
+        specifier: npm:plus-pro-components@latest
+        version: 0.0.1-alpha.15(vue@3.3.4)
     devDependencies:
       '@types/escape-html':
         specifier: ^1.0.2
@@ -7377,8 +7377,8 @@ packages:
       pathe: 1.1.0
     dev: true
 
-  /plus-pro-components@0.0.1-alpha.13(vue@3.3.4):
-    resolution: {integrity: sha512-EkWWcmOVMuTuFAL2zdSLjDGJegrKTKOM/pLMNloDGfRWNWAZrp5w5ut2I6vZjLuvvv/9zcIZMMPDMJYavatEww==}
+  /plus-pro-components@0.0.1-alpha.15(vue@3.3.4):
+    resolution: {integrity: sha512-errVncHkcaVzXKGrhJ7Dvw5SAZ1l1LnrErSdoke8m3xQ/ok369OQb3x6iE6HHJ8GyPD1PB2SYx3+ZD0MtcUCuQ==}
     peerDependencies:
       vue: ^3.2.0
     dependencies:

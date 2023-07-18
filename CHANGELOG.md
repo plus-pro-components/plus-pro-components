@@ -1,3 +1,14 @@
+## [v0.0.1-alpha.15](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-alpha.14...v0.0.1-alpha.15) (2023-07-18)
+
+
+### ✨ Features
+
+* **all:** Merge pull request #27 from plus-pro-components/zpp([5ac561e](https://github.com/plus-pro-components/plus-pro-components/commit/5ac561e)) by@xiaofei
+* **components:** :sparkles: update search component([9174b16](https://github.com/plus-pro-components/plus-pro-components/commit/9174b16)) by@zhangpp
+
+
+
+
 ## [v0.0.1-alpha.14](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-alpha.13...v0.0.1-alpha.14) (2023-07-17)
 
 

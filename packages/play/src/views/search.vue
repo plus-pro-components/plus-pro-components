@@ -23,14 +23,12 @@ const state = ref({
 const columns: PlusColumn[] = [
   {
     label: '名称',
-    width: 120,
     prop: 'name',
     valueType: 'copy',
     tooltip: '名称最多显示6个字符'
   },
   {
     label: '状态',
-    width: 120,
     prop: 'status',
     valueType: 'select',
     options: [
@@ -65,7 +63,10 @@ const columns: PlusColumn[] = [
     label: '数量',
     prop: 'number',
     valueType: 'input-number',
-    fieldProps: { precision: 2, step: 2 }
+    fieldProps: {
+      precision: 2,
+      step: 2
+    }
   },
   {
     label: '城市',

@@ -11,40 +11,40 @@
     :label-suffix="labelSuffix"
     v-bind="formProps"
   >
-    <PlusFormItem
-      v-for="item in subColumns"
-      :key="item.prop"
-      v-model="state.values[item.prop]"
-      v-bind="item"
-    />
+    <el-row v-bind="rowProps">
+      <el-col v-for="item in subColumns" :key="item.prop" v-bind="colProps">
+        <PlusFormItem v-model="state.values[item.prop]" v-bind="item" />
+      </el-col>
+      <el-col v-bind="colProps">
+        <el-form-item v-if="hasFooter">
+          <slot name="footer">
+            <el-button v-if="hasReset" @click="handleReset">
+              {{ resetText }}
+            </el-button>
+            <el-button type="primary" :loading="searchLoading" @click="handleSearch">
+              {{ searchText }}
+            </el-button>
 
-    <el-form-item v-if="hasFooter" class="plus-search-footer">
-      <slot name="footer">
-        <el-button v-if="hasReset" @click="handleReset">
-          {{ resetText }}
-        </el-button>
-        <el-button type="primary" :loading="searchLoading" @click="handleSearch">
-          {{ searchText }}
-        </el-button>
-
-        <el-button v-if="hasUnfold" type="primary" link @click="handleUnfold">
-          {{ isShowUnfold ? '展开' : '收起' }}
-          <el-icon class="el-icon--right">
-            <ArrowDown v-if="isShowUnfold" />
-            <ArrowUp v-else />
-          </el-icon>
-        </el-button>
-      </slot>
-    </el-form-item>
+            <el-button v-if="hasUnfold" type="primary" link @click="handleUnfold">
+              {{ isShowUnfold ? '展开' : '收起' }}
+              <el-icon class="el-icon--right">
+                <ArrowDown v-if="isShowUnfold" />
+                <ArrowUp v-else />
+              </el-icon>
+            </el-button>
+          </slot>
+        </el-form-item>
+      </el-col>
+    </el-row>
   </el-form>
 </template>
 
 <script lang="ts" setup>
 import { reactive, ref, watch, toRefs, computed } from 'vue'
-import type { FormInstance, FormRules, FormProps } from 'element-plus'
+import type { FormInstance, FormRules, FormProps, RowProps, ColProps } from 'element-plus'
 import { ArrowDown, ArrowUp } from '@element-plus/icons-vue'
 import PlusFormItem from '@plus-pro-components/components/form-item'
-import type { PlusColumn, RecordType } from '@plus-pro-components/types'
+import type { PlusColumn, RecordType, Mutable } from '@plus-pro-components/types'
 import { cloneDeep } from 'lodash-es'
 
 export interface PlusSearchProps {
@@ -63,6 +63,8 @@ export interface PlusSearchProps {
   rules?: FormRules
   formProps?: Partial<FormProps>
   showNumber?: number
+  rowProps?: Mutable<RowProps>
+  colProps?: Mutable<ColProps>
 }
 
 export interface PlusSearchState {
@@ -98,7 +100,17 @@ const props = withDefaults(defineProps<PlusSearchProps>(), {
   showNumber: 2,
   formProps: () => ({}),
   rules: () => ({}),
-  columns: () => []
+  columns: () => [],
+  rowProps: () => ({
+    gutter: 20
+  }),
+  colProps: () => ({
+    xs: 24,
+    sm: 12,
+    md: 8,
+    lg: 6,
+    xl: 4
+  })
 })
 
 const emit = defineEmits<PlusSearchEmits>()
@@ -156,14 +168,3 @@ defineExpose({
 
 const { isShowUnfold, subColumns } = toRefs(state)
 </script>
-
-<style lang="scss">
-.plus-search {
-  .plus-form-item {
-    width: unset;
-  }
-  .plus-search-footer {
-    float: right;
-  }
-}
-</style>

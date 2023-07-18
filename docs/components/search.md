@@ -27,6 +27,8 @@ search/basic
 | `resetText`             | 重置按钮文字             | `string`                                                                                         | `重置`  | 否       |
 | `inline`                | 一行内显示               | `boolean`                                                                                        | `true`  | 否       |
 | `showNumber`            | 默认显示个数             | `number`                                                                                         | `2`     | 否       |
+| `rowProps`              | el-row 属性              | [RowProps](https://element-plus.org/zh-CN/component/layout.html#row-attributes)                  |         | 否       |
+| `colProps`              | el-col 属性              | [ColProps](https://element-plus.org/zh-CN/component/layout.html#col-attributes)                  |         | 否       |
 | `rules`                 | 表单校验                 | el-form 的 rules [FormRules](https://element-plus.org/zh-CN/component/form.html#form-attributes) | `{}`    | 否       |
 | `formProps`             | 其他的 el-form 的 props  | [RecordType](/components/type.html#recordtype)                                                   | `{}`    | 否       |
 
