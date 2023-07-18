@@ -1,6 +1,6 @@
 <template>
   <el-descriptions :title="title" :column="column" class="plus-description" border v-bind="$attrs">
-    <template v-for="item in columns" :key="item.label">
+    <template v-for="item in state.subColumns" :key="item.label">
       <el-descriptions-item
         v-if="item.hideInDescriptions !== true"
         :label="item.label"
@@ -15,6 +15,7 @@
 </template>
 
 <script lang="ts" setup>
+import { computed, reactive } from 'vue'
 import type { ExtractPropTypes } from 'vue'
 import type { descriptionProps } from 'element-plus'
 import type { PlusColumn, RecordType } from '@plus-pro-components/types'
@@ -38,12 +39,20 @@ defineOptions({
   name: 'PlusDescriptions'
 })
 
-withDefaults(defineProps<PlusDescriptionsProps>(), {
+const props = withDefaults(defineProps<PlusDescriptionsProps>(), {
   data: () => ({}),
   columns: () => [],
   title: '',
   column: 3
 })
+
+const state = reactive<{ subColumns: any }>({
+  subColumns: []
+})
+
+state.subColumns = computed<any>(() =>
+  props.columns.filter(item => item.hideInDescriptions !== true)
+)
 </script>
 
 <style lang="scss">

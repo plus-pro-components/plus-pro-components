@@ -12,7 +12,7 @@
   >
     <slot>
       <PlusFormItem
-        v-for="item in columns"
+        v-for="item in state.subColumns"
         :key="item.prop"
         v-model="state.values[item.prop]"
         v-bind="item"
@@ -36,7 +36,7 @@
 </template>
 
 <script lang="ts" setup>
-import { reactive, ref, watch } from 'vue'
+import { reactive, ref, watch, computed } from 'vue'
 import type { FormInstance, FormRules, FormProps } from 'element-plus'
 import { ElMessage } from 'element-plus'
 import PlusFormItem from '@plus-pro-components/components/form-item'
@@ -60,6 +60,7 @@ export interface PlusFormProps {
 
 export interface PlusFormState {
   values: any
+  subColumns: any
 }
 
 export interface PlusFormEmits {
@@ -95,8 +96,11 @@ const emit = defineEmits<PlusFormEmits>()
 const formInstance = ref<FormInstance>()
 
 const state = reactive<PlusFormState>({
-  values: { ...props.modelValue }
+  values: { ...props.modelValue },
+  subColumns: []
 })
+
+state.subColumns = computed<any>(() => props.columns.filter(item => item.hideInForm !== true))
 
 watch(
   () => state.values,

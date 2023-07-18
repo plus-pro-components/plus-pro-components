@@ -1,6 +1,5 @@
 <template>
   <el-form-item
-    v-if="hideInForm !== true"
     v-bind="customFormItemProps"
     ref="formItemInstance"
     :label="label"
