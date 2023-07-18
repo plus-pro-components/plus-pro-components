@@ -17,7 +17,9 @@ export type Interval = ReturnType<typeof setInterval>
 /**
  * 普通的对象的泛型
  */
-export type RecordType<T = any> = Record<string, T>
+export type RecordType = {
+  [index: string]: any
+}
 
 /**
  * 允许null的泛型

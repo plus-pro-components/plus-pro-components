@@ -1,21 +1,19 @@
 import { resolve } from 'path'
-import vuePlugin from 'rollup-plugin-vue'
+import vuePlugin from '@vitejs/plugin-vue'
+import type { Plugin } from 'rollup'
 import { rollup } from 'rollup'
 import consola from 'consola'
 import { nodeResolve } from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
 import esbuild, { minify as minifyPlugin } from 'rollup-plugin-esbuild'
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-import DefineOptions from 'unplugin-vue-define-options/rollup'
+
 import { ecOutput, ecRoot } from '../utils/paths'
 import { writeBundles, formatBundleFilename, PKG_CAMEL_CASE_NAME } from '../utils'
 import { external } from '../utils/echarts'
 
 const buildAll = async (minify?: boolean) => {
   const plugins = [
-    DefineOptions(),
-    vuePlugin(),
+    vuePlugin() as Plugin,
     nodeResolve({
       extensions: ['.mjs', '.js', '.json', '.ts']
     }),

@@ -3,6 +3,7 @@ import { mdPlugin } from './plugins/mdPlugin'
 import pkg from '../../package.json'
 
 const content = [
+  'PlusProComponents',
   'plus-pro-components',
   'element-plus',
   'Page level components',
@@ -17,7 +18,7 @@ const content = [
 export default defineConfig({
   base: '/',
   title: 'PlusProComponents',
-  description: 'plus-pro-components',
+  description: content,
   head: [
     ['meta', { name: 'author', content: 'xiaofei' }],
 
@@ -106,6 +107,15 @@ export default defineConfig({
       ],
       '/components/': [
         {
+          text: '基础Ts类型',
+          items: [
+            {
+              text: '基础Ts类型',
+              link: '/components/type'
+            }
+          ]
+        },
+        {
           text: '基础组件',
           items: [
             {
@@ -134,8 +144,20 @@ export default defineConfig({
           text: '组合组件',
           items: [
             {
+              text: '通用配置',
+              link: '/components/config'
+            },
+            {
               text: '表格',
               link: '/components/table'
+            },
+            {
+              text: '表单',
+              link: '/components/form'
+            },
+            {
+              text: '搜索',
+              link: '/components/search'
             },
             {
               text: '描述列表',

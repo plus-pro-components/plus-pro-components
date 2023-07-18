@@ -1,5 +1,5 @@
 <template>
-  <PlusRadio v-model="state.value" is-cancel :data="state.data" @change="change" />
+  <PlusRadio v-model="state.value" :data="state.data" is-cancel @change="change" />
 </template>
 
 <script setup lang="ts">
@@ -7,8 +7,8 @@ import { reactive, watch } from 'vue'
 
 const state = reactive({
   data: [
-    { label: 'Option A', value: 1 },
-    { label: 'Option B', value: 2 }
+    { label: '选项一', value: 1 },
+    { label: '选项二', value: 2 }
   ],
   value: 1
 })
@@ -20,7 +20,7 @@ watch(
   },
   { immediate: true }
 )
-const change = () => {
-  console.log(3333)
+const change = (val: number) => {
+  console.log(val)
 }
 </script>

@@ -49,6 +49,10 @@ export const main = async () => {
     const emitOutput = sourceFile.getEmitOutput()
     const emitFiles = emitOutput.getOutputFiles()
 
+    if (emitFiles.length === 0) {
+      throw new Error(`Emit no file: ${chalk.bold(relativePath)}`)
+    }
+
     const subTasks = emitFiles.map(async outputFile => {
       const filepath = outputFile.getFilePath()
       await mkdir(path.dirname(filepath), {

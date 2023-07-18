@@ -1,17 +1,14 @@
 import { resolve } from 'path'
 import consola from 'consola'
-import { rollup } from 'rollup'
+import { rollup, Plugin } from 'rollup'
 import { nodeResolve } from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
 import esbuild from 'rollup-plugin-esbuild'
 import glob from 'fast-glob'
-import vuePlugin from 'rollup-plugin-vue'
+import vuePlugin from '@vitejs/plugin-vue'
 import postcss from 'rollup-plugin-postcss'
 import autoprefixer from 'autoprefixer'
 import cssnano from 'cssnano'
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-import DefineOptions from 'unplugin-vue-define-options/rollup'
 import type { OutputOptions, ModuleFormat } from 'rollup'
 import { pcOutput, pcRoot, pkgRoot } from '../utils/paths'
 import { writeBundles } from '../utils'
@@ -52,8 +49,7 @@ const buildModules = async () => {
     input,
     external: externalModules,
     plugins: [
-      DefineOptions(),
-      vuePlugin(),
+      vuePlugin() as Plugin,
       nodeResolve({
         extensions: ['.mjs', '.js', '.json', '.ts']
       }),

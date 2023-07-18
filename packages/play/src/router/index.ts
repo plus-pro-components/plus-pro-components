@@ -8,7 +8,7 @@ const moduleFiles = import.meta.glob('../views/**/*.vue', {
 
 const getRoutes = (moduleFiles: Record<string, any>) => {
   const getComponent = (path: string) => {
-    const key = Object.keys(moduleFiles).find(i => i.includes(path)) as string
+    const key = Object.keys(moduleFiles).find(i => i.includes(`${path}.vue`)) as string
     return moduleFiles[key]?.default
   }
   return data.map(item => ({

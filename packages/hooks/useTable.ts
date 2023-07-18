@@ -1,5 +1,5 @@
 import { ref } from 'vue'
-import { defaultPageInfo } from '@plus-pro-components/constants'
+import { DefaultPageInfo } from '@plus-pro-components/constants'
 import type { ButtonsNameRow } from '@plus-pro-components/components/table'
 import type { PageInfo } from '@plus-pro-components/types'
 
@@ -9,7 +9,7 @@ import type { PageInfo } from '@plus-pro-components/types'
  */
 function useTable<T = any>() {
   const tableData = ref<T>()
-  const pageInfo = ref<PageInfo>({ ...defaultPageInfo })
+  const pageInfo = ref<PageInfo>({ ...DefaultPageInfo })
   const total = ref<number>(0)
   const loadingStatus = ref<boolean>(false)
   const buttonsName = ref<ButtonsNameRow>({})

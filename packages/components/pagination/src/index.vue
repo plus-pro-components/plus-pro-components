@@ -6,8 +6,6 @@
       :current-page="pageInfo.page"
       :page-size="pageInfo.pageSize"
       :total="total"
-      :pager-count="5"
-      :disabled="!total"
       :page-sizes="pageSizeList"
       v-bind="$attrs"
       @size-change="handleSizeChange"
@@ -18,7 +16,7 @@
 
 <script lang="ts" setup>
 import { ref, watchEffect } from 'vue'
-import { defaultPageSizeList, defaultPageInfo } from '@plus-pro-components/constants'
+import { DefaultPageSizeList, DefaultPageInfo } from '@plus-pro-components/constants'
 import type { PaginationProps } from 'element-plus'
 import type { PageInfo } from '@plus-pro-components/types'
 
@@ -43,13 +41,13 @@ defineOptions({
 const props = withDefaults(defineProps<PlusPaginationProps>(), {
   show: true,
   total: 0,
-  pageSizeList: () => [...defaultPageSizeList],
-  modelValue: () => ({ ...defaultPageInfo })
+  pageSizeList: () => [...DefaultPageSizeList],
+  modelValue: () => ({ ...DefaultPageInfo })
 })
 
 const emit = defineEmits<PlusPaginationEmits>()
 
-const pageInfo = ref<PageInfo>({ ...defaultPageInfo })
+const pageInfo = ref<PageInfo>({ ...DefaultPageInfo })
 
 watchEffect(() => {
   pageInfo.value = { ...props.modelValue }

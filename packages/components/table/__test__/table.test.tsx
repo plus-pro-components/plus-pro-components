@@ -2,12 +2,12 @@ import { nextTick } from 'vue'
 import { mount } from '@vue/test-utils'
 import ElementPlus from 'element-plus'
 import { describe, expect, test } from 'vitest'
+import type { PlusColumn } from '@plus-pro-components/types'
 import PlusTable from '../src/index.vue'
-import type { TableConfigRow } from '../src/type'
 
 describe('table/index.vue', () => {
   test('render test', async () => {
-    const tableConfig: TableConfigRow[] = [
+    const tableConfig: PlusColumn[] = [
       {
         label: '评分',
         width: 200,
@@ -18,17 +18,13 @@ describe('table/index.vue', () => {
         label: '开关',
         width: 100,
         prop: 'switch',
-        valueType: 'switch',
-        attrs: {
-          activeColor: '#13ce66',
-          inactiveColor: '#ff4949'
-        }
+        valueType: 'switch'
       },
       {
         label: '时间',
         width: 190,
         prop: 'time',
-        valueType: 'date'
+        valueType: 'date-picker'
       }
     ]
     const tableData = [...new Array(100)].map((item, index) => {
@@ -41,7 +37,7 @@ describe('table/index.vue', () => {
       }
     })
     const wrapper = mount(
-      () => <PlusTable config={tableConfig} table-data={tableData}></PlusTable>,
+      () => <PlusTable columns={tableConfig} table-data={tableData}></PlusTable>,
       {
         global: {
           plugins: [ElementPlus]

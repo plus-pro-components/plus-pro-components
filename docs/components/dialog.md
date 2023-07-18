@@ -10,7 +10,7 @@ dialog/basic
 
 ## Dialog API
 
-### Dialog Attributes
+## Dialog Attributes
 
 | 名称                    | 说明               | 类型      | 默认值  | 是否必须 |
 | ----------------------- | ------------------ | --------- | ------- | -------- |
@@ -24,16 +24,18 @@ dialog/basic
 | `title`                 | 弹窗标题           | `string`  | `弹窗`  | 否       |
 | ...                     | ...                | ...       | ...     | ...      |
 
+:::tip 提示
 **`...`表示同时支持所有 `el-dialog` Attributes**
+:::
 
-### Dialog Events
+## Dialog Events
 
 | 名称      | 说明             | 类型                    |
 | --------- | ---------------- | ----------------------- |
 | `confirm` | 点击确认按钮触发 | [Function] `() => void` |
 | `cancel`  | 点击取消按钮触发 | [Function] `() => void` |
 
-### Dialog Slots
+## Dialog Slots
 
 | 插槽名    | 说明     |
 | --------- | -------- |

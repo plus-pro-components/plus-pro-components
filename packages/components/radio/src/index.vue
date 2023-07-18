@@ -1,9 +1,16 @@
 <template>
-  <el-radio-group v-model="state.radio" v-bind="$attrs">
+  <el-radio-group
+    ref="radioGroupInstance"
+    v-model="state.radio"
+    :disabled="disabled"
+    v-bind="groupProps"
+  >
     <el-radio
       v-for="item in data"
       :key="item.value"
+      ref="radioInstance"
       :label="item.value"
+      v-bind="radioProps"
       @click="radioClick($event, item.value)"
       @change="change(item.value)"
     >
@@ -13,7 +20,8 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, watch } from 'vue'
+import { reactive, watch, ref } from 'vue'
+import { ElRadio, ElRadioGroup } from 'element-plus'
 
 type ValueType = string | number | boolean
 
@@ -21,6 +29,9 @@ export interface PlusRadioProps {
   modelValue?: ValueType
   data: { label: string; value: ValueType }[]
   isCancel?: boolean
+  disabled?: boolean
+  groupProps?: any
+  radioProps?: any
 }
 export interface PlusRadioEmits {
   (e: 'radioChange', value: ValueType): void
@@ -37,14 +48,21 @@ defineOptions({
 const props = withDefaults(defineProps<PlusRadioProps>(), {
   modelValue: '',
   data: () => [],
-  isCancel: false
+  isCancel: false,
+  disabled: false,
+  groupProps: () => ({}),
+  radioProps: () => ({})
 })
 
 const emit = defineEmits<PlusRadioEmits>()
 
+const radioInstance = ref<InstanceType<typeof ElRadio> | null>()
+const radioGroupInstance = ref<InstanceType<typeof ElRadioGroup> | null>()
+
 const state: RadioState = reactive({
   radio: ''
 })
+
 watch(
   () => props.modelValue,
   val => {
@@ -54,6 +72,9 @@ watch(
 )
 
 const radioClick = (e: MouseEvent, val: ValueType) => {
+  if (props.disabled || props.groupProps.disabled) {
+    return
+  }
   if (!props.isCancel) {
     return
   } else {
@@ -64,9 +85,15 @@ const radioClick = (e: MouseEvent, val: ValueType) => {
   emit('update:modelValue', state.radio)
   emit('radioChange', state.radio)
 }
+
 const change = (val: ValueType) => {
   if (props.isCancel) return
   emit('update:modelValue', val)
   emit('radioChange', val)
 }
+
+defineExpose({
+  radioInstance,
+  radioGroupInstance
+})
 </script>

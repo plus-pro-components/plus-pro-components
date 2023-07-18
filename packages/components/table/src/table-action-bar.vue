@@ -5,7 +5,9 @@
     class-name="plus-table-action-bar"
     align="center"
     label="操作"
+    fixed="right"
     :width="optionColumnWidth + 'px'"
+    v-bind="actionBarProps"
   >
     <template #default="{ row, $index }">
       <!-- 显示出来的按钮 -->
@@ -14,21 +16,18 @@
       </template>
 
       <!-- 隐藏的按钮 -->
-      <el-dropdown v-if="isShowMore(row)" trigger="click" class="dropdown">
-        <span class="dropdown-link">
+      <el-dropdown v-if="isShowMore(row)" trigger="click" class="plus-table-action-bar__dropdown">
+        <span class="plus-table-action-bar__dropdown__link">
           更多
-          <el-icon class="el-icon-caret-bottom language-icon">
-            <MoreFilled />
+          <el-icon>
+            <ArrowDownBold />
           </el-icon>
         </span>
+
         <!-- 下拉按钮 -->
         <template #dropdown>
-          <el-dropdown-menu class="custom-dropdown-menu">
-            <el-dropdown-item
-              v-for="buttonRow in getNextButtonOptions(row)"
-              :key="buttonRow.text"
-              class="custom-dropdown-menu-item"
-            >
+          <el-dropdown-menu>
+            <el-dropdown-item v-for="buttonRow in getNextButtonOptions(row)" :key="buttonRow.text">
               <component :is="() => render(row, buttonRow, $index)" />
             </el-dropdown-item>
           </el-dropdown-menu>
@@ -41,21 +40,28 @@
 <script lang="ts" setup>
 import type { VNode } from 'vue'
 import { h } from 'vue'
-import { MoreFilled } from '@element-plus/icons-vue'
+import { ArrowDownBold } from '@element-plus/icons-vue'
 import { ElButton, ElLink } from 'element-plus'
 import type { RecordType } from '@plus-pro-components/types'
 import type { ButtonsCallBackParams, ButtonsNameKeyRow, ButtonsNameRow } from './type'
 
+/**
+ * 表格操作栏数据类型
+ */
 export interface PlusTableActionBarProps {
   show?: boolean
   buttonCount?: number
   buttonType?: 'icon' | 'button' | 'link'
   buttonsName?: Partial<ButtonsNameRow>
   optionColumnWidth?: number
+  /**
+   * 表格操作栏 el-table-column 的其他props
+   */
+  actionBarProps?: RecordType
 }
 
 export interface PlusTableActionBarEmits {
-  (e: 'subClickButton', data: ButtonsCallBackParams): void
+  (e: 'clickAction', data: ButtonsCallBackParams): void
 }
 
 defineOptions({
@@ -67,7 +73,8 @@ const props = withDefaults(defineProps<PlusTableActionBarProps>(), {
   buttonCount: 3,
   buttonType: 'link',
   buttonsName: () => ({}),
-  optionColumnWidth: 300
+  actionBarProps: () => ({}),
+  optionColumnWidth: 200
 })
 const emit = defineEmits<PlusTableActionBarEmits>()
 const render = (row: any, buttonRow: ButtonsNameKeyRow, index: number): VNode => {
@@ -78,7 +85,7 @@ const render = (row: any, buttonRow: ButtonsNameKeyRow, index: number): VNode =>
         type: buttonRow?.type,
         title: buttonRow?.text,
         size: buttonRow?.size || 'small',
-        onClick: (event: MouseEvent) => handleClickOption(row, buttonRow, index, event)
+        onClick: (event: MouseEvent) => handleClickAction(row, buttonRow, index, event)
       },
       () => buttonRow?.text
     )
@@ -90,7 +97,7 @@ const render = (row: any, buttonRow: ButtonsNameKeyRow, index: number): VNode =>
         type: buttonRow?.type,
         title: buttonRow?.text,
         size: buttonRow?.size || 'small',
-        onClick: (event: MouseEvent) => handleClickOption(row, buttonRow, index, event)
+        onClick: (event: MouseEvent) => handleClickAction(row, buttonRow, index, event)
       },
       () => buttonRow?.text
     )
@@ -112,7 +119,7 @@ const isShowMore = (row: any) => {
   return showMore
 }
 // 分发按钮事件
-const handleClickOption = (
+const handleClickAction = (
   row: RecordType,
   buttonRow: ButtonsNameKeyRow,
   index: number,
@@ -120,7 +127,7 @@ const handleClickOption = (
 ) => {
   if (buttonRow.disabled !== true) {
     const data: ButtonsCallBackParams = { row, buttonRow, index, e }
-    emit('subClickButton', data)
+    emit('clickAction', data)
   }
 }
 </script>
@@ -131,10 +138,13 @@ const handleClickOption = (
     display: flex;
     align-items: center;
   }
+  .plus-table-action-bar__dropdown__link {
+    cursor: pointer;
+  }
   .plus-table-action-bar__column__link {
     margin-right: 10px;
   }
-  .el-dropdown {
+  .plus-table-action-bar__dropdown {
     vertical-align: baseline;
     cursor: pointer;
     margin-left: 5px;

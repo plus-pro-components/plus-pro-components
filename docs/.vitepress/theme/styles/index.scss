@@ -7,6 +7,16 @@
 
   --vp-c-green-dark: #046ae7;
   --vp-c-green-darker: #0362d7;
+  --vp-layout-max-width: 90%;
+  --vp-sidebar-bg-color: #fff;
+}
+
+.dark {
+  --vp-sidebar-bg-color: #161618;
+}
+
+.VPContent .VPDoc.has-aside .content-container {
+  max-width: 1200px;
 }
 
 .VPSidebar {
@@ -36,7 +46,26 @@
   .el-table__body {
     margin: 0;
   }
+
+  th,
+  td {
+    border: 0;
+  }
+  tr:nth-child(2n) {
+    background-color: unset;
+  }
+
+  tr:nth-last-child(1) {
+    border-bottom: 1px solid var(--vp-c-divider);
+  }
+
+  table {
+    display: table;
+    table-layout: auto;
+    width: 100%;
+  }
 }
+
 .plus-image-preview-footer__icon {
   box-sizing: content-box;
 }

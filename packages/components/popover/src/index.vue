@@ -14,31 +14,32 @@
       <slot />
     </div>
 
-    <div v-if="hasShowBottomButton" style="text-align: right; margin: 0">
-      <el-button size="small" text @click="handleCancelPopover">{{
-        cancelText || t('el.popconfirm.cancelButtonText')
-      }}</el-button>
+    <div v-if="hasShowBottomButton" style="padding-top: 12px">
+      <el-button size="small" plain @click="handleCancelPopover">
+        {{ cancelText }}
+      </el-button>
       <el-button
         size="small"
         type="primary"
         :loading="confirmLoading"
         @click="handleConfirmPopover"
-        >{{ confirmText || t('el.popconfirm.confirmButtonText') }}</el-button
       >
+        {{ confirmText }}
+      </el-button>
     </div>
+
     <template #reference>
-      <!-- <el-icon :size="20" color="#919191">
-        <Setting />
-      </el-icon> -->
       <span @click="handleClick">
         <slot name="icon" />
       </span>
     </template>
   </el-popover>
 </template>
+
 <script lang="ts" setup>
 import { reactive } from 'vue'
-import { useLocale, ClickOutside as vClickOutside } from 'element-plus'
+import { ClickOutside as vClickOutside } from 'element-plus'
+
 export interface PlusPopoverProps {
   hasFilterTableHeader?: boolean
   hasShowBottomButton?: boolean
@@ -55,10 +56,11 @@ export interface PlusPopoverEmits {
   (e: 'confirm'): void
   (e: 'show'): void
 }
+
 defineOptions({
   name: 'PlusPopover'
 })
-const { t } = useLocale()
+
 const state = reactive({
   // 控制弹框显示隐藏
   visible: false
@@ -76,8 +78,8 @@ withDefaults(defineProps<PlusPopoverProps>(), {
   trigger: 'hover',
   title: '',
   confirmLoading: false,
-  cancelText: '',
-  confirmText: ''
+  cancelText: '取消',
+  confirmText: '确认'
 })
 const emit = defineEmits<PlusPopoverEmits>()
 const handleCancelPopover = (): void => {
