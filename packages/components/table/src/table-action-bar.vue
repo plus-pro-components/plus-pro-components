@@ -61,7 +61,7 @@ export interface PlusTableActionBarProps {
 }
 
 export interface PlusTableActionBarEmits {
-  (e: 'subClickButton', data: ButtonsCallBackParams): void
+  (e: 'clickAction', data: ButtonsCallBackParams): void
 }
 
 defineOptions({
@@ -74,7 +74,7 @@ const props = withDefaults(defineProps<PlusTableActionBarProps>(), {
   buttonType: 'link',
   buttonsName: () => ({}),
   actionBarProps: () => ({}),
-  optionColumnWidth: 300
+  optionColumnWidth: 200
 })
 const emit = defineEmits<PlusTableActionBarEmits>()
 const render = (row: any, buttonRow: ButtonsNameKeyRow, index: number): VNode => {
@@ -85,7 +85,7 @@ const render = (row: any, buttonRow: ButtonsNameKeyRow, index: number): VNode =>
         type: buttonRow?.type,
         title: buttonRow?.text,
         size: buttonRow?.size || 'small',
-        onClick: (event: MouseEvent) => handleClickOption(row, buttonRow, index, event)
+        onClick: (event: MouseEvent) => handleClickAction(row, buttonRow, index, event)
       },
       () => buttonRow?.text
     )
@@ -97,7 +97,7 @@ const render = (row: any, buttonRow: ButtonsNameKeyRow, index: number): VNode =>
         type: buttonRow?.type,
         title: buttonRow?.text,
         size: buttonRow?.size || 'small',
-        onClick: (event: MouseEvent) => handleClickOption(row, buttonRow, index, event)
+        onClick: (event: MouseEvent) => handleClickAction(row, buttonRow, index, event)
       },
       () => buttonRow?.text
     )
@@ -119,7 +119,7 @@ const isShowMore = (row: any) => {
   return showMore
 }
 // 分发按钮事件
-const handleClickOption = (
+const handleClickAction = (
   row: RecordType,
   buttonRow: ButtonsNameKeyRow,
   index: number,
@@ -127,7 +127,7 @@ const handleClickOption = (
 ) => {
   if (buttonRow.disabled !== true) {
     const data: ButtonsCallBackParams = { row, buttonRow, index, e }
-    emit('subClickButton', data)
+    emit('clickAction', data)
   }
 }
 </script>

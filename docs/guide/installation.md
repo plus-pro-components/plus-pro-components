@@ -14,7 +14,7 @@
 
 ## 使用包管理器
 
-**建议您使用包管理器 (NPM, [Yarn](https://classic.yarnpkg.com/lang/en/), [pnpm](https://pnpm.io/)) 安装 plus-pro-components，由于`PlusProComponents`基于`element-plus`开发，建议同时安装`element-plus`** 。
+**建议您使用包管理器 (NPM, [Yarn](https://classic.yarnpkg.com/lang/en/), [pnpm](https://pnpm.io/)) 安装 plus-pro-components**。
 
 ```shell
 # 选择一个你喜欢的包管理器

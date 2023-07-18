@@ -18,8 +18,6 @@ export default {
     app.use(ElementPlus, {
       locale: zhCn
     })
-    console.log(PlusProComponents)
-
     app.use(PlusProComponents as unknown as any)
     app.component('code-demo', CodeDemo)
     directive(app)

@@ -14,21 +14,21 @@ date-picker/basic
 
 ## DatePicker API
 
-### DatePicker Attributes
+## DatePicker Attributes
 
-| 名称                    | 说明                                      | 类型                                             | 默认值                                                              | 是否必须 |
-| ----------------------- | ----------------------------------------- | ------------------------------------------------ | ------------------------------------------------------------------- | -------- |
-| `model-value / v-model` | 绑定值                                    | `string[]`                                       | `false`                                                             | 否       |
-| `type`                  | el-date-picker 的类型                     | `year/month/date/dates/datetime/week`            | `datetime`                                                          | 否       |
-| `format`                | 显示在输入框中的格式                      | `string`                                         | `YYYY-MM-DD HH:mm:ss`                                               | 否       |
-| `valueFormat`           | 绑定值的格式。 不指定则绑定值为 Date 对象 | `string`                                         | `YYYY-MM-DD HH:mm:ss`                                               | 否       |
-| `rangeSeparator`        | 开始时间和结束时间中间的分隔符            | `string`                                         | `/`                                                                 | 否       |
-| `startProps`            | 开始的`el-date-picker` 的 props           | `object`                                         | `{}`                                                                | 否       |
-| `endProps`              | 结束的`el-date-picker` 的 props           | `object`                                         | `{}`                                                                | 否       |
-| `startDisabledDate`     | 开始的`el-date-picker` 的 disabledDate    | `(startTime: Date, endValue: string) => boolean` | [startDisabledDate](/components/date-picker.html#startdisableddate) | 否       |
-| `endDisabledDate`       | 结束的`el-date-picker` 的 disabledDate    | `(endTime: Date, startValue: string) => boolean` | [endDisabledDate](/components/date-picker.html#enddisableddate)`    | 否       |
+| 名称                    | 说明                                         | 类型                                             | 默认值                                                              | 是否必须 |
+| ----------------------- | -------------------------------------------- | ------------------------------------------------ | ------------------------------------------------------------------- | -------- |
+| `model-value / v-model` | 绑定值                                       | `string[]`                                       | `false`                                                             | 否       |
+| `type`                  | el-date-picker 的类型                        | `year/month/date/dates/datetime/week`            | `datetime`                                                          | 否       |
+| `format`                | 显示在输入框中的格式                         | `string`                                         | `YYYY-MM-DD HH:mm:ss`                                               | 否       |
+| `valueFormat`           | 绑定值的格式。 不指定则绑定值为 Date 对象    | `string`                                         | `YYYY-MM-DD HH:mm:ss`                                               | 否       |
+| `rangeSeparator`        | 开始时间和结束时间中间的分隔符               | `string`                                         | `/`                                                                 | 否       |
+| `startProps`            | 开始的`el-date-picker` 的 props（支持所有）  | `object`                                         | `{}`                                                                | 否       |
+| `endProps`              | 结束的`el-date-picker` 的 props （支持所有） | `object`                                         | `{}`                                                                | 否       |
+| `startDisabledDate`     | 开始的`el-date-picker` 的 disabledDate       | `(startTime: Date, endValue: string) => boolean` | [startDisabledDate](/components/date-picker.html#startdisableddate) | 否       |
+| `endDisabledDate`       | 结束的`el-date-picker` 的 disabledDate       | `(endTime: Date, startValue: string) => boolean` | [endDisabledDate](/components/date-picker.html#enddisableddate)     | 否       |
 
-#### startDisabledDate
+### startDisabledDate
 
 默认值
 
@@ -39,7 +39,7 @@ const startDisabledDate = (startTime, endValue) => {
 }
 ```
 
-#### endDisabledDate
+### endDisabledDate
 
 默认值
 
@@ -50,7 +50,7 @@ const endDisabledDate = (endTime, startValue) => {
 }
 ```
 
-### DatePicker Events
+## DatePicker Events
 
 | 名称     | 说明           | 类型                                  |
 | -------- | -------------- | ------------------------------------- |
@@ -60,12 +60,12 @@ const endDisabledDate = (endTime, startValue) => {
 el-date-picker 的其他事件的支持写法 如 blur
 
 ```html
-<PlusDatePicker :start-props="{onBlur:()=>{ } }" :end-props="{onBlur:()=>{ } }" />
+<PlusDatePicker :start-props="{onBlur: () => {} }" :end-props="{onBlur: () => {} }" />
 ```
 
 :::
 
-### Exposes
+## Exposes
 
 | 名称                  | 说明                   | 类型                                |
 | --------------------- | ---------------------- | ----------------------------------- |

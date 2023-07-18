@@ -6,8 +6,6 @@
       :current-page="pageInfo.page"
       :page-size="pageInfo.pageSize"
       :total="total"
-      :pager-count="5"
-      :disabled="!total"
       :page-sizes="pageSizeList"
       v-bind="$attrs"
       @size-change="handleSizeChange"
