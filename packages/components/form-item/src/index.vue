@@ -90,6 +90,11 @@ const getTooltip = (tooltip: PlusColumn['tooltip']) => {
 <style lang="scss">
 .plus-form-item {
   width: 100%;
+  .plus-form-item__label {
+    .plus-table-column__label__icon {
+      vertical-align: sub;
+    }
+  }
 }
 .el-form-item.plus-form-item .plus-form-item-field {
   width: 100%;
