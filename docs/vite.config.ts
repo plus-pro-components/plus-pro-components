@@ -8,10 +8,10 @@ const pathResolve = (dir: string): string => fileURLToPath(new URL(dir, import.m
 const isWrite = process.env.WRITE === 'true'
 
 const alias: AliasOptions = isWrite
-  ? {}
-  : {
+  ? {
       'plus-pro-components': pathResolve('../dist/plus-pro-components')
     }
+  : {}
 
 export default defineConfig(() => {
   return {
