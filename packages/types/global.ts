@@ -25,3 +25,10 @@ export type RecordType = {
  * 允许null的泛型
  */
 export type Nullable<T> = T | null
+
+/**
+ * 去除只读状态
+ */
+export type Mutable<T extends Record<string, any>> = {
+  -readonly [K in keyof T]?: T[K]
+}

@@ -4,6 +4,13 @@
       v-model="state"
       :columns="columns"
       :show-number="2"
+      :col-props="{
+        xs: 24,
+        sm: 12,
+        md: 12,
+        lg: 8,
+        xl: 8
+      }"
       @change="handleChange"
       @search="handleSearch"
       @reset="handleRest"
@@ -23,14 +30,12 @@ const state = ref({
 const columns: PlusColumn[] = [
   {
     label: '名称',
-    width: 120,
     prop: 'name',
     valueType: 'copy',
     tooltip: '名称最多显示6个字符'
   },
   {
     label: '状态',
-    width: 120,
     prop: 'status',
     valueType: 'select',
     options: [
