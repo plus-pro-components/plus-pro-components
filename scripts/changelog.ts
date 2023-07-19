@@ -26,8 +26,6 @@ type Log = {
   scoped: string
 }
 
-const target = 'https://github.com/plus-pro-components/plus-pro-components/'
-
 const execPromise = (command: string): Promise<string> => {
   return new Promise((resolve, reject) => {
     exec(command, (err, stdout) => {
@@ -85,6 +83,7 @@ const handleTagData = async (): Promise<Tag[]> => {
 }
 
 const main = async () => {
+  const target = (await execPromise(' git remote get-url --all origin')).replace('.git', '/')
   const logs = await handleLogData()
   const tags = await handleTagData()
   const res = tags.map(item => {
