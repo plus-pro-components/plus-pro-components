@@ -89,7 +89,7 @@ const getVersion = async (currentVersion: string, pkgName: string) => {
         item.optionsOrLoose as any,
         item.identifier
       )
-      const name = `${item.release} (${value}})`
+      const name = `${item.release} (${value})`
 
       return {
         name,
