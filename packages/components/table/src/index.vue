@@ -1,7 +1,7 @@
 <template>
   <div class="plus-table">
     <PlusTableToolbar
-      :has-filter-table-header="hasFilterTableHeader"
+      :has-table-header="hasTableHeader"
       :columns="columns"
       :default-size="size"
       :title="title"
@@ -37,12 +37,16 @@
       <!-- 序号栏 -->
       <PlusTableTableColumnIndex
         :show="isShowNumber"
+        :index-content-style="indexContentStyle"
         :page-info="pagination.modelValue"
-        align="left"
       />
 
       <!-- 拖拽行 -->
-      <PlusTableColumnDragSort :sortable="dragSortable" @dragSortEnd="handleDragSortEnd" />
+      <PlusTableColumnDragSort
+        :sortable="dragSortable"
+        :table-instance="tableInstance"
+        @dragSortEnd="handleDragSortEnd"
+      />
 
       <!-- 展开行 -->
       <el-table-column v-if="hasExpand" type="expand">
@@ -54,7 +58,7 @@
       </el-table-column>
 
       <!--配置渲染栏  -->
-      <PlusTableTableColumn
+      <PlusTableColumn
         :columns="(subColumns as any)"
         @clickToEnlargeImage="handelClickToEnlargeImage"
         @formChange="handleFormChange"
@@ -96,7 +100,7 @@ import type { TableInstance } from 'element-plus'
 import type { PageInfo, PlusColumn, RecordType } from '@plus-pro-components/types'
 import type { Options as SortableOptions } from 'sortablejs'
 import PlusTableActionBar from './table-action-bar.vue'
-import PlusTableTableColumn from './table-column.vue'
+import PlusTableColumn from './table-column.vue'
 import PlusTableTableColumnIndex from './table-column-index.vue'
 import PlusTableColumnDragSort from './table-column-drag-sort.vue'
 import PlusTableToolbar from './table-toolbar.vue'
@@ -115,7 +119,7 @@ export interface PlusTableProps {
   /* 是否需要序号*/
   isShowNumber?: boolean
   /* 是否需要过滤表格表头*/
-  hasFilterTableHeader?: boolean
+  hasTableHeader?: boolean
   /* 是否是多选表格*/
   isSelection?: boolean
   /* 是否需要展开行*/
@@ -139,6 +143,7 @@ export interface PlusTableProps {
   tableProps?: RecordType
   /** sortablejs配置 */
   dragSortable?: SortableOptions | boolean
+  indexContentStyle?: CSSProperties | ((row: any, index: number) => CSSProperties)
 }
 
 export interface PlusTableEmits {
@@ -157,8 +162,8 @@ const props = withDefaults(defineProps<PlusTableProps>(), {
   defaultSize: 'default',
   pagination: () => ({}),
   actionBar: () => ({}),
-  isShowNumber: true,
-  hasFilterTableHeader: true,
+  isShowNumber: false,
+  hasTableHeader: false,
   isSelection: false,
   hasExpand: false,
   loadingStatus: false,
@@ -170,8 +175,9 @@ const props = withDefaults(defineProps<PlusTableProps>(), {
     color: '#777'
   }),
   rowKey: 'id',
-  dragSortable: true,
-  tableProps: () => ({})
+  dragSortable: false,
+  tableProps: () => ({}),
+  indexContentStyle: () => ({})
 })
 
 const emit = defineEmits<PlusTableEmits>()
@@ -189,6 +195,8 @@ const state = reactive<TableState>({
 watch(
   () => props.columns,
   val => {
+    // console.log(val)
+
     subColumns.value = val.filter(item => item.hideInTable !== true) as any
   },
   {

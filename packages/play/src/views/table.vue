@@ -127,7 +127,8 @@ const tableConfig: PlusColumn[] = [
     tooltip: '名称最多显示6个字符',
     width: 120,
     prop: 'name',
-    valueType: 'copy',
+    valueType: 'text',
+    editable: true,
     tableColumnProps: {
       'show-overflow-tooltip': true
     }
