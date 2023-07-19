@@ -107,15 +107,18 @@
 </template>
 
 <script lang="ts" setup>
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-nocheck
 import { DocumentCopy, Select } from '@element-plus/icons-vue'
 import type { PlusImagePreviewRow } from '@plus-pro-components/components/image-preview'
 import { PlusFormFieldItem } from '@plus-pro-components/components/form-item'
-import { dateFormat, formatToCurrency, isFunction } from '@plus-pro-components/utils'
+import {
+  dateFormat,
+  formatToCurrency,
+  isFunction,
+  getCustomProps
+} from '@plus-pro-components/utils'
 import { ref, watch } from 'vue'
 import type { PlusColumn, RecordType } from '@plus-pro-components/types'
-import { useGetOptions, useGetCustomProps } from '@plus-pro-components/hooks'
+import { useGetOptions } from '@plus-pro-components/hooks'
 import { FormFieldType } from '@plus-pro-components/constants'
 
 export interface PlusDisplayItemProps {
@@ -125,7 +128,7 @@ export interface PlusDisplayItemProps {
 
 export interface PlusTableTableColumnEmits {
   (e: 'clickToEnlargeImage', data: PlusImagePreviewRow[]): void
-  (e: 'change', value: any, prop: string, row: any): void
+  (e: 'change', data: { value: any; prop: string; row: any }): void
 }
 
 defineOptions({
@@ -140,13 +143,28 @@ const props = withDefaults(defineProps<PlusDisplayItemProps>(), {
 const subRow = ref(props.row)
 const currentStatus = ref({})
 
-const customFieldProps = useGetCustomProps(
-  props.column.fieldProps,
-  subRow.value[props.column.prop],
-  subRow
-)
-const options = useGetOptions(props.column)
+const customFieldProps = ref<any>({})
 
+watch(
+  () => props.column.fieldProps,
+  val => {
+    const value = subRow.value[props.column.prop]
+    const row = subRow
+    getCustomProps(val, value, row)
+      .then(data => {
+        customFieldProps.value = data
+      })
+      .catch(err => {
+        throw err
+      })
+  },
+  {
+    immediate: true,
+    deep: true
+  }
+)
+
+const options = useGetOptions(props.column)
 watch(
   options,
   val => {

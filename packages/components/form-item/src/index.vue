@@ -20,10 +20,9 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import type { PlusColumn } from '@plus-pro-components/types'
-import { useGetCustomProps } from '@plus-pro-components/hooks'
-import { isString, isPlainObject } from '@plus-pro-components/utils'
+import { isString, isPlainObject, getCustomProps } from '@plus-pro-components/utils'
 import { QuestionFilled } from '@element-plus/icons-vue'
 import PlusFieldItem from './field-item.vue'
 import type { ValueType } from './type'
@@ -67,7 +66,24 @@ const emit = defineEmits<PlusFormItemEmits>()
 
 const state = ref<ValueType>(props.modelValue)
 
-const customFormItemProps = useGetCustomProps(props.formItemProps, state, props)
+const customFormItemProps = ref<any>({})
+
+watch(
+  () => props.formItemProps,
+  val => {
+    getCustomProps(val, state.value, props)
+      .then(data => {
+        customFormItemProps.value = data
+      })
+      .catch(err => {
+        throw err
+      })
+  },
+  {
+    immediate: true,
+    deep: true
+  }
+)
 
 const handleChange = (val: ValueType) => {
   emit('update:modelValue', val)

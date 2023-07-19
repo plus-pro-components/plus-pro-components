@@ -28,12 +28,10 @@ const TestServe = {
         status: String(index % 3),
         rate: index > 3 ? 2 : 3.5,
         switch: index % 2 === 0 ? true : false,
-        time: new Date().toString()
+        time: new Date()
       }
     })
-    return {
-      data
-    }
+    return { data }
   }
 }
 const { tableData } = useTable()
@@ -80,7 +78,8 @@ const tableConfig = ref<PlusColumn[]>([
     valueType: 'rate',
     editable: true,
     fieldProps: {
-      disabled: true
+      disabled: false,
+      allowHalf: true
     }
   },
   {
@@ -90,7 +89,7 @@ const tableConfig = ref<PlusColumn[]>([
     valueType: 'switch',
     editable: true,
     fieldProps: {
-      disabled: true
+      disabled: false
     }
   },
   {
@@ -108,7 +107,6 @@ const getList = async () => {
     tableData.value = data
   } catch (error) {}
 }
-
 getList()
 
 const formChange = (data: { value: any; prop: string; row: any; index: number; column: any }) => {
@@ -122,15 +120,15 @@ const editTable = (isEdit: boolean) => {
         ...item,
         editable: true,
         fieldProps: {
-          disabled: false
+          ...item.fieldProps,
+          disabled: !isEdit
         }
       }
     } else {
-      return {
-        ...item,
-        editable: isEdit
-      }
+      return { ...item, editable: isEdit }
     }
   })
+
+  console.log(tableConfig.value)
 }
 </script>
