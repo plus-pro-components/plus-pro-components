@@ -15,10 +15,10 @@ form/basic
 | 名称                    | 说明                            | 类型                                                                                             | 默认值  | 是否必须 |
 | ----------------------- | ------------------------------- | ------------------------------------------------------------------------------------------------ | ------- | -------- |
 | `model-value / v-model` | 表单绑定值                      | [RecordType](/components/type.html#recordtype)                                                   |         | 否       |
-| `columns`               | 搜索配置信息                    | [PlusColumn[]](/components/config.html)                                                          | `[]`    | 是       |
+| `columns`               | 表单配置信息                    | [PlusColumn[]](/components/config.html)                                                          | `[]`    | 是       |
 | `labelWidth`            | el-form 的 labelWidth           | `string`                                                                                         | `84px`  | 否       |
 | `labelPosition`         | el-form 的 labelPosition        | `'left' / 'right' / 'top'`                                                                       | `left`  | 否       |
-| `labelSuffix`           | labelSuffix labelSuffix         | `string`                                                                                         | `:`     | 否       |
+| `labelSuffix`           | el-form 的 labelSuffix          | `string`                                                                                         | `:`     | 否       |
 | `hasErrorTip`           | 是否需要校验 message 提示       | `boolean`                                                                                        | `true`  | 否       |
 | `hasFooter`             | 是否需要全部底部按钮            | `boolean`                                                                                        | `true`  | 否       |
 | `hasCancel`             | 是否需要底部按钮 `取消`         | `boolean`                                                                                        | `true`  | 否       |
