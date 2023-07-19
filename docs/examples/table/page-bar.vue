@@ -1,0 +1,113 @@
+<template>
+  <div>
+    <PlusTable
+      :columns="tableConfig"
+      :table-data="tableData"
+      :is-show-number="true"
+      :action-bar="{ show: false }"
+      :index-content-style="handleIndexContentStyle"
+      :pagination="{
+        show: true,
+        total,
+        modelValue: pageInfo,
+        pageSizeList: [10, 20, 50],
+        align: 'right'
+      }"
+      @paginationChange="handlePaginationChange"
+    />
+  </div>
+</template>
+
+<script lang="ts" setup>
+import { useTable } from '@plus-pro-components/hooks'
+import type { PageInfo, PlusColumn } from '@plus-pro-components/types'
+
+const TestServe = {
+  getList: async () => {
+    const data = [...new Array(10)].map((item, index) => {
+      return {
+        name: index + 'name',
+        status: String(index % 3),
+        tag: index === 1 ? 'success' : index === 2 ? 'warning' : index === 3 ? 'info' : 'danger',
+        time: new Date()
+      }
+    })
+    return {
+      data,
+      total: data.length
+    }
+  }
+}
+
+const { tableData, total, pageInfo } = useTable()
+
+pageInfo.value.pageSize = 10
+
+const tableConfig: PlusColumn[] = [
+  {
+    label: '名称',
+    prop: 'name'
+  },
+  {
+    label: '状态',
+    prop: 'status',
+    valueType: 'select',
+    options: [
+      {
+        label: '未解决',
+        value: '0',
+        color: 'red'
+      },
+      {
+        label: '已解决',
+        value: '1',
+        color: 'blue'
+      },
+      {
+        label: '解决中',
+        value: '2',
+        color: 'yellow'
+      },
+      {
+        label: '失败',
+        value: '3',
+        color: 'red'
+      }
+    ]
+  },
+  {
+    label: '标签',
+    prop: 'tag',
+    valueType: 'tag',
+    fieldProps: (value: string) => {
+      return { type: value }
+    }
+  },
+  {
+    label: '时间',
+    prop: 'time',
+    valueType: 'date-picker'
+  }
+]
+
+const getList = async () => {
+  try {
+    const { data, total: dataTotal } = await TestServe.getList()
+    tableData.value = data
+    total.value = dataTotal
+  } catch (error) {}
+}
+const handlePaginationChange = (_pageInfo: PageInfo): void => {
+  pageInfo.value = _pageInfo
+
+  getList()
+}
+
+const handleIndexContentStyle = (row: any, index: number) => {
+  return index < 3
+    ? { backgroundColor: '#314659', color: '#fff', borderRadius: '50%' }
+    : { backgroundColor: '#979797', color: '#fff', borderRadius: '50%' }
+}
+
+getList()
+</script>

@@ -1,5 +1,5 @@
 <template>
-  <template v-for="item in columns" :key="item.prop">
+  <template v-for="(item, index) in columns" :key="item.prop">
     <el-table-column
       class-name="plus-table-column"
       :prop="item.prop"
@@ -18,7 +18,7 @@
 
       <template #default="{ row, column, $index }">
         <PlusDisplayItem
-          :column="item"
+          :column="columns[index]"
           :row="row"
           @clickToEnlargeImage="handelClickToEnlargeImage"
           @change="data => handleChange(data, $index, column, item)"

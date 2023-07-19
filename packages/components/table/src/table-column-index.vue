@@ -19,7 +19,7 @@
       >
         <div
           class="plus-table-index-column plus-table-index-col-border plus-table-column-index-content"
-          :style="row?.indexColStyle || {}"
+          :style="customIndexContentStyle(row, $index)"
         >
           {{ getTableIndex($index) }}
         </div>
@@ -27,7 +27,7 @@
       <div
         v-else
         class="plus-table-index-column plus-table-index-col-border plus-table-column-index-content"
-        :style="row?.indexColStyle || {}"
+        :style="customIndexContentStyle(row, $index)"
       >
         {{ getTableIndex($index) }}
       </div>
@@ -38,11 +38,14 @@
 <script lang="ts" setup>
 import { DefaultPageInfo } from '@plus-pro-components/constants'
 import type { PageInfo } from '@plus-pro-components/types'
+import type { CSSProperties } from 'vue'
+import { isFunction, isPlainObject } from '@plus-pro-components/utils'
 
 export interface PlusTableTableColumnIndexProps {
   show?: boolean
   pageInfo?: PageInfo
   max?: number
+  indexContentStyle?: CSSProperties | ((row: any, index: number) => CSSProperties)
 }
 
 defineOptions({
@@ -50,16 +53,27 @@ defineOptions({
 })
 
 const props = withDefaults(defineProps<PlusTableTableColumnIndexProps>(), {
-  show: true,
+  show: false,
   pageInfo: () => ({ ...DefaultPageInfo }),
-  max: 999
+  max: 999,
+  indexContentStyle: () => ({})
 })
 
 // 修改序号生成方法
 const getTableIndex = (index: number) => {
   const i = (props.pageInfo.page - 1) * props.pageInfo.pageSize + index + 1
-
   return +i
+}
+
+// index样式
+const customIndexContentStyle = (row: any, index: number) => {
+  if (isFunction(props.indexContentStyle)) {
+    return (props.indexContentStyle as (row: any, index: number) => CSSProperties)(row, index)
+  } else if (isPlainObject(props.indexContentStyle)) {
+    return props.indexContentStyle
+  } else {
+    return {}
+  }
 }
 </script>
 
@@ -73,12 +87,6 @@ const getTableIndex = (index: number) => {
     white-space: nowrap;
     width: 20px;
     height: 20px;
-  }
-  .plus-table-index-col-border {
-    color: #fff;
-    font-size: 12px;
-    line-height: 12px;
-    border-radius: 50%;
   }
 
   .cell {
