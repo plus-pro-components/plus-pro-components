@@ -1,4 +1,4 @@
-# ImagePreview 弹窗
+# ImagePreview 预览
 
 ## 基础用法
 

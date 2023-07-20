@@ -20,7 +20,6 @@
         <PlusDisplayItem
           :column="columns[index]"
           :row="row"
-          @clickToEnlargeImage="handelClickToEnlargeImage"
           @change="data => handleChange(data, $index, column, item)"
         />
       </template>
@@ -30,7 +29,6 @@
 
 <script lang="ts" setup>
 import PlusDisplayItem from '@plus-pro-components/components/display-item'
-import type { PlusImagePreviewRow } from '@plus-pro-components/components/image-preview'
 import type { PlusColumn } from '@plus-pro-components/types'
 import { isString, isPlainObject } from '@plus-pro-components/utils'
 import { Warning } from '@element-plus/icons-vue'
@@ -40,7 +38,6 @@ export interface PlusTableTableColumnProps {
 }
 
 export interface PlusTableTableColumnEmits {
-  (e: 'clickToEnlargeImage', data: PlusImagePreviewRow[]): void
   (e: 'formChange', data: { value: any; prop: string; row: any; index: number; column: any }): void
 }
 
@@ -53,11 +50,6 @@ withDefaults(defineProps<PlusTableTableColumnProps>(), {
 })
 
 const emit = defineEmits<PlusTableTableColumnEmits>()
-
-// 点击放大图片
-const handelClickToEnlargeImage = (srcList: PlusImagePreviewRow[]) => {
-  emit('clickToEnlargeImage', srcList)
-}
 
 const getTooltip = (tooltip: PlusColumn['tooltip']) => {
   if (isString(tooltip)) {

@@ -19,14 +19,15 @@
   />
 
   <!--显示图片 -->
-  <img
+  <el-image
     v-else-if="column.valueType === 'img'"
     title="点击预览"
     class="plus-table-column-image-col"
     fit="cover"
+    preview-teleported
     :src="getImageUrl().url"
+    :preview-src-list="getImageUrl().options"
     v-bind="customFieldProps"
-    @click="handelClickToEnlargeImage"
   />
 
   <!--显示链接 -->
@@ -108,7 +109,6 @@
 
 <script lang="ts" setup>
 import { DocumentCopy, Select } from '@element-plus/icons-vue'
-import type { PlusImagePreviewRow } from '@plus-pro-components/components/image-preview'
 import { PlusFormFieldItem } from '@plus-pro-components/components/form-item'
 import {
   dateFormat,
@@ -127,7 +127,6 @@ export interface PlusDisplayItemProps {
 }
 
 export interface PlusTableTableColumnEmits {
-  (e: 'clickToEnlargeImage', data: PlusImagePreviewRow[]): void
   (e: 'change', data: { value: any; prop: string; row: any }): void
 }
 
@@ -205,29 +204,21 @@ const emit = defineEmits<PlusTableTableColumnEmits>()
 
 const getImageUrl = () => {
   const option = subRow.value[props.column.prop]
-  if (typeof option === 'string' && option) {
+  if (option && typeof option === 'string') {
     return {
-      options: [{ url: option, name: option }],
+      options: [option],
       url: option
     }
   }
   if (Array.isArray(option)) {
     return {
       options: option,
-      url: option[0]?.url
+      url: option[0]
     }
   }
   return {
     options: [],
     url: ''
-  }
-}
-
-// 点击放大图片
-const handelClickToEnlargeImage = () => {
-  if (props.column.preview !== false) {
-    const { options } = getImageUrl()
-    emit('clickToEnlargeImage', options)
   }
 }
 

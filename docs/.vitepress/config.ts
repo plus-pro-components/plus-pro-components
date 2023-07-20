@@ -127,10 +127,6 @@ export default defineConfig({
               link: '/components/pagination'
             },
             {
-              text: '图片预览',
-              link: '/components/image-preview'
-            },
-            {
               text: '单选',
               link: '/components/radio'
             },

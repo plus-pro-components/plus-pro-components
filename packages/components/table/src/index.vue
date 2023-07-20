@@ -80,9 +80,6 @@
 
     <!-- 分页 -->
     <PlusPagination v-model="subPageInfo" v-bind="pagination" :loading-status="loadingStatus" />
-
-    <!-- 大图预览 -->
-    <PlusImagePreview v-model="bigImageVisible" title="图片预览" :src-list="srcList" />
   </div>
 </template>
 
@@ -91,8 +88,7 @@ import { reactive, toRefs, watch, ref } from 'vue'
 import { cloneDeep } from 'lodash-es'
 import PlusPagination from '@plus-pro-components/components/pagination'
 import { DefaultPageInfo } from '@plus-pro-components/constants'
-import type { PlusImagePreviewRow } from '@plus-pro-components/components/image-preview'
-import PlusImagePreview from '@plus-pro-components/components/image-preview'
+
 import type { PlusPaginationProps } from '@plus-pro-components/components/pagination'
 import type { CSSProperties } from 'vue'
 import type { ComponentSize } from 'element-plus/es/constants'
@@ -220,12 +216,6 @@ const handleAction = (res: ButtonsCallBackParams) => {
   emit('clickAction', { row, buttonRow, index, e })
 }
 
-// 点击放大图片
-const handelClickToEnlargeImage = (srcList: PlusImagePreviewRow[]) => {
-  state.srcList = srcList?.length ? srcList : []
-  state.bigImageVisible = true
-}
-
 const handleFilterTableConfirm = (data: PlusColumn[]) => {
   subColumns.value = data.filter(item => item.hideInTable !== true) as any
 }
@@ -249,7 +239,7 @@ const handleFormChange = (data: {
   emit('formChange', data)
 }
 
-const { bigImageVisible, srcList, subPageInfo, size } = toRefs(state)
+const { subPageInfo, size } = toRefs(state)
 
 // 暴露方法到外部调用
 defineExpose({
