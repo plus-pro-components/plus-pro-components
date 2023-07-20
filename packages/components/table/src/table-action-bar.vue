@@ -138,5 +138,8 @@ const handleClickAction = (
     cursor: pointer;
     margin-left: 12px;
   }
+  .el-link + .el-link {
+    margin-left: 12px;
+  }
 }
 </style>
