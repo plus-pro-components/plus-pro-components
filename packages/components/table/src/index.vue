@@ -58,11 +58,7 @@
       </el-table-column>
 
       <!--配置渲染栏  -->
-      <PlusTableColumn
-        :columns="(subColumns as any)"
-        @clickToEnlargeImage="handelClickToEnlargeImage"
-        @formChange="handleFormChange"
-      />
+      <PlusTableColumn :columns="(subColumns as any)" @formChange="handleFormChange" />
 
       <!-- 操作栏 -->
       <PlusTableActionBar v-bind="actionBar" @clickAction="handleAction" />
@@ -84,11 +80,10 @@
 </template>
 
 <script lang="ts" setup>
-import { reactive, toRefs, watch, ref } from 'vue'
+import { reactive, toRefs, watch, ref, provide } from 'vue'
 import { cloneDeep } from 'lodash-es'
 import PlusPagination from '@plus-pro-components/components/pagination'
-import { DefaultPageInfo } from '@plus-pro-components/constants'
-
+import { DefaultPageInfo, TableFormRefInjectionKey } from '@plus-pro-components/constants'
 import type { PlusPaginationProps } from '@plus-pro-components/components/pagination'
 import type { CSSProperties } from 'vue'
 import type { ComponentSize } from 'element-plus/es/constants'
@@ -179,11 +174,12 @@ const props = withDefaults(defineProps<PlusTableProps>(), {
 const emit = defineEmits<PlusTableEmits>()
 
 const subColumns = ref(cloneDeep(props.columns))
+const formRefs = ref({})
+
+provide(TableFormRefInjectionKey, formRefs)
 
 const tableInstance = ref<TableInstance | null>(null)
 const state = reactive<TableState>({
-  bigImageVisible: false,
-  srcList: [],
   subPageInfo: { ...((props.pagination.modelValue || DefaultPageInfo) as PageInfo) },
   size: props.defaultSize
 })
@@ -213,7 +209,8 @@ watch(
 
 const handleAction = (res: ButtonsCallBackParams) => {
   const { row, buttonRow, index, e } = res
-  emit('clickAction', { row, buttonRow, index, e })
+
+  emit('clickAction', { row, buttonRow, index, e, formRefs: (formRefs.value as any)[index] })
 }
 
 const handleFilterTableConfirm = (data: PlusColumn[]) => {

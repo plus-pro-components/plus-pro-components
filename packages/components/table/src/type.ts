@@ -7,7 +7,7 @@ import type { ComponentSize } from 'element-plus/es/constants'
 export interface ButtonsNameKeyRow {
   /**
    * 操作唯一code
-   * @deprecated
+   *
    */
   code?: string | number
   /**
@@ -56,6 +56,10 @@ export interface ButtonsCallBackParams {
    * 按钮点击事件数据
    */
   e: MouseEvent
+  /**
+   * 可编辑表单的行form
+   */
+  formRefs?: any
 }
 
 /**

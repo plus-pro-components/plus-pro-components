@@ -1,14 +1,14 @@
 <template>
   <el-form
     ref="formInstance"
-    :model="state.values"
     :rules="rules"
     :label-width="labelWidth"
     class="plus-form"
     :label-position="labelPosition"
     :validate-on-rule-change="false"
     :label-suffix="labelSuffix"
-    v-bind="formProps"
+    v-bind="$attrs"
+    :model="state.values"
   >
     <slot>
       <PlusFormItem
@@ -37,14 +37,14 @@
 
 <script lang="ts" setup>
 import { reactive, ref, watch, computed } from 'vue'
-import type { FormInstance, FormRules, FormProps } from 'element-plus'
+import type { FormInstance, FormRules } from 'element-plus'
 import { ElMessage } from 'element-plus'
 import PlusFormItem from '@plus-pro-components/components/form-item'
 import type { PlusColumn, RecordType } from '@plus-pro-components/types'
 
 export interface PlusFormProps {
-  modelValue: RecordType
-  columns: PlusColumn[]
+  modelValue?: RecordType
+  columns?: PlusColumn[]
   labelWidth?: string
   labelPosition?: 'left' | 'right' | 'top'
   labelSuffix?: string
@@ -55,7 +55,6 @@ export interface PlusFormProps {
   cancelText?: string
   submitLoading?: boolean
   rules?: FormRules
-  formProps?: Partial<FormProps>
 }
 
 export interface PlusFormState {
@@ -140,7 +139,6 @@ const handleCancel = (): void => {
 }
 
 defineExpose({
-  clearValidate,
   formInstance
 })
 </script>

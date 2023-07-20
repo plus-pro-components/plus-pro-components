@@ -17,8 +17,6 @@ import type {
   ButtonsNameKeyRow
 } from '@plus-pro-components/components/table'
 import { useTable } from '@plus-pro-components/hooks'
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
 import { ElMessage } from 'element-plus'
 import type { PlusColumn } from '@plus-pro-components/types'
 import { ref } from 'vue'
@@ -163,8 +161,6 @@ const handleSave = async (data: any) => {
   try {
     await Promise.all(data.formRefs.map((item: any) => item.formInstance?.validate()))
   } catch (errors: any) {
-    console.log(errors)
-
     ElMessage.closeAll()
     const values: any[] = Object.values(errors)
     ElMessage.warning(values[0]?.[0]?.message || '请完整填写表单并再次提交！')
@@ -172,8 +168,6 @@ const handleSave = async (data: any) => {
 }
 
 const handleClickButton = async (data: ButtonsCallBackParams) => {
-  console.log(data.formRefs)
-
   if (data.buttonRow.code === 'edit') {
     buttonsName.value = {
       normal: [...edit]

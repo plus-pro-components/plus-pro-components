@@ -100,6 +100,10 @@ const getTooltip = (tooltip: PlusColumn['tooltip']) => {
     return tooltip
   }
 }
+
+defineExpose({
+  formItemInstance
+})
 </script>
 
 <style lang="scss">

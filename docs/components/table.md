@@ -10,6 +10,8 @@ table/basic
 
 ## 自定义操作栏
 
+actionBar 的`buttonType` 支持 `button` 和 `link`, 对应 element plus 的 ElButton 和 ElLink 组件
+
 :::demo
 
 table/action-bar
@@ -40,11 +42,20 @@ table/page-bar
 
 :::
 
-## 可编辑表格
+## 可编辑表格 (整体)
 
 :::demo
 
 table/edit-bar
+
+:::
+
+## 可编辑表格 (单行)
+
+可校验
+:::demo
+
+table/cell-edit
 
 :::
 

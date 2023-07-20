@@ -3,7 +3,7 @@
     <PlusTable
       :columns="tableConfig"
       :table-data="tableData"
-      :action-bar="{ buttonsName, buttonType: 'link', buttonCount: 2 }"
+      :action-bar="{ buttonsName, buttonType: 'button', buttonCount: 2 }"
       :pagination="{ show: false }"
     />
   </div>

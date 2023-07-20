@@ -4,8 +4,10 @@
       <el-descriptions-item
         v-if="item.hideInDescriptions !== true"
         :label="item.label"
-        :class-name="item.descriptionsItemProps?.className || 'plus-description__name'"
-        :label-class-name="item.descriptionsItemProps?.labelClassName || 'plus-description__label'"
+        :class-name="(item.descriptionsItemProps?.className || '') + ' plus-description__name'"
+        :label-class-name="
+          (item.descriptionsItemProps?.labelClassName || '') + ' plus-description__label'
+        "
         v-bind="item.descriptionsItemProps"
       >
         <PlusDisplayItem :column="item" :row="data" />
