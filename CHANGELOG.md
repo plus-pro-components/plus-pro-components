@@ -1,3 +1,23 @@
+## [v0.0.1-alpha.18](https://github.com/plus-pro-components/plus-pro-components/
+compare/v0.0.1-alpha.17...v0.0.1-alpha.18) (2023-07-20)
+
+
+### ✨ Features
+
+* **components:** :sparkles: add dialog-form and drawer-form component.([b1b70de](https://github.com/plus-pro-components/plus-pro-components/
+commit/b1b70de)) by@xiaofei
+
+
+### 🐛 Bug Fixes
+
+* **docs:** :bug: fix table cell edit.([2f8da7d](https://github.com/plus-pro-components/plus-pro-components/
+commit/2f8da7d)) by@xiaofei
+* **components:** :bug: fix table-column-index indexContentStyle ts type.([8d8b2d5](https://github.com/plus-pro-components/plus-pro-components/
+commit/8d8b2d5)) by@xiaofei
+* **components:** :bug: fix table-action-bar el-link style.([66fe5e3](https://github.com/plus-pro-components/plus-pro-components/
+commit/66fe5e3)) by@xiaofei
+
+
 ## [v0.0.1-alpha.17](https://github.com/plus-pro-components/plus-pro-components/
 compare/v0.0.1-alpha.16...v0.0.1-alpha.17) (2023-07-20)
 
