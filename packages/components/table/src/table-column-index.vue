@@ -66,11 +66,11 @@ const getTableIndex = (index: number) => {
 }
 
 // index样式
-const customIndexContentStyle = (row: any, index: number) => {
+const customIndexContentStyle = (row: any, index: number): CSSProperties => {
   if (isFunction(props.indexContentStyle)) {
     return (props.indexContentStyle as (row: any, index: number) => CSSProperties)(row, index)
   } else if (isPlainObject(props.indexContentStyle)) {
-    return props.indexContentStyle
+    return props.indexContentStyle as CSSProperties
   } else {
     return {}
   }
