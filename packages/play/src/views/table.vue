@@ -27,12 +27,12 @@ const TestServe = {
   getList: async () => {
     const data = [...new Array(10)].map((item, index) => {
       return {
+        id: index,
         name: index < 5 ? '' : index + 'name',
         status: String(index % 3),
         rate: index > 3 ? 2 : 3.5,
         switch: index % 2 === 0 ? true : false,
-        time: index < 5 ? '' : new Date(),
-        buttonKey: 'normal'
+        time: index < 5 ? '' : new Date()
       }
     })
     return { data }
@@ -150,7 +150,11 @@ const tableConfig = ref<PlusColumn[]>([
 const getList = async () => {
   try {
     const { data } = await TestServe.getList()
-    tableData.value = data
+    tableData.value = data.map(item => ({ ...item, buttonKey: item.id }))
+
+    tableData.value.forEach((item: any) => {
+      buttonsName.value[item.buttonKey] = noEdit
+    })
   } catch (error) {}
 }
 getList()
@@ -175,17 +179,21 @@ const handleClickButton = async (data: ButtonsCallBackParams) => {
   console.log(data.formRefs)
 
   if (data.buttonRow.code === 'edit') {
-    buttonsName.value = {
-      normal: [...edit]
-    }
+    tableData.value.forEach((item: any) => {
+      if (item.id === data.row.id) {
+        buttonsName.value[item.buttonKey] = [...edit]
+      }
+    })
 
     data.formRefs.forEach((item: any) => {
       item.startCellEdit()
     })
   } else if (data.buttonRow.code === 'cancel') {
-    buttonsName.value = {
-      normal: [...noEdit]
-    }
+    tableData.value.forEach((item: any) => {
+      if (item.id === data.row.id) {
+        buttonsName.value[item.buttonKey] = [...noEdit]
+      }
+    })
 
     data.formRefs.forEach((item: any) => {
       item.stopCellEdit()
