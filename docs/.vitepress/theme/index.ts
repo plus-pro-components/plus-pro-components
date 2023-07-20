@@ -5,7 +5,7 @@ import 'element-plus/dist/index.css'
 import zhCn from 'element-plus/dist/locale/zh-cn.mjs'
 
 import PlusProComponents from 'plus-pro-components'
-import 'plus-pro-components/index.min.css'
+// import 'plus-pro-components/index.min.css'
 
 import CodeDemo from './components/code-demo.vue'
 import directive from './directives'

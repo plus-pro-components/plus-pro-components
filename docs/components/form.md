@@ -21,6 +21,7 @@ form/basic
 | `labelSuffix`           | el-form 的 labelSuffix    | `string`                                                                                         | `:`     | 否       |
 | `hasErrorTip`           | 是否需要校验 message 提示 | `boolean`                                                                                        | `true`  | 否       |
 | `hasFooter`             | 是否需要全部底部按钮      | `boolean`                                                                                        | `true`  | 否       |
+| `footerAlign`           | 底部按钮对齐方式          | `left`/`right`                                                                                   | `left`  | 否       |
 | `hasCancel`             | 是否需要底部按钮 `取消`   | `boolean`                                                                                        | `true`  | 否       |
 | `submitLoading`         | 确定按钮 loading          | `boolean`                                                                                        | `false` | 否       |
 | `rules`                 | 表单校验                  | el-form 的 rules [FormRules](https://element-plus.org/zh-CN/component/form.html#form-attributes) | `{}`    | 否       |

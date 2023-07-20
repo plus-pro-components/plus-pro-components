@@ -8,6 +8,8 @@ import { PlusDatePicker } from '@plus-pro-components/components/date-picker'
 import { PlusDescriptions } from '@plus-pro-components/components/descriptions'
 import { PlusForm } from '@plus-pro-components/components/form'
 import { PlusSearch } from '@plus-pro-components/components/search'
+import { PlusDialogForm } from '@plus-pro-components/components/dialog-form'
+import { PlusDrawerForm } from '@plus-pro-components/components/drawer-form'
 
 const plugins: DefineComponent[] = [
   PlusDialog,
@@ -17,7 +19,9 @@ const plugins: DefineComponent[] = [
   PlusDatePicker,
   PlusDescriptions,
   PlusForm,
-  PlusSearch
+  PlusSearch,
+  PlusDialogForm,
+  PlusDrawerForm
 ] as unknown as DefineComponent[]
 
 export default plugins

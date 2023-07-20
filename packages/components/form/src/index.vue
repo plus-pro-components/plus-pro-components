@@ -19,7 +19,11 @@
       />
     </slot>
 
-    <div v-if="hasFooter" class="plus-form-footer">
+    <div
+      v-if="hasFooter"
+      class="plus-form-footer"
+      :style="{ justifyContent: footerAlign === 'left' ? 'flex-start' : 'flex-end' }"
+    >
       <slot name="footer">
         <el-button type="primary" :loading="submitLoading" @click="handleSubmit">
           <!-- 确定 -->
@@ -54,6 +58,7 @@ export interface PlusFormProps {
   confirmText?: string
   cancelText?: string
   submitLoading?: boolean
+  footerAlign?: 'left' | 'right'
   rules?: FormRules
 }
 
@@ -85,6 +90,7 @@ const props = withDefaults(defineProps<PlusFormProps>(), {
   submitLoading: false,
   confirmText: '确定',
   cancelText: '取消',
+  footerAlign: 'left',
   formProps: () => ({}),
   rules: () => ({}),
   columns: () => []
@@ -142,3 +148,10 @@ defineExpose({
   formInstance
 })
 </script>
+
+<style lang="scss">
+.plus-form-footer {
+  display: flex;
+  justify-content: flex-end;
+}
+</style>
