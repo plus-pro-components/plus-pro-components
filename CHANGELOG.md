@@ -1,3 +1,19 @@
+## [v0.0.1-alpha.17](https://github.com/plus-pro-components/plus-pro-components/
+compare/v0.0.1-alpha.16...v0.0.1-alpha.17) (2023-07-20)
+
+
+### ✨ Features
+
+* **components:** :sparkles: table component add single line editing function.([632b178](https://github.com/plus-pro-components/plus-pro-components/
+commit/632b178)) by@xiaofei
+* **docs:** :sparkles: delete deprecated md.([83f73f7](https://github.com/plus-pro-components/plus-pro-components/
+commit/83f73f7)) by@xiaofei
+* **components:** :sparkles: imagePreview component is deprecated.([20312b6](https://github.com/plus-pro-components/plus-pro-components/
+commit/20312b6)) by@xiaofei
+
+
+
+
 ## [v0.0.1-alpha.16](https://github.com/plus-pro-components/plus-pro-components/
 compare/v0.0.1-alpha.15...v0.0.1-alpha.16) (2023-07-19)
 
