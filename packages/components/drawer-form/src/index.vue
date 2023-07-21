@@ -20,7 +20,7 @@
       ref="formInstance"
       v-model="state"
       footer-align="right"
-      v-bind="form"
+      v-bind="(form as any)"
       @submit="handleSubmitForm"
       @change="handleChange"
       @cancel="handleCancel"

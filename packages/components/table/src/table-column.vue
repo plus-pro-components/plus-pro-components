@@ -17,15 +17,13 @@
       </template>
 
       <template #default="{ row, column, $index }">
-        <el-form>
-          <PlusDisplayItem
-            ref="plusDisplayItemInstance"
-            :column="columns[index]"
-            :row="row"
-            :index="$index"
-            @change="data => handleChange(data, $index, column, item)"
-          />
-        </el-form>
+        <PlusDisplayItem
+          ref="plusDisplayItemInstance"
+          :column="columns[index]"
+          :row="row"
+          :index="$index"
+          @change="data => handleChange(data, $index, column, item)"
+        />
       </template>
     </el-table-column>
   </template>
@@ -65,7 +63,7 @@ const formRef = inject(TableFormRefInjectionKey) as Ref<any>
 
 watch(plusDisplayItemInstance, (event: PlusDisplayItemInstance[]) => {
   const data: any = {}
-  const list: any[] = event?.map(item => ({ ...item, ...item.getDisplayItemInstance() })) || []
+  const list: any[] = event?.map(item => ({ ...item, ...item?.getDisplayItemInstance() })) || []
   list.forEach(item => {
     if (!data[item.index]) {
       data[item.index] = []

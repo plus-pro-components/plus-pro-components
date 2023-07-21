@@ -41,7 +41,7 @@
 import type { VNode } from 'vue'
 import { h } from 'vue'
 import { ArrowDownBold } from '@element-plus/icons-vue'
-import { ElButton, ElLink } from 'element-plus'
+import { ElButton, ElIcon, ElLink, ElTooltip } from 'element-plus'
 import type { RecordType } from '@plus-pro-components/types'
 import type { ButtonsCallBackParams, ButtonsNameKeyRow, ButtonsNameRow } from './type'
 
@@ -77,20 +77,39 @@ const props = withDefaults(defineProps<PlusTableActionBarProps>(), {
   optionColumnWidth: 200
 })
 const emit = defineEmits<PlusTableActionBarEmits>()
-const render = (row: any, buttonRow: ButtonsNameKeyRow, index: number): VNode => {
-  const tag = props.buttonType === 'button' ? ElButton : ElLink
 
-  return h(
-    tag,
-    {
-      type: buttonRow?.type,
-      title: buttonRow?.text,
-      size: buttonRow?.size || 'small',
-      onClick: (event: MouseEvent) => handleClickAction(row, buttonRow, index, event)
-    },
-    () => buttonRow?.text
-  )
+// 渲染
+const render = (row: any, buttonRow: ButtonsNameKeyRow, index: number): VNode => {
+  if (props.buttonType === 'icon') {
+    return h(
+      ElTooltip,
+      { placement: 'top', content: buttonRow.text, ...buttonRow.tooltipProps },
+      () =>
+        h(
+          ElIcon,
+          {
+            size: 16,
+            ...buttonRow.props,
+            onClick: (event: MouseEvent) => handleClickAction(row, buttonRow, index, event)
+          },
+          () => (buttonRow.icon ? h(buttonRow.icon) : '')
+        )
+    )
+  } else {
+    const Tag = props.buttonType === 'button' ? ElButton : ElLink
+    return h(
+      Tag,
+      {
+        size: 'small',
+        icon: buttonRow.icon,
+        ...buttonRow.props,
+        onClick: (event: MouseEvent) => handleClickAction(row, buttonRow, index, event)
+      },
+      () => buttonRow.text
+    )
+  }
 }
+
 // 获取当前操作的按钮组
 const getOptionsName = (buttonKey: string): ButtonsNameKeyRow[] =>
   props.buttonsName[buttonKey] || []
@@ -139,6 +158,12 @@ const handleClickAction = (
     margin-left: 12px;
   }
   .el-link + .el-link {
+    margin-left: 12px;
+  }
+  .el-icon {
+    cursor: pointer;
+  }
+  .el-icon + .el-icon {
     margin-left: 12px;
   }
 }

@@ -4,7 +4,7 @@
       :columns="tableConfig"
       :table-data="tableData"
       :pagination="{ show: false }"
-      :action-bar="{ buttonsName, optionColumnWidth: 200 }"
+      :action-bar="{ buttonsName, optionColumnWidth: 140 }"
       @formChange="formChange"
       @clickAction="handleClickButton"
     />
@@ -44,13 +44,17 @@ const edit: ButtonsNameKeyRow[] = [
   {
     text: '取消编辑',
     code: 'cancel',
-    type: 'warning'
+    props: {
+      type: 'warning'
+    }
   },
   {
     // 保存
     text: '保存',
     code: 'save',
-    type: 'danger'
+    props: {
+      type: 'danger'
+    }
   }
 ]
 
@@ -58,7 +62,9 @@ const noEdit: ButtonsNameKeyRow[] = [
   {
     text: '编辑',
     code: 'edit',
-    type: 'primary'
+    props: {
+      type: 'primary'
+    }
   }
 ]
 
@@ -167,8 +173,6 @@ const handleSave = async (data: any) => {
   try {
     await Promise.all(data.formRefs.map((item: any) => item.formInstance?.validate()))
   } catch (errors: any) {
-    console.log(errors)
-
     ElMessage.closeAll()
     const values: any[] = Object.values(errors)
     ElMessage.warning(values[0]?.[0]?.message || '请完整填写表单并再次提交！')
@@ -176,8 +180,6 @@ const handleSave = async (data: any) => {
 }
 
 const handleClickButton = async (data: ButtonsCallBackParams) => {
-  console.log(data.formRefs)
-
   if (data.buttonRow.code === 'edit') {
     tableData.value.forEach((item: any) => {
       if (item.id === data.row.id) {
@@ -185,7 +187,7 @@ const handleClickButton = async (data: ButtonsCallBackParams) => {
       }
     })
 
-    data.formRefs.forEach((item: any) => {
+    data.formRefs?.forEach((item: any) => {
       item.startCellEdit()
     })
   } else if (data.buttonRow.code === 'cancel') {
@@ -195,7 +197,7 @@ const handleClickButton = async (data: ButtonsCallBackParams) => {
       }
     })
 
-    data.formRefs.forEach((item: any) => {
+    data.formRefs?.forEach((item: any) => {
       item.stopCellEdit()
     })
   } else {

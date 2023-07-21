@@ -39,6 +39,7 @@
     "typecheck:play": "vue-tsc -p packages/play/tsconfig.json --composite false --noEmit",
     "docs:dev": "pnpm run -C docs dev",
     "docs:start": "pnpm run -C docs start",
+    "docs:debug": "pnpm run -C docs debug",
     "docs:build": "pnpm run -C docs build",
     "docs:preview": "pnpm run -C docs preview",
     "new": "tsx scripts/create-component/index.ts"

@@ -16,7 +16,7 @@
         <PlusFormItem v-model="state.values[item.prop]" v-bind="item" />
       </el-col>
       <el-col v-bind="colProps">
-        <el-form-item v-if="hasFooter">
+        <el-form-item v-if="hasFooter" class="plus-search__button__wrapper">
           <slot name="footer">
             <el-button v-if="hasReset" @click="handleReset">
               {{ resetText }}
@@ -168,3 +168,11 @@ defineExpose({
 
 const { isShowUnfold, subColumns } = toRefs(state)
 </script>
+
+<style lang="scss">
+.plus-search {
+  .plus-search__button__wrapper .el-form-item__content {
+    flex-wrap: nowrap;
+  }
+}
+</style>

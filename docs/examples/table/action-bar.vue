@@ -3,8 +3,23 @@
     <PlusTable
       :columns="tableConfig"
       :table-data="tableData"
-      :action-bar="{ buttonsName, buttonType: 'button', buttonCount: 2 }"
+      :action-bar="{ buttonsName, buttonCount: 2 }"
       :pagination="{ show: false }"
+      @clickAction="handleClickButton"
+    />
+    <PlusTable
+      :columns="tableConfig"
+      :table-data="tableData"
+      :action-bar="{ buttonsName, buttonType: 'button', buttonCount: 2, optionColumnWidth: 240 }"
+      :pagination="{ show: false }"
+      @clickAction="handleClickButton"
+    />
+    <PlusTable
+      :columns="tableConfig"
+      :table-data="tableData"
+      :action-bar="{ buttonsName, buttonType: 'icon', buttonCount: 4 }"
+      :pagination="{ show: false }"
+      @clickAction="handleClickButton"
     />
   </div>
 </template>
@@ -12,10 +27,13 @@
 <script lang="ts" setup>
 import { useTable } from '@plus-pro-components/hooks'
 import type { PlusColumn } from '@plus-pro-components/types'
+import type { ButtonsCallBackParams } from '@plus-pro-components/components/table'
+
+import { View, Edit, Delete, DocumentCopy } from '@element-plus/icons-vue'
 
 const TestServe = {
   getList: async () => {
-    const data = [...new Array(10)].map((item, index) => {
+    const data = [...new Array(3)].map((item, index) => {
       return {
         name: index + 'name',
         status: String(index % 3),
@@ -42,21 +60,33 @@ buttonsName.value = {
     {
       // 查看
       text: '查看',
-      type: 'info'
+      icon: View,
+      props: {
+        type: 'info'
+      }
     },
     {
       // 修改
       text: '修改',
-      type: 'primary'
+      icon: Edit,
+      props: {
+        type: 'primary'
+      }
     },
     {
       // 删除
       text: '删除',
-      type: 'danger'
+      icon: Delete,
+      props: {
+        type: 'danger'
+      }
     },
     {
       text: '复制',
-      type: 'success'
+      icon: DocumentCopy,
+      props: {
+        type: 'success'
+      }
     }
   ]
 }
@@ -116,4 +146,8 @@ const getList = async () => {
   } catch (error) {}
 }
 getList()
+
+const handleClickButton = (data: ButtonsCallBackParams) => {
+  console.log(data.buttonRow.text)
+}
 </script>

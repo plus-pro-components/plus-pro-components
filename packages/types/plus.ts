@@ -131,7 +131,7 @@ export interface CommentType {
    * ]
    * ```
    */
-  render?: (value?: any, row?: RecordType, column?: PlusColumn) => VNode
+  render?: (value: any, data: { row: any; column: PlusColumn; index: number }) => VNode
 
   /**
    * 自定义渲染单行显示内容 需要返回一个 html字符串，`renderHTML`的优先级低于`render`，高于`valueType`。
@@ -154,7 +154,7 @@ export interface CommentType {
    *```
    *
    */
-  renderHTML?: (value?: any, row?: RecordType, column?: PlusColumn) => string
+  renderHTML?: (value: any, data: { row: any; column: PlusColumn; index: number }) => string
 }
 
 /**

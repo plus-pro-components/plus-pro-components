@@ -185,7 +185,7 @@ const handleClickButton = async (data: ButtonsCallBackParams) => {
       }
     })
 
-    data.formRefs.forEach((item: any) => {
+    data.formRefs?.forEach((item: any) => {
       item.startCellEdit()
     })
   } else if (data.buttonRow.code === 'cancel') {
@@ -195,7 +195,7 @@ const handleClickButton = async (data: ButtonsCallBackParams) => {
       }
     })
 
-    data.formRefs.forEach((item: any) => {
+    data.formRefs?.forEach((item: any) => {
       item.stopCellEdit()
     })
   } else {

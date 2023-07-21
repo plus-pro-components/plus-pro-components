@@ -141,8 +141,6 @@ const props = withDefaults(defineProps<PlusTableToolbarProps>(), {
   defaultSize: 'default'
 })
 
-console.log(props.defaultSize, 'defaultSize')
-
 const emit = defineEmits<PlusTableToolbarEmits>()
 
 const buttonNameDensity: ButtonNameDensity[] = [
