@@ -10,7 +10,7 @@
       <slot name="toolbar" />
       <!-- 表格密度 -->
       <PlusPopover
-        :has-filter-table-header="hasFilterTableHeader"
+        :has-table-header="hasTableHeader"
         placement="bottom"
         :width="150"
         trigger="click"
@@ -50,7 +50,7 @@
 
       <!-- 列设置 -->
       <PlusPopover
-        :has-filter-table-header="hasFilterTableHeader"
+        :has-table-header="hasTableHeader"
         placement="bottom"
         :width="100"
         trigger="click"
@@ -108,7 +108,7 @@ import type { ComponentSize } from 'element-plus/es/constants'
 export interface PlusTableToolbarProps {
   columns?: PlusColumn[]
   title?: string
-  hasFilterTableHeader?: boolean
+  hasTableHeader?: boolean
   filterTableHeaderOverflowLabelLength?: number
   defaultSize?: ComponentSize
 }
@@ -136,7 +136,7 @@ defineOptions({
 const props = withDefaults(defineProps<PlusTableToolbarProps>(), {
   columns: () => [],
   title: '',
-  hasFilterTableHeader: true,
+  hasTableHeader: true,
   filterTableHeaderOverflowLabelLength: 6,
   defaultSize: 'default'
 })

@@ -26,6 +26,10 @@ export type FormItemValueType =
  */
 export interface FormColumnProps {
   /**
+   * @desc 支持所有 el-form的props
+   */
+  formProps?: PropsItemType
+  /**
    * @desc 支持所有 el-form-item的props
    */
   formItemProps?: PropsItemType

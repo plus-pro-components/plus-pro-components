@@ -20,7 +20,10 @@ const useGetOptions = (props: PlusColumn): Ref<OptionsRow[]> => {
   } else if (isFunction(props.options)) {
     const getValue = props.options as (props?: PlusColumn | undefined) => OptionsRow[]
     options.value = getValue(props) || []
+  } else {
+    options.value = []
   }
+
   return options
 }
 

@@ -1,1 +1,11 @@
-export type ValueType = string | number | boolean | string[] | number[] | boolean[] | null | ''
+export type ValueType =
+  | string
+  | number
+  | boolean
+  | Date
+  | string[]
+  | number[]
+  | boolean[]
+  | Date[]
+  | null
+  | ''

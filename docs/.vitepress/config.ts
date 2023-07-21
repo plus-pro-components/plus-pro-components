@@ -127,10 +127,6 @@ export default defineConfig({
               link: '/components/pagination'
             },
             {
-              text: '图片预览',
-              link: '/components/image-preview'
-            },
-            {
               text: '单选',
               link: '/components/radio'
             },
@@ -141,7 +137,7 @@ export default defineConfig({
           ]
         },
         {
-          text: '组合组件',
+          text: '高级组件',
           items: [
             {
               text: '通用配置',
@@ -154,6 +150,14 @@ export default defineConfig({
             {
               text: '表单',
               link: '/components/form'
+            },
+            {
+              text: '弹窗表单',
+              link: '/components/dialog-form'
+            },
+            {
+              text: '抽屉表单',
+              link: '/components/drawer-form'
             },
             {
               text: '搜索',

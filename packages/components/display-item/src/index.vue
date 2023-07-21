@@ -11,29 +11,43 @@
     v-html="column.renderHTML && column.renderHTML(subRow[column.prop], subRow, column)"
   />
 
-  <PlusFormFieldItem
-    v-else-if="FormFieldType.includes(column.valueType as string) && column.editable === true"
-    v-model="subRow[column.prop]"
-    v-bind="column"
-    @change="handleChange"
-  />
+  <PlusForm
+    v-else-if="isForm"
+    ref="formInstance"
+    v-bind="column.formProps"
+    :model="subRow"
+    :has-footer="false"
+    label-suffix=""
+    label-width="0"
+    class="plus-display-item__form"
+  >
+    <PlusFormItem
+      ref="formItemInstance"
+      v-model="subRow[column.prop]"
+      class="plus-display-item__form__item"
+      v-bind="column"
+      label=""
+      @change="handleChange"
+    />
+  </PlusForm>
 
   <!--显示图片 -->
-  <img
+  <el-image
     v-else-if="column.valueType === 'img'"
     title="点击预览"
-    class="plus-table-column-image-col"
+    class="plus-display-item__image__col"
     fit="cover"
+    preview-teleported
     :src="getImageUrl().url"
+    :preview-src-list="column.preview !== false ? getImageUrl().options : []"
     v-bind="customFieldProps"
-    @click="handelClickToEnlargeImage"
   />
 
   <!--显示链接 -->
   <el-link
     v-else-if="column.valueType === 'link'"
     type="primary"
-    class="plus-table-column-link"
+    class="plus-display-item__link"
     v-bind="customFieldProps"
   >
     {{ column.linkText || subRow[column.prop] }}
@@ -59,12 +73,12 @@
       column.valueType === 'radio' ||
       column.valueType === 'checkbox'
     "
-    class="plus-table-column-badge-status"
+    class="plus-display-item__badge--status"
     v-bind="customFieldProps"
   >
     <span
       v-if="getStatus().color"
-      class="plus-table-column-badge-status-dot"
+      class="plus-display-item__badge--status__dot"
       :style="{ backgroundColor: getStatus().color }"
     />
     {{ getStatus().label }}
@@ -87,7 +101,7 @@
     <el-icon
       size="16"
       color="var(--el-color-primary)"
-      class="plus-table-icon-copy"
+      class="plus-display-item__icon__copy"
       v-bind="customFieldProps"
       @click="handelClickCopy(column, subRow)"
     >
@@ -98,7 +112,11 @@
   </span>
 
   <!-- 代码块 -->
-  <pre v-else-if="column.valueType === 'code'" class="plus-table-pre" v-bind="customFieldProps">
+  <pre
+    v-else-if="column.valueType === 'code'"
+    class="plus-display-item__pre"
+    v-bind="customFieldProps"
+  >
       {{ subRow[column.prop] }}
   </pre>
 
@@ -107,25 +125,30 @@
 </template>
 
 <script lang="ts" setup>
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-nocheck
 import { DocumentCopy, Select } from '@element-plus/icons-vue'
-import type { PlusImagePreviewRow } from '@plus-pro-components/components/image-preview'
-import { PlusFormFieldItem } from '@plus-pro-components/components/form-item'
-import { dateFormat, formatToCurrency, isFunction } from '@plus-pro-components/utils'
-import { ref, watch } from 'vue'
+import PlusFormItem from '@plus-pro-components/components/form-item'
+import type { PlusFormInstance } from '@plus-pro-components/components/form'
+import PlusForm from '@plus-pro-components/components/form'
+import {
+  dateFormat,
+  formatToCurrency,
+  isFunction,
+  getCustomProps,
+  isArray
+} from '@plus-pro-components/utils'
+
+import { ref, watch, computed } from 'vue'
 import type { PlusColumn, RecordType } from '@plus-pro-components/types'
-import { useGetOptions, useGetCustomProps } from '@plus-pro-components/hooks'
-import { FormFieldType } from '@plus-pro-components/constants'
+import { useGetOptions } from '@plus-pro-components/hooks'
 
 export interface PlusDisplayItemProps {
   column?: PlusColumn
   row: RecordType
+  index?: number
 }
 
 export interface PlusTableTableColumnEmits {
-  (e: 'clickToEnlargeImage', data: PlusImagePreviewRow[]): void
-  (e: 'change', value: any, prop: string, row: any): void
+  (e: 'change', data: { value: any; prop: string; row: any }): void
 }
 
 defineOptions({
@@ -134,19 +157,40 @@ defineOptions({
 
 const props = withDefaults(defineProps<PlusDisplayItemProps>(), {
   column: () => ({ prop: '', label: '' }),
-  row: () => ({})
+  row: () => ({}),
+  index: 0
 })
+
+const isCellEdit = ref(false)
+
+const isForm = computed(() => props.column.editable === true || isCellEdit.value === true)
 
 const subRow = ref(props.row)
 const currentStatus = ref({})
+const customFieldProps = ref<any>({})
+const formInstance = ref<PlusFormInstance>()
+const formItemInstance = ref()
 
-const customFieldProps = useGetCustomProps(
-  props.column.fieldProps,
-  subRow.value[props.column.prop],
-  subRow
+watch(
+  () => props.column.fieldProps,
+  val => {
+    const value = subRow.value[props.column.prop]
+    const row = subRow
+    getCustomProps(val, value, row)
+      .then(data => {
+        customFieldProps.value = data
+      })
+      .catch(err => {
+        throw err
+      })
+  },
+  {
+    immediate: true,
+    deep: true
+  }
 )
-const options = useGetOptions(props.column)
 
+const options = useGetOptions(props.column)
 watch(
   options,
   val => {
@@ -187,30 +231,13 @@ const emit = defineEmits<PlusTableTableColumnEmits>()
 
 const getImageUrl = () => {
   const option = subRow.value[props.column.prop]
-  if (typeof option === 'string' && option) {
-    return {
-      options: [{ url: option, name: option }],
-      url: option
-    }
+  if (option && typeof option === 'string') {
+    return { options: [option], url: option }
   }
-  if (Array.isArray(option)) {
-    return {
-      options: option,
-      url: option[0]?.url
-    }
+  if (isArray(option)) {
+    return { options: option, url: option[0] }
   }
-  return {
-    options: [],
-    url: ''
-  }
-}
-
-// 点击放大图片
-const handelClickToEnlargeImage = () => {
-  if (props.column.preview !== false) {
-    const { options } = getImageUrl()
-    emit('clickToEnlargeImage', options)
-  }
+  return { options: [], url: '' }
 }
 
 const getStatus = () => {
@@ -232,16 +259,38 @@ const handelClickCopy = (item: PlusColumn, row: RecordType) => {
 const handleChange = (value: any) => {
   emit('change', { value, prop: props.column.prop, row: subRow })
 }
+
+const startCellEdit = () => {
+  isCellEdit.value = true
+}
+const stopCellEdit = () => {
+  isCellEdit.value = false
+}
+
+const getDisplayItemInstance = () => {
+  return {
+    index: props.index,
+    prop: props.column.prop,
+    formInstance: computed(() => formInstance.value?.formInstance),
+    formItemInstance: computed(() => formItemInstance.value?.formItemInstance)
+  }
+}
+
+defineExpose({
+  startCellEdit,
+  stopCellEdit,
+  getDisplayItemInstance
+})
 </script>
 
 <style lang="scss">
-.plus-table-column-image-col {
+.plus-display-item__image__col {
   cursor: pointer;
   object-fit: cover;
   overflow: hidden;
   width: 30px;
 }
-.plus-table-icon-copy {
+.plus-display-item__icon__copy {
   cursor: pointer;
   color: #1677ff;
   text-decoration: none;
@@ -250,23 +299,15 @@ const handleChange = (value: any) => {
   margin-inline-start: 4px;
   vertical-align: sub;
 }
-.plus-table-column-link {
-  font-size: 13px;
+.plus-display-item__link {
   max-width: 100%;
-  .plus-table-column-link-content {
-    width: 100%;
-    display: inline-block;
-  }
-  .plus-table-column-link-loading {
-    margin-left: 5px;
-  }
   .el-link__inner {
     width: 100%;
     display: inline-block;
   }
 }
-.plus-table-column-badge-status {
-  .plus-table-column-badge-status-dot {
+.plus-display-item__badge--status {
+  .plus-display-item__badge--status__dot {
     position: relative;
     top: -1px;
     display: inline-block;
@@ -276,7 +317,7 @@ const handleChange = (value: any) => {
     border-radius: 50%;
   }
 }
-.plus-table-pre {
+.plus-display-item__pre {
   padding: 0;
   overflow: auto;
   font-size: 85%;
@@ -284,5 +325,12 @@ const handleChange = (value: any) => {
   background-color: rgb(246, 248, 250);
   border-radius: 3px;
   width: unset;
+}
+.plus-display-item__form {
+  .plus-display-item__form__item {
+    .el-form-item__label {
+      padding: 0;
+    }
+  }
 }
 </style>

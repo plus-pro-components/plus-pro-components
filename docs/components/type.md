@@ -69,18 +69,6 @@ export interface PageInfo {
 }
 ```
 
-## PlusImagePreviewRow
-
-```ts
-/**
- * 表格图片预览类型
- */
-export interface PlusImagePreviewRow {
-  url: string
-  name?: string
-}
-```
-
 ## ActionBarProps
 
 ```ts

@@ -1,25 +1,29 @@
 <template>
   <el-form
     ref="formInstance"
-    :model="state.values"
     :rules="rules"
     :label-width="labelWidth"
     class="plus-form"
     :label-position="labelPosition"
     :validate-on-rule-change="false"
     :label-suffix="labelSuffix"
-    v-bind="formProps"
+    v-bind="$attrs"
+    :model="state.values"
   >
     <slot>
       <PlusFormItem
-        v-for="item in columns"
+        v-for="item in state.subColumns"
         :key="item.prop"
         v-model="state.values[item.prop]"
         v-bind="item"
       />
     </slot>
 
-    <div v-if="hasFooter" class="plus-form-footer">
+    <div
+      v-if="hasFooter"
+      class="plus-form-footer"
+      :style="{ justifyContent: footerAlign === 'left' ? 'flex-start' : 'flex-end' }"
+    >
       <slot name="footer">
         <el-button type="primary" :loading="submitLoading" @click="handleSubmit">
           <!-- 确定 -->
@@ -36,15 +40,15 @@
 </template>
 
 <script lang="ts" setup>
-import { reactive, ref, watch } from 'vue'
-import type { FormInstance, FormRules, FormProps } from 'element-plus'
+import { reactive, ref, watch, computed } from 'vue'
+import type { FormInstance, FormRules } from 'element-plus'
 import { ElMessage } from 'element-plus'
 import PlusFormItem from '@plus-pro-components/components/form-item'
 import type { PlusColumn, RecordType } from '@plus-pro-components/types'
 
 export interface PlusFormProps {
-  modelValue: RecordType
-  columns: PlusColumn[]
+  modelValue?: RecordType
+  columns?: PlusColumn[]
   labelWidth?: string
   labelPosition?: 'left' | 'right' | 'top'
   labelSuffix?: string
@@ -54,12 +58,13 @@ export interface PlusFormProps {
   confirmText?: string
   cancelText?: string
   submitLoading?: boolean
+  footerAlign?: 'left' | 'right'
   rules?: FormRules
-  formProps?: Partial<FormProps>
 }
 
 export interface PlusFormState {
   values: any
+  subColumns: any
 }
 
 export interface PlusFormEmits {
@@ -85,6 +90,7 @@ const props = withDefaults(defineProps<PlusFormProps>(), {
   submitLoading: false,
   confirmText: '确定',
   cancelText: '取消',
+  footerAlign: 'left',
   formProps: () => ({}),
   rules: () => ({}),
   columns: () => []
@@ -95,8 +101,11 @@ const emit = defineEmits<PlusFormEmits>()
 const formInstance = ref<FormInstance>()
 
 const state = reactive<PlusFormState>({
-  values: { ...props.modelValue }
+  values: { ...props.modelValue },
+  subColumns: []
 })
+
+state.subColumns = computed<any>(() => props.columns.filter(item => item.hideInForm !== true))
 
 watch(
   () => state.values,
@@ -136,7 +145,13 @@ const handleCancel = (): void => {
 }
 
 defineExpose({
-  clearValidate,
   formInstance
 })
 </script>
+
+<style lang="scss">
+.plus-form-footer {
+  display: flex;
+  justify-content: flex-end;
+}
+</style>

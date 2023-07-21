@@ -38,6 +38,9 @@
 }
 
 .vp-doc {
+  .el-link {
+    color: var(--el-link-text-color);
+  }
   .el-link:hover {
     text-decoration: none;
   }

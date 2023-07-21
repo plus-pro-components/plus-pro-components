@@ -1,5 +1,5 @@
 <template>
-  <template v-for="item in columns" :key="item.prop">
+  <template v-for="(item, index) in columns" :key="item.prop">
     <el-table-column
       class-name="plus-table-column"
       :prop="item.prop"
@@ -17,30 +17,35 @@
       </template>
 
       <template #default="{ row, column, $index }">
-        <PlusDisplayItem
-          :column="item"
-          :row="row"
-          @clickToEnlargeImage="handelClickToEnlargeImage"
-          @change="data => handleChange(data, $index, column, item)"
-        />
+        <el-form>
+          <PlusDisplayItem
+            ref="plusDisplayItemInstance"
+            :column="columns[index]"
+            :row="row"
+            :index="$index"
+            @change="data => handleChange(data, $index, column, item)"
+          />
+        </el-form>
       </template>
     </el-table-column>
   </template>
 </template>
 
 <script lang="ts" setup>
+import type { PlusDisplayItemInstance } from '@plus-pro-components/components/display-item'
 import PlusDisplayItem from '@plus-pro-components/components/display-item'
-import type { PlusImagePreviewRow } from '@plus-pro-components/components/image-preview'
 import type { PlusColumn } from '@plus-pro-components/types'
 import { isString, isPlainObject } from '@plus-pro-components/utils'
+import { TableFormRefInjectionKey } from '@plus-pro-components/constants'
 import { Warning } from '@element-plus/icons-vue'
+import type { Ref } from 'vue'
+import { ref, inject, watch } from 'vue'
 
 export interface PlusTableTableColumnProps {
   columns?: PlusColumn[]
 }
 
 export interface PlusTableTableColumnEmits {
-  (e: 'clickToEnlargeImage', data: PlusImagePreviewRow[]): void
   (e: 'formChange', data: { value: any; prop: string; row: any; index: number; column: any }): void
 }
 
@@ -54,10 +59,22 @@ withDefaults(defineProps<PlusTableTableColumnProps>(), {
 
 const emit = defineEmits<PlusTableTableColumnEmits>()
 
-// 点击放大图片
-const handelClickToEnlargeImage = (srcList: PlusImagePreviewRow[]) => {
-  emit('clickToEnlargeImage', srcList)
-}
+const plusDisplayItemInstance = ref()
+
+const formRef = inject(TableFormRefInjectionKey) as Ref<any>
+
+watch(plusDisplayItemInstance, (event: PlusDisplayItemInstance[]) => {
+  const data: any = {}
+  const list: any[] = event?.map(item => ({ ...item, ...item.getDisplayItemInstance() })) || []
+  list.forEach(item => {
+    if (!data[item.index]) {
+      data[item.index] = []
+    }
+    data[item.index].push(item)
+  })
+
+  formRef.value = data
+})
 
 const getTooltip = (tooltip: PlusColumn['tooltip']) => {
   if (isString(tooltip)) {
@@ -79,6 +96,10 @@ const handleChange = (
 ) => {
   emit('formChange', { ...data, index, column: { ...column, ...item } })
 }
+
+defineExpose({
+  plusDisplayItemInstance
+})
 </script>
 
 <style lang="scss">

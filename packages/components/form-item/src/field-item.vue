@@ -172,9 +172,9 @@
 
 <script lang="ts" setup>
 import { ref, watch } from 'vue'
-import { isFunction } from '@plus-pro-components/utils'
+import { isFunction, getCustomProps, isDate, isArray } from '@plus-pro-components/utils'
 import type { PlusColumn } from '@plus-pro-components/types'
-import { useGetOptions, useGetCustomProps } from '@plus-pro-components/hooks'
+import { useGetOptions } from '@plus-pro-components/hooks'
 import type { ValueType } from './type'
 
 export interface PlusFormItemProps {
@@ -218,7 +218,25 @@ const emit = defineEmits<PlusFormItemEmits>()
 const state = ref<ValueType>()
 
 const options = useGetOptions(props)
-const customFieldProps = useGetCustomProps(props.fieldProps, state, props)
+
+const customFieldProps = ref<any>({})
+
+watch(
+  () => props.fieldProps,
+  val => {
+    getCustomProps(val, state.value, props)
+      .then(data => {
+        customFieldProps.value = data
+      })
+      .catch(err => {
+        throw err
+      })
+  },
+  {
+    immediate: true,
+    deep: true
+  }
+)
 
 const range = ['datetimerange', 'daterange', 'monthrange']
 
@@ -249,11 +267,23 @@ const isNumberValue = () => {
 
 const setValue = (val: any) => {
   if (isArrayValue()) {
-    state.value = Array.isArray(val) ? val : []
+    if (isArray(val)) {
+      const [start, end] = val
+
+      if (isDate(start) || isDate(end)) {
+        state.value = [String(start), String(end)]
+      } else {
+        state.value = val
+      }
+    } else {
+      state.value = []
+    }
   } else if (isNumberValue()) {
     state.value = Number(val)
   } else if (props.valueType === 'switch') {
     state.value = Boolean(val)
+  } else if (isDate(val)) {
+    state.value = String(val)
   } else {
     state.value = val
   }

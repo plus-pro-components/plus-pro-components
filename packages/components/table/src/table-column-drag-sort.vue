@@ -14,10 +14,11 @@
 import type { SortableEvent, Options as SortableOptions } from 'sortablejs'
 import Sortable from 'sortablejs'
 import { isPlainObject } from '@plus-pro-components/utils'
-import { onMounted } from 'vue'
+import { watch } from 'vue'
 
 export interface PlusTableColumnDragSortProps {
   sortable: SortableOptions | boolean
+  tableInstance: any
 }
 export interface PlusTableColumnDragSortEmits {
   (e: 'dragSortEnd', newIndex: number, oldIndex: number): void
@@ -28,19 +29,25 @@ defineOptions({
 })
 
 const props = withDefaults(defineProps<PlusTableColumnDragSortProps>(), {
-  sortable: true
+  sortable: true,
+  tableInstance: null
 })
 const emit = defineEmits<PlusTableColumnDragSortEmits>()
 
-onMounted(() => {
-  if (props.sortable) {
-    rowDrop()
-  }
-})
+watch(
+  () => props.tableInstance,
+  val => {
+    if (val && props.sortable) {
+      rowDrop()
+    }
+  },
+  { deep: true }
+)
 
 // 行拖拽
 const rowDrop = () => {
-  const tbody = document.querySelector('.el-table__body-wrapper tbody')
+  const tbody = props.tableInstance.$el.querySelector('.el-table__body-wrapper tbody')
+
   if (!tbody) return
 
   let config: Sortable.Options = {

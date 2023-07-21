@@ -78,30 +78,18 @@ const props = withDefaults(defineProps<PlusTableActionBarProps>(), {
 })
 const emit = defineEmits<PlusTableActionBarEmits>()
 const render = (row: any, buttonRow: ButtonsNameKeyRow, index: number): VNode => {
-  if (props.buttonType === 'button') {
-    return h(
-      ElButton,
-      {
-        type: buttonRow?.type,
-        title: buttonRow?.text,
-        size: buttonRow?.size || 'small',
-        onClick: (event: MouseEvent) => handleClickAction(row, buttonRow, index, event)
-      },
-      () => buttonRow?.text
-    )
-  } else {
-    return h(
-      ElLink,
-      {
-        class: 'plus-table-action-bar__column__link',
-        type: buttonRow?.type,
-        title: buttonRow?.text,
-        size: buttonRow?.size || 'small',
-        onClick: (event: MouseEvent) => handleClickAction(row, buttonRow, index, event)
-      },
-      () => buttonRow?.text
-    )
-  }
+  const tag = props.buttonType === 'button' ? ElButton : ElLink
+
+  return h(
+    tag,
+    {
+      type: buttonRow?.type,
+      title: buttonRow?.text,
+      size: buttonRow?.size || 'small',
+      onClick: (event: MouseEvent) => handleClickAction(row, buttonRow, index, event)
+    },
+    () => buttonRow?.text
+  )
 }
 // 获取当前操作的按钮组
 const getOptionsName = (buttonKey: string): ButtonsNameKeyRow[] =>
@@ -139,6 +127,7 @@ const handleClickAction = (
     align-items: center;
   }
   .plus-table-action-bar__dropdown__link {
+    display: inline-block;
     cursor: pointer;
   }
   .plus-table-action-bar__column__link {
@@ -147,7 +136,10 @@ const handleClickAction = (
   .plus-table-action-bar__dropdown {
     vertical-align: baseline;
     cursor: pointer;
-    margin-left: 5px;
+    margin-left: 12px;
+  }
+  .el-link + .el-link {
+    margin-left: 12px;
   }
 }
 </style>

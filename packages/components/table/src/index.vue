@@ -1,7 +1,7 @@
 <template>
   <div class="plus-table">
     <PlusTableToolbar
-      :has-filter-table-header="hasFilterTableHeader"
+      :has-table-header="hasTableHeader"
       :columns="columns"
       :default-size="size"
       :title="title"
@@ -37,12 +37,16 @@
       <!-- 序号栏 -->
       <PlusTableTableColumnIndex
         :show="isShowNumber"
+        :index-content-style="indexContentStyle"
         :page-info="pagination.modelValue"
-        align="left"
       />
 
       <!-- 拖拽行 -->
-      <PlusTableColumnDragSort :sortable="dragSortable" @dragSortEnd="handleDragSortEnd" />
+      <PlusTableColumnDragSort
+        :sortable="dragSortable"
+        :table-instance="tableInstance"
+        @dragSortEnd="handleDragSortEnd"
+      />
 
       <!-- 展开行 -->
       <el-table-column v-if="hasExpand" type="expand">
@@ -54,11 +58,7 @@
       </el-table-column>
 
       <!--配置渲染栏  -->
-      <PlusTableTableColumn
-        :columns="(subColumns as any)"
-        @clickToEnlargeImage="handelClickToEnlargeImage"
-        @formChange="handleFormChange"
-      />
+      <PlusTableColumn :columns="(subColumns as any)" @formChange="handleFormChange" />
 
       <!-- 操作栏 -->
       <PlusTableActionBar v-bind="actionBar" @clickAction="handleAction" />
@@ -76,19 +76,14 @@
 
     <!-- 分页 -->
     <PlusPagination v-model="subPageInfo" v-bind="pagination" :loading-status="loadingStatus" />
-
-    <!-- 大图预览 -->
-    <PlusImagePreview v-model="bigImageVisible" title="图片预览" :src-list="srcList" />
   </div>
 </template>
 
 <script lang="ts" setup>
-import { reactive, toRefs, watch, ref } from 'vue'
+import { reactive, toRefs, watch, ref, provide } from 'vue'
 import { cloneDeep } from 'lodash-es'
 import PlusPagination from '@plus-pro-components/components/pagination'
-import { DefaultPageInfo } from '@plus-pro-components/constants'
-import type { PlusImagePreviewRow } from '@plus-pro-components/components/image-preview'
-import PlusImagePreview from '@plus-pro-components/components/image-preview'
+import { DefaultPageInfo, TableFormRefInjectionKey } from '@plus-pro-components/constants'
 import type { PlusPaginationProps } from '@plus-pro-components/components/pagination'
 import type { CSSProperties } from 'vue'
 import type { ComponentSize } from 'element-plus/es/constants'
@@ -96,7 +91,7 @@ import type { TableInstance } from 'element-plus'
 import type { PageInfo, PlusColumn, RecordType } from '@plus-pro-components/types'
 import type { Options as SortableOptions } from 'sortablejs'
 import PlusTableActionBar from './table-action-bar.vue'
-import PlusTableTableColumn from './table-column.vue'
+import PlusTableColumn from './table-column.vue'
 import PlusTableTableColumnIndex from './table-column-index.vue'
 import PlusTableColumnDragSort from './table-column-drag-sort.vue'
 import PlusTableToolbar from './table-toolbar.vue'
@@ -115,7 +110,7 @@ export interface PlusTableProps {
   /* 是否需要序号*/
   isShowNumber?: boolean
   /* 是否需要过滤表格表头*/
-  hasFilterTableHeader?: boolean
+  hasTableHeader?: boolean
   /* 是否是多选表格*/
   isSelection?: boolean
   /* 是否需要展开行*/
@@ -139,6 +134,7 @@ export interface PlusTableProps {
   tableProps?: RecordType
   /** sortablejs配置 */
   dragSortable?: SortableOptions | boolean
+  indexContentStyle?: CSSProperties | ((row: any, index: number) => CSSProperties)
 }
 
 export interface PlusTableEmits {
@@ -157,8 +153,8 @@ const props = withDefaults(defineProps<PlusTableProps>(), {
   defaultSize: 'default',
   pagination: () => ({}),
   actionBar: () => ({}),
-  isShowNumber: true,
-  hasFilterTableHeader: true,
+  isShowNumber: false,
+  hasTableHeader: false,
   isSelection: false,
   hasExpand: false,
   loadingStatus: false,
@@ -170,18 +166,20 @@ const props = withDefaults(defineProps<PlusTableProps>(), {
     color: '#777'
   }),
   rowKey: 'id',
-  dragSortable: true,
-  tableProps: () => ({})
+  dragSortable: false,
+  tableProps: () => ({}),
+  indexContentStyle: () => ({})
 })
 
 const emit = defineEmits<PlusTableEmits>()
 
 const subColumns = ref(cloneDeep(props.columns))
+const formRefs = ref({})
+
+provide(TableFormRefInjectionKey, formRefs)
 
 const tableInstance = ref<TableInstance | null>(null)
 const state = reactive<TableState>({
-  bigImageVisible: false,
-  srcList: [],
   subPageInfo: { ...((props.pagination.modelValue || DefaultPageInfo) as PageInfo) },
   size: props.defaultSize
 })
@@ -189,6 +187,8 @@ const state = reactive<TableState>({
 watch(
   () => props.columns,
   val => {
+    // console.log(val)
+
     subColumns.value = val.filter(item => item.hideInTable !== true) as any
   },
   {
@@ -209,13 +209,8 @@ watch(
 
 const handleAction = (res: ButtonsCallBackParams) => {
   const { row, buttonRow, index, e } = res
-  emit('clickAction', { row, buttonRow, index, e })
-}
 
-// 点击放大图片
-const handelClickToEnlargeImage = (srcList: PlusImagePreviewRow[]) => {
-  state.srcList = srcList?.length ? srcList : []
-  state.bigImageVisible = true
+  emit('clickAction', { row, buttonRow, index, e, formRefs: (formRefs.value as any)[index] })
 }
 
 const handleFilterTableConfirm = (data: PlusColumn[]) => {
@@ -241,7 +236,7 @@ const handleFormChange = (data: {
   emit('formChange', data)
 }
 
-const { bigImageVisible, srcList, subPageInfo, size } = toRefs(state)
+const { subPageInfo, size } = toRefs(state)
 
 // 暴露方法到外部调用
 defineExpose({

@@ -1,4 +1,3 @@
-import type { PlusImagePreviewRow } from '@plus-pro-components/components/image-preview'
 import type { RecordType, PageInfo } from '@plus-pro-components/types'
 import type { ComponentSize } from 'element-plus/es/constants'
 
@@ -8,6 +7,7 @@ import type { ComponentSize } from 'element-plus/es/constants'
 export interface ButtonsNameKeyRow {
   /**
    * 操作唯一code
+   *
    */
   code?: string | number
   /**
@@ -56,6 +56,10 @@ export interface ButtonsCallBackParams {
    * 按钮点击事件数据
    */
   e: MouseEvent
+  /**
+   * 可编辑表单的行form
+   */
+  formRefs?: any
 }
 
 /**
@@ -103,14 +107,7 @@ export interface ActionBarProps {
  */
 export interface TableState {
   size?: ComponentSize
-  /**
-   * 显示大图预览
-   */
-  bigImageVisible: boolean
-  /**
-   * 图片预览列表
-   */
-  srcList: PlusImagePreviewRow[]
+
   /**
    * 分页参数供表格自身使用
    */
