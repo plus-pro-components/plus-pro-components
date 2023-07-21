@@ -1,39 +1,39 @@
 import type { RecordType, PageInfo } from '@plus-pro-components/types'
 import type { ComponentSize } from 'element-plus/es/constants'
+import type { ElForm, ElFormItem } from 'element-plus'
+import type { DefineComponent } from 'vue'
 
 /**
  * 按钮配置项的值的类型
  */
 export interface ButtonsNameKeyRow {
   /**
+   * 操作文本
+   */
+  text: string
+  /**
    * 操作唯一code
    *
    */
   code?: string | number
-  /**
-   * 操作按钮国际化文本
-   */
-  text: string
+
   /**
    * 禁用
    */
   disabled?: boolean
+
   /**
-   * iconfont 的图标名称
+   * @element-plus/icons-vue 的图标名称，对ElButton,ElLink 和ElIcon 组件同时生效
    */
-  iconfont?: string
+  icon?: DefineComponent
   /**
-   * 按钮显示大小
+   * ElButton 和ElIcon 组件对应的props
    */
-  size?: 'small' | 'default' | 'large'
+  props?: RecordType
   /**
-   * 权限标识
+   * ElTooltip组件的props， buttonType 为icon 时生效
    */
-  perms?: string
-  /**
-   * 按钮显示类型
-   */
-  type?: 'primary' | 'success' | 'warning' | 'danger' | 'info'
+  tooltipProps?: RecordType
 }
 
 /**
@@ -59,7 +59,43 @@ export interface ButtonsCallBackParams {
   /**
    * 可编辑表单的行form
    */
-  formRefs?: any
+  formRefs?: {
+    /**
+     * 单元格的表单实例
+     */
+    formInstance: InstanceType<typeof ElForm>
+    /**
+     * 单元格的表单单项实例
+     */
+    formItemInstance: InstanceType<typeof ElFormItem>
+    /**
+     * 获取显示组件实例
+     */
+    getDisplayItemInstance: () => {
+      index: number
+      prop: string
+      formInstance: InstanceType<typeof ElForm>
+      formItemInstance: InstanceType<typeof ElFormItem>
+    }
+    /**
+     * 表格的行索引
+     */
+    index: number
+    /**
+     * 表格的列字段
+     */
+    prop: string
+    /**
+     * 单元格的表单开启编辑
+     * @returns
+     */
+    startCellEdit: () => void
+    /**
+     * 单元格的表单停止编辑
+     * @returns
+     */
+    stopCellEdit: () => void
+  }[]
 }
 
 /**

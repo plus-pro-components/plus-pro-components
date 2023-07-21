@@ -119,16 +119,11 @@ const editTable = (isEdit: boolean) => {
       return {
         ...item,
         editable: true,
-        fieldProps: {
-          ...item.fieldProps,
-          disabled: !isEdit
-        }
+        fieldProps: { ...item.fieldProps, disabled: !isEdit }
       }
     } else {
       return { ...item, editable: isEdit }
     }
   })
-
-  console.log(tableConfig.value)
 }
 </script>

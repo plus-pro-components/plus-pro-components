@@ -83,7 +83,10 @@ const handleTagData = async (): Promise<Tag[]> => {
 }
 
 const main = async () => {
-  const target = (await execPromise(' git remote get-url --all origin')).replace('.git', '/')
+  const target = (await execPromise('git remote get-url --all origin'))
+    .replace('.git', '/')
+    .replace('\n', '')
+
   const logs = await handleLogData()
   const tags = await handleTagData()
   const res = tags.map(item => {

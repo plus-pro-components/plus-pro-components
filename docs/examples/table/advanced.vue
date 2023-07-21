@@ -94,21 +94,29 @@ buttonsName.value = {
     {
       // 查看
       text: '查看',
-      type: 'primary'
+      props: {
+        type: 'primary'
+      }
     },
     {
       // 修改
       text: '修改',
-      type: 'success'
+      props: {
+        type: 'success'
+      }
     },
     {
       // 删除
       text: '删除',
-      type: 'danger'
+      props: {
+        type: 'danger'
+      }
     },
     {
       text: '复制',
-      type: 'primary'
+      props: {
+        type: 'primary'
+      }
     }
   ]
 }
@@ -235,7 +243,7 @@ const tableConfig: PlusColumn[] = [
     prop: 'status',
     render: value => {
       const item = statusOptions.find(item => item.value === value)
-      return h(ElAlert, { type: item?.type }, () => item?.label)
+      return h(ElAlert as any, { type: item?.type }, () => item?.label)
     }
   },
   {

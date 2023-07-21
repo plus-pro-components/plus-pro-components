@@ -1,6 +1,6 @@
 {
   "private": true,
-  "version": "0.0.1-alpha.18",
+  "version": "0.0.1-alpha.19",
   "description": "Page level components developed based on Element Plus.",
   "packageManager": "pnpm@8.5.0",
   "license": "MIT",
@@ -39,6 +39,7 @@
     "typecheck:play": "vue-tsc -p packages/play/tsconfig.json --composite false --noEmit",
     "docs:dev": "pnpm run -C docs dev",
     "docs:start": "pnpm run -C docs start",
+    "docs:debug": "pnpm run -C docs debug",
     "docs:build": "pnpm run -C docs build",
     "docs:preview": "pnpm run -C docs preview",
     "new": "tsx scripts/create-component/index.ts"

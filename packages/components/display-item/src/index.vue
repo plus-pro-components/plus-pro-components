@@ -1,14 +1,16 @@
 <template>
   <!-- 自定义显示 -->
   <component
-    :is="() => column.render && column.render(subRow[column.prop], subRow, column)"
+    :is="() => column.render && column.render(subRow[column.prop], { row: subRow, column, index })"
     v-if="column.render && isFunction(column.render)"
     v-bind="customFieldProps"
   />
 
   <span
     v-else-if="column.renderHTML && isFunction(column.renderHTML)"
-    v-html="column.renderHTML && column.renderHTML(subRow[column.prop], subRow, column)"
+    v-html="
+      column.renderHTML && column.renderHTML(subRow[column.prop], { row: subRow, column, index })
+    "
   />
 
   <PlusForm

@@ -44,13 +44,17 @@ const edit: ButtonsNameKeyRow[] = [
   {
     text: '取消编辑',
     code: 'cancel',
-    type: 'warning'
+    props: {
+      type: 'warning'
+    }
   },
   {
     // 保存
     text: '保存',
     code: 'save',
-    type: 'danger'
+    props: {
+      type: 'danger'
+    }
   }
 ]
 
@@ -58,7 +62,9 @@ const noEdit: ButtonsNameKeyRow[] = [
   {
     text: '编辑',
     code: 'edit',
-    type: 'primary'
+    props: {
+      type: 'primary'
+    }
   }
 ]
 
@@ -185,7 +191,7 @@ const handleClickButton = async (data: ButtonsCallBackParams) => {
       }
     })
 
-    data.formRefs.forEach((item: any) => {
+    data.formRefs?.forEach((item: any) => {
       item.startCellEdit()
     })
   } else if (data.buttonRow.code === 'cancel') {
@@ -195,7 +201,7 @@ const handleClickButton = async (data: ButtonsCallBackParams) => {
       }
     })
 
-    data.formRefs.forEach((item: any) => {
+    data.formRefs?.forEach((item: any) => {
       item.stopCellEdit()
     })
   } else {

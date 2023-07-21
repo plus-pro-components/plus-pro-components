@@ -10,7 +10,7 @@ table/basic
 
 ## 自定义操作栏
 
-actionBar 的`buttonType` 支持 `button` 和 `link`, 对应 element plus 的 ElButton 和 ElLink 组件
+actionBar 的`buttonType` 支持 `button`,`icon`和 `link`, 对应 element plus 的 ElButton,ElIcon 和 ElLink 组件
 
 :::demo
 
@@ -52,10 +52,20 @@ table/edit-bar
 
 ## 可编辑表格 (单行)
 
-可校验
+可编辑和校验单行，也可以控制单行的每一个单元格的编辑状态和校验。核心方法是 调用 formRefs 里的方法。
 :::demo
 
 table/cell-edit
+
+:::
+
+## 自定义行
+
+支持 vue 渲染函数和 html，表单自定义需要开启 `editable`,
+
+:::demo
+
+table/custom-cell
 
 :::
 
@@ -143,7 +153,7 @@ el-table 的其他属性的支持写法 如 `stripe`,`border`,`max-height`等
 | 名称               | 说明                                 | 类型                                                                                      |
 | ------------------ | ------------------------------------ | ----------------------------------------------------------------------------------------- |
 | `paginationChange` | 分页改变触发                         | [Function] `(pageInfo: PageInfo) => void`                                                 |
-| `clickAction`      | 点击操作栏触发                       | [Function] `({row: any, column: any, event: any}) => void`                                |
+| `clickAction`      | 点击操作栏触发                       | [ButtonsCallBackParams](/components/type.html#buttonscallbackparams)                      |
 | `dragSortEnd`      | 拖拽排序列图标触发                   | [Function] `({newIndex: number, oldIndex: number}) => void`                               |
 | `formChange`       | 表格中有可以编辑的表单项目改变时触发 | [Function] `({ value: any; prop: string; row: any; index: number; column: any }) => void` |
 
