@@ -1,3 +1,15 @@
+## [v0.0.1-alpha.19](https://github.com/plus-pro-components/plus-pro-components/
+compare/v0.0.1-alpha.18...v0.0.1-alpha.19) (2023-07-21)
+
+
+### ✨ Features
+
+* **components:** :sparkles: table-action-bar add icon function.([28f311d](https://github.com/plus-pro-components/plus-pro-components/
+commit/28f311d)) by@xiaofei
+
+
+
+
 ## [v0.0.1-alpha.18](https://github.com/plus-pro-components/plus-pro-components/
 compare/v0.0.1-alpha.17...v0.0.1-alpha.18) (2023-07-20)
 
