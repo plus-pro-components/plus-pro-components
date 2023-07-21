@@ -44,13 +44,17 @@ const edit: ButtonsNameKeyRow[] = [
   {
     text: '取消编辑',
     code: 'cancel',
-    type: 'warning'
+    props: {
+      type: 'warning'
+    }
   },
   {
     // 保存
     text: '保存',
     code: 'save',
-    type: 'danger'
+    props: {
+      type: 'danger'
+    }
   }
 ]
 
@@ -58,7 +62,9 @@ const noEdit: ButtonsNameKeyRow[] = [
   {
     text: '编辑',
     code: 'edit',
-    type: 'primary'
+    props: {
+      type: 'primary'
+    }
   }
 ]
 
