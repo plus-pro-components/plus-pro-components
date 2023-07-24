@@ -64,7 +64,7 @@ import 'plus-pro-components/index.css'
 
 ```html{2,6}
 <template>
-  <plus-pagination :total="100" show />
+  <plus-pagination :total="100"  />
 </template>
 
 <script setup>

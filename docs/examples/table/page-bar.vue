@@ -4,10 +4,8 @@
       :columns="tableConfig"
       :table-data="tableData"
       :is-show-number="true"
-      :action-bar="{ show: false }"
       :index-content-style="handleIndexContentStyle"
       :pagination="{
-        show: true,
         total,
         modelValue: pageInfo,
         pageSizeList: [10, 20, 50],

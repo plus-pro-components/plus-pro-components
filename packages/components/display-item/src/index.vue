@@ -178,7 +178,7 @@ watch(
   val => {
     const value = subRow.value[props.column.prop]
     const row = subRow
-    getCustomProps(val, value, row)
+    getCustomProps(val, value, row, props.index)
       .then(data => {
         customFieldProps.value = data
       })

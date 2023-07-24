@@ -1,11 +1,6 @@
 <template>
   <div>
-    <PlusTable
-      :columns="tableConfig"
-      :table-data="tableData"
-      :action-bar="{ show: false }"
-      :pagination="{ show: false }"
-    />
+    <PlusTable :columns="tableConfig" :table-data="tableData" />
   </div>
 </template>
 

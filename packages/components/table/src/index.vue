@@ -36,9 +36,9 @@
 
       <!-- 序号栏 -->
       <PlusTableTableColumnIndex
-        :show="isShowNumber"
+        v-if="isShowNumber"
         :index-content-style="indexContentStyle"
-        :page-info="pagination.modelValue"
+        :page-info="(pagination as PlusPaginationProps)?.modelValue"
       />
 
       <!-- 拖拽行 -->
@@ -61,7 +61,12 @@
       <PlusTableColumn :columns="(subColumns as any)" @formChange="handleFormChange" />
 
       <!-- 操作栏 -->
-      <PlusTableActionBar v-bind="actionBar" @clickAction="handleAction" />
+      <PlusTableActionBar
+        v-if="actionBar"
+        v-bind="actionBar"
+        @clickAction="handleAction"
+        @clickActionConfirmCancel="handleClickActionConfirmCancel"
+      />
 
       <!-- 插入至表格最后一行之后的内容 -->
       <template #append>
@@ -75,20 +80,20 @@
     </el-table>
 
     <!-- 分页 -->
-    <PlusPagination v-model="subPageInfo" v-bind="pagination" :loading-status="loadingStatus" />
+    <PlusPagination v-if="pagination" v-model="subPageInfo" v-bind="pagination" />
   </div>
 </template>
 
 <script lang="ts" setup>
-import { reactive, toRefs, watch, ref, provide } from 'vue'
+import { reactive, toRefs, watch, ref, provide, shallowRef } from 'vue'
 import { cloneDeep } from 'lodash-es'
 import PlusPagination from '@plus-pro-components/components/pagination'
 import { DefaultPageInfo, TableFormRefInjectionKey } from '@plus-pro-components/constants'
 import type { PlusPaginationProps } from '@plus-pro-components/components/pagination'
 import type { CSSProperties } from 'vue'
 import type { ComponentSize } from 'element-plus/es/constants'
-import type { TableInstance } from 'element-plus'
-import type { PageInfo, PlusColumn, RecordType } from '@plus-pro-components/types'
+import type { TableInstance, TableProps } from 'element-plus'
+import type { PageInfo, PlusColumn } from '@plus-pro-components/types'
 import type { Options as SortableOptions } from 'sortablejs'
 import PlusTableActionBar from './table-action-bar.vue'
 import PlusTableColumn from './table-column.vue'
@@ -104,9 +109,9 @@ export interface PlusTableProps {
   // 密度
   defaultSize?: ComponentSize
   /* 分页参数*/
-  pagination?: Partial<PlusPaginationProps>
+  pagination?: false | PlusPaginationProps
   /* 操作栏参数*/
-  actionBar?: ActionBarProps
+  actionBar?: false | ActionBarProps
   /* 是否需要序号*/
   isShowNumber?: boolean
   /* 是否需要过滤表格表头*/
@@ -131,7 +136,7 @@ export interface PlusTableProps {
   /** rowKey */
   rowKey?: string
   /** 表格的其他配置 */
-  tableProps?: RecordType
+  tableProps?: Partial<TableProps<any>>
   /** sortablejs配置 */
   dragSortable?: SortableOptions | boolean
   indexContentStyle?: CSSProperties | ((row: any, index: number) => CSSProperties)
@@ -140,6 +145,7 @@ export interface PlusTableProps {
 export interface PlusTableEmits {
   (e: 'paginationChange', pageInfo: PageInfo): void
   (e: 'clickAction', data: ButtonsCallBackParams): void
+  (e: 'clickActionConfirmCancel', data: ButtonsCallBackParams): void
   (e: 'dragSortEnd', newIndex: number, oldIndex: number): void
   (e: 'formChange', data: { value: any; prop: string; row: any; index: number; column: any }): void
 }
@@ -151,8 +157,8 @@ defineOptions({
 
 const props = withDefaults(defineProps<PlusTableProps>(), {
   defaultSize: 'default',
-  pagination: () => ({}),
-  actionBar: () => ({}),
+  pagination: false,
+  actionBar: false,
   isShowNumber: false,
   hasTableHeader: false,
   isSelection: false,
@@ -174,21 +180,21 @@ const props = withDefaults(defineProps<PlusTableProps>(), {
 const emit = defineEmits<PlusTableEmits>()
 
 const subColumns = ref(cloneDeep(props.columns))
-const formRefs = ref({})
+const formRefs = shallowRef({})
 
 provide(TableFormRefInjectionKey, formRefs)
 
-const tableInstance = ref<TableInstance | null>(null)
+const tableInstance = shallowRef<TableInstance | null>(null)
 const state = reactive<TableState>({
-  subPageInfo: { ...((props.pagination.modelValue || DefaultPageInfo) as PageInfo) },
+  subPageInfo: {
+    ...(((props.pagination as PlusPaginationProps)?.modelValue || DefaultPageInfo) as PageInfo)
+  },
   size: props.defaultSize
 })
 // 监听配置更改
 watch(
   () => props.columns,
   val => {
-    // console.log(val)
-
     subColumns.value = val.filter(item => item.hideInTable !== true) as any
   },
   {
@@ -209,8 +215,18 @@ watch(
 
 const handleAction = (res: ButtonsCallBackParams) => {
   const { row, buttonRow, index, e } = res
-
   emit('clickAction', { row, buttonRow, index, e, formRefs: (formRefs.value as any)[index] })
+}
+
+const handleClickActionConfirmCancel = (res: ButtonsCallBackParams) => {
+  const { row, buttonRow, index, e } = res
+  emit('clickActionConfirmCancel', {
+    row,
+    buttonRow,
+    index,
+    e,
+    formRefs: (formRefs.value as any)[index]
+  })
 }
 
 const handleFilterTableConfirm = (data: PlusColumn[]) => {

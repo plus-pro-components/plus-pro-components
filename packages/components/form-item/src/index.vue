@@ -40,6 +40,7 @@ export interface PlusFormItemProps {
   // eslint-disable-next-line vue/require-default-prop
   renderFormItem?: PlusColumn['renderFormItem']
   tooltip?: PlusColumn['tooltip']
+  index?: number
 }
 
 export interface PlusFormItemEmits {
@@ -59,7 +60,8 @@ const props = withDefaults(defineProps<PlusFormItemProps>(), {
   hideInForm: false,
   formItemProps: () => ({}),
   fieldProps: () => ({}),
-  options: () => []
+  options: () => [],
+  index: 0
 })
 
 const emit = defineEmits<PlusFormItemEmits>()
@@ -71,7 +73,7 @@ const customFormItemProps = ref<any>({})
 watch(
   () => props.formItemProps,
   val => {
-    getCustomProps(val, state.value, props)
+    getCustomProps(val, state.value, props, props.index)
       .then(data => {
         customFormItemProps.value = data
       })

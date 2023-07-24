@@ -10,13 +10,12 @@
       :is-show-number="true"
       :is-show-drag-sort="true"
       table-title="表格"
-      :pagination="{ show: true, total, modelValue: pageInfo }"
+      :pagination="{ total, modelValue: pageInfo }"
       :action-bar="{
-        show: true,
-        buttonsName,
-        buttonType: 'link',
-        buttonCount: 3,
-        optionColumnWidth: 200
+        buttons,
+        type: 'link',
+        showNumber: 3,
+        width: 200
       }"
       @paginationChange="handlePaginationChange"
       @clickAction="handleClickButton"
@@ -87,39 +86,39 @@ const TestServe = {
 
 const plusTable = ref<PlusTableInstance>()
 
-const { tableData, pageInfo, total, buttonsName, loadingStatus } = useTable()
+const { tableData, pageInfo, total, buttons, loadingStatus } = useTable()
 
-buttonsName.value = {
-  normal: [
-    {
-      // 查看
-      text: '查看',
-      props: {
-        type: 'primary'
-      }
-    },
-    {
-      // 修改
-      text: '修改',
-      props: {
-        type: 'success'
-      }
-    },
-    {
-      // 删除
-      text: '删除',
-      props: {
-        type: 'danger'
-      }
-    },
-    {
-      text: '复制',
-      props: {
-        type: 'primary'
-      }
+buttons.value = [
+  {
+    // 查看
+    text: '查看',
+    props: {
+      type: 'primary'
     }
-  ]
-}
+  },
+  {
+    // 修改
+    text: '修改',
+    props: {
+      type: 'success'
+    }
+  },
+  {
+    // 删除
+    text: '删除',
+    props: {
+      type: 'warning'
+    },
+    confirm: {}
+  },
+  {
+    text: '复制',
+    props: {
+      type: 'primary'
+    },
+    confirm: {}
+  }
+]
 
 const statusOptions = [
   {

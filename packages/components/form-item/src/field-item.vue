@@ -66,6 +66,13 @@
     @change="handleChange"
   />
 
+  <PlusDatePicker
+    v-else-if="valueType === 'plus-date-picker'"
+    v-model="state"
+    v-bind="customFieldProps"
+    @change="handleChange"
+  />
+
   <el-input-number
     v-else-if="valueType === 'input-number'"
     v-model="state"
@@ -96,6 +103,15 @@
       {{ item.label }}
     </el-radio>
   </el-radio-group>
+
+  <PlusRadio
+    v-else-if="valueType === 'plus-radio'"
+    v-model="state"
+    :data="options"
+    is-cancel
+    v-bind="customFieldProps"
+    @change="handleChange"
+  />
 
   <el-rate
     v-else-if="valueType === 'rate'"
@@ -175,6 +191,8 @@ import { ref, watch } from 'vue'
 import { isFunction, getCustomProps, isDate, isArray } from '@plus-pro-components/utils'
 import type { PlusColumn } from '@plus-pro-components/types'
 import { useGetOptions } from '@plus-pro-components/hooks'
+import PlusDatePicker from '@plus-pro-components/components/date-picker'
+import PlusRadio from '@plus-pro-components/components/radio'
 import type { ValueType } from './type'
 
 export interface PlusFormItemProps {
@@ -189,6 +207,7 @@ export interface PlusFormItemProps {
   formItemProps?: PlusColumn['formItemProps']
   // eslint-disable-next-line vue/require-default-prop
   renderFormItem?: PlusColumn['renderFormItem']
+  index?: number
 }
 
 export interface PlusFormItemEmits {
@@ -210,7 +229,8 @@ const props = withDefaults(defineProps<PlusFormItemProps>(), {
   hideInForm: false,
   formItemProps: () => ({}),
   fieldProps: () => ({}),
-  options: () => []
+  options: () => [],
+  index: 0
 })
 
 const emit = defineEmits<PlusFormItemEmits>()
@@ -224,7 +244,7 @@ const customFieldProps = ref<any>({})
 watch(
   () => props.fieldProps,
   val => {
-    getCustomProps(val, state.value, props)
+    getCustomProps(val, state.value, props, props.index)
       .then(data => {
         customFieldProps.value = data
       })

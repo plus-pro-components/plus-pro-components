@@ -4,8 +4,6 @@
       drag-sortable
       :columns="tableConfig"
       :table-data="tableData"
-      :action-bar="{ show: false }"
-      :pagination="{ show: false }"
       @dragSortEnd="handleSortEnd"
     />
   </div>

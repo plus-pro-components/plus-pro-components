@@ -4,9 +4,6 @@
       :columns="tableConfig"
       :table-data="tableData"
       table-title="表格"
-      :action-bar="{
-        show: false
-      }"
       :pagination="{ total, modelValue: pageInfo }"
       @paginationChange="handlePaginationChange"
     />

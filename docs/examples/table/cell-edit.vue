@@ -3,8 +3,7 @@
     <PlusTable
       :columns="tableConfig"
       :table-data="tableData"
-      :pagination="{ show: false }"
-      :action-bar="{ buttonsName, optionColumnWidth: 140 }"
+      :action-bar="{ buttons, width: 140 }"
       @formChange="formChange"
       @clickAction="handleClickButton"
     />
@@ -12,10 +11,7 @@
 </template>
 
 <script lang="ts" setup>
-import type {
-  ButtonsCallBackParams,
-  ButtonsNameKeyRow
-} from '@plus-pro-components/components/table'
+import type { ButtonsCallBackParams } from '@plus-pro-components/components/table'
 import { useTable } from '@plus-pro-components/hooks'
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
@@ -38,39 +34,46 @@ const TestServe = {
     return { data }
   }
 }
-const { tableData, buttonsName } = useTable()
+const { tableData, buttons } = useTable()
 
-const edit: ButtonsNameKeyRow[] = [
+const show = ref<boolean[]>([])
+
+buttons.value = [
   {
     text: '取消编辑',
     code: 'cancel',
     props: {
       type: 'warning'
-    }
+    },
+    show: (_, index) => !!show.value[index]
   },
   {
     // 保存
     text: '保存',
     code: 'save',
     props: {
-      type: 'danger'
-    }
-  }
-]
-
-const noEdit: ButtonsNameKeyRow[] = [
+      type: 'primary'
+    },
+    show: (_, index) => !!show.value[index]
+  },
   {
     text: '编辑',
     code: 'edit',
     props: {
       type: 'primary'
-    }
+    },
+    show: (_, index) => !show.value[index]
+  },
+  {
+    text: '删除',
+    code: 'delete',
+    props: {
+      type: 'danger'
+    },
+    confirm: {},
+    show: (_, index) => !show.value[index]
   }
 ]
-
-buttonsName.value = {
-  normal: [...noEdit]
-}
 const tableConfig = ref<PlusColumn[]>([
   {
     label: '名称',
@@ -156,11 +159,7 @@ const tableConfig = ref<PlusColumn[]>([
 const getList = async () => {
   try {
     const { data } = await TestServe.getList()
-    tableData.value = data.map(item => ({ ...item, buttonKey: item.id }))
-
-    tableData.value.forEach((item: any) => {
-      buttonsName.value[item.buttonKey] = noEdit
-    })
+    tableData.value = data.map(item => ({ ...item }))
   } catch (error) {}
 }
 getList()
@@ -183,7 +182,7 @@ const handleClickButton = async (data: ButtonsCallBackParams) => {
   if (data.buttonRow.code === 'edit') {
     tableData.value.forEach((item: any) => {
       if (item.id === data.row.id) {
-        buttonsName.value[item.buttonKey] = [...edit]
+        show.value[data.index] = true
       }
     })
 
@@ -193,15 +192,16 @@ const handleClickButton = async (data: ButtonsCallBackParams) => {
   } else if (data.buttonRow.code === 'cancel') {
     tableData.value.forEach((item: any) => {
       if (item.id === data.row.id) {
-        buttonsName.value[item.buttonKey] = [...noEdit]
+        show.value[data.index] = false
       }
     })
-
     data.formRefs?.forEach((item: any) => {
       item.stopCellEdit()
     })
-  } else {
+  } else if (data.buttonRow.code === 'save') {
     handleSave(data)
+  } else {
+    ElMessage.success('删除成功')
   }
 }
 </script>

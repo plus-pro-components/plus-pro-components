@@ -1,12 +1,6 @@
 <template>
   <div>
-    <PlusTable
-      :columns="tableConfig"
-      :table-data="tableData"
-      :pagination="{ show: false }"
-      :action-bar="{ show: false }"
-      @formChange="formChange"
-    >
+    <PlusTable :columns="tableConfig" :table-data="tableData" @formChange="formChange">
       <template #toolbar>
         <el-button plain size="small" @click="editTable(false)">取消编辑</el-button>
         <el-button type="primary" size="small" @click="editTable(true)">编辑表格</el-button>

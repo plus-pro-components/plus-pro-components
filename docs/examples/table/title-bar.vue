@@ -5,8 +5,6 @@
       :table-data="tableData"
       title="表格标题"
       :has-table-header="true"
-      :action-bar="{ show: false }"
-      :pagination="{ show: false }"
     >
       <template #toolbar>
         <el-button plain size="small">查看日志</el-button>

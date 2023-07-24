@@ -20,6 +20,8 @@ export type FormItemValueType =
   | 'time-select'
   | 'textarea'
   | 'text'
+  | 'plus-radio'
+  | 'plus-date-picker'
 
 /**
  * 表单项的props

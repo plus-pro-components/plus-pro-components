@@ -20,4 +20,4 @@ export const FormFieldType = [
   'text'
 ]
 
-export const TableFormRefInjectionKey = 'tableFormRefInjectionKey'
+export const TableFormRefInjectionKey = Symbol('tableFormRefInjectionKey')

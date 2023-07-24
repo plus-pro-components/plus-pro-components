@@ -27,7 +27,9 @@ export interface PageInfo {
 /**
  *  自定义props类型
  */
-export type PropsItemType = RecordType | ((value?: any, row?: any) => RecordType)
+export type PropsItemType =
+  | RecordType
+  | ((value: any, row: any, index: number) => RecordType | Promise<RecordType>)
 
 /**
  * 选择框类型

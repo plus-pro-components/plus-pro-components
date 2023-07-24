@@ -1,30 +1,33 @@
 <template>
   <div>
     <PlusTable
+      key="1"
       :columns="tableConfig"
       :table-data="tableData"
-      :action-bar="{ buttonsName, buttonCount: 2 }"
-      :pagination="{ show: false }"
+      :action-bar="{ buttons, showNumber: 2 }"
       @clickAction="handleClickButton"
     />
+
     <PlusTable
+      key="2"
       :columns="tableConfig"
       :table-data="tableData"
-      :action-bar="{ buttonsName, buttonType: 'button', buttonCount: 2, optionColumnWidth: 240 }"
-      :pagination="{ show: false }"
+      :action-bar="{ buttons: buttons1, type: 'button', showNumber: 2, width: 240 }"
       @clickAction="handleClickButton"
     />
+
     <PlusTable
+      key="3"
       :columns="tableConfig"
       :table-data="tableData"
-      :action-bar="{ buttonsName, buttonType: 'icon', buttonCount: 4 }"
-      :pagination="{ show: false }"
+      :action-bar="{ buttons: buttons2, type: 'icon', showNumber: 2 }"
       @clickAction="handleClickButton"
     />
   </div>
 </template>
 
 <script lang="ts" setup>
+import { computed } from 'vue'
 import { useTable } from '@plus-pro-components/hooks'
 import type { PlusColumn } from '@plus-pro-components/types'
 import type { ButtonsCallBackParams } from '@plus-pro-components/components/table'
@@ -35,6 +38,7 @@ const TestServe = {
   getList: async () => {
     const data = [...new Array(3)].map((item, index) => {
       return {
+        id: index,
         name: index + 'name',
         status: String(index % 3),
         tag: index === 1 ? 'success' : index === 2 ? 'warning' : index === 3 ? 'info' : 'danger',
@@ -53,43 +57,122 @@ const formatTableItem = (item: any) => {
   }
 }
 
-const { tableData, buttonsName } = useTable()
+const { tableData, buttons } = useTable()
+const { buttons: buttons1 } = useTable()
+const { buttons: buttons2 } = useTable()
 
-buttonsName.value = {
-  normal: [
-    {
-      // 查看
-      text: '查看',
-      icon: View,
-      props: {
-        type: 'info'
-      }
+buttons.value = [
+  {
+    // 查看
+    text: '查看',
+    props: {
+      type: 'info'
     },
-    {
-      // 修改
-      text: '修改',
-      icon: Edit,
-      props: {
-        type: 'primary'
-      }
+    show: (row: any) => row.status === '1'
+  },
+  {
+    // 修改
+    text: '修改',
+    props: {
+      type: 'primary'
     },
-    {
-      // 删除
-      text: '删除',
-      icon: Delete,
-      props: {
-        type: 'danger'
-      }
+    show: computed(() => true)
+  },
+  {
+    // 删除
+    text: '删除',
+    props: {
+      type: 'danger'
     },
-    {
-      text: '复制',
-      icon: DocumentCopy,
-      props: {
-        type: 'success'
-      }
+    confirm: {
+      options: { draggable: true }
     }
-  ]
-}
+  },
+  {
+    text: '复制',
+    props: {
+      type: 'success'
+    }
+  }
+]
+
+buttons1.value = [
+  {
+    // 查看
+    text: '查看',
+    icon: View,
+    props: {
+      type: 'info'
+    },
+    show: (row: any) => row.status === '1'
+  },
+  {
+    // 修改
+    text: '修改',
+    icon: Edit,
+    props: {
+      type: 'primary'
+    },
+    show: computed(() => true)
+  },
+  {
+    // 删除
+    text: '删除',
+    icon: Delete,
+    props: {
+      type: 'danger'
+    },
+    confirm: {
+      message: data => `确定删除id为${data.row.id}的数据吗？`,
+      options: { draggable: true }
+    }
+  },
+  {
+    text: '复制',
+    icon: DocumentCopy,
+    props: {
+      type: 'success'
+    }
+  }
+]
+buttons2.value = [
+  {
+    // 查看
+    text: '查看',
+    icon: View,
+    props: {
+      type: 'info'
+    },
+    show: (row: any) => row.status === '1'
+  },
+  {
+    // 修改
+    text: '修改',
+    icon: Edit,
+    props: {
+      type: 'primary'
+    },
+    show: computed(() => true)
+  },
+  {
+    // 删除
+    text: '删除',
+    icon: Delete,
+    props: {
+      type: 'danger'
+    },
+    confirm: {
+      message: data => `确定删除id为${data.row.id}且行数为${data.index}的数据吗？`
+    }
+  },
+  {
+    text: '复制',
+    icon: DocumentCopy,
+    props: {
+      type: 'success'
+    }
+  }
+]
 
 const tableConfig: PlusColumn[] = [
   {

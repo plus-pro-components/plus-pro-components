@@ -1,6 +1,5 @@
 <template>
   <div
-    v-if="show"
     class="plus-pagination"
     :style="{ justifyContent: align === 'left' ? 'flex-start' : 'flex-end' }"
   >
@@ -27,7 +26,6 @@ import type { PageInfo } from '@plus-pro-components/types'
 export interface PlusPaginationProps extends /* @vue-ignore */ Partial<PaginationProps> {
   modelValue: PageInfo
   total?: number
-  show?: boolean
   pageSizeList?: number[]
   align?: 'left' | 'right'
 }
@@ -44,11 +42,10 @@ defineOptions({
 })
 
 const props = withDefaults(defineProps<PlusPaginationProps>(), {
-  show: true,
   total: 0,
   pageSizeList: () => [...DefaultPageSizeList],
   modelValue: () => ({ ...DefaultPageInfo }),
-  align: 'left'
+  align: 'right'
 })
 
 const emit = defineEmits<PlusPaginationEmits>()
@@ -85,5 +82,6 @@ const handleCurrentChange = (page: number) => {
 .plus-pagination {
   display: flex;
   justify-content: flex-start;
+  padding: 10px 0;
 }
 </style>

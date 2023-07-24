@@ -7,16 +7,21 @@ import { isPromise, isFunction, isPlainObject } from './is'
  * @param row
  * @returns
  */
-export const getCustomProps = async (props?: any, value?: any, row?: any): Promise<any> => {
+export const getCustomProps = async (
+  props: any,
+  value: any,
+  row: any,
+  index: number
+): Promise<any> => {
   try {
     let data: any = {}
 
     if (isPromise(props)) {
       const getValue = props as any
-      data = await getValue(value, row)
+      data = await getValue(value, row, index)
     } else if (isFunction(props)) {
       const getValue = props as any
-      data = getValue(value, row) || {}
+      data = getValue(value, row, index) || {}
     } else if (isPlainObject(props)) {
       data = { ...props }
     } else {
