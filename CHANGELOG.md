@@ -1,3 +1,13 @@
+## [v0.0.1-alpha.20](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-alpha.19...v0.0.1-alpha.20) (2023-07-24)
+
+
+### ✨ Features
+
+* **components:** :sparkles: table-action-bar add show and confirm function.([13a6ca0](https://github.com/plus-pro-components/plus-pro-components/commit/13a6ca0)) by@xiaofei
+
+
+
+
 ## [v0.0.1-alpha.19](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-alpha.18...v0.0.1-alpha.19) (2023-07-21)
 
 
