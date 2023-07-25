@@ -302,6 +302,37 @@ export type FormItemValueType =
   | 'plus-date-picker'
 ```
 
+## FieldValueType
+
+```ts
+/**
+ * 单个表单值的类型
+ */
+export type FieldValueType =
+  | string
+  | number
+  | boolean
+  | Date
+  | string[]
+  | number[]
+  | boolean[]
+  | Date[]
+  | [Date, Date]
+  | [number, number]
+  | [string, string]
+  | null
+  | ''
+```
+
+## FieldValues
+
+```ts
+/**
+ * 整体表单值的类型
+ */
+export type FieldValues = Record<string, FieldValueType>
+```
+
 ## PropsItemType
 
 自定义 props 类型

@@ -41,13 +41,13 @@
 
 <script lang="ts" setup>
 import { reactive, ref, watch, computed } from 'vue'
-import type { FormInstance, FormRules } from 'element-plus'
+import type { FormInstance, FormRules, FormProps } from 'element-plus'
 import { ElMessage } from 'element-plus'
 import PlusFormItem from '@plus-pro-components/components/form-item'
-import type { PlusColumn, RecordType } from '@plus-pro-components/types'
+import type { PlusColumn, FieldValues, Mutable } from '@plus-pro-components/types'
 
-export interface PlusFormProps {
-  modelValue?: RecordType
+export interface PlusFormProps extends /* @vue-ignore */ Partial<Mutable<FormProps>> {
+  modelValue?: FieldValues
   columns?: PlusColumn[]
   labelWidth?: string
   labelPosition?: 'left' | 'right' | 'top'
@@ -63,7 +63,7 @@ export interface PlusFormProps {
 }
 
 export interface PlusFormState {
-  values: any
+  values: FieldValues
   subColumns: any
 }
 

@@ -38,6 +38,9 @@
 }
 
 .vp-doc {
+  h2 {
+    border-top: 0;
+  }
   .el-link {
     color: var(--el-link-text-color);
   }

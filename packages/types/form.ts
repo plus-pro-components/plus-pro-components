@@ -43,9 +43,32 @@ export interface FormColumnProps {
    * @param formItemInstance
    * @returns
    */
-  renderFormItem?: (
+  renderFormFieldItem?: (
     props: any,
     onChange: (value: any) => void,
     formItemInstance: InstanceType<typeof ElFormItem>
   ) => VNode
 }
+
+/**
+ * 单个表单值的类型
+ */
+export type FieldValueType =
+  | string
+  | number
+  | boolean
+  | Date
+  | string[]
+  | number[]
+  | boolean[]
+  | Date[]
+  | [Date, Date]
+  | [number, number]
+  | [string, string]
+  | null
+  | ''
+
+/**
+ * 整体表单值的类型
+ */
+export type FieldValues = Record<string, FieldValueType>

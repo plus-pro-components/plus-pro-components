@@ -14,7 +14,7 @@ search/basic
 
 | 名称                    | 说明                     | 类型                                                                                             | 默认值  | 是否必须 |
 | ----------------------- | ------------------------ | ------------------------------------------------------------------------------------------------ | ------- | -------- |
-| `model-value / v-model` | 搜索表单绑定值           | [RecordType](/components/type.html#recordtype)                                                   |         | 否       |
+| `model-value / v-model` | 搜索表单绑定值           | [FieldValues](/components/type.html#fieldvalues)                                                 |         | 否       |
 | `columns`               | 搜索配置信息             | [PlusColumn[]](/components/config.html)                                                          | `[]`    | 是       |
 | `labelWidth`            | el-form 的 labelWidth    | `string`                                                                                         | `84px`  | 否       |
 | `labelPosition`         | el-form 的 labelPosition | `'left' / 'right' / 'top'`                                                                       | `left`  | 否       |
@@ -30,7 +30,11 @@ search/basic
 | `rowProps`              | el-row 属性              | [RowProps](https://element-plus.org/zh-CN/component/layout.html#row-attributes)                  |         | 否       |
 | `colProps`              | el-col 属性              | [ColProps](https://element-plus.org/zh-CN/component/layout.html#col-attributes)                  |         | 否       |
 | `rules`                 | 表单校验                 | el-form 的 rules [FormRules](https://element-plus.org/zh-CN/component/form.html#form-attributes) | `{}`    | 否       |
-| `formProps`             | 其他的 el-form 的 props  | [RecordType](/components/type.html#recordtype)                                                   | `{}`    | 否       |
+| ...                     | ...                      | ...                                                                                              | ...     | ...      |
+
+:::tip 提示
+**`...`表示同时支持所有 `el-form` Attributes** ，model 参数已在组件内部处理，一般不需要传。
+:::
 
 ## Search Events
 

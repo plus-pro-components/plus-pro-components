@@ -104,7 +104,7 @@ const columns: PlusColumn[] = [
     prop: 'img',
     width: 100,
     valueType: 'img',
-    renderFormItem(_, onChange) {
+    renderFormFieldItem(_, onChange) {
       // 自定义上传
       const handleHttpRequest = async ({ file, onError, onSuccess }: any) => {
         try {

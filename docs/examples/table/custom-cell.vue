@@ -122,7 +122,7 @@ const tableConfig: PlusColumn[] = [
     width: 160,
     prop: 'custom',
     editable: true,
-    renderFormItem(_, onChange) {
+    renderFormFieldItem(_, onChange) {
       // 自定义上传
       const handleHttpRequest = async ({ file, onError, onSuccess }: any) => {
         try {

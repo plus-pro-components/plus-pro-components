@@ -100,22 +100,19 @@ table/advanced
 | `title`             | 自定义表格标题                           | `string`                                                                                                                                                                                |                                              | 否       |
 | `height`            | 表格高度                                 | `string`                                                                                                                                                                                |                                              | 否       |
 | `headerCellStyle`   | 表格表头样式                             | [CSSProperties](https://cn.vuejs.org/api/utility-types.html#cssproperties)                                                                                                              | `{backgroundColor: '#F5F9FD',color: '#777'}` | 否       |
-| `tableProps`        | `el-table`的其他`props`                  | `object`                                                                                                                                                                                | `{}`                                         | 否       |
 | `indexContentStyle` | 序号栏样式                               | [CSSProperties](https://cn.vuejs.org/api/utility-types.html#cssproperties) / `((row: any, index: number) =>`[CSSProperties](https://cn.vuejs.org/api/utility-types.html#cssproperties)) | `{}`                                         | 否       |
+| ...                 | ...                                      | ...                                                                                                                                                                                     | ...                                          | ...      |
 
-**支持所有[ElTable 属性](https://element-plus.org/zh-CN/component/table.html#table-%E5%B1%9E%E6%80%A7)**
+**`...`表示同时支持所有[ElTable Attributes](https://element-plus.org/zh-CN/component/table.html#table-%E5%B1%9E%E6%80%A7)**
 
-::: tip 提示
-el-table 的其他属性的支持写法 如 `stripe`,`border`,`max-height`等
+:::tip 提示
+
+el-table 的其他属性的支持写法 如 `stripe`,`border`,`fit`等
+
+示例：
 
 ```html
-<PlusTable
-  :tableProps="{
-  stripe: true,
-  stripe: true
-  maxHeight: '100vh'
-  }"
-/>
+<PlusTable :stripe="true" :border="true" :fit="false" />
 ```
 
 :::
@@ -129,20 +126,17 @@ el-table 的其他属性的支持写法 如 `stripe`,`border`,`max-height`等
 | `clickActionConfirmCancel` | 点击操作栏需要二次确认的取消时触发               | [ButtonsCallBackParams](/components/type.html#buttonscallbackparams)                      |
 | `dragSortEnd`              | 拖拽排序列图标触发                               | [Function] `({newIndex: number, oldIndex: number}) => void`                               |
 | `formChange`               | 表格中有可以编辑的表单项目改变时触发             | [Function] `({ value: any; prop: string; row: any; index: number; column: any }) => void` |
+| ...                        | ...                                              | ...                                                                                       |
 
-**支持所有[ElTable 事件](https://element-plus.org/zh-CN/component/table.html#table-%E4%BA%8B%E4%BB%B6)**
+**`...`表示同时支持所有[ElTable 事件](https://element-plus.org/zh-CN/component/table.html#table-%E4%BA%8B%E4%BB%B6)**
 
 ::: tip 提示
 el-table 的其他事件的支持写法 如 `select`,`select-all`,`row-click`等
 
+示例：
+
 ```html
-<PlusTable
-  :tableProps="{
-  onSelect: () => {},
-  onSelectAll: () => {}
-  onRowClick: () => {}
-  }"
-/>
+<PlusTable @select="handleSelect" @select-all="handleSelectAll" />
 ```
 
 :::
@@ -154,8 +148,9 @@ el-table 的其他事件的支持写法 如 `select`,`select-all`,`row-click`等
 | `title`   | 表格标题   |
 | `toolbar` | 工具栏左侧 |
 | `expand`  | 展开行     |
+| ...       | ...        |
 
-**支持所有[ElTable 插槽](https://element-plus.org/zh-CN/component/table.html#table-%E6%8F%92%E6%A7%BD)**
+**`...`表示同时支持所有[ElTable 插槽](https://element-plus.org/zh-CN/component/table.html#table-%E6%8F%92%E6%A7%BD)**
 
 ::: tip 提示
 el-table 的其他插槽 如 `append`,`empty`等
@@ -167,7 +162,7 @@ el-table 的其他插槽 如 `append`,`empty`等
 | --------------- | ---------------- | ----------------------------------------- |
 | `tableInstance` | `el-table`的实例 | `import('element-plus')['TableInstance']` |
 
-**支持所有[ElTable 方法](https://element-plus.org/zh-CN/component/table.html#table-%E6%96%B9%E6%B3%95)**
+**拿到 tableInstance 后支持所有[ElTable 方法](https://element-plus.org/zh-CN/component/table.html#table-%E6%96%B9%E6%B3%95)**
 
 ::: tip 提示
 如 `clearSelection`,`getSelectionRows`等

@@ -1,7 +1,7 @@
 <template>
   <component
-    :is="() => renderFormItem && renderFormItem(props, handleChange, formItemInstance)"
-    v-if="renderFormItem && isFunction(renderFormItem)"
+    :is="() => renderFormFieldItem && renderFormFieldItem(props, handleChange, formItemInstance)"
+    v-if="renderFormFieldItem && isFunction(renderFormFieldItem)"
     v-bind="customFieldProps"
   />
 
@@ -189,14 +189,13 @@
 <script lang="ts" setup>
 import { ref, watch } from 'vue'
 import { isFunction, getCustomProps, isDate, isArray } from '@plus-pro-components/utils'
-import type { PlusColumn } from '@plus-pro-components/types'
+import type { PlusColumn, FieldValueType } from '@plus-pro-components/types'
 import { useGetOptions } from '@plus-pro-components/hooks'
 import PlusDatePicker from '@plus-pro-components/components/date-picker'
 import PlusRadio from '@plus-pro-components/components/radio'
-import type { ValueType } from './type'
 
 export interface PlusFormItemProps {
-  modelValue?: ValueType
+  modelValue?: FieldValueType
   label?: PlusColumn['label']
   prop: PlusColumn['prop']
   fieldProps?: PlusColumn['fieldProps']
@@ -206,13 +205,13 @@ export interface PlusFormItemProps {
   hideInForm?: PlusColumn['hideInForm']
   formItemProps?: PlusColumn['formItemProps']
   // eslint-disable-next-line vue/require-default-prop
-  renderFormItem?: PlusColumn['renderFormItem']
+  renderFormFieldItem?: PlusColumn['renderFormFieldItem']
   index?: number
 }
 
 export interface PlusFormItemEmits {
-  (e: 'update:modelValue', data: ValueType): void
-  (e: 'change', data: ValueType): void
+  (e: 'update:modelValue', data: FieldValueType): void
+  (e: 'change', data: FieldValueType): void
 }
 
 defineOptions({
@@ -235,7 +234,7 @@ const props = withDefaults(defineProps<PlusFormItemProps>(), {
 
 const emit = defineEmits<PlusFormItemEmits>()
 
-const state = ref<ValueType>()
+const state = ref<FieldValueType>()
 
 const options = useGetOptions(props)
 
@@ -319,7 +318,7 @@ watch(
   }
 )
 
-const handleChange = (val: ValueType) => {
+const handleChange = (val: FieldValueType) => {
   emit('update:modelValue', val)
   emit('change', val)
 }

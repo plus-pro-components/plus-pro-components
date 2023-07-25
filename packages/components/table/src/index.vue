@@ -26,10 +26,10 @@
       :height="height"
       :header-cell-style="headerCellStyle"
       :size="size"
+      :row-key="rowKey"
       highlight-current-row
       scrollbar-always-on
-      v-bind="tableProps"
-      :row-key="rowKey"
+      v-bind="$attrs"
     >
       <!-- 选择栏 -->
       <el-table-column v-if="isSelection" key="selection" type="selection" width="34" />
@@ -105,7 +105,7 @@ import type { ButtonsCallBackParams, TableState, ActionBarProps } from './type'
 /**
  * 表格数据
  */
-export interface PlusTableProps {
+export interface PlusTableProps extends /* @vue-ignore */ Partial<TableProps<any>> {
   // 密度
   defaultSize?: ComponentSize
   /* 分页参数*/
@@ -135,8 +135,6 @@ export interface PlusTableProps {
   headerCellStyle?: CSSProperties
   /** rowKey */
   rowKey?: string
-  /** 表格的其他配置 */
-  tableProps?: Partial<TableProps<any>>
   /** sortablejs配置 */
   dragSortable?: SortableOptions | boolean
   indexContentStyle?: CSSProperties | ((row: any, index: number) => CSSProperties)
