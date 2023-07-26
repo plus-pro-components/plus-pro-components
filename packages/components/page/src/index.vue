@@ -58,6 +58,7 @@ import type { PlusSearchProps, PlusSearchInstance } from '@plus-pro-components/c
 import PlusSearch from '@plus-pro-components/components/search'
 import type { PlusTableProps, PlusTableInstance } from '@plus-pro-components/components/table'
 import PlusTable from '@plus-pro-components/components/table'
+import type { Ref } from 'vue'
 import { h, reactive, ref } from 'vue'
 import type { CardProps } from 'element-plus'
 import { ElCard } from 'element-plus'
@@ -161,8 +162,8 @@ const renderWrapper = () => {
   return { search: h('div'), table: h('div') }
 }
 
-const plusSearchInstance = ref<PlusSearchInstance>()
-const plusTableInstance = ref<PlusTableInstance>()
+const plusSearchInstance = ref<any>()
+const plusTableInstance = ref<any>()
 
 const state: PlusPageState = reactive({
   params: {},
@@ -206,8 +207,8 @@ const handleRest = () => {
 }
 
 defineExpose({
-  plusSearchInstance,
-  plusTableInstance,
+  plusSearchInstance: plusSearchInstance as Ref<PlusSearchInstance>,
+  plusTableInstance: plusTableInstance as Ref<PlusTableInstance>,
   getList,
   handleRest
 })

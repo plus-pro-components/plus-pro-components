@@ -12,6 +12,6 @@
 
 - [PlusDialogForm ](/components/dialog-form.html) 弹窗表单模板组件，预设常见布局和行为。
 
-- [PlusDrawerForm ](/components/fdrawer-orm.html) 抽屉表单模板组件，预设常见布局和行为。
+- [PlusDrawerForm ](/components/drawer-form.html) 抽屉表单模板组件，预设常见布局和行为。
 
 - [PlusDescriptions](/components/description.html) 定义列表模板组件。
