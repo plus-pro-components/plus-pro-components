@@ -55,9 +55,10 @@ import type {
   FieldValues
 } from '@plus-pro-components/types'
 import type { PlusSearchProps, PlusSearchInstance } from '@plus-pro-components/components/search'
-import PlusSearch from '@plus-pro-components/components/search'
+import { PlusSearch } from '@plus-pro-components/components/search'
 import type { PlusTableProps, PlusTableInstance } from '@plus-pro-components/components/table'
-import PlusTable from '@plus-pro-components/components/table'
+import { PlusTable } from '@plus-pro-components/components/table'
+
 import type { Ref } from 'vue'
 import { h, reactive, ref } from 'vue'
 import type { CardProps } from 'element-plus'

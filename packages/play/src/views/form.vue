@@ -14,10 +14,9 @@
 
 <script lang="ts" setup>
 import { ref, h, Fragment } from 'vue'
-import type { PlusColumn } from '@plus-pro-components/types'
+import type { PlusColumn, FieldValues } from '@plus-pro-components/types'
 import { readFileBase64 } from '@plus-pro-components/utils'
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
+import type { UploadFile } from 'element-plus'
 import { ElUpload, ElButton, ElImage } from 'element-plus'
 
 const state = ref({
@@ -135,8 +134,8 @@ const columns: PlusColumn[] = [
           {
             action: '',
             httpRequest: handleHttpRequest,
-            onChange: async (data: any) => {
-              const base64 = await readFileBase64(data.raw)
+            onChange: async (data: UploadFile) => {
+              const base64 = await readFileBase64(data.raw as File)
               // 调用 renderFormFieldItem 的onChange 回调把值传给表单
               onChange(base64)
             }
@@ -298,10 +297,10 @@ const columns: PlusColumn[] = [
   }
 ]
 
-const handleChange = (values: any) => {
+const handleChange = (values: FieldValues) => {
   console.log(values, 'change')
 }
-const handleSubmit = (values: any) => {
+const handleSubmit = (values: FieldValues) => {
   console.log(values, 'Submit')
 }
 const handleSubmitError = (err: any) => {

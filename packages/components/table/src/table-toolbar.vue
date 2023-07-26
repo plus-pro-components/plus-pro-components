@@ -95,7 +95,7 @@ import { reactive } from 'vue'
 import { cloneDeep } from 'lodash-es'
 import type { PlusColumn } from '@plus-pro-components/types'
 import { Setting } from '@element-plus/icons-vue'
-import PlusPopover from '@plus-pro-components/components/popover'
+import { PlusPopover } from '@plus-pro-components/components/popover'
 import type { ComponentSize } from 'element-plus/es/constants'
 
 export interface PlusTableToolbarProps {

@@ -14,10 +14,8 @@
 
 <script lang="ts" setup>
 import { ref, h, Fragment } from 'vue'
-import type { PlusColumn } from '@plus-pro-components/types'
+import type { PlusColumn, FieldValues } from '@plus-pro-components/types'
 import { readFileBase64 } from '@plus-pro-components/utils'
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
 import { ElUpload, ElButton, ElImage } from 'element-plus'
 
 const state = ref({
@@ -298,10 +296,10 @@ const columns: PlusColumn[] = [
   }
 ]
 
-const handleChange = (values: any) => {
+const handleChange = (values: FieldValues) => {
   console.log(values, 'change')
 }
-const handleSubmit = (values: any) => {
+const handleSubmit = (values: FieldValues) => {
   console.log(values, 'Submit')
 }
 const handleSubmitError = (err: any) => {

@@ -31,8 +31,15 @@ import { computed } from 'vue'
 import { useTable } from '@plus-pro-components/hooks'
 import type { PlusColumn } from '@plus-pro-components/types'
 import type { ButtonsCallBackParams } from '@plus-pro-components/components/table'
-
 import { View, Edit, Delete, DocumentCopy } from '@element-plus/icons-vue'
+
+interface TableRow {
+  id: number
+  name: string
+  status: string
+  tag: string
+  time: Date
+}
 
 const TestServe = {
   getList: async () => {
@@ -46,20 +53,14 @@ const TestServe = {
       }
     })
     return {
-      data
+      data: data as TableRow[]
     }
   }
 }
-const formatTableItem = (item: any) => {
-  return {
-    ...item,
-    buttonKey: 'normal'
-  }
-}
 
-const { tableData, buttons } = useTable()
-const { buttons: buttons1 } = useTable()
-const { buttons: buttons2 } = useTable()
+const { tableData, buttons } = useTable<TableRow[]>()
+const { buttons: buttons1 } = useTable<TableRow[]>()
+const { buttons: buttons2 } = useTable<TableRow[]>()
 
 buttons.value = [
   {
@@ -224,8 +225,7 @@ const tableConfig: PlusColumn[] = [
 const getList = async () => {
   try {
     const { data } = await TestServe.getList()
-    const items = data.map(item => formatTableItem(item))
-    tableData.value = items || []
+    tableData.value = data || []
   } catch (error) {}
 }
 getList()

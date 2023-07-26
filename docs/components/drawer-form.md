@@ -23,11 +23,11 @@ drawer-form/basic
 
 ## DrawerForm Events
 
-| 名称     | 说明                           | 类型                               |
-| -------- | ------------------------------ | ---------------------------------- |
-| `submit` | 点击确定按钮校验通过触发的事件 | [Function] `(values: any) => void` |
-| `change` | 表单变化触发的事件             | [Function] `(values:any) => void`  |
-| `cancel` | 点击取消按钮触发的事件         | [Function] `() => void`            |
+| 名称     | 说明                           | 类型                                       |
+| -------- | ------------------------------ | ------------------------------------------ |
+| `submit` | 点击确定按钮校验通过触发的事件 | [Function] `(values: FieldValues) => void` |
+| `change` | 表单变化触发的事件             | [Function] `(values: FieldValues) => void` |
+| `cancel` | 点击取消按钮触发的事件         | [Function] `() => void`                    |
 
 ## DrawerForm Slots
 

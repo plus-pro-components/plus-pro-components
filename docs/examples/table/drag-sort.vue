@@ -13,10 +13,19 @@
 import { useTable } from '@plus-pro-components/hooks'
 import type { PlusColumn } from '@plus-pro-components/types'
 
+interface TableRow {
+  id: number
+  name: string
+  status: string
+  tag: string
+  time: Date
+}
+
 const TestServe = {
   getList: async () => {
     const data = [...new Array(10)].map((item, index) => {
       return {
+        id: index,
         name: index + 'name',
         status: String(index % 3),
         tag: index === 1 ? 'success' : index === 2 ? 'warning' : index === 3 ? 'info' : 'danger',
@@ -24,12 +33,12 @@ const TestServe = {
       }
     })
     return {
-      data
+      data: data as TableRow[]
     }
   }
 }
 
-const { tableData } = useTable()
+const { tableData } = useTable<TableRow[]>()
 
 const tableConfig: PlusColumn[] = [
   {

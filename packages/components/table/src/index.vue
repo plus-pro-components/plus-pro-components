@@ -87,9 +87,9 @@
 <script lang="ts" setup>
 import { reactive, toRefs, watch, ref, provide, shallowRef } from 'vue'
 import { cloneDeep } from 'lodash-es'
-import PlusPagination from '@plus-pro-components/components/pagination'
-import { DefaultPageInfo, TableFormRefInjectionKey } from '@plus-pro-components/constants'
 import type { PlusPaginationProps } from '@plus-pro-components/components/pagination'
+import { PlusPagination } from '@plus-pro-components/components/pagination'
+import { DefaultPageInfo, TableFormRefInjectionKey } from '@plus-pro-components/constants'
 import type { CSSProperties } from 'vue'
 import type { ComponentSize } from 'element-plus/es/constants'
 import type { TableInstance, TableProps } from 'element-plus'

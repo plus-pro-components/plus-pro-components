@@ -1,5 +1,10 @@
 import type { VNode } from 'vue'
+import type { FormItemProps } from 'element-plus'
+import type { PlusSearchProps } from '@plus-pro-components/components/search'
 import type { PropsItemType, PlusColumn } from './plus'
+import type { Mutable } from './global'
+
+export {}
 
 /**
  * 所有表单的类型 默认是 text
@@ -29,11 +34,11 @@ export interface FormColumnProps {
   /**
    * @desc 传递给 PlusForm的配置， 支持所有 el-form的props
    */
-  formProps?: PropsItemType
+  formProps?: PropsItemType<PlusSearchProps>
   /**
    * @desc 传递给 el-form-item 的配置， 支持所有 el-form-item的props
    */
-  formItemProps?: PropsItemType
+  formItemProps?: PropsItemType<Mutable<FormItemProps>>
 
   /**
    * 自定义渲染   el-form-item 下的field-item组件，自定义渲染同步表单的值的核心方法是调用onChange回调把值传给表单

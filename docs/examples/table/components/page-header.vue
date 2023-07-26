@@ -1,7 +1,10 @@
 <template>
   <div class="page-header">
-    返回 <span>{{ content }}</span
-    >层
+    返回
+    <span>
+      {{ content }}
+    </span>
+    层
   </div>
 </template>
 

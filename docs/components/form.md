@@ -35,13 +35,13 @@ form/basic
 
 ## Form Events
 
-| 名称          | 说明                             | 类型                               |
-| ------------- | -------------------------------- | ---------------------------------- |
-| `submit`      | 点击确定按钮校验通过触发的事件   | [Function] `(values: any) => void` |
-| `change`      | 表单变化触发的事件               | [Function] `(values:any) => void`  |
-| `cancel`      | 点击取消按钮触发的事件           | [Function] `() => void`            |
-| `submitError` | 点击确定按钮校验不通过触发的事件 | [Function] `(error:any) => void`   |
-| ...           | ...                              | ...                                |
+| 名称          | 说明                             | 类型                                       |
+| ------------- | -------------------------------- | ------------------------------------------ |
+| `submit`      | 点击确定按钮校验通过触发的事件   | [Function] `(values: FieldValues) => void` |
+| `change`      | 表单变化触发的事件               | [Function] `(values: FieldValues) => void` |
+| `cancel`      | 点击取消按钮触发的事件           | [Function] `() => void`                    |
+| `submitError` | 点击确定按钮校验不通过触发的事件 | [Function] `(error:any) => void`           |
+| ...           | ...                              | ...                                        |
 
 **`...`表示同时支持所有[ElForm Events](https://element-plus.org/zh-CN/component/form.html#form-%E4%BA%8B%E4%BB%B6)**
 

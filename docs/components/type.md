@@ -192,7 +192,54 @@ export interface ActionBarProps {
   /**
    * 表格操作栏 el-table-column 的其他props   默认值为 `{}`
    */
-  actionBarTableColumnProps?: RecordType
+  actionBarTableColumnProps?: Partial<import('element-plus')['TableColumnCtx']>
+}
+```
+
+## TableFormRefRow
+
+表格可编辑表单的行 form 的参数类型
+
+```ts
+/**
+ * 表格可编辑表单的行form 的参数类型
+ */
+export interface TableFormRefRow {
+  /**
+   * 单元格的表单实例
+   */
+  formInstance: Ref<InstanceType<typeof ElForm>>
+  /**
+   * 单元格的表单单项实例
+   */
+  formItemInstance: Ref<InstanceType<typeof ElFormItem>>
+  /**
+   * 获取显示组件实例
+   */
+  getDisplayItemInstance: () => {
+    index: number
+    prop: string
+    formInstance: Ref<InstanceType<typeof ElForm>>
+    formItemInstance: Ref<InstanceType<typeof ElFormItem>>
+  }
+  /**
+   * 表格的行索引
+   */
+  index: number
+  /**
+   * 表格的列字段
+   */
+  prop: string
+  /**
+   * 单元格的表单开启编辑
+   * @returns
+   */
+  startCellEdit: () => void
+  /**
+   * 单元格的表单停止编辑
+   * @returns
+   */
+  stopCellEdit: () => void
 }
 ```
 
@@ -224,43 +271,7 @@ export interface ButtonsCallBackParams {
   /**
    * 可编辑表单的行form
    */
-  formRefs?: {
-    /**
-     * 单元格的表单实例
-     */
-    formInstance: InstanceType<typeof ElForm>
-    /**
-     * 单元格的表单单项实例
-     */
-    formItemInstance: InstanceType<typeof ElFormItem>
-    /**
-     * 获取显示组件实例
-     */
-    getDisplayItemInstance: () => {
-      index: number
-      prop: string
-      formInstance: InstanceType<typeof ElForm>
-      formItemInstance: InstanceType<typeof ElFormItem>
-    }
-    /**
-     * 表格的行索引
-     */
-    index: number
-    /**
-     * 表格的列字段
-     */
-    prop: string
-    /**
-     * 单元格的表单开启编辑
-     * @returns
-     */
-    startCellEdit: () => void
-    /**
-     * 单元格的表单停止编辑
-     * @returns
-     */
-    stopCellEdit: () => void
-  }[]
+  formRefs?: TableFormRefRow[]
 }
 ```
 

@@ -7,11 +7,11 @@ import type { PageInfo } from '@plus-pro-components/types'
  * 初始化表格基本数据
  *
  */
-function useTable<T = any>() {
-  const tableData = ref<T>()
+function useTable<T extends Record<string, any>[] = any>() {
+  const tableData = ref<T>([] as any)
   const pageInfo = ref<PageInfo>({ ...DefaultPageInfo })
-  const total = shallowRef<number>(0)
-  const loadingStatus = shallowRef<boolean>(false)
+  const total = ref<number>(0)
+  const loadingStatus = ref<boolean>(false)
   const buttons = shallowRef<ActionBarButtonsRow[]>([])
 
   return {

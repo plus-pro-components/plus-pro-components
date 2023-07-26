@@ -11,13 +11,21 @@
 </template>
 
 <script lang="ts" setup>
-import type { ButtonsCallBackParams } from '@plus-pro-components/components/table'
+import type { ButtonsCallBackParams, TableFormRefRow } from '@plus-pro-components/components/table'
 import { useTable } from '@plus-pro-components/hooks'
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
+
 import { ElMessage } from 'element-plus'
 import type { PlusColumn } from '@plus-pro-components/types'
 import { ref } from 'vue'
+
+interface TableRow {
+  id: number
+  name: string
+  status: string
+  rate: number
+  switch: boolean
+  time: string
+}
 
 const TestServe = {
   getList: async () => {
@@ -31,10 +39,10 @@ const TestServe = {
         time: index < 5 ? '' : new Date()
       }
     })
-    return { data }
+    return { data: data as TableRow[] }
   }
 }
-const { tableData, buttons } = useTable()
+const { tableData, buttons } = useTable<TableRow[]>()
 
 const show = ref<boolean[]>([])
 
@@ -168,9 +176,13 @@ const formChange = (data: { value: any; prop: string; row: any; index: number; c
   console.log(data)
 }
 
-const handleSave = async (data: any) => {
+const handleSave = async (data: ButtonsCallBackParams) => {
   try {
-    await Promise.all(data.formRefs.map((item: any) => item.formInstance?.validate()))
+    if (data.formRefs) {
+      await Promise.all(
+        data.formRefs?.map((item: TableFormRefRow) => item.formInstance.value?.validate())
+      )
+    }
   } catch (errors: any) {
     ElMessage.closeAll()
     const values: any[] = Object.values(errors)
@@ -180,22 +192,22 @@ const handleSave = async (data: any) => {
 
 const handleClickButton = async (data: ButtonsCallBackParams) => {
   if (data.buttonRow.code === 'edit') {
-    tableData.value.forEach((item: any) => {
+    tableData.value.forEach(item => {
       if (item.id === data.row.id) {
         show.value[data.index] = true
       }
     })
 
-    data.formRefs?.forEach((item: any) => {
+    data.formRefs?.forEach((item: TableFormRefRow) => {
       item.startCellEdit()
     })
   } else if (data.buttonRow.code === 'cancel') {
-    tableData.value.forEach((item: any) => {
+    tableData.value.forEach(item => {
       if (item.id === data.row.id) {
         show.value[data.index] = false
       }
     })
-    data.formRefs?.forEach((item: any) => {
+    data.formRefs?.forEach((item: TableFormRefRow) => {
       item.stopCellEdit()
     })
   } else if (data.buttonRow.code === 'save') {

@@ -44,7 +44,7 @@
 import { reactive, ref, watch, computed } from 'vue'
 import type { FormInstance, FormRules, FormProps } from 'element-plus'
 import { ElMessage } from 'element-plus'
-import PlusFormItem from '@plus-pro-components/components/form-item'
+import { PlusFormItem } from '@plus-pro-components/components/form-item'
 import type { PlusColumn, FieldValues, Mutable } from '@plus-pro-components/types'
 
 export interface PlusFormProps extends /* @vue-ignore */ Partial<Mutable<FormProps>> {
@@ -69,9 +69,9 @@ export interface PlusFormState {
 }
 
 export interface PlusFormEmits {
-  (e: 'update:modelValue', values: any): void
-  (e: 'submit', values: any): void
-  (e: 'change', values: any): void
+  (e: 'update:modelValue', values: FieldValues): void
+  (e: 'submit', values: FieldValues): void
+  (e: 'change', values: FieldValues): void
   (e: 'cancel'): void
   (e: 'submitError', errors: any): void
 }

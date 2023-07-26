@@ -47,6 +47,7 @@
 import type { VNode } from 'vue'
 import { h, unref } from 'vue'
 import { ArrowDownBold } from '@element-plus/icons-vue'
+import type { TableColumnCtx } from 'element-plus'
 import { ElButton, ElIcon, ElLink, ElTooltip, ElMessageBox } from 'element-plus'
 import type { RecordType } from '@plus-pro-components/types'
 import { isFunction } from '@plus-pro-components/utils'
@@ -82,7 +83,7 @@ export interface ActionBarProps {
   /**
    * 表格操作栏 el-table-column 的其他props   默认值为 `{}`
    */
-  actionBarTableColumnProps?: Record<string, any>
+  actionBarTableColumnProps?: Partial<TableColumnCtx<any>>
 }
 
 export interface PlusTableActionBarEmits {

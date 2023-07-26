@@ -5,14 +5,18 @@
 </template>
 
 <script lang="ts" setup>
-import type { PlusColumn } from '@plus-pro-components/types'
+import type { PlusColumn, PageInfo } from '@plus-pro-components/types'
 import { readFileBase64 } from '@plus-pro-components/utils'
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
+import type { UploadFile } from 'element-plus'
 import { ElUpload, ElButton, ElImage } from 'element-plus'
 import { h, Fragment } from 'vue'
 
-const getList = async (query: any) => {
+const getList = async (
+  query: PageInfo & {
+    status?: string
+    name?: string
+  }
+) => {
   const { page = 1, pageSize = 20, status, name } = query || {}
   const total = 1000
   const List = [...new Array(total)].map((item, index) => {
@@ -182,8 +186,8 @@ const tableConfig: PlusColumn[] = [
           {
             action: '',
             httpRequest: handleHttpRequest,
-            onChange: async (data: any) => {
-              const base64 = await readFileBase64(data.raw)
+            onChange: async (data: UploadFile) => {
+              const base64 = await readFileBase64(data.raw as File)
               // 调用 renderFormFieldItem 的onChange 回调把值传给表单
               onChange(base64)
             }

@@ -30,8 +30,8 @@
 </template>
 
 <script lang="ts" setup>
+import { PlusDisplayItem } from '@plus-pro-components/components/display-item'
 import type { PlusDisplayItemInstance } from '@plus-pro-components/components/display-item'
-import PlusDisplayItem from '@plus-pro-components/components/display-item'
 import type { PlusColumn } from '@plus-pro-components/types'
 import { isString, isPlainObject } from '@plus-pro-components/utils'
 import { TableFormRefInjectionKey } from '@plus-pro-components/constants'

@@ -15,7 +15,7 @@
       </span>
     </template>
 
-    <PlusFieldItem v-bind="props" @change="handleChange" />
+    <PlusFormFieldItem v-bind="props" @change="handleChange" />
   </el-form-item>
 </template>
 
@@ -24,7 +24,7 @@ import { ref, watch } from 'vue'
 import type { PlusColumn, FieldValueType } from '@plus-pro-components/types'
 import { isString, isPlainObject, getCustomProps } from '@plus-pro-components/utils'
 import { QuestionFilled } from '@element-plus/icons-vue'
-import PlusFieldItem from './field-item.vue'
+import PlusFormFieldItem from './field-item.vue'
 
 export interface PlusFormItemProps {
   modelValue?: FieldValueType

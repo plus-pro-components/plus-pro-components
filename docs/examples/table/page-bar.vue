@@ -20,10 +20,19 @@
 import { useTable } from '@plus-pro-components/hooks'
 import type { PageInfo, PlusColumn } from '@plus-pro-components/types'
 
+interface TableRow {
+  id: number
+  name: string
+  status: string
+  tag: string
+  time: Date
+}
+
 const TestServe = {
   getList: async () => {
     const data = [...new Array(10)].map((item, index) => {
       return {
+        id: index,
         name: index + 'name',
         status: String(index % 3),
         tag: index === 1 ? 'success' : index === 2 ? 'warning' : index === 3 ? 'info' : 'danger',
@@ -31,13 +40,13 @@ const TestServe = {
       }
     })
     return {
-      data,
+      data: data as TableRow[],
       total: data.length
     }
   }
 }
 
-const { tableData, total, pageInfo } = useTable()
+const { tableData, total, pageInfo } = useTable<TableRow[]>()
 
 pageInfo.value.pageSize = 10
 

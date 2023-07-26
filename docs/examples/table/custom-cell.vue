@@ -16,13 +16,20 @@ import { h, Fragment } from 'vue'
 import { useTable } from '@plus-pro-components/hooks'
 import type { PageInfo, PlusColumn } from '@plus-pro-components/types'
 import { ElAlert, ElButton, ElMessage, ElUpload, ElResult } from 'element-plus'
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
+
 import CustomPageHeader from './components/page-header.vue'
 
 defineOptions({
   name: 'CustomCell'
 })
+
+interface TableRow {
+  index: number
+  id: number
+  name: string
+  status: string
+  custom: string
+}
 
 const TestServe = {
   getList: async () => {
@@ -36,13 +43,13 @@ const TestServe = {
       }
     })
     return {
-      data,
+      data: data as TableRow[],
       total: data.length
     }
   }
 }
 
-const { tableData, pageInfo, total, loadingStatus } = useTable()
+const { tableData, pageInfo, total, loadingStatus } = useTable<TableRow[]>()
 
 const statusOptions = [
   {
