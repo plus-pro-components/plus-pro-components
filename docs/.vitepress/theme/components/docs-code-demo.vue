@@ -1,9 +1,9 @@
 <template>
   <ClientOnly>
-    <div class="example-showcase">
+    <div class="docs-example-showcase">
       <AppAsyncComponent />
     </div>
-    <div class="example-btns">
+    <div class="docs-example-btns">
       <el-tooltip content="复制代码">
         <el-icon :size="18"><DocumentCopy v-copy="content" /></el-icon>
       </el-tooltip>
@@ -18,7 +18,7 @@
       :style="{
         display: show ? 'block' : 'none'
       }"
-      class="example-language-vue language-vue"
+      class="docs-example-language-vue language-vue"
       v-html="decoded"
     />
   </ClientOnly>
@@ -53,12 +53,12 @@ const content = computed(() => decodeURIComponent(props.rawSource))
 </script>
 
 <style lang="scss" scoped>
-.example-showcase {
+.docs-example-showcase {
   border: 1px solid #dcdfe6;
   border-radius: 4px 4px 0 0;
   padding: 20px;
 }
-.example-btns {
+.docs-example-btns {
   border: 1px solid #dcdfe6;
   border-top: 0;
   padding: 20px;

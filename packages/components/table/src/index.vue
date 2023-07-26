@@ -1,7 +1,7 @@
 <template>
   <div class="plus-table">
     <PlusTableToolbar
-      :has-table-header="hasTableHeader"
+      v-if="hasToolbar"
       :columns="columns"
       :default-size="size"
       :title="title"
@@ -115,7 +115,7 @@ export interface PlusTableProps extends /* @vue-ignore */ Partial<TableProps<any
   /* 是否需要序号*/
   isShowNumber?: boolean
   /* 是否需要过滤表格表头*/
-  hasTableHeader?: boolean
+  hasToolbar?: boolean
   /* 是否是多选表格*/
   isSelection?: boolean
   /* 是否需要展开行*/
@@ -158,11 +158,11 @@ const props = withDefaults(defineProps<PlusTableProps>(), {
   pagination: false,
   actionBar: false,
   isShowNumber: false,
-  hasTableHeader: false,
+  hasToolbar: true,
   isSelection: false,
   hasExpand: false,
   loadingStatus: false,
-  title: '',
+  title: '表格',
   tableData: () => [],
   columns: () => [],
   headerCellStyle: () => ({

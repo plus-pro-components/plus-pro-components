@@ -92,7 +92,6 @@ const customIndexContentStyle = (row: any, index: number): CSSProperties => {
   }
 
   .cell {
-    line-height: 32px !important;
     .plus-table-column-index-content {
       align-items: center;
       display: flex;

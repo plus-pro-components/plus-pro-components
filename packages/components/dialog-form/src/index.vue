@@ -80,6 +80,18 @@ watch(
     immediate: true
   }
 )
+
+watch(
+  () => props.modelValue,
+  val => {
+    state.value = val
+  },
+  {
+    immediate: true,
+    deep: true
+  }
+)
+
 const handleChange = (values: any) => {
   emit('update:modelValue', values)
   emit('change', values)

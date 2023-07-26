@@ -1,6 +1,5 @@
-import type { ElFormItem } from 'element-plus'
 import type { VNode } from 'vue'
-import type { PropsItemType } from './plus'
+import type { PropsItemType, PlusColumn } from './plus'
 
 /**
  * 所有表单的类型 默认是 text
@@ -28,26 +27,22 @@ export type FormItemValueType =
  */
 export interface FormColumnProps {
   /**
-   * @desc 支持所有 el-form的props
+   * @desc 传递给 PlusForm的配置， 支持所有 el-form的props
    */
   formProps?: PropsItemType
   /**
-   * @desc 支持所有 el-form-item的props
+   * @desc 传递给 el-form-item 的配置， 支持所有 el-form-item的props
    */
   formItemProps?: PropsItemType
 
   /**
-   * 自定义渲染   el-form-item 下的field-item组件
+   * 自定义渲染   el-form-item 下的field-item组件，自定义渲染同步表单的值的核心方法是调用onChange回调把值传给表单
    * @param props
    * @param onChange
    * @param formItemInstance
    * @returns
    */
-  renderFormFieldItem?: (
-    props: any,
-    onChange: (value: any) => void,
-    formItemInstance: InstanceType<typeof ElFormItem>
-  ) => VNode
+  renderFormFieldItem?: (value: any, onChange: (value: any) => void, props: PlusColumn) => VNode
 }
 
 /**

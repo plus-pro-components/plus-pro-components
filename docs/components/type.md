@@ -137,7 +137,7 @@ export interface ActionBarButtonsRow {
    * 操作是不是需要二次确认  默认值为 `false`
    */
   confirm?:
-    | false
+    | false // 这里的false 表示类型
     | {
         /**
          * 默认 `提示`
@@ -304,6 +304,8 @@ export type FormItemValueType =
 
 ## FieldValueType
 
+单个表单值的类型
+
 ```ts
 /**
  * 单个表单值的类型
@@ -325,6 +327,8 @@ export type FieldValueType =
 ```
 
 ## FieldValues
+
+整体表单值的类型
 
 ```ts
 /**

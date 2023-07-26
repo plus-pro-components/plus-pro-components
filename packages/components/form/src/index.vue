@@ -16,6 +16,7 @@
         :key="item.prop"
         v-model="state.values[item.prop]"
         v-bind="item"
+        @change="handleChange"
       />
     </slot>
 
@@ -107,14 +108,19 @@ const state = reactive<PlusFormState>({
 
 state.subColumns = computed<any>(() => props.columns.filter(item => item.hideInForm !== true))
 
+const handleChange = () => {
+  emit('change', state.values)
+  emit('update:modelValue', state.values)
+}
+
 watch(
-  () => state.values,
+  () => props.modelValue,
   val => {
-    emit('change', val)
-    emit('update:modelValue', val)
+    state.values = val
   },
   {
-    deep: true
+    deep: true,
+    immediate: true
   }
 )
 

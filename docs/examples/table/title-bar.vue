@@ -1,11 +1,6 @@
 <template>
   <div>
-    <PlusTable
-      :columns="tableConfig"
-      :table-data="tableData"
-      title="表格标题"
-      :has-table-header="true"
-    >
+    <PlusTable :columns="tableConfig" :table-data="tableData" title="表格标题" :has-toolbar="true">
       <template #toolbar>
         <el-button plain size="small">查看日志</el-button>
         <el-button plain size="small">导出数据</el-button>

@@ -13,9 +13,12 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, h } from 'vue'
+import { ref, h, Fragment } from 'vue'
 import type { PlusColumn } from '@plus-pro-components/types'
-import { ElUpload, ElButton } from 'element-plus'
+import { readFileBase64 } from '@plus-pro-components/utils'
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+import { ElUpload, ElButton, ElImage } from 'element-plus'
 
 const state = ref({
   status: '0',
@@ -23,7 +26,8 @@ const state = ref({
   rate: 4,
   progress: 100,
   switch: true,
-  time: new Date().toString()
+  time: new Date().toString(),
+  img: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg'
 })
 
 const rules = {
@@ -104,7 +108,7 @@ const columns: PlusColumn[] = [
     prop: 'img',
     width: 100,
     valueType: 'img',
-    renderFormFieldItem(_, onChange) {
+    renderFormFieldItem(value, onChange) {
       // 自定义上传
       const handleHttpRequest = async ({ file, onError, onSuccess }: any) => {
         try {
@@ -115,17 +119,31 @@ const columns: PlusColumn[] = [
         return file
       }
 
-      return h(
-        ElUpload,
-        {
-          action: '',
-          httpRequest: handleHttpRequest,
-          onChange: (file: any) => {
-            onChange(file.raw.name)
-          }
-        },
-        () => h(ElButton, () => '点击上传')
-      )
+      return h(Fragment, [
+        h(ElImage, {
+          src: value,
+          previewSrcList: [value],
+          style: value
+            ? {
+                width: '60px',
+                marginRight: '10px'
+              }
+            : {}
+        }),
+        h(
+          ElUpload,
+          {
+            action: '',
+            httpRequest: handleHttpRequest,
+            onChange: async (data: any) => {
+              const base64 = await readFileBase64(data.raw)
+              // 调用 renderFormFieldItem 的onChange 回调把值传给表单
+              onChange(base64)
+            }
+          },
+          () => h(ElButton, () => '点击上传')
+        )
+      ])
     }
   },
   {
@@ -227,7 +245,7 @@ const columns: PlusColumn[] = [
       },
       {
         label: '普通话证书',
-        value: '2'
+        value: '1'
       }
     ]
   },

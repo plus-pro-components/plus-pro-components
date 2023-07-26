@@ -8,7 +8,9 @@ import PlusProComponents from 'plus-pro-components'
 // 导入plus-pro-components样式，alias 处理过，正常导入是plus-pro-components/index.min.css
 import 'plus-pro-components-css'
 
-import CodeDemo from './components/code-demo.vue'
+import DocsCodeDemo from './components/docs-code-demo.vue'
+import DocsChangelog from './components/docs-changelog.vue'
+import DocsMarkdown from './components/docs-markdown.vue'
 import directive from './directives'
 
 import './styles/index.scss'
@@ -20,7 +22,9 @@ export default {
       locale: zhCn
     })
     app.use(PlusProComponents as unknown as any)
-    app.component('code-demo', CodeDemo)
+    app.component('DocsCodeDemo', DocsCodeDemo)
+    app.component('DocsChangelog', DocsChangelog)
+    app.component('DocsMarkdown', DocsMarkdown)
     directive(app)
   }
 }

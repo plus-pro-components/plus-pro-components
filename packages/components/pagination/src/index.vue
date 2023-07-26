@@ -82,6 +82,6 @@ const handleCurrentChange = (page: number) => {
 .plus-pagination {
   display: flex;
   justify-content: flex-start;
-  padding: 10px 0;
+  padding: 16px 0;
 }
 </style>

@@ -1,6 +1,5 @@
 <template>
   <el-popover
-    v-if="hasTableHeader"
     :placement="placement"
     :width="width"
     :trigger="trigger"
@@ -41,7 +40,6 @@ import { reactive } from 'vue'
 import { ClickOutside as vClickOutside } from 'element-plus'
 
 export interface PlusPopoverProps {
-  hasTableHeader?: boolean
   hasShowBottomButton?: boolean
   placement: string
   width: number
@@ -67,7 +65,7 @@ const state = reactive({
 })
 withDefaults(defineProps<PlusPopoverProps>(), {
   // 是否显示 popover 弹出框
-  hasTableHeader: false,
+  hasToolbar: false,
   // 是否显示底部按钮
   hasShowBottomButton: false,
   // 出现位置

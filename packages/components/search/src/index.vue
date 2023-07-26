@@ -18,10 +18,10 @@
       <el-col v-bind="colProps">
         <el-form-item v-if="hasFooter" class="plus-search__button__wrapper">
           <slot name="footer">
-            <el-button v-if="hasReset" @click="handleReset">
+            <el-button v-if="hasReset" :icon="RefreshRight" @click="handleReset">
               {{ resetText }}
             </el-button>
-            <el-button type="primary" :loading="searchLoading" @click="handleSearch">
+            <el-button type="primary" :loading="searchLoading" :icon="Search" @click="handleSearch">
               {{ searchText }}
             </el-button>
 
@@ -42,7 +42,7 @@
 <script lang="ts" setup>
 import { reactive, ref, watch, toRefs, computed } from 'vue'
 import type { FormInstance, FormRules, FormProps, RowProps, ColProps } from 'element-plus'
-import { ArrowDown, ArrowUp } from '@element-plus/icons-vue'
+import { ArrowDown, ArrowUp, Search, RefreshRight } from '@element-plus/icons-vue'
 import PlusFormItem from '@plus-pro-components/components/form-item'
 import type { PlusColumn, FieldValues, Mutable } from '@plus-pro-components/types'
 import { cloneDeep } from 'lodash-es'
