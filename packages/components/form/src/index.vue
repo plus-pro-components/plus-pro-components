@@ -16,6 +16,7 @@
         :key="item.prop"
         v-model="state.values[item.prop]"
         v-bind="item"
+        @change="handleChange"
       />
     </slot>
 
@@ -41,13 +42,13 @@
 
 <script lang="ts" setup>
 import { reactive, ref, watch, computed } from 'vue'
-import type { FormInstance, FormRules } from 'element-plus'
+import type { FormInstance, FormRules, FormProps } from 'element-plus'
 import { ElMessage } from 'element-plus'
-import PlusFormItem from '@plus-pro-components/components/form-item'
-import type { PlusColumn, RecordType } from '@plus-pro-components/types'
+import { PlusFormItem } from '@plus-pro-components/components/form-item'
+import type { PlusColumn, FieldValues, Mutable } from '@plus-pro-components/types'
 
-export interface PlusFormProps {
-  modelValue?: RecordType
+export interface PlusFormProps extends /* @vue-ignore */ Partial<Mutable<FormProps>> {
+  modelValue?: FieldValues
   columns?: PlusColumn[]
   labelWidth?: string
   labelPosition?: 'left' | 'right' | 'top'
@@ -63,14 +64,14 @@ export interface PlusFormProps {
 }
 
 export interface PlusFormState {
-  values: any
+  values: FieldValues
   subColumns: any
 }
 
 export interface PlusFormEmits {
-  (e: 'update:modelValue', values: any): void
-  (e: 'submit', values: any): void
-  (e: 'change', values: any): void
+  (e: 'update:modelValue', values: FieldValues): void
+  (e: 'submit', values: FieldValues): void
+  (e: 'change', values: FieldValues): void
   (e: 'cancel'): void
   (e: 'submitError', errors: any): void
 }
@@ -107,14 +108,19 @@ const state = reactive<PlusFormState>({
 
 state.subColumns = computed<any>(() => props.columns.filter(item => item.hideInForm !== true))
 
+const handleChange = () => {
+  emit('change', state.values)
+  emit('update:modelValue', state.values)
+}
+
 watch(
-  () => state.values,
+  () => props.modelValue,
   val => {
-    emit('change', val)
-    emit('update:modelValue', val)
+    state.values = val
   },
   {
-    deep: true
+    deep: true,
+    immediate: true
   }
 )
 

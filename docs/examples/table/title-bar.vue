@@ -1,13 +1,6 @@
 <template>
   <div>
-    <PlusTable
-      :columns="tableConfig"
-      :table-data="tableData"
-      title="表格标题"
-      :has-table-header="true"
-      :action-bar="{ show: false }"
-      :pagination="{ show: false }"
-    >
+    <PlusTable :columns="tableConfig" :table-data="tableData" title="表格标题" :has-toolbar="true">
       <template #toolbar>
         <el-button plain size="small">查看日志</el-button>
         <el-button plain size="small">导出数据</el-button>
@@ -21,10 +14,19 @@
 import { useTable } from '@plus-pro-components/hooks'
 import type { PlusColumn } from '@plus-pro-components/types'
 
+interface TableRow {
+  id: number
+  name: string
+  status: string
+  tag: string
+  time: Date
+}
+
 const TestServe = {
   getList: async () => {
     const data = [...new Array(10)].map((item, index) => {
       return {
+        id: index,
         name: index + 'name',
         status: String(index % 3),
         tag: index === 1 ? 'success' : index === 2 ? 'warning' : index === 3 ? 'info' : 'danger',
@@ -32,12 +34,12 @@ const TestServe = {
       }
     })
     return {
-      data
+      data: data as TableRow[]
     }
   }
 }
 
-const { tableData } = useTable()
+const { tableData } = useTable<TableRow[]>()
 
 const tableConfig: PlusColumn[] = [
   {

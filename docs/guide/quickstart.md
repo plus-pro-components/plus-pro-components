@@ -56,7 +56,7 @@ PlusProComponents 提供了基于 ES Module 的开箱即用的 [Tree Shaking](ht
   > main.ts
 
 ```ts
-import 'plus-pro-components/index.css'
+import 'plus-pro-components/index.min.css'
 ```
 
 - 导入组件
@@ -64,7 +64,7 @@ import 'plus-pro-components/index.css'
 
 ```html{2,6}
 <template>
-  <plus-pagination :total="100" show />
+  <PlusPagination :total="100"  />
 </template>
 
 <script setup>

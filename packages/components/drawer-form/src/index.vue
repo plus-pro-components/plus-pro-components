@@ -34,24 +34,23 @@
 
 <script lang="ts" setup>
 import { ref, watch } from 'vue'
-import type { PlusFormInstance } from '@plus-pro-components/components/form'
-import type { PlusFormProps } from 'plus-pro-components/es/components/form/src/index.vue'
-import PlusForm from '@plus-pro-components/components/form'
-import type { RecordType } from '@plus-pro-components/types'
+import { PlusForm } from '@plus-pro-components/components/form'
+import type { PlusFormInstance, PlusFormProps } from '@plus-pro-components/components/form'
+import type { FieldValues } from '@plus-pro-components/types'
 import { ElDrawer } from 'element-plus'
 
 export interface PlusDrawerFormProps {
-  modelValue?: RecordType
+  modelValue?: FieldValues
   visible?: boolean
   drawer?: any
   form?: PlusFormProps
 }
 
 export interface PlusDrawerFormEmits {
-  (e: 'update:modelValue', data: RecordType): void
+  (e: 'update:modelValue', data: FieldValues): void
   (e: 'update:visible', visible: boolean): void
-  (e: 'submit', data: string): void
-  (e: 'change', data: string): void
+  (e: 'submit', data: FieldValues): void
+  (e: 'change', data: FieldValues): void
   (e: 'cancel'): void
 }
 
@@ -71,7 +70,7 @@ const emit = defineEmits<PlusDrawerFormEmits>()
 const formInstance = ref<PlusFormInstance>()
 const drawerInstance = ref<InstanceType<typeof ElDrawer>>()
 
-const state = ref<any>({})
+const state = ref<FieldValues>({})
 
 const subVisible = ref(false)
 
@@ -84,13 +83,25 @@ watch(
     immediate: true
   }
 )
+
+watch(
+  () => props.modelValue,
+  val => {
+    state.value = val
+  },
+  {
+    immediate: true,
+    deep: true
+  }
+)
+
 const handleChange = (values: any) => {
   emit('update:modelValue', values)
   emit('change', values)
 }
 
 const handleSubmitForm = () => {
-  emit('submit', state)
+  emit('submit', state.value)
 }
 
 const handleCancel = () => {

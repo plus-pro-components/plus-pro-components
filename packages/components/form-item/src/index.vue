@@ -15,20 +15,19 @@
       </span>
     </template>
 
-    <PlusFieldItem v-bind="props" @change="handleChange" />
+    <PlusFormFieldItem v-bind="props" @change="handleChange" />
   </el-form-item>
 </template>
 
 <script lang="ts" setup>
 import { ref, watch } from 'vue'
-import type { PlusColumn } from '@plus-pro-components/types'
+import type { PlusColumn, FieldValueType } from '@plus-pro-components/types'
 import { isString, isPlainObject, getCustomProps } from '@plus-pro-components/utils'
 import { QuestionFilled } from '@element-plus/icons-vue'
-import PlusFieldItem from './field-item.vue'
-import type { ValueType } from './type'
+import PlusFormFieldItem from './field-item.vue'
 
 export interface PlusFormItemProps {
-  modelValue?: ValueType
+  modelValue?: FieldValueType
   label: PlusColumn['label']
   prop: PlusColumn['prop']
   fieldProps?: PlusColumn['fieldProps']
@@ -38,13 +37,14 @@ export interface PlusFormItemProps {
   hideInForm?: PlusColumn['hideInForm']
   formItemProps?: PlusColumn['formItemProps']
   // eslint-disable-next-line vue/require-default-prop
-  renderFormItem?: PlusColumn['renderFormItem']
+  renderFormFieldItem?: PlusColumn['renderFormFieldItem']
   tooltip?: PlusColumn['tooltip']
+  index?: number
 }
 
 export interface PlusFormItemEmits {
-  (e: 'update:modelValue', data: ValueType): void
-  (e: 'change', data: ValueType): void
+  (e: 'update:modelValue', data: FieldValueType): void
+  (e: 'change', data: FieldValueType): void
 }
 
 defineOptions({
@@ -59,19 +59,20 @@ const props = withDefaults(defineProps<PlusFormItemProps>(), {
   hideInForm: false,
   formItemProps: () => ({}),
   fieldProps: () => ({}),
-  options: () => []
+  options: () => [],
+  index: 0
 })
 
 const emit = defineEmits<PlusFormItemEmits>()
 
-const state = ref<ValueType>(props.modelValue)
+const state = ref<FieldValueType>(props.modelValue)
 
 const customFormItemProps = ref<any>({})
 
 watch(
   () => props.formItemProps,
   val => {
-    getCustomProps(val, state.value, props)
+    getCustomProps(val, state.value, props, props.index)
       .then(data => {
         customFormItemProps.value = data
       })
@@ -85,7 +86,7 @@ watch(
   }
 )
 
-const handleChange = (val: ValueType) => {
+const handleChange = (val: FieldValueType) => {
   emit('update:modelValue', val)
   emit('change', val)
 }

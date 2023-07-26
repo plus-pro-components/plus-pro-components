@@ -1,16 +1,9 @@
+import type { PlusTableProps } from './src/index.vue'
 import PlusTable from './src/index.vue'
 
-export type {
-  ButtonsNameRow,
-  ButtonsNameKeyRow,
-  ButtonsCallBackParams,
-  ActionBarProps,
-  SortParams
-} from './src/type'
-
-type PlusTableInstance = InstanceType<typeof PlusTable>
-
-export type { PlusTableInstance }
+export type PlusTableInstance = InstanceType<typeof PlusTable>
+export * from './src/type'
+export type { PlusTableProps }
 
 export { PlusTable }
 export default PlusTable

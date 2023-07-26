@@ -1,22 +1,25 @@
 <template>
   <el-table-column
-    v-if="show"
     key="actionBar"
     class-name="plus-table-action-bar"
     align="center"
-    label="操作"
-    fixed="right"
-    :width="optionColumnWidth + 'px'"
-    v-bind="actionBarProps"
+    :label="label || '操作'"
+    :fixed="fixed || 'right'"
+    :width="width || 200"
+    v-bind="props.actionBarTableColumnProps"
   >
     <template #default="{ row, $index }">
       <!-- 显示出来的按钮 -->
-      <template v-for="buttonRow in getPreButtonOptions(row)" :key="buttonRow.text">
+      <template v-for="buttonRow in getSubButtons(row, $index).preButtons" :key="buttonRow.text">
         <component :is="() => render(row, buttonRow, $index)" />
       </template>
 
       <!-- 隐藏的按钮 -->
-      <el-dropdown v-if="isShowMore(row)" trigger="click" class="plus-table-action-bar__dropdown">
+      <el-dropdown
+        v-if="getSubButtons(row, $index).showMore"
+        trigger="click"
+        class="plus-table-action-bar__dropdown"
+      >
         <span class="plus-table-action-bar__dropdown__link">
           更多
           <el-icon>
@@ -27,7 +30,10 @@
         <!-- 下拉按钮 -->
         <template #dropdown>
           <el-dropdown-menu>
-            <el-dropdown-item v-for="buttonRow in getNextButtonOptions(row)" :key="buttonRow.text">
+            <el-dropdown-item
+              v-for="buttonRow in getSubButtons(row, $index).nextButtons"
+              :key="buttonRow.text"
+            >
               <component :is="() => render(row, buttonRow, $index)" />
             </el-dropdown-item>
           </el-dropdown-menu>
@@ -39,48 +45,99 @@
 
 <script lang="ts" setup>
 import type { VNode } from 'vue'
-import { h } from 'vue'
+import { h, unref } from 'vue'
 import { ArrowDownBold } from '@element-plus/icons-vue'
-import { ElButton, ElIcon, ElLink, ElTooltip } from 'element-plus'
+import type { TableColumnCtx } from 'element-plus'
+import { ElButton, ElIcon, ElLink, ElTooltip, ElMessageBox } from 'element-plus'
 import type { RecordType } from '@plus-pro-components/types'
-import type { ButtonsCallBackParams, ButtonsNameKeyRow, ButtonsNameRow } from './type'
+import { isFunction } from '@plus-pro-components/utils'
+import { cloneDeep } from 'lodash-es'
+import type { ButtonsCallBackParams, ActionBarButtonsRow } from './type'
 
-/**
- * 表格操作栏数据类型
- */
-export interface PlusTableActionBarProps {
-  show?: boolean
-  buttonCount?: number
-  buttonType?: 'icon' | 'button' | 'link'
-  buttonsName?: Partial<ButtonsNameRow>
-  optionColumnWidth?: number
+export interface ActionBarProps {
   /**
-   * 表格操作栏 el-table-column 的其他props
+   * 操作栏名称  默认值为 `'操作栏'`
+   *
    */
-  actionBarProps?: RecordType
+  label?: string
+  /**
+   * 操作栏固定   默认值为 `'right'`
+   */
+  fixed?: string
+  /**
+   * 显示出来的按钮个数  默认值为 `3`
+   */
+  showNumber?: number
+  /**
+   * 操作按钮的类型   默认值为 `'link'`
+   */
+  type?: 'icon' | 'button' | 'link'
+  /**
+   * 操作按钮集合   默认值为 `[]`
+   */
+  buttons?: ActionBarButtonsRow[]
+  /**
+   * 表格操作栏 el-table-column 的其width   默认值为 `200`
+   */
+  width?: string | number
+  /**
+   * 表格操作栏 el-table-column 的其他props   默认值为 `{}`
+   */
+  actionBarTableColumnProps?: Partial<TableColumnCtx<any>>
 }
 
 export interface PlusTableActionBarEmits {
   (e: 'clickAction', data: ButtonsCallBackParams): void
+  (e: 'clickActionConfirmCancel', data: ButtonsCallBackParams): void
 }
 
 defineOptions({
   name: 'PlusTableActionBar'
 })
 
-const props = withDefaults(defineProps<PlusTableActionBarProps>(), {
-  show: true,
-  buttonCount: 3,
-  buttonType: 'link',
-  buttonsName: () => ({}),
-  actionBarProps: () => ({}),
-  optionColumnWidth: 200
+const props = withDefaults(defineProps<ActionBarProps>(), {
+  label: '操作',
+  fixed: 'right',
+  type: 'link',
+  buttons: () => [],
+  width: 200,
+  showNumber: 3,
+  actionBarTableColumnProps: () => ({})
 })
 const emit = defineEmits<PlusTableActionBarEmits>()
 
+const getSubButtons = (row: any, index: number) => {
+  const data = cloneDeep(props.buttons).filter(item => {
+    if (isFunction(item.show)) {
+      const tempFunction = item.show as (
+        row: any,
+        index: number,
+        button: ActionBarButtonsRow
+      ) => boolean
+      const isShow = tempFunction(row, index, item)
+      return unref(isShow) !== false
+    }
+    return unref(item.show) !== false
+  })
+  // 获取'更多'之前的按钮组
+  const preButtons = data.slice(0, props.showNumber)
+
+  // 获取'更多'之后的按钮组
+  const nextButtons = data.slice(props.showNumber)
+
+  //  显示更多
+  const showMore = data.length > props.showNumber
+
+  return {
+    showMore,
+    preButtons,
+    nextButtons
+  }
+}
+
 // 渲染
-const render = (row: any, buttonRow: ButtonsNameKeyRow, index: number): VNode => {
-  if (props.buttonType === 'icon') {
+const render = (row: any, buttonRow: ActionBarButtonsRow, index: number): VNode => {
+  if (props.type === 'icon') {
     return h(
       ElTooltip,
       { placement: 'top', content: buttonRow.text, ...buttonRow.tooltipProps },
@@ -96,12 +153,12 @@ const render = (row: any, buttonRow: ButtonsNameKeyRow, index: number): VNode =>
         )
     )
   } else {
-    const Tag = props.buttonType === 'button' ? ElButton : ElLink
+    const Tag = props.type === 'button' ? ElButton : ElLink
     return h(
       Tag,
       {
         size: 'small',
-        icon: buttonRow.icon,
+        // icon: buttonRow.icon,
         ...buttonRow.props,
         onClick: (event: MouseEvent) => handleClickAction(row, buttonRow, index, event)
       },
@@ -110,30 +167,32 @@ const render = (row: any, buttonRow: ButtonsNameKeyRow, index: number): VNode =>
   }
 }
 
-// 获取当前操作的按钮组
-const getOptionsName = (buttonKey: string): ButtonsNameKeyRow[] =>
-  props.buttonsName[buttonKey] || []
-
-// 获取'更多'之前的按钮组
-const getPreButtonOptions = (row: any) => getOptionsName(row.buttonKey).slice(0, props.buttonCount)
-
-// 获取'更多'之后的按钮组
-const getNextButtonOptions = (row: any) => getOptionsName(row.buttonKey).slice(props.buttonCount)
-
-// 是否显示'更多'之后的按钮组
-const isShowMore = (row: any) => {
-  const showMore = getOptionsName(row.buttonKey).length > props.buttonCount
-  return showMore
-}
 // 分发按钮事件
 const handleClickAction = (
   row: RecordType,
-  buttonRow: ButtonsNameKeyRow,
+  buttonRow: ActionBarButtonsRow,
   index: number,
   e: MouseEvent
 ) => {
-  if (buttonRow.disabled !== true) {
-    const data: ButtonsCallBackParams = { row, buttonRow, index, e }
+  const data: ButtonsCallBackParams = { row, buttonRow, index, e }
+  if (buttonRow.confirm) {
+    const title = isFunction(buttonRow.confirm.title)
+      ? (buttonRow.confirm.title as any)(data)
+      : buttonRow.confirm.title
+
+    const message = isFunction(buttonRow.confirm.message)
+      ? (buttonRow.confirm.message as any)(data)
+      : buttonRow.confirm.message
+
+    ElMessageBox.confirm(message || '确定执行本次操作', title || '提示', buttonRow.confirm.options)
+
+      .then(() => {
+        emit('clickAction', data)
+      })
+      .catch(() => {
+        emit('clickActionConfirmCancel', data)
+      })
+  } else {
     emit('clickAction', data)
   }
 }

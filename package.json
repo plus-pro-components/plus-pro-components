@@ -1,6 +1,6 @@
 {
   "private": true,
-  "version": "0.0.1-alpha.19",
+  "version": "0.0.1-alpha.22",
   "description": "Page level components developed based on Element Plus.",
   "packageManager": "pnpm@8.5.0",
   "license": "MIT",
@@ -95,6 +95,7 @@
     "jsdom": "^22.1.0",
     "lint-staged": "^13.2.2",
     "minimist": "^1.2.8",
+    "ora": "^6.3.1",
     "postcss": "^8.4.24",
     "prettier": "^2.8.8",
     "rimraf": "^5.0.0",

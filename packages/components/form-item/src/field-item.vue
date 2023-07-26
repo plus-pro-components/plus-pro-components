@@ -1,7 +1,7 @@
 <template>
   <component
-    :is="() => renderFormItem && renderFormItem(props, handleChange, formItemInstance)"
-    v-if="renderFormItem && isFunction(renderFormItem)"
+    :is="() => renderFormFieldItem && renderFormFieldItem(state, handleChange, props)"
+    v-if="renderFormFieldItem && isFunction(renderFormFieldItem)"
     v-bind="customFieldProps"
   />
 
@@ -66,6 +66,13 @@
     @change="handleChange"
   />
 
+  <PlusDatePicker
+    v-else-if="valueType === 'plus-date-picker'"
+    v-model="state"
+    v-bind="customFieldProps"
+    @change="handleChange"
+  />
+
   <el-input-number
     v-else-if="valueType === 'input-number'"
     v-model="state"
@@ -96,6 +103,15 @@
       {{ item.label }}
     </el-radio>
   </el-radio-group>
+
+  <PlusRadio
+    v-else-if="valueType === 'plus-radio'"
+    v-model="state"
+    :data="options"
+    is-cancel
+    v-bind="customFieldProps"
+    @change="handleChange"
+  />
 
   <el-rate
     v-else-if="valueType === 'rate'"
@@ -173,12 +189,13 @@
 <script lang="ts" setup>
 import { ref, watch } from 'vue'
 import { isFunction, getCustomProps, isDate, isArray } from '@plus-pro-components/utils'
-import type { PlusColumn } from '@plus-pro-components/types'
+import type { PlusColumn, FieldValueType } from '@plus-pro-components/types'
 import { useGetOptions } from '@plus-pro-components/hooks'
-import type { ValueType } from './type'
+import PlusDatePicker from '@plus-pro-components/components/date-picker'
+import PlusRadio from '@plus-pro-components/components/radio'
 
-export interface PlusFormItemProps {
-  modelValue?: ValueType
+export interface PlusFormFieldItemProps {
+  modelValue?: FieldValueType
   label?: PlusColumn['label']
   prop: PlusColumn['prop']
   fieldProps?: PlusColumn['fieldProps']
@@ -188,12 +205,13 @@ export interface PlusFormItemProps {
   hideInForm?: PlusColumn['hideInForm']
   formItemProps?: PlusColumn['formItemProps']
   // eslint-disable-next-line vue/require-default-prop
-  renderFormItem?: PlusColumn['renderFormItem']
+  renderFormFieldItem?: PlusColumn['renderFormFieldItem']
+  index?: number
 }
 
-export interface PlusFormItemEmits {
-  (e: 'update:modelValue', data: ValueType): void
-  (e: 'change', data: ValueType): void
+export interface PlusFormFieldItemEmits {
+  (e: 'update:modelValue', data: FieldValueType): void
+  (e: 'change', data: FieldValueType): void
 }
 
 defineOptions({
@@ -201,21 +219,20 @@ defineOptions({
   inheritAttrs: false
 })
 
-const formItemInstance = ref()
-
-const props = withDefaults(defineProps<PlusFormItemProps>(), {
+const props = withDefaults(defineProps<PlusFormFieldItemProps>(), {
   modelValue: '',
   label: '',
   prop: '',
   hideInForm: false,
   formItemProps: () => ({}),
   fieldProps: () => ({}),
-  options: () => []
+  options: () => [],
+  index: 0
 })
 
-const emit = defineEmits<PlusFormItemEmits>()
+const emit = defineEmits<PlusFormFieldItemEmits>()
 
-const state = ref<ValueType>()
+const state = ref<FieldValueType>()
 
 const options = useGetOptions(props)
 
@@ -224,7 +241,7 @@ const customFieldProps = ref<any>({})
 watch(
   () => props.fieldProps,
   val => {
-    getCustomProps(val, state.value, props)
+    getCustomProps(val, state.value, props, props.index)
       .then(data => {
         customFieldProps.value = data
       })
@@ -299,7 +316,7 @@ watch(
   }
 )
 
-const handleChange = (val: ValueType) => {
+const handleChange = (val: FieldValueType) => {
   emit('update:modelValue', val)
   emit('change', val)
 }

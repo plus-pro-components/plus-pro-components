@@ -128,9 +128,9 @@
 
 <script lang="ts" setup>
 import { DocumentCopy, Select } from '@element-plus/icons-vue'
-import PlusFormItem from '@plus-pro-components/components/form-item'
+import { PlusFormItem } from '@plus-pro-components/components/form-item'
+import { PlusForm } from '@plus-pro-components/components/form'
 import type { PlusFormInstance } from '@plus-pro-components/components/form'
-import PlusForm from '@plus-pro-components/components/form'
 import {
   dateFormat,
   formatToCurrency,
@@ -138,7 +138,6 @@ import {
   getCustomProps,
   isArray
 } from '@plus-pro-components/utils'
-
 import { ref, watch, computed } from 'vue'
 import type { PlusColumn, RecordType } from '@plus-pro-components/types'
 import { useGetOptions } from '@plus-pro-components/hooks'
@@ -178,7 +177,7 @@ watch(
   val => {
     const value = subRow.value[props.column.prop]
     const row = subRow
-    getCustomProps(val, value, row)
+    getCustomProps(val, value, row, props.index)
       .then(data => {
         customFieldProps.value = data
       })

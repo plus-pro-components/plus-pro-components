@@ -46,8 +46,7 @@ watch(
 
 // 行拖拽
 const rowDrop = () => {
-  const tbody = props.tableInstance.$el.querySelector('.el-table__body-wrapper tbody')
-
+  const tbody = props.tableInstance?.$el?.querySelector('.el-table__body-wrapper tbody')
   if (!tbody) return
 
   let config: Sortable.Options = {

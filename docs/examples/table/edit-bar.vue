@@ -1,12 +1,6 @@
 <template>
   <div>
-    <PlusTable
-      :columns="tableConfig"
-      :table-data="tableData"
-      :pagination="{ show: false }"
-      :action-bar="{ show: false }"
-      @formChange="formChange"
-    >
+    <PlusTable :columns="tableConfig" :table-data="tableData" @formChange="formChange">
       <template #toolbar>
         <el-button plain size="small" @click="editTable(false)">取消编辑</el-button>
         <el-button type="primary" size="small" @click="editTable(true)">编辑表格</el-button>
@@ -20,10 +14,20 @@ import { useTable } from '@plus-pro-components/hooks'
 import type { PlusColumn } from '@plus-pro-components/types'
 import { ref } from 'vue'
 
+interface TableRow {
+  id: number
+  name: string
+  status: string
+  rate: number
+  switch: boolean
+  time: Date
+}
+
 const TestServe = {
   getList: async () => {
     const data = [...new Array(10)].map((item, index) => {
       return {
+        id: index,
         name: index + 'name',
         status: String(index % 3),
         rate: index > 3 ? 2 : 3.5,
@@ -31,10 +35,11 @@ const TestServe = {
         time: new Date()
       }
     })
-    return { data }
+    return { data: data as TableRow[] }
   }
 }
-const { tableData } = useTable()
+const { tableData } = useTable<TableRow[]>()
+
 const tableConfig = ref<PlusColumn[]>([
   {
     label: '名称',

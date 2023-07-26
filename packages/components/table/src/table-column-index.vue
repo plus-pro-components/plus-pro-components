@@ -1,6 +1,5 @@
 <template>
   <el-table-column
-    v-if="show"
     key="index"
     label="#"
     fixed="left"
@@ -42,7 +41,6 @@ import type { CSSProperties } from 'vue'
 import { isFunction, isPlainObject } from '@plus-pro-components/utils'
 
 export interface PlusTableTableColumnIndexProps {
-  show?: boolean
   pageInfo?: PageInfo
   max?: number
   indexContentStyle?: CSSProperties | ((row: any, index: number) => CSSProperties)
@@ -61,7 +59,11 @@ const props = withDefaults(defineProps<PlusTableTableColumnIndexProps>(), {
 
 // 修改序号生成方法
 const getTableIndex = (index: number) => {
-  const i = (props.pageInfo.page - 1) * props.pageInfo.pageSize + index + 1
+  const i =
+    ((props.pageInfo?.page || DefaultPageInfo.page) - 1) *
+      (props.pageInfo?.pageSize || DefaultPageInfo.page) +
+    index +
+    1
   return +i
 }
 
@@ -90,7 +92,6 @@ const customIndexContentStyle = (row: any, index: number): CSSProperties => {
   }
 
   .cell {
-    line-height: 32px !important;
     .plus-table-column-index-content {
       align-items: center;
       display: flex;

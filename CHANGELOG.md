@@ -1,3 +1,34 @@
+## [v0.0.1-alpha.22](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-alpha.21...v0.0.1-alpha.22) (2023-07-26)
+
+
+
+
+### 🐛 Bug Fixes
+
+* **packages:** :bug: improve TS type.([fd39b1e](https://github.com/plus-pro-components/plus-pro-components/commit/fd39b1e)) by@xiaofei
+
+
+## [v0.0.1-alpha.21](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-alpha.20...v0.0.1-alpha.21) (2023-07-26)
+
+
+### ✨ Features
+
+* **packages:** :sparkles: add page component and component instance type.([c2628ea](https://github.com/plus-pro-components/plus-pro-components/commit/c2628ea)) by@xiaofei
+* **components:** :sparkles: edit table,form and search component extends attributes method.([dda410a](https://github.com/plus-pro-components/plus-pro-components/commit/dda410a)) by@xiaofei
+
+
+
+
+## [v0.0.1-alpha.20](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-alpha.19...v0.0.1-alpha.20) (2023-07-24)
+
+
+### ✨ Features
+
+* **components:** :sparkles: table-action-bar add show and confirm function.([13a6ca0](https://github.com/plus-pro-components/plus-pro-components/commit/13a6ca0)) by@xiaofei
+
+
+
+
 ## [v0.0.1-alpha.19](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-alpha.18...v0.0.1-alpha.19) (2023-07-21)
 
 

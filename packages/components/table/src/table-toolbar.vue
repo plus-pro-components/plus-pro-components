@@ -9,13 +9,7 @@
     <div class="plus-table-toolbar">
       <slot name="toolbar" />
       <!-- 表格密度 -->
-      <PlusPopover
-        :has-table-header="hasTableHeader"
-        placement="bottom"
-        :width="150"
-        trigger="click"
-        title="密度"
-      >
+      <PlusPopover placement="bottom" :width="150" trigger="click" title="密度">
         <div class="plus-table-toolbar__density">
           <el-button
             v-for="item in buttonNameDensity"
@@ -50,7 +44,6 @@
 
       <!-- 列设置 -->
       <PlusPopover
-        :has-table-header="hasTableHeader"
         placement="bottom"
         :width="100"
         trigger="click"
@@ -102,13 +95,12 @@ import { reactive } from 'vue'
 import { cloneDeep } from 'lodash-es'
 import type { PlusColumn } from '@plus-pro-components/types'
 import { Setting } from '@element-plus/icons-vue'
-import PlusPopover from '@plus-pro-components/components/popover'
+import { PlusPopover } from '@plus-pro-components/components/popover'
 import type { ComponentSize } from 'element-plus/es/constants'
 
 export interface PlusTableToolbarProps {
   columns?: PlusColumn[]
   title?: string
-  hasTableHeader?: boolean
   filterTableHeaderOverflowLabelLength?: number
   defaultSize?: ComponentSize
 }
@@ -136,7 +128,7 @@ defineOptions({
 const props = withDefaults(defineProps<PlusTableToolbarProps>(), {
   columns: () => [],
   title: '',
-  hasTableHeader: true,
+  hasToolbar: true,
   filterTableHeaderOverflowLabelLength: 6,
   defaultSize: 'default'
 })

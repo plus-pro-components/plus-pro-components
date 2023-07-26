@@ -1,4 +1,7 @@
 import type { RecordType } from './global'
+
+export {}
+
 /**
  * 所有表格的类型 默认是 ''
  */

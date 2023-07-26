@@ -10,13 +10,12 @@
       :is-show-number="true"
       :is-show-drag-sort="true"
       table-title="表格"
-      :pagination="{ show: true, total, modelValue: pageInfo }"
+      :pagination="{ total, modelValue: pageInfo }"
       :action-bar="{
-        show: true,
-        buttonsName,
-        buttonType: 'link',
-        buttonCount: 3,
-        optionColumnWidth: 200
+        buttons,
+        type: 'link',
+        showNumber: 3,
+        width: 200
       }"
       @paginationChange="handlePaginationChange"
       @clickAction="handleClickButton"
@@ -40,13 +39,27 @@ import type {
   ButtonsCallBackParams
 } from '@plus-pro-components/components/table'
 import type { PageInfo, PlusColumn } from '@plus-pro-components/types'
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
+
 import { ElAlert } from 'element-plus'
 
 defineOptions({
-  name: 'PlusTableTest'
+  name: 'PlusTableAdvancedTest'
 })
+
+interface TableRow {
+  index: number
+  id: number
+  name: string
+  status: string
+  tag: string
+  progress: number
+  rate: number
+  switch: boolean
+  img: string
+  code: string
+  time: Date
+  custom: string
+}
 
 const TestServe = {
   getList: async () => {
@@ -60,14 +73,6 @@ const TestServe = {
         progress: Math.ceil(Math.random() * index * 10),
         rate: index > 3 ? 2 : 3.5,
         switch: index % 2 === 0 ? true : false,
-        indexColStyle:
-          index < 3
-            ? {
-                backgroundColor: '#314659'
-              }
-            : {
-                backgroundColor: '#979797'
-              },
         img: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
         time: new Date(),
         code: `
@@ -79,7 +84,7 @@ const TestServe = {
       }
     })
     return {
-      data,
+      data: data as TableRow[],
       total: data.length
     }
   }
@@ -87,39 +92,39 @@ const TestServe = {
 
 const plusTable = ref<PlusTableInstance>()
 
-const { tableData, pageInfo, total, buttonsName, loadingStatus } = useTable()
+const { tableData, pageInfo, total, buttons, loadingStatus } = useTable<TableRow[]>()
 
-buttonsName.value = {
-  normal: [
-    {
-      // 查看
-      text: '查看',
-      props: {
-        type: 'primary'
-      }
-    },
-    {
-      // 修改
-      text: '修改',
-      props: {
-        type: 'success'
-      }
-    },
-    {
-      // 删除
-      text: '删除',
-      props: {
-        type: 'danger'
-      }
-    },
-    {
-      text: '复制',
-      props: {
-        type: 'primary'
-      }
+buttons.value = [
+  {
+    // 查看
+    text: '查看',
+    props: {
+      type: 'primary'
     }
-  ]
-}
+  },
+  {
+    // 修改
+    text: '修改',
+    props: {
+      type: 'success'
+    }
+  },
+  {
+    // 删除
+    text: '删除',
+    props: {
+      type: 'warning'
+    },
+    confirm: {}
+  },
+  {
+    text: '复制',
+    props: {
+      type: 'primary'
+    },
+    confirm: {}
+  }
+]
 
 const statusOptions = [
   {
@@ -256,20 +261,12 @@ const tableConfig: PlusColumn[] = [
   }
 ]
 
-const formatTableItem = (item: any) => {
-  return {
-    ...item,
-    buttonKey: 'normal'
-  }
-}
-
 const getList = async () => {
   try {
     loadingStatus.value = true
 
     const { data, total: dataTotal } = await TestServe.getList()
-    const items = data.map(item => formatTableItem(item))
-    tableData.value = items || []
+    tableData.value = data || []
     total.value = dataTotal
   } catch (error) {}
   loadingStatus.value = false
@@ -287,7 +284,13 @@ const handleSortEnd = (newIndex: number, oldIndex: number) => {
   const currRow = tableData.value.splice(oldIndex, 1)[0]
   tableData.value.splice(newIndex, 0, currRow)
 }
-const handleChange = (data: { value: any; prop: string; row: any; index: number; column: any }) => {
+const handleChange = (data: {
+  value: any
+  prop: string
+  row: TableRow
+  index: number
+  column: any
+}) => {
   console.log(data)
 }
 </script>

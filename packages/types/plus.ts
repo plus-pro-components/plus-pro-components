@@ -1,6 +1,6 @@
-import type { ElTooltipProps } from 'element-plus'
+import type { ElTooltipProps, FormItemProps } from 'element-plus'
 import type { VNode } from 'vue'
-import type { RecordType } from './global'
+import type { RecordType, Mutable } from './global'
 import type { TableValueType, TableColumnProps } from './table'
 import type { FormItemValueType, FormColumnProps } from './form'
 
@@ -27,7 +27,9 @@ export interface PageInfo {
 /**
  *  自定义props类型
  */
-export type PropsItemType = RecordType | ((value?: any, row?: any) => RecordType)
+export type PropsItemType<T extends Record<string, any> = any> =
+  | Partial<T>
+  | ((value: any, row: any, index: number) => Partial<T> | Promise<Partial<T>>)
 
 /**
  * 选择框类型
@@ -39,7 +41,7 @@ export interface OptionsRow {
   /**
    * 表单子项的props  如 el-checkbox-group下的el-checkbox的props
    */
-  fieldItemProps?: PropsItemType
+  fieldItemProps?: PropsItemType<Mutable<FormItemProps>>
   children?: OptionsRow[]
 }
 /**

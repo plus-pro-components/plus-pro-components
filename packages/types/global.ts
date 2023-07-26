@@ -30,5 +30,5 @@ export type Nullable<T> = T | null
  * 去除只读状态
  */
 export type Mutable<T extends Record<string, any>> = {
-  -readonly [K in keyof T]?: T[K]
+  -readonly [K in keyof T]: T[K]
 }

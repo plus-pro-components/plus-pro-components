@@ -21,9 +21,7 @@ export const mdPlugin = (md: MarkdownIt) => {
     },
 
     render(tokens, idx) {
-      const m = tokens[idx].info.trim().match(/^demo\s*(.*)$/)
       if (tokens[idx].nesting === 1 /* means the tag is opening */) {
-        const description = m && m.length > 1 ? m[1] : ''
         const sourceFileToken = tokens[idx + 2]
         let source = ''
         const sourceFile = sourceFileToken.children?.[0].content ?? ''
@@ -33,11 +31,11 @@ export const mdPlugin = (md: MarkdownIt) => {
         }
         if (!source) throw new Error(`Incorrect source file: ${sourceFile}`)
 
-        return `<code-demo  source="${encodeURIComponent(
+        return `<DocsCodeDemo  source="${encodeURIComponent(
           highlight(source, 'vue')
         )}" path="${sourceFile}" raw-source="${encodeURIComponent(source)}" >`
       } else {
-        return '</code-demo>'
+        return '</DocsCodeDemo>'
       }
     }
   } as ContainerOpts)

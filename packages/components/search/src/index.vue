@@ -9,7 +9,7 @@
     :label-position="labelPosition"
     :validate-on-rule-change="false"
     :label-suffix="labelSuffix"
-    v-bind="formProps"
+    v-bind="$attrs"
   >
     <el-row v-bind="rowProps">
       <el-col v-for="item in subColumns" :key="item.prop" v-bind="colProps">
@@ -18,16 +18,16 @@
       <el-col v-bind="colProps">
         <el-form-item v-if="hasFooter" class="plus-search__button__wrapper">
           <slot name="footer">
-            <el-button v-if="hasReset" @click="handleReset">
+            <el-button v-if="hasReset" :icon="RefreshRight" @click="handleReset">
               {{ resetText }}
             </el-button>
-            <el-button type="primary" :loading="searchLoading" @click="handleSearch">
+            <el-button type="primary" :loading="searchLoading" :icon="Search" @click="handleSearch">
               {{ searchText }}
             </el-button>
 
             <el-button v-if="hasUnfold" type="primary" link @click="handleUnfold">
               {{ isShowUnfold ? '展开' : '收起' }}
-              <el-icon class="el-icon--right">
+              <el-icon>
                 <ArrowDown v-if="isShowUnfold" />
                 <ArrowUp v-else />
               </el-icon>
@@ -42,13 +42,13 @@
 <script lang="ts" setup>
 import { reactive, ref, watch, toRefs, computed } from 'vue'
 import type { FormInstance, FormRules, FormProps, RowProps, ColProps } from 'element-plus'
-import { ArrowDown, ArrowUp } from '@element-plus/icons-vue'
-import PlusFormItem from '@plus-pro-components/components/form-item'
-import type { PlusColumn, RecordType, Mutable } from '@plus-pro-components/types'
+import { ArrowDown, ArrowUp, Search, RefreshRight } from '@element-plus/icons-vue'
+import { PlusFormItem } from '@plus-pro-components/components/form-item'
+import type { PlusColumn, FieldValues, Mutable } from '@plus-pro-components/types'
 import { cloneDeep } from 'lodash-es'
 
-export interface PlusSearchProps {
-  modelValue: RecordType
+export interface PlusSearchProps extends /* @vue-ignore */ Partial<Mutable<FormProps>> {
+  modelValue: FieldValues
   columns: PlusColumn[]
   labelWidth?: string
   labelPosition?: 'left' | 'right' | 'top'
@@ -61,16 +61,15 @@ export interface PlusSearchProps {
   searchLoading?: boolean
   inline?: boolean
   rules?: FormRules
-  formProps?: Partial<FormProps>
   showNumber?: number
-  rowProps?: Mutable<RowProps>
-  colProps?: Mutable<ColProps>
+  rowProps?: Partial<Mutable<RowProps>>
+  colProps?: Partial<Mutable<ColProps>>
 }
 
 export interface PlusSearchState {
-  values: any
+  values: FieldValues
   isShowUnfold: boolean
-  subColumns: any
+  subColumns: any[]
   originData: any
 }
 
@@ -135,9 +134,10 @@ watch(
   }
 )
 
-state.originData = computed<any>(() => {
-  return props.columns.filter(data => data.hideInSearch !== true)
+state.originData = computed<any[]>(() => {
+  return props.columns.filter(item => item.hideInSearch !== true)
 })
+
 if (props.hasUnfold) {
   state.subColumns = cloneDeep(state.originData).slice(0, props.showNumber)
 } else {

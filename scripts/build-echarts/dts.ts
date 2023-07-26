@@ -43,7 +43,7 @@ export const main = async () => {
 
   const tasks = sourceFiles.map(async sourceFile => {
     const relativePath = path.relative(ecRoot, sourceFile.getFilePath())
-    consola.trace(chalk.yellow(`Generating definition for file: ${chalk.bold(relativePath)}`))
+    consola.info(chalk.yellow(`Generating definition for file: ${chalk.bold(relativePath)}`))
 
     const emitOutput = sourceFile.getEmitOutput()
     const emitFiles = emitOutput.getOutputFiles()

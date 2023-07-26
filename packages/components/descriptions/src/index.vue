@@ -21,7 +21,7 @@ import { computed, reactive } from 'vue'
 import type { ExtractPropTypes } from 'vue'
 import type { descriptionProps } from 'element-plus'
 import type { PlusColumn, RecordType } from '@plus-pro-components/types'
-import PlusDisplayItem from '@plus-pro-components/components/display-item'
+import { PlusDisplayItem } from '@plus-pro-components/components/display-item'
 
 type DescriptionProps = ExtractPropTypes<typeof descriptionProps>
 

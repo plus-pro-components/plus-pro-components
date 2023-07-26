@@ -11,7 +11,7 @@
         <span class="plus-table-column__header">
           {{ item.label }}
           <el-tooltip v-if="item.tooltip" placement="top" v-bind="getTooltip(item.tooltip)">
-            <el-icon class="plus-table-column__header__icon" :size="16"><Warning /></el-icon>
+            <el-icon class="plus-table-column__header__icon" :size="16"><QuestionFilled /></el-icon>
           </el-tooltip>
         </span>
       </template>
@@ -30,14 +30,14 @@
 </template>
 
 <script lang="ts" setup>
+import { PlusDisplayItem } from '@plus-pro-components/components/display-item'
 import type { PlusDisplayItemInstance } from '@plus-pro-components/components/display-item'
-import PlusDisplayItem from '@plus-pro-components/components/display-item'
 import type { PlusColumn } from '@plus-pro-components/types'
 import { isString, isPlainObject } from '@plus-pro-components/utils'
 import { TableFormRefInjectionKey } from '@plus-pro-components/constants'
-import { Warning } from '@element-plus/icons-vue'
+import { QuestionFilled } from '@element-plus/icons-vue'
 import type { Ref } from 'vue'
-import { ref, inject, watch } from 'vue'
+import { shallowRef, inject, watch } from 'vue'
 
 export interface PlusTableTableColumnProps {
   columns?: PlusColumn[]
@@ -57,7 +57,7 @@ withDefaults(defineProps<PlusTableTableColumnProps>(), {
 
 const emit = defineEmits<PlusTableTableColumnEmits>()
 
-const plusDisplayItemInstance = ref()
+const plusDisplayItemInstance = shallowRef()
 
 const formRef = inject(TableFormRefInjectionKey) as Ref<any>
 

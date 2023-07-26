@@ -3,11 +3,23 @@
   "include": ["src/**/*", "src/**/*.vue", "src/**/*.json", "../plus-pro-components/index"],
   "exclude": ["src/**/__tests__/*"],
   "compilerOptions": {
-    "composite": true,
+    "outDir": "dist",
+    "target": "es2018",
+    "module": "esnext",
+    "sourceMap": false,
+    "moduleResolution": "node",
+    "allowJs": false,
+    "strict": true,
+    "noUnusedLocals": true,
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "removeComments": false,
+    "rootDir": ".",
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]
     },
-    "types": ["vite/client", "../../global"]
+    "types": ["vite/client", "element-plus/global", "../../global"]
   }
 }

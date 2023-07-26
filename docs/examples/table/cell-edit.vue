@@ -3,8 +3,7 @@
     <PlusTable
       :columns="tableConfig"
       :table-data="tableData"
-      :pagination="{ show: false }"
-      :action-bar="{ buttonsName, optionColumnWidth: 140 }"
+      :action-bar="{ buttons, width: 140 }"
       @formChange="formChange"
       @clickAction="handleClickButton"
     />
@@ -12,16 +11,21 @@
 </template>
 
 <script lang="ts" setup>
-import type {
-  ButtonsCallBackParams,
-  ButtonsNameKeyRow
-} from '@plus-pro-components/components/table'
+import type { ButtonsCallBackParams, TableFormRefRow } from '@plus-pro-components/components/table'
 import { useTable } from '@plus-pro-components/hooks'
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
+
 import { ElMessage } from 'element-plus'
 import type { PlusColumn } from '@plus-pro-components/types'
 import { ref } from 'vue'
+
+interface TableRow {
+  id: number
+  name: string
+  status: string
+  rate: number
+  switch: boolean
+  time: string
+}
 
 const TestServe = {
   getList: async () => {
@@ -35,42 +39,49 @@ const TestServe = {
         time: index < 5 ? '' : new Date()
       }
     })
-    return { data }
+    return { data: data as TableRow[] }
   }
 }
-const { tableData, buttonsName } = useTable()
+const { tableData, buttons } = useTable<TableRow[]>()
 
-const edit: ButtonsNameKeyRow[] = [
+const show = ref<boolean[]>([])
+
+buttons.value = [
   {
     text: '取消编辑',
     code: 'cancel',
     props: {
       type: 'warning'
-    }
+    },
+    show: (_, index) => !!show.value[index]
   },
   {
     // 保存
     text: '保存',
     code: 'save',
     props: {
-      type: 'danger'
-    }
-  }
-]
-
-const noEdit: ButtonsNameKeyRow[] = [
+      type: 'primary'
+    },
+    show: (_, index) => !!show.value[index]
+  },
   {
     text: '编辑',
     code: 'edit',
     props: {
       type: 'primary'
-    }
+    },
+    show: (_, index) => !show.value[index]
+  },
+  {
+    text: '删除',
+    code: 'delete',
+    props: {
+      type: 'danger'
+    },
+    confirm: {},
+    show: (_, index) => !show.value[index]
   }
 ]
-
-buttonsName.value = {
-  normal: [...noEdit]
-}
 const tableConfig = ref<PlusColumn[]>([
   {
     label: '名称',
@@ -156,11 +167,7 @@ const tableConfig = ref<PlusColumn[]>([
 const getList = async () => {
   try {
     const { data } = await TestServe.getList()
-    tableData.value = data.map(item => ({ ...item, buttonKey: item.id }))
-
-    tableData.value.forEach((item: any) => {
-      buttonsName.value[item.buttonKey] = noEdit
-    })
+    tableData.value = data.map(item => ({ ...item }))
   } catch (error) {}
 }
 getList()
@@ -169,9 +176,13 @@ const formChange = (data: { value: any; prop: string; row: any; index: number; c
   console.log(data)
 }
 
-const handleSave = async (data: any) => {
+const handleSave = async (data: ButtonsCallBackParams) => {
   try {
-    await Promise.all(data.formRefs.map((item: any) => item.formInstance?.validate()))
+    if (data.formRefs) {
+      await Promise.all(
+        data.formRefs?.map((item: TableFormRefRow) => item.formInstance.value?.validate())
+      )
+    }
   } catch (errors: any) {
     ElMessage.closeAll()
     const values: any[] = Object.values(errors)
@@ -181,27 +192,28 @@ const handleSave = async (data: any) => {
 
 const handleClickButton = async (data: ButtonsCallBackParams) => {
   if (data.buttonRow.code === 'edit') {
-    tableData.value.forEach((item: any) => {
+    tableData.value.forEach(item => {
       if (item.id === data.row.id) {
-        buttonsName.value[item.buttonKey] = [...edit]
+        show.value[data.index] = true
       }
     })
 
-    data.formRefs?.forEach((item: any) => {
+    data.formRefs?.forEach((item: TableFormRefRow) => {
       item.startCellEdit()
     })
   } else if (data.buttonRow.code === 'cancel') {
-    tableData.value.forEach((item: any) => {
+    tableData.value.forEach(item => {
       if (item.id === data.row.id) {
-        buttonsName.value[item.buttonKey] = [...noEdit]
+        show.value[data.index] = false
       }
     })
-
-    data.formRefs?.forEach((item: any) => {
+    data.formRefs?.forEach((item: TableFormRefRow) => {
       item.stopCellEdit()
     })
-  } else {
+  } else if (data.buttonRow.code === 'save') {
     handleSave(data)
+  } else {
+    ElMessage.success('删除成功')
   }
 }
 </script>

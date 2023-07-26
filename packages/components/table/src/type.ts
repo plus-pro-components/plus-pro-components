@@ -1,12 +1,21 @@
-import type { RecordType, PageInfo } from '@plus-pro-components/types'
+import type { RecordType, PageInfo, Mutable } from '@plus-pro-components/types'
 import type { ComponentSize } from 'element-plus/es/constants'
-import type { ElForm, ElFormItem } from 'element-plus'
-import type { DefineComponent } from 'vue'
+import type {
+  ElForm,
+  ElFormItem,
+  ElMessageBoxOptions,
+  ButtonProps,
+  LinkProps,
+  IconProps,
+  ElTooltipProps,
+  TableColumnCtx
+} from 'element-plus'
+import type { DefineComponent, Ref, ComputedRef } from 'vue'
 
 /**
- * 按钮配置项的值的类型
+ * 表格操作栏按钮配置项的值的类型
  */
-export interface ButtonsNameKeyRow {
+export interface ActionBarButtonsRow {
   /**
    * 操作文本
    */
@@ -18,22 +27,94 @@ export interface ButtonsNameKeyRow {
   code?: string | number
 
   /**
-   * 禁用
-   */
-  disabled?: boolean
-
-  /**
-   * @element-plus/icons-vue 的图标名称，对ElButton,ElLink 和ElIcon 组件同时生效
+   * `@element-plus/icons-vue` 的图标名称，对ElButton,ElLink 和ElIcon 组件同时生效
    */
   icon?: DefineComponent
   /**
-   * ElButton 和ElIcon 组件对应的props
+   * ElButton,ElLink和ElIcon 组件对应的props
    */
-  props?: RecordType
+  props?: Partial<Mutable<ButtonProps & LinkProps & IconProps>>
   /**
-   * ElTooltip组件的props， buttonType 为icon 时生效
+   * ElTooltip组件的props， type 为icon 时生效
    */
-  tooltipProps?: RecordType
+  tooltipProps?: Partial<ElTooltipProps>
+
+  /**
+   * 按钮显示的逻辑 默认 true 显示， 不需要显示给 false
+   *
+   * 可以用来控制权限
+   */
+  show?:
+    | boolean
+    | Ref<boolean>
+    | ComputedRef<boolean>
+    | ((
+        row: any,
+        index: number,
+        button: ActionBarButtonsRow
+      ) => boolean | Ref<boolean> | ComputedRef<boolean>)
+
+  /**
+   * 操作是不是需要二次确认  默认值为 `false`
+   */
+  confirm?:
+    | false
+    | {
+        /**
+         * 默认 `提示`
+         */
+        title?: string | ((data: ButtonsCallBackParams) => string)
+        /**
+         * 默认 `确定执行本次操作`
+         */
+        message?: string | ((data: ButtonsCallBackParams) => string)
+
+        /**
+         *  ElMessageBox.confirm 的options
+         */
+        options?: ElMessageBoxOptions
+      }
+}
+
+/**
+ * 表格可编辑表单的行form 的参数类型
+ */
+export interface TableFormRefRow {
+  /**
+   * 单元格的表单实例
+   */
+  formInstance: Ref<InstanceType<typeof ElForm>>
+  /**
+   * 单元格的表单单项实例
+   */
+  formItemInstance: Ref<InstanceType<typeof ElFormItem>>
+  /**
+   * 获取显示组件实例
+   */
+  getDisplayItemInstance: () => {
+    index: number
+    prop: string
+    formInstance: Ref<InstanceType<typeof ElForm>>
+    formItemInstance: Ref<InstanceType<typeof ElFormItem>>
+  }
+  /**
+   * 表格的行索引
+   */
+  index: number
+  /**
+   * 表格的列字段
+   */
+  prop: string
+  /**
+   * 单元格的表单开启编辑
+   * @returns
+   */
+  startCellEdit: () => void
+  /**
+   * 单元格的表单停止编辑
+   * @returns
+   */
+  stopCellEdit: () => void
 }
 
 /**
@@ -47,7 +128,7 @@ export interface ButtonsCallBackParams {
   /**
    * 点击按钮数据
    */
-  buttonRow: ButtonsNameKeyRow
+  buttonRow: ActionBarButtonsRow
   /**
    * 表格索引
    */
@@ -59,53 +140,7 @@ export interface ButtonsCallBackParams {
   /**
    * 可编辑表单的行form
    */
-  formRefs?: {
-    /**
-     * 单元格的表单实例
-     */
-    formInstance: InstanceType<typeof ElForm>
-    /**
-     * 单元格的表单单项实例
-     */
-    formItemInstance: InstanceType<typeof ElFormItem>
-    /**
-     * 获取显示组件实例
-     */
-    getDisplayItemInstance: () => {
-      index: number
-      prop: string
-      formInstance: InstanceType<typeof ElForm>
-      formItemInstance: InstanceType<typeof ElFormItem>
-    }
-    /**
-     * 表格的行索引
-     */
-    index: number
-    /**
-     * 表格的列字段
-     */
-    prop: string
-    /**
-     * 单元格的表单开启编辑
-     * @returns
-     */
-    startCellEdit: () => void
-    /**
-     * 单元格的表单停止编辑
-     * @returns
-     */
-    stopCellEdit: () => void
-  }[]
-}
-
-/**
- * 按钮配置项的类型
- */
-export interface ButtonsNameRow {
-  /**
-   * 按钮对应的key值
-   */
-  [key: string]: ButtonsNameKeyRow[]
+  formRefs?: TableFormRefRow[]
 }
 
 /**
@@ -113,29 +148,34 @@ export interface ButtonsNameRow {
  */
 export interface ActionBarProps {
   /**
-   * 是否显示操作栏
-   */
-  show?: boolean
-  /**
-   * 操作栏名称 默认 '操作栏'
+   * 操作栏名称  默认值为 `'操作栏'`
+   *
    */
   label?: string
   /**
-   * 操作栏固定  默认固定在 right
+   * 操作栏固定   默认值为 `'right'`
    */
   fixed?: string
   /**
-   * 操作栏宽度定  默认固定在 200
+   * 显示出来的按钮个数  默认值为 `3`
    */
-  optionColumnWidth?: number
+  showNumber?: number
   /**
-   * 操作栏默认显示数量，多余的隐藏 默认3
+   * 操作按钮的类型   默认值为 `'link'`
    */
-  buttonCount?: number
+  type?: 'icon' | 'button' | 'link'
   /**
-   * 操作栏按钮的key值
+   * 操作按钮集合   默认值为 `[]`
    */
-  buttonsName?: ButtonsNameRow
+  buttons?: ActionBarButtonsRow[]
+  /**
+   * 表格操作栏 el-table-column 的其width   默认值为 `200`
+   */
+  width?: string | number
+  /**
+   * 表格操作栏 el-table-column 的其他props   默认值为 `{}`
+   */
+  actionBarTableColumnProps?: Partial<TableColumnCtx<any>>
 }
 
 /**
@@ -149,8 +189,3 @@ export interface TableState {
    */
   subPageInfo: PageInfo
 }
-
-/**
- * 排序回调参数
- */
-export type SortParams = { order: string; prop: string; column: RecordType }

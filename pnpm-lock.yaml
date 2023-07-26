@@ -153,6 +153,9 @@ importers:
       minimist:
         specifier: ^1.2.8
         version: 1.2.8
+      ora:
+        specifier: ^6.3.1
+        version: 6.3.1
       postcss:
         specifier: ^8.4.24
         version: 8.4.24
@@ -209,7 +212,7 @@ importers:
     dependencies:
       plus-pro-components:
         specifier: npm:plus-pro-components@latest
-        version: 0.0.1-alpha.15(vue@3.3.4)
+        version: 0.0.1-alpha.21(vue@3.3.4)
     devDependencies:
       '@types/escape-html':
         specifier: ^1.0.2
@@ -379,7 +382,7 @@ importers:
         version: 1.15.0
     devDependencies:
       '@plus-pro-components/utils':
-        specifier: ^0.0.4
+        specifier: ^0.0.6
         version: link:../utils
       '@types/node':
         specifier: '*'
@@ -3271,6 +3274,14 @@ packages:
       readable-stream: 3.6.2
     dev: true
 
+  /bl@5.1.0:
+    resolution: {integrity: sha512-tv1ZJHLfTDnXE6tMHv73YgSJaWR2AFuPwMntBe7XL/GBFHnT0CLnsHMogfk5+GzCDC5ZWarSCYaIGATZt9dNsQ==}
+    dependencies:
+      buffer: 6.0.3
+      inherits: 2.0.4
+      readable-stream: 3.6.2
+    dev: true
+
   /blueimp-md5@2.19.0:
     resolution: {integrity: sha512-DRQrD6gJyy8FbiE4s+bDoXS9hiW3Vbx5uCdwvcCf3zLHL+Iv7LtGHLpr+GZV8rHG8tK766FGYBwRbu8pELTt+w==}
     dev: true
@@ -3348,6 +3359,13 @@ packages:
 
   /buffer@5.7.1:
     resolution: {integrity: sha512-EHcyIPBQ4BSGlvjB16k5KgAJ27CIsHY/2JBmCRReo48y9rQ3MaUzWX3KVlBa4U7MyX02HdVj0K7C3WaB3ju7FQ==}
+    dependencies:
+      base64-js: 1.5.1
+      ieee754: 1.2.1
+    dev: true
+
+  /buffer@6.0.3:
+    resolution: {integrity: sha512-FTiCpNxtwiZZHEZbcbTIcZjERVICn9yq/pDFkTl95/AxzD1naBctN7YO68riM/gLSDY7sdrMby8hofADYuuqOA==}
     dependencies:
       base64-js: 1.5.1
       ieee754: 1.2.1
@@ -3543,6 +3561,13 @@ packages:
     engines: {node: '>=8'}
     dependencies:
       restore-cursor: 3.1.0
+    dev: true
+
+  /cli-cursor@4.0.0:
+    resolution: {integrity: sha512-VGtlMu3x/4DOtIUwEkRezxUZ2lBacNJCHash0N0WeZDBS+7Ux1dm3XWAgWYxLJFMMdOeXMHXorshEFhbMSGelg==}
+    engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
+    dependencies:
+      restore-cursor: 4.0.0
     dev: true
 
   /cli-spinners@2.9.0:
@@ -5983,6 +6008,11 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
+  /is-interactive@2.0.0:
+    resolution: {integrity: sha512-qP1vozQRI+BMOPcjFzrjXuQvdak2pHNUMZoeG2eRbiSqyvbEf/wQtEOTOX1guk6E3t36RkaqiSt8A/6YElNxLQ==}
+    engines: {node: '>=12'}
+    dev: true
+
   /is-module@1.0.0:
     resolution: {integrity: sha512-51ypPSPCoTEIN9dy5Oy+h4pShgJmPCygKfyRCISBI+JoWT/2oJvK8QPxmwv7b/p239jXrm9M1mlQbyKJ5A152g==}
     dev: true
@@ -6104,6 +6134,11 @@ packages:
   /is-unicode-supported@0.1.0:
     resolution: {integrity: sha512-knxG2q4UC3u8stRGyAVJCOdxFmv5DZiRcdlIaAQXAbSfJya+OhopNotLQrstBhququ4ZpuKbDc/8S6mgXgPFPw==}
     engines: {node: '>=10'}
+    dev: true
+
+  /is-unicode-supported@1.3.0:
+    resolution: {integrity: sha512-43r2mRvz+8JRIKnWJ+3j8JtjRKZ6GmjzfaE/qiBJnikNnYv/6bagRJ1kUhNk8R5EX/GkobD+r+sfxCPJsiKBLQ==}
+    engines: {node: '>=12'}
     dev: true
 
   /is-utf8@0.2.1:
@@ -6511,6 +6546,14 @@ packages:
     dependencies:
       chalk: 4.1.2
       is-unicode-supported: 0.1.0
+    dev: true
+
+  /log-symbols@5.1.0:
+    resolution: {integrity: sha512-l0x2DvrW294C9uDCoQe1VSU4gf529FkSZ6leBl4TiqZH/e+0R7hSfHQBNut2mNygDgHwvYHfFLn6Oxb3VWj2rA==}
+    engines: {node: '>=12'}
+    dependencies:
+      chalk: 5.2.0
+      is-unicode-supported: 1.3.0
     dev: true
 
   /log-update@4.0.0:
@@ -7098,6 +7141,21 @@ packages:
       wcwidth: 1.0.1
     dev: true
 
+  /ora@6.3.1:
+    resolution: {integrity: sha512-ERAyNnZOfqM+Ao3RAvIXkYh5joP220yf59gVe2X/cI6SiCxIdi4c9HZKZD8R6q/RDXEje1THBju6iExiSsgJaQ==}
+    engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
+    dependencies:
+      chalk: 5.2.0
+      cli-cursor: 4.0.0
+      cli-spinners: 2.9.0
+      is-interactive: 2.0.0
+      is-unicode-supported: 1.3.0
+      log-symbols: 5.1.0
+      stdin-discarder: 0.1.0
+      strip-ansi: 7.0.1
+      wcwidth: 1.0.1
+    dev: true
+
   /os-homedir@1.0.2:
     resolution: {integrity: sha512-B5JU3cabzk8c67mRRd3ECmROafjYMXbuzlwtqdM8IbS8ktlTix8aFGb2bAGKrSRIlnfKwovGUUr72JUPyOb6kQ==}
     engines: {node: '>=0.10.0'}
@@ -7377,8 +7435,8 @@ packages:
       pathe: 1.1.0
     dev: true
 
-  /plus-pro-components@0.0.1-alpha.15(vue@3.3.4):
-    resolution: {integrity: sha512-errVncHkcaVzXKGrhJ7Dvw5SAZ1l1LnrErSdoke8m3xQ/ok369OQb3x6iE6HHJ8GyPD1PB2SYx3+ZD0MtcUCuQ==}
+  /plus-pro-components@0.0.1-alpha.21(vue@3.3.4):
+    resolution: {integrity: sha512-ztUX064BkcvDZl+OAu4Sx2A3moYK7YKnx9kQJaT852vuzyP6ZuOnZDhoMiuia1F+zRoIYXpNvCoZ3I0R2AVG8w==}
     peerDependencies:
       vue: ^3.2.0
     dependencies:
@@ -8343,6 +8401,14 @@ packages:
       signal-exit: 3.0.7
     dev: true
 
+  /restore-cursor@4.0.0:
+    resolution: {integrity: sha512-I9fPXU9geO9bHOt9pHHOhOkYerIMsmVaWB0rA2AI9ERh/+x/i7MV5HKBNrg+ljO5eoPVgCcnFuRjJ9uH6I/3eg==}
+    engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
+    dependencies:
+      onetime: 5.1.2
+      signal-exit: 3.0.7
+    dev: true
+
   /reusify@1.0.4:
     resolution: {integrity: sha512-U9nH88a3fc/ekCF1l0/UP1IosiuIjyTh7hBvXVMHYgVcfGvt897Xguj2UOLDeI5BG2m7/uwyaLVT6fbtCwTyzw==}
     engines: {iojs: '>=1.0.0', node: '>=0.10.0'}
@@ -8795,6 +8861,13 @@ packages:
 
   /std-env@3.3.3:
     resolution: {integrity: sha512-Rz6yejtVyWnVjC1RFvNmYL10kgjC49EOghxWn0RFqlCHGFpQx+Xe7yW3I4ceK1SGrWIGMjD5Kbue8W/udkbMJg==}
+    dev: true
+
+  /stdin-discarder@0.1.0:
+    resolution: {integrity: sha512-xhV7w8S+bUwlPTb4bAOUQhv8/cSS5offJuX8GQGq32ONF0ZtDWKfkdomM3HMRA+LhX6um/FZ0COqlwsjD53LeQ==}
+    engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
+    dependencies:
+      bl: 5.1.0
     dev: true
 
   /string-argv@0.3.2:

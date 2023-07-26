@@ -60,7 +60,7 @@ export default defineConfig({
       { text: '指南', link: '/guide/installation' },
       {
         text: '组件',
-        link: '/components/dialog'
+        link: '/components/'
       },
       {
         text: `v${pkg.version}`,
@@ -96,6 +96,15 @@ export default defineConfig({
           ]
         },
         {
+          text: '进阶',
+          items: [
+            {
+              text: '更新日志',
+              link: '/guide/changelog'
+            }
+          ]
+        },
+        {
           text: '开发',
           items: [
             {
@@ -106,6 +115,15 @@ export default defineConfig({
         }
       ],
       '/components/': [
+        {
+          text: '简介',
+          items: [
+            {
+              text: '简介',
+              link: '/components/index'
+            }
+          ]
+        },
         {
           text: '基础Ts类型',
           items: [
@@ -147,9 +165,18 @@ export default defineConfig({
               text: '表格',
               link: '/components/table'
             },
+
             {
               text: '表单',
               link: '/components/form'
+            },
+            {
+              text: '搜索',
+              link: '/components/search'
+            },
+            {
+              text: '页面',
+              link: '/components/page'
             },
             {
               text: '弹窗表单',
@@ -159,10 +186,7 @@ export default defineConfig({
               text: '抽屉表单',
               link: '/components/drawer-form'
             },
-            {
-              text: '搜索',
-              link: '/components/search'
-            },
+
             {
               text: '描述列表',
               link: '/components/description'

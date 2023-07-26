@@ -5,7 +5,7 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue'
-import type { PlusColumn } from '@plus-pro-components/types'
+import type { PlusColumn, FieldValues } from '@plus-pro-components/types'
 
 const columns: PlusColumn[] = [
   {
@@ -185,7 +185,7 @@ const columns: PlusColumn[] = [
 ]
 
 const visible = ref(false)
-const values = ref({})
+const values = ref<FieldValues>({})
 
 const handleOpen = () => {
   visible.value = true
