@@ -1,3 +1,13 @@
+## [v0.0.1-alpha.22](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-alpha.21...v0.0.1-alpha.22) (2023-07-26)
+
+
+
+
+### 🐛 Bug Fixes
+
+* **packages:** :bug: improve TS type.([fd39b1e](https://github.com/plus-pro-components/plus-pro-components/commit/fd39b1e)) by@xiaofei
+
+
 ## [v0.0.1-alpha.21](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-alpha.20...v0.0.1-alpha.21) (2023-07-26)
 
 
