@@ -57,10 +57,10 @@ export default defineConfig({
     // https://vitepress.dev/reference/default-theme-config
     nav: [
       { text: '首页', link: '/' },
-      { text: '指南', link: '/guide/installation' },
+      { text: '指南', link: '/guide/' },
       {
         text: '组件',
-        link: '/components/'
+        link: '/components/type'
       },
       {
         text: `v${pkg.version}`,
@@ -83,6 +83,15 @@ export default defineConfig({
     sidebar: {
       '/guide/': [
         {
+          text: '简介',
+          items: [
+            {
+              text: '简介',
+              link: '/guide/index'
+            }
+          ]
+        },
+        {
           text: '基础',
           items: [
             {
@@ -98,6 +107,10 @@ export default defineConfig({
         {
           text: '进阶',
           items: [
+            {
+              text: '国际化',
+              link: '/guide/internationalization'
+            },
             {
               text: '更新日志',
               link: '/guide/changelog'
@@ -115,15 +128,6 @@ export default defineConfig({
         }
       ],
       '/components/': [
-        {
-          text: '简介',
-          items: [
-            {
-              text: '简介',
-              link: '/components/index'
-            }
-          ]
-        },
         {
           text: '基础Ts类型',
           items: [

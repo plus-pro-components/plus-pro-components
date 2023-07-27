@@ -12,11 +12,11 @@ hero:
   actions:
     - theme: brand
       text: 开始
-      link: /guide/installation
+      link: /guide/
 
     - theme: alt
       text: 组件
-      link: /components/index
+      link: /components/type
 
 features:
   - icon: 🔥
