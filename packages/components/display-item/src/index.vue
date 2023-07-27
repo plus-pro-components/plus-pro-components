@@ -60,12 +60,12 @@
     v-else-if="column.valueType === 'date-picker' && subRow[column.prop]"
     v-bind="customFieldProps"
   >
-    {{ dateFormat(subRow[column.prop]) }}
+    {{ formatDate(subRow[column.prop]) }}
   </span>
 
   <!-- 格式化金钱 -->
   <span v-else-if="column.valueType === 'money'" v-bind="customFieldProps">
-    {{ formatToCurrency(subRow[column.prop]) }}
+    {{ formatMoney(subRow[column.prop]) }}
   </span>
 
   <!-- 状态显示 -->
@@ -132,8 +132,8 @@ import { PlusFormItem } from '@plus-pro-components/components/form-item'
 import { PlusForm } from '@plus-pro-components/components/form'
 import type { PlusFormInstance } from '@plus-pro-components/components/form'
 import {
-  dateFormat,
-  formatToCurrency,
+  formatDate,
+  formatMoney,
   isFunction,
   getCustomProps,
   isArray
