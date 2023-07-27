@@ -1,6 +1,6 @@
 {
   "name": "@plus-pro-components/utils",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "utils of plus-pro-components",
   "license": "MIT",
   "main": "./dist/index.cjs",
