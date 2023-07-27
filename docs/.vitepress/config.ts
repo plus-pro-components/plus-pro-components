@@ -63,6 +63,10 @@ export default defineConfig({
         link: '/components/type'
       },
       {
+        text: 'API',
+        link: '/api/utils/'
+      },
+      {
         text: `v${pkg.version}`,
         items: [
           {
@@ -196,6 +200,16 @@ export default defineConfig({
               link: '/components/description'
             }
           ]
+        }
+      ],
+      '/api/': [
+        {
+          text: 'utils',
+          link: '/api/utils/'
+        },
+        {
+          text: 'hooks',
+          link: '/api/hooks/'
         }
       ]
     },

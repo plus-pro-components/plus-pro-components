@@ -42,11 +42,11 @@ export function dateDiff(
 }
 
 /**
- * @desc 获取距离当前时间差
+ * @desc 获取距离当前时间差，返回多少年（月/天/小时/分钟/秒）前
  * @param date  秒数
  * @returns
  */
-export function getDiffByDate(date: number): string {
+export function getDiffDateFromCurrent(date: number): string {
   if (date >= 60 * 60 * 24 * 365) {
     return `${parseInt(String(date / (60 * 60 * 24 * 365)))}年前`
   }
