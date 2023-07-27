@@ -30,27 +30,26 @@ export function decrypt(
   return res
 }
 
-const TokenKey = 'Admin-Token'
 /**
  * 获取token
  * @returns token
  */
-export function getToken(): string {
-  const data = storage.get(TokenKey)
-  const res = data ? decrypt(TokenKey, data) : ''
+export function getToken(key: string): string {
+  const data = storage.get(key)
+  const res = data ? decrypt(key, data) : ''
   return res
 }
 /**
  * 设置token
  * @returns token
  */
-export function setToken(token: string): string {
-  const data = encrypt(TokenKey, token)
-  return storage.set(TokenKey, data)
+export function setToken(key: string, token: string): string {
+  const data = encrypt(key, token)
+  return storage.set(key, data)
 }
 /**
  * 移除token
  */
-export function removeToken(): void {
-  storage.remove(TokenKey)
+export function removeToken(key: string): void {
+  storage.remove(key)
 }

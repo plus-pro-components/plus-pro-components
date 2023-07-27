@@ -6,7 +6,7 @@
 
 <script lang="ts" setup>
 import type { PlusColumn, PageInfo } from '@plus-pro-components/types'
-import { readFileBase64 } from '@plus-pro-components/utils'
+import { fileToDataURL } from '@plus-pro-components/utils'
 import type { UploadFile } from 'element-plus'
 import { ElUpload, ElButton, ElImage } from 'element-plus'
 import { h, Fragment } from 'vue'
@@ -187,7 +187,7 @@ const tableConfig: PlusColumn[] = [
             action: '',
             httpRequest: handleHttpRequest,
             onChange: async (data: UploadFile) => {
-              const base64 = await readFileBase64(data.raw as File)
+              const base64 = await fileToDataURL(data.raw as File)
               // 调用 renderFormFieldItem 的onChange 回调把值传给表单
               onChange(base64)
             }

@@ -124,6 +124,14 @@ const main = async () => {
             item.sha
           })) by@${item.author}\n`
       )
+    const refactorData = item.content
+      .filter(item => item.type === 'refactor')
+      .map(
+        item =>
+          `* **${item.scoped || 'all'}:**${item.content}([${item.sha}](${target}commit/${
+            item.sha
+          })) by@${item.author}\n`
+      )
 
     const content =
       md +
@@ -131,6 +139,8 @@ const main = async () => {
       (featData.length ? `### ✨ Features\n\n${featData.join('')}` : '') +
       '\n\n' +
       (fixData.length ? `### 🐛 Bug Fixes\n\n${fixData.join('')}` : '') +
+      '\n\n' +
+      (refactorData.length ? `### ♻️ Code Refactoring\n\n${refactorData.join('')}` : '') +
       '\n\n'
 
     return content
