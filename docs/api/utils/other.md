@@ -10,9 +10,17 @@
 declare const getBigLetter: () => string[]
 ```
 
+使用示例
+
+```ts
+import { getBigLetter } from '@plus-pro-components/utils'
+
+getBigLetter() // ["A","B","C", "D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
+```
+
 ## getSmallLetter
 
-生成大写字母
+生成小写字母
 
 ```ts
 /**
@@ -22,19 +30,12 @@ declare const getBigLetter: () => string[]
 declare const getSmallLetter: () => string[]
 ```
 
-## getCustomProps
-
-获取自定义的 props 支持对象 函数 和 Promise
+使用示例
 
 ```ts
-/**
- * 获取自定义的props 支持对象 函数 和 Promise
- * @param props
- * @param value
- * @param row
- * @returns
- */
-declare const getCustomProps: (props: any, value: any, row: any, index: number) => Promise<any>
+import { getSmallLetter } from '@plus-pro-components/utils'
+
+getSmallLetter() // ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
 ```
 
 ## WebSocket
@@ -127,7 +128,7 @@ declare class WS {
 }
 ```
 
-示例
+使用示例
 
 ```ts
 import { WS } from '@plus-pro-components/utils'
@@ -152,7 +153,7 @@ ws.onMessage(data => {
 declare const openExe: (protocol: string, event: Event, timeout?: number) => Promise<FocusEvent>
 ```
 
-示例
+使用示例
 
 ```html
 <button @click="handleCLick">打开vscode</button>
@@ -166,4 +167,24 @@ const url = 'vscode://'
 const handleCLick = async (event: MouseEvent) => {
   await openExe(url, event)
 }
+```
+
+## isIOS
+
+是否是 ios
+
+```ts
+/**
+ * 是否是ios
+ * @returns {boolean}
+ */
+declare function isIOS(): boolean
+```
+
+使用示例
+
+```ts
+import { isIOS } from '@plus-pro-components/utils'
+
+isIOS() // false
 ```

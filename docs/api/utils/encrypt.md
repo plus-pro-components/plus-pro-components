@@ -17,6 +17,14 @@ declare function encrypt(
 ): string
 ```
 
+使用示例
+
+```ts
+import { encrypt } from '@plus-pro-components/utils'
+
+encrypt('key', 'message') // U2FsdGVkX19GcnbMMQplTX7ZrBomhN24tzbA5Nlc1dw=
+```
+
 ## decrypt
 
 AES 解密
@@ -34,4 +42,12 @@ declare function decrypt(
   key: string | CryptoJS.lib.WordArray,
   encrypted: string | CryptoJS.lib.CipherParams
 ): string
+```
+
+使用示例
+
+```ts
+import { decrypt } from '@plus-pro-components/utils'
+
+decrypt('key', 'U2FsdGVkX19GcnbMMQplTX7ZrBomhN24tzbA5Nlc1dw=') // message
 ```

@@ -2,7 +2,7 @@
 
 ## useTable
 
-初始化表格基本数据
+初始化表格基本数据，配合 [PlusTable](/components/table.html) 组件使用
 
 ```ts
 import type { ActionBarButtonsRow } from 'plus-pro-components/es/components/table'
@@ -59,6 +59,14 @@ declare function useAppendTag(
 export default useAppendTag
 ```
 
+使用示例
+
+```ts
+import { useAppendTag } from 'plus-pro-components'
+
+useAppendTag('script', { src: 'https://www.api,com/test.js' })
+```
+
 ## useIsEnterKeyboard
 
 判断是否按住某键
@@ -73,23 +81,33 @@ import type { Ref } from 'vue'
 export default function useIsEnterKeyboard(key?: string): { isEnterKeyboard: Ref<boolean> }
 ```
 
+使用示例
+
+```ts
+import { useIsEnterKeyboard } from 'plus-pro-components'
+
+const isEnterKeyboard = useIsEnterKeyboard()
+```
+
 ## useIsOperation
 
 是否在指定时间内操作页面
 
 ```ts
 import type { Ref } from 'vue'
-type returnType = {
-  /**
-   * 是否在指定时间内操作页面
-   */
-  isOperation: Ref<boolean>
-}
 /**
  *  判断用户是否在操作页面
  * @param duration 秒 默认 10, 最小1
- * @return `{ isOperation: Ref<boolean> }`
+ * @return `{ isOperation: Ref<boolean> }`  是否在指定时间内操作页面
  */
-declare function useIsOperation(duration?: number): returnType
+declare function useIsOperation(duration = 10): { isOperation: Ref<boolean> }
 export default useIsOperation
+```
+
+使用示例
+
+```ts
+import { useIsOperation } from 'plus-pro-components'
+
+const { isOperation } = useIsOperation()
 ```

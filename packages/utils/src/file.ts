@@ -129,11 +129,11 @@ export const isLegalResolutionRatio = async (
     const image = await loadImage(base64)
     if (image.width !== width || image.height !== height) {
       // 上传图片的分辨率必须为
-      return Promise.reject('error')
+      return Promise.reject(false)
     }
     return true
   } catch (error) {
-    return Promise.reject('error')
+    return Promise.reject(false)
   }
 }
 

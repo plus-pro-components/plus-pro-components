@@ -1,22 +1,10 @@
-## getStorage
-
-获取 storage
-
-```ts
-/**
- * 获取storage
- * @returns storage
- */
-export function getStorage(key: string): string {
-  return storage.get(key)
-}
-```
-
 ## setStorage
 
+设置 localStorage
+
 ```ts
 /**
- * 设置storage
+ * 设置 localStorage
  * @returns storage
  */
 export function setStorage(key: string, data: any): string {
@@ -24,11 +12,39 @@ export function setStorage(key: string, data: any): string {
 }
 ```
 
-设置 storage
+使用示例
+
+```ts
+import { setStorage } from '@plus-pro-components/utils'
+
+setStorage('key', { data: { username: 'name' } })
+```
+
+## getStorage
+
+获取 localStorage
+
+```ts
+/**
+ * 获取 localStorage
+ * @returns storage
+ */
+export function getStorage(key: string): string {
+  return storage.get(key)
+}
+```
+
+使用示例
+
+```ts
+import { getStorage } from '@plus-pro-components/utils'
+
+getStorage('key') // { data: { username: "name" } }
+```
 
 ## removeStorage
 
-移除 storage
+移除 localStorage
 
 ```ts
 /**
@@ -39,16 +55,12 @@ export function removeStorage(key: string): void {
 }
 ```
 
-## getToken
-
-获取 token 带 AES 解密
+使用示例
 
 ```ts
-/**
- * 获取token  带AES解密
- * @returns token
- */
-declare function getToken(key: string): string
+import { removeStorage } from '@plus-pro-components/utils'
+
+removeStorage('key')
 ```
 
 ## setToken
@@ -63,6 +75,34 @@ declare function getToken(key: string): string
 declare function setToken(key: string, token: string): string
 ```
 
+使用示例
+
+```ts
+import { setToken } from '@plus-pro-components/utils'
+
+setToken('tokenKey', 'token')
+```
+
+## getToken
+
+获取 token 带 AES 解密
+
+```ts
+/**
+ * 获取token  带AES解密
+ * @returns token
+ */
+declare function getToken(key: string): string
+```
+
+使用示例
+
+```ts
+import { getToken } from '@plus-pro-components/utils'
+
+getToken('tokenKey') //  'token'
+```
+
 ## removeToken
 
 设置 token
@@ -72,4 +112,12 @@ declare function setToken(key: string, token: string): string
  * 移除token
  */
 declare function removeToken(key: string): void
+```
+
+使用示例
+
+```ts
+import { removeToken } from '@plus-pro-components/utils'
+
+removeToken('tokenKey')
 ```

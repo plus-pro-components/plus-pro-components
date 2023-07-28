@@ -12,6 +12,14 @@
 declare function formatMoney(val: string | number, format?: string): string
 ```
 
+使用示例
+
+```ts
+import { formatMoney } from '@plus-pro-components/utils'
+
+formatMoney('100') // ￥100.00
+```
+
 ## formatNumber
 
 格式化数字
@@ -26,9 +34,17 @@ declare function formatMoney(val: string | number, format?: string): string
 declare function formatNumber(number: number | string, format?: string): string
 ```
 
+使用示例
+
+```ts
+import { formatNumber } from '@plus-pro-components/utils'
+
+formatNumber('100') // 100.00
+```
+
 ## formatNumberFixed
 
-格式化数字保留几位小数
+格式化数字保留几位小数，不会四舍五入
 
 ```ts
 /**
@@ -38,4 +54,12 @@ declare function formatNumber(number: number | string, format?: string): string
  * @returns x.xx
  */
 declare function formatNumberFixed(value: string, decimal?: number): string
+```
+
+使用示例
+
+```ts
+import { formatNumberFixed } from '@plus-pro-components/utils'
+
+formatNumberFixed('100.12555') // 100.12
 ```

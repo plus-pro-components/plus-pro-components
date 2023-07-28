@@ -18,7 +18,7 @@ interface Download<T = Blob | string> {
 declare const download: Download
 ```
 
-示例
+使用示例
 
 ```ts
 import { download } from '@plus-pro-components/utils'
@@ -26,6 +26,8 @@ import { download } from '@plus-pro-components/utils'
 const handleDownload = async () => {
   await download('data', 'test.txt')
 }
+
+handleDownload()
 ```
 
 ## isLegalFile
@@ -43,6 +45,18 @@ const handleDownload = async () => {
 declare const isLegalFile: (file: File | Blob, types: string[]) => boolean
 ```
 
+使用示例
+
+```ts
+import { isLegalFile } from '@plus-pro-components/utils'
+
+const file = new File(['data'], 'test.txt', {
+  type: 'text/plain'
+})
+
+isLegalFile(file, ['.txt', '.cad', '.bom', '.dwg', '.job', '.lib']) // true
+```
+
 ## isMaxFileSize
 
 判断文件文件上传大小是否符合预期
@@ -51,10 +65,22 @@ declare const isLegalFile: (file: File | Blob, types: string[]) => boolean
 /**
  * @desc 限制文件上传大小
  * @param {File|Blob} file 源文件
- * @param {number} fileMaxSize  图片限制大小单位（MB）
+ * @param {number} fileMaxSize  文件大小单位（MB）
  * @return 在限制内返回true否则返回false
  */
 declare const isMaxFileSize: (file: File | Blob, fileMaxSize?: number) => boolean
+```
+
+使用示例
+
+```ts
+import { isMaxFileSize } from '@plus-pro-components/utils'
+
+const file = new File(['data'], 'test.txt', {
+  type: 'text/plain'
+})
+
+isMaxFileSize(file, 1) // true
 ```
 
 ## fileToDataURL
@@ -71,6 +97,22 @@ declare const isMaxFileSize: (file: File | Blob, fileMaxSize?: number) => boolea
 declare const fileToDataURL: (file: File | Blob) => Promise<string>
 ```
 
+使用示例
+
+```ts
+import { fileToDataURL } from '@plus-pro-components/utils'
+
+const file = new File(['data'], 'test.txt', {
+  type: 'text/plain'
+})
+
+const handleFileToDataURL = async () => {
+  const data = await fileToDataURL(file) // data:text/plain;base64,ZGF0YQ==
+}
+
+handleFileToDataURL()
+```
+
 ## fileToText
 
 读取文件为 text 文件格式
@@ -82,6 +124,22 @@ declare const fileToDataURL: (file: File | Blob) => Promise<string>
  * @return 返回text文件
  */
 declare const fileToText: (file: File | Blob) => Promise<string>
+```
+
+使用示例
+
+```ts
+import { fileToText } from '@plus-pro-components/utils'
+
+const file = new File(['hello-data'], 'test.txt', {
+  type: 'text/plain'
+})
+
+const handleFileToText = async () => {
+  const data = await fileToText(file) // hello-data
+}
+
+handleFileToText()
 ```
 
 ## loadImage
@@ -101,6 +159,19 @@ declare const loadImage: (src: string) => Promise<{
 }>
 ```
 
+使用示例
+
+```ts
+import { loadImage } from '@plus-pro-components/utils'
+
+const handleLoadImage = async () => {
+  const url = 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg'
+  const data = await loadImage(url) //  {width: 800, height: 572, image: img}
+}
+
+handleLoadImage()
+```
+
 ## isLegalResolutionRatio
 
 判断图片文件的分辨率是否在限定范围之内
@@ -108,7 +179,7 @@ declare const loadImage: (src: string) => Promise<{
 ```ts
 /**
  * @desc  判断图片文件的分辨率是否在限定范围之内，分辨率不在限定范围之内则抛出异常
- * @param {file} file 源文件
+ * @param {File | Blob} file 源文件
  * @param {object} props   文件分辨率的宽和高   ag: props={width:100, height :100}
  */
 declare const isLegalResolutionRatio: (
@@ -118,4 +189,24 @@ declare const isLegalResolutionRatio: (
     height: number
   }
 ) => Promise<boolean>
+```
+
+使用示例
+
+```ts
+import { isLegalResolutionRatio } from '@plus-pro-components/utils'
+
+const file = new File(['image'], 'test.jpeg', {
+  type: 'image/jpeg'
+})
+
+const handleIsLegalResolutionRatio = async () => {
+  try {
+    await isLegalResolutionRatio(file, { width: 100, height: 100 })
+  } catch (error) {
+    console.log(error) // false
+  }
+}
+
+handleIsLegalResolutionRatio()
 ```

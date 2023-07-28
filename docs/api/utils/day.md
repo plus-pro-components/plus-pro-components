@@ -13,6 +13,14 @@ import type { ConfigType } from 'dayjs'
 declare function formatDate(date?: ConfigType, format?: string): string
 ```
 
+使用示例
+
+```ts
+import { formatDate } from '@plus-pro-components/utils'
+
+formatDate(new Date()) //  2023-01-01 01:01:01
+```
+
 ## formatDateToDay
 
 格式化时间到天
@@ -25,6 +33,14 @@ import type { ConfigType } from 'dayjs'
  * @returns YYYY-MM-DD
  */
 declare const formatDateToDay: (date: ConfigType) => string
+```
+
+使用示例
+
+```ts
+import { formatDateToDay } from '@plus-pro-components/utils'
+
+formatDateToDay(new Date()) //  2023-01-01
 ```
 
 ## formatDateToMinute
@@ -41,6 +57,14 @@ import type { ConfigType } from 'dayjs'
 declare const formatDateToMinute: (date: ConfigType) => string
 ```
 
+使用示例
+
+```ts
+import { formatDateToMinute } from '@plus-pro-components/utils'
+
+formatDateToDay(new Date()) // 2023-01-01 01:01
+```
+
 ## diffDate
 
 获取两个 Dayjs 对象的时间差，默认秒。
@@ -51,14 +75,22 @@ import type { QUnitType, OpUnitType, ConfigType } from 'dayjs'
  * 获取两个 Dayjs 对象的时间差，默认秒。
  * @param date1
  * @param date2
- * @param format
- * @returns {*}
+ * @param format  默认 'second'
+ * @returns
  */
 declare function diffDate(
   date1: ConfigType,
   date2?: ConfigType,
   format?: QUnitType | OpUnitType
 ): number | string | undefined
+```
+
+使用示例
+
+```ts
+import { diffDate } from '@plus-pro-components/utils'
+
+diffDate(new Date(), '2023-01-01 01:01:01') // 18014030
 ```
 
 ## diffDateFromCurrent
@@ -72,4 +104,12 @@ declare function diffDate(
  * @returns
  */
 declare function diffDateFromCurrent(date: number): string
+```
+
+使用示例
+
+```ts
+import { diffDateFromCurrent } from '@plus-pro-components/utils'
+
+diffDateFromCurrent(61) // 1秒前
 ```
