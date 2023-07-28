@@ -1,10 +1,10 @@
 /**
  * @description 打开电脑本地软件
- * @param protocol  本地软件
- * @param event  点击按钮事件
- * @param timeout 默认1000ms
+ * @param protocol  本地软件协议， 如 vscode 的协议 `vscode://`
+ * @param event  点击按钮事件， `el-button` 或者原生 `button`
+ * @param timeout 默认`1000`ms，没响应则认为打开失败
  */
-const openExe = (protocol: string, event: Event, timeout = 1000): Promise<FocusEvent> => {
+export const openExe = (protocol: string, event: Event, timeout = 1000): Promise<FocusEvent> => {
   window.location.href = protocol
   const target = event.target as EventTarget & {
     localName: string
@@ -41,5 +41,3 @@ const openExe = (protocol: string, event: Event, timeout = 1000): Promise<FocusE
     }
   })
 }
-
-export default openExe

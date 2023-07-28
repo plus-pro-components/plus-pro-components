@@ -102,3 +102,13 @@ export const isPlainObject = (val: any) => toTypeString(val) === '[object Object
  * @returns
  */
 export const isEmptyObject = (val: any) => isPlainObject(val) && Object.keys(val).length === 0
+
+/**
+ * 是否是ios
+ * @returns {boolean}
+ */
+export function isIOS(): boolean {
+  const isIphone = navigator.userAgent.includes('iPhone')
+  const isIpad = navigator.userAgent.includes('iPad')
+  return isIphone || isIpad
+}

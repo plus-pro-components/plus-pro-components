@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 set -e
 
+npm run clean
+
 npm run build:main
 cd dist/plus-pro-components
 echo "publish plus-pro-components..."

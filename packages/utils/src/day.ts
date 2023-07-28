@@ -1,11 +1,11 @@
-import type { QUnitType, OpUnitType, ConfigType } from 'dayjs'
 import dayjs from 'dayjs'
+import type { QUnitType, OpUnitType, ConfigType } from 'dayjs'
 
 /**
  *
- * @param date
- * @param format
- * @returns
+ * @param {string | number | Date | Dayjs | null | undefined} date
+ * @param format 默认 YYYY-MM-DD HH:mm:ss
+ * @returns YYYY-MM-DD HH:mm:ss
  */
 export function formatDate(date?: ConfigType, format = 'YYYY-MM-DD HH:mm:ss'): string {
   return dayjs(date || new Date()).format(format)
@@ -13,14 +13,14 @@ export function formatDate(date?: ConfigType, format = 'YYYY-MM-DD HH:mm:ss'): s
 
 /**
  * 格式化时间到天
- * @param  {number | string | Date} date
+ * @param  {string | number | Date | Dayjs | null | undefined} date
  * @returns YYYY-MM-DD
  */
 export const formatDateToDay = (date: ConfigType): string => formatDate(date, 'YYYY-MM-DD')
 
 /**
  * 格式化时间到分钟
- * @param  {number | string | Date} date
+ * @param  {string | number | Date | Dayjs | null | undefined} date
  * @returns YYYY-MM-DD HH:mm
  */
 export const formatDateToMinute = (date: ConfigType): string => formatDate(date, 'YYYY-MM-DD HH:mm')
@@ -32,13 +32,13 @@ export const formatDateToMinute = (date: ConfigType): string => formatDate(date,
  * @param format
  * @returns {*}
  */
-export function dateDiff(
-  date1: string | number | Date,
-  date2 = dayjs(),
+export function diffDate(
+  date1: ConfigType,
+  date2: ConfigType = dayjs(),
   format: QUnitType | OpUnitType = 'second'
 ): number | string | undefined {
   if (!date1) return
-  return dayjs(date1).diff(date2, format)
+  return dayjs(date1).diff(dayjs(date2), format)
 }
 
 /**
@@ -46,7 +46,7 @@ export function dateDiff(
  * @param date  秒数
  * @returns
  */
-export function getDiffDateFromCurrent(date: number): string {
+export function diffDateFromCurrent(date: number): string {
   if (date >= 60 * 60 * 24 * 365) {
     return `${parseInt(String(date / (60 * 60 * 24 * 365)))}年前`
   }

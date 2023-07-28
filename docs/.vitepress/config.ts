@@ -204,11 +204,49 @@ export default defineConfig({
       ],
       '/api/': [
         {
-          text: 'utils',
-          link: '/api/utils/'
+          text: '工具utils',
+          link: '/api/utils/',
+          items: [
+            {
+              text: '时间',
+              link: '/api/utils/day'
+            },
+            {
+              text: '数字',
+              link: '/api/utils/number'
+            },
+            {
+              text: 'AES加密',
+              link: '/api/utils/encrypt'
+            },
+            {
+              text: '存贮',
+              link: '/api/utils/storage'
+            },
+            {
+              text: 'cookie',
+              link: '/api/utils/cookie'
+            },
+            {
+              text: '文件',
+              link: '/api/utils/file'
+            },
+            {
+              text: '判断',
+              link: '/api/utils/is'
+            },
+            {
+              text: '校验',
+              link: '/api/utils/validate'
+            },
+            {
+              text: '其他',
+              link: '/api/utils/other'
+            }
+          ]
         },
         {
-          text: 'hooks',
+          text: '钩子hooks',
           link: '/api/hooks/'
         }
       ]

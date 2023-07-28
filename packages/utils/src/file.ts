@@ -1,3 +1,5 @@
+import type { FileSaverOptions } from 'file-saver'
+
 const toLower = (str: string) => str.toLowerCase()
 
 /**
@@ -10,11 +12,11 @@ const getFileType = (path: string) => path && path.slice(path.lastIndexOf('.'))
 /**
  *
  * @desc 限制文件类型
- * @param {file} file 源文件
+ * @param {file|Blob} file 源文件
  * "默认限制图"片
  * @return 合法文件返回true否则返回false
  */
-export const isLegalFile = (file: File, types: string[]): boolean => {
+export const isLegalFile = (file: File | Blob, types: string[]): boolean => {
   const filterTypes = types.filter(item => item && item !== '*').map(item => toLower(item))
   if (!filterTypes.length) {
     return true
@@ -31,7 +33,7 @@ export const isLegalFile = (file: File, types: string[]): boolean => {
 
 /**
  *  @desc 限制文件上传大小
- * @param {file} file 源文件
+ * @param {file|Blob} file 源文件
  * @param {number} fileMaxSize  图片限制大小单位（MB）
  * @return 在限制内返回true否则返回false
  */
@@ -49,9 +51,9 @@ export const isMaxFileSize = (file: File | Blob, fileMaxSize?: number): boolean 
 
 /**
  *
- * @desc 读取图片文件为base64文件格式
- * @param {file} file 源文件
- * @return 返回base64文件
+ * @desc 读取文件为DataURL文件格式  （base64）
+ * @param {file|Blob} file 源文件
+ * @return 返回DataURL文件 （base64）
  */
 export const fileToDataURL = (file: File | Blob): Promise<string> => {
   return new Promise((resolve, reject) => {
@@ -69,7 +71,7 @@ export const fileToDataURL = (file: File | Blob): Promise<string> => {
 }
 
 /**
- * @desc 读取图片文件为text文件格式
+ * @desc 读取文件为text文件格式
  * @param {file} file 源文件
  * @return 返回text文件
  */
@@ -132,5 +134,40 @@ export const isLegalResolutionRatio = async (
     return true
   } catch (error) {
     return Promise.reject('error')
+  }
+}
+
+interface Download<T = Blob | string> {
+  (data: T, filename: string, options?: FileSaverOptions): Promise<T>
+}
+
+/**
+ * @description 下载文件
+ * @param {Blob | string} data  文件 Blob
+ * @param  {string} filename 文件名称
+ * @param  {object} options 可选参数
+ */
+export const download: Download = async (data, filename, options) => {
+  // 处理没有数据的情况
+  if (!data) {
+    return Promise.reject('download fail: data is empt!')
+  }
+
+  // 处理二进制数据接口异常
+  try {
+    const text = await (data as Blob).text()
+    const res = JSON.parse(text)
+    if (res) {
+      return Promise.reject('download fail: server error!')
+    }
+  } catch (error) {}
+
+  // 下载文件
+  try {
+    const { default: FileSaver } = await import('file-saver')
+    FileSaver.saveAs(data, filename, options)
+    return Promise.resolve(data)
+  } catch (error) {
+    return Promise.reject('download fail: server error!')
   }
 }

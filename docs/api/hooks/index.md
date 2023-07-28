@@ -1,24 +1,5 @@
 # plus-pro-components 内置 hooks
 
-**使用示例**
-
-```ts
-import { useTable } from 'plus-pro-components'
-
-interface TableRow {
-  index: number
-  id: number
-  name: string
-  status: string
-  tag: string
-  progress: number
-}
-
-const { tableData, pageInfo, total, buttons, loadingStatus } = useTable<TableRow[]>()
-```
-
-下面是所有内置的`hooks`
-
 ## useTable
 
 初始化表格基本数据
@@ -41,6 +22,23 @@ declare function useTable<T extends Record<string, any>[] = any>(): {
   buttons: import('vue').ShallowRef<ActionBarButtonsRow[]>
 }
 export default useTable
+```
+
+使用示例
+
+```ts
+import { useTable } from 'plus-pro-components'
+
+interface TableRow {
+  index: number
+  id: number
+  name: string
+  status: string
+  tag: string
+  progress: number
+}
+
+const { tableData, pageInfo, total, buttons, loadingStatus } = useTable<TableRow[]>()
 ```
 
 ## useAppendTag
@@ -72,9 +70,7 @@ import type { Ref } from 'vue'
  * @param key `Shift`
  * @returns
  */
-export default function useIsEnterKeyboard(key?: string): {
-  isEnterKeyboard: Ref<boolean>
-}
+export default function useIsEnterKeyboard(key?: string): { isEnterKeyboard: Ref<boolean> }
 ```
 
 ## useIsOperation
