@@ -257,6 +257,10 @@ export default defineConfig({
     footer: {
       message: 'MIT Licensed.',
       copyright: 'Copyright © 2023-present xiaofei'
+    },
+    editLink: {
+      text: '在 GitHub 上编辑此页',
+      pattern: 'https://github.com/plus-pro-components/plus-pro-components/edit/dev/docs/:path'
     }
   },
   markdown: {
