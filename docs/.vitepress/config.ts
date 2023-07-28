@@ -41,6 +41,7 @@ export default defineConfig({
     ['script', { src: '/hmt.js' }],
     ['link', { rel: 'icon', href: '/logo.png' }]
   ],
+
   themeConfig: {
     search: {
       provider: 'local'
@@ -263,6 +264,7 @@ export default defineConfig({
       pattern: 'https://github.com/plus-pro-components/plus-pro-components/edit/dev/docs/:path'
     }
   },
+  lastUpdated: true,
   markdown: {
     lineNumbers: true,
     config: md => mdPlugin(md)
