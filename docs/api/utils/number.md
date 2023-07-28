@@ -4,8 +4,9 @@
 
 ```ts
 /**
- * 格式化金钱  $12,345,678.00
+ * 格式化金钱  ￥12,345,678.00
  * @param val
+ * @param format 默认 '￥'
  * @returns
  */
 declare function formatMoney(val: string | number, format?: string): string

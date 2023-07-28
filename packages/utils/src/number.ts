@@ -4,6 +4,7 @@ import accounting from 'accounting'
 /**
  * 格式化金钱  $12,345,678.00
  * @param val
+ * @param format 默认 '￥'
  * @returns
  */
 export function formatMoney(val: string | number, format = '￥'): string {
