@@ -36,7 +36,6 @@
   <!--显示图片 -->
   <el-image
     v-else-if="column.valueType === 'img'"
-    title="点击预览"
     class="plus-display-item__image__col"
     fit="cover"
     preview-teleported

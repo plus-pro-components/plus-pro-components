@@ -19,14 +19,14 @@
         <el-form-item v-if="hasFooter" class="plus-search__button__wrapper">
           <slot name="footer">
             <el-button v-if="hasReset" :icon="RefreshRight" @click="handleReset">
-              {{ resetText }}
+              {{ resetText || t('plus.search.resetText') }}
             </el-button>
             <el-button type="primary" :loading="searchLoading" :icon="Search" @click="handleSearch">
-              {{ searchText }}
+              {{ searchText || t('plus.search.searchText') }}
             </el-button>
 
             <el-button v-if="hasUnfold" type="primary" link @click="handleUnfold">
-              {{ isShowUnfold ? '展开' : '收起' }}
+              {{ isShowUnfold ? t('plus.search.expand') : t('plus.search.retract') }}
               <el-icon>
                 <ArrowDown v-if="isShowUnfold" />
                 <ArrowUp v-else />
@@ -46,6 +46,7 @@ import { ArrowDown, ArrowUp, Search, RefreshRight } from '@element-plus/icons-vu
 import { PlusFormItem } from '@plus-pro-components/components/form-item'
 import type { PlusColumn, FieldValues, Mutable } from '@plus-pro-components/types'
 import { cloneDeep } from 'lodash-es'
+import { useLocale } from '@plus-pro-components/hooks'
 
 export interface PlusSearchProps extends /* @vue-ignore */ Partial<Mutable<FormProps>> {
   modelValue: FieldValues
@@ -93,8 +94,8 @@ const props = withDefaults(defineProps<PlusSearchProps>(), {
   hasReset: true,
   hasUnfold: true,
   searchLoading: false,
-  searchText: '查询',
-  resetText: '重置',
+  searchText: '',
+  resetText: '',
   inline: true,
   showNumber: 2,
   formProps: () => ({}),
@@ -113,6 +114,7 @@ const props = withDefaults(defineProps<PlusSearchProps>(), {
 })
 
 const emit = defineEmits<PlusSearchEmits>()
+const { t } = useLocale()
 
 const formInstance = ref<FormInstance>()
 

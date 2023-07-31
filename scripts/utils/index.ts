@@ -14,6 +14,10 @@ export const PKG_CAMEL_CASE_NAME = 'PlusProComponents'
 
 export const PKG_PREFIX = '@plus-pro-components'
 
+export const PKG_CAMEL_CASE_LOCAL_NAME = 'PlusProComponentsLocale'
+
+export const target = 'es2018'
+
 export const pathRewriter = (id: string) => {
   id = id.replaceAll(`${PKG_PREFIX}/`, `${PKG_NAME}/es/`)
   return id

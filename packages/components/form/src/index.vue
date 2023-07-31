@@ -28,12 +28,12 @@
       <slot name="footer">
         <el-button type="primary" :loading="submitLoading" @click="handleSubmit">
           <!-- 确定 -->
-          {{ confirmText }}
+          {{ confirmText || t('plus.form.confirmText') }}
         </el-button>
 
         <el-button v-if="hasCancel" @click="handleCancel">
           <!-- 取消 -->
-          {{ cancelText }}
+          {{ cancelText || t('plus.form.cancelText') }}
         </el-button>
       </slot>
     </div>
@@ -44,6 +44,7 @@
 import { reactive, ref, watch, computed } from 'vue'
 import type { FormInstance, FormRules, FormProps } from 'element-plus'
 import { ElMessage } from 'element-plus'
+import { useLocale } from '@plus-pro-components/hooks'
 import { PlusFormItem } from '@plus-pro-components/components/form-item'
 import type { PlusColumn, FieldValues, Mutable } from '@plus-pro-components/types'
 
@@ -89,8 +90,8 @@ const props = withDefaults(defineProps<PlusFormProps>(), {
   hasFooter: true,
   hasCancel: true,
   submitLoading: false,
-  confirmText: '确定',
-  cancelText: '取消',
+  confirmText: '',
+  cancelText: '',
   footerAlign: 'left',
   formProps: () => ({}),
   rules: () => ({}),
@@ -98,6 +99,8 @@ const props = withDefaults(defineProps<PlusFormProps>(), {
 })
 
 const emit = defineEmits<PlusFormEmits>()
+
+const { t } = useLocale()
 
 const formInstance = ref<FormInstance>()
 
@@ -139,7 +142,7 @@ const handleSubmit = async () => {
     if (props.hasErrorTip) {
       ElMessage.closeAll()
       const values: any[] = Object.values(errors)
-      ElMessage.warning(values[0]?.[0]?.message || '请完整填写表单并再次提交！')
+      ElMessage.warning(values[0]?.[0]?.message || t('plus.form.errorTip'))
     }
     emit('submitError', errors)
   }

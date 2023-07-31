@@ -2,9 +2,10 @@
   <el-table-column
     v-if="sortable"
     key="dragSort"
-    label="排序"
+    :label="t('plus.table.sort')"
     width="60"
     class-name="plus-table-column-drag-sort"
+    v-bind="dragSortableTableColumnProps"
   >
     <span class="plus-table-column-drag-icon">☷</span>
   </el-table-column>
@@ -15,10 +16,14 @@ import type { SortableEvent, Options as SortableOptions } from 'sortablejs'
 import Sortable from 'sortablejs'
 import { isPlainObject } from '@plus-pro-components/utils'
 import { watch } from 'vue'
+import { useLocale } from '@plus-pro-components/hooks'
+
+import type { RecordType } from '@plus-pro-components/types'
 
 export interface PlusTableColumnDragSortProps {
   sortable: SortableOptions | boolean
   tableInstance: any
+  dragSortableTableColumnProps: RecordType
 }
 export interface PlusTableColumnDragSortEmits {
   (e: 'dragSortEnd', newIndex: number, oldIndex: number): void
@@ -30,9 +35,12 @@ defineOptions({
 
 const props = withDefaults(defineProps<PlusTableColumnDragSortProps>(), {
   sortable: true,
-  tableInstance: null
+  tableInstance: null,
+  dragSortableTableColumnProps: () => ({})
 })
+
 const emit = defineEmits<PlusTableColumnDragSortEmits>()
+const { t } = useLocale()
 
 watch(
   () => props.tableInstance,

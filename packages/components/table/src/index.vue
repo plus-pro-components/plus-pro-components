@@ -38,12 +38,14 @@
       <PlusTableTableColumnIndex
         v-if="isShowNumber"
         :index-content-style="indexContentStyle"
+        :index-table-column-props="indexTableColumnProps"
         :page-info="(pagination as PlusPaginationProps)?.modelValue"
       />
 
       <!-- 拖拽行 -->
       <PlusTableColumnDragSort
         :sortable="dragSortable"
+        :drag-sortable-table-column-props="dragSortableTableColumnProps"
         :table-instance="tableInstance"
         @dragSortEnd="handleDragSortEnd"
       />
@@ -93,7 +95,7 @@ import { DefaultPageInfo, TableFormRefInjectionKey } from '@plus-pro-components/
 import type { CSSProperties } from 'vue'
 import type { ComponentSize } from 'element-plus/es/constants'
 import type { TableInstance, TableProps } from 'element-plus'
-import type { PageInfo, PlusColumn } from '@plus-pro-components/types'
+import type { PageInfo, PlusColumn, RecordType } from '@plus-pro-components/types'
 import type { Options as SortableOptions } from 'sortablejs'
 import PlusTableActionBar from './table-action-bar.vue'
 import PlusTableColumn from './table-column.vue'
@@ -137,6 +139,8 @@ export interface PlusTableProps extends /* @vue-ignore */ Partial<TableProps<any
   rowKey?: string
   /** sortablejs配置 */
   dragSortable?: SortableOptions | boolean
+  dragSortableTableColumnProps?: RecordType
+  indexTableColumnProps?: RecordType
   indexContentStyle?: CSSProperties | ((row: any, index: number) => CSSProperties)
 }
 
@@ -162,7 +166,7 @@ const props = withDefaults(defineProps<PlusTableProps>(), {
   isSelection: false,
   hasExpand: false,
   loadingStatus: false,
-  title: '表格',
+  title: '',
   tableData: () => [],
   columns: () => [],
   headerCellStyle: () => ({
@@ -171,7 +175,8 @@ const props = withDefaults(defineProps<PlusTableProps>(), {
   }),
   rowKey: 'id',
   dragSortable: false,
-  tableProps: () => ({}),
+  dragSortableTableColumnProps: () => ({}),
+  indexTableColumnProps: () => ({}),
   indexContentStyle: () => ({})
 })
 

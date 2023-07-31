@@ -26,6 +26,9 @@ importers:
       '@plus-pro-components/hooks':
         specifier: workspace:*
         version: link:packages/hooks
+      '@plus-pro-components/locale':
+        specifier: workspace:*
+        version: link:packages/locale
       '@plus-pro-components/types':
         specifier: workspace:*
         version: link:packages/types
@@ -86,10 +89,10 @@ importers:
         version: 1.15.1
       '@vitejs/plugin-vue':
         specifier: ^4.2.3
-        version: 4.2.3(vite@4.3.9)(vue@3.3.4)
+        version: 4.2.3(vite@4.4.7)(vue@3.3.4)
       '@vitejs/plugin-vue-jsx':
         specifier: ^3.0.1
-        version: 3.0.1(vite@4.3.9)(vue@3.3.4)
+        version: 3.0.1(vite@4.4.7)(vue@3.3.4)
       '@vitest/coverage-c8':
         specifier: ^0.31.1
         version: 0.31.1(vitest@0.31.1)
@@ -173,7 +176,7 @@ importers:
         version: 1.2.2
       rollup-plugin-esbuild:
         specifier: ^5.0.0
-        version: 5.0.0(esbuild@0.17.19)(rollup@3.22.0)
+        version: 5.0.0(esbuild@0.18.17)(rollup@3.22.0)
       rollup-plugin-postcss:
         specifier: ^4.0.2
         version: 4.0.2(postcss@8.4.24)(ts-node@10.9.1)
@@ -249,7 +252,7 @@ importers:
         version: 1.62.1
       vite-plugin-inspect:
         specifier: ^0.7.28
-        version: 0.7.28(rollup@3.22.0)(vite@4.3.9)
+        version: 0.7.28(rollup@3.22.0)(vite@4.4.7)
       vitepress:
         specifier: 1.0.0-beta.6
         version: 1.0.0-beta.6(@algolia/client-search@4.17.0)(@types/node@20.1.4)(sass@1.62.1)(search-insights@2.6.0)(sortablejs@1.15.0)
@@ -310,6 +313,8 @@ importers:
         version: 4.9.4
 
   packages/hooks: {}
+
+  packages/locale: {}
 
   packages/play:
     dependencies:
@@ -2662,7 +2667,7 @@ packages:
       - supports-color
     dev: true
 
-  /@vitejs/plugin-vue-jsx@3.0.1(vite@4.3.9)(vue@3.3.4):
+  /@vitejs/plugin-vue-jsx@3.0.1(vite@4.4.7)(vue@3.3.4):
     resolution: {integrity: sha512-+Jb7ggL48FSPS1uhPnJbJwWa9Sr90vQ+d0InW+AhBM22n+cfuYqJZDckBc+W3QSHe1WDvewMZfa4wZOtk5pRgw==}
     engines: {node: ^14.18.0 || >=16.0.0}
     peerDependencies:
@@ -2672,7 +2677,7 @@ packages:
       '@babel/core': 7.21.8
       '@babel/plugin-transform-typescript': 7.22.3(@babel/core@7.21.8)
       '@vue/babel-plugin-jsx': 1.1.1(@babel/core@7.21.8)
-      vite: 4.3.9(@types/node@20.1.4)(sass@1.62.1)
+      vite: 4.4.7(@types/node@20.1.4)(sass@1.62.1)
       vue: 3.3.4
     transitivePeerDependencies:
       - supports-color
@@ -2686,17 +2691,6 @@ packages:
       vue: ^3.2.25
     dependencies:
       vite: 4.3.8(@types/node@18.16.8)(sass@1.62.1)
-      vue: 3.3.4
-    dev: true
-
-  /@vitejs/plugin-vue@4.2.3(vite@4.3.9)(vue@3.3.4):
-    resolution: {integrity: sha512-R6JDUfiZbJA9cMiguQ7jxALsgiprjBeHL5ikpXfJCH62pPHtI+JdJ5xWj6Ev73yXSlYl86+blXn1kZHQ7uElxw==}
-    engines: {node: ^14.18.0 || >=16.0.0}
-    peerDependencies:
-      vite: ^4.0.0
-      vue: ^3.2.25
-    dependencies:
-      vite: 4.3.9(@types/node@20.1.4)(sass@1.62.1)
       vue: 3.3.4
     dev: true
 
@@ -8719,7 +8713,7 @@ packages:
       '@babel/code-frame': 7.21.4
     dev: true
 
-  /rollup-plugin-esbuild@5.0.0(esbuild@0.17.19)(rollup@3.22.0):
+  /rollup-plugin-esbuild@5.0.0(esbuild@0.18.17)(rollup@3.22.0):
     resolution: {integrity: sha512-1cRIOHAPh8WQgdQQyyvFdeOdxuiyk+zB5zJ5+YOwrZP4cJ0MT3Fs48pQxrZeyZHcn+klFherytILVfE4aYrneg==}
     engines: {node: '>=14.18.0', npm: '>=8.0.0'}
     peerDependencies:
@@ -8729,7 +8723,7 @@ packages:
       '@rollup/pluginutils': 5.0.2(rollup@3.22.0)
       debug: 4.3.4
       es-module-lexer: 1.2.1
-      esbuild: 0.17.19
+      esbuild: 0.18.17
       joycon: 3.1.1
       jsonc-parser: 3.2.0
       rollup: 3.22.0
@@ -9936,7 +9930,7 @@ packages:
       - terser
     dev: true
 
-  /vite-plugin-inspect@0.7.28(rollup@3.22.0)(vite@4.3.9):
+  /vite-plugin-inspect@0.7.28(rollup@3.22.0)(vite@4.4.7):
     resolution: {integrity: sha512-XRdQGdf+PU6eT0EoL8beUyFQfcCrHr06OyRM71IT8t7rEC9JywdsscehGHEAyFZryfaVBWAI280N63BI2N+1BA==}
     engines: {node: '>=14'}
     peerDependencies:
@@ -9949,7 +9943,7 @@ packages:
       open: 9.1.0
       picocolors: 1.0.0
       sirv: 2.0.3
-      vite: 4.3.9(@types/node@20.1.4)(sass@1.62.1)
+      vite: 4.4.7(@types/node@20.1.4)(sass@1.62.1)
     transitivePeerDependencies:
       - rollup
       - supports-color

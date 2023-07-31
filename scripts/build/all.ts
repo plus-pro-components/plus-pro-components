@@ -1,4 +1,4 @@
-import { resolve } from 'path'
+import { resolve, basename } from 'path'
 import vuePlugin from '@vitejs/plugin-vue'
 import postcss from 'rollup-plugin-postcss'
 import autoprefixer from 'autoprefixer'
@@ -9,26 +9,37 @@ import consola from 'consola'
 import { nodeResolve } from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
 import esbuild, { minify as minifyPlugin } from 'rollup-plugin-esbuild'
-import { pcOutput, pcRoot, projPackage } from '../utils/paths'
-import { writeBundles, formatBundleFilename, PKG_CAMEL_CASE_NAME, PKG_NAME } from '../utils'
+import glob from 'fast-glob'
+import { camelCase, upperFirst } from 'lodash'
+import { pcOutput, pcRoot, projPackage, localesRoot } from '../utils/paths'
+import {
+  writeBundles,
+  formatBundleFilename,
+  PKG_CAMEL_CASE_NAME,
+  PKG_NAME,
+  PKG_CAMEL_CASE_LOCAL_NAME,
+  target
+} from '../utils'
 import { external } from '../utils/main'
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import banner2 from 'rollup-plugin-banner2'
 
-const buildAll = async (minify?: boolean) => {
-  const pkg = JSON.parse(fs.readFileSync(projPackage, 'utf-8'))
+const pkg = JSON.parse(fs.readFileSync(projPackage, 'utf-8'))
 
+const banner = `/*! ${PKG_NAME} v${pkg.version} */\n`
+
+const buildAll = async (minify?: boolean) => {
   const plugins = [
     vuePlugin() as Plugin,
     nodeResolve({
       extensions: ['.mjs', '.js', '.json', '.ts']
     }),
     commonjs(),
-    banner2(() => `/*! ${PKG_NAME} v${pkg.version} */\n`),
+    banner2(() => banner),
     esbuild({
       sourceMap: false,
-      target: 'es2018',
+      target: target,
       loaders: {
         '.vue': 'ts'
       }
@@ -38,7 +49,7 @@ const buildAll = async (minify?: boolean) => {
   if (minify) {
     plugins.push(
       minifyPlugin({
-        target: 'es2018',
+        target: target,
         sourceMap: false
       })
     )
@@ -88,6 +99,49 @@ const buildAll = async (minify?: boolean) => {
   consola.success(msg)
 }
 
-const task = [buildAll(false), buildAll(true)]
+async function buildLocale(minify: boolean) {
+  const files = await glob(`**/*.ts`, {
+    cwd: resolve(localesRoot, 'lang'),
+    absolute: true
+  })
+  return Promise.all(
+    files.map(async file => {
+      const filename = basename(file, '.ts')
+      const name = upperFirst(camelCase(filename))
+
+      const bundle = await rollup({
+        input: file,
+        plugins: [
+          esbuild({
+            minify,
+            sourceMap: false,
+            target
+          })
+        ]
+      })
+      await writeBundles(bundle, [
+        {
+          format: 'umd',
+          file: resolve(pcOutput, 'locale', formatBundleFilename(filename, minify, 'js')),
+          exports: 'default',
+          name: `${PKG_CAMEL_CASE_LOCAL_NAME}${name}`,
+          sourcemap: false,
+          banner
+        },
+        {
+          format: 'esm',
+          file: resolve(pcOutput, 'locale', formatBundleFilename(filename, minify, 'mjs')),
+          sourcemap: false,
+          banner
+        }
+      ])
+    })
+  ).then(() => {
+    const msg = minify ? 'Successfully built compressed locale!' : 'Successfully built into locale!'
+    consola.success(msg)
+  })
+}
+
+const task = [buildAll(false), buildAll(true), buildLocale(false), buildLocale(true)]
 
 export default task

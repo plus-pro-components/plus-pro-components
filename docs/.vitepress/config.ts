@@ -114,7 +114,7 @@ export default defineConfig({
           items: [
             {
               text: '国际化',
-              link: '/guide/internationalization'
+              link: '/guide/i18n'
             },
             {
               text: '更新日志',

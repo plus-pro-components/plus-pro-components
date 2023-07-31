@@ -12,6 +12,8 @@ export const compRoot = resolve(pkgRoot, 'components')
 export const hookRoot = resolve(pkgRoot, 'hooks')
 /** 工具函数目录 `/packages/utils`  */
 export const utilRoot = resolve(pkgRoot, 'utils')
+/** 语言包目录 `/packages/locale`  */
+export const localesRoot = resolve(pkgRoot, 'locale')
 
 /** plus-pro-components 目录 即 `/packages/plus-pro-components` */
 export const pcRoot = resolve(pkgRoot, 'plus-pro-components')

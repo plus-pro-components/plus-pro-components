@@ -8,7 +8,7 @@
     width="60"
     align="center"
     :index="getTableIndex"
-    v-bind="$attrs"
+    v-bind="indexTableColumnProps"
   >
     <template #default="{ row, $index }">
       <el-tooltip
@@ -36,12 +36,13 @@
 
 <script lang="ts" setup>
 import { DefaultPageInfo } from '@plus-pro-components/constants'
-import type { PageInfo } from '@plus-pro-components/types'
+import type { PageInfo, RecordType } from '@plus-pro-components/types'
 import type { CSSProperties } from 'vue'
 import { isFunction, isPlainObject } from '@plus-pro-components/utils'
 
 export interface PlusTableTableColumnIndexProps {
   pageInfo?: PageInfo
+  indexTableColumnProps?: RecordType
   max?: number
   indexContentStyle?: CSSProperties | ((row: any, index: number) => CSSProperties)
 }
@@ -54,7 +55,8 @@ const props = withDefaults(defineProps<PlusTableTableColumnIndexProps>(), {
   show: false,
   pageInfo: () => ({ ...DefaultPageInfo }),
   max: 999,
-  indexContentStyle: () => ({})
+  indexContentStyle: () => ({}),
+  indexTableColumnProps: () => ({})
 })
 
 // 修改序号生成方法

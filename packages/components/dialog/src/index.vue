@@ -3,7 +3,7 @@
     v-model="subVisible"
     :top="top"
     :width="width"
-    :title="title"
+    :title="title || t('plus.dialog.title')"
     :close-on-click-modal="false"
     :close-on-press-escape="false"
     :append-to-body="false"
@@ -24,10 +24,10 @@
         <div>
           <span class="dialog-footer">
             <el-button @click="handleCancel">
-              {{ cancelText }}
+              {{ cancelText || t('plus.dialog.cancelText') }}
             </el-button>
             <el-button type="primary" :loading="confirmLoading" @click="handleConfirm">
-              {{ confirmText }}
+              {{ confirmText || t('plus.dialog.confirmText') }}
             </el-button>
           </span>
         </div>
@@ -39,6 +39,7 @@
 <script lang="ts" setup>
 import { ref, watchEffect } from 'vue'
 import type { DialogProps } from 'element-plus'
+import { useLocale } from '@plus-pro-components/hooks'
 
 export interface PlusDialogProps
   extends /* @vue-ignore */ Partial<Omit<DialogProps, 'modelValue' | 'title'>> {
@@ -64,11 +65,11 @@ defineOptions({
 
 const props = withDefaults(defineProps<PlusDialogProps>(), {
   modelValue: false,
-  confirmText: '取消',
+  confirmText: '',
   confirmLoading: false,
-  cancelText: '确定',
+  cancelText: '',
   hasFooter: true,
-  title: '弹窗',
+  title: '',
   top: '15vh',
   width: '460px'
 })
@@ -76,6 +77,7 @@ const props = withDefaults(defineProps<PlusDialogProps>(), {
 const emit = defineEmits<PlusDialogEmits>()
 
 const subVisible = ref(false)
+const { t } = useLocale()
 
 watchEffect(() => {
   subVisible.value = props.modelValue
