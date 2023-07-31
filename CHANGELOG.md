@@ -1,3 +1,22 @@
+## [v0.0.1-alpha.24](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-alpha.23...v0.0.1-alpha.24) (2023-07-31)
+
+
+### ✨ Features
+
+* **components:** :sparkles: add internationalization support.([d2013d5](https://github.com/plus-pro-components/plus-pro-components/commit/d2013d5)) by@xiaofei
+
+
+### 🐛 Bug Fixes
+
+* **components:** :bug: fix table pagination,actionBar and dragSortable type error.([7923f71](https://github.com/plus-pro-components/plus-pro-components/commit/7923f71)) by@xiaofei
+* **components:** :bug: fix display-item formatToCurrency and dateFormat method.([3089f1f](https://github.com/plus-pro-components/plus-pro-components/commit/3089f1f)) by@xiaofei
+
+
+### ♻️ Code Refactoring
+
+* **packages:** :recycle: refactor utils.([4cb0869](https://github.com/plus-pro-components/plus-pro-components/commit/4cb0869)) by@xiaofei
+
+
 ## [v0.0.1-alpha.23](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-alpha.22...v0.0.1-alpha.23) (2023-07-27)
 
 
