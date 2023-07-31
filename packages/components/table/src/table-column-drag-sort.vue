@@ -1,6 +1,5 @@
 <template>
   <el-table-column
-    v-if="sortable"
     key="dragSort"
     :label="t('plus.table.sort')"
     width="60"

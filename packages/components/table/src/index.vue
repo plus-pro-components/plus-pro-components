@@ -44,6 +44,7 @@
 
       <!-- 拖拽行 -->
       <PlusTableColumnDragSort
+        v-if="dragSortable"
         :sortable="dragSortable"
         :drag-sortable-table-column-props="dragSortableTableColumnProps"
         :table-instance="tableInstance"
@@ -111,9 +112,9 @@ export interface PlusTableProps extends /* @vue-ignore */ Partial<TableProps<any
   // 密度
   defaultSize?: ComponentSize
   /* 分页参数*/
-  pagination?: false | PlusPaginationProps
+  pagination?: false | Partial<PlusPaginationProps>
   /* 操作栏参数*/
-  actionBar?: false | ActionBarProps
+  actionBar?: false | Partial<ActionBarProps>
   /* 是否需要序号*/
   isShowNumber?: boolean
   /* 是否需要过滤表格表头*/
@@ -134,14 +135,14 @@ export interface PlusTableProps extends /* @vue-ignore */ Partial<TableProps<any
   /* 表格配置信息*/
   columns: PlusColumn[]
   /* 表格头样式*/
-  headerCellStyle?: CSSProperties
+  headerCellStyle?: Partial<CSSProperties>
   /** rowKey */
   rowKey?: string
   /** sortablejs配置 */
-  dragSortable?: SortableOptions | boolean
+  dragSortable?: false | Partial<SortableOptions>
   dragSortableTableColumnProps?: RecordType
   indexTableColumnProps?: RecordType
-  indexContentStyle?: CSSProperties | ((row: any, index: number) => CSSProperties)
+  indexContentStyle?: Partial<CSSProperties> | ((row: any, index: number) => Partial<CSSProperties>)
 }
 
 export interface PlusTableEmits {

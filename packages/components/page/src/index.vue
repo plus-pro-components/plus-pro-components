@@ -85,7 +85,7 @@ export interface PlusPageProps {
   /**
    * PlusSearchProps
    */
-  search?: false | Partial<PlusSearchProps>
+  search?: Partial<PlusSearchProps>
   /**
    * PlusTableProps
    */

@@ -44,7 +44,7 @@ export interface PlusTableTableColumnIndexProps {
   pageInfo?: PageInfo
   indexTableColumnProps?: RecordType
   max?: number
-  indexContentStyle?: CSSProperties | ((row: any, index: number) => CSSProperties)
+  indexContentStyle?: Partial<CSSProperties> | ((row: any, index: number) => Partial<CSSProperties>)
 }
 
 defineOptions({
