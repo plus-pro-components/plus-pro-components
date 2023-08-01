@@ -17,7 +17,7 @@ const distBundle = path.resolve(pcOutput, 'theme-chalk')
 
 const main = async () => {
   /**
-   * 加载src下所有scss文件
+   * 加载./src下所有scss文件 （index.scss除外）
    */
   const files = await glob([`**/*.scss`, `!**/*index.scss`], {
     cwd: resolve(styleRoot),
@@ -25,7 +25,7 @@ const main = async () => {
   })
 
   /**
-   * 生成./dist文件
+   * 生成./dist文件夹
    */
   try {
     await access(distFolder)
@@ -33,7 +33,7 @@ const main = async () => {
     await mkdir(distFolder)
   }
 
-  /* 不压缩css内容 */
+  /* css内容 */
   let index = ''
 
   for (const item of files) {
@@ -58,17 +58,17 @@ const main = async () => {
   await writeFile(resolve(distFolder, `index.css`), index)
 
   /**
-   * 复制src的文件到 ./dist/src
+   * 复制./src的文件到 ./dist/src
    */
   await copy(styleRoot, resolve(distFolder, 'src'))
 
   /**
-   * 复制打包后的文件到/dist/plus-pro-components/theme-chalk
+   * 复制打包后的文件./dist到/dist/plus-pro-components/theme-chalk
    */
   await copy(distFolder, resolve(distBundle))
 
   /**
-   * 复制打包后的index.css文件到/dist/plus-pro-components/index.css
+   * 复制打包后的./dist/index.css文件到/dist/plus-pro-components/index.css
    */
   await copy(resolve(distFolder, 'index.css'), resolve(pcOutput, 'index.css'))
 }
