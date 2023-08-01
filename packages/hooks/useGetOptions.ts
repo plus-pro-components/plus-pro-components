@@ -6,9 +6,7 @@ import type { OptionsRow, PlusColumn } from '@plus-pro-components/types'
 const useGetOptions = (props: PlusColumn): Ref<OptionsRow[]> => {
   const options = ref<OptionsRow[]>([])
 
-  if (isArray(props.options)) {
-    options.value = [...props.options]
-  } else if (isPromise(props.options)) {
+  if (isPromise(props.options)) {
     const getValue = props.options as (props?: PlusColumn | undefined) => Promise<OptionsRow[]>
     getValue(props)
       .then(data => {
@@ -20,6 +18,8 @@ const useGetOptions = (props: PlusColumn): Ref<OptionsRow[]> => {
   } else if (isFunction(props.options)) {
     const getValue = props.options as (props?: PlusColumn | undefined) => OptionsRow[]
     options.value = getValue(props) || []
+  } else if (isArray(props.options)) {
+    options.value = [...props.options]
   } else {
     options.value = []
   }

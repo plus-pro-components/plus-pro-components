@@ -41,6 +41,7 @@ export default defineConfig({
     ['script', { src: '/hmt.js' }],
     ['link', { rel: 'icon', href: '/logo.png' }]
   ],
+
   themeConfig: {
     search: {
       provider: 'local'
@@ -57,10 +58,14 @@ export default defineConfig({
     // https://vitepress.dev/reference/default-theme-config
     nav: [
       { text: '首页', link: '/' },
-      { text: '指南', link: '/guide/installation' },
+      { text: '指南', link: '/guide/' },
       {
         text: '组件',
-        link: '/components/'
+        link: '/components/type'
+      },
+      {
+        text: 'API',
+        link: '/api/utils/'
       },
       {
         text: `v${pkg.version}`,
@@ -83,6 +88,15 @@ export default defineConfig({
     sidebar: {
       '/guide/': [
         {
+          text: '简介',
+          items: [
+            {
+              text: '简介',
+              link: '/guide/index'
+            }
+          ]
+        },
+        {
           text: '基础',
           items: [
             {
@@ -98,6 +112,10 @@ export default defineConfig({
         {
           text: '进阶',
           items: [
+            {
+              text: '国际化',
+              link: '/guide/i18n'
+            },
             {
               text: '更新日志',
               link: '/guide/changelog'
@@ -115,15 +133,6 @@ export default defineConfig({
         }
       ],
       '/components/': [
-        {
-          text: '简介',
-          items: [
-            {
-              text: '简介',
-              link: '/components/index'
-            }
-          ]
-        },
         {
           text: '基础Ts类型',
           items: [
@@ -193,6 +202,54 @@ export default defineConfig({
             }
           ]
         }
+      ],
+      '/api/': [
+        {
+          text: '工具utils',
+          link: '/api/utils/',
+          items: [
+            {
+              text: '时间',
+              link: '/api/utils/day'
+            },
+            {
+              text: '数字',
+              link: '/api/utils/number'
+            },
+            {
+              text: 'AES加密',
+              link: '/api/utils/encrypt'
+            },
+            {
+              text: '存贮',
+              link: '/api/utils/storage'
+            },
+            {
+              text: 'cookie',
+              link: '/api/utils/cookie'
+            },
+            {
+              text: '文件',
+              link: '/api/utils/file'
+            },
+            {
+              text: '判断',
+              link: '/api/utils/is'
+            },
+            {
+              text: '校验',
+              link: '/api/utils/validate'
+            },
+            {
+              text: '其他',
+              link: '/api/utils/other'
+            }
+          ]
+        },
+        {
+          text: '钩子hooks',
+          link: '/api/hooks/'
+        }
       ]
     },
     socialLinks: [
@@ -201,8 +258,13 @@ export default defineConfig({
     footer: {
       message: 'MIT Licensed.',
       copyright: 'Copyright © 2023-present xiaofei'
+    },
+    editLink: {
+      text: '在 GitHub 上编辑此页',
+      pattern: 'https://github.com/plus-pro-components/plus-pro-components/edit/dev/docs/:path'
     }
   },
+  lastUpdated: true,
   markdown: {
     lineNumbers: true,
     config: md => mdPlugin(md)

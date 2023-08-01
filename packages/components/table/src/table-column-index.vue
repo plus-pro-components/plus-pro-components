@@ -8,7 +8,7 @@
     width="60"
     align="center"
     :index="getTableIndex"
-    v-bind="$attrs"
+    v-bind="indexTableColumnProps"
   >
     <template #default="{ row, $index }">
       <el-tooltip
@@ -36,14 +36,15 @@
 
 <script lang="ts" setup>
 import { DefaultPageInfo } from '@plus-pro-components/constants'
-import type { PageInfo } from '@plus-pro-components/types'
+import type { PageInfo, RecordType } from '@plus-pro-components/types'
 import type { CSSProperties } from 'vue'
 import { isFunction, isPlainObject } from '@plus-pro-components/utils'
 
 export interface PlusTableTableColumnIndexProps {
   pageInfo?: PageInfo
+  indexTableColumnProps?: RecordType
   max?: number
-  indexContentStyle?: CSSProperties | ((row: any, index: number) => CSSProperties)
+  indexContentStyle?: Partial<CSSProperties> | ((row: any, index: number) => Partial<CSSProperties>)
 }
 
 defineOptions({
@@ -54,7 +55,8 @@ const props = withDefaults(defineProps<PlusTableTableColumnIndexProps>(), {
   show: false,
   pageInfo: () => ({ ...DefaultPageInfo }),
   max: 999,
-  indexContentStyle: () => ({})
+  indexContentStyle: () => ({}),
+  indexTableColumnProps: () => ({})
 })
 
 // 修改序号生成方法
@@ -78,28 +80,3 @@ const customIndexContentStyle = (row: any, index: number): CSSProperties => {
   }
 }
 </script>
-
-<style lang="scss">
-.plus-table-column-index {
-  .plus-table-index-column {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    word-break: keep-all;
-    white-space: nowrap;
-    width: 20px;
-    height: 20px;
-  }
-
-  .cell {
-    .plus-table-column-index-content {
-      align-items: center;
-      display: flex;
-      font-size: 12px;
-      justify-content: center;
-      overflow: hidden;
-      padding: 5px 5px;
-    }
-  }
-}
-</style>

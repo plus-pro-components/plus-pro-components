@@ -1,13 +1,7 @@
 <template>
   <el-button @click="handleOpen">打开弹窗</el-button>
 
-  <PlusDialog
-    v-model="show"
-    header="标题"
-    cancel-text="取消"
-    confirm-text="确定"
-    @confirm="handleConfirm"
-  >
+  <PlusDialog v-model="show" header="标题" @confirm="handleConfirm">
     确认删除此行数据吗？
   </PlusDialog>
 </template>

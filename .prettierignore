@@ -4,4 +4,4 @@ static/
 assets
 public
 coverage
-*.html
+# *.html

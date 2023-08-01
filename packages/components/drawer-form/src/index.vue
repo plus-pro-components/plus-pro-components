@@ -2,7 +2,7 @@
   <el-drawer
     ref="drawerInstance"
     v-model="subVisible"
-    title="抽屉表单"
+    :title="t('plus.drawerForm.title')"
     :close-on-click-modal="false"
     :close-on-press-escape="false"
     v-bind="drawer"
@@ -38,6 +38,7 @@ import { PlusForm } from '@plus-pro-components/components/form'
 import type { PlusFormInstance, PlusFormProps } from '@plus-pro-components/components/form'
 import type { FieldValues } from '@plus-pro-components/types'
 import { ElDrawer } from 'element-plus'
+import { useLocale } from '@plus-pro-components/hooks'
 
 export interface PlusDrawerFormProps {
   modelValue?: FieldValues
@@ -66,6 +67,7 @@ const props = withDefaults(defineProps<PlusDrawerFormProps>(), {
 })
 
 const emit = defineEmits<PlusDrawerFormEmits>()
+const { t } = useLocale()
 
 const formInstance = ref<PlusFormInstance>()
 const drawerInstance = ref<InstanceType<typeof ElDrawer>>()

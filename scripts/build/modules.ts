@@ -11,7 +11,7 @@ import autoprefixer from 'autoprefixer'
 import cssnano from 'cssnano'
 import type { OutputOptions, ModuleFormat } from 'rollup'
 import { pcOutput, pcRoot, pkgRoot } from '../utils/paths'
-import { writeBundles } from '../utils'
+import { writeBundles, target } from '../utils'
 import { externalModules, excludeFiles } from '../utils/main'
 
 const buildConfig = {
@@ -56,7 +56,7 @@ const buildModules = async () => {
       commonjs(),
       esbuild({
         sourceMap: false,
-        target: 'es2018',
+        target: target,
         loaders: {
           '.vue': 'ts'
         }
@@ -83,7 +83,7 @@ const buildModules = async () => {
       }
     })
   )
-  consola.success('Successfully built into modules!')
+  consola.success('Successfully build into modules!')
 }
 
 export default [buildModules()]

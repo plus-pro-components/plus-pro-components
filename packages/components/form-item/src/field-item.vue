@@ -8,7 +8,7 @@
   <el-autocomplete
     v-else-if="valueType === 'autocomplete'"
     v-model="state"
-    :placeholder="'请输入' + label"
+    :placeholder="t('plus.field.pleaseEnter') + label"
     class="plus-form-item-field"
     v-bind="customFieldProps"
     @change="handleChange"
@@ -17,7 +17,7 @@
   <el-cascader
     v-else-if="valueType === 'cascader'"
     v-model="state"
-    :placeholder="'请选择' + label"
+    :placeholder="t('plus.field.pleaseSelect') + label"
     class="plus-form-item-field"
     :options="options"
     v-bind="customFieldProps"
@@ -27,7 +27,7 @@
   <el-checkbox-group
     v-else-if="valueType === 'checkbox'"
     v-model="state"
-    :placeholder="'请选择' + label"
+    :placeholder="t('plus.field.pleaseSelect') + label"
     class="plus-form-item-field"
     clearable
     v-bind="customFieldProps"
@@ -46,7 +46,7 @@
   <el-color-picker
     v-else-if="valueType === 'color-picker'"
     v-model="state"
-    :placeholder="'请选择' + label"
+    :placeholder="t('plus.field.pleaseSelect') + label"
     class="plus-form-item-field"
     v-bind="customFieldProps"
     @change="handleChange"
@@ -55,9 +55,9 @@
   <el-date-picker
     v-else-if="valueType === 'date-picker'"
     v-model="state"
-    :placeholder="'请选择' + label"
-    start-placeholder="请选择开始日期"
-    end-placeholder="请结束开始日期"
+    :placeholder="t('plus.field.pleaseSelect') + label"
+    :start-placeholder="t('plus.datepicker.startPlaceholder')"
+    :end-placeholder="t('plus.datepicker.endPlaceholder')"
     class="plus-form-item-field"
     format="YYYY-MM-DD HH:mm:ss"
     type="datetime"
@@ -77,7 +77,7 @@
     v-else-if="valueType === 'input-number'"
     v-model="state"
     class="plus-form-item-field"
-    :placeholder="'请输入' + label"
+    :placeholder="t('plus.field.pleaseEnter') + label"
     autocomplete="off"
     clearable
     v-bind="customFieldProps"
@@ -87,7 +87,7 @@
   <el-radio-group
     v-else-if="valueType === 'radio'"
     v-model="state"
-    :placeholder="'请选择' + label"
+    :placeholder="t('plus.field.pleaseSelect') + label"
     class="plus-form-item-field"
     clearable
     v-bind="customFieldProps"
@@ -124,7 +124,7 @@
   <el-select
     v-else-if="valueType === 'select'"
     v-model="state"
-    :placeholder="'请选择' + label"
+    :placeholder="t('plus.field.pleaseSelect') + label"
     class="plus-form-item-field"
     clearable
     v-bind="customFieldProps"
@@ -168,7 +168,7 @@
     v-model="state"
     type="textarea"
     class="plus-form-item-field"
-    :placeholder="'请输入' + label"
+    :placeholder="t('plus.field.pleaseEnter') + label"
     autocomplete="off"
     clearable
     v-bind="customFieldProps"
@@ -178,7 +178,7 @@
   <el-input
     v-else
     v-model="state"
-    :placeholder="'请输入' + label"
+    :placeholder="t('plus.field.pleaseEnter') + label"
     autocomplete="off"
     clearable
     v-bind="customFieldProps"
@@ -190,7 +190,7 @@
 import { ref, watch } from 'vue'
 import { isFunction, getCustomProps, isDate, isArray } from '@plus-pro-components/utils'
 import type { PlusColumn, FieldValueType } from '@plus-pro-components/types'
-import { useGetOptions } from '@plus-pro-components/hooks'
+import { useGetOptions, useLocale } from '@plus-pro-components/hooks'
 import PlusDatePicker from '@plus-pro-components/components/date-picker'
 import PlusRadio from '@plus-pro-components/components/radio'
 
@@ -231,7 +231,7 @@ const props = withDefaults(defineProps<PlusFormFieldItemProps>(), {
 })
 
 const emit = defineEmits<PlusFormFieldItemEmits>()
-
+const { t } = useLocale()
 const state = ref<FieldValueType>()
 
 const options = useGetOptions(props)
@@ -321,9 +321,3 @@ const handleChange = (val: FieldValueType) => {
   emit('change', val)
 }
 </script>
-
-<style lang="scss">
-.plus-form-item-field {
-  width: 100%;
-}
-</style>

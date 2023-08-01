@@ -51,7 +51,7 @@ type Heartbeat = {
   interval: number
 }
 
-export interface IWSOptions {
+export interface WSOptions {
   /**
    * 是否自动重连 默认`true`
    */
@@ -72,11 +72,11 @@ class WS {
   reconnectCount = 0
   delay: Nullable<Timeout> = null
   timer: Nullable<Interval> = null
-  autoReconnect: IWSOptions['autoReconnect']
-  heartbeat: IWSOptions['heartbeat']
-  query: IWSOptions['query']
+  autoReconnect: WSOptions['autoReconnect']
+  heartbeat: WSOptions['heartbeat']
+  query: WSOptions['query']
 
-  constructor(url?: string, options?: IWSOptions) {
+  constructor(url?: string, options?: WSOptions) {
     const { autoReconnect = true, query = {}, heartbeat = false } = options || {}
     this.autoReconnect = autoReconnect
     this.heartbeat = heartbeat
@@ -188,4 +188,4 @@ class WS {
   }
 }
 
-export default WS
+export { WS }

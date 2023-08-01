@@ -21,19 +21,12 @@ interface IState {
   handlerList: string[]
 }
 
-type returnType = {
-  /**
-   * 是否在指定时间内操作页面
-   */
-  isOperation: Ref<boolean>
-}
-
 /**
  *  判断用户是否在操作页面
  * @param duration 秒 默认 10, 最小1
- * @return `{ isOperation: Ref<boolean> }`
+ * @return `{ isOperation: Ref<boolean> }`  是否在指定时间内操作页面
  */
-function useIsOperation(duration = 10): returnType {
+function useIsOperation(duration = 10): { isOperation: Ref<boolean> } {
   const totalDuration = computed(() => (duration < 1 ? 1 : duration))
   const state = reactive<IState>({
     time: 0,

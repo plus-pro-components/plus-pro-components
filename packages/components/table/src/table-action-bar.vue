@@ -3,7 +3,7 @@
     key="actionBar"
     class-name="plus-table-action-bar"
     align="center"
-    :label="label || '操作'"
+    :label="label || t('plus.table.action')"
     :fixed="fixed || 'right'"
     :width="width || 200"
     v-bind="props.actionBarTableColumnProps"
@@ -21,7 +21,7 @@
         class="plus-table-action-bar__dropdown"
       >
         <span class="plus-table-action-bar__dropdown__link">
-          更多
+          {{ t('plus.table.more') }}
           <el-icon>
             <ArrowDownBold />
           </el-icon>
@@ -52,6 +52,7 @@ import { ElButton, ElIcon, ElLink, ElTooltip, ElMessageBox } from 'element-plus'
 import type { RecordType } from '@plus-pro-components/types'
 import { isFunction } from '@plus-pro-components/utils'
 import { cloneDeep } from 'lodash-es'
+import { useLocale } from '@plus-pro-components/hooks'
 import type { ButtonsCallBackParams, ActionBarButtonsRow } from './type'
 
 export interface ActionBarProps {
@@ -96,7 +97,7 @@ defineOptions({
 })
 
 const props = withDefaults(defineProps<ActionBarProps>(), {
-  label: '操作',
+  label: '',
   fixed: 'right',
   type: 'link',
   buttons: () => [],
@@ -105,6 +106,7 @@ const props = withDefaults(defineProps<ActionBarProps>(), {
   actionBarTableColumnProps: () => ({})
 })
 const emit = defineEmits<PlusTableActionBarEmits>()
+const { t } = useLocale()
 
 const getSubButtons = (row: any, index: number) => {
   const data = cloneDeep(props.buttons).filter(item => {
@@ -184,7 +186,11 @@ const handleClickAction = (
       ? (buttonRow.confirm.message as any)(data)
       : buttonRow.confirm.message
 
-    ElMessageBox.confirm(message || '确定执行本次操作', title || '提示', buttonRow.confirm.options)
+    ElMessageBox.confirm(
+      message || t('plus.table.confirmToPerformThisOperation'),
+      title || t('plus.table.prompt'),
+      buttonRow.confirm.options
+    )
 
       .then(() => {
         emit('clickAction', data)
@@ -197,33 +203,3 @@ const handleClickAction = (
   }
 }
 </script>
-
-<style lang="scss">
-.plus-table-action-bar {
-  .cell {
-    display: flex;
-    align-items: center;
-  }
-  .plus-table-action-bar__dropdown__link {
-    display: inline-block;
-    cursor: pointer;
-  }
-  .plus-table-action-bar__column__link {
-    margin-right: 10px;
-  }
-  .plus-table-action-bar__dropdown {
-    vertical-align: baseline;
-    cursor: pointer;
-    margin-left: 12px;
-  }
-  .el-link + .el-link {
-    margin-left: 12px;
-  }
-  .el-icon {
-    cursor: pointer;
-  }
-  .el-icon + .el-icon {
-    margin-left: 12px;
-  }
-}
-</style>

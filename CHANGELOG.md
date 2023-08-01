@@ -1,3 +1,46 @@
+## [v0.0.1-alpha.25](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-alpha.24...v0.0.1-alpha.25) (2023-08-01)
+
+
+### ✨ Features
+
+* **theme-chalk:** :sparkles: extract styles to theme-chalk.([28fba5b](https://github.com/plus-pro-components/plus-pro-components/commit/28fba5b)) by@xiaofei
+
+
+
+
+
+
+## [v0.0.1-alpha.24](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-alpha.23...v0.0.1-alpha.24) (2023-07-31)
+
+
+### ✨ Features
+
+* **components:** :sparkles: add internationalization support.([d2013d5](https://github.com/plus-pro-components/plus-pro-components/commit/d2013d5)) by@xiaofei
+
+
+### 🐛 Bug Fixes
+
+* **components:** :bug: fix table pagination,actionBar and dragSortable type error.([7923f71](https://github.com/plus-pro-components/plus-pro-components/commit/7923f71)) by@xiaofei
+* **components:** :bug: fix display-item formatToCurrency and dateFormat method.([3089f1f](https://github.com/plus-pro-components/plus-pro-components/commit/3089f1f)) by@xiaofei
+
+
+### ♻️ Code Refactoring
+
+* **packages:** :recycle: refactor utils.([4cb0869](https://github.com/plus-pro-components/plus-pro-components/commit/4cb0869)) by@xiaofei
+
+
+## [v0.0.1-alpha.23](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-alpha.22...v0.0.1-alpha.23) (2023-07-27)
+
+
+
+
+
+
+### ♻️ Code Refactoring
+
+* **utils:** :recycle: refactor utils and hooks.([03ac264](https://github.com/plus-pro-components/plus-pro-components/commit/03ac264)) by@xiaofei
+
+
 ## [v0.0.1-alpha.22](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-alpha.21...v0.0.1-alpha.22) (2023-07-26)
 
 
@@ -8,6 +51,8 @@
 * **packages:** :bug: improve TS type.([fd39b1e](https://github.com/plus-pro-components/plus-pro-components/commit/fd39b1e)) by@xiaofei
 
 
+
+
 ## [v0.0.1-alpha.21](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-alpha.20...v0.0.1-alpha.21) (2023-07-26)
 
 
@@ -15,6 +60,8 @@
 
 * **packages:** :sparkles: add page component and component instance type.([c2628ea](https://github.com/plus-pro-components/plus-pro-components/commit/c2628ea)) by@xiaofei
 * **components:** :sparkles: edit table,form and search component extends attributes method.([dda410a](https://github.com/plus-pro-components/plus-pro-components/commit/dda410a)) by@xiaofei
+
+
 
 
 
@@ -29,12 +76,16 @@
 
 
 
+
+
 ## [v0.0.1-alpha.19](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-alpha.18...v0.0.1-alpha.19) (2023-07-21)
 
 
 ### ✨ Features
 
 * **components:** :sparkles: table-action-bar add icon function.([28f311d](https://github.com/plus-pro-components/plus-pro-components/commit/28f311d)) by@xiaofei
+
+
 
 
 
@@ -54,6 +105,8 @@
 * **components:** :bug: fix table-action-bar el-link style.([66fe5e3](https://github.com/plus-pro-components/plus-pro-components/commit/66fe5e3)) by@xiaofei
 
 
+
+
 ## [v0.0.1-alpha.17](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-alpha.16...v0.0.1-alpha.17) (2023-07-20)
 
 
@@ -62,6 +115,8 @@
 * **components:** :sparkles: table component add single line editing function.([632b178](https://github.com/plus-pro-components/plus-pro-components/commit/632b178)) by@xiaofei
 * **docs:** :sparkles: delete deprecated md.([83f73f7](https://github.com/plus-pro-components/plus-pro-components/commit/83f73f7)) by@xiaofei
 * **components:** :sparkles: imagePreview component is deprecated.([20312b6](https://github.com/plus-pro-components/plus-pro-components/commit/20312b6)) by@xiaofei
+
+
 
 
 
@@ -80,6 +135,8 @@
 * **components:** :bug: fix custom props not responding.([c6aa03e](https://github.com/plus-pro-components/plus-pro-components/commit/c6aa03e)) by@xiaofei
 
 
+
+
 ## [v0.0.1-alpha.15](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-alpha.14...v0.0.1-alpha.15) (2023-07-18)
 
 
@@ -87,6 +144,8 @@
 
 * **all:** Merge pull request #27 from plus-pro-components/zpp([5ac561e](https://github.com/plus-pro-components/plus-pro-components/commit/5ac561e)) by@xiaofei
 * **components:** :sparkles: update search component([9174b16](https://github.com/plus-pro-components/plus-pro-components/commit/9174b16)) by@zhangpp
+
+
 
 
 
@@ -101,6 +160,8 @@
 
 
 
+
+
 ## [v0.0.1-alpha.13](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-alpha.12...v0.0.1-alpha.13) (2023-07-14)
 
 
@@ -111,6 +172,8 @@
 * **all:** Merge pull request #24 from plus-pro-components/zpp([5c108c6](https://github.com/plus-pro-components/plus-pro-components/commit/5c108c6)) by@xiaofei
 * **packages:** :sparkles: add search component([01aefc8](https://github.com/plus-pro-components/plus-pro-components/commit/01aefc8)) by@zhangpp
 * **components:** :sparkles: release v0.0.1-alpha.12([ca2806c](https://github.com/plus-pro-components/plus-pro-components/commit/ca2806c)) by@xiaofei
+
+
 
 
 
@@ -130,6 +193,8 @@
 * **docs:** :bug: modify TS type：linkText([6b538b6](https://github.com/plus-pro-components/plus-pro-components/commit/6b538b6)) by@ex-cuishengnan
 
 
+
+
 ## [v0.0.1-alpha.11](https://github.com/plus-pro-components/plus-pro-components/compare/0.0.1-alpha.10...v0.0.1-alpha.11) (2023-07-12)
 
 
@@ -146,6 +211,11 @@
 
 
 
+### ♻️ Code Refactoring
+
+* **all:** :recycle: code architecture adjustment.([b833934](https://github.com/plus-pro-components/plus-pro-components/commit/b833934)) by@xiaofei
+
+
 ## [0.0.1-alpha.10](https://github.com/plus-pro-components/plus-pro-components/compare/0.0.1-alpha.9...0.0.1-alpha.10) (2023-06-26)
 
 
@@ -153,6 +223,8 @@
 
 * **all:** Merge pull request #19 from plus-pro-components/zpp([4a96fc9](https://github.com/plus-pro-components/plus-pro-components/commit/4a96fc9)) by@xiaofei
 * **packages:** :sparkles: update drag sort icon([3096dc8](https://github.com/plus-pro-components/plus-pro-components/commit/3096dc8)) by@zhangpp
+
+
 
 
 
@@ -172,6 +244,8 @@
 
 
 
+
+
 ## [0.0.1-alpha.8](https://github.com/plus-pro-components/plus-pro-components/compare/0.0.1-alpha.7...0.0.1-alpha.8) (2023-06-25)
 
 
@@ -183,6 +257,8 @@
 * **all:** Merge branch 'dev' into zpp([8de5de9](https://github.com/plus-pro-components/plus-pro-components/commit/8de5de9)) by@zpx
 * **packages:** :sparkles: table setting([2a89cfa](https://github.com/plus-pro-components/plus-pro-components/commit/2a89cfa)) by@zhangpp
 * **all:** :sparkles: release v0.0.1-alpha.7([abfbe10](https://github.com/plus-pro-components/plus-pro-components/commit/abfbe10)) by@xiaofei
+
+
 
 
 
@@ -203,6 +279,8 @@
 * **all:** Merge branch 'dev' into zpp([1912403](https://github.com/plus-pro-components/plus-pro-components/commit/1912403)) by@zhangpp
 * **all:** :sparkles: release v0.0.1-alpha.6([326bc09](https://github.com/plus-pro-components/plus-pro-components/commit/326bc09)) by@xiaofei
 * **all:** Merge branch 'dev' into zpp([a800000](https://github.com/plus-pro-components/plus-pro-components/commit/a800000)) by@zhangpp
+
+
 
 
 
@@ -229,6 +307,8 @@
 * **scripts:** :bug: release v0.0.1-alpha.5.([5849cb1](https://github.com/plus-pro-components/plus-pro-components/commit/5849cb1)) by@xiaofei
 
 
+
+
 ## [0.0.1-alpha.5](https://github.com/plus-pro-components/plus-pro-components/compare/0.0.1-alpha.4...0.0.1-alpha.5) (2023-06-13)
 
 
@@ -241,6 +321,8 @@
 ### 🐛 Bug Fixes
 
 * **scripts:** :bug: fix rollup-plugin-vue causes DefineOptions to fail.([c401d5c](https://github.com/plus-pro-components/plus-pro-components/commit/c401d5c)) by@xiaofei
+
+
 
 
 ## [0.0.1-alpha.4](https://github.com/plus-pro-components/plus-pro-components/compare/0.0.1-alpha.3...0.0.1-alpha.4) (2023-06-13)
@@ -270,6 +352,8 @@
 * **play:** :bug: edit tsconfig.app.json.([ffb0981](https://github.com/plus-pro-components/plus-pro-components/commit/ffb0981)) by@xiaofei
 
 
+
+
 ## [0.0.1-alpha.3](https://github.com/plus-pro-components/plus-pro-components/compare/0.0.1-alpha.2...0.0.1-alpha.3) (2023-05-30)
 
 
@@ -285,6 +369,8 @@
 * **scripts:** :bug: fix includes error.([c7a6e00](https://github.com/plus-pro-components/plus-pro-components/commit/c7a6e00)) by@xiaofei
 
 
+
+
 ## [0.0.1-alpha.2](https://github.com/plus-pro-components/plus-pro-components/compare/0.0.1-alpha.1...0.0.1-alpha.2) (2023-05-25)
 
 
@@ -295,12 +381,16 @@
 
 
 
+
+
 ## [0.0.1-alpha.1](https://github.com/plus-pro-components/plus-pro-components/commit/511a2be) (2023-05-24)
 
 
 ### ✨ Features
 
 * **all:** :sparkles: init([511a2be](https://github.com/plus-pro-components/plus-pro-components/commit/511a2be)) by@xiaofei
+
+
 
 
 

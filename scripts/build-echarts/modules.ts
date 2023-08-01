@@ -8,7 +8,7 @@ import glob from 'fast-glob'
 import vuePlugin from '@vitejs/plugin-vue'
 import type { OutputOptions, ModuleFormat, Plugin } from 'rollup'
 import { ecOutput, ecRoot } from '../utils/paths'
-import { writeBundles } from '../utils'
+import { writeBundles, target } from '../utils'
 import { external, excludeFiles } from '../utils/echarts'
 
 const buildConfig = {
@@ -53,7 +53,7 @@ const buildModules = async () => {
       commonjs(),
       esbuild({
         sourceMap: false,
-        target: 'es2018',
+        target: target,
         loaders: {
           '.vue': 'ts'
         }
@@ -75,7 +75,7 @@ const buildModules = async () => {
       }
     })
   )
-  consola.success('Successfully built into modules!')
+  consola.success('Successfully build into modules!')
 }
 
 export default [buildModules()]

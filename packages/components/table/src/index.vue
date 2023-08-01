@@ -38,12 +38,15 @@
       <PlusTableTableColumnIndex
         v-if="isShowNumber"
         :index-content-style="indexContentStyle"
+        :index-table-column-props="indexTableColumnProps"
         :page-info="(pagination as PlusPaginationProps)?.modelValue"
       />
 
       <!-- 拖拽行 -->
       <PlusTableColumnDragSort
+        v-if="dragSortable"
         :sortable="dragSortable"
+        :drag-sortable-table-column-props="dragSortableTableColumnProps"
         :table-instance="tableInstance"
         @dragSortEnd="handleDragSortEnd"
       />
@@ -93,7 +96,7 @@ import { DefaultPageInfo, TableFormRefInjectionKey } from '@plus-pro-components/
 import type { CSSProperties } from 'vue'
 import type { ComponentSize } from 'element-plus/es/constants'
 import type { TableInstance, TableProps } from 'element-plus'
-import type { PageInfo, PlusColumn } from '@plus-pro-components/types'
+import type { PageInfo, PlusColumn, RecordType } from '@plus-pro-components/types'
 import type { Options as SortableOptions } from 'sortablejs'
 import PlusTableActionBar from './table-action-bar.vue'
 import PlusTableColumn from './table-column.vue'
@@ -109,9 +112,9 @@ export interface PlusTableProps extends /* @vue-ignore */ Partial<TableProps<any
   // 密度
   defaultSize?: ComponentSize
   /* 分页参数*/
-  pagination?: false | PlusPaginationProps
+  pagination?: false | Partial<PlusPaginationProps>
   /* 操作栏参数*/
-  actionBar?: false | ActionBarProps
+  actionBar?: false | Partial<ActionBarProps>
   /* 是否需要序号*/
   isShowNumber?: boolean
   /* 是否需要过滤表格表头*/
@@ -132,12 +135,14 @@ export interface PlusTableProps extends /* @vue-ignore */ Partial<TableProps<any
   /* 表格配置信息*/
   columns: PlusColumn[]
   /* 表格头样式*/
-  headerCellStyle?: CSSProperties
+  headerCellStyle?: Partial<CSSProperties>
   /** rowKey */
   rowKey?: string
   /** sortablejs配置 */
-  dragSortable?: SortableOptions | boolean
-  indexContentStyle?: CSSProperties | ((row: any, index: number) => CSSProperties)
+  dragSortable?: false | Partial<SortableOptions>
+  dragSortableTableColumnProps?: RecordType
+  indexTableColumnProps?: RecordType
+  indexContentStyle?: Partial<CSSProperties> | ((row: any, index: number) => Partial<CSSProperties>)
 }
 
 export interface PlusTableEmits {
@@ -162,7 +167,7 @@ const props = withDefaults(defineProps<PlusTableProps>(), {
   isSelection: false,
   hasExpand: false,
   loadingStatus: false,
-  title: '表格',
+  title: '',
   tableData: () => [],
   columns: () => [],
   headerCellStyle: () => ({
@@ -171,7 +176,8 @@ const props = withDefaults(defineProps<PlusTableProps>(), {
   }),
   rowKey: 'id',
   dragSortable: false,
-  tableProps: () => ({}),
+  dragSortableTableColumnProps: () => ({}),
+  indexTableColumnProps: () => ({}),
   indexContentStyle: () => ({})
 })
 
@@ -257,9 +263,3 @@ defineExpose({
   tableInstance
 })
 </script>
-
-<style lang="scss">
-.el-popper {
-  max-width: 200px;
-}
-</style>

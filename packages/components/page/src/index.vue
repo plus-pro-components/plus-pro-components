@@ -1,5 +1,5 @@
 <template>
-  <div class="plus-age">
+  <div class="plus-page">
     <component :is="renderWrapper().search" v-if="search">
       <PlusSearch
         ref="plusSearchInstance"
@@ -85,7 +85,7 @@ export interface PlusPageProps {
   /**
    * PlusSearchProps
    */
-  search?: false | Partial<PlusSearchProps>
+  search?: Partial<PlusSearchProps>
   /**
    * PlusTableProps
    */
@@ -214,11 +214,3 @@ defineExpose({
   handleRest
 })
 </script>
-
-<style lang="scss">
-.plus-age {
-  .plus-page__table_wrapper {
-    margin-top: 20px;
-  }
-}
-</style>

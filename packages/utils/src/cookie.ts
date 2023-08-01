@@ -19,6 +19,6 @@ export function setCookie(key: string, data: any): string | undefined {
 /**
  * 移除 cookie
  */
-export function removeLanguage(key: string): void {
+export function removeCookie(key: string): void {
   Cookies.remove(key)
 }

@@ -60,7 +60,7 @@ page/basic
 
 | 名称                 | 说明                                                  | 类型                                                  |
 | -------------------- | ----------------------------------------------------- | ----------------------------------------------------- |
-| `plusSearchInstance` | `el-table`的实例                                      | `import('plus-pro-components')['PlusSearchInstance']` |
-| `plusTableInstance`  | `el-table`的实例                                      | `import('plus-pro-components')['PlusTableInstance']`  |
+| `plusSearchInstance` | [PlusSearch](/components/table.html)的实例            | `import('plus-pro-components')['PlusSearchInstance']` |
+| `plusTableInstance`  | [PlusTable](/components/table.html)的实例             | `import('plus-pro-components')['PlusTableInstance']`  |
 | `getList`            | 获取数据方法，可以用来重新加载数据                    | `() => void`                                          |
 | `handleRest`         | 重置搜索数据，并将 page 置为 1 ，然后重新加载 getList | `() => void`                                          |

@@ -6,7 +6,8 @@ const excludes = [
   'dist',
   'packages/eslint-config',
   'packages/utils',
-  'packages/play'
+  'packages/play',
+  'packages/theme-chalk'
 ]
 
 export const excludeEchartsFiles = (files: string[]) => {

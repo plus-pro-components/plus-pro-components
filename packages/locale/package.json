@@ -1,0 +1,12 @@
+{
+  "name": "@plus-pro-components/locale",
+  "private": true,
+  "version": "0.0.1",
+  "description": "plus-pro-components locale",
+  "license": "MIT",
+  "main": "index.ts",
+  "module": "index.ts",
+  "unpkg": "index.js",
+  "jsdelivr": "index.js",
+  "types": "index.d.ts"
+}

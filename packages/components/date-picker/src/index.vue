@@ -4,7 +4,7 @@
       ref="startPickerInstance"
       v-model="state.start"
       type="datetime"
-      placeholder="请选择开始时间"
+      :placeholder="t('plus.datepicker.startPlaceholder')"
       :format="format"
       :value-format="valueFormat"
       :disabled-date="subStartDisabledDate"
@@ -19,7 +19,7 @@
       type="datetime"
       :format="format"
       :value-format="valueFormat"
-      placeholder="请选择结束时间"
+      :placeholder="t('plus.datepicker.endPlaceholder')"
       :disabled-date="subEndDisabledDate"
       class="plus-date-picker__end"
       v-bind="endProps"
@@ -32,6 +32,7 @@
 import { reactive, watch, ref } from 'vue'
 import { ElDatePicker } from 'element-plus'
 import { isFunction } from '@plus-pro-components/utils'
+import { useLocale } from '@plus-pro-components/hooks'
 
 export interface PlusDatePickerProps {
   modelValue?: string[]
@@ -76,6 +77,7 @@ const props = withDefaults(defineProps<PlusDatePickerProps>(), {
 })
 
 const emit = defineEmits<PlusRadioEmits>()
+const { t } = useLocale()
 
 const startPickerInstance = ref<InstanceType<typeof ElDatePicker> | null>()
 const endPickerInstance = ref<InstanceType<typeof ElDatePicker> | null>()
@@ -123,42 +125,3 @@ defineExpose({
   endPickerInstance
 })
 </script>
-
-<style lang="scss">
-.plus-date-picker {
-  border: none;
-  display: flex;
-  flex-wrap: nowrap;
-  .el-input__prefix {
-    display: none;
-  }
-  .plus-date-picker__middle {
-    display: inline-block;
-    line-height: 30px;
-    border-top: 1px solid #ebeff2;
-    border-bottom: 1px solid #ebeff2;
-    background-color: #fff;
-  }
-  .el-input__wrapper {
-    width: 100%;
-    box-sizing: border-box;
-    border: 1px solid #ebeff2;
-    box-shadow: none;
-    padding-right: 0;
-  }
-  .plus-date-picker__start {
-    .el-input__wrapper {
-      border-top-right-radius: 0;
-      border-bottom-right-radius: 0;
-      border-right: none;
-    }
-  }
-  .plus-date-picker__end {
-    .el-input__wrapper {
-      border-top-left-radius: 0;
-      border-bottom-left-radius: 0;
-      border-left: 0;
-    }
-  }
-}
-</style>

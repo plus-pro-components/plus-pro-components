@@ -99,15 +99,3 @@ defineExpose({
   plusDisplayItemInstance
 })
 </script>
-
-<style lang="scss">
-.plus-table-column {
-  .plus-table-column__header {
-    display: flex;
-    align-items: center;
-    .plus-table-column__header__icon {
-      padding-left: 5px;
-    }
-  }
-}
-</style>

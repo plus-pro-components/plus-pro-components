@@ -4,7 +4,7 @@
     :has-footer="false"
     width="800px"
     top="10vh"
-    title="弹窗表单"
+    :title="t('plus.dialogForm.title')"
     v-bind="dialog"
     @cancel="handleCancel"
   >
@@ -30,6 +30,7 @@
 
 <script lang="ts" setup>
 import { ref, watch } from 'vue'
+import { useLocale } from '@plus-pro-components/hooks'
 import type { PlusFormInstance, PlusFormProps } from '@plus-pro-components/components/form'
 import { PlusForm } from '@plus-pro-components/components/form'
 import type { PlusDialogProps } from '@plus-pro-components/components/dialog'
@@ -63,6 +64,7 @@ const props = withDefaults(defineProps<PlusDialogFormProps>(), {
 })
 
 const emit = defineEmits<PlusDialogFormEmits>()
+const { t } = useLocale()
 
 const formInstance = ref<PlusFormInstance>()
 

@@ -15,15 +15,16 @@
 
     <div v-if="hasShowBottomButton" style="padding-top: 12px">
       <el-button size="small" plain @click="handleCancelPopover">
-        {{ cancelText }}
+        {{ cancelText || t('plus.popover.cancelText') }}
       </el-button>
+
       <el-button
         size="small"
         type="primary"
         :loading="confirmLoading"
         @click="handleConfirmPopover"
       >
-        {{ confirmText }}
+        {{ confirmText || t('plus.popover.confirmText') }}
       </el-button>
     </div>
 
@@ -38,6 +39,7 @@
 <script lang="ts" setup>
 import { reactive } from 'vue'
 import { ClickOutside as vClickOutside } from 'element-plus'
+import { useLocale } from '@plus-pro-components/hooks'
 
 export interface PlusPopoverProps {
   hasShowBottomButton?: boolean
@@ -63,6 +65,7 @@ const state = reactive({
   // 控制弹框显示隐藏
   visible: false
 })
+
 withDefaults(defineProps<PlusPopoverProps>(), {
   // 是否显示 popover 弹出框
   hasToolbar: false,
@@ -76,10 +79,13 @@ withDefaults(defineProps<PlusPopoverProps>(), {
   trigger: 'hover',
   title: '',
   confirmLoading: false,
-  cancelText: '取消',
-  confirmText: '确认'
+  cancelText: '',
+  confirmText: ''
 })
+
 const emit = defineEmits<PlusPopoverEmits>()
+const { t } = useLocale()
+
 const handleCancelPopover = (): void => {
   emit('cancel')
   state.visible = false

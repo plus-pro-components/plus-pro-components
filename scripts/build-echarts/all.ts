@@ -6,9 +6,8 @@ import consola from 'consola'
 import { nodeResolve } from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
 import esbuild, { minify as minifyPlugin } from 'rollup-plugin-esbuild'
-
 import { ecOutput, ecRoot } from '../utils/paths'
-import { writeBundles, formatBundleFilename, PKG_CAMEL_CASE_NAME } from '../utils'
+import { writeBundles, formatBundleFilename, PKG_CAMEL_CASE_NAME, target } from '../utils'
 import { external } from '../utils/echarts'
 
 const buildAll = async (minify?: boolean) => {
@@ -20,7 +19,7 @@ const buildAll = async (minify?: boolean) => {
     commonjs(),
     esbuild({
       sourceMap: false,
-      target: 'es2018',
+      target: target,
       loaders: {
         '.vue': 'ts'
       }
@@ -30,7 +29,7 @@ const buildAll = async (minify?: boolean) => {
   if (minify) {
     plugins.push(
       minifyPlugin({
-        target: 'es2018',
+        target: target,
         sourceMap: false
       })
     )
@@ -62,8 +61,8 @@ const buildAll = async (minify?: boolean) => {
     }
   ])
   const msg = minify
-    ? 'Successfully built compressed umd and esm!'
-    : 'Successfully built into umd and esm!'
+    ? 'Successfully build compressed umd and esm!'
+    : 'Successfully build into umd and esm!'
   consola.success(msg)
 }
 
