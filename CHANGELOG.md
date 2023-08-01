@@ -1,3 +1,15 @@
+## [v0.0.1-alpha.25](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-alpha.24...v0.0.1-alpha.25) (2023-08-01)
+
+
+### ✨ Features
+
+* **theme-chalk:** :sparkles: extract styles to theme-chalk.([28fba5b](https://github.com/plus-pro-components/plus-pro-components/commit/28fba5b)) by@xiaofei
+
+
+
+
+
+
 ## [v0.0.1-alpha.24](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-alpha.23...v0.0.1-alpha.24) (2023-07-31)
 
 
