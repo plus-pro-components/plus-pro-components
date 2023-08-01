@@ -3,7 +3,7 @@ set -e
 
 npm run clean
 
-npm run build:main
+npm run build
 cd dist/plus-pro-components
 echo "publish plus-pro-components..."
 npm publish
