@@ -22,7 +22,7 @@
 
     <div
       v-if="hasFooter"
-      class="plus-form-footer"
+      class="plus-form__footer"
       :style="{ justifyContent: footerAlign === 'left' ? 'flex-start' : 'flex-end' }"
     >
       <slot name="footer">
@@ -157,10 +157,3 @@ defineExpose({
   formInstance
 })
 </script>
-
-<style lang="scss">
-.plus-form-footer {
-  display: flex;
-  justify-content: flex-end;
-}
-</style>

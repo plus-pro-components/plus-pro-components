@@ -61,8 +61,8 @@ const buildAll = async (minify?: boolean) => {
     }
   ])
   const msg = minify
-    ? 'Successfully built compressed umd and esm!'
-    : 'Successfully built into umd and esm!'
+    ? 'Successfully build compressed umd and esm!'
+    : 'Successfully build into umd and esm!'
   consola.success(msg)
 }
 

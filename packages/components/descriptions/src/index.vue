@@ -56,15 +56,3 @@ state.subColumns = computed<any>(() =>
   props.columns.filter(item => item.hideInDescriptions !== true)
 )
 </script>
-
-<style lang="scss">
-.plus-description {
-  .plus-description__name {
-    max-width: 200px;
-    word-wrap: break-word;
-  }
-  .plus-description__label {
-    min-width: 80px;
-  }
-}
-</style>

@@ -80,28 +80,3 @@ const customIndexContentStyle = (row: any, index: number): CSSProperties => {
   }
 }
 </script>
-
-<style lang="scss">
-.plus-table-column-index {
-  .plus-table-index-column {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    word-break: keep-all;
-    white-space: nowrap;
-    width: 20px;
-    height: 20px;
-  }
-
-  .cell {
-    .plus-table-column-index-content {
-      align-items: center;
-      display: flex;
-      font-size: 12px;
-      justify-content: center;
-      overflow: hidden;
-      padding: 5px 5px;
-    }
-  }
-}
-</style>

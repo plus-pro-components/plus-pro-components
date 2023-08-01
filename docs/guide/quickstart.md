@@ -12,7 +12,7 @@ PlusProComponents 依赖 Vue 和 ElementPlus，在开始之前建议先配置 Vu
 
 ## 用法
 
-### 完整引入
+## 完整引入
 
 如果你对打包后的文件大小不是很在乎，那么使用完整导入会更方便。
 
@@ -34,7 +34,7 @@ app.use(PlusProComponents)
 app.mount('#app')
 ```
 
-#### Volar 支持
+## Volar 支持
 
 如果您使用 Volar，请在 tsconfig.json 中通过 compilerOptions.type 指定全局组件类型。
 
@@ -48,7 +48,7 @@ app.mount('#app')
 }
 ```
 
-### 按需手动导入
+## 按需手动导入
 
 PlusProComponents 提供了基于 ES Module 的开箱即用的 [Tree Shaking](https://webpack.js.org/guides/tree-shaking/) 功能。
 
@@ -56,7 +56,7 @@ PlusProComponents 提供了基于 ES Module 的开箱即用的 [Tree Shaking](ht
   > main.ts
 
 ```ts
-import 'plus-pro-components/index.min.css'
+import 'plus-pro-components/index.css' // 5.5kb
 ```
 
 - 导入组件
@@ -71,3 +71,30 @@ import 'plus-pro-components/index.min.css'
   import { PlusPagination } from 'plus-pro-components'
 </script>
 ```
+
+## CDN
+
+::: tip 提示
+使用 CDN 时，在 HTML 中所有的组件都是小写中划线隔开的形式，切不支持单标签。
+
+例如：
+
+```html
+<!-- 不支持 -->
+<PlusPagination :total="100" />
+```
+
+需要写成
+
+```html
+<!-- 支持 -->
+<plus-pagination :total="100"></plus-pagination>
+```
+
+:::
+
+示例
+
+<div class="glitch-embed-wrap" style="height: 420px; width: 100%;">
+  <iframe src="https://codepen.io/l-x-f/embed/KKrbRxW?height=469&theme-id=light&default%20-tab=html,result"   style="height: 100%; width: 100%; border: 0;"></iframe>
+</div>

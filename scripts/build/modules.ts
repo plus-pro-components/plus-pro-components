@@ -83,7 +83,7 @@ const buildModules = async () => {
       }
     })
   )
-  consola.success('Successfully built into modules!')
+  consola.success('Successfully build into modules!')
 }
 
 export default [buildModules()]

@@ -7,6 +7,6 @@
     "types": [],
     "skipLibCheck": true
   },
-  "include": ["packages", "typings"],
+  "include": ["packages", "typings", "scripts/utils/paths.ts"],
   "exclude": ["node_modules", "**/dist", "**/__tests__/**/*", "**/*.md", "packages/play/**/*"]
 }

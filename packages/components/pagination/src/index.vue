@@ -77,11 +77,3 @@ const handleCurrentChange = (page: number) => {
   emit('current-change', page)
 }
 </script>
-
-<style lang="scss">
-.plus-pagination {
-  display: flex;
-  justify-content: flex-start;
-  padding: 16px 0;
-}
-</style>

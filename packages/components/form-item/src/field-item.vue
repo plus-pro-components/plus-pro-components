@@ -321,9 +321,3 @@ const handleChange = (val: FieldValueType) => {
   emit('change', val)
 }
 </script>
-
-<style lang="scss">
-.plus-form-item-field {
-  width: 100%;
-}
-</style>

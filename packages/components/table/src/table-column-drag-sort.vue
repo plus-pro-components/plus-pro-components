@@ -74,19 +74,3 @@ const rowDrop = () => {
   Sortable.create(tbody as HTMLElement, config)
 }
 </script>
-
-<style lang="scss">
-.plus-table-column-drag-sort {
-  .plus-table-column-drag-icon {
-    cursor: move;
-    padding: 4px;
-    box-sizing: border-box;
-    font-size: 18px;
-    color: rgba(42, 46, 54, 0.88);
-    vertical-align: bottom;
-    &:hover {
-      background-color: #d3e7ff;
-    }
-  }
-}
-</style>

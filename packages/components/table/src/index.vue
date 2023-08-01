@@ -263,9 +263,3 @@ defineExpose({
   tableInstance
 })
 </script>
-
-<style lang="scss">
-.el-popper {
-  max-width: 200px;
-}
-</style>

@@ -6,6 +6,6 @@
     "types": ["node", "jsdom"],
     "skipLibCheck": true
   },
-  "include": ["packages", "typings"],
+  "include": ["packages", "typings", "scripts/utils/paths.ts"],
   "exclude": ["node_modules", "dist", "**/*.md"]
 }

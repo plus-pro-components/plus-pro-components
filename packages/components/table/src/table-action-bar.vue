@@ -203,33 +203,3 @@ const handleClickAction = (
   }
 }
 </script>
-
-<style lang="scss">
-.plus-table-action-bar {
-  .cell {
-    display: flex;
-    align-items: center;
-  }
-  .plus-table-action-bar__dropdown__link {
-    display: inline-block;
-    cursor: pointer;
-  }
-  .plus-table-action-bar__column__link {
-    margin-right: 10px;
-  }
-  .plus-table-action-bar__dropdown {
-    vertical-align: baseline;
-    cursor: pointer;
-    margin-left: 12px;
-  }
-  .el-link + .el-link {
-    margin-left: 12px;
-  }
-  .el-icon {
-    cursor: pointer;
-  }
-  .el-icon + .el-icon {
-    margin-left: 12px;
-  }
-}
-</style>

@@ -1,0 +1,122 @@
+.plus-table {
+  .el-popper {
+    max-width: 200px;
+  }
+
+  /* 自定义列栏 */
+  .plus-table-column {
+    .plus-table-column__header {
+      display: flex;
+      align-items: center;
+      .plus-table-column__header__icon {
+        padding-left: 5px;
+      }
+    }
+  }
+
+  /* 操作栏 */
+  .plus-table-action-bar {
+    .cell {
+      display: flex;
+      align-items: center;
+    }
+    .plus-table-action-bar__dropdown__link {
+      display: inline-block;
+      cursor: pointer;
+    }
+    .plus-table-action-bar__column__link {
+      margin-right: 10px;
+    }
+    .plus-table-action-bar__dropdown {
+      vertical-align: baseline;
+      cursor: pointer;
+      margin-left: 12px;
+    }
+    .el-link + .el-link {
+      margin-left: 12px;
+    }
+    .el-icon {
+      cursor: pointer;
+    }
+    .el-icon + .el-icon {
+      margin-left: 12px;
+    }
+  }
+
+  /* 排序 */
+  .plus-table-column-drag-sort {
+    .plus-table-column-drag-icon {
+      cursor: move;
+      padding: 4px;
+      box-sizing: border-box;
+      font-size: 18px;
+      color: rgba(42, 46, 54, 0.88);
+      vertical-align: bottom;
+      &:hover {
+        background-color: #d3e7ff;
+      }
+    }
+  }
+
+  /* 序号栏 */
+  .plus-table-column-index {
+    .plus-table-index-column {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      word-break: keep-all;
+      white-space: nowrap;
+      width: 20px;
+      height: 20px;
+    }
+
+    .cell {
+      .plus-table-column-index-content {
+        align-items: center;
+        display: flex;
+        font-size: 12px;
+        justify-content: center;
+        overflow: hidden;
+        padding: 5px 5px;
+      }
+    }
+  }
+
+  /*工具栏*/
+
+  .plus-table-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+
+    .plus-table-toolbar__content {
+      display: flex;
+      align-items: center;
+    }
+  }
+}
+
+/* 密度设置 */
+.plus-table-toolbar__density {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .el-button {
+    margin-top: 10px;
+    width: 80px;
+  }
+  .el-button + .el-button {
+    margin-left: 0;
+  }
+}
+.plus-table-toolbar__icon {
+  margin-left: 10px;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+/* 列设置 */
+.plus-table-toolbar__checkbox__item {
+  margin-left: 20px;
+}

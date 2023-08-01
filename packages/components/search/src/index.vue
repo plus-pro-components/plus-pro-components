@@ -170,11 +170,3 @@ defineExpose({
 
 const { isShowUnfold, subColumns } = toRefs(state)
 </script>
-
-<style lang="scss">
-.plus-search {
-  .plus-search__button__wrapper .el-form-item__content {
-    flex-wrap: nowrap;
-  }
-}
-</style>

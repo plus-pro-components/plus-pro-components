@@ -1,0 +1,19 @@
+{
+  "name": "@plus-pro-components/theme-chalk",
+  "private": true,
+  "version": "0.0.1",
+  "description": "plus-pro-components theme-chalk",
+  "license": "MIT",
+  "main": "index.css",
+  "unpkg": "index.css",
+  "jsdelivr": "index.css",
+  "scripts": {
+    "clean": "rimraf dist",
+    "build": "tsx ./build.ts"
+  },
+  "devDependencies": {
+    "postcss": "^8.4.27",
+    "postcss-nested": "^6.0.1",
+    "postcss-scss": "^4.0.6"
+  }
+}
