@@ -221,7 +221,7 @@ export default defineConfig({
               link: '/api/utils/encrypt'
             },
             {
-              text: '存贮',
+              text: '存储',
               link: '/api/utils/storage'
             },
             {

@@ -64,7 +64,7 @@ export default useAppendTag
 ```ts
 import { useAppendTag } from 'plus-pro-components'
 
-useAppendTag('script', { src: 'https://www.api,com/test.js' })
+useAppendTag('script', { src: 'https://www.api.com/test.js' })
 ```
 
 ## useIsEnterKeyboard
