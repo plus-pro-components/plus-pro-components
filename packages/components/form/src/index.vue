@@ -12,8 +12,8 @@
   >
     <slot>
       <PlusFormItem
-        v-for="item in state.subColumns"
-        :key="item.prop"
+        v-for="(item, index) in state.subColumns"
+        :key="item.prop + index"
         v-model="state.values[item.prop]"
         v-bind="item"
         @change="handleChange"

@@ -1,10 +1,10 @@
 <template>
   <el-form-item
-    v-bind="customFormItemProps"
     ref="formItemInstance"
     :label="label"
     :prop="prop"
     class="plus-form-item"
+    v-bind="customFormItemProps"
   >
     <template #label="{ label: currentLabel }">
       <span class="plus-form-item__label">
@@ -15,14 +15,15 @@
       </span>
     </template>
 
-    <PlusFormFieldItem v-bind="props" @change="handleChange" />
+    <PlusFormFieldItem :key="prop" v-bind="props" @change="handleChange" />
   </el-form-item>
 </template>
 
 <script lang="ts" setup>
 import { ref, watch } from 'vue'
 import type { PlusColumn, FieldValueType } from '@plus-pro-components/types'
-import { isString, isPlainObject, getCustomProps } from '@plus-pro-components/utils'
+import { isString, isPlainObject } from '@plus-pro-components/utils'
+import { getCustomProps } from '@plus-pro-components/components/utils'
 import { QuestionFilled } from '@element-plus/icons-vue'
 import PlusFormFieldItem from './field-item.vue'
 
@@ -39,6 +40,7 @@ export interface PlusFormItemProps {
   // eslint-disable-next-line vue/require-default-prop
   renderFormFieldItem?: PlusColumn['renderFormFieldItem']
   tooltip?: PlusColumn['tooltip']
+  slots?: PlusColumn['slots']
   index?: number
 }
 
@@ -60,7 +62,8 @@ const props = withDefaults(defineProps<PlusFormItemProps>(), {
   formItemProps: () => ({}),
   fieldProps: () => ({}),
   options: () => [],
-  index: 0
+  index: 0,
+  slots: () => ({})
 })
 
 const emit = defineEmits<PlusFormItemEmits>()

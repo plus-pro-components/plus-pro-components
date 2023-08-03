@@ -18,7 +18,7 @@ interface TableRow {
 
 const TestServe = {
   getList: async () => {
-    const data = [...new Array(10)].map((item, index) => {
+    const data = [...new Array(3)].map((item, index) => {
       return {
         id: index,
         name: index + 'name',

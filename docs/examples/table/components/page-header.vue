@@ -15,8 +15,8 @@ defineOptions({
 
 defineProps({
   content: {
-    type: String,
-    default: ''
+    type: [String, Number],
+    default: '自定义组件'
   }
 })
 </script>

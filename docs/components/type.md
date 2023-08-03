@@ -327,6 +327,8 @@ export type FieldValueType =
   | string
   | number
   | boolean
+  | null
+  | undefined
   | Date
   | string[]
   | number[]
@@ -335,8 +337,6 @@ export type FieldValueType =
   | [Date, Date]
   | [number, number]
   | [string, string]
-  | null
-  | ''
 ```
 
 ## FieldValues
@@ -356,11 +356,17 @@ export type FieldValues = Record<string, FieldValueType>
 
 ```ts
 /**
- *  自定义props类型
+ *  自定义props类型  支持对象object ，函数，Promise
  */
-export type PropsItemType =
-  | RecordType
-  | ((value: any, row: any, index: number) => RecordType | Promise<RecordType>)
+export type PropsItemType<T extends Record<string, any> = any> =
+  | Partial<T>
+  | ((
+      value: FieldValueType,
+      data: {
+        row: Record<string, any>
+        index: number
+      }
+    ) => Partial<T> | Promise<Partial<T>>)
 ```
 
 ## OptionsRow

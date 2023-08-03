@@ -16,7 +16,6 @@ import { h, Fragment } from 'vue'
 import { useTable } from '@plus-pro-components/hooks'
 import type { PageInfo, PlusColumn } from '@plus-pro-components/types'
 import { ElAlert, ElButton, ElMessage, ElUpload, ElResult } from 'element-plus'
-
 import CustomPageHeader from './components/page-header.vue'
 
 defineOptions({
@@ -33,7 +32,7 @@ interface TableRow {
 
 const TestServe = {
   getList: async () => {
-    const data = [...new Array(10)].map((item, index) => {
+    const data = [...new Array(4)].map((item, index) => {
       return {
         index,
         id: index,
@@ -50,7 +49,6 @@ const TestServe = {
 }
 
 const { tableData, pageInfo, total, loadingStatus } = useTable<TableRow[]>()
-
 const statusOptions = [
   {
     label: '待审核',
@@ -68,46 +66,73 @@ const statusOptions = [
     type: 'warning'
   }
 ]
-
+const typeList = ['success', 'warning', 'info', 'error']
 const tableConfig: PlusColumn[] = [
   {
-    label: '名称',
+    label: '自定义组件div',
     tooltip: '名称最多显示6个字符',
-    width: 80,
+    width: 140,
     prop: 'name',
-    valueType: 'text',
-    tableColumnProps: {
-      'show-overflow-tooltip': true
-    }
-  },
-  {
-    label: '自定义组件ElAlert',
-    width: 150,
-    prop: 'status',
-    render: value => {
-      const item = statusOptions.find(item => item.value === value)
-      return h(ElAlert as unknown as DefineComponent, { type: item?.type }, () => item?.label)
+    // 返回一个标签字符串
+    render: () => 'div',
+    // 传递给  'div' props
+    fieldProps: value => {
+      return { value: value }
+    },
+    // 传递给 'div' 的slots
+    slots: {
+      default: (value: string) => {
+        return `${value}`
+      }
     }
   },
   {
     label: '自定义组件ElResult',
     width: 150,
     prop: 'status',
-    render: (value, { index }) => {
-      const iconList = ['success', 'warning', 'info', 'error']
-      return h(ElResult, { icon: iconList[index % 4] as any, title: `Tip${value}` })
+    // 返回一个组件
+    render: () => ElResult,
+    // 传递给 ElResult 组件的props
+    fieldProps: (value, { index }) => {
+      return { icon: typeList[index % 4] as any, title: `Tip${value}` }
+    },
+    // 传递给 'ElResult' 的slots
+    slots: {
+      extra: (value: string, { index }) => {
+        return h(ElButton, { type: typeList[index % 4] as any }, () => `按钮${value}`)
+      }
+    }
+  },
+  {
+    label: '自定义组件ElAlert',
+    width: 150,
+    prop: 'status',
+    // 返回一个VNode
+    render: value => {
+      const item = statusOptions.find(item => item.value === value)
+      return h(ElAlert as unknown as DefineComponent, { type: item?.type }, () => item?.label)
+    },
+    // 传递给 'div' 的slots
+    slots: {
+      default: (value: string) => {
+        return `${value}1000`
+      }
     }
   },
   {
     label: '自定义组件',
     width: 100,
     prop: 'status',
-    render: value => {
-      return h(CustomPageHeader, {
-        content: value
-      })
-    }
+    // 返回一个组件
+    render: () => {
+      return CustomPageHeader
+    },
+    // 传递给CustomPageHeader 组件的props
+    fieldProps: (value, { index }) => ({
+      content: index
+    })
   },
+  // renderHTML 返回一个 HTML 字符串
   {
     label: '自定义html',
     width: 100,
@@ -116,12 +141,13 @@ const tableConfig: PlusColumn[] = [
       return `<div style='color:red;'>${value}</div>`
     }
   },
+  // renderHTML 返回一个 HTML 字符串
   {
     label: '自定义html',
-    width: 120,
+    width: 110,
     prop: 'custom',
     renderHTML: (value: any) => {
-      return `<input  style="border:1px solid #ccc;width:90px;padding:0 10px;" value=${value} />`
+      return `<input  style="border:1px solid #ccc;width:80px;padding:0 10px;" value=${value} />`
     }
   },
   {
@@ -129,6 +155,7 @@ const tableConfig: PlusColumn[] = [
     width: 160,
     prop: 'custom',
     editable: true,
+    // 返回一个VNode
     renderFormFieldItem(_, onChange) {
       // 自定义上传
       const handleHttpRequest = async ({ file, onError, onSuccess }: any) => {
@@ -160,18 +187,17 @@ const tableConfig: PlusColumn[] = [
     width: 200,
     prop: 'status',
     render: (value, { index, row }) => {
-      const buttons = index > 3 ? ['编辑', '删除'] : ['保存', '删除']
+      const buttons = index > 1 ? ['编辑', '删除'] : ['保存', '删除']
       const CustomButton = buttons.map(item =>
         h(
           ElButton,
           {
-            type: index > 3 ? 'primary' : 'warning',
+            type: index > 1 ? 'warning' : 'primary',
             onClick: e => handleClickButton(e, value, index, row, item)
           },
           () => item
         )
       )
-
       return h(Fragment, CustomButton)
     }
   }
@@ -187,6 +213,7 @@ const handleClickButton = (
   console.log(e, value, index, row)
   ElMessage.success(buttonText)
 }
+
 const getList = async () => {
   try {
     loadingStatus.value = true

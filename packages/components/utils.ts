@@ -1,0 +1,64 @@
+import type { FieldValueType, RecordType, PlusColumn } from '@plus-pro-components/types'
+import { isPromise, isFunction, isPlainObject, isEmptyObject } from '@plus-pro-components/utils'
+
+/**
+ * 获取自定义的props 支持对象 函数 和 Promise
+ * @param props
+ * @param value
+ * @param row
+ * @returns
+ */
+export const getCustomProps = async (
+  props:
+    | Record<string, any>
+    | ((...arg: any) => Record<string, any> | Promise<Record<string, any>>)
+    | undefined,
+  value: FieldValueType | undefined,
+  row: Record<string, any>,
+  index: number
+): Promise<any> => {
+  try {
+    let data: any = {}
+    const params = { row, index }
+    if (isPlainObject(props)) {
+      data = { ...props }
+    } else if (isFunction(props) && isPromise((props as any)(value, params))) {
+      const getValue = props as any
+      data = await getValue(value, params)
+    } else if (isFunction(props)) {
+      const getValue = props as any
+      data = getValue(value, params) || {}
+    } else {
+      data = {}
+    }
+    return data
+  } catch (error) {
+    return Promise.reject(error)
+  }
+}
+
+/**
+ * 处理slots
+ */
+export const handleSlots = (
+  slots: PlusColumn['slots'],
+  value: FieldValueType | undefined,
+  params: RecordType
+) => {
+  /** `
+   * `不存在` 或者 `不是对象` 或者  `对象为空 ` 全部返回空对象
+   */
+  if (!slots || !isPlainObject(slots) || isEmptyObject(slots)) {
+    return {}
+  }
+  const slotsRes: RecordType = {}
+  if (slots && !isEmptyObject(slots)) {
+    Object.keys(slots).forEach(key => {
+      const temp = (...arg: any) => {
+        return () => slots[key](...arg)
+      }
+      slotsRes[key] = temp(value, params)
+    })
+  }
+  return slotsRes
+}

@@ -8,6 +8,38 @@ form/basic
 
 :::
 
+## 异步数据用法
+
+[PlusColumn](/components/config.html) 配置中的 `options` 支持数组，函数和 Promise。
+[PlusColumn](/components/config.html) 配置中的 `fieldProps`和`formItemProps` 支持对象 object，函数和 Promise。
+
+**常见的使用场景是数据来自后端接口，这里调用后端接口，返回 [OptionsRow[]](/components/type.html#optionsrow)数组即可。**
+
+:::demo
+
+form/async
+
+:::
+
+## 自定义表单项
+
+自定义表单项的核心方法是定义 `renderFormFieldItem`方法，该方法可以返回以下三种情况
+
+- 调用 vue 的[渲染函数 h](https://cn.vuejs.org/guide/extras/render-function.html) 返回一个 `VNode`。（会自动包裹 modelValue，需要手动调用`renderFormFieldItem`中的 `onChange` 用来实现双向绑定）
+- 返回一个 [Component](https://cn.vuejs.org/api/built-in-special-elements.html#component)。 （会自动包裹 modelValue 和 onChange）
+- 返回一个 [string](https://cn.vuejs.org/api/built-in-special-elements.html#component)。 （渲染原生标签，配合[PlusColumn](/components/config.html) 的 `slots`使用 ）
+
+::: tip 提示
+`返回的值` 的 `props` 和配置项的 `fieldProps`会同时生效，`返回的值` 的 `props` 优先级高于 `fieldProps`.
+
+:::
+
+:::demo
+
+form/custom
+
+:::
+
 ## Form API
 
 ## Form Attributes

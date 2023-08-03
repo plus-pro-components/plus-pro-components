@@ -104,6 +104,14 @@ export const isPlainObject = (val: any) => toTypeString(val) === '[object Object
 export const isEmptyObject = (val: any) => isPlainObject(val) && Object.keys(val).length === 0
 
 /**
+ * 是否是vue 组件
+ * @param val
+ * @returns
+ */
+export const isComponent = (val: any) =>
+  isPlainObject(val) && (isFunction(val.render) || isFunction(val.setup))
+
+/**
  * 是否是ios
  * @returns {boolean}
  */

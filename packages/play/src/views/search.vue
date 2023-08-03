@@ -128,7 +128,6 @@ const columns: PlusColumn[] = [
     label: '地区',
     prop: 'place',
     tooltip: '请精确到门牌号',
-
     fieldProps: {
       placeholder: '请精确到门牌号'
     }
@@ -140,7 +139,7 @@ const columns: PlusColumn[] = [
     fieldProps: {
       type: 'datetimerange',
       startPlaceholder: '请选择开始时间',
-      endPlaceholder: '请结束开始时间'
+      endPlaceholder: '请选择结束时间'
     }
   },
   {

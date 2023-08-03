@@ -8,6 +8,17 @@ search/basic
 
 :::
 
+## 异步数据用法
+
+[PlusColumn](/components/config.html) 配置中的 `options` 支持数，函数和 Promise。
+[PlusColumn](/components/config.html) 配置中的 `fieldProps` 支持对象 object，函数和 Promise。
+
+:::demo
+
+search/async
+
+:::
+
 ## Search API
 
 ## Search Attributes

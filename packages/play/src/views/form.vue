@@ -274,7 +274,7 @@ const columns: PlusColumn[] = [
     fieldProps: {
       type: 'datetimerange',
       startPlaceholder: '请选择开始时间',
-      endPlaceholder: '请结束开始时间'
+      endPlaceholder: '请选择结束时间'
     }
   },
   {

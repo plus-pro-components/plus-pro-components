@@ -13,12 +13,10 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, h, Fragment } from 'vue'
+import { ref } from 'vue'
 import type { PlusColumn, FieldValues } from '@plus-pro-components/types'
-import { fileToDataURL } from '@plus-pro-components/utils'
-import { ElUpload, ElButton, ElImage } from 'element-plus'
 
-const state = ref({
+const state = ref<FieldValues>({
   status: '0',
   name: '',
   rate: 4,
@@ -105,44 +103,7 @@ const columns: PlusColumn[] = [
     label: '图片',
     prop: 'img',
     width: 100,
-    valueType: 'img',
-    renderFormFieldItem(value, onChange) {
-      // 自定义上传
-      const handleHttpRequest = async ({ file, onError, onSuccess }: any) => {
-        try {
-          onSuccess(file)
-        } catch (error: any) {
-          onError(error)
-        }
-        return file
-      }
-
-      return h(Fragment, [
-        h(ElImage, {
-          src: value,
-          previewSrcList: [value],
-          style: value
-            ? {
-                width: '60px',
-                marginRight: '10px'
-              }
-            : {}
-        }),
-        h(
-          ElUpload,
-          {
-            action: '',
-            httpRequest: handleHttpRequest,
-            onChange: async (data: any) => {
-              const base64 = await fileToDataURL(data.raw)
-              // 调用 renderFormFieldItem 的onChange 回调把值传给表单
-              onChange(base64)
-            }
-          },
-          () => h(ElButton, () => '点击上传')
-        )
-      ])
-    }
+    valueType: 'img'
   },
   {
     label: '时间',
@@ -219,16 +180,6 @@ const columns: PlusColumn[] = [
     }
   },
   {
-    label: '经度',
-    prop: 'lng',
-    tooltip: '请保留两位小数'
-  },
-  {
-    label: '纬度',
-    prop: 'lat',
-    tooltip: '请保留两位小数'
-  },
-  {
     label: '要求',
     prop: 'demand',
     valueType: 'checkbox',
@@ -273,16 +224,8 @@ const columns: PlusColumn[] = [
     fieldProps: {
       type: 'datetimerange',
       startPlaceholder: '请选择开始时间',
-      endPlaceholder: '请结束开始时间'
+      endPlaceholder: '请选择结束时间'
     }
-  },
-  {
-    label: '奖励',
-    prop: 'price'
-  },
-  {
-    label: '提成',
-    prop: 'percentage'
   },
   {
     label: '说明',
