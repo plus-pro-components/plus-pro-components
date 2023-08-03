@@ -1,3 +1,19 @@
+## [v0.0.1-alpha.26](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-alpha.25...v0.0.1-alpha.26) (2023-08-03)
+
+
+### ✨ Features
+
+* **components:** :sparkles: improve custom render and async options.([1ac47d2](https://github.com/plus-pro-components/plus-pro-components/commit/1ac47d2)) by@xiaofei
+
+
+### 🐛 Bug Fixes
+
+* **theme-chalk:** :bug: add missing styles.([c3eae73](https://github.com/plus-pro-components/plus-pro-components/commit/c3eae73)) by@xiaofei
+* **theme-chalk:** :bug: fix ./form-item-field.scss not exist.([690b93c](https://github.com/plus-pro-components/plus-pro-components/commit/690b93c)) by@xiaofei
+
+
+
+
 ## [v0.0.1-alpha.25](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-alpha.24...v0.0.1-alpha.25) (2023-08-01)
 
 
