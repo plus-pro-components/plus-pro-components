@@ -20,10 +20,10 @@
 </template>
 
 <script lang="ts" setup>
-import { reactive } from 'vue'
+import { ref } from 'vue'
 import type { PlusColumn } from '@plus-pro-components/types'
 
-const state = reactive({
+const state = ref({
   status: '0',
   async: '0',
   promise: '0-0-0',

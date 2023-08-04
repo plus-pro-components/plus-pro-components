@@ -9,6 +9,7 @@
     "start": "cross-env PLUS_WRITE=true vitepress dev",
     "debug": "cross-env PLUS_DEBUG=true vitepress dev",
     "build": "vitepress build",
+    "build:local": "cross-env PLUS_WRITE=true vitepress build",
     "preview": "vitepress preview"
   },
   "keywords": [],

@@ -13,7 +13,7 @@
   >
     <el-row v-bind="rowProps">
       <el-col v-for="item in subColumns" :key="item.prop" v-bind="colProps">
-        <PlusFormItem v-model="state.values[item.prop]" v-bind="item" />
+        <PlusFormItem v-model="state.values[item.prop]" v-bind="item" @change="handleChange" />
       </el-col>
       <el-col v-bind="colProps">
         <el-form-item v-if="hasFooter" class="plus-search__button__wrapper">
@@ -40,7 +40,7 @@
 </template>
 
 <script lang="ts" setup>
-import { reactive, ref, watch, toRefs, computed } from 'vue'
+import { reactive, ref, toRefs, computed, watch } from 'vue'
 import type { FormInstance, FormRules, FormProps, RowProps, ColProps } from 'element-plus'
 import { ArrowDown, ArrowUp, Search, RefreshRight } from '@element-plus/icons-vue'
 import { PlusFormItem } from '@plus-pro-components/components/form-item'
@@ -115,11 +115,22 @@ const emit = defineEmits<PlusSearchEmits>()
 const { t } = useLocale()
 const formInstance = ref<FormInstance>()
 const state = reactive<PlusSearchState>({
-  values: { ...props.modelValue },
+  values: {},
   subColumns: [],
   originData: [],
   isShowUnfold: true
 })
+
+watch(
+  () => props.modelValue,
+  val => {
+    state.values = val
+  },
+  {
+    deep: true,
+    immediate: true
+  }
+)
 
 state.originData = computed<any[]>(() => {
   return props.columns.filter(item => item.hideInSearch !== true)
@@ -131,19 +142,13 @@ if (props.hasUnfold) {
   state.subColumns = cloneDeep(state.originData)
 }
 
-watch(
-  () => state.values,
-  val => {
-    emit('change', val)
-    emit('update:modelValue', val)
-  },
-  {
-    deep: true
-  }
-)
+const handleChange = async () => {
+  emit('change', state.values)
+  emit('update:modelValue', state.values)
+}
 
 const handleSearch = async () => {
-  emit('search', state.values)
+  emit('search', cloneDeep(state.values))
 }
 
 const handleReset = (): void => {
