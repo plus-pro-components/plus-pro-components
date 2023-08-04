@@ -10,8 +10,7 @@ const content = [
   'component library',
   'ui framework',
   'ui',
-  'vue',
-  'echarts'
+  'vue'
 ].toString()
 
 // https://vitepress.dev/reference/site-config

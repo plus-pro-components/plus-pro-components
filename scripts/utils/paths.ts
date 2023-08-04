@@ -28,14 +28,6 @@ export const buildOutput = resolve(projRoot, 'dist')
 /** `/dist/plus-pro-components` */
 export const pcOutput = resolve(buildOutput, 'plus-pro-components')
 
-// echarts
-/** `/packages/echarts` */
-export const ecRoot = resolve(pkgRoot, 'echarts')
-/** `/dist/types/echarts` */
-export const typeOutput = resolve(projRoot, 'dist', 'types', 'echarts')
-/** `/dist/echarts` */
-export const ecOutput = resolve(projRoot, 'dist', 'echarts')
-
 export const pcPackage = resolve(pcRoot, 'package.json')
 export const projPackage = resolve(projRoot, 'package.json')
 export const compPackage = resolve(compRoot, 'package.json')

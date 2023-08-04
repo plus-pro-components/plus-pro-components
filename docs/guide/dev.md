@@ -37,7 +37,6 @@
 ├── packages                 #包文件夹
 |  ├── components            #主组件包
 |  ├── constants             #固定变量
-|  ├── echarts               #echarts独立组件包
 |  ├── eslint-config         #eslint配置独立包
 |  ├── hooks                 #hooks包
 |  ├── play                  #组件预览包
@@ -49,13 +48,11 @@
 ├── README.md                #项目介绍
 ├── scripts                  #脚本
 |  ├── build                 #主包components打包
-|  ├── build-echarts         #echarts独立组件包打包
 |  ├── commit.sh             #代码提交
 |  ├── create-component      #新增组件
 |  ├── publish.sh            #发包到npm
 |  └── release               #整包release
 ├── tsconfig.base.json       #tsconfig配置
-├── tsconfig.echarts.json
 ├── tsconfig.json
 ├── tsconfig.node.json
 ├── tsconfig.vitest.json

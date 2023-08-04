@@ -17,9 +17,6 @@ importers:
       '@plus-pro-components/constants':
         specifier: workspace:*
         version: link:packages/constants
-      '@plus-pro-components/echarts':
-        specifier: workspace:*
-        version: link:packages/echarts
       '@plus-pro-components/eslint-config':
         specifier: workspace:*
         version: link:packages/eslint-config
@@ -29,6 +26,9 @@ importers:
       '@plus-pro-components/locale':
         specifier: workspace:*
         version: link:packages/locale
+      '@plus-pro-components/theme-chalk':
+        specifier: workspace:*
+        version: link:packages/theme-chalk
       '@plus-pro-components/types':
         specifier: workspace:*
         version: link:packages/types
@@ -215,7 +215,7 @@ importers:
     dependencies:
       plus-pro-components:
         specifier: npm:plus-pro-components@latest
-        version: 0.0.1-alpha.24(vue@3.3.4)
+        version: 0.0.1-alpha.27(vue@3.3.4)
     devDependencies:
       '@types/escape-html':
         specifier: ^1.0.2
@@ -260,15 +260,6 @@ importers:
   packages/components: {}
 
   packages/constants: {}
-
-  packages/echarts:
-    dependencies:
-      echarts:
-        specifier: ^5.4.2
-        version: 5.4.2
-      vue:
-        specifier: ^3.2.0
-        version: 3.2.47
 
   packages/eslint-config:
     devDependencies:
@@ -387,7 +378,7 @@ importers:
         version: 1.15.0
     devDependencies:
       '@plus-pro-components/utils':
-        specifier: ^0.0.8
+        specifier: ^0.0.9
         version: link:../utils
       '@types/node':
         specifier: '*'
@@ -4703,13 +4694,6 @@ packages:
     resolution: {integrity: sha512-I88TYZWc9XiYHRQ4/3c5rjjfgkjhLyW2luGIheGERbNQ6OY7yTybanSpDXZa8y7VUP9YmDcYa+eyq4ca7iLqWA==}
     dev: true
 
-  /echarts@5.4.2:
-    resolution: {integrity: sha512-2W3vw3oI2tWJdyAz+b8DuWS0nfXtSDqlDmqgin/lfzbkB01cuMEN66KWBlmur3YMp5nEDEEt5s23pllnAzB4EA==}
-    dependencies:
-      tslib: 2.3.0
-      zrender: 5.4.3
-    dev: false
-
   /editor@1.0.0:
     resolution: {integrity: sha512-SoRmbGStwNYHgKfjOrX2L0mUvp9bUVv0uPppZSOMAntEbcFtoC3MKF5b3T6HQPXKIV+QGY3xPO3JK5it5lVkuw==}
     dev: true
@@ -7680,8 +7664,8 @@ packages:
       pathe: 1.1.0
     dev: true
 
-  /plus-pro-components@0.0.1-alpha.24(vue@3.3.4):
-    resolution: {integrity: sha512-4NEw7Cw/iG/eWPJm6uTTfW6d+c2ZCqhMY1DY44R+fDQNzEzm4cxR9jy1sXMrgTjzYLriCKRz/kYrqzWDmvpa6g==}
+  /plus-pro-components@0.0.1-alpha.27(vue@3.3.4):
+    resolution: {integrity: sha512-XQ7ZWl0UdyKmCMiFMUsdJ2Rvx4OcXij9sDUznEXOXH/IMZfimDzOswIsnbynho2lswO9MUxFLTRbHEYomk4dWQ==}
     peerDependencies:
       vue: ^3.2.0
     dependencies:
@@ -9601,10 +9585,6 @@ packages:
     resolution: {integrity: sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==}
     dev: true
 
-  /tslib@2.3.0:
-    resolution: {integrity: sha512-N82ooyxVNm6h1riLCoyS9e3fuJ3AMG2zIZs2Gd1ATcSFjSA23Q0fzjjZeh0jbJvWVDZ0cJT8yaNNaaXHzueNjg==}
-    dev: false
-
   /tslib@2.5.2:
     resolution: {integrity: sha512-5svOrSA2w3iGFDs1HibEVBGbDrAY82bFQ3HZ3ixB+88nsbsWQoKqDRb5UBYAUPEzbBn6dAp5gRNXglySbx1MlA==}
     dev: true
@@ -10607,9 +10587,3 @@ packages:
     resolution: {integrity: sha512-9bnSc/HEW2uRy67wc+T8UwauLuPJVn28jb+GtJY16iiKWyvmYJRXVT4UamsAEGQfPohgr2q4Tq0sQbQlxTfi1g==}
     engines: {node: '>=12.20'}
     dev: true
-
-  /zrender@5.4.3:
-    resolution: {integrity: sha512-DRUM4ZLnoaT0PBVvGBDO9oWIDBKFdAVieNWxWwK0niYzJCMwGchRk21/hsE+RKkIveH3XHCyvXcJDkgLVvfizQ==}
-    dependencies:
-      tslib: 2.3.0
-    dev: false
