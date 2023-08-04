@@ -43,7 +43,6 @@ export interface PlusDialogFormProps {
   dialog?: PlusDialogProps
   form?: PlusFormProps
 }
-
 export interface PlusDialogFormEmits {
   (e: 'update:modelValue', data: FieldValues): void
   (e: 'update:visible', visible: boolean): void
@@ -62,14 +61,11 @@ const props = withDefaults(defineProps<PlusDialogFormProps>(), {
   dialog: () => ({}),
   form: () => ({})
 })
-
 const emit = defineEmits<PlusDialogFormEmits>()
+
 const { t } = useLocale()
-
 const formInstance = ref<PlusFormInstance>()
-
 const state = ref<FieldValues>({})
-
 const subVisible = ref(false)
 
 watch(

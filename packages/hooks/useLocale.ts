@@ -48,5 +48,3 @@ export const useLocale = (localeOverrides?: Ref<Language | undefined>) => {
   const locale = localeOverrides || inject(localeContextKey, ref())!
   return buildLocaleContext(computed(() => locale.value || English) as any)
 }
-
-export default useLocale

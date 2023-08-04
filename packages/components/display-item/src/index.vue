@@ -150,7 +150,6 @@ export interface PlusDisplayItemProps {
   row: RecordType
   index?: number
 }
-
 export interface PlusTableTableColumnEmits {
   (e: 'change', data: { value: any; prop: string; row: any }): void
 }
@@ -167,16 +166,14 @@ const props = withDefaults(defineProps<PlusDisplayItemProps>(), {
 const emit = defineEmits<PlusTableTableColumnEmits>()
 
 const isCellEdit = ref(false)
-
 const isForm = computed(() => props.column.editable === true || isCellEdit.value === true)
-
 const subRow = ref(props.row)
 const currentStatus = ref({})
 const customFieldProps = ref<any>({})
 const formInstance = ref<PlusFormInstance>()
 const formItemInstance = ref()
-
 const options = useGetOptions(props.column)
+
 watch(
   options,
   val => {

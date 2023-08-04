@@ -46,7 +46,6 @@ export interface PlusDrawerFormProps {
   drawer?: any
   form?: PlusFormProps
 }
-
 export interface PlusDrawerFormEmits {
   (e: 'update:modelValue', data: FieldValues): void
   (e: 'update:visible', visible: boolean): void
@@ -65,15 +64,12 @@ const props = withDefaults(defineProps<PlusDrawerFormProps>(), {
   drawer: () => ({}),
   form: () => ({})
 })
-
 const emit = defineEmits<PlusDrawerFormEmits>()
-const { t } = useLocale()
 
+const { t } = useLocale()
 const formInstance = ref<PlusFormInstance>()
 const drawerInstance = ref<InstanceType<typeof ElDrawer>>()
-
 const state = ref<FieldValues>({})
-
 const subVisible = ref(false)
 
 watch(

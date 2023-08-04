@@ -43,7 +43,6 @@ export interface PlusFormItemProps {
   slots?: PlusColumn['slots']
   index?: number
 }
-
 export interface PlusFormItemEmits {
   (e: 'update:modelValue', data: FieldValueType): void
   (e: 'change', data: FieldValueType): void

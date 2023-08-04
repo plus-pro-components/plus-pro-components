@@ -12,7 +12,6 @@ cd -
 
 cd packages/utils
 echo "publish utils..."
-npm run build
 npm publish
 echo "Successfully published utils"
 cd -

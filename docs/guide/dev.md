@@ -19,15 +19,15 @@
 
 ```sh
 
-├── changelog.config.js     #changelog 配置
 ├── CHANGELOG.md            #changelog文件
 ├── commitlint.config.js    #commitlint配置
-├── DEVELOPMENT.md          #本地开发指南
 ├── docs                    #文档所在目录
+|  ├── .vitepress           #vitepress配置
 |  ├── components           #组件文档
+|  ├── examples             #组件文档对应的vue示例
 |  ├── deploy.sh            #文档部署脚本
 |  ├── guide                #快速开始文档
-|  ├── index.md
+|  ├── index.md             #文档首页
 |  ├── package.json
 |  ├── public
 |  └── utils
@@ -47,11 +47,13 @@
 ├── pnpm-workspace.yaml      #工作空间配置
 ├── README.md                #项目介绍
 ├── scripts                  #脚本
-|  ├── build                 #主包components打包
-|  ├── commit.sh             #代码提交
+|  ├── build                 #主包打包
+|  ├── changelog             #changelog
 |  ├── create-component      #新增组件
-|  ├── publish.sh            #发包到npm
-|  └── release               #整包release
+|  ├── release               #整包release
+|  ├── utils                 #新增组件
+|  ├── commit.sh             #代码提交
+|  └── publish.sh            #整包发布
 ├── tsconfig.base.json       #tsconfig配置
 ├── tsconfig.json
 ├── tsconfig.node.json

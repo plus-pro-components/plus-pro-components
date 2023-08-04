@@ -212,7 +212,6 @@ export interface PlusFormFieldItemProps {
   slots?: PlusColumn['slots']
   index?: number
 }
-
 export interface PlusFormFieldItemEmits {
   (e: 'update:modelValue', data: FieldValueType): void
   (e: 'change', data: FieldValueType): void
@@ -234,8 +233,8 @@ const props = withDefaults(defineProps<PlusFormFieldItemProps>(), {
   index: 0,
   slots: () => ({})
 })
-
 const emit = defineEmits<PlusFormFieldItemEmits>()
+
 const { t } = useLocale()
 const state = ref<FieldValueType>()
 const options = useGetOptions(props)

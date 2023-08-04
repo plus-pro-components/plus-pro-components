@@ -145,7 +145,7 @@ const main = async () => {
 
     return content
   })
-  fs.writeFileSync(path.resolve(__dirname, '../CHANGELOG.md'), mdContent.join(''))
+  fs.writeFileSync(path.resolve(__dirname, '../../CHANGELOG.md'), mdContent.join(''))
 }
 
 main().catch(err => {

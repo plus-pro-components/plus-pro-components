@@ -29,7 +29,7 @@
     "commit": "bash scripts/commit.sh",
     "release": "tsx scripts/release/index.ts",
     "clean": "rimraf dist && rimraf packages/utils/dist && rimraf packages/theme-chalk/dist",
-    "changelog": "tsx scripts/changelog.ts",
+    "changelog": "tsx scripts/changelog/index.ts",
     "prepare": "husky install",
     "gitcz": "git-cz",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx,.vue --fix",

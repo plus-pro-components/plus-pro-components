@@ -144,7 +144,6 @@ export interface PlusTableProps extends /* @vue-ignore */ Partial<TableProps<any
   indexTableColumnProps?: RecordType
   indexContentStyle?: Partial<CSSProperties> | ((row: any, index: number) => Partial<CSSProperties>)
 }
-
 export interface PlusTableEmits {
   (e: 'paginationChange', pageInfo: PageInfo): void
   (e: 'clickAction', data: ButtonsCallBackParams): void
@@ -180,14 +179,9 @@ const props = withDefaults(defineProps<PlusTableProps>(), {
   indexTableColumnProps: () => ({}),
   indexContentStyle: () => ({})
 })
-
 const emit = defineEmits<PlusTableEmits>()
 
 const subColumns = ref(cloneDeep(props.columns))
-const formRefs = shallowRef({})
-
-provide(TableFormRefInjectionKey, formRefs)
-
 const tableInstance = shallowRef<TableInstance | null>(null)
 const state = reactive<TableState>({
   subPageInfo: {
@@ -195,6 +189,10 @@ const state = reactive<TableState>({
   },
   size: props.defaultSize
 })
+
+const formRefs = shallowRef({})
+provide(TableFormRefInjectionKey, formRefs)
+
 // 监听配置更改
 watch(
   () => props.columns,

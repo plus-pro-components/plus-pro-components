@@ -26,7 +26,7 @@ interface IState {
  * @param duration 秒 默认 10, 最小1
  * @return `{ isOperation: Ref<boolean> }`  是否在指定时间内操作页面
  */
-function useIsOperation(duration = 10): { isOperation: Ref<boolean> } {
+export function useIsOperation(duration = 10): { isOperation: Ref<boolean> } {
   const totalDuration = computed(() => (duration < 1 ? 1 : duration))
   const state = reactive<IState>({
     time: 0,
@@ -76,5 +76,3 @@ function useIsOperation(duration = 10): { isOperation: Ref<boolean> } {
 
   return { isOperation: toRef(state, 'isOperation') }
 }
-
-export default useIsOperation

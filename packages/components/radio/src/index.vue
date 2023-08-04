@@ -24,7 +24,6 @@ import { reactive, watch, ref } from 'vue'
 import { ElRadio, ElRadioGroup } from 'element-plus'
 
 type ValueType = string | number | boolean
-
 export interface PlusRadioProps {
   modelValue?: ValueType
   data: { label: string; value: ValueType }[]
@@ -53,15 +52,11 @@ const props = withDefaults(defineProps<PlusRadioProps>(), {
   groupProps: () => ({}),
   radioProps: () => ({})
 })
-
 const emit = defineEmits<PlusRadioEmits>()
 
 const radioInstance = ref<InstanceType<typeof ElRadio> | null>()
 const radioGroupInstance = ref<InstanceType<typeof ElRadioGroup> | null>()
-
-const state: RadioState = reactive({
-  radio: ''
-})
+const state: RadioState = reactive({ radio: '' })
 
 watch(
   () => props.modelValue,

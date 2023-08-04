@@ -66,14 +66,12 @@ export interface PlusSearchProps extends /* @vue-ignore */ Partial<Mutable<FormP
   rowProps?: Partial<Mutable<RowProps>>
   colProps?: Partial<Mutable<ColProps>>
 }
-
 export interface PlusSearchState {
   values: FieldValues
   isShowUnfold: boolean
   subColumns: any[]
   originData: any
 }
-
 export interface PlusSearchEmits {
   (e: 'update:modelValue', values: any): void
   (e: 'search', values: any): void
@@ -112,18 +110,26 @@ const props = withDefaults(defineProps<PlusSearchProps>(), {
     xl: 6
   })
 })
-
 const emit = defineEmits<PlusSearchEmits>()
+
 const { t } = useLocale()
-
 const formInstance = ref<FormInstance>()
-
 const state = reactive<PlusSearchState>({
   values: { ...props.modelValue },
   subColumns: [],
   originData: [],
   isShowUnfold: true
 })
+
+state.originData = computed<any[]>(() => {
+  return props.columns.filter(item => item.hideInSearch !== true)
+})
+
+if (props.hasUnfold) {
+  state.subColumns = cloneDeep(state.originData).slice(0, props.showNumber)
+} else {
+  state.subColumns = cloneDeep(state.originData)
+}
 
 watch(
   () => state.values,
@@ -136,16 +142,6 @@ watch(
   }
 )
 
-state.originData = computed<any[]>(() => {
-  return props.columns.filter(item => item.hideInSearch !== true)
-})
-
-if (props.hasUnfold) {
-  state.subColumns = cloneDeep(state.originData).slice(0, props.showNumber)
-} else {
-  state.subColumns = cloneDeep(state.originData)
-}
-
 const handleSearch = async () => {
   emit('search', state.values)
 }
@@ -154,9 +150,9 @@ const handleReset = (): void => {
   state.values = {}
   emit('reset')
 }
+
 const handleUnfold = () => {
   state.isShowUnfold = !state.isShowUnfold
-
   if (state.subColumns.length > props.showNumber) {
     state.subColumns = state.subColumns.slice(0, props.showNumber)
   } else {

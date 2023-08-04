@@ -52,7 +52,6 @@ export interface PlusDialogProps
   width?: string
   title?: string
 }
-
 export interface PlusDialogEmits {
   (e: 'update:modelValue', visible: boolean): void
   (e: 'cancel'): void
@@ -73,7 +72,6 @@ const props = withDefaults(defineProps<PlusDialogProps>(), {
   top: '15vh',
   width: '460px'
 })
-
 const emit = defineEmits<PlusDialogEmits>()
 
 const subVisible = ref(false)
@@ -86,6 +84,7 @@ watchEffect(() => {
 const handleConfirm = (): void => {
   emit('confirm')
 }
+
 const handleCancel = (): void => {
   emit('update:modelValue', false)
   emit('cancel')

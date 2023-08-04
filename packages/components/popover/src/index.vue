@@ -61,11 +61,6 @@ defineOptions({
   name: 'PlusPopover'
 })
 
-const state = reactive({
-  // 控制弹框显示隐藏
-  visible: false
-})
-
 withDefaults(defineProps<PlusPopoverProps>(), {
   // 是否显示 popover 弹出框
   hasToolbar: false,
@@ -82,24 +77,32 @@ withDefaults(defineProps<PlusPopoverProps>(), {
   cancelText: '',
   confirmText: ''
 })
-
 const emit = defineEmits<PlusPopoverEmits>()
+
 const { t } = useLocale()
+const state = reactive({
+  // 控制弹框显示隐藏
+  visible: false
+})
 
 const handleCancelPopover = (): void => {
   emit('cancel')
   state.visible = false
 }
+
 const handleConfirmPopover = (): void => {
   emit('confirm')
   state.visible = false
 }
+
 const handleClick = (): void => {
   state.visible = true
 }
+
 const onClickOutside = () => {
   state.visible = false
 }
+
 const handleShow = () => {
   emit('show')
 }

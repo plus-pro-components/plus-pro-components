@@ -10,7 +10,7 @@ const throwError = (data: any) => {
   }
 }
 
-const useGetOptions = (column: PlusColumn): Ref<OptionsRow[]> => {
+export const useGetOptions = (column: PlusColumn): Ref<OptionsRow[]> => {
   const props = cloneDeep(column)
   const options = ref<OptionsRow[]>([])
 
@@ -52,9 +52,3 @@ const useGetOptions = (column: PlusColumn): Ref<OptionsRow[]> => {
 
   return options
 }
-
-export default useGetOptions
-
-/**
- *
- */

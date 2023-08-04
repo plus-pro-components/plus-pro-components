@@ -42,7 +42,6 @@ import { shallowRef, inject, watch } from 'vue'
 export interface PlusTableTableColumnProps {
   columns?: PlusColumn[]
 }
-
 export interface PlusTableTableColumnEmits {
   (e: 'formChange', data: { value: any; prop: string; row: any; index: number; column: any }): void
 }
@@ -54,11 +53,9 @@ defineOptions({
 withDefaults(defineProps<PlusTableTableColumnProps>(), {
   columns: () => []
 })
-
 const emit = defineEmits<PlusTableTableColumnEmits>()
 
 const plusDisplayItemInstance = shallowRef()
-
 const formRef = inject(TableFormRefInjectionKey) as Ref<any>
 
 watch(plusDisplayItemInstance, (event: PlusDisplayItemInstance[]) => {
