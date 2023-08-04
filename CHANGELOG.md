@@ -1,3 +1,15 @@
+## [v0.0.1-alpha.27](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-alpha.26...v0.0.1-alpha.27) (2023-08-04)
+
+
+
+
+### 🐛 Bug Fixes
+
+* **components:** :bug: fix getCustomProps and useGetOptions promise trigger twice.([f52ea70](https://github.com/plus-pro-components/plus-pro-components/commit/f52ea70)) by@xiaofei
+
+
+
+
 ## [v0.0.1-alpha.26](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-alpha.25...v0.0.1-alpha.26) (2023-08-03)
 
 
