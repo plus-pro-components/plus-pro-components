@@ -238,11 +238,8 @@ const props = withDefaults(defineProps<PlusFormFieldItemProps>(), {
 const emit = defineEmits<PlusFormFieldItemEmits>()
 const { t } = useLocale()
 const state = ref<FieldValueType>()
-
 const options = useGetOptions(props)
-
 const customFieldProps = ref<any>({})
-
 const range = ['datetimerange', 'daterange', 'monthrange']
 
 const isArrayValue = () => {
@@ -307,7 +304,7 @@ watch(
 watch(
   () => props.fieldProps,
   val => {
-    getCustomProps(val, state.value, props, props.index)
+    getCustomProps(val, state.value, props, props.index, 'fieldProps')
       .then(data => {
         customFieldProps.value = data
       })

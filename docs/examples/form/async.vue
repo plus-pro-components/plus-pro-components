@@ -212,29 +212,24 @@ const columns: PlusColumn[] = [
     label: '梦想',
     prop: 'gift',
     valueType: 'radio',
-    options: async () => {
-      // 等待2s
-      await new Promise(resolve => {
-        setTimeout(() => {
-          resolve('')
-        }, 2000)
-      })
-
-      return [
-        {
-          label: '诗',
-          value: '0'
-        },
-        {
-          label: '远方',
-          value: '1'
-        },
-        {
-          label: '美食',
-          value: '2'
-        }
-      ]
-    }
+    options: new Promise(resolve => {
+      setTimeout(() => {
+        resolve([
+          {
+            label: '诗',
+            value: '0'
+          },
+          {
+            label: '远方',
+            value: '1'
+          },
+          {
+            label: '美食',
+            value: '2'
+          }
+        ])
+      }, 2000)
+    })
   },
   {
     label: '到期时间',
@@ -256,11 +251,16 @@ const columns: PlusColumn[] = [
     label: '说明',
     prop: 'desc',
     valueType: 'textarea',
-    fieldProps: {
-      maxlength: 10,
-      showWordLimit: true,
-      autosize: { minRows: 2, maxRows: 4 }
-    }
+    fieldProps: new Promise(resolve => {
+      setTimeout(() => {
+        resolve({
+          placeholder: '请输入详情',
+          maxlength: 10,
+          showWordLimit: true,
+          autosize: { minRows: 2, maxRows: 4 }
+        })
+      }, 2000)
+    })
   }
 ]
 

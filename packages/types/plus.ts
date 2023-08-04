@@ -36,6 +36,7 @@ export type PropsItemType<T extends Record<string, any> = any> =
         index: number
       }
     ) => Partial<T> | Promise<Partial<T>>)
+  | Promise<Partial<T>>
 
 /**
  * 选择框类型
@@ -51,11 +52,12 @@ export interface OptionsRow {
   children?: OptionsRow[]
 }
 /**
- * 选择类型
+ * 选择类型   支持数组，函数和Promise
  */
 export type OptionsType =
   | OptionsRow[]
   | ((props?: PlusColumn) => OptionsRow[] | Promise<OptionsRow[]>)
+  | Promise<OptionsRow[]>
 
 export interface CommentType {
   [index: string]: any

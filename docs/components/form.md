@@ -30,7 +30,7 @@ form/async
 - 返回一个 [string](https://cn.vuejs.org/api/built-in-special-elements.html#component)。 （渲染原生标签，配合[PlusColumn](/components/config.html) 的 `slots`使用 ）
 
 ::: tip 提示
-`返回的值` 的 `props` 和配置项的 `fieldProps`会同时生效，`返回的值` 的 `props` 优先级高于 `fieldProps`.
+`renderFormFieldItem 返回的值`的`props` 和配置项的`fieldProps`会同时生效，`renderFormFieldItem 返回的值`的`props`优先级高于 `fieldProps`.
 
 :::
 

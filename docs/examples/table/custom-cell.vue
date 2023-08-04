@@ -66,7 +66,7 @@ const statusOptions = [
     type: 'warning'
   }
 ]
-const typeList = ['success', 'warning', 'info', 'error']
+const typeList = ['success', 'warning', 'info']
 const tableConfig: PlusColumn[] = [
   {
     label: '自定义组件div',

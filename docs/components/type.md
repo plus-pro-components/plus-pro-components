@@ -367,6 +367,7 @@ export type PropsItemType<T extends Record<string, any> = any> =
         index: number
       }
     ) => Partial<T> | Promise<Partial<T>>)
+  | Promise<Partial<T>>
 ```
 
 ## OptionsRow
@@ -390,13 +391,15 @@ export interface OptionsRow {
 
 ## OptionsType
 
-选择类型
+选择类型 支持数组，函数和 Promise
 
 ```ts
 /**
  * 选择类型
  */
+ */
 export type OptionsType =
   | OptionsRow[]
   | ((props?: PlusColumn) => OptionsRow[] | Promise<OptionsRow[]>)
+  | Promise<OptionsRow[]>
 ```

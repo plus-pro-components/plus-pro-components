@@ -53,8 +53,6 @@ defineOptions({
   name: 'PlusFormItem'
 })
 
-const formItemInstance = ref()
-
 const props = withDefaults(defineProps<PlusFormItemProps>(), {
   modelValue: '',
   tooltip: '',
@@ -65,17 +63,16 @@ const props = withDefaults(defineProps<PlusFormItemProps>(), {
   index: 0,
   slots: () => ({})
 })
-
 const emit = defineEmits<PlusFormItemEmits>()
 
+const formItemInstance = ref()
 const state = ref<FieldValueType>(props.modelValue)
-
 const customFormItemProps = ref<any>({})
 
 watch(
   () => props.formItemProps,
   val => {
-    getCustomProps(val, state.value, props, props.index)
+    getCustomProps(val, state.value, props, props.index, 'formItemProps')
       .then(data => {
         customFormItemProps.value = data
       })

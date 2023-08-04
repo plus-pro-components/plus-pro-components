@@ -1,5 +1,18 @@
 import type { FieldValueType, RecordType, PlusColumn } from '@plus-pro-components/types'
-import { isPromise, isFunction, isPlainObject, isEmptyObject } from '@plus-pro-components/utils'
+import {
+  isPromise,
+  isFunction,
+  isPlainObject,
+  isEmptyObject,
+  toRawType
+} from '@plus-pro-components/utils'
+import { cloneDeep } from 'lodash-es'
+
+const throwError = (data: any, type: string) => {
+  if (!isPlainObject(data)) {
+    throw new Error(`${type} expected Object but got ${toRawType(data)}`)
+  }
+}
 
 /**
  * 获取自定义的props 支持对象 函数 和 Promise
@@ -15,22 +28,29 @@ export const getCustomProps = async (
     | undefined,
   value: FieldValueType | undefined,
   row: Record<string, any>,
-  index: number
+  index: number,
+  type: 'formItemProps' | 'fieldProps'
 ): Promise<any> => {
   try {
     let data: any = {}
-    const params = { row, index }
-    if (isPlainObject(props)) {
-      data = { ...props }
-    } else if (isFunction(props) && isPromise((props as any)(value, params))) {
-      const getValue = props as any
-      data = await getValue(value, params)
-    } else if (isFunction(props)) {
-      const getValue = props as any
-      data = getValue(value, params) || {}
-    } else {
+    const params = cloneDeep({ row, index })
+
+    if (!props) {
       data = {}
+    } else if (isPlainObject(props)) {
+      data = { ...props }
+    } else if (isFunction(props)) {
+      // 函数 和  函数返回一个Promise
+      data = await (props as any)(value, params)
+    } else if (isPromise(props)) {
+      // 本身是一个Promise
+      data = await (props as any)
+    } else {
+      data = props
     }
+
+    throwError(data, type)
+
     return data
   } catch (error) {
     return Promise.reject(error)
