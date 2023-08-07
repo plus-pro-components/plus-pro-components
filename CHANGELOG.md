@@ -1,3 +1,21 @@
+## [v0.0.1-alpha.28](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-alpha.27...v0.0.1-alpha.28) (2023-08-07)
+
+
+### ✨ Features
+
+* **components:** :sparkles: remove @plus-pro-components/echarts([377c1e2](https://github.com/plus-pro-components/plus-pro-components/commit/377c1e2)) by@xiaofei
+
+
+### 🐛 Bug Fixes
+
+* **components:** :bug: fix display-item component order and fix field-item autocomplete change bug([e5828ca](https://github.com/plus-pro-components/plus-pro-components/commit/e5828ca)) by@xiaofei
+
+
+### ♻️ Code Refactoring
+
+* **components:** :recycle: refactor hooks and unified format.([144ba3b](https://github.com/plus-pro-components/plus-pro-components/commit/144ba3b)) by@xiaofei
+
+
 ## [v0.0.1-alpha.27](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-alpha.26...v0.0.1-alpha.27) (2023-08-04)
 
 
