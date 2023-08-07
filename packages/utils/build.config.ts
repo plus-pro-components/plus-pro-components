@@ -10,7 +10,7 @@ export default defineBuildConfig({
       respectExternal: true
     },
     esbuild: {
-      // minify: true
+      minify: true
     }
   }
 })
