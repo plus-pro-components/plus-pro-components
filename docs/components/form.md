@@ -40,6 +40,14 @@ form/custom
 
 :::
 
+## 所有内置的表单类型
+
+:::demo
+
+form/all
+
+:::
+
 ## Form API
 
 ## Form Attributes

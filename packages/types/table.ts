@@ -31,5 +31,5 @@ export type TableColumnProps = {
    *
    * 使用场景：例如每列都要显示 一个 `下载` 固定不变
    */
-  linkText?: boolean
+  linkText?: string
 }

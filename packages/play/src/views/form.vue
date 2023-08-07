@@ -119,7 +119,7 @@ const columns: PlusColumn[] = [
       }
 
       return h(Fragment, [
-        h(ElImage, {
+        h(ElImage as any, {
           src: value,
           previewSrcList: [value],
           style: value
@@ -244,7 +244,7 @@ const columns: PlusColumn[] = [
       },
       {
         label: '普通话证书',
-        value: '1'
+        value: '2'
       }
     ]
   },

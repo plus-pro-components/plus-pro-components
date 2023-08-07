@@ -21,6 +21,7 @@ export type FormItemValueType =
   | 'select'
   | 'slider'
   | 'switch'
+  | 'time-picker'
   | 'time-select'
   | 'textarea'
   | 'text'

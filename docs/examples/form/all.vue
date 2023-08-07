@@ -1,16 +1,30 @@
 <template>
-  <PlusFormItem
-    v-for="item in columns"
-    :key="item.label"
-    v-model="values[item.prop]"
-    v-bind="item"
-    @change="(val:any) =>handleChange(val, item.prop)"
-  />
+  <el-card style="width: 600px">
+    <PlusForm
+      v-model="state"
+      label-width="140px"
+      :columns="columns"
+      @change="handleChange"
+      @submit="handleSubmit"
+      @submit-error="handleSubmitError"
+      @cancel="handleCancel"
+    />
+  </el-card>
 </template>
 
 <script lang="ts" setup>
-import { ref, onMounted } from 'vue'
+import { ref } from 'vue'
 import type { PlusColumn, FieldValues } from '@plus-pro-components/types'
+
+const state = ref<FieldValues>({
+  status: '0',
+  name: '',
+  rate: 4,
+  progress: 100,
+  switch: true,
+  time: new Date().toString(),
+  img: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg'
+})
 
 interface RestaurantItem {
   value: string
@@ -36,9 +50,7 @@ const loadAll = () => {
   ]
 }
 
-onMounted(() => {
-  restaurants.value = loadAll()
-})
+restaurants.value = loadAll()
 
 const columns: PlusColumn[] = [
   {
@@ -239,24 +251,16 @@ const columns: PlusColumn[] = [
   }
 ]
 
-const row = {
-  name: 'name',
-  status: '1',
-  tag: 'success',
-  money: '100',
-  progress: 30,
-  rate: 4,
-  switch: true,
-  number: 30,
-  time: new Date(),
-  slider: 10,
-  code: `const data = 100`,
-  copy: 'copy',
-  img: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg'
+const handleChange = (values: FieldValues) => {
+  console.log(values, 'change')
 }
-const values = ref<FieldValues>({ ...row })
-
-const handleChange = (values: FieldValues, prop: string) => {
-  console.log(values, prop)
+const handleSubmit = (values: FieldValues) => {
+  console.log(values, 'Submit')
+}
+const handleSubmitError = (err: any) => {
+  console.log(err, 'err')
+}
+const handleCancel = () => {
+  console.log('handleCancel')
 }
 </script>

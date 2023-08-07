@@ -1,21 +1,7 @@
 <template>
-  <!-- 自定义显示 -->
-
-  <component
-    :is="render"
-    v-bind="customFieldProps"
-    v-if="column.render && isFunction(column.render)"
-  />
-
-  <span
-    v-else-if="column.renderHTML && isFunction(column.renderHTML)"
-    v-html="
-      column.renderHTML && column.renderHTML(subRow[column.prop], { row: subRow, column, index })
-    "
-  />
-
+  <!-- 表单第一优先级 -->
   <PlusForm
-    v-else-if="isForm"
+    v-if="isForm"
     ref="formInstance"
     v-bind="column.formProps"
     :model="subRow"
@@ -33,6 +19,19 @@
       @change="handleChange"
     />
   </PlusForm>
+
+  <!-- 自定义显示 -->
+  <component
+    :is="render"
+    v-bind="customFieldProps"
+    v-else-if="column.render && isFunction(column.render)"
+  />
+
+  <!--显示HTML -->
+  <span
+    v-else-if="column.renderHTML && isFunction(column.renderHTML)"
+    v-html="column.renderHTML(subRow[column.prop], { row: subRow, column, index })"
+  />
 
   <!--显示图片 -->
   <el-image

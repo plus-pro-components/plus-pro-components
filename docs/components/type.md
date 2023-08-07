@@ -285,7 +285,7 @@ export interface ButtonsCallBackParams {
 /**
  * 所有表格列显示的类型 默认是 ''
  */
-export type TableValueType = 'img' | 'link' | 'money' | 'tag' | 'progress' | 'copy' | 'code' | ''
+export type TableValueType = 'img' | 'link' | 'money' | 'tag' | 'progress' | 'copy' | 'code'
 ```
 
 ## FormItemValueType
@@ -308,6 +308,7 @@ export type FormItemValueType =
   | 'select'
   | 'slider'
   | 'switch'
+  | 'time-picker'
   | 'time-select'
   | 'textarea'
   | 'text'

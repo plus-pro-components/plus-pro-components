@@ -13,6 +13,7 @@
     class="plus-form-item-field"
     v-bind="customFieldProps"
     @change="handleChange"
+    @select="handleSelect"
   />
 
   <el-cascader
@@ -97,8 +98,7 @@
     <el-radio
       v-for="item in options"
       :key="item.label"
-      :label="item.label"
-      :value="item.value"
+      :label="item.value"
       v-bind="item.fieldItemProps"
     >
       {{ item.label }}
@@ -150,6 +150,14 @@
 
   <el-switch
     v-else-if="valueType === 'switch'"
+    v-model="state"
+    class="plus-form-item-field"
+    v-bind="customFieldProps"
+    @change="handleChange"
+  />
+
+  <el-time-picker
+    v-else-if="valueType === 'time-picker'"
     v-model="state"
     class="plus-form-item-field"
     v-bind="customFieldProps"
@@ -320,6 +328,10 @@ watch(
 const handleChange = (val: FieldValueType) => {
   emit('update:modelValue', val)
   emit('change', val)
+}
+
+const handleSelect = ({ value }: any) => {
+  handleChange(value)
 }
 
 // 渲染自定义表单

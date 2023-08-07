@@ -139,7 +139,7 @@ const columns: PlusColumn[] = [
       },
       {
         label: '普通话证书',
-        value: '1'
+        value: '2'
       }
     ]
   },
