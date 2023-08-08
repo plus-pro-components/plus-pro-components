@@ -58,7 +58,6 @@ import type { PlusSearchProps, PlusSearchInstance } from '@plus-pro-components/c
 import { PlusSearch } from '@plus-pro-components/components/search'
 import type { PlusTableProps, PlusTableInstance } from '@plus-pro-components/components/table'
 import { PlusTable } from '@plus-pro-components/components/table'
-
 import type { Ref } from 'vue'
 import { h, reactive, ref } from 'vue'
 import type { CardProps } from 'element-plus'
@@ -85,7 +84,7 @@ export interface PlusPageProps {
   /**
    * PlusSearchProps
    */
-  search?: Partial<PlusSearchProps>
+  search?: false | Partial<PlusSearchProps>
   /**
    * PlusTableProps
    */
@@ -143,7 +142,6 @@ const props = withDefaults(defineProps<PlusPageProps>(), {
   searchCardProps: () => ({}),
   tableCardProps: () => ({})
 })
-
 const emit = defineEmits<PlusPageEmits>()
 
 defineOptions({
@@ -151,6 +149,12 @@ defineOptions({
 })
 
 const { tableData, pageInfo, total, loadingStatus } = useTable()
+const plusSearchInstance = ref<any>()
+const plusTableInstance = ref<any>()
+const state: PlusPageState = reactive({
+  params: {},
+  values: {}
+})
 
 /** 渲染包裹层 */
 const renderWrapper = () => {
@@ -162,14 +166,6 @@ const renderWrapper = () => {
   }
   return { search: h('div'), table: h('div') }
 }
-
-const plusSearchInstance = ref<any>()
-const plusTableInstance = ref<any>()
-
-const state: PlusPageState = reactive({
-  params: {},
-  values: {}
-})
 
 const getList = async () => {
   if (!props.request) return

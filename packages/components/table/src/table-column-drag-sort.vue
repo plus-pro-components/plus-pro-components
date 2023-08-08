@@ -16,7 +16,6 @@ import Sortable from 'sortablejs'
 import { isPlainObject } from '@plus-pro-components/utils'
 import { watch } from 'vue'
 import { useLocale } from '@plus-pro-components/hooks'
-
 import type { RecordType } from '@plus-pro-components/types'
 
 export interface PlusTableColumnDragSortProps {
@@ -37,8 +36,8 @@ const props = withDefaults(defineProps<PlusTableColumnDragSortProps>(), {
   tableInstance: null,
   dragSortableTableColumnProps: () => ({})
 })
-
 const emit = defineEmits<PlusTableColumnDragSortEmits>()
+
 const { t } = useLocale()
 
 watch(

@@ -1,7 +1,6 @@
 export * from './cookie'
 export * from './day'
 export * from './file'
-export * from './getCustomProps'
 export * from './is'
 export * from './letter'
 export * from './number'

@@ -12,8 +12,8 @@
   >
     <slot>
       <PlusFormItem
-        v-for="item in state.subColumns"
-        :key="item.prop"
+        v-for="(item, index) in state.subColumns"
+        :key="item.prop + index"
         v-model="state.values[item.prop]"
         v-bind="item"
         @change="handleChange"
@@ -63,12 +63,10 @@ export interface PlusFormProps extends /* @vue-ignore */ Partial<Mutable<FormPro
   footerAlign?: 'left' | 'right'
   rules?: FormRules
 }
-
 export interface PlusFormState {
   values: FieldValues
   subColumns: any
 }
-
 export interface PlusFormEmits {
   (e: 'update:modelValue', values: FieldValues): void
   (e: 'submit', values: FieldValues): void
@@ -97,18 +95,14 @@ const props = withDefaults(defineProps<PlusFormProps>(), {
   rules: () => ({}),
   columns: () => []
 })
-
 const emit = defineEmits<PlusFormEmits>()
 
 const { t } = useLocale()
-
 const formInstance = ref<FormInstance>()
-
 const state = reactive<PlusFormState>({
   values: { ...props.modelValue },
   subColumns: []
 })
-
 state.subColumns = computed<any>(() => props.columns.filter(item => item.hideInForm !== true))
 
 const handleChange = () => {

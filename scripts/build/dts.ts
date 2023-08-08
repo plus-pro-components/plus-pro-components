@@ -10,9 +10,6 @@ import { buildOutput, pcRoot, pkgRoot, projRoot } from '../utils/paths'
 import type { CompilerOptions, SourceFile } from 'ts-morph'
 import { pathRewriter, PKG_NAME } from '../utils'
 import { excludeFiles } from '../utils/main'
-import ora from 'ora'
-
-const spinner = ora('Type checking...')
 
 const TSCONFIG_PATH = path.resolve(projRoot, 'tsconfig.web.json')
 const outDir = path.resolve(buildOutput, 'types')
@@ -38,10 +35,11 @@ export const main = async () => {
   const sourceFiles = await addSourceFiles(project)
   consola.success('Added source files')
 
-  spinner.start()
+  consola.start('Type checking...')
   typeCheck(project)
-  spinner.succeed('Type check passed!')
+  consola.success('Type check passed!')
 
+  consola.start('Type emitting...')
   await project.emit({
     emitOnlyDtsFiles: true
   })

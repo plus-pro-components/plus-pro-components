@@ -18,7 +18,6 @@ const alias: AliasOptions = isWrite
       'plus-pro-components/locale/zh-cn.mjs': pathResolve('../packages/locale/lang/zh-cn.ts'),
       'plus-pro-components/locale/en.mjs': pathResolve('../packages/locale/lang/en.ts'),
       'plus-pro-components': pathResolve('../packages/plus-pro-components/index'),
-      // 导入空的css 则界面中使用的是最新的本地组件的样式
       'plus-pro-components-css': pathResolve('../packages/theme-chalk/src/index.scss')
     }
   : {

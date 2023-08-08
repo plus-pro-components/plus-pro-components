@@ -1,5 +1,5 @@
 <template>
-  <PlusDescriptions :column="3" :columns="columns" :data="descriptionsData" />
+  <PlusDescriptions title="title" :column="3" :columns="columns" :data="descriptionsData" />
 </template>
 
 <script lang="ts" setup>
@@ -103,7 +103,8 @@ const columns: PlusColumn[] = [
     label: '开关',
     width: 100,
     prop: 'switch',
-    valueType: 'switch'
+    valueType: 'switch',
+    editable: true
   },
   {
     label: '时间',

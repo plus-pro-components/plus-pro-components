@@ -1,3 +1,4 @@
 {
-  "cSpell.words": ["prefixer", "sortablejs"]
+  "cSpell.words": ["prefixer", "sortablejs"],
+  "commentTranslate.multiLineMerge": false
 }

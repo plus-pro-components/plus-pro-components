@@ -1,20 +1,7 @@
 <template>
-  <!-- 自定义显示 -->
-  <component
-    :is="() => column.render && column.render(subRow[column.prop], { row: subRow, column, index })"
-    v-if="column.render && isFunction(column.render)"
-    v-bind="customFieldProps"
-  />
-
-  <span
-    v-else-if="column.renderHTML && isFunction(column.renderHTML)"
-    v-html="
-      column.renderHTML && column.renderHTML(subRow[column.prop], { row: subRow, column, index })
-    "
-  />
-
+  <!-- 表单第一优先级 -->
   <PlusForm
-    v-else-if="isForm"
+    v-if="isForm"
     ref="formInstance"
     v-bind="column.formProps"
     :model="subRow"
@@ -32,6 +19,19 @@
       @change="handleChange"
     />
   </PlusForm>
+
+  <!-- 自定义显示 -->
+  <component
+    :is="render"
+    v-bind="customFieldProps"
+    v-else-if="column.render && isFunction(column.render)"
+  />
+
+  <!--显示HTML -->
+  <span
+    v-else-if="column.renderHTML && isFunction(column.renderHTML)"
+    v-html="column.renderHTML(subRow[column.prop], { row: subRow, column, index })"
+  />
 
   <!--显示图片 -->
   <el-image
@@ -134,10 +134,13 @@ import {
   formatDate,
   formatMoney,
   isFunction,
-  getCustomProps,
-  isArray
+  isArray,
+  isComponent,
+  isString
 } from '@plus-pro-components/utils'
-import { ref, watch, computed } from 'vue'
+import { getCustomProps, handleSlots } from '@plus-pro-components/components/utils'
+import type { VNode, Component } from 'vue'
+import { ref, watch, computed, isVNode, h } from 'vue'
 import type { PlusColumn, RecordType } from '@plus-pro-components/types'
 import { useGetOptions } from '@plus-pro-components/hooks'
 
@@ -146,7 +149,6 @@ export interface PlusDisplayItemProps {
   row: RecordType
   index?: number
 }
-
 export interface PlusTableTableColumnEmits {
   (e: 'change', data: { value: any; prop: string; row: any }): void
 }
@@ -160,23 +162,35 @@ const props = withDefaults(defineProps<PlusDisplayItemProps>(), {
   row: () => ({}),
   index: 0
 })
+const emit = defineEmits<PlusTableTableColumnEmits>()
 
 const isCellEdit = ref(false)
-
 const isForm = computed(() => props.column.editable === true || isCellEdit.value === true)
-
 const subRow = ref(props.row)
 const currentStatus = ref({})
 const customFieldProps = ref<any>({})
 const formInstance = ref<PlusFormInstance>()
 const formItemInstance = ref()
+const options = useGetOptions(props.column)
+
+watch(
+  options,
+  val => {
+    const option = val?.find(i => i.value === subRow.value[props.column?.prop])
+    currentStatus.value = option || {}
+  },
+  {
+    immediate: true,
+    deep: true
+  }
+)
 
 watch(
   () => props.column.fieldProps,
   val => {
     const value = subRow.value[props.column.prop]
     const row = subRow
-    getCustomProps(val, value, row, props.index)
+    getCustomProps(val, value, row, props.index, 'fieldProps')
       .then(data => {
         customFieldProps.value = data
       })
@@ -190,12 +204,10 @@ watch(
   }
 )
 
-const options = useGetOptions(props.column)
 watch(
-  options,
+  () => props.row,
   val => {
-    const option = val?.find(i => i.value === subRow.value[props.column?.prop])
-    currentStatus.value = option || {}
+    subRow.value = { ...val }
   },
   {
     immediate: true,
@@ -215,19 +227,6 @@ const copy = (data: string) => {
   document.execCommand('Copy')
   textarea.remove()
 }
-
-watch(
-  () => props.row,
-  val => {
-    subRow.value = { ...val }
-  },
-  {
-    immediate: true,
-    deep: true
-  }
-)
-
-const emit = defineEmits<PlusTableTableColumnEmits>()
 
 const getImageUrl = () => {
   const option = subRow.value[props.column.prop]
@@ -263,6 +262,7 @@ const handleChange = (value: any) => {
 const startCellEdit = () => {
   isCellEdit.value = true
 }
+
 const stopCellEdit = () => {
   isCellEdit.value = false
 }
@@ -273,6 +273,37 @@ const getDisplayItemInstance = () => {
     prop: props.column.prop,
     formInstance: computed(() => formInstance.value?.formInstance),
     formItemInstance: computed(() => formItemInstance.value?.formItemInstance)
+  }
+}
+
+// 渲染表格自定义显示
+const render = () => {
+  if (!props.column.render) return
+  const value = subRow.value[props.column.prop]
+  const params = {
+    row: subRow.value,
+    column: props.column,
+    index: props.index
+  }
+  const dynamicComponent = props.column.render(value, params)
+  const slots = handleSlots(props.column.slots, value, params)
+  /** string */
+  if (isString(dynamicComponent)) {
+    return h(dynamicComponent as string, { ...customFieldProps.value }, slots)
+  }
+  /** Component */
+  if (isComponent(dynamicComponent)) {
+    return h(dynamicComponent as Component, { ...customFieldProps.value }, slots)
+  }
+  /** VNode */
+  if (isVNode(dynamicComponent)) {
+    return {
+      ...dynamicComponent,
+      props: {
+        ...customFieldProps.value,
+        ...dynamicComponent.props
+      }
+    } as VNode
   }
 }
 

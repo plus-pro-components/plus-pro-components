@@ -106,18 +106,15 @@ export interface PlusTableToolbarProps {
   filterTableHeaderOverflowLabelLength?: number
   defaultSize?: ComponentSize
 }
-
 export interface PlusTableToolbarEmits {
   (e: 'filterTable', columns: PlusColumn[]): void
   (e: 'clickDensity', size: ComponentSize): void
 }
-
 export interface State {
   checkList: string[]
   checkAll: boolean
   isIndeterminate: boolean
 }
-
 export interface ButtonNameDensity {
   size: ComponentSize
   text: string | ComputedRef<string>
@@ -134,10 +131,9 @@ const props = withDefaults(defineProps<PlusTableToolbarProps>(), {
   filterTableHeaderOverflowLabelLength: 6,
   defaultSize: 'default'
 })
-
 const emit = defineEmits<PlusTableToolbarEmits>()
-const { t } = useLocale()
 
+const { t } = useLocale()
 const buttonNameDensity: ButtonNameDensity[] = [
   {
     size: 'default',
@@ -152,7 +148,6 @@ const buttonNameDensity: ButtonNameDensity[] = [
     text: computed(() => t('plus.table.compact'))
   }
 ]
-
 const state: State = reactive({
   checkAll: false,
   isIndeterminate: true,

@@ -86,7 +86,6 @@ export interface ActionBarProps {
    */
   actionBarTableColumnProps?: Partial<TableColumnCtx<any>>
 }
-
 export interface PlusTableActionBarEmits {
   (e: 'clickAction', data: ButtonsCallBackParams): void
   (e: 'clickActionConfirmCancel', data: ButtonsCallBackParams): void
@@ -106,6 +105,7 @@ const props = withDefaults(defineProps<ActionBarProps>(), {
   actionBarTableColumnProps: () => ({})
 })
 const emit = defineEmits<PlusTableActionBarEmits>()
+
 const { t } = useLocale()
 
 const getSubButtons = (row: any, index: number) => {
@@ -123,13 +123,10 @@ const getSubButtons = (row: any, index: number) => {
   })
   // 获取'更多'之前的按钮组
   const preButtons = data.slice(0, props.showNumber)
-
   // 获取'更多'之后的按钮组
   const nextButtons = data.slice(props.showNumber)
-
   //  显示更多
   const showMore = data.length > props.showNumber
-
   return {
     showMore,
     preButtons,
@@ -191,7 +188,6 @@ const handleClickAction = (
       title || t('plus.table.prompt'),
       buttonRow.confirm.options
     )
-
       .then(() => {
         emit('clickAction', data)
       })

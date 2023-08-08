@@ -1,15 +1,13 @@
 ## setStorage
 
-设置 localStorage
+设置 `localStorage`
 
 ```ts
 /**
  * 设置 localStorage
  * @returns storage
  */
-export function setStorage(key: string, data: any): string {
-  return storage.set(key, data)
-}
+declare function setToken(key: string, token: string): string
 ```
 
 使用示例
@@ -22,16 +20,14 @@ setStorage('key', { data: { username: 'name' } })
 
 ## getStorage
 
-获取 localStorage
+获取 `localStorage`
 
 ```ts
 /**
  * 获取 localStorage
  * @returns storage
  */
-export function getStorage(key: string): string {
-  return storage.get(key)
-}
+declare function getToken(key: string): string
 ```
 
 使用示例
@@ -44,15 +40,13 @@ getStorage('key') // { data: { username: "name" } }
 
 ## removeStorage
 
-移除 localStorage
+移除 `localStorage`
 
 ```ts
 /**
  * 移除storage
  */
-export function removeStorage(key: string): void {
-  storage.remove(key)
-}
+declare function removeToken(key: string): void
 ```
 
 使用示例
@@ -65,7 +59,7 @@ removeStorage('key')
 
 ## setToken
 
-设置 token 带 AES 加密
+设置 token 带 AES 加密 （存储在 `localStorage`）
 
 ```ts
 /**
@@ -85,7 +79,7 @@ setToken('tokenKey', 'token')
 
 ## getToken
 
-获取 token 带 AES 解密
+获取 token 带 AES 解密 （获取的是 `localStorage` 的值）
 
 ```ts
 /**
@@ -105,7 +99,7 @@ getToken('tokenKey') //  'token'
 
 ## removeToken
 
-设置 token
+移除 token （移除的是 `localStorage` 的值）
 
 ```ts
 /**

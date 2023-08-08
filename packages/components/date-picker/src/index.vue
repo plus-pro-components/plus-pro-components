@@ -75,13 +75,11 @@ const props = withDefaults(defineProps<PlusDatePickerProps>(), {
     return endTime.getTime() < new Date(startValue).getTime()
   }
 })
-
 const emit = defineEmits<PlusRadioEmits>()
-const { t } = useLocale()
 
+const { t } = useLocale()
 const startPickerInstance = ref<InstanceType<typeof ElDatePicker> | null>()
 const endPickerInstance = ref<InstanceType<typeof ElDatePicker> | null>()
-
 const state: DatePickerState = reactive({
   start: '',
   end: ''

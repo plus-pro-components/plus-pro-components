@@ -30,7 +30,7 @@ interface TableRow {
 
 const TestServe = {
   getList: async () => {
-    const data = [...new Array(10)].map((item, index) => {
+    const data = [...new Array(5)].map((item, index) => {
       return {
         id: index,
         name: index + 'name',
@@ -48,7 +48,7 @@ const TestServe = {
 
 const { tableData, total, pageInfo } = useTable<TableRow[]>()
 
-pageInfo.value.pageSize = 10
+pageInfo.value.pageSize = 5
 
 const tableConfig: PlusColumn[] = [
   {

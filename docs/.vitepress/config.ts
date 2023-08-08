@@ -10,8 +10,7 @@ const content = [
   'component library',
   'ui framework',
   'ui',
-  'vue',
-  'echarts'
+  'vue'
 ].toString()
 
 // https://vitepress.dev/reference/site-config
@@ -221,7 +220,7 @@ export default defineConfig({
               link: '/api/utils/encrypt'
             },
             {
-              text: '存贮',
+              text: '存储',
               link: '/api/utils/storage'
             },
             {

@@ -6,7 +6,7 @@ import { ref, onMounted, onBeforeUnmount } from 'vue'
  * @param key `Shift`
  * @returns
  */
-export default function useIsEnterKeyboard(key = 'Shift'): { isEnterKeyboard: Ref<boolean> } {
+export function useIsEnterKeyboard(key = 'Shift'): { isEnterKeyboard: Ref<boolean> } {
   const isEnterKeyboard = ref(false)
   const handleKeyDown = (event: KeyboardEvent) => {
     if (event.key === key && event.shiftKey) {

@@ -1,6 +1,6 @@
 import { nextTick, ref } from 'vue'
 import { mount } from '@vue/test-utils'
-import ElementPlus from 'element-plus'
+import { ElRadio, ElRadioGroup } from 'element-plus'
 import { describe, expect, test } from 'vitest'
 import type { PlusRadioProps } from '../src/index.vue'
 import PlusRadio from '../src/index.vue'
@@ -15,8 +15,9 @@ describe('radio/index.vue', () => {
     const wrapper = mount(
       () => <PlusRadio data={options} modelValue={1} isCancel={false}></PlusRadio>,
       {
-        global: {
-          plugins: [ElementPlus]
+        components: {
+          ElRadio,
+          ElRadioGroup
         }
       }
     )
@@ -38,8 +39,9 @@ describe('radio/index.vue', () => {
         ></PlusRadio>
       ),
       {
-        global: {
-          plugins: [ElementPlus]
+        components: {
+          ElRadio,
+          ElRadioGroup
         }
       }
     )

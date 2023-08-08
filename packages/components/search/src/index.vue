@@ -13,7 +13,7 @@
   >
     <el-row v-bind="rowProps">
       <el-col v-for="item in subColumns" :key="item.prop" v-bind="colProps">
-        <PlusFormItem v-model="state.values[item.prop]" v-bind="item" />
+        <PlusFormItem v-model="state.values[item.prop]" v-bind="item" @change="handleChange" />
       </el-col>
       <el-col v-bind="colProps">
         <el-form-item v-if="hasFooter" class="plus-search__button__wrapper">
@@ -40,7 +40,7 @@
 </template>
 
 <script lang="ts" setup>
-import { reactive, ref, watch, toRefs, computed } from 'vue'
+import { reactive, ref, toRefs, computed, watch } from 'vue'
 import type { FormInstance, FormRules, FormProps, RowProps, ColProps } from 'element-plus'
 import { ArrowDown, ArrowUp, Search, RefreshRight } from '@element-plus/icons-vue'
 import { PlusFormItem } from '@plus-pro-components/components/form-item'
@@ -66,14 +66,12 @@ export interface PlusSearchProps extends /* @vue-ignore */ Partial<Mutable<FormP
   rowProps?: Partial<Mutable<RowProps>>
   colProps?: Partial<Mutable<ColProps>>
 }
-
 export interface PlusSearchState {
   values: FieldValues
   isShowUnfold: boolean
   subColumns: any[]
   originData: any
 }
-
 export interface PlusSearchEmits {
   (e: 'update:modelValue', values: any): void
   (e: 'search', values: any): void
@@ -109,30 +107,28 @@ const props = withDefaults(defineProps<PlusSearchProps>(), {
     sm: 12,
     md: 8,
     lg: 6,
-    xl: 4
+    xl: 6
   })
 })
-
 const emit = defineEmits<PlusSearchEmits>()
+
 const { t } = useLocale()
-
 const formInstance = ref<FormInstance>()
-
 const state = reactive<PlusSearchState>({
-  values: { ...props.modelValue },
+  values: {},
   subColumns: [],
   originData: [],
   isShowUnfold: true
 })
 
 watch(
-  () => state.values,
+  () => props.modelValue,
   val => {
-    emit('change', val)
-    emit('update:modelValue', val)
+    state.values = val
   },
   {
-    deep: true
+    deep: true,
+    immediate: true
   }
 )
 
@@ -146,17 +142,22 @@ if (props.hasUnfold) {
   state.subColumns = cloneDeep(state.originData)
 }
 
+const handleChange = async () => {
+  emit('change', state.values)
+  emit('update:modelValue', state.values)
+}
+
 const handleSearch = async () => {
-  emit('search', state.values)
+  emit('search', cloneDeep(state.values))
 }
 
 const handleReset = (): void => {
   state.values = {}
   emit('reset')
 }
+
 const handleUnfold = () => {
   state.isShowUnfold = !state.isShowUnfold
-
   if (state.subColumns.length > props.showNumber) {
     state.subColumns = state.subColumns.slice(0, props.showNumber)
   } else {

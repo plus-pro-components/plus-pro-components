@@ -6,8 +6,7 @@ import { ref } from 'vue'
  * @param attrs
  * @returns
  */
-
-function useAppendTag(
+export function useAppendTag(
   tag = 'script',
   attrs: Record<string, unknown>
 ): () => Promise<HTMLElement | unknown> {
@@ -30,5 +29,3 @@ function useAppendTag(
   }
   return getScript
 }
-
-export default useAppendTag

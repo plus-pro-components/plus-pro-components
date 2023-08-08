@@ -1,9 +1,9 @@
 import path from 'path'
-import { readFile, writeFile, mkdir, access } from 'fs/promises'
+import { writeFile, mkdir, access } from 'fs/promises'
 import autoprefixer from 'autoprefixer'
 import postcss from 'postcss'
 import postcssNested from 'postcss-nested'
-import scss from 'postcss-scss'
+import sass from 'sass'
 import cssnano from 'cssnano'
 import glob from 'fast-glob'
 import { copy } from 'fs-extra'
@@ -17,9 +17,9 @@ const distBundle = path.resolve(pcOutput, 'theme-chalk')
 
 const main = async () => {
   /**
-   * 加载./src下所有scss文件 （index.scss除外）
+   * 加载./src下所有scss文件
    */
-  const files = await glob([`**/*.scss`, `!**/*index.scss`], {
+  const files = await glob([`**/*.scss`], {
     cwd: resolve(styleRoot),
     absolute: true
   })
@@ -33,29 +33,16 @@ const main = async () => {
     await mkdir(distFolder)
   }
 
-  /* css内容 */
-  let index = ''
-
   for (const item of files) {
-    const content = await readFile(item)
+    const content = sass.compile(item)
     const { name } = path.parse(item)
-
-    /**
-     * 生成压缩css
-     */
-    const result = await postcss([postcssNested as any, autoprefixer, cssnano]).process(content, {
-      from: item,
-      parser: scss.parse
-    })
-
-    await writeFile(resolve(distFolder, `plus-${name}.css`), result.css)
-
-    index += result.css
+    const result = await postcss([postcssNested as any, autoprefixer, cssnano]).process(
+      content.css,
+      { from: undefined }
+    )
+    const filename = name === 'index' ? 'index.css' : `plus-${name}.css`
+    await writeFile(resolve(distFolder, filename), result.css)
   }
-  /**
-   * 生成index.css文件
-   */
-  await writeFile(resolve(distFolder, `index.css`), index)
 
   /**
    * 复制./src的文件到 ./dist/src

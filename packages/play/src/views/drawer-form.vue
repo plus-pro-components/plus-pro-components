@@ -139,7 +139,7 @@ const columns: PlusColumn[] = [
       },
       {
         label: '普通话证书',
-        value: '1'
+        value: '2'
       }
     ]
   },
@@ -169,7 +169,7 @@ const columns: PlusColumn[] = [
     fieldProps: {
       type: 'datetimerange',
       startPlaceholder: '请选择开始时间',
-      endPlaceholder: '请结束开始时间'
+      endPlaceholder: '请选择结束时间'
     }
   },
   {

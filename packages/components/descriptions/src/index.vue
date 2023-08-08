@@ -24,14 +24,12 @@ import type { PlusColumn, RecordType } from '@plus-pro-components/types'
 import { PlusDisplayItem } from '@plus-pro-components/components/display-item'
 
 type DescriptionProps = ExtractPropTypes<typeof descriptionProps>
-
 export interface PlusDescriptionsProps extends /* @vue-ignore */ Partial<DescriptionProps> {
   data: RecordType
   columns?: PlusColumn[]
   column?: number
   title?: string
 }
-
 export interface PlusTableTableColumnStatus {
   text: string
   color: string

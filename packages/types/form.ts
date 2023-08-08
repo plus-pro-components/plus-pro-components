@@ -1,6 +1,6 @@
-import type { VNode } from 'vue'
+import type { VNode, Component } from 'vue'
 import type { FormItemProps } from 'element-plus'
-import type { PlusSearchProps } from '@plus-pro-components/components/search'
+import type { PlusFormProps } from '@plus-pro-components/components/form'
 import type { PropsItemType, PlusColumn } from './plus'
 import type { Mutable } from './global'
 
@@ -21,6 +21,7 @@ export type FormItemValueType =
   | 'select'
   | 'slider'
   | 'switch'
+  | 'time-picker'
   | 'time-select'
   | 'textarea'
   | 'text'
@@ -32,22 +33,55 @@ export type FormItemValueType =
  */
 export interface FormColumnProps {
   /**
-   * @desc 传递给 PlusForm的配置， 支持所有 el-form的props
+   * @desc 传递给 PlusForm的配置， 支持所有 el-form的props。值支持对象object。
    */
-  formProps?: PropsItemType<PlusSearchProps>
+  formProps?: PropsItemType<PlusFormProps>
   /**
-   * @desc 传递给 el-form-item 的配置， 支持所有 el-form-item的props
+   * @desc 传递给 el-form-item 的配置， 支持所有 el-form-item的props。值支持对象object，函数和 Promise。
    */
   formItemProps?: PropsItemType<Mutable<FormItemProps>>
 
   /**
-   * 自定义渲染   el-form-item 下的field-item组件，自定义渲染同步表单的值的核心方法是调用onChange回调把值传给表单
+   * @desc 支持类似el-input，el-select等所有表单项的props 以及 表格显示的每行 props。值支持对象object，函数和 Promise。
+   */
+  fieldProps?: PropsItemType
+
+  /**
+   * 自定义渲染 el-form-item 下的field-item组件。
+   * 自定义渲染同步表单的值需要手动调用onChange 用来实现双向绑定
    * @param props
    * @param onChange
    * @param formItemInstance
    * @returns
+   * 示例：
+   * ```js
+   *import { h } from 'vue'
+   *import { ElTag } from 'element-plus'
+   *
+   *const columns = [
+   *  {
+   *    label: '自定义el-input',
+   *    prop: 'elData',
+   *    fieldProps: {
+   *     // 优先级低于 renderFormFieldItem 的props
+   *      placeholder: '请输入'
+   *    },
+   *     renderFormFieldItem: (value, onChange) => {
+   *        return h(ElInput as any, {
+   *         // 优先级高于 fieldProps
+   *           placeholder: '请输入自定义el-input',
+   *           type: 'textarea',
+   *           onChange
+   *      })
+   *  }
+   *]
+   * ```
    */
-  renderFormFieldItem?: (value: any, onChange: (value: any) => void, props: PlusColumn) => VNode
+  renderFormFieldItem?: (
+    value: FieldValueType,
+    onChange: (value: FieldValueType) => void,
+    props: PlusColumn
+  ) => VNode | Component | string
 }
 
 /**
@@ -57,6 +91,8 @@ export type FieldValueType =
   | string
   | number
   | boolean
+  | null
+  | undefined
   | Date
   | string[]
   | number[]
@@ -65,8 +101,6 @@ export type FieldValueType =
   | [Date, Date]
   | [number, number]
   | [string, string]
-  | null
-  | ''
 
 /**
  * 整体表单值的类型

@@ -63,9 +63,19 @@ table/cell-edit
 
 :::
 
-## 自定义行
+## 自定义表格项和表单项
 
-支持 vue 渲染函数和 html，表单自定义需要开启 `editable`,
+- 自定义表格项的核心方法是定义 `render`方法。
+  `render` 方法可以返回以下三种情况
+
+  - 返回一个 [Component](https://cn.vuejs.org/api/built-in-special-elements.html#component)。 （配合[PlusColumn](/components/config.html) 的 `slots`使用 ）<el-tag  effect="dark">推荐</el-tag>
+  - 调用 vue 的[渲染函数 h](https://cn.vuejs.org/guide/extras/render-function.html) 返回一个 `VNode`。
+  - 返回一个 [string](https://cn.vuejs.org/api/built-in-special-elements.html#component)。（渲染原生标签，配合[PlusColumn](/components/config.html) 的 `slots`使用 ）
+
+- 自定义表格项还支持 `renderHTML`方法，需要返回一个 HTML 字符串。
+
+- 自定义表单项参考[自定义表单项](/components/form.html#%E8%87%AA%E5%AE%9A%E4%B9%89%E8%A1%A8%E5%8D%95%E9%A1%B9) （
+  表格中需要开启 `editable`）
 
 :::demo
 

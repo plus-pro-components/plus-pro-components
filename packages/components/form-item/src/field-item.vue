@@ -1,7 +1,8 @@
 <template>
   <component
-    :is="() => renderFormFieldItem && renderFormFieldItem(state, handleChange, props)"
+    :is="render"
     v-if="renderFormFieldItem && isFunction(renderFormFieldItem)"
+    v-model="state"
     v-bind="customFieldProps"
   />
 
@@ -12,6 +13,7 @@
     class="plus-form-item-field"
     v-bind="customFieldProps"
     @change="handleChange"
+    @select="handleSelect"
   />
 
   <el-cascader
@@ -96,8 +98,7 @@
     <el-radio
       v-for="item in options"
       :key="item.label"
-      :label="item.label"
-      :value="item.value"
+      :label="item.value"
       v-bind="item.fieldItemProps"
     >
       {{ item.label }}
@@ -155,6 +156,14 @@
     @change="handleChange"
   />
 
+  <el-time-picker
+    v-else-if="valueType === 'time-picker'"
+    v-model="state"
+    class="plus-form-item-field"
+    v-bind="customFieldProps"
+    @change="handleChange"
+  />
+
   <el-time-select
     v-else-if="valueType === 'time-select'"
     v-model="state"
@@ -187,8 +196,10 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, watch } from 'vue'
-import { isFunction, getCustomProps, isDate, isArray } from '@plus-pro-components/utils'
+import type { VNode, Component } from 'vue'
+import { ref, watch, isVNode, h } from 'vue'
+import { isFunction, isDate, isArray, isString, isComponent } from '@plus-pro-components/utils'
+import { getCustomProps, handleSlots } from '@plus-pro-components/components/utils'
 import type { PlusColumn, FieldValueType } from '@plus-pro-components/types'
 import { useGetOptions, useLocale } from '@plus-pro-components/hooks'
 import PlusDatePicker from '@plus-pro-components/components/date-picker'
@@ -206,9 +217,9 @@ export interface PlusFormFieldItemProps {
   formItemProps?: PlusColumn['formItemProps']
   // eslint-disable-next-line vue/require-default-prop
   renderFormFieldItem?: PlusColumn['renderFormFieldItem']
+  slots?: PlusColumn['slots']
   index?: number
 }
-
 export interface PlusFormFieldItemEmits {
   (e: 'update:modelValue', data: FieldValueType): void
   (e: 'change', data: FieldValueType): void
@@ -227,34 +238,15 @@ const props = withDefaults(defineProps<PlusFormFieldItemProps>(), {
   formItemProps: () => ({}),
   fieldProps: () => ({}),
   options: () => [],
-  index: 0
+  index: 0,
+  slots: () => ({})
 })
-
 const emit = defineEmits<PlusFormFieldItemEmits>()
+
 const { t } = useLocale()
 const state = ref<FieldValueType>()
-
 const options = useGetOptions(props)
-
 const customFieldProps = ref<any>({})
-
-watch(
-  () => props.fieldProps,
-  val => {
-    getCustomProps(val, state.value, props, props.index)
-      .then(data => {
-        customFieldProps.value = data
-      })
-      .catch(err => {
-        throw err
-      })
-  },
-  {
-    immediate: true,
-    deep: true
-  }
-)
-
 const range = ['datetimerange', 'daterange', 'monthrange']
 
 const isArrayValue = () => {
@@ -316,8 +308,61 @@ watch(
   }
 )
 
+watch(
+  () => props.fieldProps,
+  val => {
+    getCustomProps(val, state.value, props, props.index, 'fieldProps')
+      .then(data => {
+        customFieldProps.value = data
+      })
+      .catch(err => {
+        throw err
+      })
+  },
+  {
+    immediate: true,
+    deep: true
+  }
+)
+
 const handleChange = (val: FieldValueType) => {
   emit('update:modelValue', val)
   emit('change', val)
+}
+
+const handleSelect = ({ value }: any) => {
+  handleChange(value)
+}
+
+// 渲染自定义表单
+const render = () => {
+  if (!props.renderFormFieldItem) return
+  const value = state.value
+  const params = { ...props }
+  const dynamicComponent = props.renderFormFieldItem(value, handleChange, params)
+  const slots = handleSlots(props.slots, value, params)
+  /** string */
+  if (isString(dynamicComponent)) {
+    return h(dynamicComponent as string, { ...customFieldProps.value }, slots)
+  }
+  /** Component */
+  if (isComponent(dynamicComponent)) {
+    return h(
+      dynamicComponent as Component,
+      { ...customFieldProps.value, modelValue: state.value, onChange: handleChange },
+      slots
+    )
+  }
+  /** VNode */
+  if (isVNode(dynamicComponent)) {
+    return {
+      ...dynamicComponent,
+      props: {
+        ...customFieldProps.value,
+        ...dynamicComponent.props,
+        modelValue: state.value
+      }
+    } as VNode
+  }
 }
 </script>

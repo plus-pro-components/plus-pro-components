@@ -12,16 +12,8 @@ cd -
 
 cd packages/utils
 echo "publish utils..."
-npm run build
 npm publish
 echo "Successfully published utils"
-cd -
-
-npm run build:echarts
-cd dist/echarts
-echo "publish echarts..."
-npm publish
-echo "Successfully published echarts"
 cd -
 
 cd packages/eslint-config

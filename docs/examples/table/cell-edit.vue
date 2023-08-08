@@ -29,14 +29,14 @@ interface TableRow {
 
 const TestServe = {
   getList: async () => {
-    const data = [...new Array(10)].map((item, index) => {
+    const data = [...new Array(4)].map((item, index) => {
       return {
         id: index,
-        name: index < 5 ? '' : index + 'name',
+        name: index < 2 ? '' : index + 'name',
         status: String(index % 3),
         rate: index > 3 ? 2 : 3.5,
         switch: index % 2 === 0 ? true : false,
-        time: index < 5 ? '' : new Date()
+        time: index < 2 ? '' : new Date()
       }
     })
     return { data: data as TableRow[] }

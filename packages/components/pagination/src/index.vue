@@ -29,7 +29,6 @@ export interface PlusPaginationProps extends /* @vue-ignore */ Partial<Paginatio
   pageSizeList?: number[]
   align?: 'left' | 'right'
 }
-
 export interface PlusPaginationEmits {
   (e: 'update:modelValue', pageInfo: PageInfo): void
   (e: 'change', pageInfo: PageInfo): void
@@ -47,7 +46,6 @@ const props = withDefaults(defineProps<PlusPaginationProps>(), {
   modelValue: () => ({ ...DefaultPageInfo }),
   align: 'right'
 })
-
 const emit = defineEmits<PlusPaginationEmits>()
 
 const pageInfo = ref<PageInfo>({ ...DefaultPageInfo })

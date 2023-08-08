@@ -1,8 +1,8 @@
-import type { ElTooltipProps, FormItemProps } from 'element-plus'
-import type { VNode } from 'vue'
-import type { RecordType, Mutable } from './global'
+import type { ElTooltipProps } from 'element-plus'
+import type { VNode, Component } from 'vue'
+import type { RecordType } from './global'
 import type { TableValueType, TableColumnProps } from './table'
-import type { FormItemValueType, FormColumnProps } from './form'
+import type { FormItemValueType, FormColumnProps, FieldValueType } from './form'
 
 export {}
 
@@ -25,11 +25,18 @@ export interface PageInfo {
 }
 
 /**
- *  自定义props类型
+ *  自定义props类型  支持对象object ，函数，Promise
  */
 export type PropsItemType<T extends Record<string, any> = any> =
   | Partial<T>
-  | ((value: any, row: any, index: number) => Partial<T> | Promise<Partial<T>>)
+  | ((
+      value: FieldValueType,
+      data: {
+        row: Record<string, any>
+        index: number
+      }
+    ) => Partial<T> | Promise<Partial<T>>)
+  | Promise<Partial<T>>
 
 /**
  * 选择框类型
@@ -41,15 +48,16 @@ export interface OptionsRow {
   /**
    * 表单子项的props  如 el-checkbox-group下的el-checkbox的props
    */
-  fieldItemProps?: PropsItemType<Mutable<FormItemProps>>
+  fieldItemProps?: RecordType
   children?: OptionsRow[]
 }
 /**
- * 选择类型
+ * 选择类型   支持数组，函数和Promise
  */
 export type OptionsType =
   | OptionsRow[]
   | ((props?: PlusColumn) => OptionsRow[] | Promise<OptionsRow[]>)
+  | Promise<OptionsRow[]>
 
 export interface CommentType {
   [index: string]: any
@@ -100,11 +108,6 @@ export interface CommentType {
   descriptionsItemProps?: RecordType
 
   /**
-   * @desc 支持类似el-input，el-select等所有表单项的props 以及 表格显示的每行 props
-   */
-  fieldProps?: PropsItemType
-
-  /**
    * el-select，el-radio-group，el-checkbox-group 选项 ，支持数组，函数，和Promise
    */
   options?: OptionsType
@@ -133,7 +136,10 @@ export interface CommentType {
    * ]
    * ```
    */
-  render?: (value: any, data: { row: any; column: PlusColumn; index: number }) => VNode
+  render?: (
+    value: FieldValueType,
+    data: { row: RecordType; column: PlusColumn; index: number }
+  ) => VNode | Component | string
 
   /**
    * 自定义渲染单行显示内容 需要返回一个 html字符串，`renderHTML`的优先级低于`render`，高于`valueType`。
@@ -146,7 +152,7 @@ export interface CommentType {
    *    {
    *       label: '自定义',
    *       prop: '',
-   *       renderHTML: (_, row) => {
+   *       renderHTML: (value, { row }) => {
    *         return `
    *          <div>自定义: ${row.number || 0}</div>
    *         `
@@ -156,7 +162,17 @@ export interface CommentType {
    *```
    *
    */
-  renderHTML?: (value: any, data: { row: any; column: PlusColumn; index: number }) => string
+  renderHTML?: (
+    value: FieldValueType,
+    data: { row: RecordType; column: PlusColumn; index: number }
+  ) => string
+
+  /**
+   * 插槽 当 `render` 或者 `renderFormFieldItem` 返回值是一个组件或者字符串是生效
+   */
+  slots?: {
+    [index: string]: (...arg: any) => any
+  } & { default?: (...arg: any) => any }
 }
 
 /**

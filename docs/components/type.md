@@ -1,5 +1,7 @@
 # 基础 Ts 类型
 
+**本页面类型会互相引用，请注意上下文。**
+
 ## ElementRefType
 
 ref 绑定的元素类型
@@ -283,7 +285,7 @@ export interface ButtonsCallBackParams {
 /**
  * 所有表格列显示的类型 默认是 ''
  */
-export type TableValueType = 'img' | 'link' | 'money' | 'tag' | 'progress' | 'copy' | 'code' | ''
+export type TableValueType = 'img' | 'link' | 'money' | 'tag' | 'progress' | 'copy' | 'code'
 ```
 
 ## FormItemValueType
@@ -306,6 +308,7 @@ export type FormItemValueType =
   | 'select'
   | 'slider'
   | 'switch'
+  | 'time-picker'
   | 'time-select'
   | 'textarea'
   | 'text'
@@ -325,6 +328,8 @@ export type FieldValueType =
   | string
   | number
   | boolean
+  | null
+  | undefined
   | Date
   | string[]
   | number[]
@@ -333,8 +338,6 @@ export type FieldValueType =
   | [Date, Date]
   | [number, number]
   | [string, string]
-  | null
-  | ''
 ```
 
 ## FieldValues
@@ -354,11 +357,18 @@ export type FieldValues = Record<string, FieldValueType>
 
 ```ts
 /**
- *  自定义props类型
+ *  自定义props类型  支持对象object ，函数，Promise
  */
-export type PropsItemType =
-  | RecordType
-  | ((value: any, row: any, index: number) => RecordType | Promise<RecordType>)
+export type PropsItemType<T extends Record<string, any> = any> =
+  | Partial<T>
+  | ((
+      value: FieldValueType,
+      data: {
+        row: Record<string, any>
+        index: number
+      }
+    ) => Partial<T> | Promise<Partial<T>>)
+  | Promise<Partial<T>>
 ```
 
 ## OptionsRow
@@ -382,13 +392,15 @@ export interface OptionsRow {
 
 ## OptionsType
 
-选择类型
+选择类型 支持数组，函数和 Promise
 
 ```ts
 /**
  * 选择类型
  */
+ */
 export type OptionsType =
   | OptionsRow[]
   | ((props?: PlusColumn) => OptionsRow[] | Promise<OptionsRow[]>)
+  | Promise<OptionsRow[]>
 ```

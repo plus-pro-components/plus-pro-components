@@ -1,10 +1,10 @@
 <template>
   <el-form-item
-    v-bind="customFormItemProps"
     ref="formItemInstance"
     :label="label"
     :prop="prop"
     class="plus-form-item"
+    v-bind="customFormItemProps"
   >
     <template #label="{ label: currentLabel }">
       <span class="plus-form-item__label">
@@ -15,14 +15,15 @@
       </span>
     </template>
 
-    <PlusFormFieldItem v-bind="props" @change="handleChange" />
+    <PlusFormFieldItem :key="prop" v-bind="props" @change="handleChange" />
   </el-form-item>
 </template>
 
 <script lang="ts" setup>
 import { ref, watch } from 'vue'
 import type { PlusColumn, FieldValueType } from '@plus-pro-components/types'
-import { isString, isPlainObject, getCustomProps } from '@plus-pro-components/utils'
+import { isString, isPlainObject } from '@plus-pro-components/utils'
+import { getCustomProps } from '@plus-pro-components/components/utils'
 import { QuestionFilled } from '@element-plus/icons-vue'
 import PlusFormFieldItem from './field-item.vue'
 
@@ -39,9 +40,9 @@ export interface PlusFormItemProps {
   // eslint-disable-next-line vue/require-default-prop
   renderFormFieldItem?: PlusColumn['renderFormFieldItem']
   tooltip?: PlusColumn['tooltip']
+  slots?: PlusColumn['slots']
   index?: number
 }
-
 export interface PlusFormItemEmits {
   (e: 'update:modelValue', data: FieldValueType): void
   (e: 'change', data: FieldValueType): void
@@ -51,8 +52,6 @@ defineOptions({
   name: 'PlusFormItem'
 })
 
-const formItemInstance = ref()
-
 const props = withDefaults(defineProps<PlusFormItemProps>(), {
   modelValue: '',
   tooltip: '',
@@ -60,19 +59,19 @@ const props = withDefaults(defineProps<PlusFormItemProps>(), {
   formItemProps: () => ({}),
   fieldProps: () => ({}),
   options: () => [],
-  index: 0
+  index: 0,
+  slots: () => ({})
 })
-
 const emit = defineEmits<PlusFormItemEmits>()
 
+const formItemInstance = ref()
 const state = ref<FieldValueType>(props.modelValue)
-
 const customFormItemProps = ref<any>({})
 
 watch(
   () => props.formItemProps,
   val => {
-    getCustomProps(val, state.value, props, props.index)
+    getCustomProps(val, state.value, props, props.index, 'formItemProps')
       .then(data => {
         customFormItemProps.value = data
       })
