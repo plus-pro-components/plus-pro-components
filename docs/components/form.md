@@ -25,8 +25,8 @@ form/async
 
 自定义表单项的核心方法是定义 `renderFormFieldItem`方法，该方法可以返回以下三种情况
 
+- 返回一个 [Component](https://cn.vuejs.org/api/built-in-special-elements.html#component)。 （会自动包裹 modelValue 和 onChange） <el-tag  effect="dark">推荐</el-tag>
 - 调用 vue 的[渲染函数 h](https://cn.vuejs.org/guide/extras/render-function.html) 返回一个 `VNode`。（会自动包裹 modelValue，需要手动调用`renderFormFieldItem`中的 `onChange` 用来实现双向绑定）
-- 返回一个 [Component](https://cn.vuejs.org/api/built-in-special-elements.html#component)。 （会自动包裹 modelValue 和 onChange）
 - 返回一个 [string](https://cn.vuejs.org/api/built-in-special-elements.html#component)。 （渲染原生标签，配合[PlusColumn](/components/config.html) 的 `slots`使用 ）
 
 ::: tip 提示
