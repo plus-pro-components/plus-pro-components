@@ -18,7 +18,7 @@ const getList = async (
   }
 ) => {
   const { page = 1, pageSize = 20, status, name } = query || {}
-  const total = 1000
+  const total = 30
   const List = [...new Array(total)].map((item, index) => {
     return {
       id: index,

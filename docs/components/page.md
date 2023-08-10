@@ -10,6 +10,16 @@ page/basic
 
 :::
 
+## 搜索键请求时替换
+
+配置`before-search-submit`方法，可在请求前替换参数名。
+
+:::demo
+
+page/replace-keyname
+
+:::
+
 ## Page API
 
 ## Page Attributes

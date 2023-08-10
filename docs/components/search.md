@@ -8,6 +8,26 @@ search/basic
 
 :::
 
+## 显示个数
+
+配置 `show-number` 属性为显示个数，默认值 2。
+
+:::demo
+
+search/show-number
+
+:::
+
+## 展开收缩隐藏
+
+配置 `hasUnfold` 属性为`false`展开收缩隐藏，同时默认值显示所有搜索框。
+
+:::demo
+
+search/hide-unfold
+
+:::
+
 ## 异步数据用法
 
 [PlusColumn](/components/config.html) 配置中的 `options` 支持数，函数和 Promise。
@@ -30,7 +50,7 @@ search/async
 | `labelWidth`            | el-form 的 labelWidth    | `string`                                                                                         | `84px`  | 否       |
 | `labelPosition`         | el-form 的 labelPosition | `'left' / 'right' / 'top'`                                                                       | `left`  | 否       |
 | `labelSuffix`           | labelSuffix labelSuffix  | `string`                                                                                         | `:`     | 否       |
-| `hasFooter`             | 是否需要全部底部按钮     | `boolean`                                                                                        | `true`  | 否       |
+| `hasFooter`             | 是否需要全部按钮         | `boolean`                                                                                        | `true`  | 否       |
 | `hasReset`              | 是否需要底部按钮 `重置`  | `boolean`                                                                                        | `true`  | 否       |
 | `hasUnfold`             | 是否显示展开收缩按钮     | `boolean`                                                                                        | `true`  | 否       |
 | `searchLoading`         | 查询按钮 loading         | `boolean`                                                                                        | `false` | 否       |
