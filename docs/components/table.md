@@ -2,6 +2,7 @@
 
 ## 基础用法
 
+配置`columns`表头和`table-data`表格数据。
 :::demo
 
 table/basic
@@ -24,6 +25,8 @@ table/action-bar
 
 ## 拖动排序
 
+配置`drag-sortable`，同时配合`dragSortEnd`使用。
+
 :::demo
 
 table/drag-sort
@@ -32,6 +35,7 @@ table/drag-sort
 
 ## 标题栏
 
+配置` has-toolbar``title `，可使用`title` `toolbar`插槽。
 :::demo
 
 table/title-bar
@@ -40,9 +44,40 @@ table/title-bar
 
 ## 分页栏
 
+配置`pagination`属性。
 :::demo
 
 table/page-bar
+
+:::
+
+## 多选
+
+配置`is-selection`属性为`true`，即可显示表格多选框。默认值`false`。配合原生`selection-change`方法使用。
+:::demo
+
+table/multiple
+
+:::
+
+## 树形结构
+
+配置`tree-props`树形为`children: 'children'`，数据结构中有 children 即可。
+树形懒加载表格还需设置` lazy``load `。注意：`children`中的`id`和表格`id`不能重复。`row-key`默认值`id`。
+
+:::demo
+
+table/tree
+
+:::
+
+## 展开行
+
+配置`has-expand`属性 `true` 可显示展开行，默认值 `false`。配合插槽 `expand` 使用。
+
+:::demo
+
+table/expand
 
 :::
 
@@ -57,6 +92,15 @@ table/edit-bar
 ## 可编辑表格 (单行)
 
 可编辑和校验单行，也可以控制单行的每一个单元格的编辑状态和校验。核心方法是 调用 formRefs 里的方法。
+:::demo
+
+table/row-edit
+
+:::
+
+## 可编辑表格 (单元格)
+
+可编辑和校验单元格。核心方法是 调用 formRefs 里的方法。
 :::demo
 
 table/cell-edit
