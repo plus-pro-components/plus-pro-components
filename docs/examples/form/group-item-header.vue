@@ -8,7 +8,17 @@
       @submit="handleSubmit"
       @submit-error="handleSubmitError"
       @cancel="handleCancel"
-    />
+    >
+      <template #group-item-header="{ title, icon }">
+        <div class="custom-group-item-header">
+          <span>
+            {{ title }}
+            <el-icon> <component :is="icon" /> </el-icon>
+          </span>
+          <el-button type="primary"> 添加</el-button>
+        </div>
+      </template>
+    </PlusForm>
   </div>
 </template>
 
@@ -16,6 +26,7 @@
 import { ref } from 'vue'
 import type { FieldValues } from '@plus-pro-components/types'
 import type { PlusFormGroupRow } from '@plus-pro-components/components/form'
+import { CreditCard, Calendar, Soccer } from '@element-plus/icons-vue'
 
 const state = ref({
   status: '0',
@@ -45,6 +56,7 @@ const rules = {
 const group: PlusFormGroupRow[] = [
   {
     title: '第一分组',
+    icon: CreditCard,
     columns: [
       {
         label: '名称',
@@ -85,6 +97,7 @@ const group: PlusFormGroupRow[] = [
   },
   {
     title: '第二分组',
+    icon: Calendar,
     columns: [
       {
         label: '标签',
@@ -112,6 +125,7 @@ const group: PlusFormGroupRow[] = [
   },
   {
     title: '第三分组',
+    icon: Soccer,
     columns: [
       {
         label: '时间',
@@ -280,3 +294,15 @@ const handleCancel = () => {
   console.log('handleCancel')
 }
 </script>
+
+<style lang="scss" scoped>
+.custom-group-item-header {
+  display: flex;
+  align-items: center;
+  color: var(--el-color-primary);
+  justify-content: space-between;
+  .el-icon {
+    margin-right: 5px;
+  }
+}
+</style>

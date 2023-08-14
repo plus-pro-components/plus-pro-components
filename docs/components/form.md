@@ -21,6 +21,26 @@ form/async
 
 :::
 
+## 分组表单
+
+配置 `group` 字段，则显示分组。配置 `group` 字段后，`columns` 则不在生效。
+
+:::demo
+
+form/group
+
+:::
+
+## 分组表单自定义头部
+
+添加 `group-item-header` 插槽即可实现。
+
+:::demo
+
+form/group-item-header
+
+:::
+
 ## 自定义表单项
 
 自定义表单项的核心方法是定义 `renderFormFieldItem`方法，该方法可以返回以下三种情况
@@ -65,6 +85,7 @@ form/all
 | `hasCancel`             | 是否需要底部按钮 `取消`   | `boolean`                                                                                        | `true`  | 否       |
 | `submitLoading`         | 确定按钮 loading          | `boolean`                                                                                        | `false` | 否       |
 | `rules`                 | 表单校验                  | el-form 的 rules [FormRules](https://element-plus.org/zh-CN/component/form.html#form-attributes) | `{}`    | 否       |
+| `group`                 | 分组表单配置              | `boolean`/ [PlusFormGroupRow](/components/type.html#plusformgrouprow)                            | `{}`    | 否       |
 | ...                     | ...                       | ...                                                                                              | ...     | ...      |
 
 **`...`表示同时支持所有[ElForm Attributes](https://element-plus.org/zh-CN/component/form.html#form-attributes)**
@@ -93,10 +114,11 @@ form/all
 
 ## Form Slots
 
-| 插槽名    | 说明                                  |
-| --------- | ------------------------------------- |
-| `default` | 表单的内容 默认是 `PlusFormItem` 组件 |
-| `footer`  | 表单底部按钮                          |
+| 插槽名              | 说明                                  |
+| ------------------- | ------------------------------------- |
+| `default`           | 表单的内容 默认是 `PlusFormItem` 组件 |
+| `footer`            | 表单底部按钮                          |
+| `group-item-header` | 分组表单头部                          |
 
 ## Exposes
 

@@ -31,11 +31,12 @@ drawer-form/basic
 
 ## DrawerForm Slots
 
-| 插槽名          | 说明                                                                                 |
-| --------------- | ------------------------------------------------------------------------------------ |
-| `drawer-header` | [ElDrawer](https://element-plus.gitee.io/zh-CN/component/drawer.html) 的 header slot |
-| `drawer-footer` | [ElDrawer](https://element-plus.gitee.io/zh-CN/component/drawer.html) 的 footer slot |
-| `form-footer`   | [PlusForm](/components/form.html) 的 footer slot                                     |
+| 插槽名                   | 说明                                                                                      |
+| ------------------------ | ----------------------------------------------------------------------------------------- |
+| `drawer-header`          | [ElDrawer](https://element-plus.gitee.io/zh-CN/component/drawer.html#插槽) 的 header slot |
+| `drawer-footer`          | [ElDrawer](https://element-plus.gitee.io/zh-CN/component/drawer.html#插槽) 的 footer slot |
+| `form-footer`            | [PlusForm-footer](/components/form.html#form-slots) 的 footer slot                        |
+| `form-group-item-header` | [PlusForm-group-item-header](/components/form.html#form-slots) 的 group-item-header slot  |
 
 ## Exposes
 

@@ -24,6 +24,10 @@
       <template #footer>
         <slot name="form-footer" />
       </template>
+
+      <template #group-item-header>
+        <slot name="form-group-item-header" />
+      </template>
     </PlusForm>
   </PlusDialog>
 </template>

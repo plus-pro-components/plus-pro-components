@@ -404,3 +404,16 @@ export type OptionsType =
   | ((props?: PlusColumn) => OptionsRow[] | Promise<OptionsRow[]>)
   | Promise<OptionsRow[]>
 ```
+
+## PlusFormGroupRow
+
+```ts
+/**
+ * 分组表单配置项
+ */
+export interface PlusFormGroupRow {
+  title: string
+  icon?: DefineComponent
+  columns: PlusColumn[]
+}
+```

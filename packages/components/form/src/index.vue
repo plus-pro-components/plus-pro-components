@@ -11,13 +11,45 @@
     :model="state.values"
   >
     <slot>
-      <PlusFormItem
-        v-for="(item, index) in state.subColumns"
-        :key="item.prop + index"
-        v-model="state.values[item.prop]"
-        v-bind="item"
-        @change="handleChange"
-      />
+      <!-- 分组表单 -->
+      <template v-if="group">
+        <el-card v-for="groupItem in group" :key="groupItem.title" class="plus-form__group__item">
+          <template #header>
+            <slot
+              name="group-item-header"
+              :title="groupItem.title"
+              :columns="groupItem.columns"
+              :icon="groupItem.icon"
+            >
+              <div class="plus-form__group__item__icon">
+                <el-icon v-if="groupItem.icon">
+                  <component :is="groupItem.icon" />
+                </el-icon>
+                {{ groupItem.title }}
+              </div>
+            </slot>
+          </template>
+
+          <PlusFormItem
+            v-for="(item, index) in filterHide(groupItem.columns)"
+            :key="item.prop + index"
+            v-model="state.values[item.prop]"
+            v-bind="item"
+            @change="handleChange"
+          />
+        </el-card>
+      </template>
+
+      <!-- 普通表单 -->
+      <template v-else>
+        <PlusFormItem
+          v-for="(item, index) in state.subColumns"
+          :key="item.prop + index"
+          v-model="state.values[item.prop]"
+          v-bind="item"
+          @change="handleChange"
+        />
+      </template>
     </slot>
 
     <div
@@ -41,12 +73,22 @@
 </template>
 
 <script lang="ts" setup>
+import type { DefineComponent } from 'vue'
 import { reactive, ref, watch, computed } from 'vue'
 import type { FormInstance, FormRules, FormProps } from 'element-plus'
 import { ElMessage } from 'element-plus'
 import { useLocale } from '@plus-pro-components/hooks'
 import { PlusFormItem } from '@plus-pro-components/components/form-item'
 import type { PlusColumn, FieldValues, Mutable } from '@plus-pro-components/types'
+
+/**
+ * 分组表单配置项
+ */
+export interface PlusFormGroupRow {
+  title: string
+  icon?: DefineComponent
+  columns: PlusColumn[]
+}
 
 export interface PlusFormProps extends /* @vue-ignore */ Partial<Mutable<FormProps>> {
   modelValue?: FieldValues
@@ -62,6 +104,7 @@ export interface PlusFormProps extends /* @vue-ignore */ Partial<Mutable<FormPro
   submitLoading?: boolean
   footerAlign?: 'left' | 'right'
   rules?: FormRules
+  group?: false | PlusFormGroupRow[]
 }
 export interface PlusFormState {
   values: FieldValues
@@ -93,7 +136,8 @@ const props = withDefaults(defineProps<PlusFormProps>(), {
   footerAlign: 'left',
   formProps: () => ({}),
   rules: () => ({}),
-  columns: () => []
+  columns: () => [],
+  group: false
 })
 const emit = defineEmits<PlusFormEmits>()
 
@@ -103,7 +147,10 @@ const state = reactive<PlusFormState>({
   values: { ...props.modelValue },
   subColumns: []
 })
-state.subColumns = computed<any>(() => props.columns.filter(item => item.hideInForm !== true))
+
+const filterHide = (columns: PlusColumn[]) => columns.filter(item => item.hideInForm !== true)
+
+state.subColumns = computed<any>(() => filterHide(props.columns))
 
 const handleChange = () => {
   emit('change', state.values)

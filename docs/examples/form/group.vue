@@ -16,6 +16,7 @@
 import { ref } from 'vue'
 import type { FieldValues } from '@plus-pro-components/types'
 import type { PlusFormGroupRow } from '@plus-pro-components/components/form'
+import { CreditCard, Calendar, Soccer } from '@element-plus/icons-vue'
 
 const state = ref({
   status: '0',
@@ -45,6 +46,7 @@ const rules = {
 const group: PlusFormGroupRow[] = [
   {
     title: '第一分组',
+    icon: CreditCard,
     columns: [
       {
         label: '名称',
@@ -85,6 +87,7 @@ const group: PlusFormGroupRow[] = [
   },
   {
     title: '第二分组',
+    icon: Calendar,
     columns: [
       {
         label: '标签',
@@ -112,6 +115,7 @@ const group: PlusFormGroupRow[] = [
   },
   {
     title: '第三分组',
+    icon: Soccer,
     columns: [
       {
         label: '时间',
