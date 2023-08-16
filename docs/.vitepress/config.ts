@@ -126,6 +126,10 @@ export default defineConfig({
             {
               text: '开发指南',
               link: '/guide/dev'
+            },
+            {
+              text: '贡献指南',
+              link: '/guide/contribution'
             }
           ]
         }

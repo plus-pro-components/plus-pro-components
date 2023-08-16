@@ -26,6 +26,10 @@ plus-pro-components 是一个基于 Vue 和 element-plus 的页面级别的组�
 
 - 使用 TypeScript：plus-pro-components 全量使用 TypeScript 编写，和你的 TypeScript 项目无缝衔接。
 
+- 国际化： plus-pro-components 提供完备的国际化，与 element-plus 体系打通，无需多余配置。
+
+- 预设： plus-pro-components 预设基本的样式，与 element-plus 样式一脉相承。 plus-pro-components 预设基本的行为，更少的代码具备更多的功能。
+
 # 组件列表
 
 - [x] Dialog 弹窗 -- 完成

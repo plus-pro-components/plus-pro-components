@@ -26,6 +26,10 @@ plus-pro-components is a page level component library based on Vue and element p
 
 - Use TypeScript: plus-pro-components are fully written using TypeScript, seamlessly integrating with your TypeScript project.
 
+- internationalization: provide complete internationalization, connecting with the element plus system, without the need for redundant configuration.
+
+- Presets: plus-pro-components preset basic styles, which are in line with the element plus style. plus-pro-components preset basic behavior, with less code and more functionality.
+
 # Component List
 
 - [x] Dialog -- Finished
