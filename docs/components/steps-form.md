@@ -54,11 +54,11 @@ steps-form/slots
 
 ## StepsForm Attributes
 
-| 名称                    | 说明               | 类型             | 默认值 | 是否必须 |
-| ----------------------- | ------------------ | ---------------- | ------ | -------- |
-| `model-value / v-model` | 分步表单绑定值     | number           | `1`    | 是       |
-| `data`                  | 分步表单展示的数据 | `PlusStepFrom[]` | `[]`   | 是       |
-| ...                     | ...                | ...              | ...    | ...      |
+| 名称                    | 说明               | 类型                                                 | 默认值 | 是否必须 |
+| ----------------------- | ------------------ | ---------------------------------------------------- | ------ | -------- |
+| `model-value / v-model` | 分步表单绑定值     | number                                               | `1`    | 是       |
+| `data`                  | 分步表单展示的数据 | [PlusStepFrom[]](/components/type.html#plusstepfrom) | `[]`   | 是       |
+| ...                     | ...                | ...                                                  | ...    | ...      |
 
 `...`表示同时支持所有 [ElSteps Attributes](https://element-plus.org/zh-CN/component/steps.html#steps-%E5%B1%9E%E6%80%A7)
 
