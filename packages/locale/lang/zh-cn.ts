@@ -48,6 +48,11 @@ export default {
       confirmToPerformThisOperation: '确定执行本次操作?',
       prompt: '提示',
       sort: '排序'
+    },
+    stepsForm: {
+      nextText: '下一步',
+      preText: '上一步',
+      submitText: '提交'
     }
   }
 }

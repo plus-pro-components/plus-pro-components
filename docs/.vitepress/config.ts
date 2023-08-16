@@ -194,7 +194,10 @@ export default defineConfig({
               text: '抽屉表单',
               link: '/components/drawer-form'
             },
-
+            {
+              text: '分步表单',
+              link: '/components/steps-form'
+            },
             {
               text: '描述列表',
               link: '/components/description'

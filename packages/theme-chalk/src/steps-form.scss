@@ -1,0 +1,24 @@
+.plus-steps-form {
+  .plus-form__footer {
+    .el-button + .el-button {
+      margin-left: 0;
+      margin-right: 12px;
+    }
+    .el-button--primary {
+      order: 1;
+    }
+  }
+  .el-steps {
+    margin-bottom: 20px;
+  }
+}
+
+.plus-steps-from-vertical {
+  display: flex;
+  .el-steps--vertical {
+    margin-right: 20px;
+  }
+  .plus-form {
+    flex: 1;
+  }
+}

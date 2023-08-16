@@ -13,6 +13,7 @@ import { PlusSearch } from '@plus-pro-components/components/search'
 import { PlusDialogForm } from '@plus-pro-components/components/dialog-form'
 import { PlusDrawerForm } from '@plus-pro-components/components/drawer-form'
 import { PlusPage } from '@plus-pro-components/components/page'
+import { PlusStepsForm } from '@plus-pro-components/components/steps-form'
 
 const plugins: DefineComponent[] = [
   PlusDialog,
@@ -28,7 +29,8 @@ const plugins: DefineComponent[] = [
   PlusSearch,
   PlusDialogForm,
   PlusDrawerForm,
-  PlusPage
+  PlusPage,
+  PlusStepsForm
 ] as unknown as DefineComponent[]
 
 export default plugins
