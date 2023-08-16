@@ -48,6 +48,11 @@ export default {
       confirmToPerformThisOperation: 'Confirm to perform this operation?',
       prompt: 'Prompt',
       sort: 'Sort'
+    },
+    stepsForm: {
+      nextText: 'Next step',
+      preText: 'Previous step',
+      submitText: 'Submit'
     }
   }
 }
