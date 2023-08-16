@@ -1,3 +1,21 @@
+## [v0.0.1-alpha.29](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-alpha.28...v0.0.1-alpha.29) (2023-08-16)
+
+
+### ✨ Features
+
+* **all:** Merge pull request #36 from plus-pro-components/zpp([99e5806](https://github.com/plus-pro-components/plus-pro-components/commit/99e5806)) by@xiaofei
+* **components:** :sparkles: update components steps-form slots([773027c](https://github.com/plus-pro-components/plus-pro-components/commit/773027c)) by@zhangpp
+* **all:** Merge pull request #35 from plus-pro-components/zpp([0e15da2](https://github.com/plus-pro-components/plus-pro-components/commit/0e15da2)) by@xiaofei
+* **packages:** :sparkles: add packages components steps-form([20dba1a](https://github.com/plus-pro-components/plus-pro-components/commit/20dba1a)) by@zhangpp
+* **components:** :sparkles: form component add group function.([69f6c1a](https://github.com/plus-pro-components/plus-pro-components/commit/69f6c1a)) by@xiaofei
+* **all:** Merge pull request #34 from plus-pro-components/zpp([fa41e94](https://github.com/plus-pro-components/plus-pro-components/commit/fa41e94)) by@xiaofei
+* **theme-chalk:** :sparkles: replace '@import' with '@use'.([f231c3c](https://github.com/plus-pro-components/plus-pro-components/commit/f231c3c)) by@xiaofei
+
+
+
+
+
+
 ## [v0.0.1-alpha.28](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-alpha.27...v0.0.1-alpha.28) (2023-08-07)
 
 
