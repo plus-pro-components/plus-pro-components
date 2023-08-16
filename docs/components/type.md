@@ -421,3 +421,18 @@ export interface PlusFormGroupRow {
   columns: PlusColumn[]
 }
 ```
+
+## PlusStepFrom
+
+```ts
+/**
+ * 分步表单配置项
+ */
+export interface PlusStepFrom {
+  title: Mutable<StepProps>['title']
+  description?: Mutable<StepProps>['description']
+  icon?: Mutable<StepProps>['icon']
+  status?: Mutable<StepProps>['status']
+  form: PlusFormProps
+}
+```

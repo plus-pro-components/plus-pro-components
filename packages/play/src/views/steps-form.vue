@@ -1,5 +1,7 @@
 <template>
-  <PlusStepsForm v-model="active" direction="vertical" :space="120" :data="stepForm" @next="next" />
+  <PlusStepsForm v-model="active" direction="vertical" :space="120" :data="stepForm" @next="next">
+    <template #title="{ title }">{{ title }}</template>
+  </PlusStepsForm>
 </template>
 <script lang="ts" setup>
 import { ref } from 'vue'

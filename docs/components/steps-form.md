@@ -41,17 +41,26 @@ steps-form/simple
 
 :::
 
+## 插槽渲染分步表单
+
+设置 simple 可应用简洁风格，该条件下 align-center / description / direction / space 都将失效。
+:::demo
+
+steps-form/slots
+
+:::
+
 ## StepsForm API
 
 ## StepsForm Attributes
 
-| 名称                    | 说明               | 类型             | 默认值 | 是否必须 |
-| ----------------------- | ------------------ | ---------------- | ------ | -------- |
-| `model-value / v-model` | 分步表单绑定值     | number           | `1`    | 是       |
-| `data`                  | 分步表单展示的数据 | `PlusStepFrom[]` | `[]`   | 是       |
-| ...                     | ...                | ...              | ...    | ...      |
+| 名称                    | 说明               | 类型                                                 | 默认值 | 是否必须 |
+| ----------------------- | ------------------ | ---------------------------------------------------- | ------ | -------- |
+| `model-value / v-model` | 分步表单绑定值     | number                                               | `1`    | 是       |
+| `data`                  | 分步表单展示的数据 | [PlusStepFrom[]](/components/type.html#plusstepfrom) | `[]`   | 是       |
+| ...                     | ...                | ...                                                  | ...    | ...      |
 
-`...`表示同时支持所有 `ElSteps Attributes`
+`...`表示同时支持所有 [ElSteps Attributes](https://element-plus.org/zh-CN/component/steps.html#steps-%E5%B1%9E%E6%80%A7)
 
 ## StepsForm Events
 
@@ -59,9 +68,6 @@ steps-form/simple
 | ------ | -------------------------------- | ---------------------------------------------------------- |
 | `next` | 点击下一步按钮校验通过触发的事件 | [Function] `(active: number, values: FieldValues) => void` |
 | `pre`  | 点击上一步按钮触发的事件         | [Function] `(active: number) => void`                      |
-| ...    | ...                              | ...                                                        |
-
-`...`表示同时支持所有 `ElSteps Events`
 
 ## StepsForm Slots
 
@@ -69,4 +75,4 @@ steps-form/simple
 | ------ | ---- |
 | ...    | ...  |
 
-`...`表示同时支持所有 `ElSteps` 的其他插槽 如 `default icon title description`
+`...`表示同时支持所有 [ElStep](https://element-plus.org/zh-CN/component/steps.html#step-%E6%8F%92%E6%A7%BD) 的其他插槽 如 `icon title description `
