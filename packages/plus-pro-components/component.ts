@@ -9,6 +9,7 @@ import { PlusDescriptions } from '@plus-pro-components/components/descriptions'
 import { PlusDisplayItem } from '@plus-pro-components/components/display-item'
 import { PlusForm } from '@plus-pro-components/components/form'
 import { PlusFormItem, PlusFormFieldItem } from '@plus-pro-components/components/form-item'
+import { PlusPopover } from '@plus-pro-components/components/popover'
 import { PlusSearch } from '@plus-pro-components/components/search'
 import { PlusDialogForm } from '@plus-pro-components/components/dialog-form'
 import { PlusDrawerForm } from '@plus-pro-components/components/drawer-form'
@@ -26,6 +27,7 @@ const plugins: DefineComponent[] = [
   PlusFormItem,
   PlusFormFieldItem,
   PlusForm,
+  PlusPopover,
   PlusSearch,
   PlusDialogForm,
   PlusDrawerForm,

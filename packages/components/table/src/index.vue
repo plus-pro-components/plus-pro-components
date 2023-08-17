@@ -3,6 +3,7 @@
     <PlusTableToolbar
       v-if="hasToolbar"
       :columns="columns"
+      :sub-columns="subColumns"
       :default-size="size"
       :title="title"
       @click-density="handleClickDensity"
@@ -233,6 +234,7 @@ const handleClickActionConfirmCancel = (res: ButtonsCallBackParams) => {
 
 const handleFilterTableConfirm = (data: PlusColumn[]) => {
   subColumns.value = data.filter(item => item.hideInTable !== true) as any
+  console.log(subColumns.value)
 }
 
 // 密度

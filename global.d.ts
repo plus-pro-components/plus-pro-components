@@ -12,6 +12,7 @@ declare module '@vue/runtime-core' {
     PlusDialogForm: typeof import('plus-pro-components')['PlusDialogForm']
     PlusDrawerForm: typeof import('plus-pro-components')['PlusDrawerForm']
     PlusPage: typeof import('plus-pro-components')['PlusPage']
+    PlusPopover: typeof import('plus-pro-components')['PlusPopover']
     PlusStepsForm: typeof import('plus-pro-components')['PlusStepsForm']
   }
 }

@@ -198,6 +198,10 @@ export default defineConfig({
               link: '/components/dialog'
             },
             {
+              text: '弹出框',
+              link: '/components/popover'
+            },
+            {
               text: '分页',
               link: '/components/pagination'
             }
