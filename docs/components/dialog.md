@@ -30,10 +30,10 @@ dialog/basic
 
 ## Dialog Events
 
-| 名称      | 说明             | 类型                    |
-| --------- | ---------------- | ----------------------- |
-| `confirm` | 点击确认按钮触发 | [Function] `() => void` |
-| `cancel`  | 点击取消按钮触发 | [Function] `() => void` |
+| 名称      | 说明             | 类型                                                  |
+| --------- | ---------------- | ----------------------------------------------------- |
+| `confirm` | 点击确认按钮触发 | `function` <docs-tip content='() => void'></docs-tip> |
+| `cancel`  | 点击取消按钮触发 | `function` <docs-tip content='() => void'></docs-tip> |
 
 ## Dialog Slots
 

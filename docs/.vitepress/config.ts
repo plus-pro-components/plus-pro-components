@@ -126,6 +126,10 @@ export default defineConfig({
             {
               text: '开发指南',
               link: '/guide/dev'
+            },
+            {
+              text: '贡献指南',
+              link: '/guide/contribution'
             }
           ]
         }
@@ -187,7 +191,7 @@ export default defineConfig({
           ]
         },
         {
-          text: '辅助组件',
+          text: '内置组件',
           items: [
             {
               text: '弹窗',
@@ -200,12 +204,7 @@ export default defineConfig({
             {
               text: '分页',
               link: '/components/pagination'
-            }
-          ]
-        },
-        {
-          text: '内置组件',
-          items: [
+            },
             {
               text: '单选',
               link: '/components/radio'
@@ -213,6 +212,14 @@ export default defineConfig({
             {
               text: '日期时间',
               link: '/components/date-picker'
+            },
+            {
+              text: '显示单项组件',
+              link: '/components/display-item'
+            },
+            {
+              text: '表单单项组件',
+              link: '/components/form-item'
             }
           ]
         }

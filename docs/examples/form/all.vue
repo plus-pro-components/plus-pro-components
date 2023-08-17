@@ -248,6 +248,20 @@ const columns: PlusColumn[] = [
     label: 'time-select',
     prop: 'time-select',
     valueType: 'time-select'
+  },
+  {
+    label: 'plus-radio',
+    prop: 'plus-radio',
+    valueType: 'plus-radio',
+    options: [
+      { label: '选项一', value: 1 },
+      { label: '选项二', value: 2 }
+    ]
+  },
+  {
+    label: 'plus-date-picker',
+    prop: 'plus-date-picker',
+    valueType: 'plus-date-picker'
   }
 ]
 

@@ -1,6 +1,6 @@
 # plus-pro-components
 
-[![ElementPlus version badge](https://img.shields.io/npm/v/plus-pro-components.svg?style=flat-square)](https://www.npmjs.org/package/plus-pro-components)[![ docs by vitepress](https://img.shields.io/badge/docs%20by-vitepress-10b981)](https://vitepress.dev/)[![Build With Vite](https://img.shields.io/badge/build%20with-rollup-646cff.svg)](https://rollupjs.org/)[![pnpm](https://img.shields.io/badge/maintained%20with-pnpm-cc00ff.svg)](https://www.pnpm.cn/)[![element-plus](https://img.shields.io/badge/ui%20-element%20plus-409eff.svg)](https://element-plus.org/)
+[![ElementPlus version badge](https://img.shields.io/npm/v/plus-pro-components.svg?style=flat-square)](https://www.npmjs.org/package/plus-pro-components)[![ docs by vitepress](https://img.shields.io/badge/docs%20by-vitepress-10b981)](https://vitepress.dev/)[![Build With Vite](https://img.shields.io/badge/build%20with-rollup-646cff.svg)](https://rollupjs.org/)[![pnpm](https://img.shields.io/badge/maintained%20with-pnpm-cc00ff.svg)](https://www.pnpm.cn/)[![element-plus](https://img.shields.io/badge/ui%20-element%20plus-409eff.svg)](https://element-plus.org/)[![gzip](https://img.badgesize.io/https:/unpkg.com/plus-pro-components/index.min.js?style=flat-square&compression=gzip)](https://unpkg.com/plus-pro-components/index.min.js)
 
 **Frontend components at the page level**
 
@@ -25,6 +25,10 @@ plus-pro-components is a page level component library based on Vue and element p
 - Rich component library: plus-pro-components provide a large number of UI components based on element plus, including tables, forms, charts, etc., which can meet the needs of most enterprise applications.
 
 - Use TypeScript: plus-pro-components are fully written using TypeScript, seamlessly integrating with your TypeScript project.
+
+- internationalization: provide complete internationalization, connecting with the element plus system, without the need for redundant configuration.
+
+- Presets: plus-pro-components preset basic styles, which are in line with the element plus style. plus-pro-components preset basic behavior, with less code and more functionality.
 
 # Component List
 

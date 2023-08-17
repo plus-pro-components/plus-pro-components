@@ -12,6 +12,7 @@ import 'plus-pro-components-css'
 import DocsCodeDemo from './components/docs-code-demo.vue'
 import DocsChangelog from './components/docs-changelog.vue'
 import DocsMarkdown from './components/docs-markdown.vue'
+import DocsTip from './components/docs-tip.vue'
 import directive from './directives'
 
 import './styles/index.scss'
@@ -26,6 +27,7 @@ export default {
     app.component('DocsCodeDemo', DocsCodeDemo)
     app.component('DocsChangelog', DocsChangelog)
     app.component('DocsMarkdown', DocsMarkdown)
+    app.component('DocsTip', DocsTip)
     directive(app)
   }
 }

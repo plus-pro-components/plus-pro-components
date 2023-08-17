@@ -173,7 +173,7 @@ const tableConfig: PlusColumn[] = [
     width: 100,
     hideInSearch: true,
     valueType: 'img',
-    renderFormFieldItem(value, onChange) {
+    renderField(value, onChange) {
       // 自定义上传
       const handleHttpRequest = async ({ file, onError, onSuccess }: any) => {
         try {
@@ -202,7 +202,7 @@ const tableConfig: PlusColumn[] = [
             httpRequest: handleHttpRequest,
             onChange: async (data: UploadFile) => {
               const base64 = await fileToDataURL(data.raw as File)
-              // 调用 renderFormFieldItem 的onChange 回调把值传给表单
+              // 调用 renderField 的onChange 回调把值传给表单
               onChange(base64)
             }
           },

@@ -168,7 +168,7 @@ export interface CommentType {
   ) => string
 
   /**
-   * 插槽 当 `render` 或者 `renderFormFieldItem` 返回值是一个组件或者字符串是生效
+   * 插槽 当 `render` 或者 `renderField` 返回值是一个组件或者字符串是生效
    */
   slots?: {
     [index: string]: (...arg: any) => any

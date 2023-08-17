@@ -21,23 +21,23 @@ radio/basic
 
 ## Radio Attributes
 
-| 名称                    | 说明                            | 类型                                                | 默认值  | 是否必须 |
-| ----------------------- | ------------------------------- | --------------------------------------------------- | ------- | -------- |
-| `model-value / v-model` | 选中项绑定值                    | `string/ number/ boolean`                           | `''`    | 否       |
-| `data`                  | radio 的数据源                  | `{ label: string; value: string/number/boolean }[]` | `[]`    | 是       |
-| `isCancel`              | 是否可以取消选中状态            | `boolean`                                           | `false` | 否       |
-| `groupProps`            | `el-radio-group` 的所有 `props` | `object`                                            | `{}`    | 否       |
-| `radioProps`            | `el-radio` 的所有 `props`       | `object`                                            | `{}`    | 否       |
+| 名称                    | 说明                            | 类型                                                                                      | 默认值 | 是否必须 |
+| ----------------------- | ------------------------------- | ----------------------------------------------------------------------------------------- | ------ | -------- |
+| `model-value / v-model` | 选中项绑定值                    | `string/ number/ boolean`                                                                 |        | 否       |
+| `data`                  | radio 的数据源                  | `array` <docs-tip content='{ label: string; value: string/number/boolean }[]'></docs-tip> | `[]`   | 是       |
+| `isCancel`              | 是否可以取消选中状态            | `boolean`                                                                                 | `true` | 否       |
+| `groupProps`            | `el-radio-group` 的所有 `props` | `object`                                                                                  | `{}`   | 否       |
+| `radioProps`            | `el-radio` 的所有 `props`       | `object`                                                                                  | `{}`   | 否       |
 
 ## Radio Events
 
-| 名称          | 说明                      | 类型                                               |
-| ------------- | ------------------------- | -------------------------------------------------- |
-| `radioChange` | 单个 value 变化触发的事件 | [Function] `(value:string/number/boolean) => void` |
+| 名称          | 说明                      | 类型                                                                             |
+| ------------- | ------------------------- | -------------------------------------------------------------------------------- |
+| `radioChange` | 单个 value 变化触发的事件 | `function` <docs-tip content='(value:string/number/boolean) => void'></docs-tip> |
 
 ## Exposes
 
-| 名称                 | 说明                   | 类型                                |
-| -------------------- | ---------------------- | ----------------------------------- |
-| `radioInstance`      | 开始的`el-date-picker` | `InstanceType<typeof ElRadio>`      |
-| `radioGroupInstance` | 结束的`el-date-picker` | `InstanceType<typeof ElRadioGroup>` |
+| 名称                 | 说明                        | 类型                                                                      |
+| -------------------- | --------------------------- | ------------------------------------------------------------------------- |
+| `radioInstance`      | 开始的`el-date-picker`实例  | `object`<docs-tip content='InstanceType<typeof ElRadio>'></docs-tip>      |
+| `radioGroupInstance` | 结束的`el-date-picker` 实例 | `object`<docs-tip content='InstanceType<typeof ElRadioGroup>'></docs-tip> |
