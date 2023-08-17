@@ -1,4 +1,4 @@
-.plus-display-item__image__col {
+.plus-display-item__image {
   cursor: pointer;
   object-fit: cover;
   overflow: hidden;
@@ -20,8 +20,8 @@
     display: inline-block;
   }
 }
-.plus-display-item__badge--status {
-  .plus-display-item__badge--status__dot {
+.plus-display-item__badge {
+  .plus-display-item__badge__dot {
     position: relative;
     top: -1px;
     display: inline-block;

@@ -156,7 +156,7 @@ const tableConfig: PlusColumn[] = [
     prop: 'custom',
     editable: true,
     // 返回一个VNode
-    renderFormFieldItem(_, onChange) {
+    renderField(_, onChange) {
       // 自定义上传
       const handleHttpRequest = async ({ file, onError, onSuccess }: any) => {
         try {
