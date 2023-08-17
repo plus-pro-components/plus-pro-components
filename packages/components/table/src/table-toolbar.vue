@@ -23,7 +23,7 @@
           </el-button>
         </div>
 
-        <template #icon>
+        <template #reference>
           <el-tooltip effect="dark" :content="t('plus.table.density')" placement="top">
             <el-icon :size="18" color="#919191" class="plus-table-toolbar__icon">
               <svg
@@ -78,7 +78,7 @@
           </el-checkbox>
         </el-checkbox-group>
 
-        <template #icon>
+        <template #reference>
           <el-tooltip effect="dark" :content="t('plus.table.columnSettings')" placement="top">
             <el-icon :size="20" color="#919191" class="plus-table-toolbar__icon">
               <Setting />
@@ -102,6 +102,7 @@ import { useLocale } from '@plus-pro-components/hooks'
 
 export interface PlusTableToolbarProps {
   columns?: PlusColumn[]
+  subColumns?: any
   title?: string
   filterTableHeaderOverflowLabelLength?: number
   defaultSize?: ComponentSize
@@ -126,6 +127,7 @@ defineOptions({
 
 const props = withDefaults(defineProps<PlusTableToolbarProps>(), {
   columns: () => [],
+  subColumns: () => [],
   title: '',
   hasToolbar: true,
   filterTableHeaderOverflowLabelLength: 6,
@@ -168,6 +170,7 @@ const handleCheckGroupChange = (value: string[]) => {
 }
 
 const handleShow = () => {
+  state.checkList = cloneDeep(props.subColumns).map((item: PlusColumn) => item.label + item.prop)
   const checkedCount = state.checkList.length
   state.checkAll = checkedCount === props.columns.length
   state.isIndeterminate = checkedCount > 0 && checkedCount < props.columns.length
