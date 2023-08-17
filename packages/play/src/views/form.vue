@@ -4,6 +4,7 @@
       v-model="state"
       :group="group"
       :rules="rules"
+      :row-props="{ gutter: 20 }"
       @change="handleChange"
       @submit="handleSubmit"
       @submit-error="handleSubmitError"
@@ -51,7 +52,10 @@ const group: PlusFormGroupRow[] = [
         width: 120,
         prop: 'name',
         valueType: 'copy',
-        tooltip: '名称最多显示6个字符'
+        tooltip: '名称最多显示6个字符',
+        colProps: {
+          span: 12
+        }
       },
       {
         label: '状态',
@@ -79,7 +83,10 @@ const group: PlusFormGroupRow[] = [
             value: '3',
             color: 'red'
           }
-        ]
+        ],
+        colProps: {
+          span: 12
+        }
       }
     ]
   },
@@ -122,6 +129,9 @@ const group: PlusFormGroupRow[] = [
         label: '数量',
         prop: 'number',
         valueType: 'input-number',
+        colProps: {
+          span: 12
+        },
         fieldProps: { precision: 2, step: 2 }
       },
       {
