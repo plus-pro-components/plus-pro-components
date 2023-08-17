@@ -87,6 +87,13 @@ const main = async () => {
     .replace('.git', '/')
     .replace('\n', '')
 
+  const replacePull = (content: string) => {
+    return content.replace(
+      /pull request (#(\d+))/,
+      (_, data, number) => `pull request [${data}](${target}pull/${number})`
+    )
+  }
+
   const logs = await handleLogData()
   const tags = await handleTagData()
   const res = tags.map(item => {
@@ -108,14 +115,20 @@ const main = async () => {
         item.date
       ).format('YYYY-MM-DD')})`
     }
+
+    console.log(item.content)
+
     const featData = item.content
       .filter(item => item.type === 'feat' || item.content.includes('Merge'))
       .map(
         item =>
           `* **${item.scoped || 'all'}:**${
-            item.content.includes('Merge') ? ' ' + item.content : item.content
+            item.content.includes('Merge') ? ' ' + replacePull(item.content) : item.content
           }([${item.sha}](${target}commit/${item.sha})) by@${item.author}\n`
       )
+
+    console.log(featData, item.content)
+
     const fixData = item.content
       .filter(item => item.type === 'fix')
       .map(
