@@ -1,5 +1,7 @@
 <template>
-  <PlusDisplayItem v-for="item in columns" :key="item.label" :column="item" :row="row" />
+  <div class="plus-example-display-item">
+    <PlusDisplayItem v-for="item in columns" :key="item.label" :column="item" :row="row" />
+  </div>
 </template>
 
 <script lang="ts" setup>
@@ -113,12 +115,14 @@ const row = {
 }
 </script>
 
-<style>
-.plus-display-item {
-  margin: 20px 0 20px 0;
-  padding-right: 20px;
-}
-.plus-display-item__image {
-  padding: 0;
+<style lang="scss">
+.plus-example-display-item {
+  .plus-display-item {
+    margin: 20px 0 20px 0;
+    padding-right: 20px;
+  }
+  .plus-display-item__image {
+    padding: 0;
+  }
 }
 </style>

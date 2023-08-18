@@ -19,10 +19,10 @@ import { View, Edit, Delete, DocumentCopy } from '@element-plus/icons-vue'
 
 const TestServe = {
   getList: async () => {
-    const data = [...new Array(3)].map((item, index) => {
+    const data = [...new Array(5)].map((item, index) => {
       return {
         name: index + 'name',
-        status: String(index % 3),
+        status: String(index % 5),
         tag: index === 1 ? 'success' : index === 2 ? 'warning' : index === 3 ? 'info' : 'danger',
         time: new Date()
       }
@@ -159,22 +159,30 @@ const tableConfig: PlusColumn[] = [
       {
         label: '未解决',
         value: '0',
-        color: 'red'
+        type: 'primary'
       },
       {
         label: '已解决',
         value: '1',
-        color: 'blue'
+        type: 'success'
       },
       {
         label: '解决中',
         value: '2',
-        color: 'yellow'
+        type: 'info'
+        // color: 'yellow'
       },
       {
         label: '失败',
         value: '3',
-        color: 'red'
+        type: 'danger'
+        // color: 'red'
+      },
+      {
+        label: '审核中',
+        value: '4',
+        type: 'warning'
+        // color: 'red'
       }
     ]
   },
