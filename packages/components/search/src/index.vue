@@ -1,6 +1,7 @@
 <template>
   <PlusForm
     ref="plusFormInstance"
+    v-model="state.values"
     :inline="inline"
     :row-props="rowProps"
     :col-props="colProps"

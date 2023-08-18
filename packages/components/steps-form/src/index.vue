@@ -27,13 +27,13 @@
     </el-steps>
     <PlusForm
       v-bind="data[active - 1].form"
-      :has-cancel="active !== 1"
-      :confirm-text="
+      :has-reset="active !== 1"
+      :submit-text="
         active === data.length ? t('plus.stepsForm.submitText') : t('plus.stepsForm.nextText')
       "
-      :cancel-text="t('plus.stepsForm.preText')"
+      :reset-text="t('plus.stepsForm.preText')"
       @submit="next"
-      @cancel="pre"
+      @reset="pre"
     />
   </div>
 </template>

@@ -67,14 +67,13 @@
       :style="{ justifyContent: footerAlign === 'left' ? 'flex-start' : 'flex-end' }"
     >
       <slot name="footer">
-        <el-button type="primary" :loading="submitLoading" @click="handleSubmit">
-          <!-- 确定 -->
-          {{ confirmText || t('plus.form.confirmText') }}
+        <el-button v-if="hasReset" @click="handleReset">
+          <!-- 重置 -->
+          {{ resetText || t('plus.form.resetText') }}
         </el-button>
-
-        <el-button v-if="hasCancel" @click="handleCancel">
-          <!-- 取消 -->
-          {{ cancelText || t('plus.form.cancelText') }}
+        <el-button type="primary" :loading="submitLoading" @click="handleSubmit">
+          <!-- 提交 -->
+          {{ submitText || t('plus.form.submitText') }}
         </el-button>
       </slot>
     </div>
@@ -109,9 +108,9 @@ export interface PlusFormProps extends /* @vue-ignore */ Partial<Mutable<FormPro
   labelSuffix?: string
   hasErrorTip?: boolean
   hasFooter?: boolean
-  hasCancel?: boolean
-  confirmText?: string
-  cancelText?: string
+  hasReset?: boolean
+  submitText?: string
+  resetText?: string
   submitLoading?: boolean
   footerAlign?: 'left' | 'right'
   rules?: FormRules
@@ -125,7 +124,7 @@ export interface PlusFormEmits {
   (e: 'update:modelValue', values: FieldValues): void
   (e: 'submit', values: FieldValues): void
   (e: 'change', values: FieldValues): void
-  (e: 'cancel'): void
+  (e: 'reset'): void
   (e: 'submitError', errors: any): void
 }
 
@@ -142,10 +141,10 @@ const props = withDefaults(defineProps<PlusFormProps>(), {
   labelSuffix: ':',
   hasErrorTip: true,
   hasFooter: true,
-  hasCancel: true,
+  hasReset: true,
   submitLoading: false,
-  confirmText: '',
-  cancelText: '',
+  submitText: '',
+  resetText: '',
   footerAlign: 'left',
   rules: () => ({}),
   columns: () => [],
@@ -201,9 +200,10 @@ const handleSubmit = async () => {
   }
 }
 
-const handleCancel = (): void => {
+const handleReset = (): void => {
   clearValidate()
-  emit('cancel')
+  state.values = {}
+  emit('reset')
 }
 
 defineExpose({

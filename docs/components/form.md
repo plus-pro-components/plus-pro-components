@@ -100,10 +100,12 @@ form/all
 | `hasErrorTip`           | 是否需要校验 message 提示 | `boolean`                                                                                | `true`  | 否       |
 | `hasFooter`             | 是否需要全部底部按钮      | `boolean`                                                                                | `true`  | 否       |
 | `footerAlign`           | 底部按钮对齐方式          | `string` <docs-tip content="'left' / 'right'"></docs-tip>                                | `left`  | 否       |
-| `hasCancel`             | 是否需要底部按钮 `取消`   | `boolean`                                                                                | `true`  | 否       |
+| `hasReset`              | 是否需要底部按钮 `重置`   | `boolean`                                                                                | `true`  | 否       |
 | `submitLoading`         | 确定按钮 loading          | `boolean`                                                                                | `false` | 否       |
 | `rules`                 | 表单校验                  | `object` [FormRules](https://element-plus.org/zh-CN/component/form.html#form-attributes) | `{}`    | 否       |
 | `group`                 | 分组表单配置              | `false` / (`object` [PlusFormGroupRow](/components/type.html#plusformgrouprow) )         | `{}`    | 否       |
+| `submitText`            | 提交按钮文字              | `string`                                                                                 | `提交`  | 否       |
+| `resetText`             | 重置按钮文字              | `string`                                                                                 | `重置`  | 否       |
 | ...                     | ...                       | ...                                                                                      | ...     | ...      |
 
 **`...`表示同时支持所有[ElForm Attributes](https://element-plus.org/zh-CN/component/form.html#form-attributes)**
@@ -116,10 +118,10 @@ form/all
 
 | 名称          | 说明                             | 类型                                                                     |
 | ------------- | -------------------------------- | ------------------------------------------------------------------------ |
-| `submit`      | 点击确定按钮校验通过触发的事件   | `function` <docs-tip content='(values: FieldValues) => void'></docs-tip> |
+| `submit`      | 点击提交按钮校验通过触发的事件   | `function` <docs-tip content='(values: FieldValues) => void'></docs-tip> |
 | `change`      | 表单变化触发的事件               | `function` <docs-tip content='(values: FieldValues) => void'></docs-tip> |
-| `cancel`      | 点击取消按钮触发的事件           | `function` <docs-tip content='() => void'></docs-tip>                    |
-| `submitError` | 点击确定按钮校验不通过触发的事件 | `function` <docs-tip content='(error:any) => void'></docs-tip>           |
+| `reset`       | 点击重置按钮触发的事件           | `function` <docs-tip content='() => void'></docs-tip>                    |
+| `submitError` | 点击提交按钮校验不通过触发的事件 | `function` <docs-tip content='(error:any) => void'></docs-tip>           |
 | ...           | ...                              | ...                                                                      |
 
 **`...`表示同时支持所有[ElForm Events](https://element-plus.org/zh-CN/component/form.html#form-%E4%BA%8B%E4%BB%B6)**
