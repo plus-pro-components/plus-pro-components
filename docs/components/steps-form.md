@@ -64,10 +64,11 @@ steps-form/slots
 
 ## StepsForm Events
 
-| 名称   | 说明                             | 类型                                                                                     |
-| ------ | -------------------------------- | ---------------------------------------------------------------------------------------- |
-| `next` | 点击下一步按钮校验通过触发的事件 | `function` <docs-tip content='(active: number, values: FieldValues) => void'></docs-tip> |
-| `pre`  | 点击上一步按钮触发的事件         | `function` <docs-tip content='(active: number) => void'></docs-tip>                      |
+| 名称     | 说明                             | 类型                                                                                        |
+| -------- | -------------------------------- | ------------------------------------------------------------------------------------------- |
+| `change` | 表单变化触发的事件               | `function` <docs-tip content='(values: FieldValues,column: PlusColumn) => void'></docs-tip> |
+| `next`   | 点击下一步按钮校验通过触发的事件 | `function` <docs-tip content='(active: number, values: FieldValues) => void'></docs-tip>    |
+| `pre`    | 点击上一步按钮触发的事件         | `function` <docs-tip content='(active: number) => void'></docs-tip>                         |
 
 ## StepsForm Slots
 

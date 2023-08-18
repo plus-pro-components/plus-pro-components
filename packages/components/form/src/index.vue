@@ -8,7 +8,7 @@
     :validate-on-rule-change="false"
     :label-suffix="labelSuffix"
     v-bind="$attrs"
-    :model="state.values"
+    :model="model"
   >
     <slot>
       <!-- 分组表单 -->
@@ -38,7 +38,7 @@
               <PlusFormItem
                 v-model="state.values[item.prop]"
                 v-bind="item"
-                @change="handleChange"
+                @change="() => handleChange(item)"
               />
             </el-col>
           </el-row>
@@ -53,7 +53,11 @@
             :key="item.prop + index"
             v-bind="item.colProps || colProps"
           >
-            <PlusFormItem v-model="state.values[item.prop]" v-bind="item" @change="handleChange" />
+            <PlusFormItem
+              v-model="state.values[item.prop]"
+              v-bind="item"
+              @change="() => handleChange(item)"
+            />
           </el-col>
           <el-col v-bind="colProps">
             <slot name="searchFooter" />
@@ -61,6 +65,7 @@
         </el-row>
       </template>
     </slot>
+
     <div
       v-if="hasFooter"
       class="plus-form__footer"
@@ -88,6 +93,7 @@ import { ElMessage } from 'element-plus'
 import { useLocale } from '@plus-pro-components/hooks'
 import { PlusFormItem } from '@plus-pro-components/components/form-item'
 import type { PlusColumn, FieldValues, Mutable } from '@plus-pro-components/types'
+import { cloneDeep } from 'lodash-es'
 
 /**
  * 分组表单配置项
@@ -123,7 +129,7 @@ export interface PlusFormState {
 export interface PlusFormEmits {
   (e: 'update:modelValue', values: FieldValues): void
   (e: 'submit', values: FieldValues): void
-  (e: 'change', values: FieldValues): void
+  (e: 'change', values: FieldValues, column: PlusColumn): void
   (e: 'reset'): void
   (e: 'submitError', errors: any): void
 }
@@ -158,15 +164,10 @@ const state = reactive<PlusFormState>({
   values: { ...props.modelValue },
   subColumns: []
 })
-
 const filterHide = (columns: PlusColumn[]) => columns.filter(item => item.hideInForm !== true)
+const model = computed(() => cloneDeep(state.values))
 
 state.subColumns = computed<any>(() => filterHide(props.columns))
-
-const handleChange = () => {
-  emit('change', state.values)
-  emit('update:modelValue', state.values)
-}
 
 watch(
   () => props.modelValue,
@@ -178,6 +179,11 @@ watch(
     immediate: true
   }
 )
+
+const handleChange = (column: PlusColumn) => {
+  emit('change', state.values, column)
+  emit('update:modelValue', state.values)
+}
 
 // 清空校验
 const clearValidate = (): void => {

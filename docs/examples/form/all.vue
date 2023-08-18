@@ -14,7 +14,7 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue'
-import type { PlusColumn, FieldValues } from '@plus-pro-components/types'
+import type { PlusColumn, FieldValues } from 'plus-pro-components'
 
 const state = ref<FieldValues>({
   status: '0',
@@ -265,8 +265,8 @@ const columns: PlusColumn[] = [
   }
 ]
 
-const handleChange = (values: FieldValues) => {
-  console.log(values, 'change')
+const handleChange = (values: FieldValues, prop: PlusColumn) => {
+  console.log(values, prop, 'change')
 }
 const handleSubmit = (values: FieldValues) => {
   console.log(values, 'Submit')

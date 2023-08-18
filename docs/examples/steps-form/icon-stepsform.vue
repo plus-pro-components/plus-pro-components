@@ -1,6 +1,7 @@
 <template>
   <PlusStepsForm v-model="active" :data="stepForm" @next="next" />
 </template>
+
 <script lang="ts" setup>
 import { ref } from 'vue'
 import { Edit, Picture, Upload } from '@element-plus/icons-vue'

@@ -85,7 +85,7 @@ table/expand
 
 :::demo
 
-table/edit-bar
+table/all-cell-edit
 
 :::
 

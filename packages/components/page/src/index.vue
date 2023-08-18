@@ -10,7 +10,7 @@
         @search="handleSearch"
         @reset="handleRest"
       >
-        <template #footer>
+        <template v-if="$slots['search-footer']" #footer>
           <slot name="search-footer" />
         </template>
       </PlusSearch>
@@ -26,19 +26,23 @@
         v-bind="table"
         @paginationChange="handlePaginationChange"
       >
-        <template #title>
+        <template v-if="$slots['table-title']" #title>
           <slot name="table-title" />
         </template>
-        <template #toolbar>
+
+        <template v-if="$slots['table-toolbar']" #toolbar>
           <slot name="table-toolbar" />
         </template>
-        <template #expand>
+
+        <template v-if="$slots['table-expand']" #expand>
           <slot name="table-expand" />
         </template>
-        <template #append>
+
+        <template v-if="$slots['table-append']" #append>
           <slot name="table-append" />
         </template>
-        <template #empty>
+
+        <template v-if="$slots['table-empty']" #empty>
           <slot name="table-empty" />
         </template>
       </PlusTable>

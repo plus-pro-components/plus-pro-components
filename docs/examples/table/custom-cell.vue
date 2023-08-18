@@ -13,8 +13,8 @@
 <script lang="ts" setup>
 import type { DefineComponent } from 'vue'
 import { h, Fragment } from 'vue'
-import { useTable } from '@plus-pro-components/hooks'
-import type { PageInfo, PlusColumn } from '@plus-pro-components/types'
+import { useTable } from 'plus-pro-components'
+import type { PageInfo, PlusColumn } from 'plus-pro-components'
 import { ElAlert, ElButton, ElMessage, ElUpload, ElResult } from 'element-plus'
 import CustomPageHeader from './components/page-header.vue'
 

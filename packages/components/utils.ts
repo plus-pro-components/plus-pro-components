@@ -4,9 +4,32 @@ import {
   isFunction,
   isPlainObject,
   isEmptyObject,
-  toRawType
+  toRawType,
+  isString
 } from '@plus-pro-components/utils'
 import { cloneDeep } from 'lodash-es'
+
+/**
+ * 获取table key
+ * @param item
+ * @returns
+ */
+export const getTableKey = (item: PlusColumn, hasEditable = false) =>
+  hasEditable ? item.label + item.prop + item.editable : item.label + item.prop
+
+/**
+ *  获取tooltip
+ * @param tooltip
+ * @returns
+ */
+export const getTooltip = (tooltip: PlusColumn['tooltip']) => {
+  if (isString(tooltip)) {
+    return { content: tooltip }
+  }
+  if (isPlainObject(tooltip)) {
+    return tooltip
+  }
+}
 
 const throwError = (data: any, type: string) => {
   if (!isPlainObject(data)) {

@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts" setup>
-import type { PlusColumn, PageInfo } from '@plus-pro-components/types'
+import type { PlusColumn, PageInfo } from 'plus-pro-components'
 import { fileToDataURL } from '@plus-pro-components/utils'
 import type { UploadFile } from 'element-plus'
 import { ElUpload, ElButton, ElImage } from 'element-plus'

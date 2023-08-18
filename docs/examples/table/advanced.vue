@@ -33,13 +33,13 @@
 
 <script lang="ts" setup>
 import { ref, h } from 'vue'
-import { useTable } from '@plus-pro-components/hooks'
+import { useTable } from 'plus-pro-components'
 import type {
   PlusTableInstance,
-  ButtonsCallBackParams
-} from '@plus-pro-components/components/table'
-import type { PageInfo, PlusColumn } from '@plus-pro-components/types'
-
+  ButtonsCallBackParams,
+  PageInfo,
+  PlusColumn
+} from 'plus-pro-components'
 import { ElAlert } from 'element-plus'
 
 defineOptions({

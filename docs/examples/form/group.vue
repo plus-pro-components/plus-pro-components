@@ -14,8 +14,7 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue'
-import type { FieldValues } from '@plus-pro-components/types'
-import type { PlusFormGroupRow } from '@plus-pro-components/components/form'
+import type { FieldValues, PlusColumn, PlusFormGroupRow } from 'plus-pro-components'
 import { CreditCard, Calendar, Soccer } from '@element-plus/icons-vue'
 
 const state = ref({
@@ -271,8 +270,8 @@ const group: PlusFormGroupRow[] = [
   }
 ]
 
-const handleChange = (values: FieldValues) => {
-  console.log(values, 'change')
+const handleChange = (values: FieldValues, prop: PlusColumn) => {
+  console.log(values, prop, 'change')
 }
 const handleSubmit = (values: FieldValues) => {
   console.log(values, 'Submit')

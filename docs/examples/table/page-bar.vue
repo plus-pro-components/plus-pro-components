@@ -17,8 +17,8 @@
 </template>
 
 <script lang="ts" setup>
-import { useTable } from '@plus-pro-components/hooks'
-import type { PageInfo, PlusColumn } from '@plus-pro-components/types'
+import { useTable } from 'plus-pro-components'
+import type { PageInfo, PlusColumn } from 'plus-pro-components'
 
 interface TableRow {
   id: number

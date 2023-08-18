@@ -217,20 +217,12 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, watch, isVNode, h } from 'vue'
+import { ref, watch, isVNode, h, computed } from 'vue'
 import type { VNode, Component } from 'vue'
 import type { PlusColumn, FieldValueType } from '@plus-pro-components/types'
-import {
-  isString,
-  isPlainObject,
-  isFunction,
-  isDate,
-  isArray,
-  isComponent
-} from '@plus-pro-components/utils'
-import { getCustomProps, handleSlots } from '@plus-pro-components/components/utils'
+import { isString, isFunction, isDate, isArray, isComponent } from '@plus-pro-components/utils'
+import { getTooltip, getCustomProps, handleSlots } from '@plus-pro-components/components/utils'
 import { QuestionFilled } from '@element-plus/icons-vue'
-
 import { useGetOptions, useLocale } from '@plus-pro-components/hooks'
 
 export interface PlusFormItemProps {
@@ -278,8 +270,14 @@ const customFieldProps = ref<any>({})
 const state = ref<FieldValueType>()
 const range = ['datetimerange', 'daterange', 'monthrange']
 
-const isArrayValue = () => {
+/**
+ * 默认值是数组的情况
+ */
+const isArrayValue = computed(() => {
   if (props.valueType === 'checkbox') {
+    return true
+  }
+  if (props.valueType === 'plus-date-picker') {
     return true
   }
   if (props.valueType === 'select' && customFieldProps.value?.multiple) {
@@ -291,23 +289,28 @@ const isArrayValue = () => {
   if (props.valueType === 'cascader' && customFieldProps.value?.multiple) {
     return true
   }
-
   return false
-}
+})
 
-const isNumberValue = () => {
-  const list = ['rate', 'input-number']
+/**
+ * 默认值是数字的情况
+ */
+const isNumberValue = computed(() => {
+  const list = ['rate', 'input-number', 'slider']
   if (list.includes(props.valueType as string)) {
     return true
   }
   return false
-}
+})
 
+/**
+ * 设置表单值（默认值）
+ * @param val
+ */
 const setValue = (val: any) => {
-  if (isArrayValue()) {
+  if (isArrayValue.value) {
     if (isArray(val)) {
       const [start, end] = val
-
       if (isDate(start) || isDate(end)) {
         state.value = [String(start), String(end)]
       } else {
@@ -316,7 +319,7 @@ const setValue = (val: any) => {
     } else {
       state.value = []
     }
-  } else if (isNumberValue()) {
+  } else if (isNumberValue.value) {
     state.value = Number(val)
   } else if (props.valueType === 'switch') {
     state.value = Boolean(val)
@@ -327,16 +330,9 @@ const setValue = (val: any) => {
   }
 }
 
-watch(
-  () => props.modelValue,
-  val => {
-    setValue(val)
-  },
-  {
-    immediate: true
-  }
-)
-
+/**
+ * 监听formItemProps
+ */
 watch(
   () => props.formItemProps,
   val => {
@@ -354,6 +350,9 @@ watch(
   }
 )
 
+/**
+ * 监听fieldPropss
+ */
 watch(
   () => props.fieldProps,
   val => {
@@ -371,25 +370,33 @@ watch(
   }
 )
 
+watch(
+  () => props.modelValue,
+  val => {
+    setValue(val)
+  },
+  {
+    flush: 'post',
+    immediate: true
+  }
+)
+
 const handleChange = (val: FieldValueType) => {
   emit('update:modelValue', val)
   emit('change', val)
 }
 
-const getTooltip = (tooltip: PlusColumn['tooltip']) => {
-  if (isString(tooltip)) {
-    return { content: tooltip }
-  }
-  if (isPlainObject(tooltip)) {
-    return tooltip
-  }
-}
-
+/**
+ * el-autocomplete 特殊处理
+ * @param param0
+ */
 const handleSelect = ({ value }: any) => {
   handleChange(value)
 }
 
-// 渲染自定义表单
+/**
+ * 渲染自定义表单
+ */
 const render = () => {
   if (!props.renderField) return
   const value = state.value

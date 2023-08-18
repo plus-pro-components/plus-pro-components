@@ -63,9 +63,9 @@ export interface PlusSearchState {
   originData: any
 }
 export interface PlusSearchEmits {
-  (e: 'update:modelValue', values: any): void
-  (e: 'search', values: any): void
-  (e: 'change', values: any): void
+  (e: 'update:modelValue', values: FieldValues): void
+  (e: 'search', values: FieldValues): void
+  (e: 'change', values: FieldValues, column: PlusColumn): void
   (e: 'reset'): void
 }
 
@@ -127,9 +127,9 @@ if (props.hasUnfold) {
   state.subColumns = cloneDeep(state.originData)
 }
 
-const handleChange = async () => {
-  emit('change', state.values)
-  emit('update:modelValue', state.values)
+const handleChange = async (values: FieldValues, column: PlusColumn) => {
+  emit('change', values, column)
+  emit('update:modelValue', values)
 }
 
 const handleSearch = async () => {

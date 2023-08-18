@@ -15,7 +15,7 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue'
-import type { PlusColumn, FieldValues } from '@plus-pro-components/types'
+import type { PlusColumn, FieldValues } from 'plus-pro-components'
 
 const state = ref<FieldValues>({
   status: '0',

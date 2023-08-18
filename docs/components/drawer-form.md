@@ -23,11 +23,11 @@ drawer-form/basic
 
 ## DrawerForm Events
 
-| 名称     | 说明                           | 类型                                                                     |
-| -------- | ------------------------------ | ------------------------------------------------------------------------ |
-| `submit` | 点击确定按钮校验通过触发的事件 | `function` <docs-tip content='(values: FieldValues) => void'></docs-tip> |
-| `change` | 表单变化触发的事件             | `function` <docs-tip content='(values: FieldValues) => void'></docs-tip> |
-| `cancel` | 点击取消按钮触发的事件         | `function`<docs-tip content='() => void'></docs-tip>                     |
+| 名称     | 说明                           | 类型                                                                                        |
+| -------- | ------------------------------ | ------------------------------------------------------------------------------------------- |
+| `submit` | 点击确定按钮校验通过触发的事件 | `function` <docs-tip content='(values: FieldValues) => void'></docs-tip>                    |
+| `change` | 表单变化触发的事件             | `function` <docs-tip content='(values: FieldValues,column: PlusColumn) => void'></docs-tip> |
+| `cancel` | 点击取消按钮触发的事件         | `function`<docs-tip content='() => void'></docs-tip>                                        |
 
 ## DrawerForm Slots
 

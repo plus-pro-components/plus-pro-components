@@ -10,7 +10,7 @@
 
 <script lang="ts" setup>
 import { ref, onMounted } from 'vue'
-import type { PlusColumn, FieldValues } from '@plus-pro-components/types'
+import type { PlusColumn, FieldValues } from 'plus-pro-components'
 
 interface RestaurantItem {
   value: string

@@ -1,5 +1,5 @@
 <template>
-  <template v-for="(item, index) in columns" :key="item.prop">
+  <template v-for="item in columns" :key="getKey(item)">
     <el-table-column
       class-name="plus-table-column"
       :prop="item.prop"
@@ -19,7 +19,7 @@
       <template #default="{ row, column, $index }">
         <PlusDisplayItem
           ref="plusDisplayItemInstance"
-          :column="columns[index]"
+          :column="item"
           :row="row"
           :index="$index"
           @change="data => handleChange(data, $index, column, item)"
@@ -33,7 +33,7 @@
 import { PlusDisplayItem } from '@plus-pro-components/components/display-item'
 import type { PlusDisplayItemInstance } from '@plus-pro-components/components/display-item'
 import type { PlusColumn } from '@plus-pro-components/types'
-import { isString, isPlainObject } from '@plus-pro-components/utils'
+import { getTooltip, getTableKey } from '@plus-pro-components/components/utils'
 import { TableFormRefInjectionKey } from '@plus-pro-components/constants'
 import { QuestionFilled } from '@element-plus/icons-vue'
 import type { Ref } from 'vue'
@@ -55,9 +55,11 @@ withDefaults(defineProps<PlusTableTableColumnProps>(), {
 })
 const emit = defineEmits<PlusTableTableColumnEmits>()
 
+/**
+ *  表单ref处理
+ */
 const plusDisplayItemInstance = shallowRef()
 const formRef = inject(TableFormRefInjectionKey) as Ref<any>
-
 watch(plusDisplayItemInstance, (event: PlusDisplayItemInstance[]) => {
   const data: any = {}
   const list: any[] = event?.map(item => ({ ...item, ...item?.getDisplayItemInstance() })) || []
@@ -71,18 +73,21 @@ watch(plusDisplayItemInstance, (event: PlusDisplayItemInstance[]) => {
   formRef.value = data
 })
 
-const getTooltip = (tooltip: PlusColumn['tooltip']) => {
-  if (isString(tooltip)) {
-    return {
-      content: tooltip
-    }
-  }
-  if (isPlainObject(tooltip)) {
-    return tooltip
-  }
-}
+/**
+ * 获取key
+ * @param item
+ */
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+const getKey = (item: PlusColumn) => getTableKey(item, true)
 
-// 表单发生变化
+/**
+ * 表单发生变化
+ * @param data
+ * @param index
+ * @param column
+ * @param item
+ */
 const handleChange = (
   data: { value: any; prop: string; row: any },
   index: number,

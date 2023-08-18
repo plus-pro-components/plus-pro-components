@@ -28,9 +28,8 @@
 
 <script lang="ts" setup>
 import { computed } from 'vue'
-import { useTable } from '@plus-pro-components/hooks'
-import type { PlusColumn } from '@plus-pro-components/types'
-import type { ButtonsCallBackParams } from '@plus-pro-components/components/table'
+import { useTable } from 'plus-pro-components'
+import type { PlusColumn, ButtonsCallBackParams } from 'plus-pro-components'
 import { View, Edit, Delete, DocumentCopy } from '@element-plus/icons-vue'
 
 interface TableRow {

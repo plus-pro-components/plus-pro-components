@@ -4,10 +4,11 @@
   >
     <el-steps :active="active" finish-status="success" v-bind="$attrs">
       <el-step v-for="(item, index) in data" :key="index" v-bind="item">
-        <template v-if="slots.icon" #icon>
+        <template v-if="$slots.icon" #icon>
           <slot name="icon" :icon="item.icon" :title="item.title" :description="item.description" />
         </template>
-        <template v-if="slots.title" #title>
+
+        <template v-if="$slots.title" #title>
           <slot
             name="title"
             :icon="item.icon"
@@ -15,7 +16,8 @@
             :description="item.description"
           />
         </template>
-        <template v-if="slots.description" #description>
+
+        <template v-if="$slots.description" #description>
           <slot
             name="description"
             :icon="item.icon"
@@ -25,6 +27,7 @@
         </template>
       </el-step>
     </el-steps>
+
     <PlusForm
       v-bind="data[active - 1].form"
       :has-reset="active !== 1"
@@ -34,15 +37,16 @@
       :reset-text="t('plus.stepsForm.preText')"
       @submit="next"
       @reset="pre"
+      @change="handleChange"
     />
   </div>
 </template>
 
 <script lang="ts" setup>
-import { ref, useSlots } from 'vue'
+import { ref } from 'vue'
 import { cloneDeep } from 'lodash-es'
 import type { StepProps } from 'element-plus'
-import type { FieldValues, Mutable } from '@plus-pro-components/types'
+import type { FieldValues, Mutable, PlusColumn } from '@plus-pro-components/types'
 import type { PlusFormProps } from '@plus-pro-components/components/form'
 import { useLocale } from '@plus-pro-components/hooks'
 
@@ -63,6 +67,7 @@ export interface PlusStepsFormEmits {
   (e: 'pre', modelValue: number): void
   (e: 'next', modelValue: number, values: any): void
   (e: 'update:modelValue', active: number): void
+  (e: 'change', values: FieldValues, column: PlusColumn): void
 }
 
 defineOptions({
@@ -73,12 +78,14 @@ const props = withDefaults(defineProps<PlusStepsFormProps>(), {
   modelValue: 1,
   data: () => []
 })
-const slots = useSlots()
-console.log(slots)
 
 const emit = defineEmits<PlusStepsFormEmits>()
 const { t } = useLocale()
 const active = ref(cloneDeep(props.modelValue))
+
+const handleChange = (values: FieldValues, column: PlusColumn) => {
+  emit('change', values, column)
+}
 
 // 上一步
 const pre = () => {

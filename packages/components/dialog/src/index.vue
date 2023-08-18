@@ -11,7 +11,7 @@
     class="plus-dialog"
     v-bind="$attrs"
   >
-    <template #header>
+    <template v-if="$slots.header" #header>
       <slot name="header" />
     </template>
 
