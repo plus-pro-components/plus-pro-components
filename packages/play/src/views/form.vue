@@ -52,10 +52,7 @@ const group: PlusFormGroupRow[] = [
         width: 120,
         prop: 'name',
         valueType: 'copy',
-        tooltip: '名称最多显示6个字符',
-        colProps: {
-          span: 12
-        }
+        tooltip: '名称最多显示6个字符'
       },
       {
         label: '状态',
@@ -83,10 +80,7 @@ const group: PlusFormGroupRow[] = [
             value: '3',
             color: 'red'
           }
-        ],
-        colProps: {
-          span: 12
-        }
+        ]
       }
     ]
   },

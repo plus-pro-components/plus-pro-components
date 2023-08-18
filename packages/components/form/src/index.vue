@@ -33,7 +33,7 @@
             <el-col
               v-for="(item, index) in filterHide(groupItem.columns)"
               :key="item.prop + index"
-              v-bind="item.colProps"
+              v-bind="item.colProps || colProps"
             >
               <PlusFormItem
                 v-model="state.values[item.prop]"
@@ -51,14 +51,16 @@
           <el-col
             v-for="(item, index) in state.subColumns"
             :key="item.prop + index"
-            v-bind="item.colProps"
+            v-bind="item.colProps || colProps"
           >
             <PlusFormItem v-model="state.values[item.prop]" v-bind="item" @change="handleChange" />
+          </el-col>
+          <el-col v-bind="colProps">
+            <slot name="searchFooter" />
           </el-col>
         </el-row>
       </template>
     </slot>
-
     <div
       v-if="hasFooter"
       class="plus-form__footer"
@@ -82,7 +84,7 @@
 <script lang="ts" setup>
 import type { DefineComponent } from 'vue'
 import { reactive, ref, watch, computed } from 'vue'
-import type { FormInstance, FormRules, FormProps, RowProps } from 'element-plus'
+import type { FormInstance, FormRules, FormProps, RowProps, ColProps } from 'element-plus'
 import { ElMessage } from 'element-plus'
 import { useLocale } from '@plus-pro-components/hooks'
 import { PlusFormItem } from '@plus-pro-components/components/form-item'
@@ -103,6 +105,7 @@ export interface PlusFormProps extends /* @vue-ignore */ Partial<Mutable<FormPro
   labelWidth?: string
   labelPosition?: 'left' | 'right' | 'top'
   rowProps?: Partial<Mutable<RowProps>>
+  colProps?: Partial<Mutable<ColProps>>
   labelSuffix?: string
   hasErrorTip?: boolean
   hasFooter?: boolean
@@ -135,6 +138,7 @@ const props = withDefaults(defineProps<PlusFormProps>(), {
   labelWidth: '80px',
   labelPosition: 'left',
   rowProps: () => ({}),
+  colProps: () => ({}),
   labelSuffix: ':',
   hasErrorTip: true,
   hasFooter: true,
@@ -143,7 +147,6 @@ const props = withDefaults(defineProps<PlusFormProps>(), {
   confirmText: '',
   cancelText: '',
   footerAlign: 'left',
-  formProps: () => ({}),
   rules: () => ({}),
   columns: () => [],
   group: false

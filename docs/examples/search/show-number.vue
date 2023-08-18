@@ -25,14 +25,7 @@ const columns: PlusColumn[] = [
     label: '名称',
     prop: 'name',
     valueType: 'copy',
-    tooltip: '名称最多显示6个字符',
-    colProps: {
-      xs: 24,
-      sm: 12,
-      md: 12,
-      lg: 8,
-      xl: 8
-    }
+    tooltip: '名称最多显示6个字符'
   },
   {
     label: '状态',
@@ -59,45 +52,23 @@ const columns: PlusColumn[] = [
         value: '3',
         color: 'red'
       }
-    ],
-    colProps: {
-      xs: 24,
-      sm: 12,
-      md: 12,
-      lg: 8,
-      xl: 8
-    }
+    ]
   },
   {
     label: '时间',
     prop: 'time',
-    valueType: 'date-picker',
-    colProps: {
-      xs: 24,
-      sm: 12,
-      md: 12,
-      lg: 8,
-      xl: 8
-    }
+    valueType: 'date-picker'
   },
   {
     label: '数量',
     prop: 'number',
     valueType: 'input-number',
-    fieldProps: { precision: 2, step: 2 },
-    colProps: {
-      xs: 24,
-      sm: 12,
-      md: 12,
-      lg: 8,
-      xl: 8
-    }
+    fieldProps: { precision: 2, step: 2 }
   },
   {
     label: '城市',
     prop: 'city',
     valueType: 'cascader',
-
     options: [
       {
         value: '0',
@@ -147,29 +118,14 @@ const columns: PlusColumn[] = [
           }
         ]
       }
-    ],
-    colProps: {
-      xs: 24,
-      sm: 12,
-      md: 12,
-      lg: 8,
-      xl: 8
-    }
+    ]
   },
   {
     label: '地区',
     prop: 'place',
     tooltip: '请精确到门牌号',
-
     fieldProps: {
       placeholder: '请精确到门牌号'
-    },
-    colProps: {
-      xs: 24,
-      sm: 12,
-      md: 12,
-      lg: 8,
-      xl: 8
     }
   },
   {
@@ -180,36 +136,15 @@ const columns: PlusColumn[] = [
       type: 'datetimerange',
       startPlaceholder: '请选择',
       endPlaceholder: '请选择'
-    },
-    colProps: {
-      xs: 24,
-      sm: 12,
-      md: 12,
-      lg: 8,
-      xl: 8
     }
   },
   {
     label: '奖励',
-    prop: 'price',
-    colProps: {
-      xs: 24,
-      sm: 12,
-      md: 12,
-      lg: 8,
-      xl: 8
-    }
+    prop: 'price'
   },
   {
     label: '提成',
-    prop: 'percentage',
-    colProps: {
-      xs: 24,
-      sm: 12,
-      md: 12,
-      lg: 8,
-      xl: 8
-    }
+    prop: 'percentage'
   }
 ]
 
