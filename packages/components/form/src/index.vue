@@ -82,7 +82,7 @@
 <script lang="ts" setup>
 import type { DefineComponent } from 'vue'
 import { reactive, ref, watch, computed } from 'vue'
-import type { FormInstance, FormRules, FormProps, RowProps, ColProps } from 'element-plus'
+import type { FormInstance, FormRules, FormProps, RowProps } from 'element-plus'
 import { ElMessage } from 'element-plus'
 import { useLocale } from '@plus-pro-components/hooks'
 import { PlusFormItem } from '@plus-pro-components/components/form-item'
@@ -95,7 +95,6 @@ export interface PlusFormGroupRow {
   title: string
   icon?: DefineComponent
   columns: PlusColumn[]
-  colProps?: Partial<Mutable<ColProps>>
 }
 
 export interface PlusFormProps extends /* @vue-ignore */ Partial<Mutable<FormProps>> {

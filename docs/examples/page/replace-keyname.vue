@@ -94,6 +94,13 @@ const tableConfig: PlusColumn[] = [
     valueType: 'text',
     tableColumnProps: {
       'show-overflow-tooltip': true
+    },
+    colProps: {
+      xs: 24,
+      sm: 12,
+      md: 12,
+      lg: 8,
+      xl: 8
     }
   },
   {
@@ -122,7 +129,14 @@ const tableConfig: PlusColumn[] = [
         value: '3',
         color: 'red'
       }
-    ]
+    ],
+    colProps: {
+      xs: 24,
+      sm: 12,
+      md: 12,
+      lg: 8,
+      xl: 8
+    }
   },
   {
     label: '标签',
@@ -131,6 +145,13 @@ const tableConfig: PlusColumn[] = [
     valueType: 'tag',
     fieldProps: (value: string) => {
       return { type: value }
+    },
+    colProps: {
+      xs: 24,
+      sm: 12,
+      md: 12,
+      lg: 8,
+      xl: 8
     }
   },
   {
@@ -149,6 +170,13 @@ const tableConfig: PlusColumn[] = [
           : { status: 'exception' }
 
       return data
+    },
+    colProps: {
+      xs: 24,
+      sm: 12,
+      md: 12,
+      lg: 8,
+      xl: 8
     }
   },
   {
@@ -157,7 +185,14 @@ const tableConfig: PlusColumn[] = [
     prop: 'rate',
     valueType: 'rate',
     hideInSearch: true,
-    editable: true
+    editable: true,
+    colProps: {
+      xs: 24,
+      sm: 12,
+      md: 12,
+      lg: 8,
+      xl: 8
+    }
   },
   {
     label: '开关',
@@ -165,7 +200,14 @@ const tableConfig: PlusColumn[] = [
     prop: 'switch',
     hideInSearch: true,
     valueType: 'switch',
-    editable: true
+    editable: true,
+    colProps: {
+      xs: 24,
+      sm: 12,
+      md: 12,
+      lg: 8,
+      xl: 8
+    }
   },
   {
     label: '图片',
@@ -209,6 +251,13 @@ const tableConfig: PlusColumn[] = [
           () => h(ElButton, () => '点击上传')
         )
       ])
+    },
+    colProps: {
+      xs: 24,
+      sm: 12,
+      md: 12,
+      lg: 8,
+      xl: 8
     }
   },
   {
@@ -216,7 +265,14 @@ const tableConfig: PlusColumn[] = [
     prop: 'time',
     valueType: 'date-picker',
     hideInForm: true,
-    minWidth: '180px'
+    minWidth: '180px',
+    colProps: {
+      xs: 24,
+      sm: 12,
+      md: 12,
+      lg: 8,
+      xl: 8
+    }
   }
 ]
 </script>

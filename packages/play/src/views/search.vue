@@ -25,7 +25,14 @@ const columns: PlusColumn[] = [
     label: '名称',
     prop: 'name',
     valueType: 'copy',
-    tooltip: '名称最多显示6个字符'
+    tooltip: '名称最多显示6个字符',
+    colProps: {
+      xs: 24,
+      sm: 12,
+      md: 8,
+      lg: 6,
+      xl: 6
+    }
   },
   {
     label: '状态',
@@ -52,12 +59,26 @@ const columns: PlusColumn[] = [
         value: '3',
         color: 'red'
       }
-    ]
+    ],
+    colProps: {
+      xs: 24,
+      sm: 12,
+      md: 8,
+      lg: 6,
+      xl: 6
+    }
   },
   {
     label: '时间',
     prop: 'time',
-    valueType: 'date-picker'
+    valueType: 'date-picker',
+    colProps: {
+      xs: 24,
+      sm: 12,
+      md: 8,
+      lg: 6,
+      xl: 6
+    }
   },
   {
     label: '数量',
@@ -66,6 +87,13 @@ const columns: PlusColumn[] = [
     fieldProps: {
       precision: 2,
       step: 2
+    },
+    colProps: {
+      xs: 24,
+      sm: 12,
+      md: 8,
+      lg: 6,
+      xl: 6
     }
   },
   {
@@ -122,7 +150,14 @@ const columns: PlusColumn[] = [
           }
         ]
       }
-    ]
+    ],
+    colProps: {
+      xs: 24,
+      sm: 12,
+      md: 8,
+      lg: 6,
+      xl: 6
+    }
   },
   {
     label: '地区',
@@ -130,6 +165,13 @@ const columns: PlusColumn[] = [
     tooltip: '请精确到门牌号',
     fieldProps: {
       placeholder: '请精确到门牌号'
+    },
+    colProps: {
+      xs: 24,
+      sm: 12,
+      md: 8,
+      lg: 6,
+      xl: 6
     }
   },
   {
@@ -140,15 +182,36 @@ const columns: PlusColumn[] = [
       type: 'datetimerange',
       startPlaceholder: '请选择开始时间',
       endPlaceholder: '请选择结束时间'
+    },
+    colProps: {
+      xs: 24,
+      sm: 12,
+      md: 8,
+      lg: 6,
+      xl: 6
     }
   },
   {
     label: '奖励',
-    prop: 'price'
+    prop: 'price',
+    colProps: {
+      xs: 24,
+      sm: 12,
+      md: 8,
+      lg: 6,
+      xl: 6
+    }
   },
   {
     label: '提成',
-    prop: 'percentage'
+    prop: 'percentage',
+    colProps: {
+      xs: 24,
+      sm: 12,
+      md: 8,
+      lg: 6,
+      xl: 6
+    }
   }
 ]
 
