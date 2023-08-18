@@ -5,6 +5,9 @@
       :columns="columns"
       :rules="rules"
       :row-props="{ gutter: 20 }"
+      :col-props="{
+        span: 12
+      }"
       @change="handleChange"
       @submit="handleSubmit"
       @submit-error="handleSubmitError"
@@ -48,10 +51,7 @@ const columns: PlusColumn[] = [
     width: 120,
     prop: 'name',
     valueType: 'copy',
-    tooltip: '名称最多显示6个字符',
-    colProps: {
-      span: 12
-    }
+    tooltip: '名称最多显示6个字符'
   },
   {
     label: '状态',
@@ -79,70 +79,46 @@ const columns: PlusColumn[] = [
         value: '3',
         color: 'red'
       }
-    ],
-    colProps: {
-      span: 12
-    }
+    ]
   },
   {
     label: '标签',
     width: 120,
-    prop: 'tag',
-    colProps: {
-      span: 12
-    }
+    prop: 'tag'
   },
   {
     label: '执行进度',
     width: 200,
-    prop: 'progress',
-    colProps: {
-      span: 12
-    }
+    prop: 'progress'
   },
   {
     label: '评分',
     width: 200,
     prop: 'rate',
-    valueType: 'rate',
-    colProps: {
-      span: 12
-    }
+    valueType: 'rate'
   },
   {
     label: '是否显示',
     width: 100,
     prop: 'switch',
-    valueType: 'switch',
-    colProps: {
-      span: 12
-    }
+    valueType: 'switch'
   },
   {
     label: '图片',
     prop: 'img',
     width: 100,
-    valueType: 'img',
-    colProps: {
-      span: 12
-    }
+    valueType: 'img'
   },
   {
     label: '时间',
     prop: 'time',
-    valueType: 'date-picker',
-    colProps: {
-      span: 12
-    }
+    valueType: 'date-picker'
   },
   {
     label: '数量',
     prop: 'number',
     valueType: 'input-number',
-    fieldProps: { precision: 2, step: 2 },
-    colProps: {
-      span: 12
-    }
+    fieldProps: { precision: 2, step: 2 }
   },
   {
     label: '城市',
@@ -197,10 +173,7 @@ const columns: PlusColumn[] = [
           }
         ]
       }
-    ],
-    colProps: {
-      span: 12
-    }
+    ]
   },
   {
     label: '地区',
@@ -208,9 +181,6 @@ const columns: PlusColumn[] = [
     tooltip: '请精确到门牌号',
     fieldProps: {
       placeholder: '请精确到门牌号'
-    },
-    colProps: {
-      span: 12
     }
   },
   {
@@ -230,10 +200,7 @@ const columns: PlusColumn[] = [
         label: '普通话证书',
         value: '2'
       }
-    ],
-    colProps: {
-      span: 12
-    }
+    ]
   },
   {
     label: '梦想',
@@ -248,10 +215,7 @@ const columns: PlusColumn[] = [
         label: '远方',
         value: '1'
       }
-    ],
-    colProps: {
-      span: 12
-    }
+    ]
   },
   {
     label: '到期时间',
@@ -261,9 +225,6 @@ const columns: PlusColumn[] = [
       type: 'datetimerange',
       startPlaceholder: '请选择开始时间',
       endPlaceholder: '请选择结束时间'
-    },
-    colProps: {
-      span: 12
     }
   },
   {
@@ -274,9 +235,6 @@ const columns: PlusColumn[] = [
       maxlength: 10,
       showWordLimit: true,
       autosize: { minRows: 2, maxRows: 4 }
-    },
-    colProps: {
-      span: 12
     }
   }
 ]
