@@ -29,6 +29,21 @@
     height: 6px;
     vertical-align: middle;
     border-radius: 50%;
+    &--primary {
+      background-color: var(--el-color-primary);
+    }
+    &--success {
+      background-color: var(--el-color-success);
+    }
+    &--info {
+      background-color: var(--el-color-info);
+    }
+    &--warning {
+      background-color: var(--el-color-warning);
+    }
+    &--danger {
+      background-color: var(--el-color-danger);
+    }
   }
 }
 .plus-display-item__pre {

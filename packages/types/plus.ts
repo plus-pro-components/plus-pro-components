@@ -1,4 +1,4 @@
-import type { ElTooltipProps } from 'element-plus'
+import type { ElTooltipProps, ButtonType } from 'element-plus'
 import type { VNode, Component } from 'vue'
 import type { RecordType } from './global'
 import type { TableValueType, TableColumnProps } from './table'
@@ -44,7 +44,17 @@ export type PropsItemType<T extends Record<string, any> = any> =
 export interface OptionsRow {
   label: number | string
   value: number | string
+  /**
+   * 小圆点背景色，
+   * color 优先级 高于 type
+   */
   color?: string
+  /**
+   * 小圆点背景色，
+   * type 优先级 低于 color，
+   * 只支持 'success' | 'warning' | 'info' | 'primary' | 'danger'
+   */
+  type?: Exclude<ButtonType, 'default' | 'text' | ''>
   /**
    * 表单子项的props  如 el-checkbox-group下的el-checkbox的props
    */

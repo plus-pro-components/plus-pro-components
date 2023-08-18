@@ -85,8 +85,13 @@
     v-bind="customFieldProps"
   >
     <span
-      v-if="getStatus().color"
-      class="plus-display-item__badge__dot"
+      v-if="getStatus().color || getStatus().type"
+      :class="[
+        'plus-display-item__badge__dot',
+        getStatus().type && !getStatus().color
+          ? 'plus-display-item__badge__dot--' + getStatus().type
+          : ''
+      ]"
       :style="{ backgroundColor: getStatus().color }"
     />
     {{ getStatus().label }}

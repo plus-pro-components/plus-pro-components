@@ -9,9 +9,20 @@ table/basic
 
 :::
 
+## 自定义状态小圆点的背景色
+
+`valueType`为`select`或`radio`或`checkbox  `时，
+`columns`中的`options`中可配置`type`或`color  `。
+`color` 优先级 高于 `type`。`type`只支持`'success' | 'warning' | 'info' | 'primary' | 'danger'`。
+:::demo
+
+table/status
+
+:::
+
 ## 自定义操作栏
 
-actionBar 的`type` 支持 `button`,`icon`和 `link`, 对应 element plus 的 ElButton,ElIcon 和 ElLink 组件。
+actionBar 的`type` 支持 `button`，`icon`和 `link`，对应 element plus 的 ElButton，ElIcon 和 ElLink 组件。
 
 配置 `confirm` 即可实现二次确认。
 

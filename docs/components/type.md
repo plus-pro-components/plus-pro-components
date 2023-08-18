@@ -400,7 +400,17 @@ import type { PropsItemType } from 'plus-pro-components'
 export interface OptionsRow {
   label: number | string
   value: number | string
+  /**
+   * 小圆点背景色，
+   * color 优先级 高于 type
+   */
   color?: string
+  /**
+   * 小圆点背景色，
+   * type 优先级 低于 color，
+   * 只支持 'success' | 'warning' | 'info' | 'primary' | 'danger'
+   */
+  type?: 'success' | 'warning' | 'info' | 'primary' | 'danger'
   /**
    * 表单子项的props  如 el-checkbox-group下的el-checkbox的props
    */
