@@ -1,5 +1,5 @@
 import type { VNode, Component } from 'vue'
-import type { FormItemProps } from 'element-plus'
+import type { FormItemProps, ColProps } from 'element-plus'
 import type { PlusFormProps } from '@plus-pro-components/components/form'
 import type { PropsItemType, PlusColumn } from './plus'
 import type { Mutable } from './global'
@@ -81,6 +81,10 @@ export interface FormColumnProps {
     onChange: (value: FieldValueType) => void,
     props: PlusColumn
   ) => VNode | Component | string
+  /**
+   * @desc el-col 的 props
+   */
+  colProps?: Partial<Mutable<ColProps>>
 }
 
 /**

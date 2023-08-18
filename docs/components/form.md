@@ -1,10 +1,26 @@
 # Form 表单
 
-## 基础用法
+## 基础用法(默认通栏)
 
 :::demo
 
 form/basic
+
+:::
+
+## 两列
+
+:::demo
+
+form/two-columns
+
+:::
+
+## 混合
+
+:::demo
+
+form/mixed
 
 :::
 
@@ -76,6 +92,7 @@ form/all
 | ----------------------- | ------------------------- | ---------------------------------------------------------------------------------------- | ------- | -------- |
 | `model-value / v-model` | 表单绑定值                | `object` [FieldValues](/components/type.html#fieldvalues)                                |         | 否       |
 | `columns`               | 表单配置信息              | `array`[PlusColumn[]](/components/config.html)                                           | `[]`    | 否       |
+| `rowProps`              | el-row 的 props           | `object`[RowProps](https://element-plus.org/zh-CN/component/layout.html#row-attributes)  |         | 否       |
 | `labelWidth`            | el-form 的 labelWidth     | `string`                                                                                 | `84px`  | 否       |
 | `labelPosition`         | el-form 的 labelPosition  | `string` <docs-tip content="'left' / 'right' / 'top'"></docs-tip>                        | `left`  | 否       |
 | `labelSuffix`           | el-form 的 labelSuffix    | `string`                                                                                 | `:`     | 否       |

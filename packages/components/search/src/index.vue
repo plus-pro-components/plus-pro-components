@@ -12,36 +12,34 @@
     v-bind="$attrs"
   >
     <el-row v-bind="rowProps">
-      <el-col v-for="item in subColumns" :key="item.prop" v-bind="colProps">
+      <el-col v-for="item in subColumns" :key="item.prop" v-bind="item.colProps">
         <PlusFormItem v-model="state.values[item.prop]" v-bind="item" @change="handleChange" />
       </el-col>
-      <el-col v-bind="colProps">
-        <el-form-item v-if="hasFooter" class="plus-search__button__wrapper">
-          <slot name="footer">
-            <el-button v-if="hasReset" :icon="RefreshRight" @click="handleReset">
-              {{ resetText || t('plus.search.resetText') }}
-            </el-button>
-            <el-button type="primary" :loading="searchLoading" :icon="Search" @click="handleSearch">
-              {{ searchText || t('plus.search.searchText') }}
-            </el-button>
+      <el-form-item v-if="hasFooter" class="plus-search__button__wrapper">
+        <slot name="footer">
+          <el-button v-if="hasReset" :icon="RefreshRight" @click="handleReset">
+            {{ resetText || t('plus.search.resetText') }}
+          </el-button>
+          <el-button type="primary" :loading="searchLoading" :icon="Search" @click="handleSearch">
+            {{ searchText || t('plus.search.searchText') }}
+          </el-button>
 
-            <el-button v-if="hasUnfold" type="primary" link @click="handleUnfold">
-              {{ isShowUnfold ? t('plus.search.expand') : t('plus.search.retract') }}
-              <el-icon>
-                <ArrowDown v-if="isShowUnfold" />
-                <ArrowUp v-else />
-              </el-icon>
-            </el-button>
-          </slot>
-        </el-form-item>
-      </el-col>
+          <el-button v-if="hasUnfold" type="primary" link @click="handleUnfold">
+            {{ isShowUnfold ? t('plus.search.expand') : t('plus.search.retract') }}
+            <el-icon>
+              <ArrowDown v-if="isShowUnfold" />
+              <ArrowUp v-else />
+            </el-icon>
+          </el-button>
+        </slot>
+      </el-form-item>
     </el-row>
   </el-form>
 </template>
 
 <script lang="ts" setup>
 import { reactive, ref, toRefs, computed, watch } from 'vue'
-import type { FormInstance, FormRules, FormProps, RowProps, ColProps } from 'element-plus'
+import type { FormInstance, FormRules, FormProps, RowProps } from 'element-plus'
 import { ArrowDown, ArrowUp, Search, RefreshRight } from '@element-plus/icons-vue'
 import { PlusFormItem } from '@plus-pro-components/components/form-item'
 import type { PlusColumn, FieldValues, Mutable } from '@plus-pro-components/types'
@@ -64,7 +62,6 @@ export interface PlusSearchProps extends /* @vue-ignore */ Partial<Mutable<FormP
   rules?: FormRules
   showNumber?: number
   rowProps?: Partial<Mutable<RowProps>>
-  colProps?: Partial<Mutable<ColProps>>
 }
 export interface PlusSearchState {
   values: FieldValues
@@ -101,13 +98,6 @@ const props = withDefaults(defineProps<PlusSearchProps>(), {
   columns: () => [],
   rowProps: () => ({
     gutter: 20
-  }),
-  colProps: () => ({
-    xs: 24,
-    sm: 12,
-    md: 8,
-    lg: 6,
-    xl: 6
   })
 })
 const emit = defineEmits<PlusSearchEmits>()

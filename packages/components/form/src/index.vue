@@ -29,26 +29,33 @@
               </div>
             </slot>
           </template>
-
-          <PlusFormItem
-            v-for="(item, index) in filterHide(groupItem.columns)"
-            :key="item.prop + index"
-            v-model="state.values[item.prop]"
-            v-bind="item"
-            @change="handleChange"
-          />
+          <el-row v-bind="rowProps">
+            <el-col
+              v-for="(item, index) in filterHide(groupItem.columns)"
+              :key="item.prop + index"
+              v-bind="item.colProps"
+            >
+              <PlusFormItem
+                v-model="state.values[item.prop]"
+                v-bind="item"
+                @change="handleChange"
+              />
+            </el-col>
+          </el-row>
         </el-card>
       </template>
 
       <!-- 普通表单 -->
       <template v-else>
-        <PlusFormItem
-          v-for="(item, index) in state.subColumns"
-          :key="item.prop + index"
-          v-model="state.values[item.prop]"
-          v-bind="item"
-          @change="handleChange"
-        />
+        <el-row v-bind="rowProps">
+          <el-col
+            v-for="(item, index) in state.subColumns"
+            :key="item.prop + index"
+            v-bind="item.colProps"
+          >
+            <PlusFormItem v-model="state.values[item.prop]" v-bind="item" @change="handleChange" />
+          </el-col>
+        </el-row>
       </template>
     </slot>
 
@@ -75,7 +82,7 @@
 <script lang="ts" setup>
 import type { DefineComponent } from 'vue'
 import { reactive, ref, watch, computed } from 'vue'
-import type { FormInstance, FormRules, FormProps } from 'element-plus'
+import type { FormInstance, FormRules, FormProps, RowProps } from 'element-plus'
 import { ElMessage } from 'element-plus'
 import { useLocale } from '@plus-pro-components/hooks'
 import { PlusFormItem } from '@plus-pro-components/components/form-item'
@@ -95,6 +102,7 @@ export interface PlusFormProps extends /* @vue-ignore */ Partial<Mutable<FormPro
   columns?: PlusColumn[]
   labelWidth?: string
   labelPosition?: 'left' | 'right' | 'top'
+  rowProps?: Partial<Mutable<RowProps>>
   labelSuffix?: string
   hasErrorTip?: boolean
   hasFooter?: boolean
@@ -126,6 +134,7 @@ const props = withDefaults(defineProps<PlusFormProps>(), {
   modelValue: () => ({}),
   labelWidth: '80px',
   labelPosition: 'left',
+  rowProps: () => ({}),
   labelSuffix: ':',
   hasErrorTip: true,
   hasFooter: true,

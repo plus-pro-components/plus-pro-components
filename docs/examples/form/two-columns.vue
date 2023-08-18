@@ -1,41 +1,61 @@
 <template>
-  <el-card>
-    <PlusSearch
+  <el-card style="width: 800px">
+    <PlusForm
       v-model="state"
       :columns="columns"
-      :show-number="3"
+      :rules="rules"
+      :row-props="{ gutter: 20 }"
       @change="handleChange"
-      @search="handleSearch"
-      @reset="handleRest"
+      @submit="handleSubmit"
+      @submit-error="handleSubmitError"
+      @cancel="handleCancel"
     />
   </el-card>
 </template>
 
 <script lang="ts" setup>
 import { ref } from 'vue'
-import type { PlusColumn } from '@plus-pro-components/types'
+import type { PlusColumn, FieldValues } from '@plus-pro-components/types'
 
-const state = ref({
+const state = ref<FieldValues>({
   status: '0',
-  time: new Date().toString()
+  name: '',
+  rate: 4,
+  progress: 100,
+  switch: true,
+  time: new Date().toString(),
+  img: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg'
 })
+
+const rules = {
+  name: [
+    {
+      required: true,
+      message: '请输入名称'
+    }
+  ],
+  tag: [
+    {
+      required: true,
+      message: '请输入标签'
+    }
+  ]
+}
 
 const columns: PlusColumn[] = [
   {
     label: '名称',
+    width: 120,
     prop: 'name',
     valueType: 'copy',
     tooltip: '名称最多显示6个字符',
     colProps: {
-      xs: 24,
-      sm: 12,
-      md: 12,
-      lg: 8,
-      xl: 8
+      span: 12
     }
   },
   {
     label: '状态',
+    width: 120,
     prop: 'status',
     valueType: 'select',
     options: [
@@ -61,11 +81,50 @@ const columns: PlusColumn[] = [
       }
     ],
     colProps: {
-      xs: 24,
-      sm: 12,
-      md: 12,
-      lg: 8,
-      xl: 8
+      span: 12
+    }
+  },
+  {
+    label: '标签',
+    width: 120,
+    prop: 'tag',
+    colProps: {
+      span: 12
+    }
+  },
+  {
+    label: '执行进度',
+    width: 200,
+    prop: 'progress',
+    colProps: {
+      span: 12
+    }
+  },
+  {
+    label: '评分',
+    width: 200,
+    prop: 'rate',
+    valueType: 'rate',
+    colProps: {
+      span: 12
+    }
+  },
+  {
+    label: '是否显示',
+    width: 100,
+    prop: 'switch',
+    valueType: 'switch',
+    colProps: {
+      span: 12
+    }
+  },
+  {
+    label: '图片',
+    prop: 'img',
+    width: 100,
+    valueType: 'img',
+    colProps: {
+      span: 12
     }
   },
   {
@@ -73,11 +132,7 @@ const columns: PlusColumn[] = [
     prop: 'time',
     valueType: 'date-picker',
     colProps: {
-      xs: 24,
-      sm: 12,
-      md: 12,
-      lg: 8,
-      xl: 8
+      span: 12
     }
   },
   {
@@ -86,18 +141,13 @@ const columns: PlusColumn[] = [
     valueType: 'input-number',
     fieldProps: { precision: 2, step: 2 },
     colProps: {
-      xs: 24,
-      sm: 12,
-      md: 12,
-      lg: 8,
-      xl: 8
+      span: 12
     }
   },
   {
     label: '城市',
     prop: 'city',
     valueType: 'cascader',
-
     options: [
       {
         value: '0',
@@ -149,27 +199,58 @@ const columns: PlusColumn[] = [
       }
     ],
     colProps: {
-      xs: 24,
-      sm: 12,
-      md: 12,
-      lg: 8,
-      xl: 8
+      span: 12
     }
   },
   {
     label: '地区',
     prop: 'place',
     tooltip: '请精确到门牌号',
-
     fieldProps: {
       placeholder: '请精确到门牌号'
     },
     colProps: {
-      xs: 24,
-      sm: 12,
-      md: 12,
-      lg: 8,
-      xl: 8
+      span: 12
+    }
+  },
+  {
+    label: '要求',
+    prop: 'demand',
+    valueType: 'checkbox',
+    options: [
+      {
+        label: '四六级',
+        value: '0'
+      },
+      {
+        label: '计算机二级证书',
+        value: '1'
+      },
+      {
+        label: '普通话证书',
+        value: '2'
+      }
+    ],
+    colProps: {
+      span: 12
+    }
+  },
+  {
+    label: '梦想',
+    prop: 'gift',
+    valueType: 'radio',
+    options: [
+      {
+        label: '诗',
+        value: '0'
+      },
+      {
+        label: '远方',
+        value: '1'
+      }
+    ],
+    colProps: {
+      span: 12
     }
   },
   {
@@ -178,48 +259,38 @@ const columns: PlusColumn[] = [
     valueType: 'date-picker',
     fieldProps: {
       type: 'datetimerange',
-      startPlaceholder: '请选择',
-      endPlaceholder: '请选择'
+      startPlaceholder: '请选择开始时间',
+      endPlaceholder: '请选择结束时间'
     },
     colProps: {
-      xs: 24,
-      sm: 12,
-      md: 12,
-      lg: 8,
-      xl: 8
+      span: 12
     }
   },
   {
-    label: '奖励',
-    prop: 'price',
+    label: '说明',
+    prop: 'desc',
+    valueType: 'textarea',
+    fieldProps: {
+      maxlength: 10,
+      showWordLimit: true,
+      autosize: { minRows: 2, maxRows: 4 }
+    },
     colProps: {
-      xs: 24,
-      sm: 12,
-      md: 12,
-      lg: 8,
-      xl: 8
-    }
-  },
-  {
-    label: '提成',
-    prop: 'percentage',
-    colProps: {
-      xs: 24,
-      sm: 12,
-      md: 12,
-      lg: 8,
-      xl: 8
+      span: 12
     }
   }
 ]
 
-const handleChange = (values: any) => {
+const handleChange = (values: FieldValues) => {
   console.log(values, 'change')
 }
-const handleSearch = (values: any) => {
-  console.log(values, 'search')
+const handleSubmit = (values: FieldValues) => {
+  console.log(values, 'Submit')
 }
-const handleRest = () => {
-  console.log('handleRest')
+const handleSubmitError = (err: any) => {
+  console.log(err, 'err')
+}
+const handleCancel = () => {
+  console.log('handleCancel')
 }
 </script>

@@ -4,13 +4,6 @@
       v-model="state"
       :columns="columns"
       :has-unfold="false"
-      :col-props="{
-        xs: 24,
-        sm: 12,
-        md: 12,
-        lg: 8,
-        xl: 8
-      }"
       @change="handleChange"
       @search="handleSearch"
       @reset="handleRest"
@@ -32,7 +25,14 @@ const columns: PlusColumn[] = [
     label: '名称',
     prop: 'name',
     valueType: 'copy',
-    tooltip: '名称最多显示6个字符'
+    tooltip: '名称最多显示6个字符',
+    colProps: {
+      xs: 24,
+      sm: 12,
+      md: 12,
+      lg: 8,
+      xl: 8
+    }
   },
   {
     label: '状态',
@@ -59,18 +59,39 @@ const columns: PlusColumn[] = [
         value: '3',
         color: 'red'
       }
-    ]
+    ],
+    colProps: {
+      xs: 24,
+      sm: 12,
+      md: 12,
+      lg: 8,
+      xl: 8
+    }
   },
   {
     label: '时间',
     prop: 'time',
-    valueType: 'date-picker'
+    valueType: 'date-picker',
+    colProps: {
+      xs: 24,
+      sm: 12,
+      md: 12,
+      lg: 8,
+      xl: 8
+    }
   },
   {
     label: '数量',
     prop: 'number',
     valueType: 'input-number',
-    fieldProps: { precision: 2, step: 2 }
+    fieldProps: { precision: 2, step: 2 },
+    colProps: {
+      xs: 24,
+      sm: 12,
+      md: 12,
+      lg: 8,
+      xl: 8
+    }
   },
   {
     label: '城市',
@@ -126,7 +147,14 @@ const columns: PlusColumn[] = [
           }
         ]
       }
-    ]
+    ],
+    colProps: {
+      xs: 24,
+      sm: 12,
+      md: 12,
+      lg: 8,
+      xl: 8
+    }
   }
 ]
 

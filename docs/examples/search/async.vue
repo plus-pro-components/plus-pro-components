@@ -5,13 +5,6 @@
       :columns="columns"
       :has-unfold="false"
       label-width="120px"
-      :col-props="{
-        xs: 24,
-        sm: 12,
-        md: 12,
-        lg: 8,
-        xl: 8
-      }"
       @change="handleChange"
       @search="handleSearch"
       @reset="handleRest"
@@ -56,7 +49,14 @@ const columns: PlusColumn[] = [
         value: '3',
         color: 'red'
       }
-    ]
+    ],
+    colProps: {
+      xs: 24,
+      sm: 12,
+      md: 12,
+      lg: 8,
+      xl: 8
+    }
   },
   {
     label: 'async函数状态',
@@ -84,6 +84,13 @@ const columns: PlusColumn[] = [
           value: '1'
         }
       ]
+    },
+    colProps: {
+      xs: 24,
+      sm: 12,
+      md: 12,
+      lg: 8,
+      xl: 8
     }
   },
   {
@@ -145,6 +152,13 @@ const columns: PlusColumn[] = [
           ])
         }, 2000)
       })
+    },
+    colProps: {
+      xs: 24,
+      sm: 12,
+      md: 12,
+      lg: 8,
+      xl: 8
     }
   }
 ]
