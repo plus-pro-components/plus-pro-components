@@ -215,7 +215,7 @@ importers:
     dependencies:
       plus-pro-components:
         specifier: npm:plus-pro-components@latest
-        version: 0.0.1-alpha.27(vue@3.3.4)
+        version: 0.0.1-alpha.29(vue@3.3.4)
     devDependencies:
       '@types/escape-html':
         specifier: ^1.0.2
@@ -254,8 +254,8 @@ importers:
         specifier: ^0.7.28
         version: 0.7.28(rollup@3.22.0)(vite@4.4.7)
       vitepress:
-        specifier: 1.0.0-beta.6
-        version: 1.0.0-beta.6(@algolia/client-search@4.17.0)(@types/node@20.1.4)(sass@1.62.1)(search-insights@2.6.0)(sortablejs@1.15.0)
+        specifier: 1.0.0-beta.7
+        version: 1.0.0-beta.7(@algolia/client-search@4.17.0)(@types/node@20.1.4)(sass@1.62.1)(search-insights@2.6.0)(sortablejs@1.15.0)
 
   packages/components: {}
 
@@ -7664,8 +7664,8 @@ packages:
       pathe: 1.1.0
     dev: true
 
-  /plus-pro-components@0.0.1-alpha.27(vue@3.3.4):
-    resolution: {integrity: sha512-XQ7ZWl0UdyKmCMiFMUsdJ2Rvx4OcXij9sDUznEXOXH/IMZfimDzOswIsnbynho2lswO9MUxFLTRbHEYomk4dWQ==}
+  /plus-pro-components@0.0.1-alpha.29(vue@3.3.4):
+    resolution: {integrity: sha512-nlE2gFuldYo3jfh/ln08BjGQVGDM7xdD9oSjtkbcKtod/nM7OutIMOOTpFrgzN4g5c+nFmazfMEz9nuvJQOjNQ==}
     peerDependencies:
       vue: ^3.2.0
     dependencies:
@@ -9925,10 +9925,11 @@ packages:
       mlly: 1.2.1
       pathe: 1.1.0
       picocolors: 1.0.0
-      vite: 4.3.9(@types/node@20.1.4)(sass@1.62.1)
+      vite: 4.4.7(@types/node@20.1.4)(sass@1.62.1)
     transitivePeerDependencies:
       - '@types/node'
       - less
+      - lightningcss
       - sass
       - stylus
       - sugarss
@@ -10023,40 +10024,6 @@ packages:
       fsevents: 2.3.2
     dev: true
 
-  /vite@4.3.9(@types/node@20.1.4)(sass@1.62.1):
-    resolution: {integrity: sha512-qsTNZjO9NoJNW7KnOrgYwczm0WctJ8m/yqYAMAK9Lxt4SoySUfS5S8ia9K7JHpa3KEeMfyF8LoJ3c5NeBJy6pg==}
-    engines: {node: ^14.18.0 || >=16.0.0}
-    hasBin: true
-    peerDependencies:
-      '@types/node': '>= 14'
-      less: '*'
-      sass: '*'
-      stylus: '*'
-      sugarss: '*'
-      terser: ^5.4.0
-    peerDependenciesMeta:
-      '@types/node':
-        optional: true
-      less:
-        optional: true
-      sass:
-        optional: true
-      stylus:
-        optional: true
-      sugarss:
-        optional: true
-      terser:
-        optional: true
-    dependencies:
-      '@types/node': 20.1.4
-      esbuild: 0.17.19
-      postcss: 8.4.27
-      rollup: 3.23.0
-      sass: 1.62.1
-    optionalDependencies:
-      fsevents: 2.3.2
-    dev: true
-
   /vite@4.4.7(@types/node@20.1.4)(sass@1.62.1):
     resolution: {integrity: sha512-6pYf9QJ1mHylfVh39HpuSfMPojPSKVxZvnclX1K1FyZ1PXDOcLBibdq5t1qxJSnL63ca8Wf4zts6mD8u8oc9Fw==}
     engines: {node: ^14.18.0 || >=16.0.0}
@@ -10094,8 +10061,8 @@ packages:
       fsevents: 2.3.2
     dev: true
 
-  /vitepress@1.0.0-beta.6(@algolia/client-search@4.17.0)(@types/node@20.1.4)(sass@1.62.1)(search-insights@2.6.0)(sortablejs@1.15.0):
-    resolution: {integrity: sha512-xK/ulKgQpKZVbvlL4+/vW49VG7ySi5nmSoKUNH1G4kM+Cj9JwYM+PDJO7jSJROv8zW99G0ise+maDYnaLlbGBQ==}
+  /vitepress@1.0.0-beta.7(@algolia/client-search@4.17.0)(@types/node@20.1.4)(sass@1.62.1)(search-insights@2.6.0)(sortablejs@1.15.0):
+    resolution: {integrity: sha512-P9Rw+FXatKIU4fVdtKxqwHl6fby8E/8zE3FIfep6meNgN4BxbWqoKJ6yfuuQQR9IrpQqwnyaBh4LSabyll6tWg==}
     hasBin: true
     dependencies:
       '@docsearch/css': 3.5.1
@@ -10197,6 +10164,7 @@ packages:
       why-is-node-running: 2.2.2
     transitivePeerDependencies:
       - less
+      - lightningcss
       - sass
       - stylus
       - sugarss
