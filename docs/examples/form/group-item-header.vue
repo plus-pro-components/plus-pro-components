@@ -7,7 +7,7 @@
       @change="handleChange"
       @submit="handleSubmit"
       @submit-error="handleSubmitError"
-      @cancel="handleCancel"
+      @reset="handleReset"
     >
       <template #group-item-header="{ title, icon }">
         <div class="custom-group-item-header">
@@ -290,8 +290,8 @@ const handleSubmit = (values: FieldValues) => {
 const handleSubmitError = (err: any) => {
   console.log(err, 'err')
 }
-const handleCancel = () => {
-  console.log('handleCancel')
+const handleReset = () => {
+  console.log('handleReset')
 }
 </script>
 

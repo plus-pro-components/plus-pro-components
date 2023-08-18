@@ -17,8 +17,8 @@ export default {
       title: 'Drawer form'
     },
     form: {
-      confirmText: 'Yes',
-      cancelText: 'No',
+      submitText: 'Submit',
+      resetText: 'Reset',
       errorTip: 'Please complete the form and submit again!'
     },
     field: {

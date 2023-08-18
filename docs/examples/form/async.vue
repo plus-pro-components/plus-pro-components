@@ -7,7 +7,7 @@
       @change="handleChange"
       @submit="handleSubmit"
       @submit-error="handleSubmitError"
-      @cancel="handleCancel"
+      @reset="handleReset"
     />
   </el-card>
 </template>
@@ -273,7 +273,7 @@ const handleSubmit = (values: FieldValues) => {
 const handleSubmitError = (err: any) => {
   console.log(err, 'err')
 }
-const handleCancel = () => {
-  console.log('handleCancel')
+const handleReset = () => {
+  console.log('handleReset')
 }
 </script>
