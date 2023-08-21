@@ -35,6 +35,7 @@
 <script lang="ts" setup>
 import type { PlusFormInstance } from '@plus-pro-components/components/form'
 import { PlusForm } from '@plus-pro-components/components/form'
+import type { Ref } from 'vue'
 import { reactive, ref, toRefs, computed, watch } from 'vue'
 import type { FormProps, RowProps, ColProps } from 'element-plus'
 import { ArrowDown, ArrowUp, Search, RefreshRight } from '@element-plus/icons-vue'
@@ -98,7 +99,7 @@ const props = withDefaults(defineProps<PlusSearchProps>(), {
 const emit = defineEmits<PlusSearchEmits>()
 
 const { t } = useLocale()
-const plusFormInstance = ref<PlusFormInstance>()
+const plusFormInstance = ref<any>()
 const state = reactive<PlusSearchState>({
   values: {},
   subColumns: [],
@@ -151,7 +152,7 @@ const handleUnfold = () => {
 }
 
 defineExpose({
-  plusFormInstance
+  plusFormInstance: plusFormInstance as Ref<PlusFormInstance>
 })
 
 const { isShowUnfold, subColumns } = toRefs(state)

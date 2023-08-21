@@ -224,7 +224,8 @@ import { isString, isFunction, isDate, isArray, isComponent } from '@plus-pro-co
 import { getTooltip, getCustomProps, handleSlots } from '@plus-pro-components/components/utils'
 import { QuestionFilled } from '@element-plus/icons-vue'
 import { useGetOptions, useLocale } from '@plus-pro-components/hooks'
-import { PlusRadio, PlusDatePicker } from '@plus-pro-components/components'
+import { PlusRadio } from '@plus-pro-components/components/radio'
+import { PlusDatePicker } from '@plus-pro-components/components/date-picker'
 
 export interface PlusFormItemProps {
   modelValue?: FieldValueType
@@ -352,7 +353,7 @@ watch(
 )
 
 /**
- * 监听fieldPropss
+ * 监听fieldProps
  */
 watch(
   () => props.fieldProps,
