@@ -224,6 +224,7 @@ import { isString, isFunction, isDate, isArray, isComponent } from '@plus-pro-co
 import { getTooltip, getCustomProps, handleSlots } from '@plus-pro-components/components/utils'
 import { QuestionFilled } from '@element-plus/icons-vue'
 import { useGetOptions, useLocale } from '@plus-pro-components/hooks'
+import { PlusRadio, PlusDatePicker } from '@plus-pro-components/components'
 
 export interface PlusFormItemProps {
   modelValue?: FieldValueType
