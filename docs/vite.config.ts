@@ -2,6 +2,7 @@ import { fileURLToPath, URL } from 'url'
 import Inspect from 'vite-plugin-inspect'
 import type { PluginOption, AliasOptions } from 'vite'
 import { defineConfig } from 'vite'
+import vueJsx from '@vitejs/plugin-vue-jsx'
 
 const pathResolve = (dir: string): string => fileURLToPath(new URL(dir, import.meta.url))
 
@@ -35,6 +36,6 @@ export default defineConfig(() => {
     resolve: {
       alias: alias
     },
-    plugins: [Inspect() as PluginOption]
+    plugins: [Inspect() as PluginOption, vueJsx() as PluginOption]
   }
 })
