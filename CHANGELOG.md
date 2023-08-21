@@ -1,4 +1,4 @@
-## [v0.0.1-beta.1](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-alpha.30...v0.0.1-beta.1) (2023-08-21)
+## [v0.0.1-alpha.31](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-alpha.30...v0.0.1-alpha.31) (2023-08-21)
 
 
 ### ✨ Features
