@@ -1,3 +1,22 @@
+## [v0.0.1-beta.1](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-alpha.30...v0.0.1-beta.1) (2023-08-21)
+
+
+### ✨ Features
+
+* **all:** Merge pull request [#41](https://github.com/plus-pro-components/plus-pro-components/pull/41) from plus-pro-components/zpp([7aae37d](https://github.com/plus-pro-components/plus-pro-components/commit/7aae37d)) by@xiaofei
+* **components:** :sparkles: refactor components display-item([143b047](https://github.com/plus-pro-components/plus-pro-components/commit/143b047)) by@zhangpp
+* **all:** Merge pull request [#40](https://github.com/plus-pro-components/plus-pro-components/pull/40) from plus-pro-components/zpp([55efba6](https://github.com/plus-pro-components/plus-pro-components/commit/55efba6)) by@xiaofei
+* **components:** :sparkles: refactor components from footer([52e00c9](https://github.com/plus-pro-components/plus-pro-components/commit/52e00c9)) by@zhangpp
+
+
+### 🐛 Bug Fixes
+
+* **theme-chalk:** :bug: fix 'plus-display-item__form__item' margin style.([d519d3a](https://github.com/plus-pro-components/plus-pro-components/commit/d519d3a)) by@xiaofei
+* **components:** :bug: fix table edit all cell.([afa71f5](https://github.com/plus-pro-components/plus-pro-components/commit/afa71f5)) by@xiaofei
+
+
+
+
 ## [v0.0.1-alpha.30](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-alpha.29...v0.0.1-alpha.30) (2023-08-18)
 
 
