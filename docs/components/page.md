@@ -10,7 +10,7 @@ page/basic
 
 :::
 
-## 搜索键请求时替换
+## 搜索参数处理
 
 配置`before-search-submit`方法，可在请求前替换参数名。
 
@@ -32,7 +32,7 @@ page/replace-keyname
 | `table`              | [PlusTable](/components/table.html) 的 props                                                                                                                                                                                               | `object`[PlusTableProps](/components/table.html#table-attributes)                                                              | `{}`   | 否       |
 | `params`             | request 的 params 其他参数，默认会带 pageSize，page 和 PlusSearch 组件中的值                                                                                                                                                               | `object`                                                                                                                       | `{}`   | 否       |
 | `postData`           | 对通过 request 获取的数据进行处理                                                                                                                                                                                                          | `function`<docs-tip content="<T = any>(data: T[]) => T[]"></docs-tip>                                                          |        | 否       |
-| `beforeSearchSubmit` | 搜索之前进行一些修改                                                                                                                                                                                                                       | `function` <docs-tip content="<T = any>(params: T[]) => T[]"></docs-tip>                                                       |        | 否       |
+| `beforeSearchSubmit` | 搜索之前进行一些修改                                                                                                                                                                                                                       | `function` <docs-tip content="<T = any>(params: T) => T"></docs-tip>                                                           |        | 否       |
 | `isCard`             | 表格和搜索是否需要 el-card 包裹 默认 true                                                                                                                                                                                                  | `boolean`                                                                                                                      | `true` | 否       |
 | `searchCardProps`    | 搜索外层的 el-card 的 props ，当 isCard 为 true 时生效                                                                                                                                                                                     | `object`                                                                                                                       | `{}`   | 否       |
 | `tableCardProps`     | 表格外层的 el-card 的 props ，当 isCard 为 true 时生效                                                                                                                                                                                     | `object`                                                                                                                       | `{}`   |

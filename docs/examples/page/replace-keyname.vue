@@ -9,10 +9,11 @@
 </template>
 
 <script lang="ts" setup>
-import type { PlusColumn, PageInfo, RecordType } from 'plus-pro-components'
+import type { PlusColumn, PageInfo } from 'plus-pro-components'
 import { fileToDataURL } from '@plus-pro-components/utils'
 import type { UploadFile } from 'element-plus'
 import { ElUpload, ElButton, ElImage } from 'element-plus'
+import { cloneDeep } from 'lodash-es'
 import { h, Fragment } from 'vue'
 
 const getList = async (
@@ -62,27 +63,15 @@ const getList = async (
 
   return { data: pageList, success: true, total: mockList.length }
 }
-// 将对象的key替换
-const replaceObjectKeys = (obj: RecordType, oldKey: string, newKey: string): RecordType => {
-  // 检查对象是否为真
-  if (!obj || typeof obj !== 'object') {
-    return obj
-  }
-  // 创建一个新的对象用于存储替换后的键值对
-  const newObj = {}
-  for (const key in obj) {
-    if (key === oldKey) {
-      newObj[newKey] = obj[key]
-    } else {
-      newObj[key] = obj[key]
-    }
-  }
-  return newObj
-}
+
 // 搜索之前函数
 const handleBeforeSearch = (values: any) => {
-  const newSearch = replaceObjectKeys(values, 'name', 'name1')
-  console.log(newSearch)
+  const params = cloneDeep(values)
+  Reflect.set(params, 'name1', Reflect.get(values, 'name'))
+  Reflect.deleteProperty(params, 'name')
+
+  // 返回新的参数
+  return params
 }
 
 const tableConfig: PlusColumn[] = [

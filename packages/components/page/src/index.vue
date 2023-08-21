@@ -108,7 +108,7 @@ export interface PlusPageProps {
    * 搜索之前进行一些修改
    * @param params
    */
-  beforeSearchSubmit?: <T = any>(params: T[]) => T[]
+  beforeSearchSubmit?: <T = any>(params: T) => T
 
   /**
    *  表格和搜索是否需要el-card 包裹 默认true
