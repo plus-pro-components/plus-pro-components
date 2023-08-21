@@ -116,8 +116,6 @@ const main = async () => {
       ).format('YYYY-MM-DD')})`
     }
 
-    console.log(item.content)
-
     const featData = item.content
       .filter(item => item.type === 'feat' || item.content.includes('Merge'))
       .map(
@@ -126,8 +124,6 @@ const main = async () => {
             item.content.includes('Merge') ? ' ' + replacePull(item.content) : item.content
           }([${item.sha}](${target}commit/${item.sha})) by@${item.author}\n`
       )
-
-    console.log(featData, item.content)
 
     const fixData = item.content
       .filter(item => item.type === 'fix')
