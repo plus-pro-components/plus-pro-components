@@ -5,6 +5,7 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 import { Edit, Picture, Upload } from '@element-plus/icons-vue'
+
 const stepForm = ref([
   {
     title: '第一步',

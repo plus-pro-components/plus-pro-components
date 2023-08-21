@@ -13,9 +13,7 @@
 <script lang="ts" setup>
 import type { ButtonsCallBackParams, TableFormRefRow, PlusColumn } from 'plus-pro-components'
 import { useTable } from 'plus-pro-components'
-
 import { ElMessage } from 'element-plus'
-
 import { ref } from 'vue'
 
 interface TableRow {

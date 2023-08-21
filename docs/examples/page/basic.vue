@@ -220,7 +220,7 @@ const tableConfig: PlusColumn[] = [
       }
 
       return h(Fragment, [
-        h(ElImage, {
+        h(ElImage as any, {
           src: value,
           previewSrcList: [value],
           style: value
