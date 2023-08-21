@@ -408,7 +408,7 @@ export interface OptionsRow {
   /**
    * 小圆点背景色，
    * type 优先级 低于 color，
-   * 只支持 'success' | 'warning' | 'info' | 'primary' | 'danger'
+   * 支持 'success' | 'warning' | 'info' | 'primary' | 'danger'
    */
   type?: 'success' | 'warning' | 'info' | 'primary' | 'danger'
   /**

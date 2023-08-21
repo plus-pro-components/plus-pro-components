@@ -142,19 +142,6 @@ const tableConfig: PlusColumn[] = [
         color: '#ffff99'
       }
     ]
-  },
-  {
-    label: '标签',
-    prop: 'tag',
-    valueType: 'tag',
-    fieldProps: (value: string) => {
-      return { type: value }
-    }
-  },
-  {
-    label: '时间',
-    prop: 'time',
-    valueType: 'date-picker'
   }
 ]
 

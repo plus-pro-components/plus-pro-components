@@ -11,9 +11,9 @@ table/basic
 
 ## 自定义状态小圆点的背景色
 
-`valueType`为`select`或`radio`或`checkbox  `时，
-`columns`中的`options`中可配置`type`或`color  `。
-`color` 优先级 高于 `type`。`type`只支持`'success' | 'warning' | 'info' | 'primary' | 'danger'`。
+配置项中`valueType`为`select`或`radio`或`checkbox `时，
+`columns`中的`options`中可配置`type`或`color属性`。
+`color` 优先级 高于 `type`。`type`支持`'success' | 'warning' | 'info' | 'primary' | 'danger'`。
 :::demo
 
 table/status
@@ -46,7 +46,7 @@ table/drag-sort
 
 ## 标题栏
 
-配置` has-toolbar``title `，可使用`title` `toolbar`插槽。
+使用`title`，`toolbar`插槽。
 :::demo
 
 table/title-bar
@@ -74,7 +74,7 @@ table/multiple
 ## 树形结构
 
 配置`tree-props`树形为`children: 'children'`，数据结构中有 children 即可。
-树形懒加载表格还需设置` lazy``load `。注意：`children`中的`id`和表格`id`不能重复。`row-key`默认值`id`。
+树形懒加载表格还需设置`lazy`，`load`。注意：`children`中的`id`和表格`id`不能重复。`row-key`默认值`id`。
 
 :::demo
 
