@@ -1,49 +1,44 @@
 <template>
-  <el-form
-    ref="formInstance"
-    :model="state.values"
-    :rules="rules"
-    :label-width="labelWidth"
+  <PlusForm
+    ref="plusFormInstance"
+    v-model="state.values"
     :inline="inline"
+    :row-props="rowProps"
+    :col-props="colProps"
+    :columns="subColumns"
+    :has-footer="false"
     class="plus-search"
-    :label-position="labelPosition"
-    :validate-on-rule-change="false"
-    :label-suffix="labelSuffix"
     v-bind="$attrs"
+    @change="handleChange"
   >
-    <el-row v-bind="rowProps">
-      <el-col v-for="item in subColumns" :key="item.prop" v-bind="colProps">
-        <PlusFormItem v-model="state.values[item.prop]" v-bind="item" @change="handleChange" />
-      </el-col>
-      <el-col v-bind="colProps">
-        <el-form-item v-if="hasFooter" class="plus-search__button__wrapper">
-          <slot name="footer">
-            <el-button v-if="hasReset" :icon="RefreshRight" @click="handleReset">
-              {{ resetText || t('plus.search.resetText') }}
-            </el-button>
-            <el-button type="primary" :loading="searchLoading" :icon="Search" @click="handleSearch">
-              {{ searchText || t('plus.search.searchText') }}
-            </el-button>
+    <template #searchFooter>
+      <el-form-item v-if="hasFooter" class="plus-search__button__wrapper">
+        <el-button v-if="hasReset" :icon="RefreshRight" @click="handleReset">
+          {{ resetText || t('plus.search.resetText') }}
+        </el-button>
+        <el-button type="primary" :loading="searchLoading" :icon="Search" @click="handleSearch">
+          {{ searchText || t('plus.search.searchText') }}
+        </el-button>
 
-            <el-button v-if="hasUnfold" type="primary" link @click="handleUnfold">
-              {{ isShowUnfold ? t('plus.search.expand') : t('plus.search.retract') }}
-              <el-icon>
-                <ArrowDown v-if="isShowUnfold" />
-                <ArrowUp v-else />
-              </el-icon>
-            </el-button>
-          </slot>
-        </el-form-item>
-      </el-col>
-    </el-row>
-  </el-form>
+        <el-button v-if="hasUnfold" type="primary" link @click="handleUnfold">
+          {{ isShowUnfold ? t('plus.search.expand') : t('plus.search.retract') }}
+          <el-icon>
+            <ArrowDown v-if="isShowUnfold" />
+            <ArrowUp v-else />
+          </el-icon>
+        </el-button>
+      </el-form-item>
+    </template>
+  </PlusForm>
 </template>
 
 <script lang="ts" setup>
+import type { PlusFormInstance } from '@plus-pro-components/components/form'
+import { PlusForm } from '@plus-pro-components/components/form'
+import type { Ref } from 'vue'
 import { reactive, ref, toRefs, computed, watch } from 'vue'
-import type { FormInstance, FormRules, FormProps, RowProps, ColProps } from 'element-plus'
+import type { FormProps, RowProps, ColProps } from 'element-plus'
 import { ArrowDown, ArrowUp, Search, RefreshRight } from '@element-plus/icons-vue'
-import { PlusFormItem } from '@plus-pro-components/components/form-item'
 import type { PlusColumn, FieldValues, Mutable } from '@plus-pro-components/types'
 import { cloneDeep } from 'lodash-es'
 import { useLocale } from '@plus-pro-components/hooks'
@@ -51,9 +46,6 @@ import { useLocale } from '@plus-pro-components/hooks'
 export interface PlusSearchProps extends /* @vue-ignore */ Partial<Mutable<FormProps>> {
   modelValue: FieldValues
   columns: PlusColumn[]
-  labelWidth?: string
-  labelPosition?: 'left' | 'right' | 'top'
-  labelSuffix?: string
   hasFooter?: boolean
   hasReset?: boolean
   hasUnfold?: boolean
@@ -61,7 +53,6 @@ export interface PlusSearchProps extends /* @vue-ignore */ Partial<Mutable<FormP
   resetText?: string
   searchLoading?: boolean
   inline?: boolean
-  rules?: FormRules
   showNumber?: number
   rowProps?: Partial<Mutable<RowProps>>
   colProps?: Partial<Mutable<ColProps>>
@@ -73,9 +64,9 @@ export interface PlusSearchState {
   originData: any
 }
 export interface PlusSearchEmits {
-  (e: 'update:modelValue', values: any): void
-  (e: 'search', values: any): void
-  (e: 'change', values: any): void
+  (e: 'update:modelValue', values: FieldValues): void
+  (e: 'search', values: FieldValues): void
+  (e: 'change', values: FieldValues, column: PlusColumn): void
   (e: 'reset'): void
 }
 
@@ -85,9 +76,6 @@ defineOptions({
 
 const props = withDefaults(defineProps<PlusSearchProps>(), {
   modelValue: () => ({}),
-  labelWidth: '80px',
-  labelPosition: 'left',
-  labelSuffix: ':',
   hasFooter: true,
   hasReset: true,
   hasUnfold: true,
@@ -96,8 +84,6 @@ const props = withDefaults(defineProps<PlusSearchProps>(), {
   resetText: '',
   inline: true,
   showNumber: 2,
-  formProps: () => ({}),
-  rules: () => ({}),
   columns: () => [],
   rowProps: () => ({
     gutter: 20
@@ -106,14 +92,14 @@ const props = withDefaults(defineProps<PlusSearchProps>(), {
     xs: 24,
     sm: 12,
     md: 8,
-    lg: 6,
+    lg: 8,
     xl: 6
   })
 })
 const emit = defineEmits<PlusSearchEmits>()
 
 const { t } = useLocale()
-const formInstance = ref<FormInstance>()
+const plusFormInstance = ref<any>()
 const state = reactive<PlusSearchState>({
   values: {},
   subColumns: [],
@@ -142,9 +128,9 @@ if (props.hasUnfold) {
   state.subColumns = cloneDeep(state.originData)
 }
 
-const handleChange = async () => {
-  emit('change', state.values)
-  emit('update:modelValue', state.values)
+const handleChange = async (values: FieldValues, column: PlusColumn) => {
+  emit('change', values, column)
+  emit('update:modelValue', values)
 }
 
 const handleSearch = async () => {
@@ -166,7 +152,7 @@ const handleUnfold = () => {
 }
 
 defineExpose({
-  formInstance
+  plusFormInstance: plusFormInstance as Ref<PlusFormInstance>
 })
 
 const { isShowUnfold, subColumns } = toRefs(state)

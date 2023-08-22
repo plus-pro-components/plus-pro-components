@@ -17,8 +17,8 @@ export default {
       title: '抽屉表单'
     },
     form: {
-      confirmText: '确定',
-      cancelText: '取消',
+      submitText: '提交',
+      resetText: '重置',
       errorTip: '请完整填写表单然后再次提交！'
     },
     field: {
@@ -48,6 +48,11 @@ export default {
       confirmToPerformThisOperation: '确定执行本次操作?',
       prompt: '提示',
       sort: '排序'
+    },
+    stepsForm: {
+      nextText: '下一步',
+      preText: '上一步',
+      submitText: '提交'
     }
   }
 }

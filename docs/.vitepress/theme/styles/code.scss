@@ -35,9 +35,12 @@
       code {
         padding: 0;
         line-height: 1.4;
-        font-size: 14rpx;
+        font-size: 14px;
         color: #303133;
       }
+    }
+    .plus-steps-form .el-steps {
+      line-height: initial;
     }
   }
 }

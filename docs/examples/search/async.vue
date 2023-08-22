@@ -4,14 +4,14 @@
       v-model="state"
       :columns="columns"
       :has-unfold="false"
-      label-width="120px"
       :col-props="{
         xs: 24,
         sm: 12,
-        md: 12,
+        md: 8,
         lg: 8,
         xl: 8
       }"
+      label-width="120px"
       @change="handleChange"
       @search="handleSearch"
       @reset="handleRest"
@@ -21,7 +21,7 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue'
-import type { PlusColumn } from '@plus-pro-components/types'
+import type { PlusColumn } from 'plus-pro-components'
 
 const state = ref({
   status: '0',

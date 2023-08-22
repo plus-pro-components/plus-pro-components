@@ -1,14 +1,14 @@
 <template>
   <PlusDialog
     v-model="subVisible"
-    :has-footer="false"
     width="800px"
     top="10vh"
     :title="t('plus.dialogForm.title')"
     v-bind="dialog"
     @cancel="handleCancel"
+    @confirm="handleConfirm"
   >
-    <template #header>
+    <template v-if="$slots['dialog-header']" #header>
       <slot name="dialog-header" />
     </template>
 
@@ -17,12 +17,15 @@
       v-model="state"
       footer-align="right"
       v-bind="form"
-      @submit="handleSubmitForm"
+      :has-footer="false"
       @change="handleChange"
-      @cancel="handleCancel"
     >
-      <template #footer>
+      <template v-if="$slots['form-footer']" #footer>
         <slot name="form-footer" />
+      </template>
+
+      <template v-if="$slots['form-group-item-header']" #group-item-header>
+        <slot name="form-group-item-header" />
       </template>
     </PlusForm>
   </PlusDialog>
@@ -35,7 +38,7 @@ import type { PlusFormInstance, PlusFormProps } from '@plus-pro-components/compo
 import { PlusForm } from '@plus-pro-components/components/form'
 import type { PlusDialogProps } from '@plus-pro-components/components/dialog'
 import { PlusDialog } from '@plus-pro-components/components/dialog'
-import type { FieldValues } from '@plus-pro-components/types'
+import type { FieldValues, PlusColumn } from '@plus-pro-components/types'
 
 export interface PlusDialogFormProps {
   modelValue?: FieldValues
@@ -44,10 +47,10 @@ export interface PlusDialogFormProps {
   form?: PlusFormProps
 }
 export interface PlusDialogFormEmits {
-  (e: 'update:modelValue', data: FieldValues): void
+  (e: 'update:modelValue', values: FieldValues): void
   (e: 'update:visible', visible: boolean): void
-  (e: 'submit', data: FieldValues): void
-  (e: 'change', data: FieldValues): void
+  (e: 'confirm', values: FieldValues): void
+  (e: 'change', values: FieldValues, column: PlusColumn): void
   (e: 'cancel'): void
 }
 
@@ -89,13 +92,13 @@ watch(
   }
 )
 
-const handleChange = (values: any) => {
+const handleChange = (values: FieldValues, column: PlusColumn) => {
   emit('update:modelValue', values)
-  emit('change', values)
+  emit('change', values, column)
 }
 
-const handleSubmitForm = () => {
-  emit('submit', state.value)
+const handleConfirm = () => {
+  emit('confirm', state.value)
 }
 
 const handleCancel = () => {

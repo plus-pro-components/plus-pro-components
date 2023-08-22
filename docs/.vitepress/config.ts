@@ -20,7 +20,6 @@ export default defineConfig({
   description: content,
   head: [
     ['meta', { name: 'author', content: 'xiaofei' }],
-
     [
       'meta',
       {
@@ -127,26 +126,80 @@ export default defineConfig({
             {
               text: '开发指南',
               link: '/guide/dev'
+            },
+            {
+              text: '贡献指南',
+              link: '/guide/contribution'
             }
           ]
         }
       ],
       '/components/': [
         {
-          text: '基础Ts类型',
+          text: '基础',
           items: [
             {
               text: '基础Ts类型',
               link: '/components/type'
+            },
+            {
+              text: '高级组件通用配置',
+              link: '/components/config'
             }
           ]
         },
         {
-          text: '基础组件',
+          text: '高级组件',
+          items: [
+            {
+              text: '表格',
+              link: '/components/table'
+            },
+            {
+              text: '表单',
+              items: [
+                {
+                  text: '基础表单',
+                  link: '/components/form'
+                },
+                {
+                  text: '弹窗表单',
+                  link: '/components/dialog-form'
+                },
+                {
+                  text: '抽屉表单',
+                  link: '/components/drawer-form'
+                },
+                {
+                  text: '分步表单',
+                  link: '/components/steps-form'
+                }
+              ]
+            },
+            {
+              text: '搜索',
+              link: '/components/search'
+            },
+            {
+              text: '描述列表',
+              link: '/components/description'
+            },
+            {
+              text: '页面',
+              link: '/components/page'
+            }
+          ]
+        },
+        {
+          text: '内置组件',
           items: [
             {
               text: '弹窗',
               link: '/components/dialog'
+            },
+            {
+              text: '弹出框',
+              link: '/components/popover'
             },
             {
               text: '分页',
@@ -159,45 +212,14 @@ export default defineConfig({
             {
               text: '日期时间',
               link: '/components/date-picker'
-            }
-          ]
-        },
-        {
-          text: '高级组件',
-          items: [
-            {
-              text: '通用配置',
-              link: '/components/config'
             },
             {
-              text: '表格',
-              link: '/components/table'
-            },
-
-            {
-              text: '表单',
-              link: '/components/form'
+              text: '显示单项组件',
+              link: '/components/display-item'
             },
             {
-              text: '搜索',
-              link: '/components/search'
-            },
-            {
-              text: '页面',
-              link: '/components/page'
-            },
-            {
-              text: '弹窗表单',
-              link: '/components/dialog-form'
-            },
-            {
-              text: '抽屉表单',
-              link: '/components/drawer-form'
-            },
-
-            {
-              text: '描述列表',
-              link: '/components/description'
+              text: '表单单项组件',
+              link: '/components/form-item'
             }
           ]
         }

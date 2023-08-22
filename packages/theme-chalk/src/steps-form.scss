@@ -1,0 +1,15 @@
+.plus-steps-form {
+  .el-steps {
+    margin-bottom: 20px;
+  }
+}
+
+.plus-steps-from-vertical {
+  display: flex;
+  .el-steps--vertical {
+    margin-right: 20px;
+  }
+  .plus-form {
+    flex: 1;
+  }
+}

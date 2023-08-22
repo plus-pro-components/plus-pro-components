@@ -1,4 +1,4 @@
-.plus-display-item__image__col {
+.plus-display-item__image {
   cursor: pointer;
   object-fit: cover;
   overflow: hidden;
@@ -20,8 +20,8 @@
     display: inline-block;
   }
 }
-.plus-display-item__badge--status {
-  .plus-display-item__badge--status__dot {
+.plus-display-item__badge {
+  .plus-display-item__badge__dot {
     position: relative;
     top: -1px;
     display: inline-block;
@@ -29,6 +29,21 @@
     height: 6px;
     vertical-align: middle;
     border-radius: 50%;
+    &--primary {
+      background-color: var(--el-color-primary);
+    }
+    &--success {
+      background-color: var(--el-color-success);
+    }
+    &--info {
+      background-color: var(--el-color-info);
+    }
+    &--warning {
+      background-color: var(--el-color-warning);
+    }
+    &--danger {
+      background-color: var(--el-color-danger);
+    }
   }
 }
 .plus-display-item__pre {
@@ -42,6 +57,7 @@
 }
 .plus-display-item__form {
   .plus-display-item__form__item {
+    margin: 0;
     .el-form-item__label {
       padding: 0;
     }

@@ -2,15 +2,27 @@
 
 ## 基础用法
 
+配置`columns`表头和`table-data`表格数据。
 :::demo
 
 table/basic
 
 :::
 
+## 自定义状态小圆点的背景色
+
+配置项中`valueType`为`select`或`radio`或`checkbox `时，
+`columns`中的`options`中可配置`type`或`color属性`。
+`color` 优先级 高于 `type`。`type`支持`'success' | 'warning' | 'info' | 'primary' | 'danger'`。
+:::demo
+
+table/status
+
+:::
+
 ## 自定义操作栏
 
-actionBar 的`type` 支持 `button`,`icon`和 `link`, 对应 element plus 的 ElButton,ElIcon 和 ElLink 组件。
+actionBar 的`type` 支持 `button`，`icon`和 `link`，对应 element plus 的 ElButton，ElIcon 和 ElLink 组件。
 
 配置 `confirm` 即可实现二次确认。
 
@@ -24,6 +36,8 @@ table/action-bar
 
 ## 拖动排序
 
+配置`drag-sortable`，同时配合`dragSortEnd`使用。
+
 :::demo
 
 table/drag-sort
@@ -32,6 +46,7 @@ table/drag-sort
 
 ## 标题栏
 
+使用`title`，`toolbar`插槽。
 :::demo
 
 table/title-bar
@@ -40,9 +55,40 @@ table/title-bar
 
 ## 分页栏
 
+配置`pagination`属性。
 :::demo
 
 table/page-bar
+
+:::
+
+## 多选
+
+配置`is-selection`属性为`true`，即可显示表格多选框。默认值`false`。配合原生`selection-change`方法使用。
+:::demo
+
+table/multiple
+
+:::
+
+## 树形结构
+
+配置`tree-props`树形为`children: 'children'`，数据结构中有 children 即可。
+树形懒加载表格还需设置`lazy`，`load`。注意：`children`中的`id`和表格`id`不能重复。`row-key`默认值`id`。
+
+:::demo
+
+table/tree
+
+:::
+
+## 展开行
+
+配置`has-expand`属性 `true` 可显示展开行，默认值 `false`。配合插槽 `expand` 使用。
+
+:::demo
+
+table/expand
 
 :::
 
@@ -50,13 +96,22 @@ table/page-bar
 
 :::demo
 
-table/edit-bar
+table/all-cell-edit
 
 :::
 
 ## 可编辑表格 (单行)
 
 可编辑和校验单行，也可以控制单行的每一个单元格的编辑状态和校验。核心方法是 调用 formRefs 里的方法。
+:::demo
+
+table/row-edit
+
+:::
+
+## 可编辑表格 (单元格)
+
+可编辑和校验单元格。核心方法是 调用 formRefs 里的方法。
 :::demo
 
 table/cell-edit
@@ -95,25 +150,25 @@ table/advanced
 
 ## Table Attributes
 
-| 名称                           | 说明                                       | 类型                                                                                                                                                                                    | 默认值                                       | 是否必须 |
-| ------------------------------ | ------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------- | -------- |
-| `columns`                      | 表格配置信息                               | [PlusColumn[]](/components/config.html)                                                                                                                                                 | `[]`                                         | 是       |
-| `tableData`                    | 表格数据                                   | `any[]`                                                                                                                                                                                 | `[]`                                         | 是       |
-| `pagination`                   | 分页参数 （默认 `false` 给参数就显示）     | `false`/ [PlusPaginationProps](/components/pagination.html#pagination-attributes)                                                                                                       | `false`                                      | 否       |
-| `actionBar`                    | 操作栏参数 （默认 `false` 给参数就显示）   | `false`/ [ActionBarProps](/components/type.html#actionbarprops)                                                                                                                         | `false`                                      | 否       |
-| `hasToolbar`                   | 是否需要标题栏                             | `boolean`                                                                                                                                                                               | `true`                                       | 否       |
-| `isShowNumber`                 | 是否需要序号                               | `boolean`                                                                                                                                                                               | `false`                                      | 否       |
-| `isSelection`                  | 是否是多选表格                             | `boolean`                                                                                                                                                                               | `false`                                      | 否       |
-| `dragSortable`                 | 表格拖拽配置 （默认 `false` 给参数就显示） | `false` /[SortableOptions](http://www.sortablejs.com/options.html)                                                                                                                      | `false`                                      | 否       |
-| `hasExpand`                    | 是否需要展开行                             | `boolean`                                                                                                                                                                               | `false`                                      | 否       |
-| `loadingStatus`                | 加载状态                                   | `boolean`                                                                                                                                                                               | `false`                                      | 否       |
-| `title`                        | 自定义表格标题                             | `string`                                                                                                                                                                                | `表格`                                       | 否       |
-| `height`                       | 表格高度                                   | `string`                                                                                                                                                                                |                                              | 否       |
-| `headerCellStyle`              | 表格表头样式                               | [CSSProperties](https://cn.vuejs.org/api/utility-types.html#cssproperties)                                                                                                              | `{backgroundColor: '#F5F9FD',color: '#777'}` | 否       |
-| `indexContentStyle`            | 序号栏样式                                 | [CSSProperties](https://cn.vuejs.org/api/utility-types.html#cssproperties) / `((row: any, index: number) =>`[CSSProperties](https://cn.vuejs.org/api/utility-types.html#cssproperties)) | `{}`                                         | 否       |
-| `dragSortableTableColumnProps` | 拖拽栏 el-table-column 的 props            | [RecordType](/components/type.html#recordtype)                                                                                                                                          | `{}`                                         | 否       |
-| `indexTableColumnProps`        | 序号栏 el-table-column 的 props            | [RecordType](/components/type.html#recordtype)                                                                                                                                          | `{}`                                         | 否       |
-| ...                            | ...                                        | ...                                                                                                                                                                                     | ...                                          | ...      |
+| 名称                           | 说明                                       | 类型                                                                                                                                                                          | 默认值                                       | 是否必须 |
+| ------------------------------ | ------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------- | -------- |
+| `columns`                      | 表格配置信息                               | `array` [PlusColumn[]](/components/config.html)                                                                                                                               | `[]`                                         | 是       |
+| `tableData`                    | 表格数据                                   | `array`                                                                                                                                                                       | `[]`                                         | 是       |
+| `pagination`                   | 分页参数 （默认 `false` 给参数就显示）     | `false` / (`object` [PlusPaginationProps](/components/pagination.html#pagination-attributes) )                                                                                | `false`                                      | 否       |
+| `actionBar`                    | 操作栏参数 （默认 `false` 给参数就显示）   | `false` / (`object`[ActionBarProps](/components/type.html#actionbarprops) )                                                                                                   | `false`                                      | 否       |
+| `hasToolbar`                   | 是否需要标题栏                             | `boolean`                                                                                                                                                                     | `true`                                       | 否       |
+| `isShowNumber`                 | 是否需要序号                               | `boolean`                                                                                                                                                                     | `false`                                      | 否       |
+| `isSelection`                  | 是否是多选表格                             | `boolean`                                                                                                                                                                     | `false`                                      | 否       |
+| `dragSortable`                 | 表格拖拽配置 （默认 `false` 给参数就显示） | `false` / (`object`[SortableOptions](http://www.sortablejs.com/options.html) )                                                                                                | `false`                                      | 否       |
+| `hasExpand`                    | 是否需要展开行                             | `boolean`                                                                                                                                                                     | `false`                                      | 否       |
+| `loadingStatus`                | 加载状态                                   | `boolean`                                                                                                                                                                     | `false`                                      | 否       |
+| `title`                        | 自定义表格标题                             | `string`                                                                                                                                                                      | `表格`                                       | 否       |
+| `height`                       | 表格高度                                   | `string`                                                                                                                                                                      |                                              | 否       |
+| `headerCellStyle`              | 表格表头样式                               | `object` [CSSProperties](https://cn.vuejs.org/api/utility-types.html#cssproperties)                                                                                           | `{backgroundColor: '#F5F9FD',color: '#777'}` | 否       |
+| `indexContentStyle`            | 序号栏样式                                 | (`object` [CSSProperties](https://cn.vuejs.org/api/utility-types.html#cssproperties) ) / `function` <docs-tip content='(row: any, index: number) =>CSSProperties'></docs-tip> | `{}`                                         | 否       |
+| `dragSortableTableColumnProps` | 拖拽栏 el-table-column 的 props            | `object`                                                                                                                                                                      | `{}`                                         | 否       |
+| `indexTableColumnProps`        | 序号栏 el-table-column 的 props            | `object`                                                                                                                                                                      | `{}`                                         | 否       |
+| ...                            | ...                                        | ...                                                                                                                                                                           | ...                                          | ...      |
 
 **`...`表示同时支持所有[ElTable Attributes](https://element-plus.org/zh-CN/component/table.html#table-%E5%B1%9E%E6%80%A7)**
 
@@ -131,14 +186,14 @@ el-table 的其他属性写法示例 如 `stripe`,`border`,`fit`等
 
 ## Table Events
 
-| 名称                       | 说明                                             | 类型                                                                                      |
-| -------------------------- | ------------------------------------------------ | ----------------------------------------------------------------------------------------- |
-| `paginationChange`         | 分页改变触发                                     | [Function] `(pageInfo: PageInfo) => void`                                                 |
-| `clickAction`              | 点击操作栏触发（需要二次确认的，点击确认时触发） | [ButtonsCallBackParams](/components/type.html#buttonscallbackparams)                      |
-| `clickActionConfirmCancel` | 点击操作栏需要二次确认的取消时触发               | [ButtonsCallBackParams](/components/type.html#buttonscallbackparams)                      |
-| `dragSortEnd`              | 拖拽排序列图标触发                               | [Function] `({newIndex: number, oldIndex: number}) => void`                               |
-| `formChange`               | 表格中有可以编辑的表单项目改变时触发             | [Function] `({ value: any; prop: string; row: any; index: number; column: any }) => void` |
-| ...                        | ...                                              | ...                                                                                       |
+| 名称                       | 说明                                             | 类型                                                                                                                    |
+| -------------------------- | ------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------- |
+| `paginationChange`         | 分页改变触发                                     | `function` <docs-tip content='(pageInfo: PageInfo) => void'></docs-tip>                                                 |
+| `clickAction`              | 点击操作栏触发（需要二次确认的，点击确认时触发） | `function` [ButtonsCallBackParams](/components/type.html#buttonscallbackparams)                                         |
+| `clickActionConfirmCancel` | 点击操作栏需要二次确认的取消时触发               | `function` [ButtonsCallBackParams](/components/type.html#buttonscallbackparams)                                         |
+| `dragSortEnd`              | 拖拽排序列图标触发                               | `function` <docs-tip content='({newIndex: number, oldIndex: number}) => void'></docs-tip>                               |
+| `formChange`               | 表格中有可以编辑的表单项目改变时触发             | `function` <docs-tip content='({ value: any; prop: string; row: any; index: number; column: any }) => void'></docs-tip> |
+| ...                        | ...                                              | ...                                                                                                                     |
 
 **`...`表示同时支持所有[ElTable 事件](https://element-plus.org/zh-CN/component/table.html#table-%E4%BA%8B%E4%BB%B6)**
 

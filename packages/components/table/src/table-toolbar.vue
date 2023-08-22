@@ -23,7 +23,7 @@
           </el-button>
         </div>
 
-        <template #icon>
+        <template #reference>
           <el-tooltip effect="dark" :content="t('plus.table.density')" placement="top">
             <el-icon :size="18" color="#919191" class="plus-table-toolbar__icon">
               <svg
@@ -63,7 +63,7 @@
           <el-checkbox
             v-for="item in columns"
             :key="item.label"
-            :label="item.label + item.prop"
+            :label="getTableKey(item)"
             :disabled="item.headerFilter"
             class="plus-table-toolbar__checkbox__item"
           >
@@ -78,7 +78,7 @@
           </el-checkbox>
         </el-checkbox-group>
 
-        <template #icon>
+        <template #reference>
           <el-tooltip effect="dark" :content="t('plus.table.columnSettings')" placement="top">
             <el-icon :size="20" color="#919191" class="plus-table-toolbar__icon">
               <Setting />
@@ -99,9 +99,11 @@ import { Setting } from '@element-plus/icons-vue'
 import { PlusPopover } from '@plus-pro-components/components/popover'
 import type { ComponentSize } from 'element-plus/es/constants'
 import { useLocale } from '@plus-pro-components/hooks'
+import { getTableKey } from '@plus-pro-components/components/utils'
 
 export interface PlusTableToolbarProps {
   columns?: PlusColumn[]
+  subColumns?: any
   title?: string
   filterTableHeaderOverflowLabelLength?: number
   defaultSize?: ComponentSize
@@ -126,6 +128,7 @@ defineOptions({
 
 const props = withDefaults(defineProps<PlusTableToolbarProps>(), {
   columns: () => [],
+  subColumns: () => [],
   title: '',
   hasToolbar: true,
   filterTableHeaderOverflowLabelLength: 6,
@@ -153,11 +156,11 @@ const state: State = reactive({
   isIndeterminate: true,
   bigImageVisible: false,
   srcList: [],
-  checkList: cloneDeep(props.columns).map(item => item.label + item.prop)
+  checkList: cloneDeep(props.columns).map(item => getTableKey(item))
 })
 
 const handleCheckAllChange = (val: boolean) => {
-  state.checkList = val ? cloneDeep(props.columns).map(item => item.label + item.prop) : []
+  state.checkList = val ? cloneDeep(props.columns).map(item => getTableKey(item)) : []
   state.isIndeterminate = false
 }
 
@@ -168,6 +171,7 @@ const handleCheckGroupChange = (value: string[]) => {
 }
 
 const handleShow = () => {
+  state.checkList = cloneDeep(props.subColumns).map((item: PlusColumn) => getTableKey(item))
   const checkedCount = state.checkList.length
   state.checkAll = checkedCount === props.columns.length
   state.isIndeterminate = checkedCount > 0 && checkedCount < props.columns.length
@@ -187,7 +191,7 @@ const getLabel = (label: string) => {
 
 const handleFilterTableConfirm = () => {
   const columns = cloneDeep(props.columns)
-  const subColumns = columns.filter(item => state.checkList.includes(item.label + item.prop))
+  const subColumns = columns.filter(item => state.checkList.includes(getTableKey(item)))
   emit('filterTable', subColumns)
 }
 </script>

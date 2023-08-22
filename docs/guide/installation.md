@@ -12,7 +12,7 @@
 
 [![ElementPlus version badge](https://img.shields.io/npm/v/plus-pro-components.svg?style=flat-square)](https://www.npmjs.org/package/plus-pro-components)
 
-## 使用包管理器
+## 使用包管理器 <el-tag  effect="dark">推荐</el-tag>
 
 **建议您使用包管理器 (NPM, [Yarn](https://classic.yarnpkg.com/lang/en/), [pnpm](https://pnpm.io/)) 安装 plus-pro-components**。
 

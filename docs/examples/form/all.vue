@@ -7,14 +7,14 @@
       @change="handleChange"
       @submit="handleSubmit"
       @submit-error="handleSubmitError"
-      @cancel="handleCancel"
+      @reset="handleReset"
     />
   </el-card>
 </template>
 
 <script lang="ts" setup>
 import { ref } from 'vue'
-import type { PlusColumn, FieldValues } from '@plus-pro-components/types'
+import type { PlusColumn, FieldValues } from 'plus-pro-components'
 
 const state = ref<FieldValues>({
   status: '0',
@@ -248,11 +248,25 @@ const columns: PlusColumn[] = [
     label: 'time-select',
     prop: 'time-select',
     valueType: 'time-select'
+  },
+  {
+    label: 'plus-radio',
+    prop: 'plus-radio',
+    valueType: 'plus-radio',
+    options: [
+      { label: '选项一', value: 1 },
+      { label: '选项二', value: 2 }
+    ]
+  },
+  {
+    label: 'plus-date-picker',
+    prop: 'plus-date-picker',
+    valueType: 'plus-date-picker'
   }
 ]
 
-const handleChange = (values: FieldValues) => {
-  console.log(values, 'change')
+const handleChange = (values: FieldValues, prop: PlusColumn) => {
+  console.log(values, prop, 'change')
 }
 const handleSubmit = (values: FieldValues) => {
   console.log(values, 'Submit')
@@ -260,7 +274,7 @@ const handleSubmit = (values: FieldValues) => {
 const handleSubmitError = (err: any) => {
   console.log(err, 'err')
 }
-const handleCancel = () => {
-  console.log('handleCancel')
+const handleReset = () => {
+  console.log('handleReset')
 }
 </script>

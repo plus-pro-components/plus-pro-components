@@ -42,4 +42,12 @@ features:
   - icon: ➕
     title: 使用 TypeScript
     details: PlusProComponents 全量使用 TypeScript 编写，和你的 TypeScript 项目无缝衔接。
+
+  - icon: 🌐
+    title: 国际化
+    details: PlusProComponents 提供完备的国际化，与 element-plus 体系打通，无需多余配置。
+
+  - icon: 🐋
+    title: 预设
+    details: PlusProComponents 预设基本的样式，与 element-plus 样式一脉相承。 PlusProComponents 预设基本的行为，更少的代码具备更多的功能。
 ---

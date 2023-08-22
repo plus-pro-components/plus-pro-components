@@ -35,13 +35,15 @@
 ├── LICENSE                  #LICENSE 文件
 ├── package.json
 ├── packages                 #包文件夹
-|  ├── components            #主组件包
+|  ├── components            #主组件
 |  ├── constants             #固定变量
-|  ├── eslint-config         #eslint配置独立包
-|  ├── hooks                 #hooks包
-|  ├── play                  #组件预览包
+|  ├── eslint-config         #eslint配置独立
+|  ├── hooks                 #hooks
+|  ├── locale                #国际化
+|  ├── play                  #组件实时预览
 |  ├── plus-pro-components   #主包入口
-|  ├── utils                 #工具包
+|  ├── utils                 #工具
+|  ├── theme-chalk           #样式
 |  └── types                 #公共TS类型
 ├── pnpm-lock.yaml
 ├── pnpm-workspace.yaml      #工作空间配置
@@ -63,6 +65,18 @@
 |  └── env.d.ts
 └── vitest.config.ts          #vitest配置
 
+```
+
+## 克隆仓库
+
+```sh
+git clone https://github.com/plus-pro-components/plus-pro-components.git
+```
+
+如果 GitHub 克隆速度较慢，你也可以直接克隆 plus-pro-components 在 gitee 上的[镜像仓库](https://gitee.com/plus-pro-components/plus-pro-components.git)，同步可能会存在时差。
+
+```bash
+git clone https://gitee.com/plus-pro-components/plus-pro-components.git
 ```
 
 ## 启动项目
@@ -203,22 +217,8 @@ pnpm run build
 pnpm run commit
 ```
 
-## 打包组件 components
+## 打包组件
 
 ```sh
- pnpm build:main
-```
-
-## 发布组件 components `谨慎使用`
-
-1. release `谨慎使用`
-
-```sh
-pnpm run release
-```
-
-2. 发布到 npm `谨慎使用`
-
-```sh
-pnpm run publish
+ pnpm run build
 ```

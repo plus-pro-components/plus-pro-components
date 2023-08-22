@@ -23,20 +23,22 @@
   <!-- 自定义显示 -->
   <component
     :is="render"
-    v-bind="customFieldProps"
     v-else-if="column.render && isFunction(column.render)"
+    class="plus-display-item"
+    v-bind="customFieldProps"
   />
 
   <!--显示HTML -->
   <span
     v-else-if="column.renderHTML && isFunction(column.renderHTML)"
+    class="plus-display-item"
     v-html="column.renderHTML(subRow[column.prop], { row: subRow, column, index })"
   />
 
   <!--显示图片 -->
   <el-image
     v-else-if="column.valueType === 'img'"
-    class="plus-display-item__image__col"
+    class="plus-display-item plus-display-item__image"
     fit="cover"
     preview-teleported
     :src="getImageUrl().url"
@@ -48,7 +50,7 @@
   <el-link
     v-else-if="column.valueType === 'link'"
     type="primary"
-    class="plus-display-item__link"
+    class="plus-display-item plus-display-item__link"
     v-bind="customFieldProps"
   >
     {{ column.linkText || subRow[column.prop] }}
@@ -57,13 +59,18 @@
   <!-- 格式化时间 -->
   <span
     v-else-if="column.valueType === 'date-picker' && subRow[column.prop]"
+    class="plus-display-item"
     v-bind="customFieldProps"
   >
     {{ formatDate(subRow[column.prop]) }}
   </span>
 
   <!-- 格式化金钱 -->
-  <span v-else-if="column.valueType === 'money'" v-bind="customFieldProps">
+  <span
+    v-else-if="column.valueType === 'money'"
+    class="plus-display-item"
+    v-bind="customFieldProps"
+  >
     {{ formatMoney(subRow[column.prop]) }}
   </span>
 
@@ -74,31 +81,41 @@
       column.valueType === 'radio' ||
       column.valueType === 'checkbox'
     "
-    class="plus-display-item__badge--status"
+    class="plus-display-item plus-display-item__badge"
     v-bind="customFieldProps"
   >
     <span
-      v-if="getStatus().color"
-      class="plus-display-item__badge--status__dot"
+      v-if="getStatus().color || getStatus().type"
+      :class="[
+        'plus-display-item__badge__dot',
+        getStatus().type && !getStatus().color
+          ? 'plus-display-item__badge__dot--' + getStatus().type
+          : ''
+      ]"
       :style="{ backgroundColor: getStatus().color }"
     />
     {{ getStatus().label }}
   </span>
 
   <!-- 标签 -->
-  <el-tag v-else-if="column.valueType === 'tag'" v-bind="customFieldProps">
+  <el-tag
+    v-else-if="column.valueType === 'tag'"
+    class="plus-display-item"
+    v-bind="customFieldProps"
+  >
     {{ subRow[column.prop] }}
   </el-tag>
 
   <!-- 进度条 -->
   <el-progress
     v-else-if="column.valueType === 'progress'"
+    class="plus-display-item"
     :percentage="subRow[column.prop]"
     v-bind="customFieldProps"
   />
 
   <!-- 复制 -->
-  <span v-else-if="column.valueType === 'copy'">
+  <span v-else-if="column.valueType === 'copy'" class="plus-display-item">
     <el-icon
       size="16"
       color="var(--el-color-primary)"
@@ -115,14 +132,14 @@
   <!-- 代码块 -->
   <pre
     v-else-if="column.valueType === 'code'"
-    class="plus-display-item__pre"
+    class="plus-display-item plus-display-item__pre"
     v-bind="customFieldProps"
   >
       {{ subRow[column.prop] }}
   </pre>
 
   <!-- 没有format -->
-  <span v-else v-bind="customFieldProps">{{ subRow[column.prop] }} </span>
+  <span v-else class="plus-display-item" v-bind="customFieldProps">{{ subRow[column.prop] }} </span>
 </template>
 
 <script lang="ts" setup>
@@ -145,7 +162,7 @@ import type { PlusColumn, RecordType } from '@plus-pro-components/types'
 import { useGetOptions } from '@plus-pro-components/hooks'
 
 export interface PlusDisplayItemProps {
-  column?: PlusColumn
+  column: PlusColumn
   row: RecordType
   index?: number
 }

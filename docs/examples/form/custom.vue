@@ -6,7 +6,7 @@
 
 <script lang="ts" setup>
 import { ref, h, Fragment } from 'vue'
-import type { PlusColumn, FieldValues } from '@plus-pro-components/types'
+import type { PlusColumn, FieldValues } from 'plus-pro-components'
 import { fileToDataURL } from '@plus-pro-components/utils'
 import { ElUpload, ElButton, ElImage, ElInput, ElTransfer } from 'element-plus'
 
@@ -24,10 +24,10 @@ const columns: PlusColumn[] = [
     label: '自定义el-input（返回组件）',
     prop: 'elData',
     fieldProps: {
-      // 优先级低于 renderFormFieldItem 的props
+      // 优先级低于 renderField 的props
       placeholder: '请输入'
     },
-    renderFormFieldItem: () => {
+    renderField: () => {
       // 返回组件时不需要手动调用onChange
       return ElInput
     }
@@ -36,12 +36,12 @@ const columns: PlusColumn[] = [
     label: '自定义el-input（返回VNode）',
     prop: 'elData1',
     fieldProps: {
-      // 优先级低于 renderFormFieldItem 的props
+      // 优先级低于 renderField 的props
       placeholder: '请输入'
     },
-    renderFormFieldItem: (_, onChange) => {
+    renderField: (_, onChange) => {
       return h(ElInput, {
-        // 返回VNode时，需要手动调用 renderFormFieldItem 的onChange 回调把值传给表单
+        // 返回VNode时，需要手动调用 renderField 的onChange 回调把值传给表单
         onChange
       })
     }
@@ -49,7 +49,7 @@ const columns: PlusColumn[] = [
   {
     label: '自定义ElTransfer',
     prop: 'elTransfer',
-    renderFormFieldItem: (value, onChange) => {
+    renderField: (value, onChange) => {
       interface Option {
         key: number
         label: string
@@ -74,7 +74,7 @@ const columns: PlusColumn[] = [
     prop: 'img',
     width: 100,
     valueType: 'img',
-    renderFormFieldItem(value, onChange) {
+    renderField(value, onChange) {
       // 自定义上传
       const handleHttpRequest = async ({ file, onError, onSuccess }: any) => {
         try {
@@ -103,7 +103,7 @@ const columns: PlusColumn[] = [
             httpRequest: handleHttpRequest,
             onChange: async (data: any) => {
               const value = await fileToDataURL(data.raw)
-              // 手动调用 renderFormFieldItem 的onChange 回调把值传给表单
+              // 手动调用 renderField 的onChange 回调把值传给表单
               onChange(value)
             }
           },
@@ -118,11 +118,11 @@ const columns: PlusColumn[] = [
     fieldProps: {
       placeholder: '请输入原生表单值'
     },
-    renderFormFieldItem: (value, onChange) => {
+    renderField: (value, onChange) => {
       return h('input', {
         // 原生表单需要手动添加 value值
         value: value,
-        // 返回VNode时，需要手动调用 renderFormFieldItem 的onChange 回调把值传给表单
+        // 返回VNode时，需要手动调用 renderField 的onChange 回调把值传给表单
         onChange: (e: Event) => {
           const value = (e.target as HTMLInputElement)?.value
           onChange(value)
@@ -148,13 +148,13 @@ const columns: PlusColumn[] = [
     slots: {
       default: value => value
     },
-    renderFormFieldItem: () => {
+    renderField: () => {
       return 'div'
     }
   }
 ]
 
-const handleChange = (values: FieldValues) => {
-  console.log(values, 'change')
+const handleChange = (values: FieldValues, prop: PlusColumn) => {
+  console.log(values, prop, 'change')
 }
 </script>

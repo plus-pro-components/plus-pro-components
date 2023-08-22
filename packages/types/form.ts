@@ -1,5 +1,5 @@
 import type { VNode, Component } from 'vue'
-import type { FormItemProps } from 'element-plus'
+import type { FormItemProps, ColProps } from 'element-plus'
 import type { PlusFormProps } from '@plus-pro-components/components/form'
 import type { PropsItemType, PlusColumn } from './plus'
 import type { Mutable } from './global'
@@ -48,7 +48,6 @@ export interface FormColumnProps {
 
   /**
    * 自定义渲染 el-form-item 下的field-item组件。
-   * 自定义渲染同步表单的值需要手动调用onChange 用来实现双向绑定
    * @param props
    * @param onChange
    * @param formItemInstance
@@ -63,10 +62,10 @@ export interface FormColumnProps {
    *    label: '自定义el-input',
    *    prop: 'elData',
    *    fieldProps: {
-   *     // 优先级低于 renderFormFieldItem 的props
+   *     // 优先级低于 renderField 的props
    *      placeholder: '请输入'
    *    },
-   *     renderFormFieldItem: (value, onChange) => {
+   *     renderField: (value, onChange) => {
    *        return h(ElInput as any, {
    *         // 优先级高于 fieldProps
    *           placeholder: '请输入自定义el-input',
@@ -77,11 +76,15 @@ export interface FormColumnProps {
    *]
    * ```
    */
-  renderFormFieldItem?: (
+  renderField?: (
     value: FieldValueType,
     onChange: (value: FieldValueType) => void,
     props: PlusColumn
   ) => VNode | Component | string
+  /**
+   * @desc el-col 的 props
+   */
+  colProps?: Partial<Mutable<ColProps>>
 }
 
 /**

@@ -8,11 +8,11 @@
     v-bind="drawer"
     @close="handleCancel"
   >
-    <template #header>
+    <template v-if="$slots['drawer-header']" #header>
       <slot name="drawer-header" />
     </template>
 
-    <template #footer>
+    <template v-if="$slots['drawer-footer']" #footer>
       <slot name="drawer-footer" />
     </template>
 
@@ -23,10 +23,14 @@
       v-bind="(form as any)"
       @submit="handleSubmitForm"
       @change="handleChange"
-      @cancel="handleCancel"
+      @reset="handleReset"
     >
-      <template #footer>
+      <template v-if="$slots['form-footer']" #footer>
         <slot name="form-footer" />
+      </template>
+
+      <template v-if="$slots['form-group-item-header']" #group-item-header>
+        <slot name="form-group-item-header" />
       </template>
     </PlusForm>
   </el-drawer>
@@ -36,7 +40,7 @@
 import { ref, watch } from 'vue'
 import { PlusForm } from '@plus-pro-components/components/form'
 import type { PlusFormInstance, PlusFormProps } from '@plus-pro-components/components/form'
-import type { FieldValues } from '@plus-pro-components/types'
+import type { FieldValues, PlusColumn } from '@plus-pro-components/types'
 import { ElDrawer } from 'element-plus'
 import { useLocale } from '@plus-pro-components/hooks'
 
@@ -47,11 +51,12 @@ export interface PlusDrawerFormProps {
   form?: PlusFormProps
 }
 export interface PlusDrawerFormEmits {
-  (e: 'update:modelValue', data: FieldValues): void
+  (e: 'update:modelValue', values: FieldValues): void
   (e: 'update:visible', visible: boolean): void
-  (e: 'submit', data: FieldValues): void
-  (e: 'change', data: FieldValues): void
+  (e: 'submit', values: FieldValues): void
+  (e: 'change', values: FieldValues, column: PlusColumn): void
   (e: 'cancel'): void
+  (e: 'reset'): void
 }
 
 defineOptions({
@@ -93,9 +98,9 @@ watch(
   }
 )
 
-const handleChange = (values: any) => {
+const handleChange = (values: FieldValues, column: PlusColumn) => {
   emit('update:modelValue', values)
-  emit('change', values)
+  emit('change', values, column)
 }
 
 const handleSubmitForm = () => {
@@ -106,6 +111,9 @@ const handleCancel = () => {
   subVisible.value = false
   emit('update:visible', subVisible.value)
   emit('cancel')
+}
+const handleReset = () => {
+  emit('reset')
 }
 
 defineExpose({

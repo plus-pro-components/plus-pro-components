@@ -11,11 +11,9 @@
 </template>
 
 <script lang="ts" setup>
-import type { ButtonsCallBackParams, TableFormRefRow } from '@plus-pro-components/components/table'
-import { useTable } from '@plus-pro-components/hooks'
-
+import type { ButtonsCallBackParams, TableFormRefRow, PlusColumn } from 'plus-pro-components'
+import { useTable } from 'plus-pro-components'
 import { ElMessage } from 'element-plus'
-import type { PlusColumn } from '@plus-pro-components/types'
 import { ref } from 'vue'
 
 interface TableRow {
@@ -179,9 +177,8 @@ const formChange = (data: { value: any; prop: string; row: any; index: number; c
 const handleSave = async (data: ButtonsCallBackParams) => {
   try {
     if (data.formRefs) {
-      await Promise.all(
-        data.formRefs?.map((item: TableFormRefRow) => item.formInstance.value?.validate())
-      )
+      const formItem = data.formRefs?.find((item: TableFormRefRow) => item.prop === 'name')
+      await (formItem?.formItemInstance.value as any)?.validate()
     }
   } catch (errors: any) {
     ElMessage.closeAll()
@@ -199,7 +196,9 @@ const handleClickButton = async (data: ButtonsCallBackParams) => {
     })
 
     data.formRefs?.forEach((item: TableFormRefRow) => {
-      item.startCellEdit()
+      if (item.prop === 'name') {
+        item.startCellEdit()
+      }
     })
   } else if (data.buttonRow.code === 'cancel') {
     tableData.value.forEach(item => {

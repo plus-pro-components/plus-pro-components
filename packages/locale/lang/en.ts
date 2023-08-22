@@ -17,8 +17,8 @@ export default {
       title: 'Drawer form'
     },
     form: {
-      confirmText: 'Yes',
-      cancelText: 'No',
+      submitText: 'Submit',
+      resetText: 'Reset',
       errorTip: 'Please complete the form and submit again!'
     },
     field: {
@@ -48,6 +48,11 @@ export default {
       confirmToPerformThisOperation: 'Confirm to perform this operation?',
       prompt: 'Prompt',
       sort: 'Sort'
+    },
+    stepsForm: {
+      nextText: 'Next step',
+      preText: 'Previous step',
+      submitText: 'Submit'
     }
   }
 }

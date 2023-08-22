@@ -1,6 +1,6 @@
 # plus-pro-components
 
-[![ElementPlus version badge](https://img.shields.io/npm/v/plus-pro-components.svg?style=flat-square)](https://www.npmjs.org/package/plus-pro-components)[![ docs by vitepress](https://img.shields.io/badge/docs%20by-vitepress-10b981)](https://vitepress.dev/)[![Build With Vite](https://img.shields.io/badge/build%20with-rollup-646cff.svg)](https://rollupjs.org/)[![pnpm](https://img.shields.io/badge/maintained%20with-pnpm-cc00ff.svg)](https://www.pnpm.cn/)[![element-plus](https://img.shields.io/badge/ui%20-element%20plus-409eff.svg)](https://element-plus.org/)
+[![ElementPlus version badge](https://img.shields.io/npm/v/plus-pro-components.svg?style=flat-square)](https://www.npmjs.org/package/plus-pro-components)[![ docs by vitepress](https://img.shields.io/badge/docs%20by-vitepress-10b981)](https://vitepress.dev/)[![Build With Vite](https://img.shields.io/badge/build%20with-rollup-646cff.svg)](https://rollupjs.org/)[![pnpm](https://img.shields.io/badge/maintained%20with-pnpm-cc00ff.svg)](https://www.pnpm.cn/)[![element-plus](https://img.shields.io/badge/ui%20-element%20plus-409eff.svg)](https://element-plus.org/)[![gzip](https://img.badgesize.io/https:/unpkg.com/plus-pro-components/index.min.js?style=flat-square&compression=gzip)](https://unpkg.com/plus-pro-components/index.min.js)
 
 **页面级别的前端组件**
 
@@ -25,6 +25,10 @@ plus-pro-components 是一个基于 Vue 和 element-plus 的页面级别的组�
 - 丰富的组件库：plus-pro-components 基于 element-plus 提供了大量的 UI 组件，包括表格、表单、图表等，能够满足大多数企业应用的需求。
 
 - 使用 TypeScript：plus-pro-components 全量使用 TypeScript 编写，和你的 TypeScript 项目无缝衔接。
+
+- 国际化： plus-pro-components 提供完备的国际化，与 element-plus 体系打通，无需多余配置。
+
+- 预设： plus-pro-components 预设基本的样式，与 element-plus 样式一脉相承。 plus-pro-components 预设基本的行为，更少的代码具备更多的功能。
 
 # 组件列表
 

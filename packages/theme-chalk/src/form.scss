@@ -3,4 +3,14 @@
     display: flex;
     justify-content: flex-end;
   }
+  .plus-form__group__item {
+    margin-bottom: 20px;
+    .plus-form__group__item__icon {
+      display: flex;
+      align-items: center;
+      .el-icon {
+        margin-right: 5px;
+      }
+    }
+  }
 }

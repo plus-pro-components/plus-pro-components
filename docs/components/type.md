@@ -1,6 +1,10 @@
 # 基础 Ts 类型
 
-**本页面类型会互相引用，请注意上下文。**
+::: tip 提示
+
+本页面类型会互相引用，请注意上下文!
+
+:::
 
 ## ElementRefType
 
@@ -88,6 +92,9 @@ export interface PageInfo {
 表格操作栏按钮配置项的值的类型
 
 ```ts
+import type { ElMessageBoxOptions } from 'element-plus'
+import type { DefineComponent, Ref, ComputedRef } from 'vue'
+import type { RecordType, ButtonsCallBackParams } from 'plus-pro-components'
 /**
  * 表格操作栏按钮配置项的值的类型
  */
@@ -162,6 +169,8 @@ export interface ActionBarButtonsRow {
 表格操作栏数据类型
 
 ```ts
+import type { ActionBarButtonsRow } from 'plus-pro-components'
+
 /**
  * 表格操作栏数据类型
  */
@@ -203,6 +212,9 @@ export interface ActionBarProps {
 表格可编辑表单的行 form 的参数类型
 
 ```ts
+import { ElForm, ElFormItem } from 'element-plus'
+import type { Ref } from 'vue'
+
 /**
  * 表格可编辑表单的行form 的参数类型
  */
@@ -250,6 +262,8 @@ export interface TableFormRefRow {
 表格点击按钮回调的参数的类型
 
 ```ts
+import type { RecordType, buttonsKeyRow, TableFormRefRow } from 'plus-pro-components'
+
 /**
  * 表格点击按钮回调的参数的类型
  */
@@ -345,6 +359,8 @@ export type FieldValueType =
 整体表单值的类型
 
 ```ts
+import type { FieldValueType } from 'plus-pro-components'
+
 /**
  * 整体表单值的类型
  */
@@ -356,6 +372,7 @@ export type FieldValues = Record<string, FieldValueType>
 自定义 props 类型
 
 ```ts
+import type { FieldValueType } from 'plus-pro-components'
 /**
  *  自定义props类型  支持对象object ，函数，Promise
  */
@@ -376,13 +393,24 @@ export type PropsItemType<T extends Record<string, any> = any> =
 选择框类型
 
 ```ts
+import type { PropsItemType } from 'plus-pro-components'
 /**
  * 选择框类型
  */
 export interface OptionsRow {
   label: number | string
   value: number | string
+  /**
+   * 小圆点背景色，
+   * color 优先级 高于 type
+   */
   color?: string
+  /**
+   * 小圆点背景色，
+   * type 优先级 低于 color，
+   * 支持 'success' | 'warning' | 'info' | 'primary' | 'danger'
+   */
+  type?: 'success' | 'warning' | 'info' | 'primary' | 'danger'
   /**
    * 表单子项的props  如 el-checkbox-group下的el-checkbox的props
    */
@@ -395,6 +423,7 @@ export interface OptionsRow {
 选择类型 支持数组，函数和 Promise
 
 ```ts
+import type { OptionsRow } from 'plus-pro-components'
 /**
  * 选择类型
  */
@@ -403,4 +432,38 @@ export type OptionsType =
   | OptionsRow[]
   | ((props?: PlusColumn) => OptionsRow[] | Promise<OptionsRow[]>)
   | Promise<OptionsRow[]>
+```
+
+## PlusFormGroupRow
+
+```ts
+import type { DefineComponent } from 'vue'
+import type { PlusColumn } from 'plus-pro-components'
+
+/**
+ * 分组表单配置项
+ */
+export interface PlusFormGroupRow {
+  title: string
+  icon?: DefineComponent
+  columns: PlusColumn[]
+}
+```
+
+## PlusStepFrom
+
+```ts
+import type { Component } from 'vue'
+import type { PlusFormProps } from 'plus-pro-components'
+
+/**
+ * 分步表单配置项
+ */
+export interface PlusStepFrom {
+  title: string
+  description?: string
+  icon?: string | Component
+  status?: '' | 'wait' | 'process' | 'finish' | 'error' | 'success'
+  form: PlusFormProps
+}
 ```

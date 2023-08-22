@@ -8,11 +8,13 @@ import { PlusDatePicker } from '@plus-pro-components/components/date-picker'
 import { PlusDescriptions } from '@plus-pro-components/components/descriptions'
 import { PlusDisplayItem } from '@plus-pro-components/components/display-item'
 import { PlusForm } from '@plus-pro-components/components/form'
-import { PlusFormItem, PlusFormFieldItem } from '@plus-pro-components/components/form-item'
+import { PlusFormItem } from '@plus-pro-components/components/form-item'
+import { PlusPopover } from '@plus-pro-components/components/popover'
 import { PlusSearch } from '@plus-pro-components/components/search'
 import { PlusDialogForm } from '@plus-pro-components/components/dialog-form'
 import { PlusDrawerForm } from '@plus-pro-components/components/drawer-form'
 import { PlusPage } from '@plus-pro-components/components/page'
+import { PlusStepsForm } from '@plus-pro-components/components/steps-form'
 
 const plugins: DefineComponent[] = [
   PlusDialog,
@@ -23,12 +25,13 @@ const plugins: DefineComponent[] = [
   PlusDescriptions,
   PlusDisplayItem,
   PlusFormItem,
-  PlusFormFieldItem,
   PlusForm,
+  PlusPopover,
   PlusSearch,
   PlusDialogForm,
   PlusDrawerForm,
-  PlusPage
+  PlusPage,
+  PlusStepsForm
 ] as unknown as DefineComponent[]
 
 export default plugins

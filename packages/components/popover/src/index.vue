@@ -1,17 +1,6 @@
 <template>
-  <el-popover
-    :placement="placement"
-    :width="width"
-    :trigger="trigger"
-    :title="title"
-    :visible="state.visible"
-    :show-arrow="false"
-    @show="handleShow"
-    @hide="state.visible = false"
-  >
-    <div v-click-outside="onClickOutside">
-      <slot />
-    </div>
+  <el-popover v-model:visible="subVisible" v-bind="$attrs">
+    <slot />
 
     <div v-if="hasShowBottomButton" style="padding-top: 12px">
       <el-button size="small" plain @click="handleCancelPopover">
@@ -29,24 +18,19 @@
     </div>
 
     <template #reference>
-      <span @click="handleClick">
-        <slot name="icon" />
+      <span>
+        <slot name="reference" />
       </span>
     </template>
   </el-popover>
 </template>
 
 <script lang="ts" setup>
-import { reactive } from 'vue'
-import { ClickOutside as vClickOutside } from 'element-plus'
+import { ref, watch } from 'vue'
 import { useLocale } from '@plus-pro-components/hooks'
 
 export interface PlusPopoverProps {
   hasShowBottomButton?: boolean
-  placement: string
-  width: number
-  trigger?: string
-  title?: string
   confirmLoading?: boolean
   cancelText?: string
   confirmText?: string
@@ -54,56 +38,44 @@ export interface PlusPopoverProps {
 export interface PlusPopoverEmits {
   (e: 'cancel'): void
   (e: 'confirm'): void
-  (e: 'show'): void
 }
 
 defineOptions({
   name: 'PlusPopover'
 })
 
-withDefaults(defineProps<PlusPopoverProps>(), {
+const props = withDefaults(defineProps<PlusPopoverProps>(), {
   // 是否显示 popover 弹出框
   hasToolbar: false,
   // 是否显示底部按钮
   hasShowBottomButton: false,
-  // 出现位置
-  placement: 'bottom',
-  // 宽度
-  width: 150,
-  // 触发方式
-  trigger: 'hover',
-  title: '',
   confirmLoading: false,
   cancelText: '',
-  confirmText: ''
+  confirmText: '',
+  visible: false
 })
 const emit = defineEmits<PlusPopoverEmits>()
 
+const subVisible = ref(false)
 const { t } = useLocale()
-const state = reactive({
-  // 控制弹框显示隐藏
-  visible: false
-})
+
+watch(
+  () => props.visible,
+  val => {
+    subVisible.value = val
+  },
+  {
+    immediate: true
+  }
+)
 
 const handleCancelPopover = (): void => {
+  subVisible.value = false
   emit('cancel')
-  state.visible = false
 }
 
 const handleConfirmPopover = (): void => {
+  subVisible.value = false
   emit('confirm')
-  state.visible = false
-}
-
-const handleClick = (): void => {
-  state.visible = true
-}
-
-const onClickOutside = () => {
-  state.visible = false
-}
-
-const handleShow = () => {
-  emit('show')
 }
 </script>

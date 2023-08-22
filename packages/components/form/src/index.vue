@@ -8,16 +8,62 @@
     :validate-on-rule-change="false"
     :label-suffix="labelSuffix"
     v-bind="$attrs"
-    :model="state.values"
+    :model="model"
   >
     <slot>
-      <PlusFormItem
-        v-for="(item, index) in state.subColumns"
-        :key="item.prop + index"
-        v-model="state.values[item.prop]"
-        v-bind="item"
-        @change="handleChange"
-      />
+      <!-- 分组表单 -->
+      <template v-if="group">
+        <el-card v-for="groupItem in group" :key="groupItem.title" class="plus-form__group__item">
+          <template #header>
+            <slot
+              name="group-item-header"
+              :title="groupItem.title"
+              :columns="groupItem.columns"
+              :icon="groupItem.icon"
+            >
+              <div class="plus-form__group__item__icon">
+                <el-icon v-if="groupItem.icon">
+                  <component :is="groupItem.icon" />
+                </el-icon>
+                {{ groupItem.title }}
+              </div>
+            </slot>
+          </template>
+          <el-row v-bind="rowProps">
+            <el-col
+              v-for="(item, index) in filterHide(groupItem.columns)"
+              :key="item.prop + index"
+              v-bind="item.colProps || colProps"
+            >
+              <PlusFormItem
+                v-model="state.values[item.prop]"
+                v-bind="item"
+                @change="() => handleChange(item)"
+              />
+            </el-col>
+          </el-row>
+        </el-card>
+      </template>
+
+      <!-- 普通表单 -->
+      <template v-else>
+        <el-row v-bind="rowProps">
+          <el-col
+            v-for="(item, index) in state.subColumns"
+            :key="item.prop + index"
+            v-bind="item.colProps || colProps"
+          >
+            <PlusFormItem
+              v-model="state.values[item.prop]"
+              v-bind="item"
+              @change="() => handleChange(item)"
+            />
+          </el-col>
+          <el-col v-bind="colProps">
+            <slot name="searchFooter" />
+          </el-col>
+        </el-row>
+      </template>
     </slot>
 
     <div
@@ -26,14 +72,13 @@
       :style="{ justifyContent: footerAlign === 'left' ? 'flex-start' : 'flex-end' }"
     >
       <slot name="footer">
-        <el-button type="primary" :loading="submitLoading" @click="handleSubmit">
-          <!-- 确定 -->
-          {{ confirmText || t('plus.form.confirmText') }}
+        <el-button v-if="hasReset" @click="handleReset">
+          <!-- 重置 -->
+          {{ resetText || t('plus.form.resetText') }}
         </el-button>
-
-        <el-button v-if="hasCancel" @click="handleCancel">
-          <!-- 取消 -->
-          {{ cancelText || t('plus.form.cancelText') }}
+        <el-button type="primary" :loading="submitLoading" @click="handleSubmit">
+          <!-- 提交 -->
+          {{ submitText || t('plus.form.submitText') }}
         </el-button>
       </slot>
     </div>
@@ -41,27 +86,41 @@
 </template>
 
 <script lang="ts" setup>
+import type { DefineComponent } from 'vue'
 import { reactive, ref, watch, computed } from 'vue'
-import type { FormInstance, FormRules, FormProps } from 'element-plus'
+import type { FormInstance, FormRules, FormProps, RowProps, ColProps } from 'element-plus'
 import { ElMessage } from 'element-plus'
 import { useLocale } from '@plus-pro-components/hooks'
 import { PlusFormItem } from '@plus-pro-components/components/form-item'
 import type { PlusColumn, FieldValues, Mutable } from '@plus-pro-components/types'
+import { cloneDeep } from 'lodash-es'
+
+/**
+ * 分组表单配置项
+ */
+export interface PlusFormGroupRow {
+  title: string
+  icon?: DefineComponent
+  columns: PlusColumn[]
+}
 
 export interface PlusFormProps extends /* @vue-ignore */ Partial<Mutable<FormProps>> {
   modelValue?: FieldValues
   columns?: PlusColumn[]
   labelWidth?: string
   labelPosition?: 'left' | 'right' | 'top'
+  rowProps?: Partial<Mutable<RowProps>>
+  colProps?: Partial<Mutable<ColProps>>
   labelSuffix?: string
   hasErrorTip?: boolean
   hasFooter?: boolean
-  hasCancel?: boolean
-  confirmText?: string
-  cancelText?: string
+  hasReset?: boolean
+  submitText?: string
+  resetText?: string
   submitLoading?: boolean
   footerAlign?: 'left' | 'right'
   rules?: FormRules
+  group?: false | PlusFormGroupRow[]
 }
 export interface PlusFormState {
   values: FieldValues
@@ -70,8 +129,8 @@ export interface PlusFormState {
 export interface PlusFormEmits {
   (e: 'update:modelValue', values: FieldValues): void
   (e: 'submit', values: FieldValues): void
-  (e: 'change', values: FieldValues): void
-  (e: 'cancel'): void
+  (e: 'change', values: FieldValues, column: PlusColumn): void
+  (e: 'reset'): void
   (e: 'submitError', errors: any): void
 }
 
@@ -83,17 +142,19 @@ const props = withDefaults(defineProps<PlusFormProps>(), {
   modelValue: () => ({}),
   labelWidth: '80px',
   labelPosition: 'left',
+  rowProps: () => ({}),
+  colProps: () => ({}),
   labelSuffix: ':',
   hasErrorTip: true,
   hasFooter: true,
-  hasCancel: true,
+  hasReset: true,
   submitLoading: false,
-  confirmText: '',
-  cancelText: '',
+  submitText: '',
+  resetText: '',
   footerAlign: 'left',
-  formProps: () => ({}),
   rules: () => ({}),
-  columns: () => []
+  columns: () => [],
+  group: false
 })
 const emit = defineEmits<PlusFormEmits>()
 
@@ -103,12 +164,10 @@ const state = reactive<PlusFormState>({
   values: { ...props.modelValue },
   subColumns: []
 })
-state.subColumns = computed<any>(() => props.columns.filter(item => item.hideInForm !== true))
+const filterHide = (columns: PlusColumn[]) => columns.filter(item => item.hideInForm !== true)
+const model = computed(() => cloneDeep(state.values))
 
-const handleChange = () => {
-  emit('change', state.values)
-  emit('update:modelValue', state.values)
-}
+state.subColumns = computed<any>(() => filterHide(props.columns))
 
 watch(
   () => props.modelValue,
@@ -120,6 +179,11 @@ watch(
     immediate: true
   }
 )
+
+const handleChange = (column: PlusColumn) => {
+  emit('change', state.values, column)
+  emit('update:modelValue', state.values)
+}
 
 // 清空校验
 const clearValidate = (): void => {
@@ -142,9 +206,10 @@ const handleSubmit = async () => {
   }
 }
 
-const handleCancel = (): void => {
+const handleReset = (): void => {
   clearValidate()
-  emit('cancel')
+  state.values = {}
+  emit('reset')
 }
 
 defineExpose({
