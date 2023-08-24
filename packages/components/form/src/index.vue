@@ -39,7 +39,29 @@
                 v-model="state.values[item.prop]"
                 v-bind="item"
                 @change="() => handleChange(item)"
-              />
+              >
+                <template
+                  v-if="$slots[getLabelSlotName(item.prop)]"
+                  #[getLabelSlotName(item.prop)]="{ fieldProps, valueType }"
+                >
+                  <slot
+                    :name="getLabelSlotName(item.prop)"
+                    :prop="item.prop"
+                    :label="item.label"
+                    :field-props="fieldProps"
+                    :value-type="valueType"
+                  />
+                </template>
+                <template v-if="$slots[item.prop]" #[item.prop]="{ fieldProps, valueType }">
+                  <slot
+                    :name="item.prop"
+                    :prop="item.prop"
+                    :label="item.label"
+                    :field-props="fieldProps"
+                    :value-type="valueType"
+                  />
+                </template>
+              </PlusFormItem>
             </el-col>
           </el-row>
         </el-card>
@@ -57,7 +79,29 @@
               v-model="state.values[item.prop]"
               v-bind="item"
               @change="() => handleChange(item)"
-            />
+            >
+              <template
+                v-if="$slots[getLabelSlotName(item.prop)]"
+                #[getLabelSlotName(item.prop)]="{ fieldProps, valueType }"
+              >
+                <slot
+                  :name="getLabelSlotName(item.prop)"
+                  :prop="item.prop"
+                  :label="item.label"
+                  :field-props="fieldProps"
+                  :value-type="valueType"
+                />
+              </template>
+              <template v-if="$slots[item.prop]" #[item.prop]="{ fieldProps, valueType }">
+                <slot
+                  :name="item.prop"
+                  :prop="item.prop"
+                  :label="item.label"
+                  :field-props="fieldProps"
+                  :value-type="valueType"
+                />
+              </template>
+            </PlusFormItem>
           </el-col>
           <el-col v-bind="colProps">
             <slot name="searchFooter" />
@@ -94,6 +138,7 @@ import { useLocale } from '@plus-pro-components/hooks'
 import { PlusFormItem } from '@plus-pro-components/components/form-item'
 import type { PlusColumn, FieldValues, Mutable } from '@plus-pro-components/types'
 import { cloneDeep } from 'lodash-es'
+import { getLabelSlotName } from '@plus-pro-components/components/utils'
 
 /**
  * 分组表单配置项

@@ -105,3 +105,9 @@ export const handleSlots = (
   }
   return slotsRes
 }
+/**
+ * 处理form-item中的label slot名称
+ */
+export const getLabelSlotName = (prop: string) => {
+  return prop + '-label'
+}
