@@ -1,18 +1,13 @@
 <template>
   <div>
     <PlusTable :columns="tableConfig" :table-data="tableData">
+      <!--这里的plus-header-name 插槽没有生效，因为它的优先级低于renderHeader函数 -->
       <template #plus-header-name="scoped">
         <span style="color: yellow">{{ scoped.label }}</span>
-      </template>
-      <template #plus-cell-name="scoped">
-        <span style="color: blue"> {{ scoped.value }} </span>
       </template>
 
       <template #plus-header-status="scoped">
         <span style="color: red">插槽- {{ scoped.label }}</span>
-      </template>
-      <template #plus-cell-status="scoped">
-        <span style="color: green">插槽- {{ scoped.value }} </span>
       </template>
     </PlusTable>
   </div>
@@ -25,10 +20,10 @@ import type { PlusColumn } from '@plus-pro-components/types'
 
 const TestServe = {
   getList: async () => {
-    const data = [...new Array(5)].map((item, index) => {
+    const data = [...new Array(3)].map((item, index) => {
       return {
         name: index + 'name',
-        status: String(index % 5),
+        status: String(index % 2),
         tag: index === 1 ? 'success' : index === 2 ? 'warning' : index === 3 ? 'info' : 'danger',
         time: new Date()
       }
@@ -55,18 +50,6 @@ const tableConfig: PlusColumn[] = [
           }
         },
         `render ${label}`
-      )
-    },
-    // render 的优先级比 插槽plus-cell-name 的高
-    render(value) {
-      return h(
-        'div',
-        {
-          style: {
-            color: 'green'
-          }
-        },
-        `render ${value}`
       )
     }
   },

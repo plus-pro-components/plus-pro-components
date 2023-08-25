@@ -118,14 +118,54 @@ table/cell-edit
 
 :::
 
-## 自定义表格项和表单项
+## 自定义表格项和表单项 ( 插槽 ) <el-tag  effect="dark">推荐</el-tag>
 
-- 自定义表格项的核心方法是定义 `render`方法。
+:::warning 提示
+**插槽 的优先级低于 render，高于数据**。
+:::
+
+`PlusTable` 组件会自动根据配置项的 `prop` 生成对应的插槽，例如下面的配置项，则会自动生成两个名称叫做 [ **plus-cell-`name`** ]和 [ **plus-cell-`status`**] 的两个插槽，插槽的生成规则就是 固定 key 值 [ **plus-cell-** ] 然后加上 配置项的 `prop`。
+
+```ts
+import { PlusColumn } from 'plus-pro-components'
+
+const tableConfig: PlusColumn[] = [
+  {
+    label: '名称',
+    // 自动生成对应的插槽 'plus-cell-name'
+    prop: 'name'
+  },
+  {
+    label: '状态',
+    // 自动生成对应的插槽 'plus-cell-status'
+    prop: 'status'
+  }
+]
+```
+
+插槽作用域中会返回 `scoped` 参数,`scoped` 中 包含 `prop`、`label`、`valueType`和`column`等参数可供使用。
+
+自定义表单项参考[自定义表单项(插槽)](/components/form.html#%E8%87%AA%E5%AE%9A%E4%B9%89%E8%A1%A8%E5%8D%95%E9%A1%B9) （
+表格中需要开启 `editable`）
+
+:::demo
+
+table/custom-cell-slot
+
+:::
+
+## 自定义表格项和表单项 (render)
+
+:::tip 提示
+**render 的优先级高于插槽**。
+:::
+
+- 使用 render 函数自定义表格项。
   `render` 方法可以返回以下三种情况
 
   - 返回一个 [Component](https://cn.vuejs.org/api/built-in-special-elements.html#component)。 （配合[PlusColumn](/components/config.html) 的 `slots`使用 ）<el-tag  effect="dark">推荐</el-tag>
   - 调用 vue 的[渲染函数 h](https://cn.vuejs.org/guide/extras/render-function.html) 返回一个 `VNode`。
-  - 返回一个 [string](https://cn.vuejs.org/api/built-in-special-elements.html#component)。（渲染原生标签，配合[PlusColumn](/components/config.html) 的 `slots`使用 ）
+  - 返回一个**标签字符串** [string](https://cn.vuejs.org/api/built-in-special-elements.html#component)。（渲染原生标签，配合[PlusColumn](/components/config.html) 的 `slots`使用 ）
 
 - 自定义表格项还支持 `renderHTML`方法，需要返回一个 HTML 字符串。
 
@@ -135,6 +175,101 @@ table/cell-edit
 :::demo
 
 table/custom-cell
+
+:::
+
+## 自定义表格项和表单项 (jsx/tsx)
+
+:::warning 提示
+
+jsx/tsx 的使用需要将 vue 单文件组件的`script` 的属性 `lang ` 设置为 `jsx`或者`tsx`
+
+```html
+<script lang="tsx" setup></script>
+```
+
+:::
+
+`jsx/tsx` 的支持本质是`jsx/tsx`解析数来是`VNode`, 使用 render 函数自定义表格项。
+
+自定义表单项参考[自定义表单项-jsx-tsx](/components/form.html#%E8%87%AA%E5%AE%9A%E4%B9%89%E8%A1%A8%E5%8D%95%E9%A1%B9) （
+表格中需要开启 `editable`）
+
+:::demo
+
+table/custom-cell-tsx
+
+:::
+
+## 自定义表格表头 (插槽) <el-tag  effect="dark">推荐</el-tag>
+
+:::warning 提示
+**插槽 的优先级低于 renderHeader，高于 label**。
+:::
+
+`PlusTable` 组件会自动根据配置项的 `prop` 生成对应的插槽，例如下面的配置项，则会自动生成两个名称叫做 [ **plus-header-`name`** ]和 [ **plus-header-`status`**] 的两个插槽，插槽的生成规则就是 固定 key 值 [ **plus-header-** ] 然后加上 配置项的 `prop`。
+
+```ts
+import { PlusColumn } from 'plus-pro-components'
+
+const tableConfig: PlusColumn[] = [
+  {
+    label: '名称',
+    // 自动生成对应的插槽 'plus-header-name'
+    prop: 'name'
+  },
+  {
+    label: '状态',
+    // 自动生成对应的插槽 'plus-header-status'
+    prop: 'status'
+  }
+]
+```
+
+插槽作用域中会返回 `scoped` 参数,`scoped` 中 包含 `prop`、`label`、`valueType`和`column`等参数可供使用。
+
+:::demo
+
+table/custom-header-slot
+
+:::
+
+## 自定义表格表头 (renderHeader)
+
+:::warning 提示
+**renderHeader 的优先级高于插槽**。
+:::
+
+- 使用 render 函数自定义表格项。
+  `render` 方法可以返回以下三种情况
+
+  - 返回一个 [Component](https://cn.vuejs.org/api/built-in-special-elements.html#component)。 （配合[PlusColumn](/components/config.html) 的 `headerSlots`使用 ）<el-tag  effect="dark">推荐</el-tag>
+  - 调用 vue 的[渲染函数 h](https://cn.vuejs.org/guide/extras/render-function.html) 返回一个 `VNode`。
+  - 返回一个**标签字符串** [string](https://cn.vuejs.org/api/built-in-special-elements.html#component)。（渲染原生标签，配合[PlusColumn](/components/config.html) 的 `headerSlots`使用 ）
+
+:::demo
+
+table/custom-header
+
+:::
+
+## 自定义表格表头 (jsx/tsx)
+
+:::warning 提示
+
+jsx/tsx 的使用需要将 vue 单文件组件的`script` 的属性 `lang ` 设置为 `jsx`或者`tsx`
+
+```html
+<script lang="tsx" setup></script>
+```
+
+:::
+
+`jsx/tsx` 的支持本质是`jsx/tsx`解析数来是`VNode`, 使用 renderHeader 函数自定义表格表头。
+
+:::demo
+
+table/custom-header-tsx
 
 :::
 

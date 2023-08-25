@@ -62,7 +62,22 @@
       </el-table-column>
 
       <!--配置渲染栏  -->
-      <PlusTableColumn :columns="(subColumns as any)" @formChange="handleFormChange" />
+      <PlusTableColumn :columns="(subColumns as any)" @formChange="handleFormChange">
+        <!--表格单元格表头的插槽 -->
+        <template v-for="(_, key) in headerSlots" :key="key" #[key]="data">
+          <slot :name="key" v-bind="data" />
+        </template>
+
+        <!--表格单元格的插槽 -->
+        <template v-for="(_, key) in cellSlots" :key="key" #[key]="data">
+          <slot :name="key" v-bind="data" />
+        </template>
+
+        <!--表单单项的插槽 -->
+        <template v-for="(_, key) in fieldSlots" :key="key" #[key]="data">
+          <slot :name="key" v-bind="data" />
+        </template>
+      </PlusTableColumn>
 
       <!-- 操作栏 -->
       <PlusTableActionBar
@@ -89,7 +104,7 @@
 </template>
 
 <script lang="ts" setup>
-import { reactive, toRefs, watch, ref, provide, shallowRef } from 'vue'
+import { reactive, toRefs, watch, ref, provide, shallowRef, useSlots } from 'vue'
 import { cloneDeep } from 'lodash-es'
 import type { PlusPaginationProps } from '@plus-pro-components/components/pagination'
 import { PlusPagination } from '@plus-pro-components/components/pagination'
@@ -99,6 +114,12 @@ import type { ComponentSize } from 'element-plus/es/constants'
 import type { TableInstance, TableProps } from 'element-plus'
 import type { PageInfo, PlusColumn, RecordType } from '@plus-pro-components/types'
 import type { Options as SortableOptions } from 'sortablejs'
+import {
+  getTableCellSlotName,
+  getTableHeaderSlotName,
+  getFieldSlotName,
+  filterSlots
+} from '@plus-pro-components/components/utils'
 import PlusTableActionBar from './table-action-bar.vue'
 import PlusTableColumn from './table-column.vue'
 import PlusTableTableColumnIndex from './table-column-index.vue'
@@ -191,6 +212,25 @@ const state = reactive<TableState>({
   size: props.defaultSize
 })
 
+const slots = useSlots()
+/**
+ * 表格单元格的插槽
+ */
+const cellSlots = filterSlots(slots, getTableCellSlotName())
+
+/**
+ * 表格单元格表头的插槽
+ */
+const headerSlots = filterSlots(slots, getTableHeaderSlotName())
+
+/**
+ * 表单单项的插槽
+ */
+const fieldSlots = filterSlots(slots, getFieldSlotName())
+
+/**
+ * 表单的ref
+ */
 const formRefs = shallowRef({})
 provide(TableFormRefInjectionKey, formRefs)
 

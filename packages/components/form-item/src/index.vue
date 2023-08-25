@@ -8,7 +8,15 @@
   >
     <template #label="{ label: currentLabel }">
       <span class="plus-form-item__label">
-        <component :is="renderLabel" v-if="renderLabel && isFunction(renderLabel)" />
+        <PlusRender
+          v-if="renderLabel && isFunction(renderLabel)"
+          :render="renderLabel"
+          :params="props"
+          :callback-value="currentLabel"
+          :custom-field-props="customFieldProps"
+          :slots="labelSlots"
+        />
+
         <slot
           v-else
           :name="getLabelSlotName(prop)"
@@ -16,6 +24,7 @@
           :label="label"
           :field-props="customFieldProps"
           :value-type="valueType"
+          :column="props"
         >
           {{ currentLabel }}
         </slot>
@@ -26,21 +35,25 @@
       </span>
     </template>
 
-    <component
-      :is="render"
+    <PlusRender
       v-if="renderField && isFunction(renderField)"
-      v-model="state"
-      class="plus-form-item-field"
-      v-bind="customFieldProps"
+      :render="renderField"
+      :params="props"
+      :callback-value="state"
+      :custom-field-props="customFieldProps"
+      render-type="form"
+      :handle-change="handleChange"
+      :slots="fieldSlots"
     />
 
     <slot
-      v-else-if="$slots[prop]"
-      :name="prop"
+      v-else-if="$slots[getFieldSlotName(prop)]"
+      :name="getFieldSlotName(prop)"
       :prop="prop"
       :label="label"
       :field-props="customFieldProps"
       :value-type="valueType"
+      :column="props"
     />
 
     <el-autocomplete
@@ -237,20 +250,20 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, watch, isVNode, h, computed } from 'vue'
-import type { VNode, Component } from 'vue'
+import { ref, watch, computed } from 'vue'
 import type { PlusColumn, FieldValueType } from '@plus-pro-components/types'
-import { isString, isFunction, isDate, isArray, isComponent } from '@plus-pro-components/utils'
+import { isFunction, isDate, isArray } from '@plus-pro-components/utils'
 import {
   getTooltip,
   getCustomProps,
-  handleSlots,
-  getLabelSlotName
+  getLabelSlotName,
+  getFieldSlotName
 } from '@plus-pro-components/components/utils'
 import { QuestionFilled } from '@element-plus/icons-vue'
 import { useGetOptions, useLocale } from '@plus-pro-components/hooks'
 import { PlusRadio } from '@plus-pro-components/components/radio'
 import { PlusDatePicker } from '@plus-pro-components/components/date-picker'
+import { PlusRender } from '@plus-pro-components/components/render'
 
 export interface PlusFormItemProps {
   modelValue?: FieldValueType
@@ -267,7 +280,10 @@ export interface PlusFormItemProps {
   // eslint-disable-next-line vue/require-default-prop
   renderLabel?: PlusColumn['renderLabel']
   tooltip?: PlusColumn['tooltip']
-  slots?: PlusColumn['slots']
+  // eslint-disable-next-line vue/require-default-prop
+  fieldSlots?: PlusColumn['fieldSlots']
+  // eslint-disable-next-line vue/require-default-prop
+  labelSlots?: PlusColumn['labelSlots']
   index?: number
 }
 export interface PlusFormItemEmits {
@@ -424,40 +440,6 @@ const handleChange = (val: FieldValueType) => {
  */
 const handleSelect = ({ value }: any) => {
   handleChange(value)
-}
-
-/**
- * 渲染自定义表单
- */
-const render = () => {
-  if (!props.renderField) return
-  const value = state.value
-  const params = { ...props }
-  const dynamicComponent = props.renderField(value, handleChange, params)
-  const slots = handleSlots(props.slots, value, params)
-  /** string */
-  if (isString(dynamicComponent)) {
-    return h(dynamicComponent as string, { ...customFieldProps.value }, slots)
-  }
-  /** Component */
-  if (isComponent(dynamicComponent)) {
-    return h(
-      dynamicComponent as Component,
-      { ...customFieldProps.value, modelValue: state.value, onChange: handleChange },
-      slots
-    )
-  }
-  /** VNode */
-  if (isVNode(dynamicComponent)) {
-    return {
-      ...dynamicComponent,
-      props: {
-        ...customFieldProps.value,
-        ...dynamicComponent.props,
-        modelValue: state.value
-      }
-    } as VNode
-  }
 }
 
 defineExpose({

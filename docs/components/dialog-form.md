@@ -31,11 +31,11 @@ dialog-form/basic
 
 ## DialogForm Slots
 
-| 插槽名                   | 说明                                                                                     |
-| ------------------------ | ---------------------------------------------------------------------------------------- |
-| `dialog-header`          | [PlusDialog](/components/dialog.html#dialog-slots) 的 header slot                        |
-| `form-footer`            | [PlusForm-footer](/components/form.html#form-slots) 的 footer slot                       |
-| `form-group-item-header` | [PlusForm-group-item-header](/components/form.html#form-slots) 的 group-item-header slot |
+| 插槽名              | 说明                                                                           |
+| ------------------- | ------------------------------------------------------------------------------ |
+| `dialog-header`     | [PlusDialog](/components/dialog.html#dialog-slots) 的 header slot              |
+| `form-footer`       | [PlusForm-footer](/components/form.html#form-slots) 的 footer slot             |
+| `form-group-header` | [PlusForm-group-header](/components/form.html#form-slots) 的 group-header slot |
 
 ## Exposes
 

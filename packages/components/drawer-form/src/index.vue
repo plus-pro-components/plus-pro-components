@@ -29,8 +29,8 @@
         <slot name="form-footer" />
       </template>
 
-      <template v-if="$slots['form-group-item-header']" #group-item-header>
-        <slot name="form-group-item-header" />
+      <template v-if="$slots['form-group-header']" #group-header>
+        <slot name="form-group-header" />
       </template>
     </PlusForm>
   </el-drawer>

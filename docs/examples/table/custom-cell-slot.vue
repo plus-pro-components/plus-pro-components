@@ -1,17 +1,13 @@
 <template>
   <div>
     <PlusTable :columns="tableConfig" :table-data="tableData">
-      <template #plus-header-name="scoped">
-        <span style="color: yellow">{{ scoped.label }}</span>
-      </template>
+      <!--这里的plus-cell-name 插槽没有生效，因为它的优先级低于render函数 -->
       <template #plus-cell-name="scoped">
         <span style="color: blue"> {{ scoped.value }} </span>
       </template>
 
-      <template #plus-header-status="scoped">
-        <span style="color: red">插槽- {{ scoped.label }}</span>
-      </template>
       <template #plus-cell-status="scoped">
+        {{ getData(scoped) }}
         <span style="color: green">插槽- {{ scoped.value }} </span>
       </template>
     </PlusTable>
@@ -20,15 +16,19 @@
 
 <script lang="ts" setup>
 import { h } from 'vue'
-import { useTable } from '@plus-pro-components/hooks'
-import type { PlusColumn } from '@plus-pro-components/types'
+import { useTable } from 'plus-pro-components'
+import type { PlusColumn } from 'plus-pro-components'
+
+const getData = data => {
+  console.log(data, 'data')
+}
 
 const TestServe = {
   getList: async () => {
-    const data = [...new Array(5)].map((item, index) => {
+    const data = [...new Array(4)].map((item, index) => {
       return {
         name: index + 'name',
-        status: String(index % 5),
+        status: String(index % 4),
         tag: index === 1 ? 'success' : index === 2 ? 'warning' : index === 3 ? 'info' : 'danger',
         time: new Date()
       }
@@ -45,18 +45,6 @@ const tableConfig: PlusColumn[] = [
   {
     label: '名称',
     prop: 'name',
-    // renderHeader 的优先级比 插槽 plus-header-name 的高
-    renderHeader(label) {
-      return h(
-        'div',
-        {
-          style: {
-            color: 'red'
-          }
-        },
-        `render ${label}`
-      )
-    },
     // render 的优先级比 插槽plus-cell-name 的高
     render(value) {
       return h(

@@ -1,23 +1,17 @@
 <template>
   <div style="width: 600px">
-    <PlusForm v-model="state" :rules="rules" :columns="columns" :row-props="{ gutter: 20 }">
-      <template #plus-label-name="{ label }">
-        <span style="color: red">{{ label }}</span>
-      </template>
-      <template #plus-field-name>
-        <el-input v-model="state.name" placeholder="自定义输入框插槽" />
-      </template>
-    </PlusForm>
+    <PlusForm v-model="state" :rules="rules" :columns="columns" :row-props="{ gutter: 20 }" />
   </div>
 </template>
 
-<script lang="tsx" setup>
+<script lang="ts" setup>
 import { ref } from 'vue'
 import type { PlusColumn } from '@plus-pro-components/types'
+import { ElButton } from 'element-plus'
 
 const state = ref({
   status: '0',
-  name: '',
+  name: '默认值',
   rate: 4,
   progress: 100,
   switch: true,
@@ -47,9 +41,14 @@ const columns: PlusColumn[] = [
     prop: 'name',
     valueType: 'copy',
     tooltip: '名称最多显示6个字符',
-    renderLabel: label => {
-      return <div style="color: green;">{label}</div>
-      // return h('div', label)
+    renderLabel: () => {
+      return 'div'
+    },
+    // 传递给 'div' 的slots
+    labelSlots: {
+      default(value) {
+        return `${value}`
+      }
     }
   },
   {
@@ -78,7 +77,14 @@ const columns: PlusColumn[] = [
         value: '3',
         color: 'red'
       }
-    ]
+    ],
+    renderLabel: () => ElButton,
+    // 传递给 ElButton 的slots
+    labelSlots: {
+      default(value) {
+        return `${value}`
+      }
+    }
   }
 ]
 </script>

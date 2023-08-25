@@ -11,6 +11,7 @@ export default [
   { path: '/pagination', name: 'pagination', component: '@/views/pagination.vue' },
   { path: '/popover', name: 'popover', component: '@/views/popover.vue' },
   { path: '/radio', name: 'radio', component: '@/views/radio.vue' },
+  { path: '/render', name: 'render', component: '@/views/render.vue' },
   { path: '/search', name: 'search', component: '@/views/search.vue' },
   { path: '/steps-form', name: 'steps-form', component: '@/views/steps-form.vue' },
   { path: '/table', name: 'table', component: '@/views/table.vue' }

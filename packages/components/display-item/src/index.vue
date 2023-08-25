@@ -17,15 +17,36 @@
       v-bind="column"
       label=""
       @change="handleChange"
-    />
+    >
+      <template
+        v-if="$slots[getFieldSlotName(column.prop)]"
+        #[getFieldSlotName(column.prop)]="data"
+      >
+        <slot :name="getFieldSlotName(column.prop)" v-bind="data" />
+      </template>
+    </PlusFormItem>
   </PlusForm>
 
   <!-- 自定义显示 -->
-  <component
-    :is="render"
+  <PlusRender
     v-else-if="column.render && isFunction(column.render)"
-    class="plus-display-item"
-    v-bind="customFieldProps"
+    :render="column.render"
+    :params="params"
+    :callback-value="value"
+    :custom-field-props="customFieldProps"
+    :slots="column.slots"
+  />
+
+  <!-- 插槽 -->
+  <slot
+    v-else-if="$slots[getTableCellSlotName(column.prop)]"
+    :name="getTableCellSlotName(column.prop)"
+    :prop="column.prop"
+    :value-type="column.valueType"
+    :row="subRow"
+    :value="subRow[column.prop]"
+    :field-props="customFieldProps"
+    :column="column"
   />
 
   <!--显示HTML -->
@@ -147,19 +168,16 @@ import { DocumentCopy, Select } from '@element-plus/icons-vue'
 import { PlusFormItem } from '@plus-pro-components/components/form-item'
 import { PlusForm } from '@plus-pro-components/components/form'
 import type { PlusFormInstance } from '@plus-pro-components/components/form'
+import { formatDate, formatMoney, isFunction, isArray } from '@plus-pro-components/utils'
 import {
-  formatDate,
-  formatMoney,
-  isFunction,
-  isArray,
-  isComponent,
-  isString
-} from '@plus-pro-components/utils'
-import { getCustomProps, handleSlots } from '@plus-pro-components/components/utils'
-import type { VNode, Component } from 'vue'
-import { ref, watch, computed, isVNode, h } from 'vue'
+  getCustomProps,
+  getTableCellSlotName,
+  getFieldSlotName
+} from '@plus-pro-components/components/utils'
+import { ref, watch, computed } from 'vue'
 import type { PlusColumn, RecordType } from '@plus-pro-components/types'
 import { useGetOptions } from '@plus-pro-components/hooks'
+import { PlusRender } from '@plus-pro-components/components/render'
 
 export interface PlusDisplayItemProps {
   column: PlusColumn
@@ -189,6 +207,13 @@ const customFieldProps = ref<any>({})
 const formInstance = ref<PlusFormInstance>()
 const formItemInstance = ref()
 const options = useGetOptions(props.column)
+
+const value = computed(() => subRow.value[props.column.prop])
+const params = computed(() => ({
+  row: subRow.value,
+  column: props.column,
+  index: props.index
+}))
 
 watch(
   options,
@@ -290,37 +315,6 @@ const getDisplayItemInstance = () => {
     prop: props.column.prop,
     formInstance: computed(() => formInstance.value?.formInstance),
     formItemInstance: computed(() => formItemInstance.value?.formItemInstance)
-  }
-}
-
-// 渲染表格自定义显示
-const render = () => {
-  if (!props.column.render) return
-  const value = subRow.value[props.column.prop]
-  const params = {
-    row: subRow.value,
-    column: props.column,
-    index: props.index
-  }
-  const dynamicComponent = props.column.render(value, params)
-  const slots = handleSlots(props.column.slots, value, params)
-  /** string */
-  if (isString(dynamicComponent)) {
-    return h(dynamicComponent as string, { ...customFieldProps.value }, slots)
-  }
-  /** Component */
-  if (isComponent(dynamicComponent)) {
-    return h(dynamicComponent as Component, { ...customFieldProps.value }, slots)
-  }
-  /** VNode */
-  if (isVNode(dynamicComponent)) {
-    return {
-      ...dynamicComponent,
-      props: {
-        ...customFieldProps.value,
-        ...dynamicComponent.props
-      }
-    } as VNode
   }
 }
 

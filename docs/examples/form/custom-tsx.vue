@@ -1,19 +1,13 @@
 <template>
   <div style="width: 600px">
-    <PlusForm v-model="state" :rules="rules" :columns="columns" :row-props="{ gutter: 20 }">
-      <template #plus-label-name="{ label }">
-        <span style="color: red">{{ label }}</span>
-      </template>
-      <template #plus-field-name>
-        <el-input v-model="state.name" placeholder="自定义输入框插槽" />
-      </template>
-    </PlusForm>
+    <PlusForm v-model="state" :rules="rules" :columns="columns" :row-props="{ gutter: 20 }" />
   </div>
 </template>
 
 <script lang="tsx" setup>
 import { ref } from 'vue'
 import type { PlusColumn } from '@plus-pro-components/types'
+import { ElInput } from 'element-plus'
 
 const state = ref({
   status: '0',
@@ -47,9 +41,8 @@ const columns: PlusColumn[] = [
     prop: 'name',
     valueType: 'copy',
     tooltip: '名称最多显示6个字符',
-    renderLabel: label => {
+    renderField: label => {
       return <div style="color: green;">{label}</div>
-      // return h('div', label)
     }
   },
   {
@@ -57,6 +50,7 @@ const columns: PlusColumn[] = [
     width: 120,
     prop: 'status',
     valueType: 'select',
+
     options: [
       {
         label: '未解决',
@@ -78,7 +72,10 @@ const columns: PlusColumn[] = [
         value: '3',
         color: 'red'
       }
-    ]
+    ],
+    renderField: label => {
+      return <ElInput modelValue={label as string} />
+    }
   }
 ]
 </script>

@@ -145,7 +145,8 @@ const columns: PlusColumn[] = [
         return value
       }
     },
-    slots: {
+    // 传递给 'div' 的slots
+    fieldSlots: {
       default: value => value
     },
     renderField: () => {

@@ -16,7 +16,7 @@
         <el-card v-for="groupItem in group" :key="groupItem.title" class="plus-form__group__item">
           <template #header>
             <slot
-              name="group-item-header"
+              name="group-header"
               :title="groupItem.title"
               :columns="groupItem.columns"
               :icon="groupItem.icon"
@@ -29,6 +29,7 @@
               </div>
             </slot>
           </template>
+
           <el-row v-bind="rowProps">
             <el-col
               v-for="(item, index) in filterHide(groupItem.columns)"
@@ -40,26 +41,20 @@
                 v-bind="item"
                 @change="() => handleChange(item)"
               >
+                <!--表单项label插槽 -->
                 <template
                   v-if="$slots[getLabelSlotName(item.prop)]"
-                  #[getLabelSlotName(item.prop)]="{ fieldProps, valueType }"
+                  #[getLabelSlotName(item.prop)]="data"
                 >
-                  <slot
-                    :name="getLabelSlotName(item.prop)"
-                    :prop="item.prop"
-                    :label="item.label"
-                    :field-props="fieldProps"
-                    :value-type="valueType"
-                  />
+                  <slot :name="getLabelSlotName(item.prop)" v-bind="data" />
                 </template>
-                <template v-if="$slots[item.prop]" #[item.prop]="{ fieldProps, valueType }">
-                  <slot
-                    :name="item.prop"
-                    :prop="item.prop"
-                    :label="item.label"
-                    :field-props="fieldProps"
-                    :value-type="valueType"
-                  />
+
+                <!--表单项插槽 -->
+                <template
+                  v-if="$slots[getFieldSlotName(item.prop)]"
+                  #[getFieldSlotName(item.prop)]="data"
+                >
+                  <slot :name="getFieldSlotName(item.prop)" v-bind="data" />
                 </template>
               </PlusFormItem>
             </el-col>
@@ -80,26 +75,20 @@
               v-bind="item"
               @change="() => handleChange(item)"
             >
+              <!--表单项label插槽 -->
               <template
                 v-if="$slots[getLabelSlotName(item.prop)]"
-                #[getLabelSlotName(item.prop)]="{ fieldProps, valueType }"
+                #[getLabelSlotName(item.prop)]="data"
               >
-                <slot
-                  :name="getLabelSlotName(item.prop)"
-                  :prop="item.prop"
-                  :label="item.label"
-                  :field-props="fieldProps"
-                  :value-type="valueType"
-                />
+                <slot :name="getLabelSlotName(item.prop)" v-bind="data" />
               </template>
-              <template v-if="$slots[item.prop]" #[item.prop]="{ fieldProps, valueType }">
-                <slot
-                  :name="item.prop"
-                  :prop="item.prop"
-                  :label="item.label"
-                  :field-props="fieldProps"
-                  :value-type="valueType"
-                />
+
+              <!--表单项插槽 -->
+              <template
+                v-if="$slots[getFieldSlotName(item.prop)]"
+                #[getFieldSlotName(item.prop)]="data"
+              >
+                <slot :name="getFieldSlotName(item.prop)" v-bind="data" />
               </template>
             </PlusFormItem>
           </el-col>
@@ -138,7 +127,7 @@ import { useLocale } from '@plus-pro-components/hooks'
 import { PlusFormItem } from '@plus-pro-components/components/form-item'
 import type { PlusColumn, FieldValues, Mutable } from '@plus-pro-components/types'
 import { cloneDeep } from 'lodash-es'
-import { getLabelSlotName } from '@plus-pro-components/components/utils'
+import { getLabelSlotName, getFieldSlotName } from '@plus-pro-components/components/utils'
 
 /**
  * 分组表单配置项

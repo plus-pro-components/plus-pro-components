@@ -178,9 +178,21 @@ export interface CommentType {
   ) => string
 
   /**
-   * 插槽 当 `render` 或者 `renderField` 返回值是一个组件或者字符串是生效
+   * @desc 渲染table表单的Header
+   */
+  renderHeader?: (label: string, props: PlusColumn) => VNode | Component | string
+
+  /**
+   * 插槽 当 `render` 返回值是一个组件或者字符串是生效
    */
   slots?: {
+    [index: string]: (...arg: any) => any
+  } & { default?: (...arg: any) => any }
+
+  /**
+   * 插槽 当 `renderHeader` 返回值是一个组件或者字符串是生效
+   */
+  headerSlots?: {
     [index: string]: (...arg: any) => any
   } & { default?: (...arg: any) => any }
 }
