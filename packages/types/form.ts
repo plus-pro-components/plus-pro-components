@@ -85,6 +85,10 @@ export interface FormColumnProps {
    * @desc el-col 的 props
    */
   colProps?: Partial<Mutable<ColProps>>
+  /**
+   * @desc 渲染form表单的label
+   */
+  renderLabel?: (label: string) => VNode | Component | string
 }
 
 /**

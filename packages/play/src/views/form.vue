@@ -9,11 +9,18 @@
       @submit="handleSubmit"
       @submit-error="handleSubmitError"
       @reset="handleReset"
-    />
+    >
+      <!-- <template #name-label="{ label }">
+        <span style="color: red">{{ label }}</span>
+      </template> -->
+      <template #name>
+        <el-input v-model="state.name" placeholder="自定义输入框插槽" />
+      </template>
+    </PlusForm>
   </div>
 </template>
 
-<script lang="ts" setup>
+<script lang="tsx" setup>
 import { ref } from 'vue'
 import type { FieldValues } from '@plus-pro-components/types'
 import type { PlusFormGroupRow } from '@plus-pro-components/components/form'
@@ -52,7 +59,11 @@ const group: PlusFormGroupRow[] = [
         width: 120,
         prop: 'name',
         valueType: 'copy',
-        tooltip: '名称最多显示6个字符'
+        tooltip: '名称最多显示6个字符',
+        renderLabel: () => {
+          return <div style="color: green;">L 111</div>
+          // return h('div', label)
+        }
       },
       {
         label: '状态',

@@ -8,7 +8,18 @@
   >
     <template #label="{ label: currentLabel }">
       <span class="plus-form-item__label">
-        {{ currentLabel }}
+        <component :is="renderLabel" v-if="renderLabel && isFunction(renderLabel)" />
+        <slot
+          v-else
+          :name="getLabelSlotName(prop)"
+          :prop="prop"
+          :label="label"
+          :field-props="customFieldProps"
+          :value-type="valueType"
+        >
+          {{ currentLabel }}
+        </slot>
+
         <el-tooltip v-if="tooltip" placement="top" v-bind="getTooltip(tooltip)">
           <el-icon class="plus-table-column__label__icon" :size="16"><QuestionFilled /></el-icon>
         </el-tooltip>
@@ -21,6 +32,15 @@
       v-model="state"
       class="plus-form-item-field"
       v-bind="customFieldProps"
+    />
+
+    <slot
+      v-else-if="$slots[prop]"
+      :name="prop"
+      :prop="prop"
+      :label="label"
+      :field-props="customFieldProps"
+      :value-type="valueType"
     />
 
     <el-autocomplete
@@ -221,7 +241,12 @@ import { ref, watch, isVNode, h, computed } from 'vue'
 import type { VNode, Component } from 'vue'
 import type { PlusColumn, FieldValueType } from '@plus-pro-components/types'
 import { isString, isFunction, isDate, isArray, isComponent } from '@plus-pro-components/utils'
-import { getTooltip, getCustomProps, handleSlots } from '@plus-pro-components/components/utils'
+import {
+  getTooltip,
+  getCustomProps,
+  handleSlots,
+  getLabelSlotName
+} from '@plus-pro-components/components/utils'
 import { QuestionFilled } from '@element-plus/icons-vue'
 import { useGetOptions, useLocale } from '@plus-pro-components/hooks'
 import { PlusRadio } from '@plus-pro-components/components/radio'
@@ -239,6 +264,8 @@ export interface PlusFormItemProps {
   formItemProps?: PlusColumn['formItemProps']
   // eslint-disable-next-line vue/require-default-prop
   renderField?: PlusColumn['renderField']
+  // eslint-disable-next-line vue/require-default-prop
+  renderLabel?: PlusColumn['renderLabel']
   tooltip?: PlusColumn['tooltip']
   slots?: PlusColumn['slots']
   index?: number
@@ -382,6 +409,9 @@ watch(
     immediate: true
   }
 )
+if (props?.renderLabel) {
+  console.log(props?.renderLabel)
+}
 
 const handleChange = (val: FieldValueType) => {
   emit('update:modelValue', val)
