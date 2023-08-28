@@ -30,72 +30,45 @@
             </slot>
           </template>
 
-          <el-row v-bind="rowProps">
-            <el-col
-              v-for="(item, index) in filterHide(groupItem.columns)"
-              :key="item.prop + index"
-              v-bind="item.colProps || colProps"
-            >
-              <PlusFormItem
-                v-model="state.values[item.prop]"
-                v-bind="item"
-                @change="() => handleChange(item)"
-              >
-                <!--表单项label插槽 -->
-                <template
-                  v-if="$slots[getLabelSlotName(item.prop)]"
-                  #[getLabelSlotName(item.prop)]="data"
-                >
-                  <slot :name="getLabelSlotName(item.prop)" v-bind="data" />
-                </template>
+          <PlusFormContent
+            v-model="state.values"
+            :row-props="rowProps"
+            :col-props="colProps"
+            :columns="filterHide(groupItem.columns)"
+            @change="handleChange"
+          >
+            <!--表单项label插槽 -->
+            <template v-for="(_, key) in labelSlots" :key="key" #[key]="data">
+              <slot :name="key" v-bind="data" />
+            </template>
 
-                <!--表单项插槽 -->
-                <template
-                  v-if="$slots[getFieldSlotName(item.prop)]"
-                  #[getFieldSlotName(item.prop)]="data"
-                >
-                  <slot :name="getFieldSlotName(item.prop)" v-bind="data" />
-                </template>
-              </PlusFormItem>
-            </el-col>
-          </el-row>
+            <!--表单项插槽 -->
+            <template v-for="(_, key) in fieldSlots" :key="key" #[key]="data">
+              <slot :name="key" v-bind="data" />
+            </template>
+          </PlusFormContent>
         </el-card>
       </template>
 
       <!-- 普通表单 -->
       <template v-else>
-        <el-row v-bind="rowProps">
-          <el-col
-            v-for="(item, index) in state.subColumns"
-            :key="item.prop + index"
-            v-bind="item.colProps || colProps"
-          >
-            <PlusFormItem
-              v-model="state.values[item.prop]"
-              v-bind="item"
-              @change="() => handleChange(item)"
-            >
-              <!--表单项label插槽 -->
-              <template
-                v-if="$slots[getLabelSlotName(item.prop)]"
-                #[getLabelSlotName(item.prop)]="data"
-              >
-                <slot :name="getLabelSlotName(item.prop)" v-bind="data" />
-              </template>
+        <PlusFormContent
+          v-model="state.values"
+          :row-props="rowProps"
+          :col-props="colProps"
+          :columns="state.subColumns"
+          @change="handleChange"
+        >
+          <!--表单项label插槽 -->
+          <template v-for="(_, key) in labelSlots" :key="key" #[key]="data">
+            <slot :name="key" v-bind="data" />
+          </template>
 
-              <!--表单项插槽 -->
-              <template
-                v-if="$slots[getFieldSlotName(item.prop)]"
-                #[getFieldSlotName(item.prop)]="data"
-              >
-                <slot :name="getFieldSlotName(item.prop)" v-bind="data" />
-              </template>
-            </PlusFormItem>
-          </el-col>
-          <el-col v-bind="colProps">
-            <slot name="searchFooter" />
-          </el-col>
-        </el-row>
+          <!--表单项插槽 -->
+          <template v-for="(_, key) in fieldSlots" :key="key" #[key]="data">
+            <slot :name="key" v-bind="data" />
+          </template>
+        </PlusFormContent>
       </template>
     </slot>
 
@@ -120,14 +93,18 @@
 
 <script lang="ts" setup>
 import type { DefineComponent } from 'vue'
-import { reactive, ref, watch, computed } from 'vue'
+import { reactive, ref, watch, computed, useSlots } from 'vue'
 import type { FormInstance, FormRules, FormProps, RowProps, ColProps } from 'element-plus'
 import { ElMessage } from 'element-plus'
 import { useLocale } from '@plus-pro-components/hooks'
-import { PlusFormItem } from '@plus-pro-components/components/form-item'
 import type { PlusColumn, FieldValues, Mutable } from '@plus-pro-components/types'
 import { cloneDeep } from 'lodash-es'
-import { getLabelSlotName, getFieldSlotName } from '@plus-pro-components/components/utils'
+import {
+  getLabelSlotName,
+  getFieldSlotName,
+  filterSlots
+} from '@plus-pro-components/components/utils'
+import PlusFormContent from './form-content.vue'
 
 /**
  * 分组表单配置项
@@ -203,6 +180,17 @@ const model = computed(() => cloneDeep(state.values))
 
 state.subColumns = computed<any>(() => filterHide(props.columns))
 
+const slots = useSlots()
+/**
+ * 表单label的插槽
+ */
+const labelSlots = filterSlots(slots, getLabelSlotName())
+
+/**
+ * 表单field的插槽
+ */
+const fieldSlots = filterSlots(slots, getFieldSlotName())
+
 watch(
   () => props.modelValue,
   val => {
@@ -214,7 +202,7 @@ watch(
   }
 )
 
-const handleChange = (column: PlusColumn) => {
+const handleChange = (_: FieldValues, column: PlusColumn) => {
   emit('change', state.values, column)
   emit('update:modelValue', state.values)
 }

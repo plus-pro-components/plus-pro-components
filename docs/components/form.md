@@ -174,8 +174,6 @@ form/custom-label-slot
 - 调用 vue 的[渲染函数 h](https://cn.vuejs.org/guide/extras/render-function.html) 返回一个 `VNode`。
 - 返回一个**标签字符串** [string](https://cn.vuejs.org/api/built-in-special-elements.html#component)。 （渲染原生标签，配合[PlusColumn](/components/config.html) 的 `labelSlots`使用 ）
 
-:::
-
 :::demo
 
 form/custom-label

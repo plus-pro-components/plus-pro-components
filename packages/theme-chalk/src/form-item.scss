@@ -1,8 +1,11 @@
 .plus-form-item {
   width: 100%;
   .plus-form-item__label {
+    width: 100%;
+    display: flex;
+    align-items: center;
     .plus-table-column__label__icon {
-      vertical-align: sub;
+      margin-left: 5px;
     }
   }
 }

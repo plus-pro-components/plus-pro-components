@@ -1,12 +1,6 @@
 <template>
   <div style="width: 600px">
-    <PlusForm
-      v-model="state"
-      label-width="120px"
-      :rules="rules"
-      :columns="columns"
-      :row-props="{ gutter: 20 }"
-    />
+    <PlusForm v-model="state" :rules="rules" :columns="columns" :row-props="{ gutter: 20 }" />
   </div>
 </template>
 

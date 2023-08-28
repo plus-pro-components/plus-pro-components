@@ -211,6 +211,7 @@
     <el-time-picker
       v-else-if="valueType === 'time-picker'"
       v-model="state"
+      :placeholder="t('plus.field.pleaseSelect') + label"
       class="plus-form-item-field"
       v-bind="customFieldProps"
       @change="handleChange"
@@ -220,6 +221,7 @@
       v-else-if="valueType === 'time-select'"
       v-model="state"
       class="plus-form-item-field"
+      :placeholder="t('plus.field.pleaseSelect') + label"
       v-bind="customFieldProps"
       @change="handleChange"
     />
@@ -314,6 +316,7 @@ const customFormItemProps = ref<any>({})
 const customFieldProps = ref<any>({})
 const state = ref<FieldValueType>()
 const range = ['datetimerange', 'daterange', 'monthrange']
+const numberList = ['rate', 'input-number', 'slider']
 
 /**
  * 默认值是数组的情况
@@ -325,10 +328,13 @@ const isArrayValue = computed(() => {
   if (props.valueType === 'plus-date-picker') {
     return true
   }
-  if (props.valueType === 'select' && customFieldProps.value?.multiple) {
+  if (props.valueType === 'select' && customFieldProps.value?.multiple === true) {
     return true
   }
   if (props.valueType === 'date-picker' && range.includes(customFieldProps.value?.type)) {
+    return true
+  }
+  if (props.valueType === 'time-picker' && customFieldProps.value?.isRange === true) {
     return true
   }
   if (props.valueType === 'cascader' && customFieldProps.value?.multiple) {
@@ -341,8 +347,7 @@ const isArrayValue = computed(() => {
  * 默认值是数字的情况
  */
 const isNumberValue = computed(() => {
-  const list = ['rate', 'input-number', 'slider']
-  if (list.includes(props.valueType as string)) {
+  if (numberList.includes(props.valueType as string)) {
     return true
   }
   return false
@@ -425,9 +430,6 @@ watch(
     immediate: true
   }
 )
-if (props?.renderLabel) {
-  console.log(props?.renderLabel)
-}
 
 const handleChange = (val: FieldValueType) => {
   emit('update:modelValue', val)

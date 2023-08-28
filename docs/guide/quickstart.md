@@ -14,7 +14,7 @@
 
 - [TypeScript](https://www.typescriptlang.org/) (非必须，但是有 TypeScript 基础，使用起来会更加方便。)
 
-## 前置条件
+## 前置环境
 
 `PlusProComponents` 依赖 `Vue` 和 `ElementPlus`，在开始之前建议先配置 `Vue` 和 `ElementPlus` 环境。
 

@@ -74,7 +74,7 @@ export default defineConfig({
           },
           {
             text: '更新日志',
-            link: 'https://github.com/plus-pro-components/plus-pro-components/blob/main/CHANGELOG.md'
+            link: 'https://github.com/plus-pro-components/plus-pro-components/blob/dev/CHANGELOG.md'
           }
         ]
       },

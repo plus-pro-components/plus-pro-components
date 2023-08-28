@@ -4,6 +4,8 @@
 文中的一些类型来自 <a href="/components/type.html" style="text-decoration: underline;">基础 Ts 类型</a> 章节，建议先阅读。
 :::
 
+显示的核心字段是`valueType`，渲染的 key 是`prop`（所以需要保证唯一）。
+
 ## TS 类型 PlusColumn
 
 | 名称                    | 说明                                                                                                                                                              | 类型                                                                                                                                           | 默认值  | 是否必须 |
@@ -38,3 +40,38 @@
 | `hideInForm`            | 在 PlusForm 组件中 隐藏                                                                                                                                           | `boolean`                                                                                                                                      | `false` | 否       |
 | `hideInTable`           | 在 PlusTable 组件中 隐藏                                                                                                                                          | `boolean`                                                                                                                                      | `false` | 否       |
 | `hideInSearch`          | 在 PlusSearch 组件中 隐藏                                                                                                                                         | `boolean`                                                                                                                                      | `false` | 否       |
+
+## valueType 可选的表单值
+
+| valueType 表单值   | 对应 element-plus 的组件 | 对应 plus-pro-components 的组件                  |
+| ------------------ | ------------------------ | ------------------------------------------------ |
+| `autocomplete`     | el-autocomplete          |                                                  |
+| `cascader`         | el-cascader              |                                                  |
+| `checkbox`         | el-checkbox              |                                                  |
+| `color-picker`     | el-color-picker          |                                                  |
+| `date-picker`      | el-date-picker           |                                                  |
+| `input-number`     | el-input-number          |                                                  |
+| `radio`            | el-radio                 |                                                  |
+| `rate`             | el-rate                  |                                                  |
+| `select`           | el-select                |                                                  |
+| `slider`           | el-slider                |                                                  |
+| `switch`           | el-switch                |                                                  |
+| `time-picker`      | el-time-picker           |                                                  |
+| `time-select`      | el-time-select           |                                                  |
+| `textarea`         | el-input (type=textarea) |                                                  |
+| `text`             | el-input                 |                                                  |
+| `plus-radio`       |                          | [ plus-radio](/components/radio.html)            |
+| `plus-date-picker` |                          | [plus-date-picker](/components/date-picker.html) |
+
+## valueType 可选的显示值
+
+| valueType 表单值 | 说明                                                   |
+| ---------------- | ------------------------------------------------------ |
+| `undefined`      | 默认值，显示文本                                       |
+| `img`            | 显示图片，自带预览，可使用配置项`preview`禁止          |
+| `link`           | 显示 el-link ，配合配置项`fieldProps`和`linkText` 使用 |
+| `money`          | 显示金钱                                               |
+| `tag`            | 显示 el-tag，配合配置项`fieldProps` 使用               |
+| `progress`       | 显示 el-progress，配合配置项`fieldProps` 使用          |
+| `copy`           | 文本后面有可以复制按钮                                 |
+| `code`           | 显示代码                                               |

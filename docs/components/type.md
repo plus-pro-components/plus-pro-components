@@ -293,13 +293,21 @@ export interface ButtonsCallBackParams {
 
 ## TableValueType
 
-所有表格列显示的类型 默认是 ''
+所有表格列显示的类型 默认是 `undefined`
 
 ```ts
 /**
- * 所有表格列显示的类型 默认是 ''
+ * 所有表格列显示的类型 默认是 `undefined`
  */
-export type TableValueType = 'img' | 'link' | 'money' | 'tag' | 'progress' | 'copy' | 'code'
+export type TableValueType =
+  | 'img'
+  | 'link'
+  | 'money'
+  | 'tag'
+  | 'progress'
+  | 'copy'
+  | 'code'
+  | undefined
 ```
 
 ## FormItemValueType

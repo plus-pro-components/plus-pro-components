@@ -11,7 +11,7 @@ import { ElInput } from 'element-plus'
 
 const state = ref({
   status: '0',
-  name: '',
+  name: '默认值',
   rate: 4,
   progress: 100,
   switch: true,
@@ -41,8 +41,8 @@ const columns: PlusColumn[] = [
     prop: 'name',
     valueType: 'copy',
     tooltip: '名称最多显示6个字符',
-    renderField: label => {
-      return <div style="color: green;">{label}</div>
+    renderField: value => {
+      return <div style="color: green;">{value}</div>
     }
   },
   {
@@ -73,8 +73,8 @@ const columns: PlusColumn[] = [
         color: 'red'
       }
     ],
-    renderField: label => {
-      return <ElInput modelValue={label as string} />
+    renderField: value => {
+      return <ElInput modelValue={value as string} />
     }
   }
 ]
