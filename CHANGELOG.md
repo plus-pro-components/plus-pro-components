@@ -1,3 +1,20 @@
+## [v0.0.1-alpha.32](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-alpha.31...v0.0.1-alpha.32) (2023-08-28)
+
+
+### ✨ Features
+
+* **components:** :sparkles: table,form component add slot function.([11fddef](https://github.com/plus-pro-components/plus-pro-components/commit/11fddef)) by@xiaofei
+* **all:** Merge pull request [#43](https://github.com/plus-pro-components/plus-pro-components/pull/43) from plus-pro-components/zpp([3ad52ea](https://github.com/plus-pro-components/plus-pro-components/commit/3ad52ea)) by@xiaofei
+* **components:** :sparkles: add components form slots([46458f5](https://github.com/plus-pro-components/plus-pro-components/commit/46458f5)) by@zhangpp
+
+
+
+
+### ♻️ Code Refactoring
+
+* **form-item:** :recycle: refactor form-item content.([6bae848](https://github.com/plus-pro-components/plus-pro-components/commit/6bae848)) by@xiaofei
+
+
 ## [v0.0.1-alpha.31](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-alpha.30...v0.0.1-alpha.31) (2023-08-21)
 
 
