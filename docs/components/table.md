@@ -9,9 +9,23 @@ table/basic
 
 :::
 
+## 数据多级显示
+
+`columns`中的 `prop`支持 `x.y.z` 多（无限）级数据形式。
+
+:::warning 提示
+**数据级不宜过多，可能会影响性能**。
+:::
+
+:::demo
+
+table/multiple-level-display
+
+:::
+
 ## 自定义状态小圆点的背景色
 
-配置项中`valueType`为`select`或`radio`或`checkbox `时，
+配置项中`valueType`为`select`、`radio`或`checkbox `时，
 `columns`中的`options`中可配置`type`或`color属性`。
 `color` 优先级 高于 `type`。`type`支持`'success' | 'warning' | 'info' | 'primary' | 'danger'`。
 :::demo

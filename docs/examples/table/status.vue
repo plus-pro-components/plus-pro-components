@@ -5,8 +5,8 @@
 </template>
 
 <script lang="ts" setup>
-import { useTable } from '@plus-pro-components/hooks'
-import type { PlusColumn } from '@plus-pro-components/types'
+import { useTable } from 'plus-pro-components'
+import type { PlusColumn } from 'plus-pro-components'
 
 interface TableRow {
   id: number

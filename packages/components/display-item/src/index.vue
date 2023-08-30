@@ -12,7 +12,7 @@
   >
     <PlusFormItem
       ref="formItemInstance"
-      v-model="subRow[column.prop]"
+      v-model="displayValue"
       class="plus-display-item__form__item"
       v-bind="column"
       label=""
@@ -32,7 +32,7 @@
     v-else-if="column.render && isFunction(column.render)"
     :render="column.render"
     :params="params"
-    :callback-value="value"
+    :callback-value="displayValue"
     :custom-field-props="customFieldProps"
     :slots="column.slots"
   />
@@ -44,7 +44,7 @@
     :prop="column.prop"
     :value-type="column.valueType"
     :row="subRow"
-    :value="subRow[column.prop]"
+    :value="displayValue"
     :field-props="customFieldProps"
     :column="column"
   />
@@ -53,7 +53,7 @@
   <span
     v-else-if="column.renderHTML && isFunction(column.renderHTML)"
     class="plus-display-item"
-    v-html="column.renderHTML(subRow[column.prop], { row: subRow, column, index })"
+    v-html="column.renderHTML(displayValue, { row: subRow, column, index })"
   />
 
   <!--显示图片 -->
@@ -62,8 +62,8 @@
     class="plus-display-item plus-display-item__image"
     fit="cover"
     preview-teleported
-    :src="getImageUrl().url"
-    :preview-src-list="column.preview !== false ? getImageUrl().options : []"
+    :src="imageUrl.url"
+    :preview-src-list="column.preview !== false ? imageUrl.options : []"
     v-bind="customFieldProps"
   />
 
@@ -74,16 +74,16 @@
     class="plus-display-item plus-display-item__link"
     v-bind="customFieldProps"
   >
-    {{ column.linkText || subRow[column.prop] }}
+    {{ column.linkText || displayValue }}
   </el-link>
 
   <!-- 格式化时间 -->
   <span
-    v-else-if="column.valueType === 'date-picker' && subRow[column.prop]"
+    v-else-if="column.valueType === 'date-picker' && displayValue"
     class="plus-display-item"
     v-bind="customFieldProps"
   >
-    {{ formatDate(subRow[column.prop]) }}
+    {{ formatDate(displayValue) }}
   </span>
 
   <!-- 格式化金钱 -->
@@ -92,7 +92,7 @@
     class="plus-display-item"
     v-bind="customFieldProps"
   >
-    {{ formatMoney(subRow[column.prop]) }}
+    {{ formatMoney(displayValue) }}
   </span>
 
   <!-- 状态显示 -->
@@ -106,16 +106,14 @@
     v-bind="customFieldProps"
   >
     <span
-      v-if="getStatus().color || getStatus().type"
+      v-if="getStatus.color || getStatus.type"
       :class="[
         'plus-display-item__badge__dot',
-        getStatus().type && !getStatus().color
-          ? 'plus-display-item__badge__dot--' + getStatus().type
-          : ''
+        getStatus.type && !getStatus.color ? 'plus-display-item__badge__dot--' + getStatus.type : ''
       ]"
-      :style="{ backgroundColor: getStatus().color }"
+      :style="{ backgroundColor: getStatus.color }"
     />
-    {{ getStatus().label }}
+    {{ getStatus.label }}
   </span>
 
   <!-- 标签 -->
@@ -124,14 +122,14 @@
     class="plus-display-item"
     v-bind="customFieldProps"
   >
-    {{ subRow[column.prop] }}
+    {{ displayValue }}
   </el-tag>
 
   <!-- 进度条 -->
   <el-progress
     v-else-if="column.valueType === 'progress'"
     class="plus-display-item"
-    :percentage="subRow[column.prop]"
+    :percentage="displayValue"
     v-bind="customFieldProps"
   />
 
@@ -147,7 +145,7 @@
       <DocumentCopy v-if="!subRow.isCopy" />
       <Select v-else />
     </el-icon>
-    {{ subRow[column.prop] }}
+    {{ displayValue }}
   </span>
 
   <!-- 代码块 -->
@@ -156,11 +154,11 @@
     class="plus-display-item plus-display-item__pre"
     v-bind="customFieldProps"
   >
-      {{ subRow[column.prop] }}
+      {{ displayValue }}
   </pre>
 
   <!-- 没有format -->
-  <span v-else class="plus-display-item" v-bind="customFieldProps">{{ subRow[column.prop] }} </span>
+  <span v-else class="plus-display-item" v-bind="customFieldProps">{{ displayValue }} </span>
 </template>
 
 <script lang="ts" setup>
@@ -172,10 +170,12 @@ import { formatDate, formatMoney, isFunction, isArray } from '@plus-pro-componen
 import {
   getCustomProps,
   getTableCellSlotName,
-  getFieldSlotName
+  getFieldSlotName,
+  getValue,
+  setValue
 } from '@plus-pro-components/components/utils'
 import { ref, watch, computed } from 'vue'
-import type { PlusColumn, RecordType } from '@plus-pro-components/types'
+import type { PlusColumn, RecordType, FieldValueType } from '@plus-pro-components/types'
 import { useGetOptions } from '@plus-pro-components/hooks'
 import { PlusRender } from '@plus-pro-components/components/render'
 
@@ -185,7 +185,7 @@ export interface PlusDisplayItemProps {
   index?: number
 }
 export interface PlusTableTableColumnEmits {
-  (e: 'change', data: { value: any; prop: string; row: any }): void
+  (e: 'change', data: { value: FieldValueType; prop: string; row: RecordType }): void
 }
 
 defineOptions({
@@ -201,24 +201,54 @@ const emit = defineEmits<PlusTableTableColumnEmits>()
 
 const isCellEdit = ref(false)
 const isForm = computed(() => props.column.editable === true || isCellEdit.value === true)
-const subRow = ref(props.row)
+
 const currentStatus = ref({})
 const customFieldProps = ref<any>({})
 const formInstance = ref<PlusFormInstance>()
 const formItemInstance = ref()
 const options = useGetOptions(props.column)
 
-const value = computed(() => subRow.value[props.column.prop])
+const subRow = ref(props.row)
+
+/** 多层值支持 */
+const displayValue = computed({
+  get() {
+    return getValue(subRow.value, props.column.prop)
+  },
+  set(value) {
+    setValue(subRow.value, props.column.prop, value)
+  }
+})
+
 const params = computed(() => ({
   row: subRow.value,
   column: props.column,
   index: props.index
 }))
 
+const imageUrl = computed(() => {
+  const option = displayValue.value
+  if (option && typeof option === 'string') {
+    return { options: [option], url: option }
+  }
+  if (isArray(option)) {
+    return { options: option, url: option[0] }
+  }
+  return { options: [], url: '' }
+})
+
+const getStatus = computed(() => {
+  const option = options.value?.find(i => i.value === displayValue.value)
+  if (!option) {
+    return { label: '', value: '' }
+  }
+  return option
+})
+
 watch(
   options,
   val => {
-    const option = val?.find(i => i.value === subRow.value[props.column?.prop])
+    const option = val?.find(i => i.value === displayValue.value)
     currentStatus.value = option || {}
   },
   {
@@ -230,9 +260,8 @@ watch(
 watch(
   () => props.column.fieldProps,
   val => {
-    const value = subRow.value[props.column.prop]
     const row = subRow
-    getCustomProps(val, value, row, props.index, 'fieldProps')
+    getCustomProps(val, displayValue.value, row, props.index, 'fieldProps')
       .then(data => {
         customFieldProps.value = data
       })
@@ -270,25 +299,6 @@ const copy = (data: string) => {
   textarea.remove()
 }
 
-const getImageUrl = () => {
-  const option = subRow.value[props.column.prop]
-  if (option && typeof option === 'string') {
-    return { options: [option], url: option }
-  }
-  if (isArray(option)) {
-    return { options: option, url: option[0] }
-  }
-  return { options: [], url: '' }
-}
-
-const getStatus = () => {
-  const option = options.value?.find(i => i.value === subRow.value[props.column?.prop])
-  if (!option) {
-    return { label: '', value: '' }
-  }
-  return option
-}
-
 const handelClickCopy = (item: PlusColumn, row: RecordType) => {
   copy(row[item.prop])
   row.isCopy = true
@@ -297,7 +307,7 @@ const handelClickCopy = (item: PlusColumn, row: RecordType) => {
   }, 3000)
 }
 
-const handleChange = (value: any) => {
+const handleChange = (value: FieldValueType) => {
   emit('change', { value, prop: props.column.prop, row: subRow })
 }
 

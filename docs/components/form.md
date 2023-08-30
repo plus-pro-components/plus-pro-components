@@ -8,6 +8,20 @@ form/basic
 
 :::
 
+## 多级数据绑定
+
+`prop`支持 `x.y.z` 多（无限）级数据形式。
+
+:::warning 提示
+**数据级不宜过多，可能会影响性能**。
+:::
+
+:::demo
+
+form/multiple-level-display
+
+:::
+
 ## 两列
 
 :::demo

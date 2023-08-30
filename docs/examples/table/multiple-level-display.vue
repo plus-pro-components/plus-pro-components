@@ -5,15 +5,15 @@
 </template>
 
 <script lang="ts" setup>
-import { useTable } from '@plus-pro-components/hooks'
-import type { PlusColumn } from '@plus-pro-components/types'
+import { useTable } from 'plus-pro-components'
+import type { PlusColumn } from 'plus-pro-components'
 
 const TestServe = {
   getList: async () => {
     const data = [...new Array(5)].map((_, index) => {
       return {
         status: { data: { value: String(index % 2) } },
-        level: { message: { tip: '提示' } }
+        level: { message: { tip: '提示' + index } }
       }
     })
     return { data }
@@ -27,6 +27,10 @@ const tableConfig: PlusColumn[] = [
     label: '多级显示',
     prop: 'level.message.tip',
     editable: true
+  },
+  {
+    label: '多级显示',
+    prop: 'level.message.tip'
   },
   {
     label: '状态',

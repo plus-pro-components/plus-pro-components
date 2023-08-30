@@ -1,14 +1,11 @@
 <template>
   <el-row v-bind="rowProps">
-    <el-col
-      v-for="(item, index) in columns"
-      :key="item.prop + index"
-      v-bind="item.colProps || colProps"
-    >
+    <el-col v-for="item in columns" :key="item.prop" v-bind="item.colProps || colProps">
+      <!-- 多层值支持   -->
       <PlusFormItem
-        v-model="state.values[item.prop]"
+        :model-value="getValue(state.values, item.prop)"
         v-bind="item"
-        @change="() => handleChange(item)"
+        @change="value => handleChange(value, item)"
       >
         <!--表单项label插槽 -->
         <template v-if="$slots[getLabelSlotName(item.prop)]" #[getLabelSlotName(item.prop)]="data">
@@ -28,8 +25,13 @@
 import { reactive, watch } from 'vue'
 import type { FormProps, RowProps, ColProps } from 'element-plus'
 import { PlusFormItem } from '@plus-pro-components/components/form-item'
-import type { PlusColumn, FieldValues, Mutable } from '@plus-pro-components/types'
-import { getLabelSlotName, getFieldSlotName } from '@plus-pro-components/components/utils'
+import type { PlusColumn, FieldValues, FieldValueType, Mutable } from '@plus-pro-components/types'
+import {
+  getLabelSlotName,
+  getFieldSlotName,
+  getValue,
+  setValue
+} from '@plus-pro-components/components/utils'
 
 export interface PlusFormContentProps extends /* @vue-ignore */ Partial<Mutable<FormProps>> {
   modelValue?: FieldValues
@@ -70,7 +72,10 @@ watch(
   }
 )
 
-const handleChange = (column: PlusColumn) => {
+const handleChange = (value: FieldValueType, column: PlusColumn) => {
+  /** 多层值支持 */
+  setValue(state.values, column.prop, value)
+
   emit('change', state.values, column)
   emit('update:modelValue', state.values)
 }

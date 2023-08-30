@@ -122,6 +122,7 @@ export type FieldValueType =
   | [Date, Date]
   | [number, number]
   | [string, string]
+  | Record<string | number, any>
 
 /**
  * 整体表单值的类型

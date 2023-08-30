@@ -7,7 +7,7 @@ import {
   toRawType,
   isString
 } from '@plus-pro-components/utils'
-import { cloneDeep } from 'lodash-es'
+import { cloneDeep, get, set } from 'lodash-es'
 import type { useSlots } from 'vue'
 
 /**
@@ -157,4 +157,24 @@ export const filterSlots = (slots: RecordType, name: string): ReturnType<typeof 
   })
 
   return data
+}
+
+/**
+ *  获取值  支持 x.y.z
+ * @param target
+ * @param key
+ * @returns
+ */
+export const getValue = (target: RecordType, key: string) => {
+  return get(target, key)
+}
+
+/**
+ *  设置值  支持 x.y.z
+ * @param target
+ * @param key
+ * @returns
+ */
+export const setValue = (target: RecordType, key: string, value: any) => {
+  return set(target, key, value)
 }

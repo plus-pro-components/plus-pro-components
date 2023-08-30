@@ -3,7 +3,7 @@
     :class="['plus-steps-form', $attrs.direction === 'vertical' ? 'plus-steps-from-vertical' : '']"
   >
     <el-steps :active="active" finish-status="success" v-bind="$attrs">
-      <el-step v-for="(item, index) in data" :key="index" v-bind="item">
+      <el-step v-for="item in data" :key="item.title" v-bind="item">
         <template v-if="$slots.icon" #icon>
           <slot name="icon" :icon="item.icon" :title="item.title" :description="item.description" />
         </template>

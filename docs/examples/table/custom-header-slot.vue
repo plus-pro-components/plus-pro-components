@@ -15,8 +15,8 @@
 
 <script lang="ts" setup>
 import { h } from 'vue'
-import { useTable } from '@plus-pro-components/hooks'
-import type { PlusColumn } from '@plus-pro-components/types'
+import { useTable } from 'plus-pro-components'
+import type { PlusColumn } from 'plus-pro-components'
 
 const TestServe = {
   getList: async () => {
