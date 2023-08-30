@@ -27,6 +27,7 @@
     "build:theme": "pnpm run -C packages/theme-chalk build",
     "publish": "bash scripts/publish.sh",
     "commit": "bash scripts/commit.sh",
+    "sync": "bash scripts/sync.sh",
     "release": "tsx scripts/release/index.ts",
     "clean": "rimraf dist && rimraf packages/utils/dist && rimraf packages/theme-chalk/dist",
     "changelog": "tsx scripts/changelog/index.ts",
