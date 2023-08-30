@@ -3,7 +3,7 @@
     <el-col v-for="item in columns" :key="item.prop" v-bind="item.colProps || colProps">
       <!-- 多层值支持   -->
       <PlusFormItem
-        :model-value="getValue(state.values, item.prop)"
+        v-model="state.values[item.prop]"
         v-bind="item"
         @change="value => handleChange(value, item)"
       >
@@ -26,12 +26,7 @@ import { reactive, watch } from 'vue'
 import type { FormProps, RowProps, ColProps } from 'element-plus'
 import { PlusFormItem } from '@plus-pro-components/components/form-item'
 import type { PlusColumn, FieldValues, FieldValueType, Mutable } from '@plus-pro-components/types'
-import {
-  getLabelSlotName,
-  getFieldSlotName,
-  getValue,
-  setValue
-} from '@plus-pro-components/components/utils'
+import { getLabelSlotName, getFieldSlotName } from '@plus-pro-components/components/utils'
 
 export interface PlusFormContentProps extends /* @vue-ignore */ Partial<Mutable<FormProps>> {
   modelValue?: FieldValues
@@ -73,9 +68,6 @@ watch(
 )
 
 const handleChange = (value: FieldValueType, column: PlusColumn) => {
-  /** 多层值支持 */
-  setValue(state.values, column.prop, value)
-
   emit('change', state.values, column)
   emit('update:modelValue', state.values)
 }

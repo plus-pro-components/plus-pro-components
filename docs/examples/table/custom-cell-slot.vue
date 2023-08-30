@@ -7,7 +7,6 @@
       </template>
 
       <template #plus-cell-status="scoped">
-        {{ getData(scoped) }}
         <span style="color: green">插槽- {{ scoped.value }} </span>
       </template>
     </PlusTable>
@@ -18,10 +17,6 @@
 import { h } from 'vue'
 import { useTable } from 'plus-pro-components'
 import type { PlusColumn } from 'plus-pro-components'
-
-const getData = data => {
-  console.log(data, 'data')
-}
 
 const TestServe = {
   getList: async () => {

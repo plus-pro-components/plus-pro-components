@@ -1,5 +1,5 @@
 <template>
-  <el-card style="width: 600px">
+  <el-card>
     <PlusForm v-model="state" :columns="columns" :rules="rules" @change="handleChange" />
   </el-card>
 </template>
@@ -9,18 +9,18 @@ import { ref } from 'vue'
 import type { PlusColumn, FieldValues } from '@plus-pro-components/types'
 
 const state = ref<FieldValues>({
-  status: { data: { value: '0' } },
-  name: { message: { tip: '提示' } }
+  status: '0',
+  name: '提示'
 })
 
 const rules = {
-  'name.message.tip': [
+  name: [
     {
       required: true,
       message: '请输入名称'
     }
   ],
-  'status.data.value': [
+  status: [
     {
       required: true,
       message: '请输入标签'
@@ -32,14 +32,14 @@ const columns: PlusColumn[] = [
   {
     label: '名称',
     width: 120,
-    prop: 'name.message.tip',
+    prop: 'name',
     valueType: 'copy',
     tooltip: '名称最多显示6个字符'
   },
   {
     label: '状态',
     width: 120,
-    prop: 'status.data.value',
+    prop: 'status',
     valueType: 'select',
     options: [
       {

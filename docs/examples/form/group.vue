@@ -1,5 +1,5 @@
 <template>
-  <div style="width: 600px">
+  <div>
     <PlusForm
       v-model="state"
       :group="group"

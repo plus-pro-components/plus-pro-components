@@ -238,6 +238,10 @@
       @change="handleChange"
     />
 
+    <span v-else-if="valueType === 'text'" class="plus-form-item-field" v-bind="customFieldProps">
+      {{ state }}
+    </span>
+
     <el-input
       v-else
       v-model="state"

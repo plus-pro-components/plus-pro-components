@@ -7,7 +7,7 @@ import type { Mutable } from './global'
 export {}
 
 /**
- * 所有表单的类型 默认是 text
+ * 所有表单的类型 默认是  input
  */
 export type FormItemValueType =
   | 'autocomplete'
@@ -24,9 +24,11 @@ export type FormItemValueType =
   | 'time-picker'
   | 'time-select'
   | 'textarea'
+  | 'input'
   | 'text'
   | 'plus-radio'
   | 'plus-date-picker'
+  | undefined
 
 /**
  * 表单项的props
@@ -122,7 +124,6 @@ export type FieldValueType =
   | [Date, Date]
   | [number, number]
   | [string, string]
-  | Record<string | number, any>
 
 /**
  * 整体表单值的类型

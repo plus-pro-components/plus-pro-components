@@ -312,11 +312,11 @@ export type TableValueType =
 
 ## FormItemValueType
 
-所有表单的类型 默认是 text
+所有表单的类型 默认是 `input` (`undefined`)
 
 ```ts
 /**
- * 所有表单的类型 默认是 text
+ * 所有表单的类型 默认是 `input` (`undefined`)
  */
 export type FormItemValueType =
   | 'autocomplete'
@@ -333,9 +333,11 @@ export type FormItemValueType =
   | 'time-picker'
   | 'time-select'
   | 'textarea'
+  | 'input'
   | 'text'
   | 'plus-radio'
   | 'plus-date-picker'
+  | undefined
 ```
 
 ## FieldValueType

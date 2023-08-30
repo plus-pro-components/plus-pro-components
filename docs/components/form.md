@@ -8,20 +8,6 @@ form/basic
 
 :::
 
-## 多级数据绑定
-
-`prop`支持 `x.y.z` 多（无限）级数据形式。
-
-:::warning 提示
-**数据级不宜过多，可能会影响性能**。
-:::
-
-:::demo
-
-form/multiple-level-display
-
-:::
-
 ## 两列
 
 :::demo
@@ -129,7 +115,7 @@ form/custom
 
 :::warning 提示
 
-jsx/tsx 的使用需要将 vue 单文件组件的`script` 的属性 `lang ` 设置为 `jsx`或者`tsx`
+jsx/tsx 的使用需要将 vue 单文件组件的`script`的属性 `lang`设置为`jsx`或者`tsx`，`jsx` 中值使用单花括号`{}`绑定。
 
 ```html
 <script lang="tsx" setup></script>
@@ -198,7 +184,7 @@ form/custom-label
 
 :::warning 提示
 
-jsx/tsx 的使用需要将 vue 单文件组件的`script` 的属性 `lang ` 设置为 `jsx`或者`tsx`
+jsx/tsx 的使用需要将 vue 单文件组件的`script`的属性 `lang`设置为`jsx`或者`tsx`，`jsx` 中值使用单花括号`{}`绑定。
 
 ```html
 <script lang="tsx" setup></script>

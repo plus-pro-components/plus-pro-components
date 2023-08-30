@@ -176,6 +176,7 @@ const state = reactive<PlusFormState>({
   subColumns: []
 })
 const filterHide = (columns: PlusColumn[]) => columns.filter(item => item.hideInForm !== true)
+
 const model = computed(() => cloneDeep(state.values))
 
 state.subColumns = computed<any>(() => filterHide(props.columns))

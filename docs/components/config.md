@@ -1,12 +1,14 @@
-# columns 通用配置
+# 通用配置
 
 ::: tip 提示
 文中的一些类型来自 <a href="/components/type.html" style="text-decoration: underline;">基础 Ts 类型</a> 章节，建议先阅读。
 :::
 
-显示的核心字段是`valueType`，渲染的 key 是`prop`（所以需要保证唯一）。
+配置的核心字段是`valueType`，渲染的 key 是`prop`（所以需要保证唯一）。
 
-## TS 类型 PlusColumn
+## columns 配置
+
+TS 类型 `PlusColumn`
 
 | 名称                    | 说明                                                                                                                                                                             | 类型                                                                                                                                           | 默认值  | 是否必须 |
 | ----------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- | ------- | -------- |
@@ -43,35 +45,36 @@
 
 ## valueType 可选的表单值
 
-| valueType 表单值   | 对应 element-plus 的组件 | 对应 plus-pro-components 的组件                  |
-| ------------------ | ------------------------ | ------------------------------------------------ |
-| `autocomplete`     | el-autocomplete          |                                                  |
-| `cascader`         | el-cascader              |                                                  |
-| `checkbox`         | el-checkbox              |                                                  |
-| `color-picker`     | el-color-picker          |                                                  |
-| `date-picker`      | el-date-picker           |                                                  |
-| `input-number`     | el-input-number          |                                                  |
-| `radio`            | el-radio                 |                                                  |
-| `rate`             | el-rate                  |                                                  |
-| `select`           | el-select                |                                                  |
-| `slider`           | el-slider                |                                                  |
-| `switch`           | el-switch                |                                                  |
-| `time-picker`      | el-time-picker           |                                                  |
-| `time-select`      | el-time-select           |                                                  |
-| `textarea`         | el-input (type=textarea) |                                                  |
-| `text`             | el-input                 |                                                  |
-| `plus-radio`       |                          | [ plus-radio](/components/radio.html)            |
-| `plus-date-picker` |                          | [plus-date-picker](/components/date-picker.html) |
+| valueType 表单值   | 对应 element-plus 的组件                                                       | 对应 plus-pro-components 的组件                  | 对应的表格显示（备注）        |
+| ------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------ | ----------------------------- |
+| `autocomplete`     | [el-autocomplete ](https://element-plus.org/zh-CN/component/autocomplete.html) |                                                  | 文本显示                      |
+| `cascader`         | [el-cascader ](https://element-plus.org/zh-CN/component/cascader.html)         |                                                  | 文本显示                      |
+| `checkbox`         | [el-checkbox ](https://element-plus.org/zh-CN/component/checkbox.html)         |                                                  | 显示值对应`options`的 `label` |
+| `color-picker`     | [el-color-picker ](https://element-plus.org/zh-CN/component/color-picker.html) |                                                  | 文本显示                      |
+| `date-picker`      | [el-date-picker ](https://element-plus.org/zh-CN/component/date-picker.html)   |                                                  | 文本显示                      |
+| `input-number`     | [el-input-number ](https://element-plus.org/zh-CN/component/input-number.html) |                                                  | 文本显示                      |
+| `radio`            | [ el-radio ](https://element-plus.org/zh-CN/component/radio.html)              |                                                  | 显示值对应`options`的 `label` |
+| `rate`             | [ el-rate ](https://element-plus.org/zh-CN/component/rate.html)                |                                                  | 文本显示                      |
+| `select`           | [ el-select ](https://element-plus.org/zh-CN/component/select.html)            |                                                  | 显示值对应`options`的 `label` |
+| `slider`           | [el-slider ](https://element-plus.org/zh-CN/component/slider.html)             |                                                  | 文本显示                      |
+| `switch`           | [ el-switch ](https://element-plus.org/zh-CN/component/switch.html)            |                                                  | 文本显示                      |
+| `time-picker`      | [el-time-picker ](https://element-plus.org/zh-CN/component/time-picker.html)   |                                                  | 文本显示                      |
+| `time-select`      | [el-time-select ](https://element-plus.org/zh-CN/component/time-select.html)   |                                                  | 文本显示                      |
+| `textarea`         | [el-input ](https://element-plus.org/zh-CN/component/input.html#文本域)        |                                                  | type=textarea                 |
+| `input`            | [el-input ](https://element-plus.org/zh-CN/component/input.html)               |                                                  | 表单默认值                    |
+| `text`             | 文本显示                                                                       |                                                  | 文本显示                      |
+| `plus-radio`       |                                                                                | [ plus-radio](/components/radio.html)            | 显示值对应`options`的 `label` |
+| `plus-date-picker` |                                                                                | [plus-date-picker](/components/date-picker.html) |                               |
 
 ## valueType 可选的显示值
 
-| valueType 表单值 | 说明                                                   |
-| ---------------- | ------------------------------------------------------ |
-| `undefined`      | 默认值，显示文本                                       |
-| `img`            | 显示图片，自带预览，可使用配置项`preview`禁止          |
-| `link`           | 显示 el-link ，配合配置项`fieldProps`和`linkText` 使用 |
-| `money`          | 显示金钱                                               |
-| `tag`            | 显示 el-tag，配合配置项`fieldProps` 使用               |
-| `progress`       | 显示 el-progress，配合配置项`fieldProps` 使用          |
-| `copy`           | 文本后面有可以复制按钮                                 |
-| `code`           | 显示代码                                               |
+| valueType 表单值 | 说明                                                   | 对应的编辑状态组件                                               |
+| ---------------- | ------------------------------------------------------ | ---------------------------------------------------------------- |
+| `undefined`      | 显示默认值，显示文本                                   | [el-input ](https://element-plus.org/zh-CN/component/input.html) |
+| `img`            | 显示图片，自带预览，可使用配置项`preview`禁止          | [el-input ](https://element-plus.org/zh-CN/component/input.html) |
+| `link`           | 显示 el-link ，配合配置项`fieldProps`和`linkText` 使用 | [el-input ](https://element-plus.org/zh-CN/component/input.html) |
+| `money`          | 显示金钱                                               | [el-input ](https://element-plus.org/zh-CN/component/input.html) |
+| `tag`            | 显示 el-tag，配合配置项`fieldProps` 使用               | [el-input ](https://element-plus.org/zh-CN/component/input.html) |
+| `progress`       | 显示 el-progress，配合配置项`fieldProps` 使用          | [el-input ](https://element-plus.org/zh-CN/component/input.html) |
+| `copy`           | 文本后面有可以复制按钮                                 | [el-input ](https://element-plus.org/zh-CN/component/input.html) |
+| `code`           | 显示代码                                               | [el-input ](https://element-plus.org/zh-CN/component/input.html) |

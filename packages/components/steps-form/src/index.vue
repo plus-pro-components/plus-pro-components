@@ -52,10 +52,10 @@ import { useLocale } from '@plus-pro-components/hooks'
 
 export interface PlusStepFrom {
   title: Mutable<StepProps>['title']
+  form: PlusFormProps
   description?: Mutable<StepProps>['description']
   icon?: Mutable<StepProps>['icon']
   status?: Mutable<StepProps>['status']
-  form: PlusFormProps
 }
 
 export interface PlusStepsFormProps {

@@ -78,7 +78,7 @@ table/page-bar
 
 ## 多选
 
-配置`is-selection`属性为`true`，即可显示表格多选框。默认值`false`。配合原生`selection-change`方法使用。
+配置`is-selection`属性为`true`，即可显示表格多选框。默认值`false`。配合 [el-table ](https://element-plus.org/zh-CN/component/table.html#table-%E4%BA%8B%E4%BB%B6)`selection-change` 事件使用。
 :::demo
 
 table/multiple
@@ -116,7 +116,7 @@ table/all-cell-edit
 
 ## 可编辑表格 (单行)
 
-可编辑和校验单行，也可以控制单行的每一个单元格的编辑状态和校验。核心方法是 调用 formRefs 里的方法。
+可编辑和校验单行，也可以控制单行的每一个单元格的编辑状态和校验。核心方法是 调用 `formRefs` 里的`startCellEdit()`方法。
 :::demo
 
 table/row-edit
@@ -125,7 +125,7 @@ table/row-edit
 
 ## 可编辑表格 (单元格)
 
-可编辑和校验单元格。核心方法是 调用 formRefs 里的方法。
+可编辑和校验单元格。核心方法是 调用 `formRefs` 里的`startCellEdit()`方法。
 :::demo
 
 table/cell-edit
@@ -196,7 +196,7 @@ table/custom-cell
 
 :::warning 提示
 
-jsx/tsx 的使用需要将 vue 单文件组件的`script` 的属性 `lang ` 设置为 `jsx`或者`tsx`
+jsx/tsx 的使用需要将 vue 单文件组件的`script`的属性 `lang`设置为`jsx`或者`tsx`，`jsx` 中值使用单花括号`{}`绑定。
 
 ```html
 <script lang="tsx" setup></script>
@@ -271,7 +271,7 @@ table/custom-header
 
 :::warning 提示
 
-jsx/tsx 的使用需要将 vue 单文件组件的`script` 的属性 `lang ` 设置为 `jsx`或者`tsx`
+jsx/tsx 的使用需要将 vue 单文件组件的`script`的属性 `lang`设置为`jsx`或者`tsx`，`jsx` 中值使用单花括号`{}`绑定。
 
 ```html
 <script lang="tsx" setup></script>

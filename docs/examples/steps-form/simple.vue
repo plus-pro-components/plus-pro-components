@@ -3,9 +3,10 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { ref, shallowRef } from 'vue'
 import { Edit, Upload, Picture } from '@element-plus/icons-vue'
-const stepForm = ref([
+
+const stepForm = shallowRef([
   {
     title: '第一步',
     icon: Edit,

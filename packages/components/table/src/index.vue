@@ -274,7 +274,6 @@ const handleClickActionConfirmCancel = (res: ButtonsCallBackParams) => {
 
 const handleFilterTableConfirm = (data: PlusColumn[]) => {
   subColumns.value = data.filter(item => item.hideInTable !== true) as any
-  console.log(subColumns.value)
 }
 
 // 密度

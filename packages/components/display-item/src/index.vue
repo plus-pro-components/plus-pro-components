@@ -260,8 +260,7 @@ watch(
 watch(
   () => props.column.fieldProps,
   val => {
-    const row = subRow
-    getCustomProps(val, displayValue.value, row, props.index, 'fieldProps')
+    getCustomProps(val, displayValue.value, subRow.value, props.index, 'fieldProps')
       .then(data => {
         customFieldProps.value = data
       })

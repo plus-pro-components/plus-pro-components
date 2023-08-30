@@ -1,5 +1,5 @@
 <template>
-  <el-card style="width: 600px">
+  <el-card>
     <PlusForm
       v-model="state"
       :columns="columns"
