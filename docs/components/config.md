@@ -45,26 +45,26 @@ TS 类型 `PlusColumn`
 
 ## valueType 可选的表单值
 
-| valueType 表单值   | 对应 element-plus 的组件                                                       | 对应 plus-pro-components 的组件                  | 对应的表格显示（备注）        |
-| ------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------ | ----------------------------- |
-| `autocomplete`     | [el-autocomplete ](https://element-plus.org/zh-CN/component/autocomplete.html) |                                                  | 文本显示                      |
-| `cascader`         | [el-cascader ](https://element-plus.org/zh-CN/component/cascader.html)         |                                                  | 文本显示                      |
-| `checkbox`         | [el-checkbox ](https://element-plus.org/zh-CN/component/checkbox.html)         |                                                  | 显示值对应`options`的 `label` |
-| `color-picker`     | [el-color-picker ](https://element-plus.org/zh-CN/component/color-picker.html) |                                                  | 文本显示                      |
-| `date-picker`      | [el-date-picker ](https://element-plus.org/zh-CN/component/date-picker.html)   |                                                  | 文本显示                      |
-| `input-number`     | [el-input-number ](https://element-plus.org/zh-CN/component/input-number.html) |                                                  | 文本显示                      |
-| `radio`            | [ el-radio ](https://element-plus.org/zh-CN/component/radio.html)              |                                                  | 显示值对应`options`的 `label` |
-| `rate`             | [ el-rate ](https://element-plus.org/zh-CN/component/rate.html)                |                                                  | 文本显示                      |
-| `select`           | [ el-select ](https://element-plus.org/zh-CN/component/select.html)            |                                                  | 显示值对应`options`的 `label` |
-| `slider`           | [el-slider ](https://element-plus.org/zh-CN/component/slider.html)             |                                                  | 文本显示                      |
-| `switch`           | [ el-switch ](https://element-plus.org/zh-CN/component/switch.html)            |                                                  | 文本显示                      |
-| `time-picker`      | [el-time-picker ](https://element-plus.org/zh-CN/component/time-picker.html)   |                                                  | 文本显示                      |
-| `time-select`      | [el-time-select ](https://element-plus.org/zh-CN/component/time-select.html)   |                                                  | 文本显示                      |
-| `textarea`         | [el-input ](https://element-plus.org/zh-CN/component/input.html#文本域)        |                                                  | type=textarea                 |
-| `input`            | [el-input ](https://element-plus.org/zh-CN/component/input.html)               |                                                  | 表单默认值                    |
-| `text`             | 文本显示                                                                       |                                                  | 文本显示                      |
-| `plus-radio`       |                                                                                | [ plus-radio](/components/radio.html)            | 显示值对应`options`的 `label` |
-| `plus-date-picker` |                                                                                | [plus-date-picker](/components/date-picker.html) |                               |
+| valueType 表单值   | 对应 element-plus 的组件                                                                | 对应 plus-pro-components 的组件                  | 对应的表格显示（备注）                  |
+| ------------------ | --------------------------------------------------------------------------------------- | ------------------------------------------------ | --------------------------------------- |
+| `autocomplete`     | [el-autocomplete](https://element-plus.org/zh-CN/component/autocomplete.html)           |                                                  | 文本显示                                |
+| `cascader`         | [el-cascader](https://element-plus.org/zh-CN/component/cascader.html)                   |                                                  | 文本显示                                |
+| `checkbox`         | [el-checkbox](https://element-plus.org/zh-CN/component/checkbox.html)                   |                                                  | 显示值对应`options`的 `label`           |
+| `color-picker`     | [el-color-picker](https://element-plus.org/zh-CN/component/color-picker.html)           |                                                  | 文本显示                                |
+| `date-picker`      | [el-date-picker](https://element-plus.org/zh-CN/component/date-picker.html)             |                                                  | 文本显示 格式化成` YYYY-MM-DD HH:mm:ss` |
+| `input-number`     | [el-input-number](https://element-plus.org/zh-CN/component/input-number.html)           |                                                  | 文本显示                                |
+| `radio`            | [el-radio](https://element-plus.org/zh-CN/component/radio.html)                         |                                                  | 显示值对应`options`的 `label`           |
+| `rate`             | [el-rate](https://element-plus.org/zh-CN/component/rate.html)                           |                                                  | 文本显示                                |
+| `select`           | [el-select](https://element-plus.org/zh-CN/component/select.html)                       |                                                  | 显示值对应`options`的 `label`           |
+| `slider`           | [el-slider](https://element-plus.org/zh-CN/component/slider.html)                       |                                                  | 文本显示                                |
+| `switch`           | [el-switch](https://element-plus.org/zh-CN/component/switch.html)                       |                                                  | 文本显示                                |
+| `time-picker`      | [el-time-picker](https://element-plus.org/zh-CN/component/time-picker.html)             |                                                  | 文本显示                                |
+| `time-select`      | [el-time-select](https://element-plus.org/zh-CN/component/time-select.html)             |                                                  | 文本显示                                |
+| `textarea`         | [el-input ](https://element-plus.org/zh-CN/component/input.html#文本域) (type=textarea) |                                                  | 文本显示                                |
+| `input`            | [el-input](https://element-plus.org/zh-CN/component/input.html) 表单默认值              |                                                  | 文本显示                                |
+| `text`             | 文本显示                                                                                |                                                  | 文本显示                                |
+| `plus-radio`       |                                                                                         | [ plus-radio](/components/radio.html)            | 显示值对应`options`的 `label`           |
+| `plus-date-picker` |                                                                                         | [plus-date-picker](/components/date-picker.html) | 文本显示                                |
 
 ## valueType 可选的显示值
 
