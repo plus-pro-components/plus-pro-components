@@ -68,6 +68,11 @@
           <template v-for="(_, key) in fieldSlots" :key="key" #[key]="data">
             <slot :name="key" v-bind="data" />
           </template>
+
+          <!-- 搜索的footer -->
+          <template v-if="$slots['search-footer']" #search-footer>
+            <slot name="search-footer" />
+          </template>
         </PlusFormContent>
       </template>
     </slot>

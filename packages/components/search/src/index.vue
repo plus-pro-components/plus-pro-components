@@ -11,7 +11,7 @@
     v-bind="$attrs"
     @change="handleChange"
   >
-    <template #searchFooter>
+    <template #search-footer>
       <el-form-item v-if="hasFooter" class="plus-search__button__wrapper">
         <el-button v-if="hasReset" :icon="RefreshRight" @click="handleReset">
           {{ resetText || t('plus.search.resetText') }}

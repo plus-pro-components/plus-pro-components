@@ -18,6 +18,10 @@
         </template>
       </PlusFormItem>
     </el-col>
+
+    <el-col v-if="$slots['search-footer']" v-bind="colProps">
+      <slot name="search-footer" />
+    </el-col>
   </el-row>
 </template>
 
