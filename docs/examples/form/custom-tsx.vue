@@ -6,7 +6,7 @@
 
 <script lang="tsx" setup>
 import { ref } from 'vue'
-import type { PlusColumn } from '@plus-pro-components/types'
+import type { PlusColumn } from 'plus-pro-components'
 import { ElInput } from 'element-plus'
 
 const state = ref({
@@ -50,7 +50,6 @@ const columns: PlusColumn[] = [
     width: 120,
     prop: 'status',
     valueType: 'select',
-
     options: [
       {
         label: '未解决',

@@ -123,7 +123,7 @@ jsx/tsx 的使用需要将 vue 单文件组件的`script`的属性 `lang`设置�
 
 :::
 
-`jsx/tsx` 的支持本质是`jsx/tsx`解析数来是`VNode`, 使用 renderField 函数自定义表单项。
+`jsx/tsx` 的支持本质是`jsx/tsx`解析出来是`VNode`, 使用 renderField 函数自定义表单项。
 
 :::demo
 
@@ -192,7 +192,7 @@ jsx/tsx 的使用需要将 vue 单文件组件的`script`的属性 `lang`设置�
 
 :::
 
-`jsx/tsx` 的支持本质是`jsx/tsx`解析数来是`VNode`, 使用 renderField 函数自定义表单项。
+`jsx/tsx` 的支持本质是`jsx/tsx`解析出来是`VNode`, 使用 renderField 函数自定义表单项。
 
 :::demo
 

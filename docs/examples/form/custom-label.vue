@@ -6,7 +6,7 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue'
-import type { PlusColumn } from '@plus-pro-components/types'
+import type { PlusColumn } from 'plus-pro-components'
 import { ElButton } from 'element-plus'
 
 const state = ref({

@@ -203,7 +203,6 @@ const columns: PlusColumn[] = [
       autosize: { minRows: 2, maxRows: 4 }
     }
   },
-
   {
     label: 'rate',
     width: 200,
