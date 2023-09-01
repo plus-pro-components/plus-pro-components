@@ -1,3 +1,18 @@
+## [v0.0.1-alpha.34](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-alpha.33...v0.0.1-alpha.34) (2023-09-01)
+
+
+### ✨ Features
+
+* **components[radio]:** :sparkles: rewrite radio component.([9046664](https://github.com/plus-pro-components/plus-pro-components/commit/9046664)) by@xiaofei
+
+
+### 🐛 Bug Fixes
+
+* **components[search]:** :bug: fix search component button not display.([78f2770](https://github.com/plus-pro-components/plus-pro-components/commit/78f2770)) by@xiaofei
+
+
+
+
 ## [v0.0.1-alpha.33](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-alpha.32...v0.0.1-alpha.33) (2023-08-30)
 
 
@@ -41,6 +56,7 @@
 
 ### 🐛 Bug Fixes
 
+* **components[form-item]:** :bug: fix components import method.([f1de13d](https://github.com/plus-pro-components/plus-pro-components/commit/f1de13d)) by@xiaofei
 * **theme-chalk:** :bug: fix 'plus-display-item__form__item' margin style.([d519d3a](https://github.com/plus-pro-components/plus-pro-components/commit/d519d3a)) by@xiaofei
 * **components:** :bug: fix table edit all cell.([afa71f5](https://github.com/plus-pro-components/plus-pro-components/commit/afa71f5)) by@xiaofei
 
@@ -492,6 +508,7 @@
 
 * **all:** :sparkles: add vitest and test case.([0fa2301](https://github.com/plus-pro-components/plus-pro-components/commit/0fa2301)) by@xiaofei
 * **all:** Merge pull request [#1](https://github.com/plus-pro-components/plus-pro-components/pull/1) from plus-pro-components/dev([48c8c37](https://github.com/plus-pro-components/plus-pro-components/commit/48c8c37)) by@xiaofei
+* **package.json:** :sparkles: add changelog.([ee637d7](https://github.com/plus-pro-components/plus-pro-components/commit/ee637d7)) by@xiaofei
 * **all:** :sparkles: add release scripts.([d9890e5](https://github.com/plus-pro-components/plus-pro-components/commit/d9890e5)) by@xiaofei
 
 

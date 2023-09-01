@@ -39,11 +39,24 @@ const execPromise = (command: string): Promise<string> => {
   })
 }
 
+const getInfo = (data: string) => {
+  const state = data.slice(0, data.indexOf(': '))
+  const content = data.slice(data.indexOf(': ') + 1)
+  let scoped = ''
+  let type = state
+  if (state.includes('(')) {
+    const scopedStartIndex = state.indexOf('(')
+    const scopedEndIndex = state.indexOf(')')
+    scoped = state.slice(scopedStartIndex + 1, scopedEndIndex)
+    type = state.slice(0, scopedStartIndex)
+  }
+  return { type, scoped, content }
+}
+
 const handleLogData = async (): Promise<Log[]> => {
   const log = await execPromise(
     'git log --pretty=format:"id=%H&author=%an&date=%ad&sha=%h&desc=%s"     --date=format:"%Y/%m/%d %H:%M:%S" \n'
   )
-  const reg = /^(\w+)(\(?([a-z-_]*)\)?):/
   const temp = log.split('\n')
   const logData = temp
     .filter(item => item)
@@ -51,11 +64,8 @@ const handleLogData = async (): Promise<Log[]> => {
       const info = qs.parse(item) as {
         desc: string
       }
-      const regInfo = reg.exec(info.desc)
-      const content = regInfo ? info.desc.replace(regInfo[0], '') : info.desc
-      const type = regInfo ? regInfo[1] : ''
-      const scoped = regInfo ? regInfo[3] : ''
-      const newItem = { ...info, reg: regInfo, content: content, type, scoped }
+
+      const newItem = { ...info, ...getInfo(info.desc) }
       return newItem
     })
 
@@ -96,6 +106,7 @@ const main = async () => {
 
   const logs = await handleLogData()
   const tags = await handleTagData()
+
   const res = tags.map(item => {
     const start = logs.findIndex(i => i.id === item.id)
     const end = logs.findIndex(i => i.id === item.pre?.id)
