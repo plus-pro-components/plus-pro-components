@@ -235,7 +235,7 @@ form/all
 **`...`表示同时支持所有[ElForm Attributes](https://element-plus.org/zh-CN/component/form.html#form-attributes)**
 
 :::tip 提示
-**model 参数已在组件内部处理，一般不需要传**。
+**[ElForm](https://element-plus.org/zh-CN/component/form.html#form-attributes) 的 model 参数已在组件内部处理，一般不需要传**。
 :::
 
 ## Form Events

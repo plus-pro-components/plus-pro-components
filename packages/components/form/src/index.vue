@@ -69,7 +69,7 @@
             <slot :name="key" v-bind="data" />
           </template>
 
-          <!-- 搜索的footer -->
+          <!-- 搜索的footer插槽  -->
           <template v-if="$slots['search-footer']" #search-footer>
             <slot name="search-footer" />
           </template>

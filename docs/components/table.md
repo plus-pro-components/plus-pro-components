@@ -11,7 +11,7 @@ table/basic
 
 ## 数据多级显示
 
-`columns`中的 `prop`支持 `x.y.z` 多（无限）级数据形式。
+`columns`中的 `prop`支持 `x.y.z`形式的 多（无限）级数据形式。
 
 :::warning 提示
 **数据级不宜过多，可能会影响性能**。
@@ -287,7 +287,7 @@ table/custom-header-tsx
 
 :::
 
-## 高级表格
+## 综合表格
 
 :::demo
 

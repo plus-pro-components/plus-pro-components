@@ -1,7 +1,6 @@
 <template>
   <el-row v-bind="rowProps">
     <el-col v-for="item in columns" :key="item.prop" v-bind="item.colProps || colProps">
-      <!-- 多层值支持   -->
       <PlusFormItem
         v-model="state.values[item.prop]"
         v-bind="item"
@@ -19,6 +18,7 @@
       </PlusFormItem>
     </el-col>
 
+    <!-- 搜索的footer插槽  -->
     <el-col v-if="$slots['search-footer']" v-bind="colProps">
       <slot name="search-footer" />
     </el-col>
