@@ -160,7 +160,7 @@
       v-else-if="valueType === 'plus-radio'"
       v-model="state"
       class="plus-form-item-field"
-      :data="options"
+      :options="options"
       is-cancel
       v-bind="customFieldProps"
       @change="handleChange"
