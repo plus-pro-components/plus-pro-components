@@ -132,7 +132,7 @@ table/cell-edit
 
 :::
 
-## 自定义表格项和表单项 ( 插槽 ) <el-tag  effect="dark">推荐</el-tag>
+## 自定义表格项和表单项 ( 插槽 )
 
 :::warning 提示
 **插槽 的优先级低于 render，高于数据**。
@@ -159,7 +159,7 @@ const tableConfig: PlusColumn[] = [
 
 插槽作用域中会返回 `scoped` 参数,`scoped` 中 包含 `prop`、`label`、`valueType`和`column`等参数可供使用。
 
-自定义表单项参考[自定义表单项(插槽)](/components/form.html#自定义表单-label-插槽-推荐) （
+自定义表单项参考[自定义表单项(插槽)](/components/form.html#自定义表单项-插槽) （
 表格中需要开启 `editable`）
 
 :::demo
@@ -175,11 +175,7 @@ table/custom-cell-slot
 :::
 
 - 使用 render 函数自定义表格项。
-  `render` 方法可以返回以下三种情况
-
-  - 返回一个 [Component](https://cn.vuejs.org/api/built-in-special-elements.html#component)。 （配合[PlusColumn](/components/config.html) 的 `slots`使用 ）<el-tag  effect="dark">推荐</el-tag>
-  - 调用 vue 的[渲染函数 h](https://cn.vuejs.org/guide/extras/render-function.html) 返回一个 `VNode`。
-  - 返回一个**标签字符串** [string](https://cn.vuejs.org/api/built-in-special-elements.html#component)。（渲染原生标签，配合[PlusColumn](/components/config.html) 的 `slots`使用 ）
+  `render` 方法需要调用 vue 的[渲染函数 h](https://cn.vuejs.org/guide/extras/render-function.html) 返回一个 `VNode`
 
 - 自定义表格项还支持 `renderHTML`方法，需要返回一个 HTML 字符串。
 
@@ -215,7 +211,7 @@ table/custom-cell-tsx
 
 :::
 
-## 自定义表格表头 (插槽) <el-tag  effect="dark">推荐</el-tag>
+## 自定义表格表头 (插槽)
 
 :::warning 提示
 **插槽 的优先级低于 renderHeader，高于 label**。
@@ -254,12 +250,8 @@ table/custom-header-slot
 **renderHeader 的优先级高于插槽**。
 :::
 
-- 使用 render 函数自定义表格项。
-  `render` 方法可以返回以下三种情况
-
-  - 返回一个 [Component](https://cn.vuejs.org/api/built-in-special-elements.html#component)。 （配合[PlusColumn](/components/config.html) 的 `headerSlots`使用 ）<el-tag  effect="dark">推荐</el-tag>
-  - 调用 vue 的[渲染函数 h](https://cn.vuejs.org/guide/extras/render-function.html) 返回一个 `VNode`。
-  - 返回一个**标签字符串** [string](https://cn.vuejs.org/api/built-in-special-elements.html#component)。（渲染原生标签，配合[PlusColumn](/components/config.html) 的 `headerSlots`使用 ）
+- 使用 renderHeader 函数自定义表格项。
+  `renderHeader` 方法需要调用 vue 的[渲染函数 h](https://cn.vuejs.org/guide/extras/render-function.html) 返回一个 `VNode`。
 
 :::demo
 

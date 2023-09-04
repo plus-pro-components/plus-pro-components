@@ -58,8 +58,6 @@ watch(
 
 const attrs = useAttrs()
 
-console.log(attrs, 'attrs')
-
 const radioClick = (
   e: MouseEvent,
   val: ValueType,

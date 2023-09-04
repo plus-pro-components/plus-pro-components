@@ -14,7 +14,6 @@
           :params="props"
           :callback-value="currentLabel"
           :custom-field-props="customFieldProps"
-          :slots="labelSlots"
         />
 
         <slot
@@ -43,7 +42,6 @@
       :custom-field-props="customFieldProps"
       render-type="form"
       :handle-change="handleChange"
-      :slots="fieldSlots"
     />
 
     <slot
@@ -286,10 +284,6 @@ export interface PlusFormItemProps {
   // eslint-disable-next-line vue/require-default-prop
   renderLabel?: PlusColumn['renderLabel']
   tooltip?: PlusColumn['tooltip']
-  // eslint-disable-next-line vue/require-default-prop
-  fieldSlots?: PlusColumn['fieldSlots']
-  // eslint-disable-next-line vue/require-default-prop
-  labelSlots?: PlusColumn['labelSlots']
   index?: number
 }
 export interface PlusFormItemEmits {
@@ -308,8 +302,7 @@ const props = withDefaults(defineProps<PlusFormItemProps>(), {
   formItemProps: () => ({}),
   fieldProps: () => ({}),
   options: () => [],
-  index: 0,
-  slots: () => ({})
+  index: 0
 })
 const emit = defineEmits<PlusFormItemEmits>()
 

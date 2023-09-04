@@ -21,19 +21,7 @@ const state = ref<FieldValues>({
 
 const columns: PlusColumn[] = [
   {
-    label: '自定义el-input（返回组件）',
-    prop: 'elData',
-    fieldProps: {
-      // 优先级低于 renderField 的props
-      placeholder: '请输入'
-    },
-    renderField: () => {
-      // 返回组件时不需要手动调用onChange
-      return ElInput
-    }
-  },
-  {
-    label: '自定义el-input（返回VNode）',
+    label: '自定义el-input ',
     prop: 'elData1',
     fieldProps: {
       // 优先级低于 renderField 的props
@@ -145,12 +133,9 @@ const columns: PlusColumn[] = [
         return value
       }
     },
-    // 传递给 'div' 的slots
-    fieldSlots: {
-      default: value => value
-    },
-    renderField: () => {
-      return 'div'
+
+    renderField: value => {
+      return h('div', null, value as string)
     }
   }
 ]

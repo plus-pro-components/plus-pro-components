@@ -1,5 +1,5 @@
 import type { ElTooltipProps, ButtonType } from 'element-plus'
-import type { VNode, Component } from 'vue'
+import type { VNode } from 'vue'
 import type { RecordType } from './global'
 import type { TableValueType, TableColumnProps } from './table'
 import type { FormItemValueType, FormColumnProps, FieldValueType } from './form'
@@ -149,7 +149,7 @@ export interface CommentType {
   render?: (
     value: FieldValueType,
     data: { row: RecordType; column: PlusColumn; index: number }
-  ) => VNode | Component | string
+  ) => VNode
 
   /**
    * 自定义渲染单行显示内容 需要返回一个 html字符串，`renderHTML`的优先级低于`render`，高于`valueType`。
@@ -180,21 +180,7 @@ export interface CommentType {
   /**
    * @desc 渲染table表单的Header
    */
-  renderHeader?: (label: string, props: PlusColumn) => VNode | Component | string
-
-  /**
-   * 插槽 当 `render` 返回值是一个组件或者字符串是生效
-   */
-  slots?: {
-    [index: string]: (...arg: any) => any
-  } & { default?: (...arg: any) => any }
-
-  /**
-   * 插槽 当 `renderHeader` 返回值是一个组件或者字符串是生效
-   */
-  headerSlots?: {
-    [index: string]: (...arg: any) => any
-  } & { default?: (...arg: any) => any }
+  renderHeader?: (label: string, props: PlusColumn) => VNode
 }
 
 /**

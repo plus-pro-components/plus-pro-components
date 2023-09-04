@@ -57,7 +57,7 @@ form/group-header
 
 :::
 
-## 自定义表单项 (插槽) <el-tag  effect="dark">推荐</el-tag>
+## 自定义表单项 (插槽)
 
 :::warning 提示
 **插槽 的优先级低于 renderField，高于 valueType**。
@@ -94,11 +94,7 @@ form/custom-slot
 **renderField 的优先级高于插槽**。
 :::
 
-自定义表单项的核心方法是定义 `renderField`方法，该方法可以返回以下三种情况
-
-- 返回一个 [Component](https://cn.vuejs.org/api/built-in-special-elements.html#component)。 （会自动包裹 modelValue 和 onChange） <el-tag  effect="dark">推荐</el-tag>
-- 调用 vue 的[渲染函数 h](https://cn.vuejs.org/guide/extras/render-function.html) 返回一个 `VNode`。（会自动包裹 modelValue，需要手动调用`renderField`中的 `onChange` 用来实现双向绑定）
-- 返回一个**标签字符串** [string](https://cn.vuejs.org/api/built-in-special-elements.html#component)。 （渲染原生标签，配合[PlusColumn](/components/config.html) 的 `fieldSlots`使用 ）
+自定义表单项的核心方法是定义 `renderField`方法， `renderField` 方法需要调用 vue 的[渲染函数 h](https://cn.vuejs.org/guide/extras/render-function.html) 返回一个 `VNode`
 
 ::: tip 提示
 `renderField 返回的值`的`props` 和配置项的`fieldProps`会同时生效，`renderField 返回的值`的`props`优先级高于 `fieldProps`.
@@ -131,7 +127,7 @@ form/custom-tsx
 
 :::
 
-## 自定义表单 label (插槽) <el-tag  effect="dark">推荐</el-tag>
+## 自定义表单 label (插槽)
 
 :::warning 提示
 **插槽 的优先级低于 renderLabel，高于 label**。
@@ -168,11 +164,7 @@ form/custom-label-slot
 **renderLabel 的优先级高于插槽**。
 :::
 
-自定义表单项的核心方法是定义 `renderLabel`方法，该方法可以返回以下三种情况
-
-- 返回一个 [Component](https://cn.vuejs.org/api/built-in-special-elements.html#component)。 ） <el-tag  effect="dark">推荐</el-tag>
-- 调用 vue 的[渲染函数 h](https://cn.vuejs.org/guide/extras/render-function.html) 返回一个 `VNode`。
-- 返回一个**标签字符串** [string](https://cn.vuejs.org/api/built-in-special-elements.html#component)。 （渲染原生标签，配合[PlusColumn](/components/config.html) 的 `labelSlots`使用 ）
+自定义表单项的核心方法是定义 `renderLabel`方法， `renderLabel` 方法需要调用 vue 的[渲染函数 h](https://cn.vuejs.org/guide/extras/render-function.html) 返回一个 `VNode`
 
 :::demo
 

@@ -14,7 +14,6 @@
             :render="item.renderHeader"
             :params="item"
             :callback-value="item.label"
-            :slots="item.headerSlots"
           />
 
           <!--表格单元格Header的插槽 -->

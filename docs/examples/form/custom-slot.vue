@@ -14,7 +14,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { ref, h } from 'vue'
 import type { PlusColumn } from 'plus-pro-components'
 
 const state = ref({
@@ -49,13 +49,8 @@ const columns: PlusColumn[] = [
     prop: 'name',
     valueType: 'copy',
     tooltip: '名称最多显示6个字符',
-    renderField: () => {
-      return 'div'
-    },
-    fieldSlots: {
-      default(value) {
-        return `${value}`
-      }
+    renderField: value => {
+      return h('div', null, value as string)
     }
   },
   {

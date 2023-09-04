@@ -56,33 +56,21 @@ const tableConfig: PlusColumn[] = [
     width: 200,
     prop: 'name',
     // 返回一个标签字符串
-    renderHeader: () => 'div',
-    // 传递给  'div' slots
-    headerSlots: {
-      default: (label: string) => {
-        return `${label}`
-      }
-    }
+    renderHeader: label => h('div', null, label)
   },
   {
     label: '自定义表头 ElButton',
     width: 200,
     prop: 'status',
     // 返回一个组件
-    renderHeader: () => ElButton,
-    // 传递给 'ElResult' 的slots
-    headerSlots: {
-      default: (label: string) => {
-        return `${label}`
-      }
-    }
+    renderHeader: label => h(ElButton, null, () => label)
   },
   {
     label: '自定义组件ElAlert',
     prop: 'custom',
     // 返回一个VNode
     renderHeader: label => {
-      return h(ElAlert as unknown as DefineComponent, {}, () => label)
+      return h(ElAlert as unknown as DefineComponent, null, () => label)
     }
   }
 ]

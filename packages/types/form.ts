@@ -90,21 +90,7 @@ export interface FormColumnProps {
   /**
    * @desc 渲染form表单的label
    */
-  renderLabel?: (label: string, props: PlusColumn) => VNode | Component | string
-
-  /**
-   * 插槽 当 `renderField` 返回值是一个组件或者字符串是生效
-   */
-  fieldSlots?: {
-    [index: string]: (...arg: any) => any
-  } & { default?: (...arg: any) => any }
-
-  /**
-   * 插槽 当 `renderLabel` 返回值是一个组件或者字符串是生效
-   */
-  labelSlots?: {
-    [index: string]: (...arg: any) => any
-  } & { default?: (...arg: any) => any }
+  renderLabel?: (label: string, props: PlusColumn) => VNode
 }
 
 /**

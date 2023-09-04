@@ -34,7 +34,6 @@
     :params="params"
     :callback-value="displayValue"
     :custom-field-props="customFieldProps"
-    :slots="column.slots"
   />
 
   <!-- 插槽 -->

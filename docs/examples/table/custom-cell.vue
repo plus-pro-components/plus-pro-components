@@ -79,16 +79,10 @@ const tableConfig: PlusColumn[] = [
     width: 140,
     prop: 'name',
     // 返回一个标签字符串
-    render: () => 'div',
+    render: value => h('div', null, `${value}`),
     // 传递给  'div' props
     fieldProps: value => {
       return { value: value }
-    },
-    // 传递给 'div' 的slots
-    slots: {
-      default: (value: string) => {
-        return `${value}`
-      }
     }
   },
   {
@@ -96,16 +90,20 @@ const tableConfig: PlusColumn[] = [
     width: 150,
     prop: 'status',
     // 返回一个组件
-    render: () => ElResult,
+    render: (value, { index }) =>
+      h(
+        ElResult,
+        {},
+        // 插槽
+        {
+          extra: () => {
+            return h(ElButton, { type: typeList[index % 4] as any }, () => `按钮${value}`)
+          }
+        }
+      ),
     // 传递给 ElResult 组件的props
     fieldProps: (value, { index }) => {
       return { icon: typeList[index % 4] as any, title: `Tip${value}` }
-    },
-    // 传递给 'ElResult' 的slots
-    slots: {
-      extra: (value: string, { index }) => {
-        return h(ElButton, { type: typeList[index % 4] as any }, () => `按钮${value}`)
-      }
     }
   },
   {
@@ -116,12 +114,6 @@ const tableConfig: PlusColumn[] = [
     render: value => {
       const item = statusOptions.find(item => item.value === value)
       return h(ElAlert as unknown as DefineComponent, { type: item?.type }, () => item?.label)
-    },
-    // 传递给 ElAlert 的slots
-    slots: {
-      default: (value: string) => {
-        return `${value}1000`
-      }
     }
   },
   {
@@ -130,7 +122,7 @@ const tableConfig: PlusColumn[] = [
     prop: 'status1',
     // 返回一个组件
     render: () => {
-      return CustomPageHeader
+      return h(CustomPageHeader)
     },
     // 传递给CustomPageHeader 组件的props
     fieldProps: (value, { index }) => ({
@@ -159,6 +151,7 @@ const tableConfig: PlusColumn[] = [
     label: '自定义表单ElUpload',
     width: 160,
     prop: 'custom1',
+    // editable 为true  renderField才生效
     editable: true,
     // 返回一个VNode
     renderField(_, onChange) {
