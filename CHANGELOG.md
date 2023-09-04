@@ -1,3 +1,18 @@
+## [v0.0.1-alpha.35](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-alpha.34...v0.0.1-alpha.35) (2023-09-04)
+
+
+### ✨ Features
+
+* **components:** :sparkles: unified  render methods.([a7814c7](https://github.com/plus-pro-components/plus-pro-components/commit/a7814c7)) by@xiaofei
+
+
+### 🐛 Bug Fixes
+
+* **components[radio]:** :bug: fix plus-radio props options.([450f29f](https://github.com/plus-pro-components/plus-pro-components/commit/450f29f)) by@xiaofei
+
+
+
+
 ## [v0.0.1-alpha.34](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-alpha.33...v0.0.1-alpha.34) (2023-09-01)
 
 
