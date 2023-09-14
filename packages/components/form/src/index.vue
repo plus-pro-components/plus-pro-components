@@ -100,7 +100,7 @@
 import type { DefineComponent } from 'vue'
 import { reactive, ref, watch, computed, useSlots } from 'vue'
 import type { FormInstance, FormRules, FormProps, RowProps, ColProps } from 'element-plus'
-import { ElMessage } from 'element-plus'
+import { ElMessage, ElForm, ElCard, ElButton, ElIcon } from 'element-plus'
 import { useLocale } from '@plus-pro-components/hooks'
 import type { PlusColumn, FieldValues, Mutable } from '@plus-pro-components/types'
 import { cloneDeep } from 'lodash-es'

@@ -109,9 +109,10 @@ import { cloneDeep } from 'lodash-es'
 import type { PlusPaginationProps } from '@plus-pro-components/components/pagination'
 import { PlusPagination } from '@plus-pro-components/components/pagination'
 import { DefaultPageInfo, TableFormRefInjectionKey } from '@plus-pro-components/constants'
-import type { CSSProperties } from 'vue'
+import type { CSSProperties, Ref, Component } from 'vue'
 import type { ComponentSize } from 'element-plus/es/constants'
 import type { TableInstance, TableProps } from 'element-plus'
+import { ElTable, ElTableColumn } from 'element-plus'
 import type { PageInfo, PlusColumn, RecordType } from '@plus-pro-components/types'
 import type { Options as SortableOptions } from 'sortablejs'
 import {
@@ -120,8 +121,8 @@ import {
   getFieldSlotName,
   filterSlots
 } from '@plus-pro-components/components/utils'
-import PlusTableActionBar from './table-action-bar.vue'
-import PlusTableColumn from './table-column.vue'
+import { default as PlusTableActionBarComponent } from './table-action-bar.vue'
+import { default as PlusTableColumnComponent } from './table-column.vue'
 import PlusTableTableColumnIndex from './table-column-index.vue'
 import PlusTableColumnDragSort from './table-column-drag-sort.vue'
 import PlusTableToolbar from './table-toolbar.vue'
@@ -179,6 +180,12 @@ defineOptions({
   inheritAttrs: false
 })
 
+/**
+ * FIXME: The inferred type of this node exceeds the maximum length the compiler will serialize. An explicit type annotation is needed.
+ */
+const PlusTableActionBar: Component = PlusTableActionBarComponent
+const PlusTableColumn: Component = PlusTableColumnComponent
+
 const props = withDefaults(defineProps<PlusTableProps>(), {
   defaultSize: 'default',
   pagination: false,
@@ -204,7 +211,7 @@ const props = withDefaults(defineProps<PlusTableProps>(), {
 const emit = defineEmits<PlusTableEmits>()
 
 const subColumns = ref(cloneDeep(props.columns))
-const tableInstance = shallowRef<TableInstance | null>(null)
+const tableInstance = shallowRef<any>(null)
 const state = reactive<TableState>({
   subPageInfo: {
     ...(((props.pagination as PlusPaginationProps)?.modelValue || DefaultPageInfo) as PageInfo)
@@ -298,6 +305,6 @@ const handleFormChange = (data: {
 const { subPageInfo, size } = toRefs(state)
 
 defineExpose({
-  tableInstance
+  tableInstance: tableInstance as Ref<TableInstance>
 })
 </script>

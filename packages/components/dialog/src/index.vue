@@ -39,6 +39,7 @@
 <script lang="ts" setup>
 import { ref, watchEffect } from 'vue'
 import type { DialogProps } from 'element-plus'
+import { ElDialog, ElButton } from 'element-plus'
 import { useLocale } from '@plus-pro-components/hooks'
 
 export interface PlusDialogProps

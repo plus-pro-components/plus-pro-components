@@ -48,11 +48,22 @@ import type { VNode } from 'vue'
 import { h, unref } from 'vue'
 import { ArrowDownBold } from '@element-plus/icons-vue'
 import type { TableColumnCtx } from 'element-plus'
-import { ElButton, ElIcon, ElLink, ElTooltip, ElMessageBox } from 'element-plus'
+import {
+  ElButton,
+  ElIcon,
+  ElLink,
+  ElTooltip,
+  ElMessageBox,
+  ElTableColumn,
+  ElDropdown,
+  ElDropdownItem,
+  ElDropdownMenu
+} from 'element-plus'
 import type { RecordType } from '@plus-pro-components/types'
 import { isFunction } from '@plus-pro-components/utils'
 import { cloneDeep } from 'lodash-es'
 import { useLocale } from '@plus-pro-components/hooks'
+
 import type { ButtonsCallBackParams, ActionBarButtonsRow } from './type'
 
 export interface ActionBarProps {
@@ -154,7 +165,7 @@ const render = (row: any, buttonRow: ActionBarButtonsRow, index: number): VNode 
   } else {
     const Tag = props.type === 'button' ? ElButton : ElLink
     return h(
-      Tag,
+      Tag as any,
       {
         size: 'small',
         // icon: buttonRow.icon,

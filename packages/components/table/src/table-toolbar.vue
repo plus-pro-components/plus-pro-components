@@ -98,8 +98,10 @@ import type { PlusColumn } from '@plus-pro-components/types'
 import { Setting } from '@element-plus/icons-vue'
 import { PlusPopover } from '@plus-pro-components/components/popover'
 import type { ComponentSize } from 'element-plus/es/constants'
+import type { CheckboxValueType } from 'element-plus'
 import { useLocale } from '@plus-pro-components/hooks'
 import { getTableKey } from '@plus-pro-components/components/utils'
+import { ElCheckbox, ElCheckboxGroup, ElTooltip, ElIcon, ElButton } from 'element-plus'
 
 export interface PlusTableToolbarProps {
   columns?: PlusColumn[]
@@ -159,12 +161,12 @@ const state: State = reactive({
   checkList: cloneDeep(props.columns).map(item => getTableKey(item))
 })
 
-const handleCheckAllChange = (val: boolean) => {
+const handleCheckAllChange = (val: CheckboxValueType) => {
   state.checkList = val ? cloneDeep(props.columns).map(item => getTableKey(item)) : []
   state.isIndeterminate = false
 }
 
-const handleCheckGroupChange = (value: string[]) => {
+const handleCheckGroupChange = (value: CheckboxValueType[]) => {
   const checkedCount = value.length
   state.checkAll = checkedCount === props.columns.length
   state.isIndeterminate = checkedCount > 0 && checkedCount < props.columns.length

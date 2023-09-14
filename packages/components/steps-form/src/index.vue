@@ -46,9 +46,11 @@
 import { ref } from 'vue'
 import { cloneDeep } from 'lodash-es'
 import type { StepProps } from 'element-plus'
+import { ElSteps, ElStep } from 'element-plus'
 import type { FieldValues, Mutable, PlusColumn } from '@plus-pro-components/types'
 import type { PlusFormProps } from '@plus-pro-components/components/form'
 import { useLocale } from '@plus-pro-components/hooks'
+import { PlusForm } from '@plus-pro-components/components/form'
 
 export interface PlusStepFrom {
   title: Mutable<StepProps>['title']

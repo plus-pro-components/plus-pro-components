@@ -74,10 +74,10 @@ import type {
   FieldValues
 } from '@plus-pro-components/types'
 import type { PlusSearchProps, PlusSearchInstance } from '@plus-pro-components/components/search'
-import { PlusSearch } from '@plus-pro-components/components/search'
+import { PlusSearch as PlusSearchComponent } from '@plus-pro-components/components/search'
 import type { PlusTableProps, PlusTableInstance } from '@plus-pro-components/components/table'
-import { PlusTable } from '@plus-pro-components/components/table'
-import type { Ref } from 'vue'
+import { PlusTable as PlusTableComponent } from '@plus-pro-components/components/table'
+import type { Ref, Component } from 'vue'
 import { h, reactive, ref, useSlots } from 'vue'
 import type { CardProps } from 'element-plus'
 import { ElCard } from 'element-plus'
@@ -172,6 +172,12 @@ const emit = defineEmits<PlusPageEmits>()
 defineOptions({
   name: 'PlusPage'
 })
+
+/**
+ * FIXME: The inferred type of this node exceeds the maximum length the compiler will serialize. An explicit type annotation is needed.
+ */
+const PlusSearch: Component = PlusSearchComponent
+const PlusTable: Component = PlusTableComponent
 
 const { tableData, pageInfo, total, loadingStatus } = useTable()
 const plusSearchInstance = ref<any>()

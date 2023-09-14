@@ -254,6 +254,7 @@
 </template>
 
 <script lang="ts" setup>
+import type { Component } from 'vue'
 import { ref, watch, computed } from 'vue'
 import type { PlusColumn, FieldValueType } from '@plus-pro-components/types'
 import { isFunction, isDate, isArray } from '@plus-pro-components/utils'
@@ -268,6 +269,28 @@ import { useGetOptions, useLocale } from '@plus-pro-components/hooks'
 import { PlusRadio } from '@plus-pro-components/components/radio'
 import { PlusDatePicker } from '@plus-pro-components/components/date-picker'
 import { PlusRender } from '@plus-pro-components/components/render'
+import {
+  ElFormItem as FormItemComponent,
+  ElTooltip as TooltipComponent,
+  ElIcon as IconComponent,
+  ElAutocomplete as AutocompleteComponent,
+  ElCascader as CascaderComponent,
+  ElCheckbox as CheckboxComponent,
+  ElCheckboxGroup as CheckboxGroupComponent,
+  ElColorPicker as ColorPickerComponent,
+  ElDatePicker as DatePickerComponent,
+  ElInputNumber as InputNumberComponent,
+  ElRadioGroup as RadioGroupComponent,
+  ElRadio as RadioComponent,
+  ElRate as RateComponent,
+  ElSelect as SelectComponent,
+  ElOption as OptionComponent,
+  ElSlider as SliderComponent,
+  ElSwitch as SwitchComponent,
+  ElTimePicker as TimePickerComponent,
+  ElTimeSelect as TimeSelectComponent,
+  ElInput as InputComponent
+} from 'element-plus'
 
 export interface PlusFormItemProps {
   modelValue?: FieldValueType
@@ -294,6 +317,30 @@ export interface PlusFormItemEmits {
 defineOptions({
   name: 'PlusFormItem'
 })
+
+/**
+ * FIXME: The inferred type of this node exceeds the maximum length the compiler will serialize. An explicit type annotation is needed.
+ */
+const ElFormItem: Component = FormItemComponent
+const ElTooltip: Component = TooltipComponent
+const ElIcon: Component = IconComponent
+const ElAutocomplete: Component = AutocompleteComponent
+const ElCascader: Component = CascaderComponent
+const ElCheckbox: Component = CheckboxComponent
+const ElCheckboxGroup: Component = CheckboxGroupComponent
+const ElColorPicker: Component = ColorPickerComponent
+const ElDatePicker: Component = DatePickerComponent
+const ElInputNumber: Component = InputNumberComponent
+const ElRadioGroup: Component = RadioGroupComponent
+const ElRadio: Component = RadioComponent
+const ElRate: Component = RateComponent
+const ElSelect: Component = SelectComponent
+const ElOption: Component = OptionComponent
+const ElSlider: Component = SliderComponent
+const ElSwitch: Component = SwitchComponent
+const ElTimePicker: Component = TimePickerComponent
+const ElTimeSelect: Component = TimeSelectComponent
+const ElInput: Component = InputComponent
 
 const props = withDefaults(defineProps<PlusFormItemProps>(), {
   modelValue: '',
@@ -428,7 +475,7 @@ watch(
   }
 )
 
-const handleChange = (val: FieldValueType) => {
+const handleChange = (val: any) => {
   emit('update:modelValue', val)
   emit('change', val)
 }

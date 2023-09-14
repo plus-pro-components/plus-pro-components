@@ -81,6 +81,7 @@ import { QuestionFilled } from '@element-plus/icons-vue'
 import type { Ref } from 'vue'
 import { shallowRef, inject, watch } from 'vue'
 import { PlusRender } from '@plus-pro-components/components/render'
+import { ElTableColumn, ElTooltip, ElIcon } from 'element-plus'
 
 export interface PlusTableTableColumnProps {
   columns?: PlusColumn[]

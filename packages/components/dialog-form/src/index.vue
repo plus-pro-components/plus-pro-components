@@ -34,11 +34,12 @@
 <script lang="ts" setup>
 import { ref, watch } from 'vue'
 import { useLocale } from '@plus-pro-components/hooks'
-import type { PlusFormInstance, PlusFormProps } from '@plus-pro-components/components/form'
+import type { PlusFormProps } from '@plus-pro-components/components/form'
 import { PlusForm } from '@plus-pro-components/components/form'
 import type { PlusDialogProps } from '@plus-pro-components/components/dialog'
 import { PlusDialog } from '@plus-pro-components/components/dialog'
 import type { FieldValues, PlusColumn } from '@plus-pro-components/types'
+import type { FormInstance } from 'element-plus'
 
 export interface PlusDialogFormProps {
   modelValue?: FieldValues
@@ -67,7 +68,7 @@ const props = withDefaults(defineProps<PlusDialogFormProps>(), {
 const emit = defineEmits<PlusDialogFormEmits>()
 
 const { t } = useLocale()
-const formInstance = ref<PlusFormInstance>()
+const formInstance = ref<any>()
 const state = ref<FieldValues>({})
 const subVisible = ref(false)
 
@@ -108,6 +109,6 @@ const handleCancel = () => {
 }
 
 defineExpose({
-  formInstance: formInstance.value?.formInstance
+  formInstance: formInstance.value?.formInstance as FormInstance
 })
 </script>

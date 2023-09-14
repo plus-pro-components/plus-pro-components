@@ -17,13 +17,14 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, reactive } from 'vue'
 import type { ExtractPropTypes } from 'vue'
+import { computed, reactive } from 'vue'
 import type { descriptionProps } from 'element-plus'
-import type { PlusColumn, RecordType } from '@plus-pro-components/types'
+import { ElDescriptions, ElDescriptionsItem } from 'element-plus'
+import type { PlusColumn, RecordType, Mutable } from '@plus-pro-components/types'
 import { PlusDisplayItem } from '@plus-pro-components/components/display-item'
 
-type DescriptionProps = ExtractPropTypes<typeof descriptionProps>
+export type DescriptionProps = Partial<Mutable<ExtractPropTypes<typeof descriptionProps>>>
 export interface PlusDescriptionsProps extends /* @vue-ignore */ Partial<DescriptionProps> {
   data: RecordType
   columns?: PlusColumn[]

@@ -42,6 +42,7 @@ import { ArrowDown, ArrowUp, Search, RefreshRight } from '@element-plus/icons-vu
 import type { PlusColumn, FieldValues, Mutable } from '@plus-pro-components/types'
 import { cloneDeep } from 'lodash-es'
 import { useLocale } from '@plus-pro-components/hooks'
+import { ElFormItem, ElButton, ElIcon } from 'element-plus'
 
 export interface PlusSearchProps extends /* @vue-ignore */ Partial<Mutable<FormProps>> {
   modelValue: FieldValues

@@ -4,7 +4,7 @@
       <PlusFormItem
         v-model="state.values[item.prop]"
         v-bind="item"
-        @change="value => handleChange(value, item)"
+        @change="(value: any) => handleChange(value, item)"
       >
         <!--表单项label插槽 -->
         <template v-if="$slots[getLabelSlotName(item.prop)]" #[getLabelSlotName(item.prop)]="data">
@@ -28,6 +28,7 @@
 <script lang="ts" setup>
 import { reactive, watch } from 'vue'
 import type { FormProps, RowProps, ColProps } from 'element-plus'
+import { ElRow, ElCol } from 'element-plus'
 import { PlusFormItem } from '@plus-pro-components/components/form-item'
 import type { PlusColumn, FieldValues, FieldValueType, Mutable } from '@plus-pro-components/types'
 import { getLabelSlotName, getFieldSlotName } from '@plus-pro-components/components/utils'

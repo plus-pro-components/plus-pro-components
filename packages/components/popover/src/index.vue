@@ -28,6 +28,7 @@
 <script lang="ts" setup>
 import { ref, watch } from 'vue'
 import { useLocale } from '@plus-pro-components/hooks'
+import { ElPopover, ElButton } from 'element-plus'
 
 export interface PlusPopoverProps {
   hasShowBottomButton?: boolean

@@ -39,10 +39,11 @@
 <script lang="ts" setup>
 import { ref, watch } from 'vue'
 import { PlusForm } from '@plus-pro-components/components/form'
-import type { PlusFormInstance, PlusFormProps } from '@plus-pro-components/components/form'
+import type { PlusFormProps } from '@plus-pro-components/components/form'
 import type { FieldValues, PlusColumn } from '@plus-pro-components/types'
 import { ElDrawer } from 'element-plus'
 import { useLocale } from '@plus-pro-components/hooks'
+import type { FormInstance } from 'element-plus'
 
 export interface PlusDrawerFormProps {
   modelValue?: FieldValues
@@ -72,7 +73,7 @@ const props = withDefaults(defineProps<PlusDrawerFormProps>(), {
 const emit = defineEmits<PlusDrawerFormEmits>()
 
 const { t } = useLocale()
-const formInstance = ref<PlusFormInstance>()
+const formInstance = ref<any>()
 const drawerInstance = ref<InstanceType<typeof ElDrawer>>()
 const state = ref<FieldValues>({})
 const subVisible = ref(false)
@@ -118,6 +119,6 @@ const handleReset = () => {
 
 defineExpose({
   drawerInstance,
-  formInstance: formInstance.value?.formInstance
+  formInstance: formInstance.value?.formInstance as FormInstance
 })
 </script>

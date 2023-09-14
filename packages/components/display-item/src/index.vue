@@ -162,9 +162,8 @@
 
 <script lang="ts" setup>
 import { DocumentCopy, Select } from '@element-plus/icons-vue'
-import { PlusFormItem } from '@plus-pro-components/components/form-item'
 import { PlusForm } from '@plus-pro-components/components/form'
-import type { PlusFormInstance } from '@plus-pro-components/components/form'
+import { PlusFormItem } from '@plus-pro-components/components/form-item'
 import { formatDate, formatMoney, isFunction, isArray } from '@plus-pro-components/utils'
 import {
   getCustomProps,
@@ -177,6 +176,7 @@ import { ref, watch, computed } from 'vue'
 import type { PlusColumn, RecordType, FieldValueType } from '@plus-pro-components/types'
 import { useGetOptions } from '@plus-pro-components/hooks'
 import { PlusRender } from '@plus-pro-components/components/render'
+import { ElImage, ElLink, ElTag, ElProgress, ElIcon } from 'element-plus'
 
 export interface PlusDisplayItemProps {
   column: PlusColumn
@@ -203,7 +203,7 @@ const isForm = computed(() => props.column.editable === true || isCellEdit.value
 
 const currentStatus = ref({})
 const customFieldProps = ref<any>({})
-const formInstance = ref<PlusFormInstance>()
+const formInstance = ref<any>()
 const formItemInstance = ref()
 const options = useGetOptions(props.column)
 
