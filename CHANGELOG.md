@@ -1,3 +1,15 @@
+## [v0.0.1-beta.1](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-alpha.35...v0.0.1-beta.1) (2023-09-14)
+
+
+### ✨ Features
+
+* **components:** :sparkles: remove resolveComponent and add locale d.ts.([60b54f4](https://github.com/plus-pro-components/plus-pro-components/commit/60b54f4)) by@xiaofei
+
+
+
+
+
+
 ## [v0.0.1-alpha.35](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-alpha.34...v0.0.1-alpha.35) (2023-09-04)
 
 
