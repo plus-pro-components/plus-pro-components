@@ -214,8 +214,8 @@ importers:
   docs:
     dependencies:
       plus-pro-components:
-        specifier: 0.0.1-alpha.33
-        version: 0.0.1-alpha.33(vue@3.3.4)
+        specifier: npm:plus-pro-components@latest
+        version: npm:plus-pro-components@latest(vue@3.3.4)
     devDependencies:
       '@types/escape-html':
         specifier: ^1.0.2
@@ -361,9 +361,15 @@ importers:
       '@element-plus/icons-vue':
         specifier: ^2.1.0
         version: 2.1.0(vue@3.2.47)
+      '@plus-pro-components/utils':
+        specifier: ^0.0.9
+        version: link:../utils
       '@types/lodash-es':
         specifier: ^4.17.6
         version: 4.17.7
+      '@types/sortablejs':
+        specifier: ^1.15.1
+        version: 1.15.1
       dayjs:
         specifier: ^1.11.3
         version: 1.11.7
@@ -377,15 +383,9 @@ importers:
         specifier: ^1.15.0
         version: 1.15.0
     devDependencies:
-      '@plus-pro-components/utils':
-        specifier: ^0.0.9
-        version: link:../utils
       '@types/node':
         specifier: '*'
         version: 20.1.4
-      '@types/sortablejs':
-        specifier: ^1.15.1
-        version: 1.15.1
       vue:
         specifier: ^3.2.37
         version: 3.2.47
@@ -1847,6 +1847,23 @@ packages:
     dev: true
     optional: true
 
+  /@plus-pro-components/utils@0.0.9:
+    resolution: {integrity: sha512-sSXfp+8mjyBrjDrytuHgKTosiCUBUwCvJRqiakEOU/rbdcVSwo8mkL7EUbeO/d8ip7f6aseeDhnPIm3UfYByFA==}
+    dependencies:
+      accounting: 0.4.1
+      axios: 1.4.0
+      crypto-js: 4.1.1
+      dayjs: 1.11.7
+      file-saver: 2.0.5
+      good-storage: 1.1.1
+      js-cookie: 3.0.5
+      lodash-es: 4.17.21
+      numeral: 2.0.6
+      qs: 6.11.1
+    transitivePeerDependencies:
+      - debug
+    dev: false
+
   /@pnpm/cli-meta@5.0.0:
     resolution: {integrity: sha512-sI6G+fJ73e79tYehFulbHJDtMj8t5w38G0Pe+gncle+lP0gtBlofvVzgfqhJxjlqq+OGvSdsUIbgOYWvGhOmng==}
     engines: {node: '>=16.14'}
@@ -2487,7 +2504,6 @@ packages:
 
   /@types/sortablejs@1.15.1:
     resolution: {integrity: sha512-g/JwBNToh6oCTAwNS8UGVmjO7NLDKsejVhvE4x1eWiPTC3uCuNsa/TD4ssvX3du+MLiM+SHPNDuijp8y76JzLQ==}
-    dev: true
 
   /@types/ssri@7.1.1:
     resolution: {integrity: sha512-DPP/jkDaqGiyU75MyMURxLWyYLwKSjnAuGe9ZCsLp9QZOpXmDfuevk769F0BS86TmRuD5krnp06qw9nSoNO+0g==}
@@ -7664,13 +7680,15 @@ packages:
       pathe: 1.1.0
     dev: true
 
-  /plus-pro-components@0.0.1-alpha.33(vue@3.3.4):
-    resolution: {integrity: sha512-jjzrxUNsk1gcmKTzDGQ4617C77Xx192lh10Pn3Mp7btvBFVSn2VEj1U8shHT3gPcFhoe6bjh5G6ny2n12D7CkA==}
+  /plus-pro-components@0.0.1-beta.3(vue@3.3.4):
+    resolution: {integrity: sha512-1ztugewYLxDYYx9K4dpZlvMZT6eBA/35a3teIGJHNUPErwWH2p+4PpCZSPpVO24jpSxnZ9gHr7+pFW17v4GnJw==}
     peerDependencies:
       vue: ^3.2.0
     dependencies:
       '@element-plus/icons-vue': 2.1.0(vue@3.3.4)
+      '@plus-pro-components/utils': 0.0.9
       '@types/lodash-es': 4.17.7
+      '@types/sortablejs': 1.15.1
       dayjs: 1.11.7
       element-plus: 2.3.4(vue@3.3.4)
       lodash-es: 4.17.21
@@ -7678,6 +7696,7 @@ packages:
       vue: 3.3.4
     transitivePeerDependencies:
       - '@vue/composition-api'
+      - debug
     dev: false
 
   /postcss-calc@8.2.4(postcss@8.4.24):
