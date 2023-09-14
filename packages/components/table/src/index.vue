@@ -112,7 +112,7 @@ import { DefaultPageInfo, TableFormRefInjectionKey } from '@plus-pro-components/
 import type { CSSProperties, Ref, Component } from 'vue'
 import type { ComponentSize } from 'element-plus/es/constants'
 import type { TableInstance, TableProps } from 'element-plus'
-import { ElTable, ElTableColumn } from 'element-plus'
+import { ElTable, ElTableColumn, vLoading } from 'element-plus'
 import type { PageInfo, PlusColumn, RecordType } from '@plus-pro-components/types'
 import type { Options as SortableOptions } from 'sortablejs'
 import {
