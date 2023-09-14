@@ -1,3 +1,15 @@
+## [v0.0.1-beta.3](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-beta.2...v0.0.1-beta.3) (2023-09-14)
+
+
+
+
+### 🐛 Bug Fixes
+
+* **component[table]:** :bug: fix 'failed to resolve directive: loading'([ddf9d64](https://github.com/plus-pro-components/plus-pro-components/commit/ddf9d64)) by@xiaofei
+
+
+
+
 ## [v0.0.1-beta.2](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-beta.1...v0.0.1-beta.2) (2023-09-14)
 
 
