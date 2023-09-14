@@ -1,3 +1,15 @@
+## [v0.0.1-beta.2](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-beta.1...v0.0.1-beta.2) (2023-09-14)
+
+
+
+
+### 🐛 Bug Fixes
+
+* **package:** :bug: fix package.json.([32e8ea1](https://github.com/plus-pro-components/plus-pro-components/commit/32e8ea1)) by@xiaofei
+
+
+
+
 ## [v0.0.1-beta.1](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-alpha.35...v0.0.1-beta.1) (2023-09-14)
 
 
