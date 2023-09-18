@@ -34,15 +34,15 @@ function getSideEffects(
   module: 'es' | 'lib'
 ): SideEffectsInfo | undefined {
   const { importStyle } = options
-  const componentsFolder = `plus-pro-components/${module}`
-
   const filename = kebabCase(name)
   const noPrefixFilename = filename.replace('plus-', '')
 
+  const componentsFolder = `plus-pro-components/${module}/components/${noPrefixFilename}/style`
+
   if (importStyle === 'scss') {
-    return `${componentsFolder}/${noPrefixFilename}/style/index`
+    return `${componentsFolder}/index`
   } else if (importStyle === 'css') {
-    return `${componentsFolder}/${noPrefixFilename}/style/css`
+    return `${componentsFolder}/css`
   }
 }
 

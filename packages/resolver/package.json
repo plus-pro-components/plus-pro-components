@@ -1,6 +1,6 @@
 {
   "name": "@plus-pro-components/resolver",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "plus-pro-components resolver of unplugin-vue-components",
   "license": "MIT",
   "main": "./dist/index.js",
