@@ -7,7 +7,8 @@ const excludes = [
   'packages/eslint-config',
   'packages/utils',
   'packages/play',
-  'packages/theme-chalk'
+  'packages/theme-chalk',
+  'packages/resolver'
 ]
 
 export const excludeFiles = (files: string[]) => {

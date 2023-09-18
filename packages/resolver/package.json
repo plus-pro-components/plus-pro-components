@@ -1,0 +1,24 @@
+{
+  "name": "@plus-pro-components/resolver",
+  "version": "0.0.1",
+  "description": "plus-pro-components resolver of unplugin-vue-components",
+  "license": "MIT",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
+  },
+  "scripts": {
+    "build": "tsup",
+    "dev": "DEV=true tsup"
+  },
+  "devDependencies": {
+    "tsup": "^7.2.0",
+    "unplugin-vue-components": "^0.25.0"
+  }
+}

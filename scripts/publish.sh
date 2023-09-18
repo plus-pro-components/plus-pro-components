@@ -16,6 +16,14 @@ npm publish
 echo "Successfully published utils"
 cd -
 
+cd packages/resolver
+echo "build resolver..."
+npm run build
+echo "publish resolver..."
+npm publish
+echo "Successfully published resolver"
+cd -
+
 cd packages/eslint-config
 echo "publish eslint-config..."
 npm publish

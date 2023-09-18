@@ -11,8 +11,9 @@ import autoprefixer from 'autoprefixer'
 import cssnano from 'cssnano'
 import type { OutputOptions, ModuleFormat } from 'rollup'
 import { pcOutput, pcRoot, pkgRoot } from '../utils/paths'
-import { writeBundles, target } from '../utils'
+import { target, writeBundlesFunction } from '../utils'
 import { externalModules, excludeFiles } from '../utils/main'
+import { PlusProComponentsAlias, PlusProComponentsExternal } from '../utils/plugin'
 
 const buildConfig = {
   esm: {
@@ -45,32 +46,37 @@ const buildModules = async () => {
     })
   )
 
-  const bundle = await rollup({
-    input,
-    external: externalModules,
-    plugins: [
-      vuePlugin() as Plugin,
-      nodeResolve({
-        extensions: ['.mjs', '.js', '.json', '.ts']
-      }),
-      commonjs(),
-      esbuild({
-        sourceMap: false,
-        target: target,
-        loaders: {
-          '.vue': 'ts'
-        }
-      }),
-      postcss({
-        namedExports: true,
-        extract: true,
-        plugins: [autoprefixer(), cssnano()]
-      })
-    ],
-    treeshake: false
-  })
-  await writeBundles(
-    bundle,
+  const getBundle = async (options: OutputOptions) => {
+    return await rollup({
+      input,
+      external: externalModules,
+      plugins: [
+        PlusProComponentsExternal(options),
+        PlusProComponentsAlias(),
+        vuePlugin() as Plugin,
+        nodeResolve({
+          extensions: ['.mjs', '.js', '.json', '.ts']
+        }),
+        commonjs(),
+        esbuild({
+          sourceMap: false,
+          target: target,
+          loaders: {
+            '.vue': 'ts'
+          }
+        }),
+        postcss({
+          namedExports: true,
+          extract: true,
+          plugins: [autoprefixer(), cssnano()]
+        })
+      ],
+      treeshake: false
+    })
+  }
+
+  await writeBundlesFunction(
+    getBundle,
     buildConfigEntries.map(([module, config]): OutputOptions => {
       return {
         format: config.format as ModuleFormat,

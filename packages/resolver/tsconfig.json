@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "target": "es2015",
+    "lib": ["dom", "esnext"],
+    "removeComments": false,
+    "module": "CommonJS",
+    "declaration": false,
+    "sourceMap": true,
+    "strict": true,
+    "noImplicitAny": false,
+    "baseUrl": ".",
+    "outDir": "./dist",
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "skipLibCheck": true
+  },
+  "include": ["src/**/*.ts"]
+}
