@@ -1,9 +1,9 @@
 {
   "name": "@plus-pro-components/resolver",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "plus-pro-components resolver of unplugin-vue-components",
   "license": "MIT",
-  "main": "./dist/index.cjs",
+  "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
   "files": [
