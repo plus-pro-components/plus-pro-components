@@ -60,7 +60,7 @@ app.mount('#app')
 }
 ```
 
-## 按需导入 <el-tag  effect="dark">推荐</el-tag>
+## 自动按需导入 <el-tag  effect="dark">推荐</el-tag>
 
 `PlusProComponents` 提供了基于`ES Module` 的开箱即用的 [Tree Shaking](https://webpack.js.org/guides/tree-shaking/) 功能。
 
@@ -95,16 +95,18 @@ app.mount('#app')
   })
   ```
 
-- 3. 导入组件
+- 3. 使用组件
+
      > App.vue
 
 ```html{2,6}
 <template>
-  <PlusPagination :total="100"  />
+  <!-- 自动导入 -->
+  <PlusPagination :total="total"  />
 </template>
 
 <script setup>
-  import { PlusPagination } from 'plus-pro-components'
+  const  total=100
 </script>
 ```
 
