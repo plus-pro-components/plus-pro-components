@@ -1,10 +1,12 @@
 import type { Plugin } from 'vue'
 import { createApp } from 'vue'
-import PlusProComponents from 'plus-pro-components'
 import router from '@/router'
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
-import 'plus-pro-components/index.css'
+import PlusProComponents from '../../plus-pro-components/index'
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+import '../../theme-chalk/src/index.scss'
 import App from './App.vue'
 import './style.css'
 import 'element-plus/dist/index.css'

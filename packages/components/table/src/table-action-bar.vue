@@ -32,7 +32,7 @@
           <el-dropdown-menu>
             <el-dropdown-item
               v-for="buttonRow in getSubButtons(row, $index).nextButtons"
-              :key="buttonRow.text"
+              :key="(unref(buttonRow.text) as string)"
             >
               <component :is="() => render(row, buttonRow, $index)" />
             </el-dropdown-item>
@@ -150,7 +150,7 @@ const render = (row: any, buttonRow: ActionBarButtonsRow, index: number): VNode 
   if (props.type === 'icon') {
     return h(
       ElTooltip,
-      { placement: 'top', content: buttonRow.text, ...buttonRow.tooltipProps },
+      { placement: 'top', content: unref(buttonRow.text) as string, ...buttonRow.tooltipProps },
       () =>
         h(
           ElIcon,
@@ -170,9 +170,10 @@ const render = (row: any, buttonRow: ActionBarButtonsRow, index: number): VNode 
         size: 'small',
         // icon: buttonRow.icon,
         ...buttonRow.props,
+
         onClick: (event: MouseEvent) => handleClickAction(row, buttonRow, index, event)
       },
-      () => buttonRow.text
+      () => unref(buttonRow.text)
     )
   }
 }

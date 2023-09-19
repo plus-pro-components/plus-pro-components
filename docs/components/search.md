@@ -46,7 +46,7 @@ search/async
 | 名称                    | 说明                    | 类型                                                                                    | 默认值                              | 是否必须 |
 | ----------------------- | ----------------------- | --------------------------------------------------------------------------------------- | ----------------------------------- | -------- |
 | `model-value / v-model` | 搜索表单绑定值          | `object`[FieldValues](/components/type.html#fieldvalues)                                |                                     | 否       |
-| `columns`               | 搜索配置信息            | `array` [PlusColumn[]](/components/config.html)                                         | `[]`                                | 是       |
+| `columns`               | 搜索配置信息            | `array` [PlusColumn[]](/components/config.html)                                         | `[]`                                | 否       |
 | `hasFooter`             | 是否需要全部按钮        | `boolean`                                                                               | `true`                              | 否       |
 | `hasReset`              | 是否需要底部按钮 `重置` | `boolean`                                                                               | `true`                              | 否       |
 | `hasUnfold`             | 是否显示展开收缩按钮    | `boolean`                                                                               | `true`                              | 否       |

@@ -10,5 +10,6 @@ import '@external/dropdown-item/style/index'
 
 import '@plus-pro-components/components/display-item/style/index'
 import '@plus-pro-components/components/popover/style/index'
+import '@plus-pro-components/components/pagination/style/index'
 
 import '@plus-pro-components/theme-chalk/src/table.scss'

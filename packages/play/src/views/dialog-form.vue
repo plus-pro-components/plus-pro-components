@@ -1,6 +1,12 @@
 <template>
   <el-button @click="handleOpen">打开弹窗表单</el-button>
-  <PlusDialogForm v-model:visible="visible" v-model="values" :form="{ columns }" />
+  <PlusDialogForm
+    ref="plusDialogFormInstance"
+    v-model:visible="visible"
+    v-model="values"
+    :form="{ columns, rules }"
+    @confirm="handleConfirm"
+  />
 </template>
 
 <script lang="ts" setup>
@@ -186,8 +192,15 @@ const columns: PlusColumn[] = [
 
 const visible = ref(false)
 const values = ref({})
+const plusDialogFormInstance = ref()
+const rules = ref({
+  name: [{ required: true }]
+})
 
 const handleOpen = () => {
   visible.value = true
+}
+const handleConfirm = () => {
+  console.log(plusDialogFormInstance.value.formInstance)
 }
 </script>

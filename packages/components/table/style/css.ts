@@ -10,5 +10,6 @@ import '@external/dropdown-item/style/css'
 
 import '@plus-pro-components/components/display-item/style/css'
 import '@plus-pro-components/components/popover/style/css'
+import '@plus-pro-components/components/pagination/style/css'
 
 import '@plus-pro-components/theme-chalk/plus-table.css'

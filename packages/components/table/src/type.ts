@@ -19,7 +19,7 @@ export interface ActionBarButtonsRow {
   /**
    * 操作文本
    */
-  text: string
+  text: string | Ref<string> | ComputedRef<string>
   /**
    * 操作唯一code
    *

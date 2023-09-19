@@ -105,7 +105,6 @@
 
 <script lang="ts" setup>
 import { reactive, toRefs, watch, ref, provide, shallowRef, useSlots } from 'vue'
-import { cloneDeep } from 'lodash-es'
 import type { PlusPaginationProps } from '@plus-pro-components/components/pagination'
 import { PlusPagination } from '@plus-pro-components/components/pagination'
 import { DefaultPageInfo, TableFormRefInjectionKey } from '@plus-pro-components/constants'
@@ -210,7 +209,7 @@ const props = withDefaults(defineProps<PlusTableProps>(), {
 })
 const emit = defineEmits<PlusTableEmits>()
 
-const subColumns = ref(cloneDeep(props.columns))
+const subColumns = ref([])
 const tableInstance = shallowRef<any>(null)
 const state = reactive<TableState>({
   subPageInfo: {
@@ -248,7 +247,8 @@ watch(
     subColumns.value = val.filter(item => item.hideInTable !== true) as any
   },
   {
-    deep: true
+    deep: true,
+    immediate: true
   }
 )
 
@@ -259,7 +259,8 @@ watch(
     emit('paginationChange', { ...pageInfo })
   },
   {
-    deep: true
+    deep: true,
+    immediate: true
   }
 )
 

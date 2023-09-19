@@ -1,9 +1,9 @@
 .plus-form-item {
   width: 100%;
   .plus-form-item__label {
-    width: 100%;
-    display: flex;
+    display: inline-flex;
     align-items: center;
+
     .plus-table-column__label__icon {
       margin-left: 2px;
     }

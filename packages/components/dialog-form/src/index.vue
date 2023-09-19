@@ -32,7 +32,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, watch } from 'vue'
+import { ref, watch, computed } from 'vue'
 import { useLocale } from '@plus-pro-components/hooks'
 import type { PlusFormProps } from '@plus-pro-components/components/form'
 import { PlusForm } from '@plus-pro-components/components/form'
@@ -69,6 +69,8 @@ const emit = defineEmits<PlusDialogFormEmits>()
 
 const { t } = useLocale()
 const formInstance = ref<any>()
+const computedFormInstance = computed(() => formInstance.value?.formInstance as FormInstance)
+
 const state = ref<FieldValues>({})
 const subVisible = ref(false)
 
@@ -98,8 +100,15 @@ const handleChange = (values: FieldValues, column: PlusColumn) => {
   emit('change', values, column)
 }
 
-const handleConfirm = () => {
-  emit('confirm', state.value)
+const handleConfirm = async () => {
+  try {
+    const valid = await computedFormInstance.value?.validate()
+    if (valid) {
+      emit('confirm', state.value)
+    }
+  } catch (error) {
+    console.warn(error)
+  }
 }
 
 const handleCancel = () => {
@@ -109,6 +118,6 @@ const handleCancel = () => {
 }
 
 defineExpose({
-  formInstance: formInstance.value?.formInstance as FormInstance
+  formInstance: computedFormInstance
 })
 </script>

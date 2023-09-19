@@ -1,8 +1,8 @@
 <template>
   <div class="plus-table-toolbar">
     <span class="plus-table-toolbar__title">
-      <slot name="title">
-        {{ title || t('plus.table.title') }}
+      <slot v-if="title" name="title">
+        {{ title }}
       </slot>
     </span>
 

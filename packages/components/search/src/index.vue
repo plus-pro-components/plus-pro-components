@@ -20,7 +20,12 @@
           {{ searchText || t('plus.search.searchText') }}
         </el-button>
 
-        <el-button v-if="hasUnfold" type="primary" link @click="handleUnfold">
+        <el-button
+          v-if="hasUnfold && state.subColumns.length >= showNumber"
+          type="primary"
+          link
+          @click="handleUnfold"
+        >
           {{ isShowUnfold ? t('plus.search.expand') : t('plus.search.retract') }}
           <el-icon>
             <ArrowDown v-if="isShowUnfold" />
@@ -45,8 +50,8 @@ import { useLocale } from '@plus-pro-components/hooks'
 import { ElFormItem, ElButton, ElIcon } from 'element-plus'
 
 export interface PlusSearchProps extends /* @vue-ignore */ Partial<Mutable<FormProps>> {
-  modelValue: FieldValues
-  columns: PlusColumn[]
+  modelValue?: FieldValues
+  columns?: PlusColumn[]
   hasFooter?: boolean
   hasReset?: boolean
   hasUnfold?: boolean
@@ -61,7 +66,7 @@ export interface PlusSearchProps extends /* @vue-ignore */ Partial<Mutable<FormP
 export interface PlusSearchState {
   values: FieldValues
   isShowUnfold: boolean
-  subColumns: any[]
+  subColumns: any
   originData: any
 }
 export interface PlusSearchEmits {
@@ -108,6 +113,19 @@ const state = reactive<PlusSearchState>({
   isShowUnfold: true
 })
 
+state.originData = computed<any[]>(() => {
+  return props.columns.filter(item => item.hideInSearch !== true)
+})
+
+state.subColumns = computed<any[]>(() => {
+  const data = cloneDeep(state.originData)
+  if (props.hasUnfold) {
+    return data.slice(0, props.showNumber)
+  } else {
+    return data
+  }
+})
+
 watch(
   () => props.modelValue,
   val => {
@@ -118,16 +136,6 @@ watch(
     immediate: true
   }
 )
-
-state.originData = computed<any[]>(() => {
-  return props.columns.filter(item => item.hideInSearch !== true)
-})
-
-if (props.hasUnfold) {
-  state.subColumns = cloneDeep(state.originData).slice(0, props.showNumber)
-} else {
-  state.subColumns = cloneDeep(state.originData)
-}
 
 const handleChange = async (values: FieldValues, column: PlusColumn) => {
   emit('change', values, column)
