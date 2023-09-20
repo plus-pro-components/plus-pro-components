@@ -1,5 +1,9 @@
 # Table 表格
 
+## 表格整体设计
+
+![设计](/table.png 'table')
+
 ## 基础用法
 
 配置`columns`表头和`table-data`表格数据。
@@ -297,13 +301,12 @@ table/advanced
 | `tableData`                    | 表格数据                                   | `array`                                                                                                                                                                       | `[]`                                         | 是       |
 | `pagination`                   | 分页参数 （默认 `false` 给参数就显示）     | `false` / (`object` [PlusPaginationProps](/components/pagination.html#pagination-attributes) )                                                                                | `false`                                      | 否       |
 | `actionBar`                    | 操作栏参数 （默认 `false` 给参数就显示）   | `false` / (`object`[ActionBarProps](/components/type.html#actionbarprops) )                                                                                                   | `false`                                      | 否       |
-| `hasToolbar`                   | 是否需要标题栏                             | `boolean`                                                                                                                                                                     | `true`                                       | 否       |
+| `titleBar`                     | 标题栏                                     | `boolean`/ (`object`[TitleBar](/components/type.html#titlebar))                                                                                                               | `true`                                       | 否       |
 | `isShowNumber`                 | 是否需要序号                               | `boolean`                                                                                                                                                                     | `false`                                      | 否       |
 | `isSelection`                  | 是否是多选表格                             | `boolean`                                                                                                                                                                     | `false`                                      | 否       |
 | `dragSortable`                 | 表格拖拽配置 （默认 `false` 给参数就显示） | `false` / (`object`[SortableOptions](http://www.sortablejs.com/options.html) )                                                                                                | `false`                                      | 否       |
 | `hasExpand`                    | 是否需要展开行                             | `boolean`                                                                                                                                                                     | `false`                                      | 否       |
 | `loadingStatus`                | 加载状态                                   | `boolean`                                                                                                                                                                     | `false`                                      | 否       |
-| `title`                        | 表格标题                                   | `string`                                                                                                                                                                      |                                              | 否       |
 | `height`                       | 表格高度                                   | `string`                                                                                                                                                                      |                                              | 否       |
 | `headerCellStyle`              | 表格表头样式                               | `object` [CSSProperties](https://cn.vuejs.org/api/utility-types.html#cssproperties)                                                                                           | `{backgroundColor: '#F5F9FD',color: '#777'}` | 否       |
 | `indexContentStyle`            | 序号栏样式                                 | (`object` [CSSProperties](https://cn.vuejs.org/api/utility-types.html#cssproperties) ) / `function` <docs-tip content='(row: any, index: number) =>CSSProperties'></docs-tip> | `{}`                                         | 否       |

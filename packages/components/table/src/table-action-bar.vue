@@ -60,7 +60,7 @@ import {
   ElDropdownMenu
 } from 'element-plus'
 import type { RecordType } from '@plus-pro-components/types'
-import { isFunction } from '@plus-pro-components/utils'
+import { isFunction, isPlainObject } from '@plus-pro-components/utils'
 import { cloneDeep } from 'lodash-es'
 import { useLocale } from '@plus-pro-components/hooks'
 
@@ -187,19 +187,23 @@ const handleClickAction = (
 ) => {
   const data: ButtonsCallBackParams = { row, buttonRow, index, e }
   if (buttonRow.confirm) {
-    const title = isFunction(buttonRow.confirm.title)
-      ? (buttonRow.confirm.title as any)(data)
-      : buttonRow.confirm.title
+    let message = t('plus.table.confirmToPerformThisOperation')
+    let title = t('plus.table.prompt')
+    let options: any = undefined
 
-    const message = isFunction(buttonRow.confirm.message)
-      ? (buttonRow.confirm.message as any)(data)
-      : buttonRow.confirm.message
+    if (isPlainObject(buttonRow.confirm) && typeof buttonRow.confirm !== 'boolean') {
+      title = isFunction(buttonRow.confirm.title)
+        ? (buttonRow.confirm.title as any)(data)
+        : buttonRow.confirm.title
 
-    ElMessageBox.confirm(
-      message || t('plus.table.confirmToPerformThisOperation'),
-      title || t('plus.table.prompt'),
-      buttonRow.confirm.options
-    )
+      message = isFunction(buttonRow.confirm.message)
+        ? (buttonRow.confirm.message as any)(data)
+        : buttonRow.confirm.message
+
+      options = buttonRow.confirm?.options
+    }
+
+    ElMessageBox.confirm(message, title, options)
       .then(() => {
         emit('clickAction', data)
       })

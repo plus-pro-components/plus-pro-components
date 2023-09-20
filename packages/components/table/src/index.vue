@@ -1,11 +1,11 @@
 <template>
   <div class="plus-table">
-    <PlusTableToolbar
-      v-if="hasToolbar"
+    <PlusTableTitleBar
+      v-if="titleBar"
       :columns="columns"
       :sub-columns="subColumns"
       :default-size="size"
-      :title="title"
+      :title-bar="titleBar"
       @click-density="handleClickDensity"
       @filter-table="handleFilterTableConfirm"
     >
@@ -16,7 +16,7 @@
       <template #toolbar>
         <slot name="toolbar" />
       </template>
-    </PlusTableToolbar>
+    </PlusTableTitleBar>
 
     <el-table
       ref="tableInstance"
@@ -124,8 +124,8 @@ import { default as PlusTableActionBarComponent } from './table-action-bar.vue'
 import { default as PlusTableColumnComponent } from './table-column.vue'
 import PlusTableTableColumnIndex from './table-column-index.vue'
 import PlusTableColumnDragSort from './table-column-drag-sort.vue'
-import PlusTableToolbar from './table-toolbar.vue'
-import type { ButtonsCallBackParams, TableState, ActionBarProps } from './type'
+import PlusTableTitleBar from './table-title-bar.vue'
+import type { ButtonsCallBackParams, TableState, ActionBarProps, TitleBar } from './type'
 
 /**
  * 表格数据
@@ -139,8 +139,8 @@ export interface PlusTableProps extends /* @vue-ignore */ Partial<TableProps<any
   actionBar?: false | Partial<ActionBarProps>
   /* 是否需要序号*/
   isShowNumber?: boolean
-  /* 是否需要过滤表格表头*/
-  hasToolbar?: boolean
+  /* 是否工具栏*/
+  titleBar?: boolean | Partial<TitleBar>
   /* 是否是多选表格*/
   isSelection?: boolean
   /* 是否需要展开行*/
@@ -190,7 +190,7 @@ const props = withDefaults(defineProps<PlusTableProps>(), {
   pagination: false,
   actionBar: false,
   isShowNumber: false,
-  hasToolbar: true,
+  titleBar: true,
   isSelection: false,
   hasExpand: false,
   loadingStatus: false,

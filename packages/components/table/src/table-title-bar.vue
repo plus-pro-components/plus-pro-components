@@ -1,15 +1,21 @@
 <template>
   <div class="plus-table-toolbar">
-    <span class="plus-table-toolbar__title">
-      <slot v-if="title" name="title">
-        {{ title }}
+    <div class="plus-table-toolbar__title">
+      <slot name="title">
+        {{ titleBarConfig.title }}
       </slot>
-    </span>
+    </div>
 
     <div class="plus-table-toolbar__content">
       <slot name="toolbar" />
       <!-- 表格密度 -->
-      <PlusPopover placement="bottom" :width="150" trigger="click" :title="t('plus.table.density')">
+      <PlusPopover
+        v-if="titleBarConfig?.density !== false"
+        placement="bottom"
+        :width="150"
+        trigger="click"
+        :title="t('plus.table.density')"
+      >
         <div class="plus-table-toolbar__density">
           <el-button
             v-for="item in buttonNameDensity"
@@ -44,6 +50,7 @@
 
       <!-- 列设置 -->
       <PlusPopover
+        v-if="titleBarConfig?.columnSetting !== false"
         placement="bottom"
         :width="100"
         trigger="click"
@@ -102,11 +109,12 @@ import type { CheckboxValueType } from 'element-plus'
 import { useLocale } from '@plus-pro-components/hooks'
 import { getTableKey } from '@plus-pro-components/components/utils'
 import { ElCheckbox, ElCheckboxGroup, ElTooltip, ElIcon, ElButton } from 'element-plus'
+import type { TitleBar } from './type'
 
 export interface PlusTableToolbarProps {
   columns?: PlusColumn[]
   subColumns?: any
-  title?: string
+  titleBar?: boolean | TitleBar
   filterTableHeaderOverflowLabelLength?: number
   defaultSize?: ComponentSize
 }
@@ -131,12 +139,13 @@ defineOptions({
 const props = withDefaults(defineProps<PlusTableToolbarProps>(), {
   columns: () => [],
   subColumns: () => [],
-  title: '',
-  hasToolbar: true,
+  titleBar: true,
   filterTableHeaderOverflowLabelLength: 6,
   defaultSize: 'default'
 })
 const emit = defineEmits<PlusTableToolbarEmits>()
+
+const titleBarConfig = computed<TitleBar>(() => props.titleBar as any)
 
 const { t } = useLocale()
 const buttonNameDensity: ButtonNameDensity[] = [

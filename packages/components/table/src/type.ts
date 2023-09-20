@@ -58,7 +58,7 @@ export interface ActionBarButtonsRow {
    * 操作是不是需要二次确认  默认值为 `false`
    */
   confirm?:
-    | false
+    | boolean
     | {
         /**
          * 默认 `提示`
@@ -189,3 +189,22 @@ export interface TableState {
    */
   subPageInfo: PageInfo
 }
+
+/**
+ * 标题栏
+ */
+export type TitleBar = Partial<{
+  /**
+   * 标题  使用title插槽则此配置不生效
+   */
+  title?: string
+
+  /**
+   *  是否需要密度控制  默认true
+   */
+  density?: boolean
+  /**
+   * 是否需要列设置 默认true
+   */
+  columnSetting?: boolean
+}>
