@@ -1,3 +1,15 @@
+## [v0.0.1-beta.6](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-beta.5...v0.0.1-beta.6) (2023-09-20)
+
+
+
+
+
+
+### ♻️ Code Refactoring
+
+* **components:** :recycle: refactor  table-title-bar table-action-bar.([6aaa2b5](https://github.com/plus-pro-components/plus-pro-components/commit/6aaa2b5)) by@xiaofei
+
+
 ## [v0.0.1-beta.5](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-beta.4...v0.0.1-beta.5) (2023-09-19)
 
 
