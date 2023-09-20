@@ -187,18 +187,26 @@ const handleClickAction = (
 ) => {
   const data: ButtonsCallBackParams = { row, buttonRow, index, e }
   if (buttonRow.confirm) {
-    let message = t('plus.table.confirmToPerformThisOperation')
+    const message = t('plus.table.confirmToPerformThisOperation')
     let title = t('plus.table.prompt')
     let options: any = undefined
 
     if (isPlainObject(buttonRow.confirm) && typeof buttonRow.confirm !== 'boolean') {
-      title = isFunction(buttonRow.confirm.title)
+      const tempTitle = isFunction(buttonRow.confirm.title)
         ? (buttonRow.confirm.title as any)(data)
         : buttonRow.confirm.title
 
-      message = isFunction(buttonRow.confirm.message)
+      if (tempTitle) {
+        title = tempTitle
+      }
+
+      const tempMessage = isFunction(buttonRow.confirm.message)
         ? (buttonRow.confirm.message as any)(data)
         : buttonRow.confirm.message
+
+      if (tempMessage) {
+        title = tempMessage
+      }
 
       options = buttonRow.confirm?.options
     }
