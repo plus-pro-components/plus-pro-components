@@ -1,3 +1,15 @@
+## [v0.0.1-beta.7](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-beta.6...v0.0.1-beta.7) (2023-09-20)
+
+
+
+
+### 🐛 Bug Fixes
+
+* **components:** :bug: fix  table-action-bar confirm default value not effective.([b223e9e](https://github.com/plus-pro-components/plus-pro-components/commit/b223e9e)) by@xiaofei
+
+
+
+
 ## [v0.0.1-beta.6](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-beta.5...v0.0.1-beta.6) (2023-09-20)
 
 
