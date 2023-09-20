@@ -1,6 +1,6 @@
 {
   "name": "@plus-pro-components/eslint-config",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "eslint config of plus-pro-components",
   "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
@@ -14,7 +14,7 @@
     "stub": "npx unbuild --stub"
   },
   "files": [
-    "index.js"
+    "dist"
   ],
   "license": "MIT",
   "dependencies": {
