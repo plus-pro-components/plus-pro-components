@@ -21,7 +21,7 @@
         </el-button>
 
         <el-button
-          v-if="hasUnfold && state.subColumns.length >= showNumber"
+          v-if="hasUnfold && state.subColumns.length > showNumber"
           type="primary"
           link
           @click="handleUnfold"
