@@ -1,3 +1,17 @@
+## [v0.0.1-beta.5](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-beta.4...v0.0.1-beta.5) (2023-09-19)
+
+
+
+
+### 🐛 Bug Fixes
+
+* **components:** :bug: fix table style,fix table hideInTable not effective,fix search ShowUnfold.([9ffc16a](https://github.com/plus-pro-components/plus-pro-components/commit/9ffc16a)) by@xiaofei
+* **@plus-pro-components/resolver:** :bug: fix  @plus-pro-components/resolver  componentsFolder([50f57eb](https://github.com/plus-pro-components/plus-pro-components/commit/50f57eb)) by@xiaofei
+* **@plus-pro-components/resolver:** :bug: fix package.json main([e329e25](https://github.com/plus-pro-components/plus-pro-components/commit/e329e25)) by@xiaofei
+
+
+
+
 ## [v0.0.1-beta.4](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-beta.3...v0.0.1-beta.4) (2023-09-18)
 
 
