@@ -1,6 +1,4 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-const { defineConfig } = require('eslint-define-config')
-module.exports = defineConfig({
+export default {
   parser: 'vue-eslint-parser',
   env: {
     browser: true,
@@ -75,16 +73,15 @@ module.exports = defineConfig({
     'vue/valid-attribute-name': 0,
     'vue/singleline-html-element-content-newline': 'off',
     'vue/multiline-html-element-content-newline': 'off',
-    // 'vue/name-property-casing': ['error', 'PascalCase'],
     'vue/no-v-html': 'off',
     'vue/html-closing-bracket-newline': 'off',
     'vue/html-self-closing': [
       'error',
       {
         html: {
-          void: 'always', // "always" 需要在没有内容的元素上自动关闭
+          void: 'always',
           normal: 'always',
-          component: 'always' // Vue.js 自定义组件的样式
+          component: 'always'
         },
         svg: 'always',
         math: 'always'
@@ -121,4 +118,4 @@ module.exports = defineConfig({
     '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
     '@typescript-eslint/consistent-type-imports': [2, { disallowTypeAnnotations: false }]
   }
-})
+}

@@ -1,17 +1,23 @@
 {
   "name": "@plus-pro-components/eslint-config",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "eslint config of plus-pro-components",
-  "main": "index.js",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org"
+  },
+  "scripts": {
+    "build": "npx unbuild",
+    "stub": "npx unbuild --stub"
   },
   "files": [
     "index.js"
   ],
   "license": "MIT",
-  "devDependencies": {
+  "dependencies": {
     "@typescript-eslint/eslint-plugin": "^5.59.6",
     "@typescript-eslint/parser": "^5.59.6",
     "@vue/eslint-config-prettier": "^7.1.0",

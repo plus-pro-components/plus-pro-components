@@ -25,6 +25,8 @@ echo "Successfully published resolver"
 cd -
 
 cd packages/eslint-config
+echo "build eslint-config..."
+npm run build
 echo "publish eslint-config..."
 npm publish
 echo "Successfully published eslint-config"
