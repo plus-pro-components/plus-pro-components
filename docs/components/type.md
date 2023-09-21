@@ -80,10 +80,6 @@ export interface PageInfo {
    * 默认为10
    */
   pageSize: number
-  /**
-   * 总数
-   */
-  total?: number
 }
 ```
 

@@ -1,12 +1,12 @@
 <template>
-  <div class="plus-table-toolbar">
-    <div class="plus-table-toolbar__title">
+  <div class="plus-table-title-bar">
+    <div class="plus-table-title-bar__title">
       <slot name="title">
         {{ titleBarConfig.title }}
       </slot>
     </div>
 
-    <div class="plus-table-toolbar__content">
+    <div class="plus-table-title-bar__toolbar">
       <slot name="toolbar" />
       <!-- 表格密度 -->
       <PlusPopover
@@ -16,7 +16,7 @@
         trigger="click"
         :title="t('plus.table.density')"
       >
-        <div class="plus-table-toolbar__density">
+        <div class="plus-table-title-bar__toolbar__density">
           <el-button
             v-for="item in buttonNameDensity"
             :key="item.size"
@@ -31,7 +31,7 @@
 
         <template #reference>
           <el-tooltip effect="dark" :content="t('plus.table.density')" placement="top">
-            <el-icon :size="18" color="#919191" class="plus-table-toolbar__icon">
+            <el-icon :size="18" color="#919191" class="plus-table-title-bar__toolbar__icon">
               <svg
                 viewBox="0 0 1024 1024"
                 focusable="false"
@@ -72,7 +72,7 @@
             :key="item.label"
             :label="getTableKey(item)"
             :disabled="item.headerFilter"
-            class="plus-table-toolbar__checkbox__item"
+            class="plus-table-title-bar__toolbar__checkbox__item"
           >
             <el-tooltip
               v-if="item.label?.length > filterTableHeaderOverflowLabelLength"
@@ -87,7 +87,7 @@
 
         <template #reference>
           <el-tooltip effect="dark" :content="t('plus.table.columnSettings')" placement="top">
-            <el-icon :size="20" color="#919191" class="plus-table-toolbar__icon">
+            <el-icon :size="20" color="#919191" class="plus-table-title-bar__toolbar__icon">
               <Setting />
             </el-icon>
           </el-tooltip>
