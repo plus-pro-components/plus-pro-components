@@ -16,18 +16,11 @@
         :content="String(getTableIndex($index))"
         placement="top-start"
       >
-        <div
-          class="plus-table-index-column plus-table-index-col-border plus-table-column-index-content"
-          :style="customIndexContentStyle(row, $index)"
-        >
+        <div class="plus-table-column-index__content" :style="indexContentStyle(row, $index)">
           {{ getTableIndex($index) }}
         </div>
       </el-tooltip>
-      <div
-        v-else
-        class="plus-table-index-column plus-table-index-col-border plus-table-column-index-content"
-        :style="customIndexContentStyle(row, $index)"
-      >
+      <div v-else class="plus-table-column-index__content" :style="indexContentStyle(row, $index)">
         {{ getTableIndex($index) }}
       </div>
     </template>
@@ -71,7 +64,7 @@ const getTableIndex = (index: number) => {
 }
 
 // index样式
-const customIndexContentStyle = (row: any, index: number): CSSProperties => {
+const indexContentStyle = (row: any, index: number): CSSProperties => {
   if (isFunction(props.indexContentStyle)) {
     return (props.indexContentStyle as (row: any, index: number) => CSSProperties)(row, index)
   } else if (isPlainObject(props.indexContentStyle)) {

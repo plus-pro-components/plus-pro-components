@@ -71,13 +71,11 @@
     }
 
     .cell {
-      .plus-table-column-index-content {
+      .plus-table-column-index__content {
         align-items: center;
         display: flex;
-        font-size: 12px;
         justify-content: center;
         overflow: hidden;
-        padding: 5px 5px;
       }
     }
   }

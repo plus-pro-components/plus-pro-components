@@ -33,11 +33,16 @@
       v-bind="$attrs"
     >
       <!-- 选择栏 -->
-      <el-table-column v-if="isSelection" key="selection" type="selection" width="34" />
+      <el-table-column
+        v-if="isSelection"
+        key="selection"
+        type="selection"
+        v-bind="selectionTableColumnProps"
+      />
 
       <!-- 序号栏 -->
       <PlusTableTableColumnIndex
-        v-if="isShowNumber"
+        v-if="hasIndexColumn"
         :index-content-style="indexContentStyle"
         :index-table-column-props="indexTableColumnProps"
         :page-info="(pagination as PlusPaginationProps)?.modelValue"
@@ -138,7 +143,7 @@ export interface PlusTableProps extends /* @vue-ignore */ Partial<TableProps<any
   /* 操作栏参数*/
   actionBar?: false | Partial<ActionBarProps>
   /* 是否需要序号*/
-  isShowNumber?: boolean
+  hasIndexColumn?: boolean
   /* 是否工具栏*/
   titleBar?: boolean | Partial<TitleBar>
   /* 是否是多选表格*/
@@ -147,8 +152,6 @@ export interface PlusTableProps extends /* @vue-ignore */ Partial<TableProps<any
   hasExpand?: boolean
   /* loading状态*/
   loadingStatus?: boolean
-  /* 自定义表格标题*/
-  title?: string
   /* 表格高度*/
   // eslint-disable-next-line vue/require-default-prop
   height?: string
@@ -164,6 +167,7 @@ export interface PlusTableProps extends /* @vue-ignore */ Partial<TableProps<any
   dragSortable?: false | Partial<SortableOptions>
   dragSortableTableColumnProps?: RecordType
   indexTableColumnProps?: RecordType
+  selectionTableColumnProps?: RecordType
   indexContentStyle?: Partial<CSSProperties> | ((row: any, index: number) => Partial<CSSProperties>)
 }
 export interface PlusTableEmits {
@@ -189,12 +193,11 @@ const props = withDefaults(defineProps<PlusTableProps>(), {
   defaultSize: 'default',
   pagination: false,
   actionBar: false,
-  isShowNumber: false,
+  hasIndexColumn: false,
   titleBar: true,
   isSelection: false,
   hasExpand: false,
   loadingStatus: false,
-  title: '',
   tableData: () => [],
   columns: () => [],
   headerCellStyle: () => ({
@@ -205,7 +208,10 @@ const props = withDefaults(defineProps<PlusTableProps>(), {
   dragSortable: false,
   dragSortableTableColumnProps: () => ({}),
   indexTableColumnProps: () => ({}),
-  indexContentStyle: () => ({})
+  indexContentStyle: () => ({}),
+  selectionTableColumnProps: () => ({
+    width: 40
+  })
 })
 const emit = defineEmits<PlusTableEmits>()
 

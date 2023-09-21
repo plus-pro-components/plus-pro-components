@@ -7,7 +7,7 @@
       :loading-status="loadingStatus"
       :columns="tableConfig"
       :table-data="tableData"
-      :is-show-number="true"
+      has-index-column
       :is-show-drag-sort="true"
       table-title="表格"
       :pagination="{ total, modelValue: pageInfo }"
