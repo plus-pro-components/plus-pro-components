@@ -55,21 +55,21 @@ $ pnpm install plus-pro-components
 ```html{10,12}
 <head>
   <!-- 导入element-plus样式 -->
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/element-plus/dist/index.css" />
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/element-plus/dist/index.css" />
   <!-- 导入vue3 -->
-  <script src="//cdn.jsdelivr.net/vue@3"></script>
+  <script src="//cdn.jsdelivr.net/npm/vue@3"></script>
   <!-- 导入element-plus -->
-  <script src="//cdn.jsdelivr.net/element-plus"></script>
+  <script src="//cdn.jsdelivr.net/npm/element-plus"></script>
 
   <!-- 导入plus-pro-components样式 -->
-  <link rel="stylesheet" href="//unpkg.com/plus-pro-components/index.css" />
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/plus-pro-components/index.css" />
   <!--导入plus-pro-components"  -->
-  <script src="//cdn.jsdelivr.net/plus-pro-components"></script>
+  <script src="//cdn.jsdelivr.net/npm/plus-pro-components"></script>
 </head>
 ```
 
 ::: warning 建议
-默认使用最新版本，使用时建议加上版本号 如使用`0.0.1-beta.4`版本，防止因版本导致应用出现问题。
+默认使用最新版本，使用时建议加上版本号 如使用`0.0.1-beta.9`版本，防止因版本导致应用出现问题。
 
-[https://cdn.jsdelivr.net/npm/plus-pro-components@0.0.1-beta.4/dist/index.min.js](https://cdn.jsdelivr.net/npm/plus-pro-components@0.0.1-beta.4/dist/index.min.js)
+[https://cdn.jsdelivr.net/npm/plus-pro-components@0.0.1-beta.9/index.min.js](https://cdn.jsdelivr.net/npm/plus-pro-components@0.0.1-beta.9/index.min.js)
 :::
