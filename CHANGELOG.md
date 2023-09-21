@@ -1,3 +1,23 @@
+## [v0.0.1-beta.8](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-beta.7...v0.0.1-beta.8) (2023-09-21)
+
+
+### ✨ Features
+
+* **components:** :sparkles: export  packages/constants([6262117](https://github.com/plus-pro-components/plus-pro-components/commit/6262117)) by@xiaofei
+
+
+### 🐛 Bug Fixes
+
+* **eslint-config:** :bug: fix package.json  files([695a78a](https://github.com/plus-pro-components/plus-pro-components/commit/695a78a)) by@xiaofei
+* **components[search]:** :bug: fix search hasUnfold (state.subColumns.length > showNumber).([95b2ce4](https://github.com/plus-pro-components/plus-pro-components/commit/95b2ce4)) by@xiaofei
+
+
+### ♻️ Code Refactoring
+
+* **components:** :recycle: refactor table-column-index component.([6d0af9e](https://github.com/plus-pro-components/plus-pro-components/commit/6d0af9e)) by@xiaofei
+* **eslint-config:** :recycle: refactor eslint-config with ts([1ad78f5](https://github.com/plus-pro-components/plus-pro-components/commit/1ad78f5)) by@xiaofei
+
+
 ## [v0.0.1-beta.7](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-beta.6...v0.0.1-beta.7) (2023-09-20)
 
 
