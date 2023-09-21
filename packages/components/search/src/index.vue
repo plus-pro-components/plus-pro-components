@@ -21,15 +21,15 @@
         </el-button>
 
         <el-button
-          v-if="hasUnfold && state.subColumns.length > showNumber"
+          v-if="hasUnfold && state.originData.length > showNumber"
           type="primary"
           link
           @click="handleUnfold"
         >
-          {{ isShowUnfold ? t('plus.search.expand') : t('plus.search.retract') }}
+          {{ isShowUnfold ? t('plus.search.retract') : t('plus.search.expand') }}
           <el-icon>
-            <ArrowDown v-if="isShowUnfold" />
-            <ArrowUp v-else />
+            <ArrowUp v-if="isShowUnfold" />
+            <ArrowDown v-else />
           </el-icon>
         </el-button>
       </el-form-item>
@@ -110,7 +110,7 @@ const state = reactive<PlusSearchState>({
   values: {},
   subColumns: [],
   originData: [],
-  isShowUnfold: true
+  isShowUnfold: false
 })
 
 state.originData = computed<any[]>(() => {
@@ -119,7 +119,7 @@ state.originData = computed<any[]>(() => {
 
 state.subColumns = computed<any[]>(() => {
   const data = cloneDeep(state.originData)
-  if (props.hasUnfold) {
+  if (props.hasUnfold && !state.isShowUnfold) {
     return data.slice(0, props.showNumber)
   } else {
     return data
@@ -153,11 +153,6 @@ const handleReset = (): void => {
 
 const handleUnfold = () => {
   state.isShowUnfold = !state.isShowUnfold
-  if (state.subColumns.length > props.showNumber) {
-    state.subColumns = state.subColumns.slice(0, props.showNumber)
-  } else {
-    state.subColumns = cloneDeep(state.originData)
-  }
 }
 
 defineExpose({
