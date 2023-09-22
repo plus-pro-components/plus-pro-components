@@ -110,6 +110,25 @@ app.mount('#app')
 </script>
 ```
 
+## 手动导入
+
+手动导入需要导入组件和其对应的样式文件。如下示例：
+
+```html
+<template>
+  <PlusDatePicker></PlusDatePicker>
+</template>
+
+<script>
+  import { PlusDatePicker } from 'plus-pro-components'
+  import 'plus-pro-components/es/components/date-picker/style/css'
+
+  export default {
+    components: { PlusDatePicker }
+  }
+</script>
+```
+
 ## CDN
 
 示例
