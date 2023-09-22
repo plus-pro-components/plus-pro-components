@@ -99,16 +99,16 @@ app.mount('#app')
 
      > App.vue
 
-```html{3}
-<template>
-  <!-- 自动导入 -->
-  <PlusPagination :total="total"  />
-</template>
+  ```html{3}
+  <template>
+    <!-- 自动导入 -->
+    <PlusPagination :total="total"  />
+  </template>
 
-<script setup>
-  const total = 100
-</script>
-```
+  <script setup>
+    const total = 100
+  </script>
+  ```
 
 ## 手动导入
 
