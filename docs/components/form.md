@@ -63,7 +63,7 @@ form/group-header
 **插槽 的优先级低于 renderField，高于 valueType**。
 :::
 
-`PlusTable` 组件会自动根据配置项的 `prop` 生成对应的插槽，例如下面的配置项，则会自动生成两个名称叫做 [ **plus-field-`name`** ]和 [ **plus-field-`status`**] 的两个插槽，插槽的生成规则就是 固定 key 值 [ **plus-field-** ] 然后加上 配置项的 `prop`。
+`PlusForm` 组件会自动根据配置项的 `prop` 生成对应的插槽，例如下面的配置项，则会自动生成两个名称叫做 [ **plus-field-`name`** ]和 [ **plus-field-`status`**] 的两个插槽，插槽的生成规则就是 固定 key 值 [ **plus-field-** ] 然后加上 配置项的 `prop`。
 
 ```ts
 import { PlusColumn } from 'plus-pro-components'
@@ -133,7 +133,7 @@ form/custom-tsx
 **插槽 的优先级低于 renderLabel，高于 label**。
 :::
 
-`PlusTable` 组件会自动根据配置项的 `prop` 生成对应的插槽，例如下面的配置项，则会自动生成两个名称叫做 [ **plus-label-`name`** ]和 [ **plus-label-`status`**] 的两个插槽，插槽的生成规则就是 固定 key 值 [ **plus-label-** ] 然后加上 配置项的 `prop`。
+`PlusForm` 组件会自动根据配置项的 `prop` 生成对应的插槽，例如下面的配置项，则会自动生成两个名称叫做 [ **plus-label-`name`** ]和 [ **plus-label-`status`**] 的两个插槽，插槽的生成规则就是 固定 key 值 [ **plus-label-** ] 然后加上 配置项的 `prop`。
 
 ```ts
 import { PlusColumn } from 'plus-pro-components'
