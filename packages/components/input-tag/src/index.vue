@@ -46,7 +46,6 @@ export interface PlusInputTagProps {
   tagProps?: Partial<Mutable<TagProps>>
   limit?: number
 }
-
 export interface PlusInputTagEmits {
   (e: 'update:modelValue', data: string[]): void
   (e: 'change', data: string[]): void
@@ -69,7 +68,6 @@ const props = withDefaults(defineProps<PlusInputTagProps>(), {
   inputProps: () => ({}),
   tagProps: () => ({})
 })
-
 const emit = defineEmits<PlusInputTagEmits>()
 
 const inputInstance = ref<InputInstance | null>()
@@ -80,7 +78,6 @@ const state = reactive<PlusInputTagState>({
   inputValue: '',
   isFocus: false
 })
-
 const { t } = useLocale()
 
 watch(
@@ -90,16 +87,20 @@ watch(
   },
   { immediate: true }
 )
+
 const onClickOutside = () => {
   state.isFocus = false
 }
+
 const handleClick = () => {
   state.isFocus = true
   inputInstance.value?.focus()
 }
+
 const handleClose = (tag: string) => {
   state.tags = state.tags.filter(item => item !== tag)
 }
+
 const handleValue = () => {
   if (
     state.inputValue.trim() &&
@@ -119,9 +120,6 @@ const handle = (type: TriggerType) => {
     : isString(props.trigger)
     ? [props.trigger]
     : ['blur', 'enter', 'space']
-
-  console.log(triggerList, 'triggerList')
-
   if (triggerList.includes(type)) {
     handleValue()
   }
