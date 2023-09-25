@@ -63,8 +63,25 @@ export default defineConfig({
         link: '/components/type'
       },
       {
-        text: 'API',
-        link: '/api/utils/'
+        text: '生态系统',
+        items: [
+          {
+            text: 'Utils',
+            link: '/api/utils/'
+          },
+          {
+            text: 'Hooks',
+            link: '/ecosystem/hooks'
+          },
+          {
+            text: 'Resolver',
+            link: '/ecosystem/resolver'
+          },
+          {
+            text: 'Eslint Config',
+            link: '/ecosystem/eslint-config'
+          }
+        ]
       },
       {
         text: `v${pkg.version}`,
@@ -267,10 +284,6 @@ export default defineConfig({
               link: '/api/utils/other'
             }
           ]
-        },
-        {
-          text: '钩子hooks',
-          link: '/api/hooks/'
         }
       ]
     },
