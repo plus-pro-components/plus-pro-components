@@ -8,19 +8,50 @@
   >
     <template #label="{ label: currentLabel }">
       <span class="plus-form-item__label">
-        {{ currentLabel }}
+        <PlusRender
+          v-if="renderLabel && isFunction(renderLabel)"
+          :render="renderLabel"
+          :params="props"
+          :callback-value="currentLabel"
+          :custom-field-props="customFieldProps"
+        />
+
+        <slot
+          v-else
+          :name="getLabelSlotName(prop)"
+          :prop="prop"
+          :label="label"
+          :field-props="customFieldProps"
+          :value-type="valueType"
+          :column="props"
+        >
+          {{ currentLabel }}
+        </slot>
+
         <el-tooltip v-if="tooltip" placement="top" v-bind="getTooltip(tooltip)">
           <el-icon class="plus-table-column__label__icon" :size="16"><QuestionFilled /></el-icon>
         </el-tooltip>
       </span>
     </template>
 
-    <component
-      :is="render"
+    <PlusRender
       v-if="renderField && isFunction(renderField)"
-      v-model="state"
-      class="plus-form-item-field"
-      v-bind="customFieldProps"
+      :render="renderField"
+      :params="props"
+      :callback-value="state"
+      :custom-field-props="customFieldProps"
+      render-type="form"
+      :handle-change="handleChange"
+    />
+
+    <slot
+      v-else-if="$slots[getFieldSlotName(prop)]"
+      :name="getFieldSlotName(prop)"
+      :prop="prop"
+      :label="label"
+      :field-props="customFieldProps"
+      :value-type="valueType"
+      :column="props"
     />
 
     <el-autocomplete
@@ -104,6 +135,14 @@
       @change="handleChange"
     />
 
+    <PlusInputTag
+      v-else-if="valueType === 'plus-input-tag'"
+      v-model="state"
+      class="plus-form-item-field"
+      v-bind="customFieldProps"
+      @change="handleChange"
+    />
+
     <el-radio-group
       v-else-if="valueType === 'radio'"
       v-model="state"
@@ -127,7 +166,7 @@
       v-else-if="valueType === 'plus-radio'"
       v-model="state"
       class="plus-form-item-field"
-      :data="options"
+      :options="options"
       is-cancel
       v-bind="customFieldProps"
       @change="handleChange"
@@ -178,6 +217,7 @@
     <el-time-picker
       v-else-if="valueType === 'time-picker'"
       v-model="state"
+      :placeholder="t('plus.field.pleaseSelect') + label"
       class="plus-form-item-field"
       v-bind="customFieldProps"
       @change="handleChange"
@@ -187,6 +227,7 @@
       v-else-if="valueType === 'time-select'"
       v-model="state"
       class="plus-form-item-field"
+      :placeholder="t('plus.field.pleaseSelect') + label"
       v-bind="customFieldProps"
       @change="handleChange"
     />
@@ -203,6 +244,10 @@
       @change="handleChange"
     />
 
+    <span v-else-if="valueType === 'text'" class="plus-form-item-field" v-bind="customFieldProps">
+      {{ state }}
+    </span>
+
     <el-input
       v-else
       v-model="state"
@@ -217,15 +262,44 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, watch, isVNode, h, computed } from 'vue'
-import type { VNode, Component } from 'vue'
+import type { Component } from 'vue'
+import { ref, watch, computed } from 'vue'
 import type { PlusColumn, FieldValueType } from '@plus-pro-components/types'
-import { isString, isFunction, isDate, isArray, isComponent } from '@plus-pro-components/utils'
-import { getTooltip, getCustomProps, handleSlots } from '@plus-pro-components/components/utils'
+import { isFunction, isDate, isArray } from '@plus-pro-components/utils'
+import {
+  getTooltip,
+  getCustomProps,
+  getLabelSlotName,
+  getFieldSlotName
+} from '@plus-pro-components/components/utils'
 import { QuestionFilled } from '@element-plus/icons-vue'
 import { useGetOptions, useLocale } from '@plus-pro-components/hooks'
 import { PlusRadio } from '@plus-pro-components/components/radio'
 import { PlusDatePicker } from '@plus-pro-components/components/date-picker'
+import { PlusInputTag } from '@plus-pro-components/components/input-tag'
+import { PlusRender } from '@plus-pro-components/components/render'
+import {
+  ElFormItem as FormItemComponent,
+  ElTooltip as TooltipComponent,
+  ElIcon as IconComponent,
+  ElAutocomplete as AutocompleteComponent,
+  ElCascader as CascaderComponent,
+  ElCheckbox as CheckboxComponent,
+  ElCheckboxGroup as CheckboxGroupComponent,
+  ElColorPicker as ColorPickerComponent,
+  ElDatePicker as DatePickerComponent,
+  ElInputNumber as InputNumberComponent,
+  ElRadioGroup as RadioGroupComponent,
+  ElRadio as RadioComponent,
+  ElRate as RateComponent,
+  ElSelect as SelectComponent,
+  ElOption as OptionComponent,
+  ElSlider as SliderComponent,
+  ElSwitch as SwitchComponent,
+  ElTimePicker as TimePickerComponent,
+  ElTimeSelect as TimeSelectComponent,
+  ElInput as InputComponent
+} from 'element-plus'
 
 export interface PlusFormItemProps {
   modelValue?: FieldValueType
@@ -239,8 +313,9 @@ export interface PlusFormItemProps {
   formItemProps?: PlusColumn['formItemProps']
   // eslint-disable-next-line vue/require-default-prop
   renderField?: PlusColumn['renderField']
+  // eslint-disable-next-line vue/require-default-prop
+  renderLabel?: PlusColumn['renderLabel']
   tooltip?: PlusColumn['tooltip']
-  slots?: PlusColumn['slots']
   index?: number
 }
 export interface PlusFormItemEmits {
@@ -252,6 +327,30 @@ defineOptions({
   name: 'PlusFormItem'
 })
 
+/**
+ * FIXME: The inferred type of this node exceeds the maximum length the compiler will serialize. An explicit type annotation is needed.
+ */
+const ElFormItem: Component = FormItemComponent
+const ElTooltip: Component = TooltipComponent
+const ElIcon: Component = IconComponent
+const ElAutocomplete: Component = AutocompleteComponent
+const ElCascader: Component = CascaderComponent
+const ElCheckbox: Component = CheckboxComponent
+const ElCheckboxGroup: Component = CheckboxGroupComponent
+const ElColorPicker: Component = ColorPickerComponent
+const ElDatePicker: Component = DatePickerComponent
+const ElInputNumber: Component = InputNumberComponent
+const ElRadioGroup: Component = RadioGroupComponent
+const ElRadio: Component = RadioComponent
+const ElRate: Component = RateComponent
+const ElSelect: Component = SelectComponent
+const ElOption: Component = OptionComponent
+const ElSlider: Component = SliderComponent
+const ElSwitch: Component = SwitchComponent
+const ElTimePicker: Component = TimePickerComponent
+const ElTimeSelect: Component = TimeSelectComponent
+const ElInput: Component = InputComponent
+
 const props = withDefaults(defineProps<PlusFormItemProps>(), {
   modelValue: '',
   tooltip: '',
@@ -259,8 +358,7 @@ const props = withDefaults(defineProps<PlusFormItemProps>(), {
   formItemProps: () => ({}),
   fieldProps: () => ({}),
   options: () => [],
-  index: 0,
-  slots: () => ({})
+  index: 0
 })
 const emit = defineEmits<PlusFormItemEmits>()
 
@@ -271,21 +369,23 @@ const customFormItemProps = ref<any>({})
 const customFieldProps = ref<any>({})
 const state = ref<FieldValueType>()
 const range = ['datetimerange', 'daterange', 'monthrange']
+const numberList = ['rate', 'input-number', 'slider']
+const arrayList = ['checkbox', 'plus-date-picker', 'plus-input-tag']
 
 /**
  * 默认值是数组的情况
  */
 const isArrayValue = computed(() => {
-  if (props.valueType === 'checkbox') {
+  if (arrayList.includes(props.valueType as string)) {
     return true
   }
-  if (props.valueType === 'plus-date-picker') {
-    return true
-  }
-  if (props.valueType === 'select' && customFieldProps.value?.multiple) {
+  if (props.valueType === 'select' && customFieldProps.value?.multiple === true) {
     return true
   }
   if (props.valueType === 'date-picker' && range.includes(customFieldProps.value?.type)) {
+    return true
+  }
+  if (props.valueType === 'time-picker' && customFieldProps.value?.isRange === true) {
     return true
   }
   if (props.valueType === 'cascader' && customFieldProps.value?.multiple) {
@@ -298,8 +398,7 @@ const isArrayValue = computed(() => {
  * 默认值是数字的情况
  */
 const isNumberValue = computed(() => {
-  const list = ['rate', 'input-number', 'slider']
-  if (list.includes(props.valueType as string)) {
+  if (numberList.includes(props.valueType as string)) {
     return true
   }
   return false
@@ -383,7 +482,7 @@ watch(
   }
 )
 
-const handleChange = (val: FieldValueType) => {
+const handleChange = (val: any) => {
   emit('update:modelValue', val)
   emit('change', val)
 }
@@ -394,40 +493,6 @@ const handleChange = (val: FieldValueType) => {
  */
 const handleSelect = ({ value }: any) => {
   handleChange(value)
-}
-
-/**
- * 渲染自定义表单
- */
-const render = () => {
-  if (!props.renderField) return
-  const value = state.value
-  const params = { ...props }
-  const dynamicComponent = props.renderField(value, handleChange, params)
-  const slots = handleSlots(props.slots, value, params)
-  /** string */
-  if (isString(dynamicComponent)) {
-    return h(dynamicComponent as string, { ...customFieldProps.value }, slots)
-  }
-  /** Component */
-  if (isComponent(dynamicComponent)) {
-    return h(
-      dynamicComponent as Component,
-      { ...customFieldProps.value, modelValue: state.value, onChange: handleChange },
-      slots
-    )
-  }
-  /** VNode */
-  if (isVNode(dynamicComponent)) {
-    return {
-      ...dynamicComponent,
-      props: {
-        ...customFieldProps.value,
-        ...dynamicComponent.props,
-        modelValue: state.value
-      }
-    } as VNode
-  }
 }
 
 defineExpose({

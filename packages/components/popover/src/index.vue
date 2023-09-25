@@ -28,6 +28,7 @@
 <script lang="ts" setup>
 import { ref, watch } from 'vue'
 import { useLocale } from '@plus-pro-components/hooks'
+import { ElPopover, ElButton } from 'element-plus'
 
 export interface PlusPopoverProps {
   hasShowBottomButton?: boolean
@@ -45,8 +46,6 @@ defineOptions({
 })
 
 const props = withDefaults(defineProps<PlusPopoverProps>(), {
-  // 是否显示 popover 弹出框
-  hasToolbar: false,
   // 是否显示底部按钮
   hasShowBottomButton: false,
   confirmLoading: false,

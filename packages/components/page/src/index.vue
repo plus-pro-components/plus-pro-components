@@ -26,6 +26,21 @@
         v-bind="table"
         @paginationChange="handlePaginationChange"
       >
+        <!--表格单元格表头的插槽 -->
+        <template v-for="(_, key) in headerSlots" :key="key" #[key]="data">
+          <slot :name="key" v-bind="data" />
+        </template>
+
+        <!--表格单元格的插槽 -->
+        <template v-for="(_, key) in cellSlots" :key="key" #[key]="data">
+          <slot :name="key" v-bind="data" />
+        </template>
+
+        <!--表单单项的插槽 -->
+        <template v-for="(_, key) in fieldSlots" :key="key" #[key]="data">
+          <slot :name="key" v-bind="data" />
+        </template>
+
         <template v-if="$slots['table-title']" #title>
           <slot name="table-title" />
         </template>
@@ -59,14 +74,20 @@ import type {
   FieldValues
 } from '@plus-pro-components/types'
 import type { PlusSearchProps, PlusSearchInstance } from '@plus-pro-components/components/search'
-import { PlusSearch } from '@plus-pro-components/components/search'
+import { PlusSearch as PlusSearchComponent } from '@plus-pro-components/components/search'
 import type { PlusTableProps, PlusTableInstance } from '@plus-pro-components/components/table'
-import { PlusTable } from '@plus-pro-components/components/table'
-import type { Ref } from 'vue'
-import { h, reactive, ref } from 'vue'
+import { PlusTable as PlusTableComponent } from '@plus-pro-components/components/table'
+import type { Ref, Component } from 'vue'
+import { h, reactive, ref, useSlots } from 'vue'
 import type { CardProps } from 'element-plus'
 import { ElCard } from 'element-plus'
 import { useTable } from '@plus-pro-components/hooks'
+import {
+  getTableCellSlotName,
+  getTableHeaderSlotName,
+  getFieldSlotName,
+  filterSlots
+} from '@plus-pro-components/components/utils'
 
 export interface PlusPageProps {
   /**
@@ -152,6 +173,12 @@ defineOptions({
   name: 'PlusPage'
 })
 
+/**
+ * FIXME: The inferred type of this node exceeds the maximum length the compiler will serialize. An explicit type annotation is needed.
+ */
+const PlusSearch: Component = PlusSearchComponent
+const PlusTable: Component = PlusTableComponent
+
 const { tableData, pageInfo, total, loadingStatus } = useTable()
 const plusSearchInstance = ref<any>()
 const plusTableInstance = ref<any>()
@@ -159,6 +186,20 @@ const state: PlusPageState = reactive({
   params: {},
   values: {}
 })
+
+const slots = useSlots()
+/**
+ * 表格单元格的插槽
+ */
+const cellSlots = filterSlots(slots, getTableCellSlotName())
+/**
+ * 表格单元格表头的插槽
+ */
+const headerSlots = filterSlots(slots, getTableHeaderSlotName())
+/**
+ * 表单单项的插槽
+ */
+const fieldSlots = filterSlots(slots, getFieldSlotName())
 
 /** 渲染包裹层 */
 const renderWrapper = () => {

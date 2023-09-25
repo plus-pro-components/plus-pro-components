@@ -1,16 +1,22 @@
 <template>
-  <div class="plus-table-toolbar">
-    <span class="plus-table-toolbar__title">
+  <div class="plus-table-title-bar">
+    <div class="plus-table-title-bar__title">
       <slot name="title">
-        {{ title || t('plus.table.title') }}
+        {{ titleBarConfig.title }}
       </slot>
-    </span>
+    </div>
 
-    <div class="plus-table-toolbar__content">
+    <div class="plus-table-title-bar__toolbar">
       <slot name="toolbar" />
       <!-- 表格密度 -->
-      <PlusPopover placement="bottom" :width="150" trigger="click" :title="t('plus.table.density')">
-        <div class="plus-table-toolbar__density">
+      <PlusPopover
+        v-if="titleBarConfig?.density !== false"
+        placement="bottom"
+        :width="150"
+        trigger="click"
+        :title="t('plus.table.density')"
+      >
+        <div class="plus-table-title-bar__toolbar__density">
           <el-button
             v-for="item in buttonNameDensity"
             :key="item.size"
@@ -25,7 +31,7 @@
 
         <template #reference>
           <el-tooltip effect="dark" :content="t('plus.table.density')" placement="top">
-            <el-icon :size="18" color="#919191" class="plus-table-toolbar__icon">
+            <el-icon :size="18" color="#919191" class="plus-table-title-bar__toolbar__icon">
               <svg
                 viewBox="0 0 1024 1024"
                 focusable="false"
@@ -44,6 +50,7 @@
 
       <!-- 列设置 -->
       <PlusPopover
+        v-if="titleBarConfig?.columnSetting !== false"
         placement="bottom"
         :width="100"
         trigger="click"
@@ -65,7 +72,7 @@
             :key="item.label"
             :label="getTableKey(item)"
             :disabled="item.headerFilter"
-            class="plus-table-toolbar__checkbox__item"
+            class="plus-table-title-bar__toolbar__checkbox__item"
           >
             <el-tooltip
               v-if="item.label?.length > filterTableHeaderOverflowLabelLength"
@@ -80,7 +87,7 @@
 
         <template #reference>
           <el-tooltip effect="dark" :content="t('plus.table.columnSettings')" placement="top">
-            <el-icon :size="20" color="#919191" class="plus-table-toolbar__icon">
+            <el-icon :size="20" color="#919191" class="plus-table-title-bar__toolbar__icon">
               <Setting />
             </el-icon>
           </el-tooltip>
@@ -98,13 +105,16 @@ import type { PlusColumn } from '@plus-pro-components/types'
 import { Setting } from '@element-plus/icons-vue'
 import { PlusPopover } from '@plus-pro-components/components/popover'
 import type { ComponentSize } from 'element-plus/es/constants'
+import type { CheckboxValueType } from 'element-plus'
 import { useLocale } from '@plus-pro-components/hooks'
 import { getTableKey } from '@plus-pro-components/components/utils'
+import { ElCheckbox, ElCheckboxGroup, ElTooltip, ElIcon, ElButton } from 'element-plus'
+import type { TitleBar } from './type'
 
 export interface PlusTableToolbarProps {
   columns?: PlusColumn[]
   subColumns?: any
-  title?: string
+  titleBar?: boolean | TitleBar
   filterTableHeaderOverflowLabelLength?: number
   defaultSize?: ComponentSize
 }
@@ -129,12 +139,13 @@ defineOptions({
 const props = withDefaults(defineProps<PlusTableToolbarProps>(), {
   columns: () => [],
   subColumns: () => [],
-  title: '',
-  hasToolbar: true,
+  titleBar: true,
   filterTableHeaderOverflowLabelLength: 6,
   defaultSize: 'default'
 })
 const emit = defineEmits<PlusTableToolbarEmits>()
+
+const titleBarConfig = computed<TitleBar>(() => props.titleBar as any)
 
 const { t } = useLocale()
 const buttonNameDensity: ButtonNameDensity[] = [
@@ -159,12 +170,12 @@ const state: State = reactive({
   checkList: cloneDeep(props.columns).map(item => getTableKey(item))
 })
 
-const handleCheckAllChange = (val: boolean) => {
+const handleCheckAllChange = (val: CheckboxValueType) => {
   state.checkList = val ? cloneDeep(props.columns).map(item => getTableKey(item)) : []
   state.isIndeterminate = false
 }
 
-const handleCheckGroupChange = (value: string[]) => {
+const handleCheckGroupChange = (value: CheckboxValueType[]) => {
   const checkedCount = value.length
   state.checkAll = checkedCount === props.columns.length
   state.isIndeterminate = checkedCount > 0 && checkedCount < props.columns.length

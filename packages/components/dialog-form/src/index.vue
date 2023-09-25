@@ -24,21 +24,22 @@
         <slot name="form-footer" />
       </template>
 
-      <template v-if="$slots['form-group-item-header']" #group-item-header>
-        <slot name="form-group-item-header" />
+      <template v-if="$slots['form-group-header']" #group-header>
+        <slot name="form-group-header" />
       </template>
     </PlusForm>
   </PlusDialog>
 </template>
 
 <script lang="ts" setup>
-import { ref, watch } from 'vue'
+import { ref, watch, computed } from 'vue'
 import { useLocale } from '@plus-pro-components/hooks'
-import type { PlusFormInstance, PlusFormProps } from '@plus-pro-components/components/form'
+import type { PlusFormProps } from '@plus-pro-components/components/form'
 import { PlusForm } from '@plus-pro-components/components/form'
 import type { PlusDialogProps } from '@plus-pro-components/components/dialog'
 import { PlusDialog } from '@plus-pro-components/components/dialog'
 import type { FieldValues, PlusColumn } from '@plus-pro-components/types'
+import type { FormInstance } from 'element-plus'
 
 export interface PlusDialogFormProps {
   modelValue?: FieldValues
@@ -67,7 +68,9 @@ const props = withDefaults(defineProps<PlusDialogFormProps>(), {
 const emit = defineEmits<PlusDialogFormEmits>()
 
 const { t } = useLocale()
-const formInstance = ref<PlusFormInstance>()
+const formInstance = ref<any>()
+const computedFormInstance = computed(() => formInstance.value?.formInstance as FormInstance)
+
 const state = ref<FieldValues>({})
 const subVisible = ref(false)
 
@@ -97,8 +100,15 @@ const handleChange = (values: FieldValues, column: PlusColumn) => {
   emit('change', values, column)
 }
 
-const handleConfirm = () => {
-  emit('confirm', state.value)
+const handleConfirm = async () => {
+  try {
+    const valid = await computedFormInstance.value?.validate()
+    if (valid) {
+      emit('confirm', state.value)
+    }
+  } catch (error) {
+    console.warn(error)
+  }
 }
 
 const handleCancel = () => {
@@ -108,6 +118,6 @@ const handleCancel = () => {
 }
 
 defineExpose({
-  formInstance: formInstance.value?.formInstance
+  formInstance: computedFormInstance
 })
 </script>

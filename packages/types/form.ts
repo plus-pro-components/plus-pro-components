@@ -7,7 +7,7 @@ import type { Mutable } from './global'
 export {}
 
 /**
- * 所有表单的类型 默认是 text
+ * 所有表单的类型 默认是  input
  */
 export type FormItemValueType =
   | 'autocomplete'
@@ -24,9 +24,12 @@ export type FormItemValueType =
   | 'time-picker'
   | 'time-select'
   | 'textarea'
+  | 'input'
   | 'text'
   | 'plus-radio'
   | 'plus-date-picker'
+  | 'plus-input-tag'
+  | undefined
 
 /**
  * 表单项的props
@@ -85,6 +88,10 @@ export interface FormColumnProps {
    * @desc el-col 的 props
    */
   colProps?: Partial<Mutable<ColProps>>
+  /**
+   * @desc 渲染form表单的label
+   */
+  renderLabel?: (label: string, props: PlusColumn) => VNode
 }
 
 /**

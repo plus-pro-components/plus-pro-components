@@ -49,21 +49,52 @@ form/group
 
 ## 分组表单自定义头部
 
-添加 `group-item-header` 插槽即可实现。
+添加 `group-header` 插槽即可实现。
 
 :::demo
 
-form/group-item-header
+form/group-header
 
 :::
 
-## 自定义表单项
+## 自定义表单项 (插槽)
 
-自定义表单项的核心方法是定义 `renderField`方法，该方法可以返回以下三种情况
+:::warning 提示
+**插槽 的优先级低于 renderField，高于 valueType**。
+:::
 
-- 返回一个 [Component](https://cn.vuejs.org/api/built-in-special-elements.html#component)。 （会自动包裹 modelValue 和 onChange） <el-tag  effect="dark">推荐</el-tag>
-- 调用 vue 的[渲染函数 h](https://cn.vuejs.org/guide/extras/render-function.html) 返回一个 `VNode`。（会自动包裹 modelValue，需要手动调用`renderField`中的 `onChange` 用来实现双向绑定）
-- 返回一个 [string](https://cn.vuejs.org/api/built-in-special-elements.html#component)。 （渲染原生标签，配合[PlusColumn](/components/config.html) 的 `slots`使用 ）
+`PlusForm` 组件会自动根据配置项的 `prop` 生成对应的插槽，例如下面的配置项，则会自动生成两个名称叫做 [ **plus-field-`name`** ]和 [ **plus-field-`status`**] 的两个插槽，插槽的生成规则就是 固定 key 值 [ **plus-field-** ] 然后加上 配置项的 `prop`。
+
+```ts
+import { PlusColumn } from 'plus-pro-components'
+
+const tableConfig: PlusColumn[] = [
+  {
+    label: '名称',
+    // 自动生成对应的插槽 'plus-field-name'
+    prop: 'name'
+  },
+  {
+    label: '状态',
+    // 自动生成对应的插槽 'plus-field-status'
+    prop: 'status'
+  }
+]
+```
+
+:::demo
+
+form/custom-slot
+
+:::
+
+## 自定义表单项 (renderField)
+
+:::warning 提示
+**renderField 的优先级高于插槽**。
+:::
+
+自定义表单项的核心方法是定义 `renderField`方法， `renderField` 方法需要调用 vue 的[渲染函数 h](https://cn.vuejs.org/guide/extras/render-function.html) 返回一个 `VNode`
 
 ::: tip 提示
 `renderField 返回的值`的`props` 和配置项的`fieldProps`会同时生效，`renderField 返回的值`的`props`优先级高于 `fieldProps`.
@@ -73,6 +104,91 @@ form/group-item-header
 :::demo
 
 form/custom
+
+:::
+
+## 自定义表单项 (jsx/tsx)
+
+:::warning 提示
+
+jsx/tsx 的使用需要将 vue 单文件组件的`script`的属性 `lang`设置为`jsx`或者`tsx`，`jsx` 中值使用单花括号`{}`绑定。
+
+```html
+<script lang="tsx" setup></script>
+```
+
+:::
+
+`jsx/tsx` 的支持本质是`jsx/tsx`解析出来是`VNode`, 使用 renderField 函数自定义表单项。
+
+:::demo
+
+form/custom-tsx
+
+:::
+
+## 自定义表单 label (插槽)
+
+:::warning 提示
+**插槽 的优先级低于 renderLabel，高于 label**。
+:::
+
+`PlusForm` 组件会自动根据配置项的 `prop` 生成对应的插槽，例如下面的配置项，则会自动生成两个名称叫做 [ **plus-label-`name`** ]和 [ **plus-label-`status`**] 的两个插槽，插槽的生成规则就是 固定 key 值 [ **plus-label-** ] 然后加上 配置项的 `prop`。
+
+```ts
+import { PlusColumn } from 'plus-pro-components'
+
+const tableConfig: PlusColumn[] = [
+  {
+    label: '名称',
+    // 自动生成对应的插槽 'plus-label-name'
+    prop: 'name'
+  },
+  {
+    label: '状态',
+    // 自动生成对应的插槽 'plus-label-status'
+    prop: 'status'
+  }
+]
+```
+
+:::demo
+
+form/custom-label-slot
+
+:::
+
+## 自定义表单 label (renderLabel)
+
+:::warning 提示
+**renderLabel 的优先级高于插槽**。
+:::
+
+自定义表单项的核心方法是定义 `renderLabel`方法， `renderLabel` 方法需要调用 vue 的[渲染函数 h](https://cn.vuejs.org/guide/extras/render-function.html) 返回一个 `VNode`
+
+:::demo
+
+form/custom-label
+
+:::
+
+## 自定义表单 label (jsx/tsx)
+
+:::warning 提示
+
+jsx/tsx 的使用需要将 vue 单文件组件的`script`的属性 `lang`设置为`jsx`或者`tsx`，`jsx` 中值使用单花括号`{}`绑定。
+
+```html
+<script lang="tsx" setup></script>
+```
+
+:::
+
+`jsx/tsx` 的支持本质是`jsx/tsx`解析出来是`VNode`, 使用 renderField 函数自定义表单项。
+
+:::demo
+
+form/custom-label-tsx
 
 :::
 
@@ -111,7 +227,7 @@ form/all
 **`...`表示同时支持所有[ElForm Attributes](https://element-plus.org/zh-CN/component/form.html#form-attributes)**
 
 :::tip 提示
-**model 参数已在组件内部处理，一般不需要传**。
+**[ElForm](https://element-plus.org/zh-CN/component/form.html#form-attributes) 的 model 参数已在组件内部处理，一般不需要传**。
 :::
 
 ## Form Events
@@ -134,11 +250,11 @@ form/all
 
 ## Form Slots
 
-| 插槽名              | 说明                                  |
-| ------------------- | ------------------------------------- |
-| `default`           | 表单的内容 默认是 `PlusFormItem` 组件 |
-| `footer`            | 表单底部按钮                          |
-| `group-item-header` | 分组表单头部                          |
+| 插槽名         | 说明                                  |
+| -------------- | ------------------------------------- |
+| `default`      | 表单的内容 默认是 `PlusFormItem` 组件 |
+| `footer`       | 表单底部按钮                          |
+| `group-header` | 分组表单头部                          |
 
 ## Exposes
 

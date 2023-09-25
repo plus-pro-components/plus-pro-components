@@ -2,6 +2,7 @@
   <el-drawer
     ref="drawerInstance"
     v-model="subVisible"
+    :size="size || '540px'"
     :title="t('plus.drawerForm.title')"
     :close-on-click-modal="false"
     :close-on-press-escape="false"
@@ -29,25 +30,27 @@
         <slot name="form-footer" />
       </template>
 
-      <template v-if="$slots['form-group-item-header']" #group-item-header>
-        <slot name="form-group-item-header" />
+      <template v-if="$slots['form-group-header']" #group-header>
+        <slot name="form-group-header" />
       </template>
     </PlusForm>
   </el-drawer>
 </template>
 
 <script lang="ts" setup>
-import { ref, watch } from 'vue'
+import { ref, watch, computed } from 'vue'
 import { PlusForm } from '@plus-pro-components/components/form'
-import type { PlusFormInstance, PlusFormProps } from '@plus-pro-components/components/form'
+import type { PlusFormProps } from '@plus-pro-components/components/form'
 import type { FieldValues, PlusColumn } from '@plus-pro-components/types'
 import { ElDrawer } from 'element-plus'
 import { useLocale } from '@plus-pro-components/hooks'
+import type { FormInstance } from 'element-plus'
 
 export interface PlusDrawerFormProps {
   modelValue?: FieldValues
   visible?: boolean
   drawer?: any
+  size?: string | number
   form?: PlusFormProps
 }
 export interface PlusDrawerFormEmits {
@@ -66,13 +69,15 @@ defineOptions({
 const props = withDefaults(defineProps<PlusDrawerFormProps>(), {
   modelValue: () => ({}),
   visible: false,
+  size: '540px',
   drawer: () => ({}),
   form: () => ({})
 })
 const emit = defineEmits<PlusDrawerFormEmits>()
 
 const { t } = useLocale()
-const formInstance = ref<PlusFormInstance>()
+const formInstance = ref<any>()
+const computedFormInstance = computed(() => formInstance.value?.formInstance as FormInstance)
 const drawerInstance = ref<InstanceType<typeof ElDrawer>>()
 const state = ref<FieldValues>({})
 const subVisible = ref(false)
@@ -118,6 +123,6 @@ const handleReset = () => {
 
 defineExpose({
   drawerInstance,
-  formInstance: formInstance.value?.formInstance
+  formInstance: computedFormInstance
 })
 </script>

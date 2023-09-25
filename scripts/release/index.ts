@@ -155,7 +155,11 @@ const main = async () => {
 
   // 选择需要更新的包
   let selectPackages: string[] = []
-  const checkboxChoices = workspaceNames.map(item => ({ name: item, value: item }))
+  const checkboxChoices = workspaceNames.map(item => ({
+    name: item,
+    value: item,
+    checked: item === PKG_NAME
+  }))
   const packages = await checkbox({
     message: 'Which packages would you like to include?',
     choices: [{ name: 'all', value: 'all' }, ...checkboxChoices]

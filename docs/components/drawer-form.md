@@ -14,12 +14,13 @@ drawer-form/basic
 
 ## DrawerForm Attributes
 
-| 名称                        | 说明                                                                           | 类型                                                                                                 | 默认值                                                                 | 是否必须 |
-| --------------------------- | ------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- | -------- |
-| `model-value / v-model`     | 表单绑定值                                                                     | `object`[FieldValues](/components/type.html#fieldvalues)                                             |                                                                        | 否       |
-| `visible / v-model:visible` | 抽屉显示                                                                       | `boolean`                                                                                            | `false`                                                                | 否       |
-| `form`                      | [PlusForm](/components/form.html) 的 props                                     | `object`[PlusFormProps](/components/form.html#form-attributes)                                       | `{footerAlign:"right"}`                                                | 否       |
-| `drawer`                    | [ElDrawer](https://element-plus.gitee.io/zh-CN/component/drawer.html) 的 props | `object`[ElDrawerProps](https://element-plus.gitee.io/zh-CN/component/drawer.html#drawer-attributes) | `{closeOnClickModal:false,closeOnPressEscape:false, title:"抽屉表单"}` | 否       |
+| 名称                        | 说明                                                                                                                 | 类型                                                                                                 | 默认值                                                                 | 是否必须 |
+| --------------------------- | -------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- | -------- |
+| `model-value / v-model`     | 表单绑定值                                                                                                           | `object`[FieldValues](/components/type.html#fieldvalues)                                             |                                                                        | 否       |
+| `visible / v-model:visible` | 抽屉显示                                                                                                             | `boolean`                                                                                            | `false`                                                                | 否       |
+| `size`                      | Drawer 窗体的大小, 当使用 number 类型时, 以像素为单位, 当使用 string 类型时, 请传入 'x%', 否则便会以 number 类型解释 | `string`/`number`                                                                                    | `540px`                                                                | 否       |
+| `form`                      | [PlusForm](/components/form.html) 的 props                                                                           | `object`[PlusFormProps](/components/form.html#form-attributes)                                       | `{footerAlign:"right"}`                                                | 否       |
+| `drawer`                    | [ElDrawer](https://element-plus.gitee.io/zh-CN/component/drawer.html) 的 props                                       | `object`[ElDrawerProps](https://element-plus.gitee.io/zh-CN/component/drawer.html#drawer-attributes) | `{closeOnClickModal:false,closeOnPressEscape:false, title:"抽屉表单"}` | 否       |
 
 ## DrawerForm Events
 
@@ -31,12 +32,12 @@ drawer-form/basic
 
 ## DrawerForm Slots
 
-| 插槽名                   | 说明                                                                                      |
-| ------------------------ | ----------------------------------------------------------------------------------------- |
-| `drawer-header`          | [ElDrawer](https://element-plus.gitee.io/zh-CN/component/drawer.html#插槽) 的 header slot |
-| `drawer-footer`          | [ElDrawer](https://element-plus.gitee.io/zh-CN/component/drawer.html#插槽) 的 footer slot |
-| `form-footer`            | [PlusForm-footer](/components/form.html#form-slots) 的 footer slot                        |
-| `form-group-item-header` | [PlusForm-group-item-header](/components/form.html#form-slots) 的 group-item-header slot  |
+| 插槽名              | 说明                                                                                      |
+| ------------------- | ----------------------------------------------------------------------------------------- |
+| `drawer-header`     | [ElDrawer](https://element-plus.gitee.io/zh-CN/component/drawer.html#插槽) 的 header slot |
+| `drawer-footer`     | [ElDrawer](https://element-plus.gitee.io/zh-CN/component/drawer.html#插槽) 的 footer slot |
+| `form-footer`       | [PlusForm-footer](/components/form.html#form-slots) 的 footer slot                        |
+| `form-group-header` | [PlusForm-group-header](/components/form.html#form-slots) 的 group-header slot            |
 
 ## Exposes
 

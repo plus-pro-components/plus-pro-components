@@ -32,7 +32,7 @@
           <el-dropdown-menu>
             <el-dropdown-item
               v-for="buttonRow in getSubButtons(row, $index).nextButtons"
-              :key="buttonRow.text"
+              :key="(unref(buttonRow.text) as string)"
             >
               <component :is="() => render(row, buttonRow, $index)" />
             </el-dropdown-item>
@@ -48,11 +48,22 @@ import type { VNode } from 'vue'
 import { h, unref } from 'vue'
 import { ArrowDownBold } from '@element-plus/icons-vue'
 import type { TableColumnCtx } from 'element-plus'
-import { ElButton, ElIcon, ElLink, ElTooltip, ElMessageBox } from 'element-plus'
+import {
+  ElButton,
+  ElIcon,
+  ElLink,
+  ElTooltip,
+  ElMessageBox,
+  ElTableColumn,
+  ElDropdown,
+  ElDropdownItem,
+  ElDropdownMenu
+} from 'element-plus'
 import type { RecordType } from '@plus-pro-components/types'
-import { isFunction } from '@plus-pro-components/utils'
+import { isFunction, isPlainObject } from '@plus-pro-components/utils'
 import { cloneDeep } from 'lodash-es'
 import { useLocale } from '@plus-pro-components/hooks'
+
 import type { ButtonsCallBackParams, ActionBarButtonsRow } from './type'
 
 export interface ActionBarProps {
@@ -139,7 +150,7 @@ const render = (row: any, buttonRow: ActionBarButtonsRow, index: number): VNode 
   if (props.type === 'icon') {
     return h(
       ElTooltip,
-      { placement: 'top', content: buttonRow.text, ...buttonRow.tooltipProps },
+      { placement: 'top', content: unref(buttonRow.text) as string, ...buttonRow.tooltipProps },
       () =>
         h(
           ElIcon,
@@ -154,14 +165,15 @@ const render = (row: any, buttonRow: ActionBarButtonsRow, index: number): VNode 
   } else {
     const Tag = props.type === 'button' ? ElButton : ElLink
     return h(
-      Tag,
+      Tag as any,
       {
         size: 'small',
         // icon: buttonRow.icon,
         ...buttonRow.props,
+
         onClick: (event: MouseEvent) => handleClickAction(row, buttonRow, index, event)
       },
-      () => buttonRow.text
+      () => unref(buttonRow.text)
     )
   }
 }
@@ -175,19 +187,31 @@ const handleClickAction = (
 ) => {
   const data: ButtonsCallBackParams = { row, buttonRow, index, e }
   if (buttonRow.confirm) {
-    const title = isFunction(buttonRow.confirm.title)
-      ? (buttonRow.confirm.title as any)(data)
-      : buttonRow.confirm.title
+    const message = t('plus.table.confirmToPerformThisOperation')
+    let title = t('plus.table.prompt')
+    let options: any = undefined
 
-    const message = isFunction(buttonRow.confirm.message)
-      ? (buttonRow.confirm.message as any)(data)
-      : buttonRow.confirm.message
+    if (isPlainObject(buttonRow.confirm) && typeof buttonRow.confirm !== 'boolean') {
+      const tempTitle = isFunction(buttonRow.confirm.title)
+        ? (buttonRow.confirm.title as any)(data)
+        : buttonRow.confirm.title
 
-    ElMessageBox.confirm(
-      message || t('plus.table.confirmToPerformThisOperation'),
-      title || t('plus.table.prompt'),
-      buttonRow.confirm.options
-    )
+      if (tempTitle) {
+        title = tempTitle
+      }
+
+      const tempMessage = isFunction(buttonRow.confirm.message)
+        ? (buttonRow.confirm.message as any)(data)
+        : buttonRow.confirm.message
+
+      if (tempMessage) {
+        title = tempMessage
+      }
+
+      options = buttonRow.confirm?.options
+    }
+
+    ElMessageBox.confirm(message, title, options)
       .then(() => {
         emit('clickAction', data)
       })

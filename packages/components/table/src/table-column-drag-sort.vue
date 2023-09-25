@@ -17,6 +17,7 @@ import { isPlainObject } from '@plus-pro-components/utils'
 import { watch } from 'vue'
 import { useLocale } from '@plus-pro-components/hooks'
 import type { RecordType } from '@plus-pro-components/types'
+import { ElTableColumn } from 'element-plus'
 
 export interface PlusTableColumnDragSortProps {
   sortable: SortableOptions | boolean

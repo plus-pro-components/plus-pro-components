@@ -7,7 +7,8 @@ import {
   toRawType,
   isString
 } from '@plus-pro-components/utils'
-import { cloneDeep } from 'lodash-es'
+import { cloneDeep, get, set } from 'lodash-es'
+import type { useSlots } from 'vue'
 
 /**
  * 获取table key
@@ -104,4 +105,76 @@ export const handleSlots = (
     })
   }
   return slotsRes
+}
+
+/**
+ * 处理slot名称
+ */
+export const getSlotName = (type: string, prop?: string | number) => {
+  return prop ? `plus-${type}-${prop}` : `plus-${type}`
+}
+
+/**
+ * 处理form-item中的slot名称
+ */
+export const getFieldSlotName = (prop?: string | number) => {
+  return `${getSlotName('field', prop)}`
+}
+
+/**
+ *   处理form-item中的label slot名称
+ */
+export const getLabelSlotName = (prop?: string | number) => {
+  return `${getSlotName('label', prop)}`
+}
+
+/**
+ * 处理table中的 header slot名称
+ */
+export const getTableHeaderSlotName = (prop?: string | number) => {
+  return `${getSlotName('header', prop)}`
+}
+
+/**
+ * 处理table中的 cell slot名称
+ */
+export const getTableCellSlotName = (prop?: string | number) => {
+  return `${getSlotName('cell', prop)}`
+}
+
+/**
+ * 过滤slots
+ * @param slots
+ * @param name
+ * @returns
+ */
+export const filterSlots = (slots: RecordType, name: string): ReturnType<typeof useSlots> => {
+  const data: any = {}
+  Object.keys(slots || {}).forEach(key => {
+    if (key.startsWith(name)) {
+      data[key] = slots[key]
+    }
+  })
+
+  return data
+}
+
+/**
+ *  获取值  支持 x.y.z
+ * @param target
+ * @param key
+ * @returns
+ */
+export const getValue = (target: RecordType, key: string) => {
+  return get(target, key)
+}
+
+/**
+ *  设置值  支持 x.y.z
+ * @param target
+ * @param key
+ * @returns
+ */
+export const setValue = (target: RecordType, key: string, value: any) => {
+  return set(target, key, value)
 }

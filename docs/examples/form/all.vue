@@ -1,5 +1,5 @@
 <template>
-  <el-card style="width: 600px">
+  <el-card>
     <PlusForm
       v-model="state"
       label-width="140px"
@@ -22,6 +22,7 @@ const state = ref<FieldValues>({
   rate: 4,
   progress: 100,
   switch: true,
+  text: '文本',
   time: new Date().toString(),
   img: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg'
 })
@@ -202,7 +203,6 @@ const columns: PlusColumn[] = [
       autosize: { minRows: 2, maxRows: 4 }
     }
   },
-
   {
     label: 'rate',
     width: 200,
@@ -250,6 +250,11 @@ const columns: PlusColumn[] = [
     valueType: 'time-select'
   },
   {
+    label: 'text',
+    prop: 'text',
+    valueType: 'text'
+  },
+  {
     label: 'plus-radio',
     prop: 'plus-radio',
     valueType: 'plus-radio',
@@ -262,6 +267,11 @@ const columns: PlusColumn[] = [
     label: 'plus-date-picker',
     prop: 'plus-date-picker',
     valueType: 'plus-date-picker'
+  },
+  {
+    label: 'plus-input-tag',
+    prop: 'plus-input-tag',
+    valueType: 'plus-input-tag'
   }
 ]
 

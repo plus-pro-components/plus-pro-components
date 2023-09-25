@@ -1,17 +1,12 @@
 <template>
-  <el-radio-group
-    ref="radioGroupInstance"
-    v-model="state.radio"
-    :disabled="disabled"
-    v-bind="groupProps"
-  >
+  <el-radio-group ref="radioGroupInstance" v-model="state.radio" v-bind="$attrs">
     <el-radio
-      v-for="item in data"
+      v-for="item in options"
       :key="item.value"
       ref="radioInstance"
       :label="item.value"
-      v-bind="radioProps"
-      @click="radioClick($event, item.value)"
+      v-bind="item.fieldItemProps"
+      @click="radioClick($event, item.value, item.fieldItemProps)"
       @change="change(item.value)"
     >
       {{ item.label }}
@@ -20,20 +15,18 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, watch, ref } from 'vue'
+import { reactive, watch, ref, useAttrs } from 'vue'
 import { ElRadio, ElRadioGroup } from 'element-plus'
+import type { OptionsRow } from '@plus-pro-components/types'
 
 type ValueType = string | number | boolean
 export interface PlusRadioProps {
   modelValue?: ValueType
-  data: { label: string; value: ValueType }[]
+  options: OptionsRow[]
   isCancel?: boolean
-  disabled?: boolean
-  groupProps?: any
-  radioProps?: any
 }
 export interface PlusRadioEmits {
-  (e: 'radioChange', value: ValueType): void
+  (e: 'change', value: ValueType): void
   (e: 'update:modelValue', value: ValueType): void
 }
 export interface RadioState {
@@ -46,11 +39,8 @@ defineOptions({
 
 const props = withDefaults(defineProps<PlusRadioProps>(), {
   modelValue: '',
-  data: () => [],
-  isCancel: false,
-  disabled: false,
-  groupProps: () => ({}),
-  radioProps: () => ({})
+  options: () => [],
+  isCancel: true
 })
 const emit = defineEmits<PlusRadioEmits>()
 
@@ -66,8 +56,14 @@ watch(
   { immediate: true }
 )
 
-const radioClick = (e: MouseEvent, val: ValueType) => {
-  if (props.disabled || props.groupProps.disabled) {
+const attrs = useAttrs()
+
+const radioClick = (
+  e: MouseEvent,
+  val: ValueType,
+  fieldItemProps: OptionsRow['fieldItemProps']
+) => {
+  if (Reflect.has(attrs, 'disabled') || fieldItemProps?.disabled) {
     return
   }
   if (!props.isCancel) {
@@ -78,13 +74,13 @@ const radioClick = (e: MouseEvent, val: ValueType) => {
   // click阻止了change事件
   state.radio === val ? (state.radio = '') : (state.radio = val)
   emit('update:modelValue', state.radio)
-  emit('radioChange', state.radio)
+  emit('change', state.radio)
 }
 
 const change = (val: ValueType) => {
   if (props.isCancel) return
   emit('update:modelValue', val)
-  emit('radioChange', val)
+  emit('change', val)
 }
 
 defineExpose({

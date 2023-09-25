@@ -16,18 +16,11 @@
         :content="String(getTableIndex($index))"
         placement="top-start"
       >
-        <div
-          class="plus-table-index-column plus-table-index-col-border plus-table-column-index-content"
-          :style="customIndexContentStyle(row, $index)"
-        >
+        <div class="plus-table-column-index__content" :style="indexContentStyle(row, $index)">
           {{ getTableIndex($index) }}
         </div>
       </el-tooltip>
-      <div
-        v-else
-        class="plus-table-index-column plus-table-index-col-border plus-table-column-index-content"
-        :style="customIndexContentStyle(row, $index)"
-      >
+      <div v-else class="plus-table-column-index__content" :style="indexContentStyle(row, $index)">
         {{ getTableIndex($index) }}
       </div>
     </template>
@@ -39,6 +32,7 @@ import { DefaultPageInfo } from '@plus-pro-components/constants'
 import type { PageInfo, RecordType } from '@plus-pro-components/types'
 import type { CSSProperties } from 'vue'
 import { isFunction, isPlainObject } from '@plus-pro-components/utils'
+import { ElTableColumn, ElTooltip } from 'element-plus'
 
 export interface PlusTableTableColumnIndexProps {
   pageInfo?: PageInfo
@@ -70,7 +64,7 @@ const getTableIndex = (index: number) => {
 }
 
 // index样式
-const customIndexContentStyle = (row: any, index: number): CSSProperties => {
+const indexContentStyle = (row: any, index: number): CSSProperties => {
   if (isFunction(props.indexContentStyle)) {
     return (props.indexContentStyle as (row: any, index: number) => CSSProperties)(row, index)
   } else if (isPlainObject(props.indexContentStyle)) {

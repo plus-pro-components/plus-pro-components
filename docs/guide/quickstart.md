@@ -14,15 +14,11 @@
 
 - [TypeScript](https://www.typescriptlang.org/) (非必须，但是有 TypeScript 基础，使用起来会更加方便。)
 
-## 前置条件
+<p style="margin-top:80px;"> </p>
 
-`PlusProComponents` 依赖 `Vue` 和 `ElementPlus`，在开始之前建议先配置 `Vue` 和 `ElementPlus` 环境。
+# 用法
 
-[Vue 快速上手](https://cn.vuejs.org/guide/quick-start.html#creating-a-vue-application)
-
-[ElementPlus 安装指南](https://element.eleme.cn/#/zh-CN/component/quickstart)
-
-## 用法
+**`plus-pro-components` 和`element-plus` 导入方式需要保持一致。**
 
 ## 完整引入
 
@@ -30,18 +26,22 @@
 
 > main.ts
 
-```typescript{5,6,12}
+```typescript{8,9,16}
 import { createApp } from 'vue'
+
+// 导入element-plus 及其样式
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 
+// 导入plus-pro-components 及其样式
 import PlusProComponents from 'plus-pro-components'
 import 'plus-pro-components/index.css'
 
 import App from './App.vue'
-
 const app = createApp(App)
 app.use(ElementPlus)
+
+// 使用
 app.use(PlusProComponents)
 app.mount('#app')
 ```
@@ -60,31 +60,84 @@ app.mount('#app')
 }
 ```
 
-## 按需导入 <el-tag  effect="dark">推荐</el-tag>
+## 自动按需导入 <el-tag  effect="dark">推荐</el-tag>
 
-PlusProComponents 提供了基于 ES Module 的开箱即用的 [Tree Shaking](https://webpack.js.org/guides/tree-shaking/) 功能。
+`PlusProComponents` 提供了基于`ES Module` 的开箱即用的 [Tree Shaking](https://webpack.js.org/guides/tree-shaking/) 功能。
 
-- 导入基础样式
-  > main.ts
+- 1. 安装插件
 
-```ts
-import 'plus-pro-components/index.css' // 5.5kb
-```
+  ```sh
+  pnpm install -D unplugin-vue-components unplugin-auto-import @plus-pro-components/resolver
+  ```
 
-- 导入组件
-  > App.vue
+- 2.  配置 `vite.config.ts` 或者配置 `webpack.config.js` [参考](https://element-plus.gitee.io/zh-CN/guide/quickstart.html#%E6%8C%89%E9%9C%80%E5%AF%BC%E5%85%A5)
 
-```html{2,6}
+  [@plus-pro-components/resolver 文档](/ecosystem/resolver.html)
+
+  ```ts {7,17}
+  // vite.config.ts
+  import { defineConfig } from 'vite'
+  import AutoImport from 'unplugin-auto-import/vite'
+  import Components from 'unplugin-vue-components/vite'
+  import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
+
+  import { PlusProComponentsResolver } from '@plus-pro-components/resolver'
+
+  export default defineConfig({
+    // ...
+    plugins: [
+      // ...
+      AutoImport({
+        resolvers: [ElementPlusResolver()]
+      }),
+      Components({
+        resolvers: [ElementPlusResolver(), PlusProComponentsResolver()]
+      })
+    ]
+  })
+  ```
+
+- 3. 使用组件
+
+     > App.vue
+
+  ```html{3}
+  <template>
+    <!-- 自动导入 -->
+    <PlusPagination :total="total"  />
+  </template>
+
+  <script setup>
+    const total = 100
+  </script>
+  ```
+
+## 手动导入
+
+手动导入需要导入组件和其对应的样式文件。如下示例：
+
+```html
 <template>
-  <PlusPagination :total="100"  />
+  <PlusDatePicker></PlusDatePicker>
 </template>
 
-<script setup>
-  import { PlusPagination } from 'plus-pro-components'
+<script>
+  import { PlusDatePicker } from 'plus-pro-components'
+  import 'plus-pro-components/es/components/date-picker/style/css'
+
+  export default {
+    components: { PlusDatePicker }
+  }
 </script>
 ```
 
 ## CDN
+
+示例
+
+<div class="glitch-embed-wrap" style="height: 420px; width: 100%;">
+  <iframe src="https://codepen.io/l-x-f/embed/KKrbRxW?height=469&theme-id=light&default%20-tab=html,result"   style="height: 100%; width: 100%; border: 0;"></iframe>
+</div>
 
 ::: tip 提示
 使用 CDN 时，在 HTML 中所有的组件都是小写中划线隔开的形式，不支持单标签。
@@ -104,9 +157,3 @@ import 'plus-pro-components/index.css' // 5.5kb
 ```
 
 :::
-
-示例
-
-<div class="glitch-embed-wrap" style="height: 420px; width: 100%;">
-  <iframe src="https://codepen.io/l-x-f/embed/KKrbRxW?height=469&theme-id=light&default%20-tab=html,result"   style="height: 100%; width: 100%; border: 0;"></iframe>
-</div>

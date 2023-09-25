@@ -32,13 +32,18 @@ interface TableRow {
 
 const TestServe = {
   getList: async () => {
-    const data = [...new Array(4)].map((item, index) => {
+    const data = [...new Array(3)].map((item, index) => {
       return {
         index,
         id: index,
         name: index + 'name',
         status: String(index % 3),
-        custom: 'custom' + index
+        status0: String(index % 3),
+        status1: String(index % 3),
+        status2: String(index % 3),
+        custom: 'custom' + index,
+        custom0: 'custom' + index,
+        custom1: 'custom' + index
       }
     })
     return {
@@ -74,16 +79,10 @@ const tableConfig: PlusColumn[] = [
     width: 140,
     prop: 'name',
     // 返回一个标签字符串
-    render: () => 'div',
+    render: value => h('div', null, `${value}`),
     // 传递给  'div' props
     fieldProps: value => {
       return { value: value }
-    },
-    // 传递给 'div' 的slots
-    slots: {
-      default: (value: string) => {
-        return `${value}`
-      }
     }
   },
   {
@@ -91,41 +90,39 @@ const tableConfig: PlusColumn[] = [
     width: 150,
     prop: 'status',
     // 返回一个组件
-    render: () => ElResult,
+    render: (value, { index }) =>
+      h(
+        ElResult,
+        {},
+        // 插槽
+        {
+          extra: () => {
+            return h(ElButton, { type: typeList[index % 4] as any }, () => `按钮${value}`)
+          }
+        }
+      ),
     // 传递给 ElResult 组件的props
     fieldProps: (value, { index }) => {
       return { icon: typeList[index % 4] as any, title: `Tip${value}` }
-    },
-    // 传递给 'ElResult' 的slots
-    slots: {
-      extra: (value: string, { index }) => {
-        return h(ElButton, { type: typeList[index % 4] as any }, () => `按钮${value}`)
-      }
     }
   },
   {
     label: '自定义组件ElAlert',
     width: 150,
-    prop: 'status',
+    prop: 'status0',
     // 返回一个VNode
     render: value => {
       const item = statusOptions.find(item => item.value === value)
       return h(ElAlert as unknown as DefineComponent, { type: item?.type }, () => item?.label)
-    },
-    // 传递给 'div' 的slots
-    slots: {
-      default: (value: string) => {
-        return `${value}1000`
-      }
     }
   },
   {
     label: '自定义组件',
     width: 100,
-    prop: 'status',
+    prop: 'status1',
     // 返回一个组件
     render: () => {
-      return CustomPageHeader
+      return h(CustomPageHeader)
     },
     // 传递给CustomPageHeader 组件的props
     fieldProps: (value, { index }) => ({
@@ -145,7 +142,7 @@ const tableConfig: PlusColumn[] = [
   {
     label: '自定义html',
     width: 110,
-    prop: 'custom',
+    prop: 'custom0',
     renderHTML: (value: any) => {
       return `<input  style="border:1px solid #ccc;width:80px;padding:0 10px;" value=${value} />`
     }
@@ -153,7 +150,8 @@ const tableConfig: PlusColumn[] = [
   {
     label: '自定义表单ElUpload',
     width: 160,
-    prop: 'custom',
+    prop: 'custom1',
+    // editable 为true  renderField才生效
     editable: true,
     // 返回一个VNode
     renderField(_, onChange) {
@@ -185,7 +183,7 @@ const tableConfig: PlusColumn[] = [
   {
     label: '自定义操作栏',
     width: 200,
-    prop: 'status',
+    prop: 'status2',
     render: (value, { index, row }) => {
       const buttons = index > 1 ? ['编辑', '删除'] : ['保存', '删除']
       const CustomButton = buttons.map(item =>

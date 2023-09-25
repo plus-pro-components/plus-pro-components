@@ -57,6 +57,7 @@ const content = computed(() => decodeURIComponent(props.rawSource))
   border: 1px solid #dcdfe6;
   border-radius: 4px 4px 0 0;
   padding: 20px;
+  overflow: auto;
 }
 .docs-example-btns {
   border: 1px solid #dcdfe6;

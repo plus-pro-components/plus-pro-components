@@ -7,7 +7,7 @@
       :loading-status="loadingStatus"
       :columns="tableConfig"
       :table-data="tableData"
-      :is-show-number="true"
+      has-index-column
       :is-show-drag-sort="true"
       table-title="表格"
       :pagination="{ total, modelValue: pageInfo }"
@@ -80,7 +80,12 @@ const TestServe = {
             const data = await getData(params)
             return { list: data.data, ...data }
           }`,
-        custom: 'custom' + index
+        custom: 'custom' + index,
+        level: {
+          state: {
+            value: 'level' + index
+          }
+        }
       }
     })
     return {
@@ -150,10 +155,14 @@ const tableConfig: PlusColumn[] = [
     tooltip: '名称最多显示6个字符',
     width: 120,
     prop: 'name',
-    valueType: 'text',
     tableColumnProps: {
       'show-overflow-tooltip': true
     }
+  },
+  {
+    label: '多级数据',
+    width: 120,
+    prop: 'level.state.value'
   },
   {
     label: '状态',
@@ -164,22 +173,22 @@ const tableConfig: PlusColumn[] = [
       {
         label: '未解决',
         value: '0',
-        color: 'red'
+        type: 'warning'
       },
       {
         label: '已解决',
         value: '1',
-        color: 'blue'
+        type: 'success'
       },
       {
         label: '解决中',
         value: '2',
-        color: 'yellow'
+        type: 'primary'
       },
       {
         label: '失败',
         value: '3',
-        color: 'red'
+        type: 'danger'
       }
     ]
   },
@@ -240,7 +249,10 @@ const tableConfig: PlusColumn[] = [
     label: '时间',
     prop: 'time',
     width: 180,
-    valueType: 'date-picker'
+    valueType: 'date-picker',
+    renderHeader: (label, props) => {
+      return h('h1' as any, { style: { color: 'red' } }, props.label)
+    }
   },
   {
     label: '自定义组件',

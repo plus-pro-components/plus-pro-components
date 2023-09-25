@@ -1,11 +1,11 @@
 <template>
   <div class="plus-table">
-    <PlusTableToolbar
-      v-if="hasToolbar"
+    <PlusTableTitleBar
+      v-if="titleBar"
       :columns="columns"
       :sub-columns="subColumns"
       :default-size="size"
-      :title="title"
+      :title-bar="titleBar"
       @click-density="handleClickDensity"
       @filter-table="handleFilterTableConfirm"
     >
@@ -16,7 +16,7 @@
       <template #toolbar>
         <slot name="toolbar" />
       </template>
-    </PlusTableToolbar>
+    </PlusTableTitleBar>
 
     <el-table
       ref="tableInstance"
@@ -33,11 +33,16 @@
       v-bind="$attrs"
     >
       <!-- 选择栏 -->
-      <el-table-column v-if="isSelection" key="selection" type="selection" width="34" />
+      <el-table-column
+        v-if="isSelection"
+        key="selection"
+        type="selection"
+        v-bind="selectionTableColumnProps"
+      />
 
       <!-- 序号栏 -->
       <PlusTableTableColumnIndex
-        v-if="isShowNumber"
+        v-if="hasIndexColumn"
         :index-content-style="indexContentStyle"
         :index-table-column-props="indexTableColumnProps"
         :page-info="(pagination as PlusPaginationProps)?.modelValue"
@@ -62,7 +67,22 @@
       </el-table-column>
 
       <!--配置渲染栏  -->
-      <PlusTableColumn :columns="(subColumns as any)" @formChange="handleFormChange" />
+      <PlusTableColumn :columns="(subColumns as any)" @formChange="handleFormChange">
+        <!--表格单元格表头的插槽 -->
+        <template v-for="(_, key) in headerSlots" :key="key" #[key]="data">
+          <slot :name="key" v-bind="data" />
+        </template>
+
+        <!--表格单元格的插槽 -->
+        <template v-for="(_, key) in cellSlots" :key="key" #[key]="data">
+          <slot :name="key" v-bind="data" />
+        </template>
+
+        <!--表单单项的插槽 -->
+        <template v-for="(_, key) in fieldSlots" :key="key" #[key]="data">
+          <slot :name="key" v-bind="data" />
+        </template>
+      </PlusTableColumn>
 
       <!-- 操作栏 -->
       <PlusTableActionBar
@@ -89,22 +109,28 @@
 </template>
 
 <script lang="ts" setup>
-import { reactive, toRefs, watch, ref, provide, shallowRef } from 'vue'
-import { cloneDeep } from 'lodash-es'
+import { reactive, toRefs, watch, ref, provide, shallowRef, useSlots } from 'vue'
 import type { PlusPaginationProps } from '@plus-pro-components/components/pagination'
 import { PlusPagination } from '@plus-pro-components/components/pagination'
 import { DefaultPageInfo, TableFormRefInjectionKey } from '@plus-pro-components/constants'
-import type { CSSProperties } from 'vue'
+import type { CSSProperties, Ref, Component } from 'vue'
 import type { ComponentSize } from 'element-plus/es/constants'
 import type { TableInstance, TableProps } from 'element-plus'
+import { ElTable, ElTableColumn, vLoading } from 'element-plus'
 import type { PageInfo, PlusColumn, RecordType } from '@plus-pro-components/types'
 import type { Options as SortableOptions } from 'sortablejs'
-import PlusTableActionBar from './table-action-bar.vue'
-import PlusTableColumn from './table-column.vue'
+import {
+  getTableCellSlotName,
+  getTableHeaderSlotName,
+  getFieldSlotName,
+  filterSlots
+} from '@plus-pro-components/components/utils'
+import { default as PlusTableActionBarComponent } from './table-action-bar.vue'
+import { default as PlusTableColumnComponent } from './table-column.vue'
 import PlusTableTableColumnIndex from './table-column-index.vue'
 import PlusTableColumnDragSort from './table-column-drag-sort.vue'
-import PlusTableToolbar from './table-toolbar.vue'
-import type { ButtonsCallBackParams, TableState, ActionBarProps } from './type'
+import PlusTableTitleBar from './table-title-bar.vue'
+import type { ButtonsCallBackParams, TableState, ActionBarProps, TitleBar } from './type'
 
 /**
  * 表格数据
@@ -117,17 +143,15 @@ export interface PlusTableProps extends /* @vue-ignore */ Partial<TableProps<any
   /* 操作栏参数*/
   actionBar?: false | Partial<ActionBarProps>
   /* 是否需要序号*/
-  isShowNumber?: boolean
-  /* 是否需要过滤表格表头*/
-  hasToolbar?: boolean
+  hasIndexColumn?: boolean
+  /* 是否工具栏*/
+  titleBar?: boolean | Partial<TitleBar>
   /* 是否是多选表格*/
   isSelection?: boolean
   /* 是否需要展开行*/
   hasExpand?: boolean
   /* loading状态*/
   loadingStatus?: boolean
-  /* 自定义表格标题*/
-  title?: string
   /* 表格高度*/
   // eslint-disable-next-line vue/require-default-prop
   height?: string
@@ -143,6 +167,7 @@ export interface PlusTableProps extends /* @vue-ignore */ Partial<TableProps<any
   dragSortable?: false | Partial<SortableOptions>
   dragSortableTableColumnProps?: RecordType
   indexTableColumnProps?: RecordType
+  selectionTableColumnProps?: RecordType
   indexContentStyle?: Partial<CSSProperties> | ((row: any, index: number) => Partial<CSSProperties>)
 }
 export interface PlusTableEmits {
@@ -158,16 +183,21 @@ defineOptions({
   inheritAttrs: false
 })
 
+/**
+ * FIXME: The inferred type of this node exceeds the maximum length the compiler will serialize. An explicit type annotation is needed.
+ */
+const PlusTableActionBar: Component = PlusTableActionBarComponent
+const PlusTableColumn: Component = PlusTableColumnComponent
+
 const props = withDefaults(defineProps<PlusTableProps>(), {
   defaultSize: 'default',
   pagination: false,
   actionBar: false,
-  isShowNumber: false,
-  hasToolbar: true,
+  hasIndexColumn: false,
+  titleBar: true,
   isSelection: false,
   hasExpand: false,
   loadingStatus: false,
-  title: '',
   tableData: () => [],
   columns: () => [],
   headerCellStyle: () => ({
@@ -178,12 +208,15 @@ const props = withDefaults(defineProps<PlusTableProps>(), {
   dragSortable: false,
   dragSortableTableColumnProps: () => ({}),
   indexTableColumnProps: () => ({}),
-  indexContentStyle: () => ({})
+  indexContentStyle: () => ({}),
+  selectionTableColumnProps: () => ({
+    width: 40
+  })
 })
 const emit = defineEmits<PlusTableEmits>()
 
-const subColumns = ref(cloneDeep(props.columns))
-const tableInstance = shallowRef<TableInstance | null>(null)
+const subColumns = ref([])
+const tableInstance = shallowRef<any>(null)
 const state = reactive<TableState>({
   subPageInfo: {
     ...(((props.pagination as PlusPaginationProps)?.modelValue || DefaultPageInfo) as PageInfo)
@@ -191,6 +224,25 @@ const state = reactive<TableState>({
   size: props.defaultSize
 })
 
+const slots = useSlots()
+/**
+ * 表格单元格的插槽
+ */
+const cellSlots = filterSlots(slots, getTableCellSlotName())
+
+/**
+ * 表格单元格表头的插槽
+ */
+const headerSlots = filterSlots(slots, getTableHeaderSlotName())
+
+/**
+ * 表单单项的插槽
+ */
+const fieldSlots = filterSlots(slots, getFieldSlotName())
+
+/**
+ * 表单的ref
+ */
 const formRefs = shallowRef({})
 provide(TableFormRefInjectionKey, formRefs)
 
@@ -201,7 +253,8 @@ watch(
     subColumns.value = val.filter(item => item.hideInTable !== true) as any
   },
   {
-    deep: true
+    deep: true,
+    immediate: true
   }
 )
 
@@ -212,7 +265,8 @@ watch(
     emit('paginationChange', { ...pageInfo })
   },
   {
-    deep: true
+    deep: true,
+    immediate: true
   }
 )
 
@@ -234,7 +288,6 @@ const handleClickActionConfirmCancel = (res: ButtonsCallBackParams) => {
 
 const handleFilterTableConfirm = (data: PlusColumn[]) => {
   subColumns.value = data.filter(item => item.hideInTable !== true) as any
-  console.log(subColumns.value)
 }
 
 // 密度
@@ -259,6 +312,6 @@ const handleFormChange = (data: {
 const { subPageInfo, size } = toRefs(state)
 
 defineExpose({
-  tableInstance
+  tableInstance: tableInstance as Ref<TableInstance>
 })
 </script>

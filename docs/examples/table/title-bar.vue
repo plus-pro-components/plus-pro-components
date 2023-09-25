@@ -1,6 +1,31 @@
 <template>
   <div>
-    <PlusTable :columns="tableConfig" :table-data="tableData" title="表格标题" :has-toolbar="true">
+    <PlusTable
+      :columns="tableConfig"
+      :table-data="tableData"
+      :title-bar="{ title: '表格标题' }"
+      :has-toolbar="true"
+    >
+      <template #toolbar>
+        <el-button plain size="small">查看日志</el-button>
+        <el-button plain size="small">导出数据</el-button>
+        <el-button type="primary" size="small">创建应用</el-button>
+      </template>
+    </PlusTable>
+
+    <br />
+
+    <PlusTable
+      :columns="tableConfig"
+      :table-data="tableData"
+      :title-bar="{ title: '表格标题' }"
+      :has-toolbar="true"
+    >
+      <template #title>
+        <el-button type="primary" size="small">新增</el-button>
+        <el-button type="danger" size="small">批量删除</el-button>
+      </template>
+
       <template #toolbar>
         <el-button plain size="small">查看日志</el-button>
         <el-button plain size="small">导出数据</el-button>

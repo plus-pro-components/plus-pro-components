@@ -80,10 +80,6 @@ export interface PageInfo {
    * 默认为10
    */
   pageSize: number
-  /**
-   * 总数
-   */
-  total?: number
 }
 ```
 
@@ -102,7 +98,7 @@ export interface ActionBarButtonsRow {
   /**
    * 操作文本
    */
-  text: string
+  text: string | Ref<string> | ComputedRef<string>
   /**
    * 操作唯一code
    *
@@ -146,7 +142,7 @@ export interface ActionBarButtonsRow {
    * 操作是不是需要二次确认  默认值为 `false`
    */
   confirm?:
-    | false // 这里的false 表示类型
+    | boolean
     | {
         /**
          * 默认 `提示`
@@ -157,7 +153,7 @@ export interface ActionBarButtonsRow {
          */
         message?: string | ((data: ButtonsCallBackParams) => string)
         /**
-         *  ElMessageBox.confirm 的options  默认 `{}`
+         *  ElMessageBox.confirm 的options
          */
         options?: ElMessageBoxOptions
       }
@@ -293,22 +289,30 @@ export interface ButtonsCallBackParams {
 
 ## TableValueType
 
-所有表格列显示的类型 默认是 ''
+所有表格列显示的类型 默认是 `undefined`
 
 ```ts
 /**
- * 所有表格列显示的类型 默认是 ''
+ * 所有表格列显示的类型 默认是 `undefined`
  */
-export type TableValueType = 'img' | 'link' | 'money' | 'tag' | 'progress' | 'copy' | 'code'
+export type TableValueType =
+  | 'img'
+  | 'link'
+  | 'money'
+  | 'tag'
+  | 'progress'
+  | 'copy'
+  | 'code'
+  | undefined
 ```
 
 ## FormItemValueType
 
-所有表单的类型 默认是 text
+所有表单的类型 默认是 `input` (`undefined`)
 
 ```ts
 /**
- * 所有表单的类型 默认是 text
+ * 所有表单的类型 默认是 `input` (`undefined`)
  */
 export type FormItemValueType =
   | 'autocomplete'
@@ -325,9 +329,12 @@ export type FormItemValueType =
   | 'time-picker'
   | 'time-select'
   | 'textarea'
+  | 'input'
   | 'text'
   | 'plus-radio'
   | 'plus-date-picker'
+  | 'plus-input-tag'
+  | undefined
 ```
 
 ## FieldValueType
@@ -465,5 +472,31 @@ export interface PlusStepFrom {
   icon?: string | Component
   status?: '' | 'wait' | 'process' | 'finish' | 'error' | 'success'
   form: PlusFormProps
+}
+```
+
+## TitleBar
+
+表格标题栏
+
+```ts
+/**
+ * 标题栏
+ */
+export type TitleBar = {
+  /**
+   * 标题   使用title插槽则此配置不生效
+   */
+  title?: string
+
+  /**
+   *  是否需要密度控制  默认true
+   */
+  density?: boolean
+
+  /**
+   * 是否需要列设置 默认true
+   */
+  columnSetting?: boolean
 }
 ```

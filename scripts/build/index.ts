@@ -16,10 +16,25 @@ const copyFiles = () =>
 
 const copyDts = async () => {
   const src = resolve(buildOutput, 'types', 'packages')
+
+  /**
+   * copy es dts
+   */
   const targetES = resolve(pcOutput, 'es')
-  const targetLib = resolve(pcOutput, 'lib')
   await copy(src, targetES)
+
+  /**
+   * copy lib dts
+   */
+  const targetLib = resolve(pcOutput, 'lib')
   await copy(src, targetLib)
+
+  /**
+   * copy lang dts
+   */
+  const lang = resolve(src, 'locale', 'lang')
+  const targetLocale = resolve(pcOutput, 'locale')
+  await copy(lang, targetLocale)
 }
 
 const updateVersion = async () => {

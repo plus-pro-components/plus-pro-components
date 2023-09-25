@@ -4,6 +4,8 @@ import router from '@/router'
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import PlusProComponents from '../../plus-pro-components/index'
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 import '../../theme-chalk/src/index.scss'
 import App from './App.vue'
 import './style.css'

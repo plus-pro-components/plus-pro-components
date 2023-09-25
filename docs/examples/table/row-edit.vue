@@ -80,11 +80,11 @@ buttons.value = [
     show: (_, index) => !show.value[index]
   }
 ]
+
 const tableConfig = ref<PlusColumn[]>([
   {
     label: '名称',
     prop: 'name',
-    valueType: 'text',
     width: 120,
     formProps: {
       // 添加校验

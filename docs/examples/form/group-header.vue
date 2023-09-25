@@ -1,5 +1,5 @@
 <template>
-  <div style="width: 600px">
+  <div>
     <PlusForm
       v-model="state"
       :group="group"
@@ -9,8 +9,8 @@
       @submit-error="handleSubmitError"
       @reset="handleReset"
     >
-      <template #group-item-header="{ title, icon }">
-        <div class="custom-group-item-header">
+      <template #group-header="{ title, icon }">
+        <div class="custom-group-header">
           <span>
             {{ title }}
             <el-icon> <component :is="icon" /> </el-icon>
@@ -295,7 +295,7 @@ const handleReset = () => {
 </script>
 
 <style lang="scss" scoped>
-.custom-group-item-header {
+.custom-group-header {
   display: flex;
   align-items: center;
   color: var(--el-color-primary);

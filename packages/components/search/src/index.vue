@@ -11,7 +11,7 @@
     v-bind="$attrs"
     @change="handleChange"
   >
-    <template #searchFooter>
+    <template #search-footer>
       <el-form-item v-if="hasFooter" class="plus-search__button__wrapper">
         <el-button v-if="hasReset" :icon="RefreshRight" @click="handleReset">
           {{ resetText || t('plus.search.resetText') }}
@@ -20,11 +20,16 @@
           {{ searchText || t('plus.search.searchText') }}
         </el-button>
 
-        <el-button v-if="hasUnfold" type="primary" link @click="handleUnfold">
-          {{ isShowUnfold ? t('plus.search.expand') : t('plus.search.retract') }}
+        <el-button
+          v-if="hasUnfold && state.originData.length > showNumber"
+          type="primary"
+          link
+          @click="handleUnfold"
+        >
+          {{ isShowUnfold ? t('plus.search.retract') : t('plus.search.expand') }}
           <el-icon>
-            <ArrowDown v-if="isShowUnfold" />
-            <ArrowUp v-else />
+            <ArrowUp v-if="isShowUnfold" />
+            <ArrowDown v-else />
           </el-icon>
         </el-button>
       </el-form-item>
@@ -42,10 +47,11 @@ import { ArrowDown, ArrowUp, Search, RefreshRight } from '@element-plus/icons-vu
 import type { PlusColumn, FieldValues, Mutable } from '@plus-pro-components/types'
 import { cloneDeep } from 'lodash-es'
 import { useLocale } from '@plus-pro-components/hooks'
+import { ElFormItem, ElButton, ElIcon } from 'element-plus'
 
 export interface PlusSearchProps extends /* @vue-ignore */ Partial<Mutable<FormProps>> {
-  modelValue: FieldValues
-  columns: PlusColumn[]
+  modelValue?: FieldValues
+  columns?: PlusColumn[]
   hasFooter?: boolean
   hasReset?: boolean
   hasUnfold?: boolean
@@ -60,7 +66,7 @@ export interface PlusSearchProps extends /* @vue-ignore */ Partial<Mutable<FormP
 export interface PlusSearchState {
   values: FieldValues
   isShowUnfold: boolean
-  subColumns: any[]
+  subColumns: any
   originData: any
 }
 export interface PlusSearchEmits {
@@ -104,7 +110,20 @@ const state = reactive<PlusSearchState>({
   values: {},
   subColumns: [],
   originData: [],
-  isShowUnfold: true
+  isShowUnfold: false
+})
+
+state.originData = computed<any[]>(() => {
+  return props.columns.filter(item => item.hideInSearch !== true)
+})
+
+state.subColumns = computed<any[]>(() => {
+  const data = cloneDeep(state.originData)
+  if (props.hasUnfold && !state.isShowUnfold) {
+    return data.slice(0, props.showNumber)
+  } else {
+    return data
+  }
 })
 
 watch(
@@ -117,16 +136,6 @@ watch(
     immediate: true
   }
 )
-
-state.originData = computed<any[]>(() => {
-  return props.columns.filter(item => item.hideInSearch !== true)
-})
-
-if (props.hasUnfold) {
-  state.subColumns = cloneDeep(state.originData).slice(0, props.showNumber)
-} else {
-  state.subColumns = cloneDeep(state.originData)
-}
 
 const handleChange = async (values: FieldValues, column: PlusColumn) => {
   emit('change', values, column)
@@ -144,11 +153,6 @@ const handleReset = (): void => {
 
 const handleUnfold = () => {
   state.isShowUnfold = !state.isShowUnfold
-  if (state.subColumns.length > props.showNumber) {
-    state.subColumns = state.subColumns.slice(0, props.showNumber)
-  } else {
-    state.subColumns = cloneDeep(state.originData)
-  }
 }
 
 defineExpose({

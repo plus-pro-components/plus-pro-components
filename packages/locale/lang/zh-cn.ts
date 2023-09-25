@@ -53,6 +53,9 @@ export default {
       nextText: '下一步',
       preText: '上一步',
       submitText: '提交'
+    },
+    inputTag: {
+      placeholder: '请输入关键字后按enter/space键'
     }
   }
 }

@@ -3,7 +3,7 @@
     <PlusTable :columns="tableConfig" :table-data="tableData" @formChange="formChange">
       <template #toolbar>
         <el-button plain size="small" @click="editTable(false)">取消编辑</el-button>
-        <el-button type="primary" size="small" @click="editTable(true)">编辑表格</el-button>
+        <el-button type="primary" size="small" @click="editTable(true)">开启编辑</el-button>
       </template>
     </PlusTable>
   </div>
@@ -44,7 +44,6 @@ const tableConfig = ref<PlusColumn[]>([
   {
     label: '名称',
     prop: 'name',
-    valueType: 'text',
     editable: true,
     width: 120
   },

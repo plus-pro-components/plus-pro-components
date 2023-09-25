@@ -53,6 +53,9 @@ export default {
       nextText: 'Next step',
       preText: 'Previous step',
       submitText: 'Submit'
+    },
+    inputTag: {
+      placeholder: 'Please enter keywords and press enter or space key'
     }
   }
 }

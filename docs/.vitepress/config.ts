@@ -37,6 +37,7 @@ export default defineConfig({
     ],
     ['meta', { name: 'keywords', content }],
     ['script', { src: '/hmt.js' }],
+    ['script', { src: '/style.js' }],
     ['link', { rel: 'icon', href: '/logo.png' }]
   ],
 
@@ -62,8 +63,25 @@ export default defineConfig({
         link: '/components/type'
       },
       {
-        text: 'API',
-        link: '/api/utils/'
+        text: '生态系统',
+        items: [
+          {
+            text: 'Utils',
+            link: '/api/utils/'
+          },
+          {
+            text: 'Hooks',
+            link: '/ecosystem/hooks'
+          },
+          {
+            text: 'Resolver',
+            link: '/ecosystem/resolver'
+          },
+          {
+            text: 'Eslint Config',
+            link: '/ecosystem/eslint-config'
+          }
+        ]
       },
       {
         text: `v${pkg.version}`,
@@ -74,7 +92,7 @@ export default defineConfig({
           },
           {
             text: '更新日志',
-            link: 'https://github.com/plus-pro-components/plus-pro-components/blob/main/CHANGELOG.md'
+            link: 'https://github.com/plus-pro-components/plus-pro-components/blob/dev/CHANGELOG.md'
           }
         ]
       },
@@ -214,6 +232,10 @@ export default defineConfig({
               link: '/components/date-picker'
             },
             {
+              text: '输入标签',
+              link: '/components/input-tag'
+            },
+            {
               text: '显示单项组件',
               link: '/components/display-item'
             },
@@ -266,10 +288,6 @@ export default defineConfig({
               link: '/api/utils/other'
             }
           ]
-        },
-        {
-          text: '钩子hooks',
-          link: '/api/hooks/'
         }
       ]
     },
@@ -278,7 +296,8 @@ export default defineConfig({
     ],
     footer: {
       message: 'MIT Licensed.',
-      copyright: 'Copyright © 2023-present xiaofei'
+      copyright:
+        'Copyright © 2023-present xiaofei <a class="miit-link" style="color: var(--vp-c-brand);" href="https://beian.miit.gov.cn" class="fake-link black-70 ph1">陕ICP备2021003270号-2</a>'
     },
     editLink: {
       text: '在 GitHub 上编辑此页',

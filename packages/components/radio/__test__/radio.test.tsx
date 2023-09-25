@@ -13,7 +13,7 @@ const options = [
 describe('radio/index.vue', () => {
   test('render test', async () => {
     const wrapper = mount(
-      () => <PlusRadio data={options} modelValue={1} isCancel={false}></PlusRadio>,
+      () => <PlusRadio options={options} modelValue={1} isCancel={false}></PlusRadio>,
       {
         components: {
           ElRadio,
@@ -32,10 +32,10 @@ describe('radio/index.vue', () => {
     const wrapper = mount(
       () => (
         <PlusRadio
-          data={options}
+          options={options}
           modelValue={value.value}
           isCancel={true}
-          onRadioChange={handleRadioChange}
+          onChange={handleRadioChange}
         ></PlusRadio>
       ),
       {

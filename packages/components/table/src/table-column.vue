@@ -9,7 +9,26 @@
     >
       <template #header>
         <span class="plus-table-column__header">
-          {{ item.label }}
+          <PlusRender
+            v-if="item.renderHeader && isFunction(item.renderHeader)"
+            :render="item.renderHeader"
+            :params="item"
+            :callback-value="item.label"
+          />
+
+          <!--表格单元格Header的插槽 -->
+          <slot
+            v-else
+            :name="getTableHeaderSlotName(item.prop)"
+            :prop="item.prop"
+            :label="item.label"
+            :field-props="item.fieldProps"
+            :value-type="item.valueType"
+            :column="item"
+          >
+            {{ item.label }}
+          </slot>
+
           <el-tooltip v-if="item.tooltip" placement="top" v-bind="getTooltip(item.tooltip)">
             <el-icon class="plus-table-column__header__icon" :size="16"><QuestionFilled /></el-icon>
           </el-tooltip>
@@ -23,7 +42,23 @@
           :row="row"
           :index="$index"
           @change="data => handleChange(data, $index, column, item)"
-        />
+        >
+          <!--表单单项的插槽 -->
+          <template
+            v-if="$slots[getFieldSlotName(item.prop)]"
+            #[getFieldSlotName(item.prop)]="data"
+          >
+            <slot :name="getFieldSlotName(item.prop)" v-bind="data" />
+          </template>
+
+          <!--表格单元格的插槽 -->
+          <template
+            v-if="$slots[getTableCellSlotName(item.prop)]"
+            #[getTableCellSlotName(item.prop)]="data"
+          >
+            <slot :name="getTableCellSlotName(item.prop)" v-bind="data" />
+          </template>
+        </PlusDisplayItem>
       </template>
     </el-table-column>
   </template>
@@ -33,11 +68,20 @@
 import { PlusDisplayItem } from '@plus-pro-components/components/display-item'
 import type { PlusDisplayItemInstance } from '@plus-pro-components/components/display-item'
 import type { PlusColumn } from '@plus-pro-components/types'
-import { getTooltip, getTableKey } from '@plus-pro-components/components/utils'
+import {
+  getTooltip,
+  getTableKey,
+  getTableCellSlotName,
+  getTableHeaderSlotName,
+  getFieldSlotName
+} from '@plus-pro-components/components/utils'
 import { TableFormRefInjectionKey } from '@plus-pro-components/constants'
+import { isFunction } from '@plus-pro-components/utils'
 import { QuestionFilled } from '@element-plus/icons-vue'
 import type { Ref } from 'vue'
 import { shallowRef, inject, watch } from 'vue'
+import { PlusRender } from '@plus-pro-components/components/render'
+import { ElTableColumn, ElTooltip, ElIcon } from 'element-plus'
 
 export interface PlusTableTableColumnProps {
   columns?: PlusColumn[]

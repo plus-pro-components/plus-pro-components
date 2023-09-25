@@ -17,27 +17,41 @@ radio/basic
 
 :::
 
+## 定义属性
+
+:::demo
+
+radio/custom
+
+:::
+
 ## Radio API
 
 ## Radio Attributes
 
-| 名称                    | 说明                            | 类型                                                                                      | 默认值 | 是否必须 |
-| ----------------------- | ------------------------------- | ----------------------------------------------------------------------------------------- | ------ | -------- |
-| `model-value / v-model` | 选中项绑定值                    | `string/ number/ boolean`                                                                 |        | 否       |
-| `data`                  | radio 的数据源                  | `array` <docs-tip content='{ label: string; value: string/number/boolean }[]'></docs-tip> | `[]`   | 是       |
-| `isCancel`              | 是否可以取消选中状态            | `boolean`                                                                                 | `true` | 否       |
-| `groupProps`            | `el-radio-group` 的所有 `props` | `object`                                                                                  | `{}`   | 否       |
-| `radioProps`            | `el-radio` 的所有 `props`       | `object`                                                                                  | `{}`   | 否       |
+| 名称                    | 说明                 | 类型                                                     | 默认值 | 是否必须 |
+| ----------------------- | -------------------- | -------------------------------------------------------- | ------ | -------- |
+| `model-value / v-model` | 选中项绑定值         | `string/ number/ boolean`                                |        | 否       |
+| `options`               | radio 的数据源       | `array` [OptionsRow[]](/components/type.html#optionsrow) | `[]`   | 是       |
+| `isCancel`              | 是否可以取消选中状态 | `boolean`                                                | `true` | 否       |
+| ...                     | ...                  | ...                                                      | ...    | ...      |
+
+**`...`表示同时支持所有[ElRadioGroup Attributes](https://element-plus.org/zh-CN/component/radio.html#radiogroup-attributes)，不包含 RadioButton 的属性**
+
+:::tip 提示
+
+el-radio 的 props 使用 `options` 中的 `fieldItemProps` 。
+:::
 
 ## Radio Events
 
-| 名称          | 说明                      | 类型                                                                             |
-| ------------- | ------------------------- | -------------------------------------------------------------------------------- |
-| `radioChange` | 单个 value 变化触发的事件 | `function` <docs-tip content='(value:string/number/boolean) => void'></docs-tip> |
+| 名称     | 说明                      | 类型                                                                             |
+| -------- | ------------------------- | -------------------------------------------------------------------------------- |
+| `change` | 单个 value 变化触发的事件 | `function` <docs-tip content='(value:string/number/boolean) => void'></docs-tip> |
 
 ## Exposes
 
-| 名称                 | 说明                        | 类型                                                                      |
-| -------------------- | --------------------------- | ------------------------------------------------------------------------- |
-| `radioInstance`      | 开始的`el-date-picker`实例  | `object`<docs-tip content='InstanceType<typeof ElRadio>'></docs-tip>      |
-| `radioGroupInstance` | 结束的`el-date-picker` 实例 | `object`<docs-tip content='InstanceType<typeof ElRadioGroup>'></docs-tip> |
+| 名称                 | 说明                  | 类型                                                                      |
+| -------------------- | --------------------- | ------------------------------------------------------------------------- |
+| `radioGroupInstance` | `el-radio-group` 实例 | `object`<docs-tip content='InstanceType<typeof ElRadioGroup>'></docs-tip> |
+| `radioInstance`      | `el-radio`实例        | `object`<docs-tip content='InstanceType<typeof ElRadio>'></docs-tip>      |

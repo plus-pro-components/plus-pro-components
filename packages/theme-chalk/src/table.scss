@@ -9,7 +9,7 @@
       display: flex;
       align-items: center;
       .plus-table-column__header__icon {
-        padding-left: 5px;
+        margin-left: 2px;
       }
     }
   }
@@ -71,26 +71,24 @@
     }
 
     .cell {
-      .plus-table-column-index-content {
+      .plus-table-column-index__content {
         align-items: center;
         display: flex;
-        font-size: 12px;
         justify-content: center;
         overflow: hidden;
-        padding: 5px 5px;
       }
     }
   }
 
   /*工具栏*/
 
-  .plus-table-toolbar {
+  .plus-table-title-bar {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 10px;
 
-    .plus-table-toolbar__content {
+    .plus-table-title-bar__toolbar {
       display: flex;
       align-items: center;
     }
@@ -98,7 +96,7 @@
 }
 
 /* 密度设置 */
-.plus-table-toolbar__density {
+.plus-table-title-bar__toolbar__density {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -110,13 +108,13 @@
     margin-left: 0;
   }
 }
-.plus-table-toolbar__icon {
+.plus-table-title-bar__toolbar__icon {
   margin-left: 10px;
   vertical-align: middle;
   cursor: pointer;
 }
 
 /* 列设置 */
-.plus-table-toolbar__checkbox__item {
+.plus-table-title-bar__toolbar__checkbox__item {
   margin-left: 20px;
 }
