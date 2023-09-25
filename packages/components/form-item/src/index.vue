@@ -135,6 +135,14 @@
       @change="handleChange"
     />
 
+    <PlusInputTag
+      v-else-if="valueType === 'plus-input-tag'"
+      v-model="state"
+      class="plus-form-item-field"
+      v-bind="customFieldProps"
+      @change="handleChange"
+    />
+
     <el-radio-group
       v-else-if="valueType === 'radio'"
       v-model="state"
@@ -268,6 +276,7 @@ import { QuestionFilled } from '@element-plus/icons-vue'
 import { useGetOptions, useLocale } from '@plus-pro-components/hooks'
 import { PlusRadio } from '@plus-pro-components/components/radio'
 import { PlusDatePicker } from '@plus-pro-components/components/date-picker'
+import { PlusInputTag } from '@plus-pro-components/components/input-tag'
 import { PlusRender } from '@plus-pro-components/components/render'
 import {
   ElFormItem as FormItemComponent,
@@ -361,15 +370,13 @@ const customFieldProps = ref<any>({})
 const state = ref<FieldValueType>()
 const range = ['datetimerange', 'daterange', 'monthrange']
 const numberList = ['rate', 'input-number', 'slider']
+const arrayList = ['checkbox', 'plus-date-picker', 'plus-input-tag']
 
 /**
  * 默认值是数组的情况
  */
 const isArrayValue = computed(() => {
-  if (props.valueType === 'checkbox') {
-    return true
-  }
-  if (props.valueType === 'plus-date-picker') {
+  if (arrayList.includes(props.valueType as string)) {
     return true
   }
   if (props.valueType === 'select' && customFieldProps.value?.multiple === true) {

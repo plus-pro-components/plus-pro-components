@@ -1,4 +1,6 @@
-<template><PlusInputTag v-model="data" :limit="3" /></template>
+<template>
+  <PlusInputTag v-model="data" :limit="3" />
+</template>
 
 <script lang="ts" setup>
 import { ref } from 'vue'

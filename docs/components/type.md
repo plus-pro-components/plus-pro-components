@@ -333,6 +333,7 @@ export type FormItemValueType =
   | 'text'
   | 'plus-radio'
   | 'plus-date-picker'
+  | 'plus-input-tag'
   | undefined
 ```
 

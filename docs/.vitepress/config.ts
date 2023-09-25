@@ -232,6 +232,10 @@ export default defineConfig({
               link: '/components/date-picker'
             },
             {
+              text: '输入标签',
+              link: '/components/input-tag'
+            },
+            {
               text: '显示单项组件',
               link: '/components/display-item'
             },

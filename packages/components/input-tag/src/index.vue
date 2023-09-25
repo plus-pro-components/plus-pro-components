@@ -34,14 +34,14 @@
 import type { InputProps, TagProps, InputInstance, TagInstance } from 'element-plus'
 import { ElTag, ElInput, ClickOutside as vClickOutside } from 'element-plus'
 import { reactive, ref, watch } from 'vue'
-
 import type { Mutable } from '@plus-pro-components/types'
 import { useLocale } from '@plus-pro-components/hooks'
+import { isArray, isString } from '@plus-pro-components/utils'
 
 type TriggerType = 'blur' | 'enter' | 'space'
 export interface PlusInputTagProps {
   modelValue?: string[]
-  trigger?: TriggerType[]
+  trigger?: TriggerType[] | TriggerType
   inputProps?: Partial<Mutable<InputProps>>
   tagProps?: Partial<Mutable<TagProps>>
   limit?: number
@@ -114,7 +114,15 @@ const handleValue = () => {
 }
 
 const handle = (type: TriggerType) => {
-  if (props.trigger.includes(type)) {
+  const triggerList = isArray(props.trigger)
+    ? props.trigger
+    : isString(props.trigger)
+    ? [props.trigger]
+    : ['blur', 'enter', 'space']
+
+  console.log(triggerList, 'triggerList')
+
+  if (triggerList.includes(type)) {
     handleValue()
   }
 }

@@ -267,6 +267,11 @@ const columns: PlusColumn[] = [
     label: 'plus-date-picker',
     prop: 'plus-date-picker',
     valueType: 'plus-date-picker'
+  },
+  {
+    label: 'plus-input-tag',
+    prop: 'plus-input-tag',
+    valueType: 'plus-input-tag'
   }
 ]
 
