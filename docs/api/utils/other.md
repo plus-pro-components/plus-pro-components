@@ -156,7 +156,7 @@ declare const openExe: (protocol: string, event: Event, timeout?: number) => Pro
 使用示例
 
 ```html
-<button @click="handleCLick">打开vscode</button>
+<button @click="handleClick">打开vscode</button>
 ```
 
 ```ts
@@ -164,7 +164,7 @@ import { openExe } from '@plus-pro-components/utils'
 
 const url = 'vscode://'
 
-const handleCLick = async (event: MouseEvent) => {
+const handleClick = async (event: MouseEvent) => {
   await openExe(url, event)
 }
 ```
