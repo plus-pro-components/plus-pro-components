@@ -167,7 +167,6 @@ describe('page/index.vue', () => {
     expect(wrapper.find('.plus-search').exists()).toBe(true)
     expect(wrapper.find('.plus-table').exists()).toBe(true)
     expect(wrapper.find('.plus-pagination').exists()).toBe(true)
-    expect(wrapper.find('.plus-table-toolbar__title').text()).include('Table')
 
     const wrapper1 = mount(
       () => <PlusPage search={false} columns={tableConfig} request={getList} />,

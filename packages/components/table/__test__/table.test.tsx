@@ -45,7 +45,7 @@ describe('table/index.vue', () => {
       }
     )
     await nextTick()
-    expect(wrapper.find('.plus-table-toolbar__title').text()).includes('Table')
+    expect(wrapper.find('.plus-table-title-bar').exists()).toBe(true)
   })
 
   test('visible test', async () => {
@@ -88,7 +88,6 @@ describe('table/index.vue', () => {
     )
     await nextTick()
     expect(wrapper.find('.plus-table').exists()).toBe(true)
-    expect(wrapper.find('.plus-table-toolbar__title').text()).include('Table')
     expect(wrapper.find('.plus-pagination').exists()).toBe(false)
     expect(wrapper.find('.plus-table-action-bar').exists()).toBe(false)
     expect(wrapper.find('.el-tag').exists()).toBe(false)

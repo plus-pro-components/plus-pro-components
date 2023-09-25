@@ -1,17 +1,16 @@
 <template>
   <div
-    ref="plusInputTagRef"
+    ref="plusInputTagInstance"
     v-click-outside="onClickOutside"
-    class="plus-input-tag"
-    :class="state.isFocus ? 'plus-input-tag__is-focus' : ''"
-    @click="onclick"
+    :class="['plus-input-tag', state.isFocus ? 'plus-input-tag__is-focus' : '']"
+    @click="handleClick"
   >
     <el-tag
       v-for="tag in state.tags"
       ref="tagInstance"
-      v-bind="tagProps"
       :key="tag"
       class="plus-input-tag__tag"
+      v-bind="tagProps"
       closable
       @close="handleClose(tag)"
     >
@@ -22,6 +21,7 @@
       v-model="state.inputValue"
       class="plus-input-tag__input"
       :placeholder="t('plus.inputTag.placeholder')"
+      :disabled="state.tags.length >= limit"
       v-bind="inputProps"
       @blur="handle('blur')"
       @keyup.enter.exact="handle('enter')"
@@ -65,14 +65,16 @@ defineOptions({
 const props = withDefaults(defineProps<PlusInputTagProps>(), {
   modelValue: () => [],
   trigger: () => ['blur', 'enter', 'space'],
-  limit: Infinity
+  limit: Infinity,
+  inputProps: () => ({}),
+  tagProps: () => ({})
 })
 
 const emit = defineEmits<PlusInputTagEmits>()
 
 const inputInstance = ref<InputInstance | null>()
 const tagInstance = ref<TagInstance | null>()
-const plusInputTagRef = ref<HTMLDivElement | null>()
+const plusInputTagInstance = ref<HTMLDivElement | null>()
 const state = reactive<PlusInputTagState>({
   tags: [],
   inputValue: '',
@@ -84,14 +86,14 @@ const { t } = useLocale()
 watch(
   () => props.modelValue,
   val => {
-    state.tags = val
+    state.tags = val.slice(0, props.limit)
   },
   { immediate: true }
 )
 const onClickOutside = () => {
   state.isFocus = false
 }
-const onclick = () => {
+const handleClick = () => {
   state.isFocus = true
   inputInstance.value?.focus()
 }
