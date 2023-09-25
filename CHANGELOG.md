@@ -1,3 +1,17 @@
+## [v0.0.1-beta.10](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-beta.9...v0.0.1-beta.10) (2023-09-25)
+
+
+### ✨ Features
+
+* **components[form-item]:** :sparkles: form-item component add input-tag support.([bcf4851](https://github.com/plus-pro-components/plus-pro-components/commit/bcf4851)) by@xiaofei
+* **all:** Merge pull request [#44](https://github.com/plus-pro-components/plus-pro-components/pull/44) from plus-pro-components/gs([92fea7a](https://github.com/plus-pro-components/plus-pro-components/commit/92fea7a)) by@xiaofei
+* **components[input-tag]:** :sparkles: add input-tag component([a380dc8](https://github.com/plus-pro-components/plus-pro-components/commit/a380dc8)) by@guosong
+
+
+
+
+
+
 ## [v0.0.1-beta.9](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-beta.8...v0.0.1-beta.9) (2023-09-21)
 
 
