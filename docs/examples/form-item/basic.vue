@@ -12,7 +12,7 @@
   <PlusFormItem
     v-model="values.checkbox"
     value-type="checkbox"
-    label="级联"
+    label="多选"
     prop="checkbox"
     :options="checkboxOptions"
   />
