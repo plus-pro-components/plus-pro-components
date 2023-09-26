@@ -16,7 +16,17 @@ page/basic
 
 :::demo
 
-page/replace-keyname
+page/replace-search-key
+
+:::
+
+## 增删改查 (CRUD)
+
+典型的增删改查。
+
+:::demo
+
+page/crud
 
 :::
 
