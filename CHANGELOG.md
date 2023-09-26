@@ -1,3 +1,15 @@
+## [v0.0.1-beta.11](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-beta.10...v0.0.1-beta.11) (2023-09-26)
+
+
+
+
+### 🐛 Bug Fixes
+
+* **components[form-item]:** :bug: add input-tag style to form-item.([e9fd3c6](https://github.com/plus-pro-components/plus-pro-components/commit/e9fd3c6)) by@xiaofei
+
+
+
+
 ## [v0.0.1-beta.10](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-beta.9...v0.0.1-beta.10) (2023-09-25)
 
 
