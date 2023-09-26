@@ -53,7 +53,7 @@
 |  ├── changelog             #changelog
 |  ├── create-component      #新增组件
 |  ├── release               #整包release
-|  ├── utils                 #新增组件
+|  ├── utils                 #公共打包工具
 |  ├── commit.sh             #代码提交
 |  └── publish.sh            #整包发布
 ├── tsconfig.base.json       #tsconfig配置
