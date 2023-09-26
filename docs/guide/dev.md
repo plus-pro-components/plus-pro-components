@@ -99,10 +99,10 @@ pnpm docs:dev
   pnpm stub
   ```
 
-- 打包工具
+- 打包工具和 eslint 配置
 
   ```sh
-  pnpm build:utils
+  pnpm build:utils &&  pnpm  build:eslint-config
   ```
 
 - 启动

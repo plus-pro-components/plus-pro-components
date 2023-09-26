@@ -26,6 +26,7 @@
     "build:utils": "pnpm run -C packages/utils build",
     "build:main": "pnpm run -C scripts/build build",
     "build:theme": "pnpm run -C packages/theme-chalk build",
+    "build:eslint-config": "pnpm run -C packages/eslint-config build",
     "publish": "bash scripts/publish.sh",
     "commit": "bash scripts/commit.sh",
     "sync": "bash scripts/sync.sh",
