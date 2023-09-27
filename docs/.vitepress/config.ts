@@ -3,6 +3,9 @@ import { mdPlugin } from './plugins/mdPlugin'
 import pkg from '../../package.json'
 
 const content = [
+  'vue 版本的 procomponents',
+  'vue procomponents',
+  'procomponents vue',
   'PlusProComponents',
   'plus-pro-components',
   'element-plus',
