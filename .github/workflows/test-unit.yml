@@ -42,7 +42,7 @@ jobs:
             ${{ runner.os }}-pnpm-store-
 
       - name: Install dependencies
-        run: pnpm i 
+        run: pnpm i  --no-frozen-lockfile
 
       - name: Build utils
         run: pnpm build:utils
@@ -90,7 +90,7 @@ jobs:
             ${{ runner.os }}-pnpm-store-
 
       - name: Install dependencies
-        run: pnpm i 
+        run: pnpm i  --no-frozen-lockfile
 
       - name: Build utils
         run: pnpm build:utils
