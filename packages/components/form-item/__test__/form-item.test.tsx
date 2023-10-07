@@ -1,4 +1,4 @@
-import { nextTick, ref } from 'vue'
+import { nextTick, ref, h } from 'vue'
 import ElementPlus from 'element-plus'
 import { mount } from '@vue/test-utils'
 import { describe, expect, test } from 'vitest'
@@ -229,6 +229,25 @@ describe('form-item/index.vue', () => {
         label: 'time-select',
         prop: 'time-select',
         valueType: 'time-select'
+      },
+      {
+        label: 'plus-radio',
+        prop: 'plus-radio',
+        valueType: 'plus-radio',
+        options: [
+          { label: '选项一', value: 1 },
+          { label: '选项二', value: 2 }
+        ]
+      },
+      {
+        label: 'plus-date-picker',
+        prop: 'plus-date-picker',
+        valueType: 'plus-date-picker'
+      },
+      {
+        label: 'plus-input-tag',
+        prop: 'plus-input-tag',
+        valueType: 'plus-input-tag'
       }
     ]
     const row = {
@@ -260,6 +279,8 @@ describe('form-item/index.vue', () => {
               modelValue={values.value[item.prop]}
               label={item.label}
               prop={item.prop}
+              // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+              // @ts-ignore
               onChange={handleChange}
             />
           ))}
@@ -285,5 +306,158 @@ describe('form-item/index.vue', () => {
     expect(wrapper.find('.el-switch')).toBeTruthy()
     expect(wrapper.find('.el-radio-group')).toBeTruthy()
     expect(wrapper.find('.el-date-editor--time')).toBeTruthy()
+    expect(wrapper.find('.plus-radio')).toBeTruthy()
+    expect(wrapper.find('.plus-date-picker')).toBeTruthy()
+    expect(wrapper.find('.plus-input-tag')).toBeTruthy()
+  })
+
+  test('renderLabel and renderField test', async () => {
+    const label = 'label'
+    const prop = 'input'
+
+    const column: PlusColumn = {
+      label: label,
+      width: 120,
+      prop: prop
+    }
+    const values = ref<FieldValues>({})
+
+    const renderLabel = (label: string) =>
+      h(
+        'div',
+        {
+          style: {
+            color: 'red'
+          },
+          class: 'label'
+        },
+        label
+      )
+
+    const renderField = (
+      _: FieldValueType,
+      __: (value: FieldValueType) => void,
+      props: PlusColumn
+    ) =>
+      h(
+        'div',
+        {
+          style: {
+            color: 'green'
+          },
+          class: 'field'
+        },
+        props.prop
+      )
+
+    const wrapper = mount(
+      () => (
+        <FormItem
+          modelValue={values.value['input']}
+          {...column}
+          renderLabel={renderLabel}
+          renderField={renderField}
+        />
+      ),
+      {
+        global: {
+          plugins: [ElementPlus]
+        }
+      }
+    )
+    await nextTick()
+    expect(wrapper.find('.el-form-item__label').text()).includes(label)
+    expect(wrapper.find('.el-form-item__label .label').attributes('style')).includes('red')
+    expect(wrapper.find('.el-form-item__content').text()).includes(prop)
+    expect(wrapper.find('.el-form-item__content .field').attributes('style')).includes('green')
+  })
+
+  test('slots test', async () => {
+    const label = 'label'
+    const prop = 'input'
+    const column: PlusColumn = {
+      label: label,
+      width: 120,
+      prop: prop
+    }
+    const values = ref<FieldValues>({})
+    const slots = {
+      ['plus-label-' + prop]: ({ label }: { label: string }) => (
+        <div style="color: red" class="label">
+          {label}
+        </div>
+      ),
+      ['plus-field-' + prop]: () => (
+        <div style="color: green" class="field">
+          {prop}
+        </div>
+      )
+    }
+    const wrapper = mount(
+      () => <FormItem modelValue={values.value['input']} {...column} v-slots={slots} />,
+      {
+        global: {
+          plugins: [ElementPlus]
+        }
+      }
+    )
+    await nextTick()
+    expect(wrapper.find('.el-form-item__label').text()).includes(label)
+    expect(wrapper.find('.el-form-item__label .label').attributes('style')).includes('red')
+    expect(wrapper.find('.el-form-item__content').text()).includes(prop)
+    expect(wrapper.find('.el-form-item__content .field').attributes('style')).includes('green')
+  })
+
+  test('props test', async () => {
+    const fieldProps = async () => {
+      return {
+        clearable: true,
+        size: 'large',
+        placeholder: 'placeholder'
+      }
+    }
+    const options = async () => {
+      return [
+        {
+          label: '未解决',
+          value: '0',
+          color: 'red'
+        },
+        {
+          label: '已解决',
+          value: '1',
+          color: 'blue',
+          fieldItemProps: {
+            disabled: true
+          }
+        }
+      ]
+    }
+    const formItemProps = async () => {
+      return {
+        labelWidth: '200px'
+      }
+    }
+    const column: PlusColumn = {
+      label: 'label',
+      width: 120,
+      prop: 'prop',
+      valueType: 'select',
+      fieldProps,
+      options,
+      formItemProps
+    }
+    const values = ref<FieldValueType>([])
+    const wrapper = mount(() => <FormItem modelValue={values.value} {...column} />, {
+      global: {
+        plugins: [ElementPlus]
+      }
+    })
+    await nextTick()
+    setTimeout(() => {
+      expect(wrapper.find('.el-form-item__label').attributes('style')).includes('width: 200px;')
+      expect(wrapper.find('.el-select--large').exists()).toBe(true)
+      expect(wrapper.find('.el-input__inner').attributes('placeholder')).toBe('placeholder')
+    }, 1000)
   })
 })

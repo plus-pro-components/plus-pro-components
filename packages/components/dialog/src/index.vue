@@ -15,14 +15,14 @@
       <slot name="header" />
     </template>
 
-    <div class="plus-dialog">
+    <div class="plus-dialog-body">
       <slot />
     </div>
 
     <template v-if="hasFooter" #footer>
       <slot name="footer">
         <div>
-          <span class="dialog-footer">
+          <span class="plus-dialog-footer">
             <el-button @click="handleCancel">
               {{ cancelText || t('plus.dialog.cancelText') }}
             </el-button>

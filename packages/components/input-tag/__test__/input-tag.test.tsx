@@ -43,4 +43,21 @@ describe('input-tag/index.vue', () => {
     expect(wrapper.find('.plus-input-tag').text()).includes('tag11')
     expect(wrapper.find('.plus-input-tag').text()).not.include('tag22')
   })
+
+  test('instance test', async () => {
+    const wrapper = mount(InputTag, {
+      props: {
+        modelValue: ['tag1', 'tag2', 'tag11', 'tag22']
+      },
+      global: {
+        plugins: [ElementPlus]
+      }
+    })
+    await nextTick()
+    expect(wrapper.vm.inputInstance).toHaveProperty('focus')
+    expect(wrapper.vm.inputInstance?.blur())
+    expect(wrapper.find('.plus-input-tag').trigger('click'))
+    expect(wrapper.find('.plus-input-tag__is-focus').exists()).toBe(false)
+    expect((wrapper.vm.tagInstance as any)[0]).toHaveProperty('closable')
+  })
 })
