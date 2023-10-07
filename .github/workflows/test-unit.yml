@@ -47,6 +47,9 @@ jobs:
       - name: Build utils
         run: pnpm build:utils
 
+      - name: Build eslint-config
+        run: pnpm build:eslint-config
+
       - name: Lint
         run: pnpm lint
 
