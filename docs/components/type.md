@@ -485,18 +485,36 @@ export interface PlusStepFrom {
  */
 export type TitleBar = {
   /**
-   * 标题   使用title插槽则此配置不生效
+   * 标题  使用title插槽则此配置不生效
    */
   title?: string
+
+  /**
+   *  是否需要刷新  默认false
+   */
+  refresh?: boolean
 
   /**
    *  是否需要密度控制  默认true
    */
   density?: boolean
-
   /**
    * 是否需要列设置 默认true
    */
   columnSetting?: boolean
+
+  /**
+   * 工具栏 icon 的大小和颜色配置
+   */
+  icon?: {
+    /**
+     * icon 的大小  默认 18
+     */
+    size?: string
+    /**
+     * icon 的颜色  默认 #606266
+     */
+    color?: string
+  }
 }
 ```

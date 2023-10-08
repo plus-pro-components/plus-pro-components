@@ -7,6 +7,7 @@
       :title-bar="titleBar"
       @click-density="handleClickDensity"
       @filter-table="handleFilterTableConfirm"
+      @refresh="handleRefresh"
     >
       <template #title>
         <slot name="title" />
@@ -175,6 +176,7 @@ export interface PlusTableEmits {
   (e: 'clickActionConfirmCancel', data: ButtonsCallBackParams): void
   (e: 'dragSortEnd', newIndex: number, oldIndex: number): void
   (e: 'formChange', data: { value: any; prop: string; row: any; index: number; column: any }): void
+  (e: 'refresh'): void
 }
 
 defineOptions({
@@ -296,6 +298,11 @@ const handleClickDensity = (data: ComponentSize) => {
 
 const handleDragSortEnd = (newIndex: number, oldIndex: number) => {
   emit('dragSortEnd', newIndex, oldIndex)
+}
+
+// 刷新
+const handleRefresh = () => {
+  emit('refresh')
 }
 
 const handleFormChange = (data: {

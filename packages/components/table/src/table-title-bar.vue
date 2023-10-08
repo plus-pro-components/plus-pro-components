@@ -8,6 +8,19 @@
 
     <div class="plus-table-title-bar__toolbar">
       <slot name="toolbar" />
+
+      <span
+        v-if="titleBarConfig?.refresh === true"
+        class="plus-table-title-bar__toolbar__refresh"
+        @click="handleRefresh"
+      >
+        <el-tooltip effect="dark" :content="t('plus.table.refresh')" placement="top">
+          <el-icon :size="iconSize" :color="iconColor" class="plus-table-title-bar__toolbar__icon">
+            <RefreshRight />
+          </el-icon>
+        </el-tooltip>
+      </span>
+
       <!-- 表格密度 -->
       <PlusPopover
         v-if="titleBarConfig?.density !== false"
@@ -31,7 +44,11 @@
 
         <template #reference>
           <el-tooltip effect="dark" :content="t('plus.table.density')" placement="top">
-            <el-icon :size="18" color="#919191" class="plus-table-title-bar__toolbar__icon">
+            <el-icon
+              :size="iconSize"
+              :color="iconColor"
+              class="plus-table-title-bar__toolbar__icon"
+            >
               <svg
                 viewBox="0 0 1024 1024"
                 focusable="false"
@@ -84,7 +101,11 @@
 
         <template #reference>
           <el-tooltip effect="dark" :content="t('plus.table.columnSettings')" placement="top">
-            <el-icon :size="20" color="#919191" class="plus-table-title-bar__toolbar__icon">
+            <el-icon
+              :size="iconSize"
+              :color="iconColor"
+              class="plus-table-title-bar__toolbar__icon"
+            >
               <Setting />
             </el-icon>
           </el-tooltip>
@@ -99,13 +120,14 @@ import type { ComputedRef } from 'vue'
 import { reactive, computed, unref } from 'vue'
 import { cloneDeep } from 'lodash-es'
 import type { PlusColumn } from '@plus-pro-components/types'
-import { Setting } from '@element-plus/icons-vue'
+import { Setting, RefreshRight } from '@element-plus/icons-vue'
 import { PlusPopover } from '@plus-pro-components/components/popover'
 import type { ComponentSize } from 'element-plus/es/constants'
 import type { CheckboxValueType } from 'element-plus'
 import { useLocale } from '@plus-pro-components/hooks'
 import { getTableKey } from '@plus-pro-components/components/utils'
 import { ElCheckbox, ElCheckboxGroup, ElTooltip, ElIcon, ElButton } from 'element-plus'
+
 import type { TitleBar } from './type'
 
 export interface PlusTableToolbarProps {
@@ -117,6 +139,7 @@ export interface PlusTableToolbarProps {
 export interface PlusTableToolbarEmits {
   (e: 'filterTable', columns: PlusColumn[]): void
   (e: 'clickDensity', size: ComponentSize): void
+  (e: 'refresh'): void
 }
 export interface State {
   checkList: string[]
@@ -141,6 +164,9 @@ const props = withDefaults(defineProps<PlusTableToolbarProps>(), {
 const emit = defineEmits<PlusTableToolbarEmits>()
 
 const titleBarConfig = computed<TitleBar>(() => props.titleBar as any)
+
+const iconSize = computed(() => titleBarConfig.value.icon?.size || 18)
+const iconColor = computed(() => titleBarConfig.value.icon?.color || 'var(--el-text-color-regular)')
 
 const { t } = useLocale()
 const buttonNameDensity: ButtonNameDensity[] = [
@@ -190,6 +216,10 @@ const handleCheckGroupChange = (value: CheckboxValueType[]) => {
 // 密度
 const handleClickDensity = (size: ComponentSize) => {
   emit('clickDensity', size)
+}
+// 刷新
+const handleRefresh = () => {
+  emit('refresh')
 }
 
 const getLabel = (label: string) => {

@@ -196,6 +196,7 @@ const columns: PlusColumn[] = [
     label: '备注',
     minWidth: 120,
     hideInSearch: true,
+    valueType: 'textarea',
     tableColumnProps: {
       showOverflowTooltip: true
     },
