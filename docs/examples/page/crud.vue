@@ -53,7 +53,7 @@ import type { ButtonsCallBackParams, PlusPageInstance, PlusColumn } from 'plus-p
 import { useTable } from 'plus-pro-components'
 import axios from 'axios'
 
-interface TableTow {
+interface TableRow {
   id: number
   groupName: string | null
   createBy: string | null
@@ -71,7 +71,7 @@ interface State {
   /**
    * 当前选择的行数据
    */
-  currentRow: Partial<TableTow>
+  currentRow: Partial<TableRow>
   /**
    * 表单弹窗是否可见
    */
@@ -118,7 +118,7 @@ const GroupServe = {
   async getList(query: Record<string, any>) {
     const { data } = await axios.get(url, { params: query })
     const { page = 1, pageSize = 10 } = query
-    const list = (data.data.result as TableTow[]).filter(
+    const list = (data.data.result as TableRow[]).filter(
       (_, index) => index < pageSize * page && index >= pageSize * (page - 1)
     )
     return { data: list, total: data.data.total }
