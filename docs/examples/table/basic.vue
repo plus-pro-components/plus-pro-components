@@ -38,7 +38,8 @@ const { tableData } = useTable<TableRow[]>()
 const tableConfig: PlusColumn[] = [
   {
     label: '名称',
-    prop: 'name'
+    prop: 'name',
+    headerFilter: true
   },
   {
     label: '状态',

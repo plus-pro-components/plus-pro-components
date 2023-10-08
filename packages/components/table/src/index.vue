@@ -3,7 +3,6 @@
     <PlusTableTitleBar
       v-if="titleBar"
       :columns="columns"
-      :sub-columns="subColumns"
       :default-size="size"
       :title-bar="titleBar"
       @click-density="handleClickDensity"

@@ -55,9 +55,6 @@
         :width="100"
         trigger="click"
         :title="t('plus.table.columnSettings')"
-        :has-show-bottom-button="true"
-        @confirm="handleFilterTableConfirm"
-        @show="handleShow"
       >
         <el-checkbox
           v-model="state.checkAll"
@@ -68,7 +65,7 @@
         </el-checkbox>
         <el-checkbox-group v-model="state.checkList" @change="handleCheckGroupChange">
           <el-checkbox
-            v-for="item in columns"
+            v-for="item in subColumns"
             :key="item.label"
             :label="getTableKey(item)"
             :disabled="item.headerFilter"
@@ -113,7 +110,6 @@ import type { TitleBar } from './type'
 
 export interface PlusTableToolbarProps {
   columns?: PlusColumn[]
-  subColumns?: any
   titleBar?: boolean | TitleBar
   filterTableHeaderOverflowLabelLength?: number
   defaultSize?: ComponentSize
@@ -138,7 +134,6 @@ defineOptions({
 
 const props = withDefaults(defineProps<PlusTableToolbarProps>(), {
   columns: () => [],
-  subColumns: () => [],
   titleBar: true,
   filterTableHeaderOverflowLabelLength: 6,
   defaultSize: 'default'
@@ -162,30 +157,34 @@ const buttonNameDensity: ButtonNameDensity[] = [
     text: computed(() => t('plus.table.compact'))
   }
 ]
+
+const subColumns = computed(() => props.columns.filter(item => item.hideInTable !== true))
+
 const state: State = reactive({
-  checkAll: false,
-  isIndeterminate: true,
+  checkAll: true,
+  isIndeterminate: false,
   bigImageVisible: false,
   srcList: [],
-  checkList: cloneDeep(props.columns).map(item => getTableKey(item))
+  checkList: cloneDeep(subColumns.value).map(item => getTableKey(item))
 })
 
 const handleCheckAllChange = (val: CheckboxValueType) => {
-  state.checkList = val ? cloneDeep(props.columns).map(item => getTableKey(item)) : []
+  state.checkList = val ? cloneDeep(subColumns.value).map(item => getTableKey(item)) : []
   state.isIndeterminate = false
+}
+
+const handleFilterTableConfirm = () => {
+  const columns = cloneDeep(subColumns.value)
+  const filterColumns = columns.filter(item => state.checkList.includes(getTableKey(item)))
+  emit('filterTable', filterColumns)
 }
 
 const handleCheckGroupChange = (value: CheckboxValueType[]) => {
   const checkedCount = value.length
-  state.checkAll = checkedCount === props.columns.length
-  state.isIndeterminate = checkedCount > 0 && checkedCount < props.columns.length
-}
+  state.checkAll = checkedCount === subColumns.value.length
+  state.isIndeterminate = checkedCount > 0 && checkedCount < subColumns.value.length
 
-const handleShow = () => {
-  state.checkList = cloneDeep(props.subColumns).map((item: PlusColumn) => getTableKey(item))
-  const checkedCount = state.checkList.length
-  state.checkAll = checkedCount === props.columns.length
-  state.isIndeterminate = checkedCount > 0 && checkedCount < props.columns.length
+  handleFilterTableConfirm()
 }
 
 // 密度
@@ -198,11 +197,5 @@ const getLabel = (label: string) => {
     return label
   }
   return label?.slice(0, props.filterTableHeaderOverflowLabelLength) + '...'
-}
-
-const handleFilterTableConfirm = () => {
-  const columns = cloneDeep(props.columns)
-  const subColumns = columns.filter(item => state.checkList.includes(getTableKey(item)))
-  emit('filterTable', subColumns)
 }
 </script>
