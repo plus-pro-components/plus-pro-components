@@ -1,3 +1,18 @@
+## [v0.0.1-beta.12](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-beta.11...v0.0.1-beta.12) (2023-10-08)
+
+
+### ✨ Features
+
+* **components[table]:** :sparkles: props of table-title-bar component titleBar add icon properties([3b3fcee](https://github.com/plus-pro-components/plus-pro-components/commit/3b3fcee)) by@xiaofei
+
+
+### 🐛 Bug Fixes
+
+* **components[table]:** :bug: fix table-title-bar component columnSetting not filter 'hideInTable'([4cfeeae](https://github.com/plus-pro-components/plus-pro-components/commit/4cfeeae)) by@xiaofei
+
+
+
+
 ## [v0.0.1-beta.11](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-beta.10...v0.0.1-beta.11) (2023-09-26)
 
 
