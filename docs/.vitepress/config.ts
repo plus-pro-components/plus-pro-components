@@ -100,6 +100,10 @@ export default defineConfig({
         ]
       },
       {
+        text: '演练场',
+        link: 'https://playground.plus-pro-components.com/'
+      },
+      {
         text: '国内镜像',
         link: 'https://plus-pro-components.com/'
       }
