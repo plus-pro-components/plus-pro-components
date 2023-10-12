@@ -19,8 +19,17 @@
         display: show ? 'block' : 'none'
       }"
       class="docs-example-language-vue language-vue"
-      v-html="decoded"
-    />
+    >
+      <div class="content" v-html="decoded"></div>
+      <div class="line-numbers-wrapper">
+        <template v-for="item in total" :key="item">
+          <span class="line-number">
+            {{ item }}
+          </span>
+          <br />
+        </template>
+      </div>
+    </div>
   </ClientOnly>
 </template>
 
@@ -41,6 +50,7 @@ const props = defineProps<{
 }>()
 
 const show = ref(false)
+const total = ref(0)
 
 const AppAsyncComponent = getComponent(moduleFiles, props.path)
 
@@ -50,6 +60,10 @@ const handleToggle = () => {
 
 const decoded = computed(() => decodeURIComponent(props.source))
 const content = computed(() => decodeURIComponent(props.rawSource))
+
+// add line-number
+const tem = content.value.split('\r\n')
+total.value = tem.length
 </script>
 
 <style lang="scss" scoped>
@@ -71,6 +85,20 @@ const content = computed(() => decodeURIComponent(props.rawSource))
   .el-icon {
     cursor: pointer;
     margin-left: 20px;
+  }
+}
+.content {
+  padding-left: 32px;
+}
+
+.line-numbers-wrapper {
+  border-color: #dcdfe6;
+  line-height: 1.4;
+  padding-top: 17px;
+  user-select: none;
+  .line-number {
+    color: #dcdfe6;
+    line-height: 1.4;
   }
 }
 </style>
