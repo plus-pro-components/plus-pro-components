@@ -81,9 +81,23 @@ git clone https://gitee.com/plus-pro-components/plus-pro-components.git
 
 ## 启动项目
 
-```sh
-pnpm i
-```
+- 安装依赖
+
+  ```sh
+  pnpm i
+  ```
+
+- 打桩
+
+  ```sh
+  pnpm stub
+  ```
+
+- 打包 utils 和 eslint 配置
+
+  ```sh
+  pnpm build:utils &&  pnpm  build:eslint-config
+  ```
 
 ## 文档网站预览
 
@@ -93,23 +107,9 @@ pnpm docs:dev
 
 ## 本地开发
 
-- 打桩
-
-  ```sh
-  pnpm stub
-  ```
-
-- 打包工具和 eslint 配置
-
-  ```sh
-  pnpm build:utils &&  pnpm  build:eslint-config
-  ```
-
-- 启动
-
-  ```sh
-  pnpm dev
-  ```
+```sh
+pnpm dev
+```
 
 ## 添加新的组件步骤
 
