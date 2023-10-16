@@ -15,11 +15,12 @@
     "registry": "https://registry.npmjs.org"
   },
   "scripts": {
+    "preinstall": "npx only-allow pnpm",
+    "postinstall": "pnpm stub:build && pnpm build:utils && pnpm build:eslint-config",
     "test": "vitest",
     "coverage": "vitest run --coverage",
-    "preinstall": "npx only-allow pnpm",
     "dev": "pnpm run -C packages/play dev",
-    "stub": "pnpm run -C scripts/build stub",
+    "stub:build": "pnpm run -C scripts/build stub",
     "build": "pnpm run clean && pnpm run build:utils && pnpm run build:theme && pnpm run build:main",
     "build:resolver": "pnpm run -C packages/resolver build",
     "build:utils": "pnpm run -C packages/utils build",
