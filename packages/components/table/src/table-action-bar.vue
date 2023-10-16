@@ -60,7 +60,7 @@ import {
   ElDropdownMenu
 } from 'element-plus'
 import type { RecordType } from '@plus-pro-components/types'
-import { isFunction, isPlainObject } from '@plus-pro-components/utils'
+import { isFunction, isPlainObject } from '@plus-pro-components/components/utils'
 import { cloneDeep } from 'lodash-es'
 import { useLocale } from '@plus-pro-components/hooks'
 

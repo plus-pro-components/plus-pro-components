@@ -73,10 +73,11 @@ import {
   getTableKey,
   getTableCellSlotName,
   getTableHeaderSlotName,
-  getFieldSlotName
+  getFieldSlotName,
+  isFunction
 } from '@plus-pro-components/components/utils'
 import { TableFormRefInjectionKey } from '@plus-pro-components/constants'
-import { isFunction } from '@plus-pro-components/utils'
+
 import { QuestionFilled } from '@element-plus/icons-vue'
 import type { Ref } from 'vue'
 import { shallowRef, inject, watch } from 'vue'

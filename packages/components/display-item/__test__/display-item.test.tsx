@@ -3,7 +3,7 @@ import ElementPlus from 'element-plus'
 import { mount } from '@vue/test-utils'
 import { describe, expect, test } from 'vitest'
 import type { PlusColumn } from '@plus-pro-components/types'
-import { formatDate } from '@plus-pro-components/utils'
+import { formatDate } from '@plus-pro-components/components/utils'
 import DisplayItem from '../src/index.vue'
 
 const columns: PlusColumn[] = [

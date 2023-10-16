@@ -164,14 +164,18 @@
 import { DocumentCopy, Select } from '@element-plus/icons-vue'
 import { PlusForm } from '@plus-pro-components/components/form'
 import { PlusFormItem } from '@plus-pro-components/components/form-item'
-import { formatDate, formatMoney, isFunction, isArray } from '@plus-pro-components/utils'
 import {
+  formatDate,
+  formatMoney,
+  isFunction,
+  isArray,
   getCustomProps,
   getTableCellSlotName,
   getFieldSlotName,
   getValue,
   setValue
 } from '@plus-pro-components/components/utils'
+
 import { ref, watch, computed } from 'vue'
 import type { PlusColumn, RecordType, FieldValueType } from '@plus-pro-components/types'
 import { useGetOptions } from '@plus-pro-components/hooks'

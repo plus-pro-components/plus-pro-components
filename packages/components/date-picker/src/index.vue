@@ -31,7 +31,7 @@
 <script setup lang="ts">
 import { reactive, watch, ref } from 'vue'
 import { ElDatePicker } from 'element-plus'
-import { isFunction } from '@plus-pro-components/utils'
+import { isFunction } from '@plus-pro-components/components/utils'
 import { useLocale } from '@plus-pro-components/hooks'
 
 export interface PlusDatePickerProps {

@@ -31,7 +31,7 @@
 import { DefaultPageInfo } from '@plus-pro-components/constants'
 import type { PageInfo, RecordType } from '@plus-pro-components/types'
 import type { CSSProperties } from 'vue'
-import { isFunction, isPlainObject } from '@plus-pro-components/utils'
+import { isFunction, isPlainObject } from '@plus-pro-components/components/utils'
 import { ElTableColumn, ElTooltip } from 'element-plus'
 
 export interface PlusTableTableColumnIndexProps {

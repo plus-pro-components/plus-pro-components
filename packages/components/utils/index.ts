@@ -1,14 +1,10 @@
 import type { FieldValueType, RecordType, PlusColumn } from '@plus-pro-components/types'
-import {
-  isPromise,
-  isFunction,
-  isPlainObject,
-  isEmptyObject,
-  toRawType,
-  isString
-} from '@plus-pro-components/utils'
 import { cloneDeep, get, set } from 'lodash-es'
 import type { useSlots } from 'vue'
+import { isPromise, isFunction, isPlainObject, isEmptyObject, toRawType, isString } from './is'
+
+export * from './format'
+export * from './is'
 
 /**
  * 获取table key
@@ -99,6 +95,8 @@ export const handleSlots = (
   if (slots && !isEmptyObject(slots)) {
     Object.keys(slots).forEach(key => {
       const temp = (...arg: any) => {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
         return () => slots[key](...arg)
       }
       slotsRes[key] = temp(value, params)
