@@ -1,3 +1,15 @@
+## [v0.0.1-beta.13](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-beta.12...v0.0.1-beta.13) (2023-10-16)
+
+
+
+
+
+
+### ♻️ Code Refactoring
+
+* **packages:** :recycle: remove '@plus-pro-components/utils',reduce file size by half.([d16c36e](https://github.com/plus-pro-components/plus-pro-components/commit/d16c36e)) by@xiaofei
+
+
 ## [v0.0.1-beta.12](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-beta.11...v0.0.1-beta.12) (2023-10-08)
 
 
