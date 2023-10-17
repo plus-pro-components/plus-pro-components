@@ -1,3 +1,15 @@
+## [v0.0.1-beta.15](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-beta.14...v0.0.1-beta.15) (2023-10-17)
+
+
+### ✨ Features
+
+* **packages:** :sparkles: support for  "'moduleResolution': 'bundle'" for TypeScript@5([5a7373f](https://github.com/plus-pro-components/plus-pro-components/commit/5a7373f)) by@xiaofei
+
+
+
+
+
+
 ## [v0.0.1-beta.14](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-beta.13...v0.0.1-beta.14) (2023-10-17)
 
 
