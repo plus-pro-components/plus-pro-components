@@ -1,3 +1,18 @@
+## [v0.0.1-beta.14](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-beta.13...v0.0.1-beta.14) (2023-10-17)
+
+
+
+
+### 🐛 Bug Fixes
+
+* **components:** :bug: fix  'process is not defined'  problems caused by CDN methods.([80317b0](https://github.com/plus-pro-components/plus-pro-components/commit/80317b0)) by@xiaofei
+
+
+### ♻️ Code Refactoring
+
+* **scripts:** :recycle: update excludeFiles and unified test folder name.([dd0bd5e](https://github.com/plus-pro-components/plus-pro-components/commit/dd0bd5e)) by@xiaofei
+
+
 ## [v0.0.1-beta.13](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-beta.12...v0.0.1-beta.13) (2023-10-16)
 
 
