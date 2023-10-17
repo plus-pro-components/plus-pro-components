@@ -27,6 +27,7 @@
     "prism-theme-vars": "^0.2.4",
     "prismjs": "^1.29.0",
     "sass": "^1.62.1",
+    "vite-plugin-compression": "^0.5.1",
     "vite-plugin-inspect": "^0.7.28",
     "vitepress": "1.0.0-beta.7"
   },

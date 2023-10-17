@@ -3,6 +3,10 @@ import Inspect from 'vite-plugin-inspect'
 import type { PluginOption, AliasOptions } from 'vite'
 import { defineConfig } from 'vite'
 import vueJsx from '@vitejs/plugin-vue-jsx'
+import viteCompression from 'vite-plugin-compression'
+
+// 生产环境判断
+const isEnvProduction = process.env.NODE_ENV === 'production'
 
 const pathResolve = (dir: string): string => fileURLToPath(new URL(dir, import.meta.url))
 
@@ -36,6 +40,16 @@ export default defineConfig(() => {
     resolve: {
       alias: alias
     },
-    plugins: [Inspect() as PluginOption, vueJsx() as PluginOption]
+    plugins: [
+      Inspect() as PluginOption,
+      vueJsx() as PluginOption,
+      isEnvProduction
+        ? (viteCompression({
+            filter: /\.(js|css)$/i,
+            // algorithm: 'brotliCompress',
+            threshold: 10 * 1024 // 10kb
+          }) as PluginOption)
+        : undefined
+    ]
   }
 })
