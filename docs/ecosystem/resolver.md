@@ -4,7 +4,7 @@
 
 ## 简介
 
-`@plus-pro-components/resolver` 是[plus-pro-components](https://plus-pro-components.com/)为 [unplugin-vue-components](https://github.com/unplugin/unplugin-vue-components) 提供的官方加载包，可以按需自动导入`plus-pro-components`的组件及其样式文件。
+`@plus-pro-components/resolver` 是[plus-pro-components](https://plus-pro-components.com/)为 [unplugin-vue-components](https://github.com/unplugin/unplugin-vue-components) 提供的官方解析器，可以按需自动导入`plus-pro-components`的组件及其样式文件。
 
 ## 使用
 
