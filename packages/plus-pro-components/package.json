@@ -71,8 +71,14 @@
     "access": "public",
     "registry": "https://registry.npmjs.org"
   },
+  "style": "index.css",
   "sideEffects": [
-    "dist/*"
+    "locale/*",
+    "index.*",
+    "theme-chalk/**/*.css",
+    "theme-chalk/src/**/*.scss",
+    "es/components/*/style/*",
+    "lib/components/*/style/*"
   ],
   "peerDependencies": {
     "vue": "^3.2.0"
