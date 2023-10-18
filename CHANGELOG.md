@@ -1,3 +1,15 @@
+## [v0.0.1-beta.16](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-beta.15...v0.0.1-beta.16) (2023-10-18)
+
+
+### ✨ Features
+
+* **packages:** :sparkles: update plus-pro-components/package.json 'sideEffects'([ebb6ba8](https://github.com/plus-pro-components/plus-pro-components/commit/ebb6ba8)) by@xiaofei
+
+
+
+
+
+
 ## [v0.0.1-beta.15](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-beta.14...v0.0.1-beta.15) (2023-10-17)
 
 
