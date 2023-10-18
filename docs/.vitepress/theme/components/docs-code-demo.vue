@@ -133,7 +133,7 @@ const handleEditPlayground = () => {
 .line-numbers-wrapper {
   border-color: #dcdfe6;
   line-height: 1.4;
-  padding-top: 17px;
+  padding-top: 11px;
   user-select: none;
   .line-number {
     color: #dcdfe6;
