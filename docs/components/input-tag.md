@@ -43,7 +43,7 @@ input-tag/trigger
 | ----------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------- | ---------------------------- | -------- |
 | `model-value / v-model` | 输入标签组件绑定值 （**不可重复**）                                                | `array` <docs-tip content="string[]"></docs-tip>                 |                              | 否       |
 | `trigger`               | 触发输入内容变成标签的方式                                                         | `array`/`string` <docs-tip content="string[]/string"></docs-tip> | `['blur', 'enter', 'space']` | 否       |
-| `limit`                 | tag 的最大数量                                                                     | `string`                                                         |                              | 否       |
+| `limit`                 | tag 的最大数量                                                                     | `number`                                                         |                              | 否       |
 | `tagProps`              | [ElTag](https://element-plus.org/zh-CN/component/tag.html#tag-attributes) 的 props | `object`                                                         |                              | 否       |
 | `inputProps`            | [ElInput](https://element-plus.org/zh-CN/component/input.html) 的 props            | `object`                                                         |                              | 否       |
 

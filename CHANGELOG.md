@@ -1,3 +1,81 @@
+## [v0.0.1-beta.16](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-beta.15...v0.0.1-beta.16) (2023-10-18)
+
+
+### ✨ Features
+
+* **packages:** :sparkles: update plus-pro-components/package.json 'sideEffects'([ebb6ba8](https://github.com/plus-pro-components/plus-pro-components/commit/ebb6ba8)) by@xiaofei
+
+
+
+
+
+
+## [v0.0.1-beta.15](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-beta.14...v0.0.1-beta.15) (2023-10-17)
+
+
+### ✨ Features
+
+* **packages:** :sparkles: support for  "'moduleResolution': 'bundle'" for TypeScript@5([5a7373f](https://github.com/plus-pro-components/plus-pro-components/commit/5a7373f)) by@xiaofei
+
+
+
+
+
+
+## [v0.0.1-beta.14](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-beta.13...v0.0.1-beta.14) (2023-10-17)
+
+
+
+
+### 🐛 Bug Fixes
+
+* **components:** :bug: fix  'process is not defined'  problems caused by CDN methods.([80317b0](https://github.com/plus-pro-components/plus-pro-components/commit/80317b0)) by@xiaofei
+
+
+### ♻️ Code Refactoring
+
+* **scripts:** :recycle: update excludeFiles and unified test folder name.([dd0bd5e](https://github.com/plus-pro-components/plus-pro-components/commit/dd0bd5e)) by@xiaofei
+
+
+## [v0.0.1-beta.13](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-beta.12...v0.0.1-beta.13) (2023-10-16)
+
+
+
+
+
+
+### ♻️ Code Refactoring
+
+* **packages:** :recycle: remove '@plus-pro-components/utils',reduce file size by half.([d16c36e](https://github.com/plus-pro-components/plus-pro-components/commit/d16c36e)) by@xiaofei
+
+
+## [v0.0.1-beta.12](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-beta.11...v0.0.1-beta.12) (2023-10-08)
+
+
+### ✨ Features
+
+* **components[table]:** :sparkles: props of table-title-bar component titleBar add icon properties([3b3fcee](https://github.com/plus-pro-components/plus-pro-components/commit/3b3fcee)) by@xiaofei
+
+
+### 🐛 Bug Fixes
+
+* **components[table]:** :bug: fix table-title-bar component columnSetting not filter 'hideInTable'([4cfeeae](https://github.com/plus-pro-components/plus-pro-components/commit/4cfeeae)) by@xiaofei
+
+
+
+
+## [v0.0.1-beta.11](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-beta.10...v0.0.1-beta.11) (2023-09-26)
+
+
+
+
+### 🐛 Bug Fixes
+
+* **components[form-item]:** :bug: add input-tag style to form-item.([e9fd3c6](https://github.com/plus-pro-components/plus-pro-components/commit/e9fd3c6)) by@xiaofei
+
+
+
+
 ## [v0.0.1-beta.10](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-beta.9...v0.0.1-beta.10) (2023-09-25)
 
 

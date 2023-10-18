@@ -21,5 +21,6 @@ import '@external/input/style/index'
 
 import '@plus-pro-components/components/radio/style/index'
 import '@plus-pro-components/components/date-picker/style/index'
+import '@plus-pro-components/components/input-tag/style/index'
 
 import '@plus-pro-components/theme-chalk/src/form-item.scss'

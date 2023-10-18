@@ -1,8 +1,10 @@
 # @plus-pro-components/resolver
 
+[![@plus-pro-components/resolver version badge](https://img.shields.io/npm/v/@plus-pro-components/resolver.svg?style=flat-square)](https://www.npmjs.org/package/@plus-pro-components/resolver)
+
 ## 简介
 
-`@plus-pro-components/resolver` 是为 [unplugin-vue-components](https://github.com/unplugin/unplugin-vue-components) 提供的官方加载包，可以按需自动导入`plus-pro-components`的组件及其样式文件。
+`@plus-pro-components/resolver` 是[plus-pro-components](https://plus-pro-components.com/)为 [unplugin-vue-components](https://github.com/unplugin/unplugin-vue-components) 提供的官方解析器，可以按需自动导入`plus-pro-components`的组件及其样式文件。
 
 ## 使用
 

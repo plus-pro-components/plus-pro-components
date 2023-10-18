@@ -3,6 +3,9 @@ import { mdPlugin } from './plugins/mdPlugin'
 import pkg from '../../package.json'
 
 const content = [
+  'vue 版本的 procomponents',
+  'vue procomponents',
+  'procomponents vue',
   'PlusProComponents',
   'plus-pro-components',
   'element-plus',
@@ -95,6 +98,10 @@ export default defineConfig({
             link: 'https://github.com/plus-pro-components/plus-pro-components/blob/dev/CHANGELOG.md'
           }
         ]
+      },
+      {
+        text: '演练场',
+        link: 'https://playground.plus-pro-components.com/'
       },
       {
         text: '国内镜像',

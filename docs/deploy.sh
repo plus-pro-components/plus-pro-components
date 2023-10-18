@@ -3,8 +3,6 @@
 # abort on errors
 set -e
 
-pnpm i plus-pro-components@latest
-
 # build
 npm run build
 

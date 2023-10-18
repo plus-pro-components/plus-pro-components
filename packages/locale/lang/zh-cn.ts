@@ -38,6 +38,7 @@ export default {
     table: {
       title: '表格',
       density: '密度',
+      refresh: '刷新',
       columnSettings: '列设置',
       selectAll: '全选',
       default: '默认',

@@ -1,9 +1,9 @@
-import { nextTick } from 'vue'
+import { nextTick, h } from 'vue'
 import ElementPlus from 'element-plus'
 import { mount } from '@vue/test-utils'
 import { describe, expect, test } from 'vitest'
 import type { PlusColumn } from '@plus-pro-components/types'
-import { formatDate } from '@plus-pro-components/utils'
+import { formatDate } from '@plus-pro-components/components/utils'
 import DisplayItem from '../src/index.vue'
 
 const columns: PlusColumn[] = [
@@ -141,5 +141,61 @@ describe('display-item/index.vue', () => {
     expect(wrapper.find('.el-switch__input').attributes('aria-checked')).includes(row.switch)
     expect(wrapper.find('.el-link__inner').text()).includes('link')
     expect(wrapper.find('.plus-display-item__icon__copy').exists()).toBe(true)
+  })
+
+  test('render display test', async () => {
+    const label = 'label'
+    const prop = 'input'
+    const column: PlusColumn = {
+      label: label,
+      width: 120,
+      prop: prop,
+      render: () => {
+        return h(
+          'div',
+          {
+            style: {
+              color: 'green'
+            },
+            class: 'custom-cell'
+          },
+          prop
+        )
+      }
+    }
+
+    const wrapper = mount(() => <DisplayItem column={column} row={{}} />, {
+      global: {
+        plugins: [ElementPlus]
+      }
+    })
+    await nextTick()
+    expect(wrapper.find('.custom-cell').text()).includes(prop)
+    expect(wrapper.find('.custom-cell').attributes('style')).includes('green')
+  })
+
+  test('slots test', async () => {
+    const label = 'label'
+    const prop = 'input'
+    const column: PlusColumn = {
+      label: label,
+      width: 120,
+      prop: prop
+    }
+    const slots = {
+      ['plus-cell-' + prop]: () => (
+        <div style="color: green" class="custom-cell">
+          {prop}
+        </div>
+      )
+    }
+    const wrapper = mount(() => <DisplayItem column={column} row={{}} v-slots={slots} />, {
+      global: {
+        plugins: [ElementPlus]
+      }
+    })
+    await nextTick()
+    expect(wrapper.find('.custom-cell').text()).includes(prop)
+    expect(wrapper.find('.custom-cell').attributes('style')).includes('green')
   })
 })

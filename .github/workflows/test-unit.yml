@@ -42,10 +42,13 @@ jobs:
             ${{ runner.os }}-pnpm-store-
 
       - name: Install dependencies
-        run: pnpm i --frozen-lockfile
+        run: pnpm i  --no-frozen-lockfile
 
       - name: Build utils
         run: pnpm build:utils
+
+      - name: Build eslint-config
+        run: pnpm build:eslint-config
 
       - name: Lint
         run: pnpm lint
@@ -90,7 +93,7 @@ jobs:
             ${{ runner.os }}-pnpm-store-
 
       - name: Install dependencies
-        run: pnpm i --frozen-lockfile
+        run: pnpm i  --no-frozen-lockfile
 
       - name: Build utils
         run: pnpm build:utils

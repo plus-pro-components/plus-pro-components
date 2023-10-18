@@ -14,8 +14,7 @@
     "registry": "https://registry.npmjs.org"
   },
   "scripts": {
-    "build": "tsup",
-    "dev": "DEV=true tsup"
+    "build": "tsup src/index.ts"
   },
   "devDependencies": {
     "tsup": "^7.2.0",

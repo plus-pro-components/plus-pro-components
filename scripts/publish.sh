@@ -11,6 +11,8 @@ echo "Successfully published plus-pro-components"
 cd -
 
 cd packages/utils
+echo "build utils..."
+npm run build
 echo "publish utils..."
 npm publish
 echo "Successfully published utils"

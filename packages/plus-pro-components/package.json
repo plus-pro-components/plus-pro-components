@@ -26,12 +26,39 @@
       "import": "./es/index.mjs",
       "require": "./lib/index.js"
     },
-    "./es": "./es/index.mjs",
-    "./lib": "./lib/index.js",
-    "./es/*.mjs": "./es/*.mjs",
-    "./es/*": "./es/*.mjs",
-    "./lib/*.js": "./lib/*.js",
-    "./lib/*": "./lib/*.js",
+    "./global": {
+      "types": "./global.d.ts"
+    },
+    "./es": {
+      "types": "./es/index.d.ts",
+      "import": "./es/index.mjs"
+    },
+    "./lib": {
+      "types": "./lib/index.d.ts",
+      "require": "./lib/index.js"
+    },
+    "./es/*.mjs": {
+      "types": "./es/*.d.ts",
+      "import": "./es/*.mjs"
+    },
+    "./es/*": {
+      "types": [
+        "./es/*.d.ts",
+        "./es/*/index.d.ts"
+      ],
+      "import": "./es/*.mjs"
+    },
+    "./lib/*.js": {
+      "types": "./lib/*.d.ts",
+      "require": "./lib/*.js"
+    },
+    "./lib/*": {
+      "types": [
+        "./lib/*.d.ts",
+        "./lib/*/index.d.ts"
+      ],
+      "require": "./lib/*.js"
+    },
     "./*": "./*"
   },
   "unpkg": "index.js",
@@ -44,24 +71,29 @@
     "access": "public",
     "registry": "https://registry.npmjs.org"
   },
+  "style": "index.css",
   "sideEffects": [
-    "dist/*"
+    "locale/*",
+    "index.*",
+    "theme-chalk/**/*.css",
+    "theme-chalk/src/**/*.scss",
+    "es/components/*/style/*",
+    "lib/components/*/style/*"
   ],
   "peerDependencies": {
     "vue": "^3.2.0"
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.1.0",
-    "@plus-pro-components/utils": "^0.0.9",
-    "@types/lodash-es": "^4.17.6",
-    "@types/sortablejs": "^1.15.1",
     "element-plus": "^2.3.4",
     "dayjs": "^1.11.3",
     "lodash-es": "^4.17.21",
     "sortablejs": "^1.15.0"
   },
   "devDependencies": {
+    "@types/lodash-es": "^4.17.6",
     "@types/node": "*",
+    "@types/sortablejs": "^1.15.1",
     "vue": "^3.2.37"
   },
   "browserslist": [

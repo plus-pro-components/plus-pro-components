@@ -6,8 +6,9 @@ export const external = ['vue', 'element-plus']
 
 export const externalModules = [
   ...external,
-  '@plus-pro-components/utils',
   '@element-plus/icons-vue',
+  '@vue/shared',
   'sortablejs',
+  'dayjs',
   'lodash-es'
 ]

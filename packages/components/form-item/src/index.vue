@@ -265,13 +265,16 @@
 import type { Component } from 'vue'
 import { ref, watch, computed } from 'vue'
 import type { PlusColumn, FieldValueType } from '@plus-pro-components/types'
-import { isFunction, isDate, isArray } from '@plus-pro-components/utils'
 import {
+  isFunction,
+  isDate,
+  isArray,
   getTooltip,
   getCustomProps,
   getLabelSlotName,
   getFieldSlotName
 } from '@plus-pro-components/components/utils'
+
 import { QuestionFilled } from '@element-plus/icons-vue'
 import { useGetOptions, useLocale } from '@plus-pro-components/hooks'
 import { PlusRadio } from '@plus-pro-components/components/radio'

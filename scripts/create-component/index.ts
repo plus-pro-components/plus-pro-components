@@ -47,7 +47,7 @@ const main = async () => {
   const targetFile = path.resolve(targetDir, 'index.ts')
 
   // 测试文件
-  const testDir = path.resolve(targetDir, '__test__')
+  const testDir = path.resolve(targetDir, '__tests__')
   const testFile = path.resolve(testDir, `${componentName}.test.tsx`)
 
   // 实际代码文件

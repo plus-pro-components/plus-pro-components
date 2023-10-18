@@ -46,7 +46,7 @@ app.use(PlusProComponents)
 app.mount('#app')
 ```
 
-## Volar 支持
+### Volar 支持
 
 如果您使用 Volar，请在 tsconfig.json 中通过 compilerOptions.type 指定全局组件类型。
 
@@ -70,17 +70,18 @@ app.mount('#app')
   pnpm install -D unplugin-vue-components unplugin-auto-import @plus-pro-components/resolver
   ```
 
-- 2.  配置 `vite.config.ts` 或者配置 `webpack.config.js` [参考](https://element-plus.gitee.io/zh-CN/guide/quickstart.html#%E6%8C%89%E9%9C%80%E5%AF%BC%E5%85%A5)
+- 2.  配置 `vite.config.ts` 或者配置 `webpack(vue).config.js`
 
   [@plus-pro-components/resolver 文档](/ecosystem/resolver.html)
 
-  ```ts {7,17}
+  ::: code-group
+
+  ```ts {6,16} [vite.config.ts]
   // vite.config.ts
   import { defineConfig } from 'vite'
   import AutoImport from 'unplugin-auto-import/vite'
   import Components from 'unplugin-vue-components/vite'
   import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
-
   import { PlusProComponentsResolver } from '@plus-pro-components/resolver'
 
   export default defineConfig({
@@ -97,6 +98,53 @@ app.mount('#app')
   })
   ```
 
+  ```js {5,15} [webpack.config.js]
+  // webpack.config.js
+  const AutoImport = require('unplugin-auto-import/webpack')
+  const Components = require('unplugin-vue-components/webpack')
+  const { ElementPlusResolver } = require('unplugin-vue-components/resolvers')
+  const { PlusProComponentsResolver } = require('@plus-pro-components/resolver')
+
+  module.exports = {
+    // ...
+    plugins: [
+      // ...
+      AutoImport({
+        resolvers: [ElementPlusResolver()]
+      }),
+      Components({
+        resolvers: [PlusProComponentsResolver(), ElementPlusResolver()]
+      })
+    ]
+  }
+  ```
+
+  ```js {6,17} [vue.config.js]
+  // vue.config.js
+  const { defineConfig } = require('@vue/cli-service')
+  const AutoImport = require('unplugin-auto-import/webpack')
+  const Components = require('unplugin-vue-components/webpack')
+  const { ElementPlusResolver } = require('unplugin-vue-components/resolvers')
+  const { PlusProComponentsResolver } = require('@plus-pro-components/resolver')
+
+  module.exports = defineConfig({
+    // ...
+    configureWebpack: {
+      plugins: [
+        // ...
+        AutoImport({
+          resolvers: [ElementPlusResolver()]
+        }),
+        Components({
+          resolvers: [PlusProComponentsResolver(), ElementPlusResolver()]
+        })
+      ]
+    }
+  })
+  ```
+
+  :::
+
 - 3. 使用组件
 
      > App.vue
@@ -111,6 +159,16 @@ app.mount('#app')
     const total = 100
   </script>
   ```
+
+### 自动按需导入示例工程
+
+如果你需要新建一个项目，我们推荐使用 Vite。
+
+以下是 plus-pro-components 官方提供的一些示例项目，你可以克隆该项目，并直接拷贝代码来使用。
+
+- [vite-project](https://github.com/plus-pro-components/plus-pro-components-demos/tree/main/vite-project)：使用 Vue 3、Vite 、element-plus、plus-pro-components 搭建应用。
+
+- [vue-cli-project](https://github.com/plus-pro-components/plus-pro-components-demos/tree/main/vue-cli-project)：使用 Vue 3、vue-cli@5 、element-plus、plus-pro-components 搭建应用。
 
 ## 手动导入
 

@@ -1,6 +1,6 @@
 import type { Ref } from 'vue'
 import { ref } from 'vue'
-import { isPromise, isFunction, isArray, toRawType } from '@plus-pro-components/utils'
+import { isPromise, isFunction, isArray, toRawType } from '@plus-pro-components/components/utils'
 import type { OptionsRow, PlusColumn } from '@plus-pro-components/types'
 import { cloneDeep } from 'lodash-es'
 

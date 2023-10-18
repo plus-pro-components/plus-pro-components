@@ -53,7 +53,7 @@
 |  ├── changelog             #changelog
 |  ├── create-component      #新增组件
 |  ├── release               #整包release
-|  ├── utils                 #新增组件
+|  ├── utils                 #公共打包工具
 |  ├── commit.sh             #代码提交
 |  └── publish.sh            #整包发布
 ├── tsconfig.base.json       #tsconfig配置
@@ -93,23 +93,9 @@ pnpm docs:dev
 
 ## 本地开发
 
-- 打桩
-
-  ```sh
-  pnpm stub
-  ```
-
-- 打包工具
-
-  ```sh
-  pnpm build:utils
-  ```
-
-- 启动
-
-  ```sh
-  pnpm dev
-  ```
+```sh
+pnpm dev
+```
 
 ## 添加新的组件步骤
 

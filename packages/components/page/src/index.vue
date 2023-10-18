@@ -23,8 +23,10 @@
         :loading-status="loadingStatus"
         :columns="columns"
         :pagination="{ total, modelValue: pageInfo }"
+        :title-bar="{ refresh: true }"
         v-bind="table"
         @paginationChange="handlePaginationChange"
+        @refresh="handleRefresh"
       >
         <!--表格单元格表头的插槽 -->
         <template v-for="(_, key) in headerSlots" :key="key" #[key]="data">
@@ -245,6 +247,10 @@ const handleSearch = (values: any) => {
 const handleRest = () => {
   state.params = {}
   pageInfo.value.page = 1
+  getList()
+}
+
+const handleRefresh = () => {
   getList()
 }
 

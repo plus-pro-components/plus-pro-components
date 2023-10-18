@@ -8,6 +8,19 @@
 
     <div class="plus-table-title-bar__toolbar">
       <slot name="toolbar" />
+
+      <span
+        v-if="titleBarConfig?.refresh === true"
+        class="plus-table-title-bar__toolbar__refresh"
+        @click="handleRefresh"
+      >
+        <el-tooltip effect="dark" :content="t('plus.table.refresh')" placement="top">
+          <el-icon :size="iconSize" :color="iconColor" class="plus-table-title-bar__toolbar__icon">
+            <RefreshRight />
+          </el-icon>
+        </el-tooltip>
+      </span>
+
       <!-- 表格密度 -->
       <PlusPopover
         v-if="titleBarConfig?.density !== false"
@@ -31,7 +44,11 @@
 
         <template #reference>
           <el-tooltip effect="dark" :content="t('plus.table.density')" placement="top">
-            <el-icon :size="18" color="#919191" class="plus-table-title-bar__toolbar__icon">
+            <el-icon
+              :size="iconSize"
+              :color="iconColor"
+              class="plus-table-title-bar__toolbar__icon"
+            >
               <svg
                 viewBox="0 0 1024 1024"
                 focusable="false"
@@ -55,9 +72,6 @@
         :width="100"
         trigger="click"
         :title="t('plus.table.columnSettings')"
-        :has-show-bottom-button="true"
-        @confirm="handleFilterTableConfirm"
-        @show="handleShow"
       >
         <el-checkbox
           v-model="state.checkAll"
@@ -68,7 +82,7 @@
         </el-checkbox>
         <el-checkbox-group v-model="state.checkList" @change="handleCheckGroupChange">
           <el-checkbox
-            v-for="item in columns"
+            v-for="item in subColumns"
             :key="item.label"
             :label="getTableKey(item)"
             :disabled="item.headerFilter"
@@ -87,7 +101,11 @@
 
         <template #reference>
           <el-tooltip effect="dark" :content="t('plus.table.columnSettings')" placement="top">
-            <el-icon :size="20" color="#919191" class="plus-table-title-bar__toolbar__icon">
+            <el-icon
+              :size="iconSize"
+              :color="iconColor"
+              class="plus-table-title-bar__toolbar__icon"
+            >
               <Setting />
             </el-icon>
           </el-tooltip>
@@ -102,18 +120,18 @@ import type { ComputedRef } from 'vue'
 import { reactive, computed, unref } from 'vue'
 import { cloneDeep } from 'lodash-es'
 import type { PlusColumn } from '@plus-pro-components/types'
-import { Setting } from '@element-plus/icons-vue'
+import { Setting, RefreshRight } from '@element-plus/icons-vue'
 import { PlusPopover } from '@plus-pro-components/components/popover'
 import type { ComponentSize } from 'element-plus/es/constants'
 import type { CheckboxValueType } from 'element-plus'
 import { useLocale } from '@plus-pro-components/hooks'
 import { getTableKey } from '@plus-pro-components/components/utils'
 import { ElCheckbox, ElCheckboxGroup, ElTooltip, ElIcon, ElButton } from 'element-plus'
+
 import type { TitleBar } from './type'
 
 export interface PlusTableToolbarProps {
   columns?: PlusColumn[]
-  subColumns?: any
   titleBar?: boolean | TitleBar
   filterTableHeaderOverflowLabelLength?: number
   defaultSize?: ComponentSize
@@ -121,6 +139,7 @@ export interface PlusTableToolbarProps {
 export interface PlusTableToolbarEmits {
   (e: 'filterTable', columns: PlusColumn[]): void
   (e: 'clickDensity', size: ComponentSize): void
+  (e: 'refresh'): void
 }
 export interface State {
   checkList: string[]
@@ -138,7 +157,6 @@ defineOptions({
 
 const props = withDefaults(defineProps<PlusTableToolbarProps>(), {
   columns: () => [],
-  subColumns: () => [],
   titleBar: true,
   filterTableHeaderOverflowLabelLength: 6,
   defaultSize: 'default'
@@ -146,6 +164,9 @@ const props = withDefaults(defineProps<PlusTableToolbarProps>(), {
 const emit = defineEmits<PlusTableToolbarEmits>()
 
 const titleBarConfig = computed<TitleBar>(() => props.titleBar as any)
+
+const iconSize = computed(() => titleBarConfig.value.icon?.size || 18)
+const iconColor = computed(() => titleBarConfig.value.icon?.color || 'var(--el-text-color-regular)')
 
 const { t } = useLocale()
 const buttonNameDensity: ButtonNameDensity[] = [
@@ -162,35 +183,43 @@ const buttonNameDensity: ButtonNameDensity[] = [
     text: computed(() => t('plus.table.compact'))
   }
 ]
+
+const subColumns = computed(() => props.columns.filter(item => item.hideInTable !== true))
+
 const state: State = reactive({
-  checkAll: false,
-  isIndeterminate: true,
+  checkAll: true,
+  isIndeterminate: false,
   bigImageVisible: false,
   srcList: [],
-  checkList: cloneDeep(props.columns).map(item => getTableKey(item))
+  checkList: cloneDeep(subColumns.value).map(item => getTableKey(item))
 })
 
 const handleCheckAllChange = (val: CheckboxValueType) => {
-  state.checkList = val ? cloneDeep(props.columns).map(item => getTableKey(item)) : []
+  state.checkList = val ? cloneDeep(subColumns.value).map(item => getTableKey(item)) : []
   state.isIndeterminate = false
+}
+
+const handleFilterTableConfirm = () => {
+  const columns = cloneDeep(subColumns.value)
+  const filterColumns = columns.filter(item => state.checkList.includes(getTableKey(item)))
+  emit('filterTable', filterColumns)
 }
 
 const handleCheckGroupChange = (value: CheckboxValueType[]) => {
   const checkedCount = value.length
-  state.checkAll = checkedCount === props.columns.length
-  state.isIndeterminate = checkedCount > 0 && checkedCount < props.columns.length
-}
+  state.checkAll = checkedCount === subColumns.value.length
+  state.isIndeterminate = checkedCount > 0 && checkedCount < subColumns.value.length
 
-const handleShow = () => {
-  state.checkList = cloneDeep(props.subColumns).map((item: PlusColumn) => getTableKey(item))
-  const checkedCount = state.checkList.length
-  state.checkAll = checkedCount === props.columns.length
-  state.isIndeterminate = checkedCount > 0 && checkedCount < props.columns.length
+  handleFilterTableConfirm()
 }
 
 // 密度
 const handleClickDensity = (size: ComponentSize) => {
   emit('clickDensity', size)
+}
+// 刷新
+const handleRefresh = () => {
+  emit('refresh')
 }
 
 const getLabel = (label: string) => {
@@ -198,11 +227,5 @@ const getLabel = (label: string) => {
     return label
   }
   return label?.slice(0, props.filterTableHeaderOverflowLabelLength) + '...'
-}
-
-const handleFilterTableConfirm = () => {
-  const columns = cloneDeep(props.columns)
-  const subColumns = columns.filter(item => state.checkList.includes(getTableKey(item)))
-  emit('filterTable', subColumns)
 }
 </script>

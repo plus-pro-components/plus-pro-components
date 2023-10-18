@@ -38,6 +38,7 @@ export default {
     table: {
       title: 'Table',
       density: 'Density',
+      refresh: 'Refresh',
       columnSettings: 'Column settings',
       selectAll: 'Select all',
       default: 'Default',

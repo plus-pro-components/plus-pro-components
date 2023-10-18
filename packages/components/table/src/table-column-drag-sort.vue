@@ -13,7 +13,7 @@
 <script lang="ts" setup>
 import type { SortableEvent, Options as SortableOptions } from 'sortablejs'
 import Sortable from 'sortablejs'
-import { isPlainObject } from '@plus-pro-components/utils'
+import { isPlainObject } from '@plus-pro-components/components/utils'
 import { watch } from 'vue'
 import { useLocale } from '@plus-pro-components/hooks'
 import type { RecordType } from '@plus-pro-components/types'

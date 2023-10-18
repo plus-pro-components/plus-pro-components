@@ -10,6 +10,7 @@
   --vp-layout-max-width: 90%;
   --vp-sidebar-bg-color: #fff;
   --vp-sidebar-width: 240px;
+  --prism-block-padding-y: 1.2em;
 }
 
 .dark {
@@ -18,6 +19,13 @@
 
 .VPContent .VPDoc.has-aside .content-container {
   max-width: 1200px;
+}
+
+.tagline-link {
+  font-weight: 500;
+  color: var(--vp-c-brand);
+  text-decoration-style: dotted;
+  transition: color 0.25s;
 }
 
 .VPSidebar {

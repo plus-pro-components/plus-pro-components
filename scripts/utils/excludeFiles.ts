@@ -1,8 +1,7 @@
 // 基础
 const excludes = [
   'node_modules',
-  'test',
-  'mock',
+  '__tests__',
   'dist',
   'packages/eslint-config',
   'packages/utils',
