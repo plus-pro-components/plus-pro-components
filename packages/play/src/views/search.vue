@@ -12,7 +12,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import type { PlusColumn } from '@plus-pro-components/types'
 
 const state = ref({
@@ -25,7 +25,8 @@ const columns: PlusColumn[] = [
     label: '名称',
     prop: 'name',
     valueType: 'copy',
-    tooltip: '名称最多显示6个字符'
+    tooltip: '名称最多显示6个字符',
+    hideInSearch: computed(() => true)
   },
   {
     label: '状态',

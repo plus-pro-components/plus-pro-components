@@ -109,7 +109,7 @@
 </template>
 
 <script lang="ts" setup>
-import { reactive, toRefs, watch, ref, provide, shallowRef, useSlots } from 'vue'
+import { reactive, toRefs, watch, ref, provide, shallowRef, useSlots, unref } from 'vue'
 import type { PlusPaginationProps } from '@plus-pro-components/components/pagination'
 import { PlusPagination } from '@plus-pro-components/components/pagination'
 import { DefaultPageInfo, TableFormRefInjectionKey } from '@plus-pro-components/constants'
@@ -251,7 +251,7 @@ provide(TableFormRefInjectionKey, formRefs)
 watch(
   () => props.columns,
   val => {
-    subColumns.value = val.filter(item => item.hideInTable !== true) as any
+    subColumns.value = val.filter(item => unref(item.hideInTable) !== true) as any
   },
   {
     deep: true,
@@ -288,7 +288,7 @@ const handleClickActionConfirmCancel = (res: ButtonsCallBackParams) => {
 }
 
 const handleFilterTableConfirm = (data: PlusColumn[]) => {
-  subColumns.value = data.filter(item => item.hideInTable !== true) as any
+  subColumns.value = data.filter(item => unref(item.hideInTable) !== true) as any
 }
 
 // 密度

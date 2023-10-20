@@ -184,7 +184,7 @@ const buttonNameDensity: ButtonNameDensity[] = [
   }
 ]
 
-const subColumns = computed(() => props.columns.filter(item => item.hideInTable !== true))
+const subColumns = computed(() => props.columns.filter(item => unref(item.hideInTable) !== true))
 
 const state: State = reactive({
   checkAll: true,

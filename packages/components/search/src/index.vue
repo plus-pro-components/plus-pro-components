@@ -41,7 +41,7 @@
 import type { PlusFormInstance } from '@plus-pro-components/components/form'
 import { PlusForm } from '@plus-pro-components/components/form'
 import type { Ref } from 'vue'
-import { reactive, ref, toRefs, computed, watch } from 'vue'
+import { reactive, ref, toRefs, computed, watch, unref } from 'vue'
 import type { FormProps, RowProps, ColProps } from 'element-plus'
 import { ArrowDown, ArrowUp, Search, RefreshRight } from '@element-plus/icons-vue'
 import type { PlusColumn, FieldValues, Mutable } from '@plus-pro-components/types'
@@ -114,7 +114,7 @@ const state = reactive<PlusSearchState>({
 })
 
 state.originData = computed<any[]>(() => {
-  return props.columns.filter(item => item.hideInSearch !== true)
+  return props.columns.filter(item => unref(item.hideInSearch) !== true)
 })
 
 state.subColumns = computed<any[]>(() => {

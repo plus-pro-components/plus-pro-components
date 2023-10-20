@@ -1,10 +1,12 @@
 <template>
   <div>
     <PlusTable :columns="tableConfig" :table-data="tableData" @form-change="handleChange" />
+    <el-button @click="handleClick">hide</el-button>
   </div>
 </template>
 
 <script lang="ts" setup>
+import { ref } from 'vue'
 import { useTable } from '@plus-pro-components/hooks'
 import type { PlusColumn } from '@plus-pro-components/types'
 
@@ -22,11 +24,18 @@ const TestServe = {
 
 const { tableData } = useTable()
 
+const hide = ref(true)
+
+const handleClick = () => {
+  hide.value = !hide.value
+}
+
 const tableConfig: PlusColumn[] = [
   {
     label: '多级显示',
     prop: 'level.message.tip',
-    editable: true
+    editable: true,
+    hideInTable: hide
   },
   {
     label: '状态',

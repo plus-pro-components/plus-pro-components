@@ -1,5 +1,5 @@
 import type { ElTooltipProps, ButtonType } from 'element-plus'
-import type { VNode } from 'vue'
+import type { VNode, Ref, ComputedRef } from 'vue'
 import type { RecordType } from './global'
 import type { TableValueType, TableColumnProps } from './table'
 import type { FormItemValueType, FormColumnProps, FieldValueType } from './form'
@@ -97,16 +97,16 @@ export interface CommentType {
   valueType?: TableValueType | FormItemValueType
 
   /** @desc 在 PlusDescriptions组件中 隐藏 */
-  hideInDescriptions?: boolean
+  hideInDescriptions?: boolean | Ref<boolean> | ComputedRef<boolean>
 
   /** @desc 在 PlusForm 组件中隐藏 */
-  hideInForm?: boolean
+  hideInForm?: boolean | Ref<boolean> | ComputedRef<boolean>
 
   /** @desc 在 PlusTable 组件中隐藏 */
-  hideInTable?: boolean
+  hideInTable?: boolean | Ref<boolean> | ComputedRef<boolean>
 
-  /** @desc 在 table的查询表单 中隐藏 */
-  hideInSearch?: boolean
+  /** @desc 在 PlusSearch 中隐藏 */
+  hideInSearch?: boolean | Ref<boolean> | ComputedRef<boolean>
 
   /**
    * 描述行，el-descriptions-item 的props

@@ -98,7 +98,7 @@
 
 <script lang="ts" setup>
 import type { DefineComponent } from 'vue'
-import { reactive, ref, watch, computed, useSlots } from 'vue'
+import { reactive, ref, watch, computed, useSlots, unref } from 'vue'
 import type { FormInstance, FormRules, FormProps, RowProps, ColProps } from 'element-plus'
 import { ElMessage, ElForm, ElCard, ElButton, ElIcon } from 'element-plus'
 import { useLocale } from '@plus-pro-components/hooks'
@@ -180,7 +180,8 @@ const state = reactive<PlusFormState>({
   values: { ...props.modelValue },
   subColumns: []
 })
-const filterHide = (columns: PlusColumn[]) => columns.filter(item => item.hideInForm !== true)
+const filterHide = (columns: PlusColumn[]) =>
+  columns.filter(item => unref(item.hideInForm) !== true)
 
 const model = computed(() => cloneDeep(state.values))
 

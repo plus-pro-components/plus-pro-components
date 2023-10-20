@@ -337,7 +337,6 @@ export interface PlusFormItemProps {
   // eslint-disable-next-line vue/require-default-prop
   valueType?: PlusColumn['valueType']
   options?: PlusColumn['options']
-  hideInForm?: PlusColumn['hideInForm']
   formItemProps?: PlusColumn['formItemProps']
   // eslint-disable-next-line vue/require-default-prop
   renderField?: PlusColumn['renderField']
@@ -382,7 +381,6 @@ const ElInput: Component = InputComponent
 const props = withDefaults(defineProps<PlusFormItemProps>(), {
   modelValue: '',
   tooltip: '',
-  hideInForm: false,
   formItemProps: () => ({}),
   fieldProps: () => ({}),
   options: () => [],
