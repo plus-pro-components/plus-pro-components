@@ -2,6 +2,7 @@
   <PlusFormItem
     v-for="item in columns"
     :key="item.label"
+    ref="fieldInstance"
     v-model="values[item.prop]"
     v-bind="item"
     @change="(val:any) =>handleChange(val, item.prop)"
@@ -18,7 +19,7 @@ interface RestaurantItem {
 }
 
 const restaurants = ref<RestaurantItem[]>([])
-
+const fieldInstance = ref()
 const createFilter = (queryString: string) => {
   return (restaurant: RestaurantItem) => {
     return restaurant.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0
@@ -38,6 +39,8 @@ const loadAll = () => {
 
 onMounted(() => {
   restaurants.value = loadAll()
+
+  console.log(fieldInstance.value)
 })
 
 const columns: PlusColumn[] = [
@@ -228,6 +231,11 @@ const columns: PlusColumn[] = [
     valueType: 'slider'
   },
   {
+    label: 'text',
+    prop: 'text',
+    valueType: 'text'
+  },
+  {
     label: 'time-picker',
     prop: 'time-picker',
     valueType: 'time-picker'
@@ -257,6 +265,7 @@ const row = {
   name: 'name',
   status: '1',
   tag: 'success',
+  text: 'text',
   money: '100',
   progress: 30,
   rate: 4,
