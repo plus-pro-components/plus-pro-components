@@ -1,3 +1,19 @@
+## [v0.0.1-beta.17](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-beta.16...v0.0.1-beta.17) (2023-10-23)
+
+
+### ✨ Features
+
+* **components[form-item]:** :sparkles: el-time-picker add value-format default prop([62e6c8f](https://github.com/plus-pro-components/plus-pro-components/commit/62e6c8f)) by@xiaofei
+* **components[date-picker]:** :sparkles: add focus emit([1cc3d2c](https://github.com/plus-pro-components/plus-pro-components/commit/1cc3d2c)) by@xiaofei
+* **theme-chalk:** :sparkles: update date-picker.scss and  input-tag.scss([f766f47](https://github.com/plus-pro-components/plus-pro-components/commit/f766f47)) by@xiaofei
+* **components:** :sparkles: columns hideIn* add Ref and ComputedRef support.([e24a649](https://github.com/plus-pro-components/plus-pro-components/commit/e24a649)) by@xiaofei
+* **components[form-item]:** :sparkles: form-item component expose 'fieldInstance'([f6b8744](https://github.com/plus-pro-components/plus-pro-components/commit/f6b8744)) by@xiaofei
+
+
+
+
+
+
 ## [v0.0.1-beta.16](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-beta.15...v0.0.1-beta.16) (2023-10-18)
 
 
