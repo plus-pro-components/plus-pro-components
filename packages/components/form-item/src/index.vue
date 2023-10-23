@@ -236,6 +236,7 @@
       :placeholder="t('plus.field.pleaseSelect') + label"
       class="plus-form-item-field"
       clearable
+      value-format="YYYY-MM-DD HH:mm:ss"
       v-bind="customFieldProps"
       @change="handleChange"
     />

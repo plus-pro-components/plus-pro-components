@@ -72,7 +72,7 @@ defineOptions({
 const props = withDefaults(defineProps<PlusDatePickerProps>(), {
   modelValue: () => [],
   valueFormat: 'YYYY-MM-DD HH:mm:ss',
-  format: 'YYYY-MM-D HH:mm:ss',
+  format: 'YYYY-MM-DD HH:mm:ss',
   rangeSeparator: '/',
   type: 'datetime',
   startProps: () => ({}),
