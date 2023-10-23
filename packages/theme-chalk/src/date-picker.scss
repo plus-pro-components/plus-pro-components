@@ -1,37 +1,48 @@
 .plus-date-picker {
-  border: none;
   display: flex;
   flex-wrap: nowrap;
-  width: 100%;
-  .el-input__prefix {
-    display: none;
+  width: fit-content;
+  max-width: 100%;
+  border-radius: var(--el-border-radius-base);
+  border: 1px solid var(--el-border-color);
+
+  &:hover {
+    border-color: var(--el-border-color-hover);
   }
+
+  &.is-focus {
+    border-color: var(--el-color-primary);
+  }
+
   .plus-date-picker__middle {
     display: inline-block;
     line-height: 30px;
-    border-top: 1px solid #ebeff2;
-    border-bottom: 1px solid #ebeff2;
     background-color: #fff;
+    color: var(--el-text-color-placeholder);
   }
   .el-input__wrapper {
     width: 100%;
-    box-sizing: border-box;
-    border: 1px solid #ebeff2;
-    box-shadow: none;
-    padding-right: 0;
+
+    &:hover {
+      box-shadow: none;
+    }
   }
+  .el-input__wrapper.is-focus {
+    box-shadow: none;
+  }
+
   .plus-date-picker__start {
+    font-size: 14px;
     .el-input__wrapper {
-      border-top-right-radius: 0;
-      border-bottom-right-radius: 0;
-      border-right: none;
+      border: none;
+      box-shadow: none;
     }
   }
   .plus-date-picker__end {
+    font-size: 14px;
     .el-input__wrapper {
-      border-top-left-radius: 0;
-      border-bottom-left-radius: 0;
-      border-left: 0;
+      border: 0;
+      box-shadow: none;
     }
   }
 }

@@ -1,33 +1,37 @@
 .plus-input-tag {
+  width: fit-content;
+  max-width: 100%;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  width: 100%;
   border-radius: var(--el-border-radius-base);
-  box-shadow: 0 0 0 1px var(--el-border-color) inset;
   background-color: var(--el-fill-color-blank);
-  transition: var(--el-transition-box-shadow);
-  padding: 1px 5px 3px;
   box-sizing: border-box;
-  &__is-focus {
-    box-shadow: 0 0 0 1px var(--el-color-primary) inset;
-    &:hover {
-      box-shadow: 0 0 0 1px var(--el-color-primary) inset;
-    }
-  }
+  border: 1px solid var(--el-border-color);
+  padding: 0 2px;
+  box-sizing: border-box;
+
   &:hover {
-    box-shadow: 0 0 0 1px var(--el-border-color-hover) inset;
+    border-color: var(--el-border-color-hover);
+  }
+  &.is-focus {
+    border-color: var(--el-color-primary);
   }
   .plus-input-tag__input {
     --el-input-hover-border-color: transparent;
     --el-input-focus-border-color: transparent;
     --el-input-border-color: transparent;
     flex: 1;
+    max-width: 208px;
+    min-width: 85px;
+    .el-input__wrapper {
+      box-sizing: border-box;
+      padding: 2px;
+    }
   }
   .plus-input-tag__tag {
     margin-right: 5px;
     margin-top: 2px;
-    line-height: 32px;
   }
   .el-input.is-disabled .el-input__wrapper {
     box-shadow: none;

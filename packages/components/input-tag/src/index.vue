@@ -2,7 +2,10 @@
   <div
     ref="plusInputTagInstance"
     v-click-outside="onClickOutside"
-    :class="['plus-input-tag', state.isFocus ? 'plus-input-tag__is-focus' : '']"
+    class="plus-input-tag"
+    :class="{
+      'is-focus': state.isFocus
+    }"
     @click="handleClick"
   >
     <el-tag
@@ -23,6 +26,7 @@
       :placeholder="t('plus.inputTag.placeholder')"
       :disabled="state.tags.length >= limit"
       v-bind="inputProps"
+      clearable
       @blur="handle('blur')"
       @keyup.enter.exact="handle('enter')"
       @keyup.space.exact="handle('space')"
