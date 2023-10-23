@@ -57,6 +57,7 @@ export interface PlusDatePickerProps {
 }
 export interface PlusRadioEmits {
   (e: 'change', value: string[]): void
+  (e: 'focus', event: FocusEvent): void
   (e: 'update:modelValue', value: string[]): void
 }
 export interface DatePickerState {
@@ -96,8 +97,9 @@ const state: DatePickerState = reactive({
 })
 const isFocus = ref(false)
 
-const handleFocus = () => {
+const handleFocus = (event: FocusEvent) => {
   isFocus.value = true
+  emit('focus', event)
 }
 const onClickOutside = () => {
   isFocus.value = false
