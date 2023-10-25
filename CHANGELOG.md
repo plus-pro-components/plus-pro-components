@@ -1,3 +1,18 @@
+## [v0.0.1-beta.18](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-beta.17...v0.0.1-beta.18) (2023-10-25)
+
+
+### ✨ Features
+
+* **theme-chalk:** :sparkles: support dark-mode and namespace.([1dc2995](https://github.com/plus-pro-components/plus-pro-components/commit/1dc2995)) by@xiaofei
+
+
+### 🐛 Bug Fixes
+
+* **theme-chalk:** :bug: fix input-tag width([c95ce0a](https://github.com/plus-pro-components/plus-pro-components/commit/c95ce0a)) by@xiaofei
+
+
+
+
 ## [v0.0.1-beta.17](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-beta.16...v0.0.1-beta.17) (2023-10-23)
 
 
