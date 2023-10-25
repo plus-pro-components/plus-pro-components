@@ -1,66 +1,66 @@
-.plus-table {
-  .el-popper {
-    max-width: 200px;
-  }
+@use 'mixins/config' as *;
+@use 'mixins/mixins' as *;
+@use 'mixins/function' as *;
 
+@include b(table) {
   /* 自定义列栏 */
-  .plus-table-column {
-    .plus-table-column__header {
+  @include b(table-column) {
+    @include e(header) {
       display: flex;
       align-items: center;
-      .plus-table-column__header__icon {
+
+      @include e(header__icon) {
         margin-left: 2px;
       }
     }
   }
 
   /* 操作栏 */
-  .plus-table-action-bar {
+  @include b(table-action-bar) {
     .cell {
       display: flex;
       align-items: center;
     }
-    .plus-table-action-bar__dropdown__link {
+
+    @include e(dropdown__link) {
       display: inline-block;
       cursor: pointer;
     }
-    .plus-table-action-bar__column__link {
+    @include e(column__link) {
       margin-right: 10px;
     }
-    .plus-table-action-bar__dropdown {
+    @include e(dropdown) {
       vertical-align: baseline;
       cursor: pointer;
       margin-left: 12px;
     }
-    .el-link + .el-link {
-      margin-left: 12px;
+    @include elb(link) {
+      & + .#{$el-namespace + -link} {
+        margin-left: 12px;
+      }
     }
-    .el-icon {
+    @include elb(icon) {
       cursor: pointer;
-    }
-    .el-icon + .el-icon {
-      margin-left: 12px;
-    }
-  }
 
-  /* 排序 */
-  .plus-table-column-drag-sort {
-    .plus-table-column-drag-icon {
-      cursor: move;
-      padding: 4px;
-      box-sizing: border-box;
-      font-size: 18px;
-      color: rgba(42, 46, 54, 0.88);
-      vertical-align: bottom;
-      &:hover {
-        background-color: #d3e7ff;
+      & + .#{$el-namespace + -icon} {
+        margin-left: 12px;
       }
     }
   }
 
+  /* 排序 */
+  @include b(table-column-drag-sort) {
+    @include b(table-column-drag-icon) {
+      cursor: move;
+      padding: 4px;
+      box-sizing: border-box;
+      font-size: 18px;
+    }
+  }
+
   /* 序号栏 */
-  .plus-table-column-index {
-    .plus-table-index-column {
+  @include b(table-column-index) {
+    @include b(table-index-column) {
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -71,7 +71,7 @@
     }
 
     .cell {
-      .plus-table-column-index__content {
+      @include b(table-column-index__content) {
         align-items: center;
         display: flex;
         justify-content: center;
@@ -81,40 +81,41 @@
   }
 
   /*工具栏*/
-
-  .plus-table-title-bar {
+  @include b(table-title-bar) {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 10px;
+  }
 
-    .plus-table-title-bar__toolbar {
-      display: flex;
-      align-items: center;
-    }
+  @include elb(popper) {
+    max-width: 200px;
   }
 }
 
 /* 密度设置 */
-.plus-table-title-bar__toolbar__density {
+@include b(table-title-bar__toolbar__density) {
   display: flex;
   flex-direction: column;
   align-items: center;
-  .el-button {
+
+  @include elb(button) {
     margin-top: 10px;
     width: 80px;
-  }
-  .el-button + .el-button {
-    margin-left: 0;
+
+    & + .#{$el-namespace + -button} {
+      margin-left: 0;
+    }
   }
 }
-.plus-table-title-bar__toolbar__icon {
+
+@include b(table-title-bar__toolbar__icon) {
   margin-left: 10px;
   vertical-align: middle;
   cursor: pointer;
+  color: getCssVar('text-color-regular');
 }
-
 /* 列设置 */
-.plus-table-title-bar__toolbar__checkbox__item {
+@include b(table-title-bar__toolbar__checkbox__item) {
   margin-left: 20px;
 }

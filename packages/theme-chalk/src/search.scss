@@ -1,5 +1,9 @@
-.plus-search {
-  .plus-search__button__wrapper .el-form-item__content {
-    flex-wrap: nowrap;
+@use 'mixins/mixins' as *;
+
+@include b(search) {
+  @include e(button__wrapper) {
+    @include elb(form-item__content) {
+      flex-wrap: nowrap;
+    }
   }
 }

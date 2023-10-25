@@ -166,7 +166,7 @@ const emit = defineEmits<PlusTableToolbarEmits>()
 const titleBarConfig = computed<TitleBar>(() => props.titleBar as any)
 
 const iconSize = computed(() => titleBarConfig.value.icon?.size || 18)
-const iconColor = computed(() => titleBarConfig.value.icon?.color || 'var(--el-text-color-regular)')
+const iconColor = computed(() => titleBarConfig.value.icon?.color)
 
 const { t } = useLocale()
 const buttonNameDensity: ButtonNameDensity[] = [

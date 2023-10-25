@@ -1,47 +1,52 @@
-.plus-date-picker {
+@use 'mixins/mixins' as *;
+@use 'mixins/function' as *;
+
+@include b(date-picker) {
   display: flex;
   flex-wrap: nowrap;
   width: fit-content;
   max-width: 100%;
-  border-radius: var(--el-border-radius-base);
-  border: 1px solid var(--el-border-color);
+  border-radius: getCssVar('border-radius-base');
+  border: 1px solid getCssVar('border-color');
+  align-items: center;
 
   &:hover {
-    border-color: var(--el-border-color-hover);
+    border-color: getCssVar('border-color-hover');
   }
 
   &.is-focus {
-    border-color: var(--el-color-primary);
+    border-color: getCssVar('color-primary');
   }
 
-  .plus-date-picker__middle {
-    display: inline-block;
-    line-height: 30px;
-    background-color: #fff;
-    color: var(--el-text-color-placeholder);
+  @include e(middle) {
+    color: getCssVar('text-color-placeholder');
   }
-  .el-input__wrapper {
+
+  @include e(start) {
+    font-size: 14px;
+    @include elb(input__wrapper) {
+      border: none;
+      box-shadow: none;
+    }
+  }
+
+  @include elb(input__wrapper) {
     width: 100%;
 
     &:hover {
       box-shadow: none;
     }
-  }
-  .el-input__wrapper.is-focus {
-    box-shadow: none;
-  }
-
-  .plus-date-picker__start {
-    font-size: 14px;
-    .el-input__wrapper {
-      border: none;
+    &.is-focus {
       box-shadow: none;
     }
   }
-  .plus-date-picker__end {
+}
+
+@include b(date-picker) {
+  @include e(end) {
     font-size: 14px;
-    .el-input__wrapper {
-      border: 0;
+    @include elb(input__wrapper) {
+      border: none;
       box-shadow: none;
     }
   }

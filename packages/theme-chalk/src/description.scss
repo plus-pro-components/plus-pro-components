@@ -1,9 +1,11 @@
-.plus-description {
-  .plus-description__name {
+@use 'mixins/mixins' as *;
+
+@include b(description) {
+  @include e(name) {
     max-width: 200px;
     word-wrap: break-word;
   }
-  .plus-description__label {
+  @include e(label) {
     min-width: 80px;
   }
 }
