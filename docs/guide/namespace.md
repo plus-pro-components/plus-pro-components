@@ -1,4 +1,4 @@
-## 自定义命名空间 <el-tag>v0.0.1-beta.18</el-tag>
+# 自定义命名空间 <el-tag>v0.0.1-beta.18</el-tag>
 
 支持 element-plus 的命名空间
 
@@ -8,7 +8,7 @@ Element Plus 提供的默认命名空间为 el。 在特殊情况下，我们需
 
 您必须同时设置 `ElConfigProvider` 和 `scss` `$namespace` 以及 `plus-pro-components` `scss`的 `$el-namespace`
 
-### 设置 ElConfigProvider
+## 设置 ElConfigProvider
 
 使用 ElConfigProvider 包装您的根组件。
 
@@ -21,7 +21,7 @@ Element Plus 提供的默认命名空间为 el。 在特殊情况下，我们需
 </template>
 ```
 
-### 设置 SCSS 和 CSS 变量
+## 设置 SCSS 和 CSS 变量
 
 创建 `styles/element/index.scss`:
 
