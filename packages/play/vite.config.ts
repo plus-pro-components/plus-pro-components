@@ -17,6 +17,13 @@ const resolve = (dir: string) => fileURLToPath(new URL(dir, import.meta.url))
 export default async () => {
   await gFiles()
   return defineConfig({
+    css: {
+      preprocessorOptions: {
+        scss: {
+          additionalData: `@use "./src/style.scss" as *;`
+        }
+      }
+    },
     plugins: [
       vue(),
       vueJsx(),
@@ -25,7 +32,11 @@ export default async () => {
         dts: false
       }),
       Components({
-        resolvers: [ElementPlusResolver()],
+        resolvers: [
+          ElementPlusResolver({
+            importStyle: 'sass'
+          })
+        ],
         dts: false,
         directoryAsNamespace: true
       })

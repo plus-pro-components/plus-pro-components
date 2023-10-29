@@ -1,0 +1,8 @@
+//  fork from element-plus  and rewrite
+
+$el-namespace: 'el' !default;
+$plus-namespace: 'plus' !default;
+$plus-common-separator: '-' !default;
+$plus-element-separator: '__' !default;
+$plus-modifier-separator: '--' !default;
+$plus-state-prefix: 'is-' !default;

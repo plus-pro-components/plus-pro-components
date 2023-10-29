@@ -56,7 +56,7 @@ export default {
       submitText: '提交'
     },
     inputTag: {
-      placeholder: '请输入关键字后按enter/space键'
+      placeholder: '请输入关键字后按回车/空格键'
     }
   }
 }

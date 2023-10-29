@@ -1,15 +1,18 @@
-.plus-steps-form {
-  .el-steps {
+@use 'mixins/mixins' as *;
+
+@include b(steps-form) {
+  @include elb(steps) {
     margin-bottom: 20px;
   }
 }
 
-.plus-steps-from-vertical {
+@include b(steps-form-vertical) {
   display: flex;
-  .el-steps--vertical {
+  @include elb(steps--vertical) {
     margin-right: 20px;
   }
-  .plus-form {
+
+  @include b(form) {
     flex: 1;
   }
 }

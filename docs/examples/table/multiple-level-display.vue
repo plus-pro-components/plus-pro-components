@@ -13,7 +13,8 @@ const TestServe = {
     const data = [...new Array(5)].map((_, index) => {
       return {
         status: { data: { value: String(index % 2) } },
-        level: { message: { tip: '提示' + index } }
+        level: { message: { tip: '提示' + index } },
+        list: ['list0', 'list1', 'list2']
       }
     })
     return { data }
@@ -31,6 +32,15 @@ const tableConfig: PlusColumn[] = [
   {
     label: '多级显示',
     prop: 'level.message.tip'
+  },
+  {
+    label: '数组形式',
+    editable: true,
+    prop: 'list[0]'
+  },
+  {
+    label: '数组形式',
+    prop: 'list[0]'
   },
   {
     label: '状态',

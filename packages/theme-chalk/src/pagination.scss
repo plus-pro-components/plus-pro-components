@@ -1,4 +1,6 @@
-.plus-pagination {
+@use 'mixins/mixins' as *;
+
+@include b(pagination) {
   display: flex;
   justify-content: flex-start;
   padding: 16px 0;

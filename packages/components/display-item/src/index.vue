@@ -134,9 +134,9 @@
 
   <!-- 复制 -->
   <span v-else-if="column.valueType === 'copy'" class="plus-display-item">
+    {{ displayValue }}
     <el-icon
       size="16"
-      color="var(--el-color-primary)"
       class="plus-display-item__icon__copy"
       v-bind="customFieldProps"
       @click="handelClickCopy(column, subRow)"
@@ -144,7 +144,6 @@
       <DocumentCopy v-if="!subRow.isCopy" />
       <Select v-else />
     </el-icon>
-    {{ displayValue }}
   </span>
 
   <!-- 代码块 -->

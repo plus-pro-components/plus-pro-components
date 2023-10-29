@@ -9,11 +9,13 @@
   "jsdelivr": "index.css",
   "scripts": {
     "clean": "rimraf dist",
+    "dev": "cross-env PLUS_THEME_CHALK_DEV=true  tsx watch ./build.ts ",
     "build": "tsx ./build.ts"
   },
   "devDependencies": {
-    "postcss": "^8.4.27",
+    "sass": "^1.69.4",
+    "postcss": "^8.4.31",
     "postcss-nested": "^6.0.1",
-    "postcss-scss": "^4.0.6"
+    "postcss-scss": "^4.0.9"
   }
 }

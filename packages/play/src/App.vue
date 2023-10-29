@@ -1,9 +1,10 @@
 <template>
-  <div class="nav">
-    <AppNav />
-    <el-button class="switch-language" type="primary" @click="toggle">切换语言</el-button>
-  </div>
-  <el-config-provider :locale="locales">
+  <el-config-provider :locale="locales" namespace="el">
+    <div class="nav">
+      <AppNav />
+      <el-button class="switch-language" type="primary" @click="toggle">切换语言</el-button>
+    </div>
+
     <RouterView />
   </el-config-provider>
 </template>
