@@ -238,6 +238,11 @@ const columns: PlusColumn[] = [
     valueType: 'time-select'
   },
   {
+    label: 'text',
+    prop: 'text',
+    valueType: 'text'
+  },
+  {
     label: 'plus-radio',
     prop: 'plus-radio',
     valueType: 'plus-radio',
@@ -263,6 +268,7 @@ const row = {
   status: '1',
   tag: 'success',
   money: '100',
+  text: '文本',
   progress: 30,
   rate: 4,
   switch: true,

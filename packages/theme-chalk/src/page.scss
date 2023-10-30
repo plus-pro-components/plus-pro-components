@@ -1,5 +1,7 @@
-.plus-page {
-  .plus-page__table_wrapper {
+@use 'mixins/mixins' as *;
+
+@include b(page) {
+  @include e(table_wrapper) {
     margin-top: 20px;
   }
 }

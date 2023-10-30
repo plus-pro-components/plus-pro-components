@@ -34,7 +34,8 @@ const columns: PlusColumn[] = [
     width: 120,
     prop: 'name',
     valueType: 'copy',
-    tooltip: '名称最多显示6个字符'
+    tooltip: '名称最多显示6个字符',
+    hideInForm: ref(true)
   },
   {
     label: '状态',

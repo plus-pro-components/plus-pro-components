@@ -3,7 +3,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import type { PlusColumn } from '@plus-pro-components/types'
 
 const TestServe = {
@@ -45,7 +45,8 @@ const columns: PlusColumn[] = [
     label: '名称',
     width: 120,
     prop: 'name',
-    valueType: 'copy'
+    valueType: 'copy',
+    hideInDescriptions: computed(() => true)
   },
   {
     label: '状态',

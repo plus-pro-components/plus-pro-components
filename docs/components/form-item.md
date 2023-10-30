@@ -182,6 +182,7 @@ form-item/all
 
 ## Exposes
 
-| 名称               | 说明             | 类型                                                                     |
-| ------------------ | ---------------- | ------------------------------------------------------------------------ |
-| `formItemInstance` | el-form-tem 实例 | `object` <docs-tip content='InstanceType<typeof ElFormItem>'></docs-tip> |
+| 名称               | 说明                           | 类型                                                                     |
+| ------------------ | ------------------------------ | ------------------------------------------------------------------------ |
+| `formItemInstance` | el-form-tem 实例               | `object` <docs-tip content='InstanceType<typeof ElFormItem>'></docs-tip> |
+| `fieldInstance`    | 具体的表单单项实例 如 el-input | `object`                                                                 |

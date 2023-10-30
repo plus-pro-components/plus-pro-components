@@ -18,7 +18,7 @@
 
 <script lang="ts" setup>
 import type { ExtractPropTypes } from 'vue'
-import { computed, reactive } from 'vue'
+import { computed, reactive, unref } from 'vue'
 import type { descriptionProps } from 'element-plus'
 import { ElDescriptions, ElDescriptionsItem } from 'element-plus'
 import type { PlusColumn, RecordType, Mutable } from '@plus-pro-components/types'
@@ -52,6 +52,6 @@ const state = reactive<{ subColumns: any }>({
 })
 
 state.subColumns = computed<any>(() =>
-  props.columns.filter(item => item.hideInDescriptions !== true)
+  props.columns.filter(item => unref(item.hideInDescriptions) !== true)
 )
 </script>

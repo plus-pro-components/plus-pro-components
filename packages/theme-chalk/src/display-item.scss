@@ -1,65 +1,73 @@
-.plus-display-item__image {
-  cursor: pointer;
-  object-fit: cover;
-  overflow: hidden;
-  width: 30px;
-}
-.plus-display-item__icon__copy {
-  cursor: pointer;
-  color: #1677ff;
-  text-decoration: none;
-  outline: none;
-  transition: color 0.3s;
-  margin-inline-start: 4px;
-  vertical-align: sub;
-}
-.plus-display-item__link {
-  max-width: 100%;
-  .el-link__inner {
-    width: 100%;
-    display: inline-block;
+@use 'mixins/mixins' as *;
+@use 'mixins/function' as *;
+
+@include b(display-item) {
+  @include e(image, true) {
+    cursor: pointer;
+    object-fit: cover;
+    overflow: hidden;
+    width: 30px;
   }
-}
-.plus-display-item__badge {
-  .plus-display-item__badge__dot {
-    position: relative;
-    top: -1px;
-    display: inline-block;
-    width: 6px;
-    height: 6px;
-    vertical-align: middle;
-    border-radius: 50%;
-    &--primary {
-      background-color: var(--el-color-primary);
-    }
-    &--success {
-      background-color: var(--el-color-success);
-    }
-    &--info {
-      background-color: var(--el-color-info);
-    }
-    &--warning {
-      background-color: var(--el-color-warning);
-    }
-    &--danger {
-      background-color: var(--el-color-danger);
+  @include e(icon__copy, true) {
+    cursor: pointer;
+    color: getCssVar('color-primary');
+    text-decoration: none;
+    outline: none;
+    transition: color 0.3s;
+    margin-inline-start: 4px;
+    vertical-align: sub;
+  }
+  @include e(pre, true) {
+    padding: 0;
+    overflow: auto;
+    font-size: 85%;
+    line-height: 1.45;
+    background-color: getCssVar('color-primary-light-9');
+    border-radius: 3px;
+    width: unset;
+  }
+  @include e(badge, true) {
+    @include e(badge__dot) {
+      position: relative;
+      top: -1px;
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      vertical-align: middle;
+      border-radius: 50%;
+
+      &--primary {
+        background-color: getCssVar('color-primary');
+      }
+      &--success {
+        background-color: getCssVar('color-success');
+      }
+      &--info {
+        background-color: getCssVar('color-info');
+      }
+      &--warning {
+        background-color: getCssVar('color-warning');
+      }
+      &--danger {
+        background-color: getCssVar('color-danger');
+      }
     }
   }
-}
-.plus-display-item__pre {
-  padding: 0;
-  overflow: auto;
-  font-size: 85%;
-  line-height: 1.45;
-  background-color: rgb(246, 248, 250);
-  border-radius: 3px;
-  width: unset;
-}
-.plus-display-item__form {
-  .plus-display-item__form__item {
-    margin: 0;
-    .el-form-item__label {
-      padding: 0;
+  @include e(form, true) {
+    @include e(form__item) {
+      margin: 0;
+
+      @include elb(form-item__label) {
+        padding: 0;
+      }
+    }
+  }
+
+  @include e(link, true) {
+    max-width: 100%;
+    @include elb(link__inner) {
+      width: 100%;
+      display: inline-block;
     }
   }
 }

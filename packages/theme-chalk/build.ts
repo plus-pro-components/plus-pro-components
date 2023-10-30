@@ -3,12 +3,14 @@ import { writeFile, mkdir, access } from 'fs/promises'
 import autoprefixer from 'autoprefixer'
 import postcss from 'postcss'
 import postcssNested from 'postcss-nested'
-import sass from 'sass'
+import { compile } from 'sass'
 import cssnano from 'cssnano'
 import glob from 'fast-glob'
 import { copy } from 'fs-extra'
 import consola from 'consola'
 import { pcOutput } from '../../scripts/utils/paths'
+
+const isDev = process.env.PLUS_THEME_CHALK_DEV === 'true'
 
 const resolve = (...dir: string[]) => path.resolve(__dirname, ...dir)
 const styleRoot = resolve('./src')
@@ -19,7 +21,7 @@ const main = async () => {
   /**
    * 加载./src下所有scss文件
    */
-  const files = await glob([`**/*.scss`], {
+  const files = await glob([`*.scss`], {
     cwd: resolve(styleRoot),
     absolute: true
   })
@@ -34,12 +36,16 @@ const main = async () => {
   }
 
   for (const item of files) {
-    const content = sass.compile(item)
+    const content = compile(item)
     const { name } = path.parse(item)
-    const result = await postcss([postcssNested as any, autoprefixer, cssnano]).process(
-      content.css,
-      { from: undefined }
-    )
+    const plugins = [postcssNested as any, autoprefixer]
+
+    // 生产环境开启压缩
+    if (!isDev) {
+      plugins.push(cssnano)
+    }
+
+    const result = await postcss(plugins).process(content.css, { from: undefined })
     const filename = name === 'index' ? 'index.css' : `plus-${name}.css`
     await writeFile(resolve(distFolder, filename), result.css)
   }

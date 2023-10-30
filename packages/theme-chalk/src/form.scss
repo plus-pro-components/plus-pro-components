@@ -1,14 +1,17 @@
-.plus-form {
-  .plus-form__footer {
+@use 'mixins/mixins' as *;
+
+@include b(form) {
+  @include e(footer) {
     display: flex;
     justify-content: flex-end;
   }
-  .plus-form__group__item {
+  @include e(group__item) {
     margin-bottom: 20px;
-    .plus-form__group__item__icon {
+    @include e(group__item__icon) {
       display: flex;
       align-items: center;
-      .el-icon {
+
+      @include elb(icon) {
         margin-right: 5px;
       }
     }

@@ -1,5 +1,11 @@
 <template>
-  <div class="plus-date-picker">
+  <div
+    v-click-outside="onClickOutside"
+    class="plus-date-picker"
+    :class="{
+      'is-focus': isFocus
+    }"
+  >
     <el-date-picker
       ref="startPickerInstance"
       v-model="state.start"
@@ -9,8 +15,10 @@
       :value-format="valueFormat"
       :disabled-date="subStartDisabledDate"
       class="plus-date-picker__start"
+      clearable
       v-bind="startProps"
       @change="handleChange"
+      @focus="handleFocus"
     />
     <span class="plus-date-picker__middle"> {{ rangeSeparator }} </span>
     <el-date-picker
@@ -22,15 +30,17 @@
       :placeholder="t('plus.datepicker.endPlaceholder')"
       :disabled-date="subEndDisabledDate"
       class="plus-date-picker__end"
+      clearable
       v-bind="endProps"
       @change="handleChange"
+      @focus="handleFocus"
     />
   </div>
 </template>
 
 <script setup lang="ts">
 import { reactive, watch, ref } from 'vue'
-import { ElDatePicker } from 'element-plus'
+import { ElDatePicker, ClickOutside as vClickOutside } from 'element-plus'
 import { isFunction } from '@plus-pro-components/components/utils'
 import { useLocale } from '@plus-pro-components/hooks'
 
@@ -47,6 +57,7 @@ export interface PlusDatePickerProps {
 }
 export interface PlusRadioEmits {
   (e: 'change', value: string[]): void
+  (e: 'focus', event: FocusEvent): void
   (e: 'update:modelValue', value: string[]): void
 }
 export interface DatePickerState {
@@ -61,7 +72,7 @@ defineOptions({
 const props = withDefaults(defineProps<PlusDatePickerProps>(), {
   modelValue: () => [],
   valueFormat: 'YYYY-MM-DD HH:mm:ss',
-  format: 'YYYY-MM-D HH:mm:ss',
+  format: 'YYYY-MM-DD HH:mm:ss',
   rangeSeparator: '/',
   type: 'datetime',
   startProps: () => ({}),
@@ -84,6 +95,15 @@ const state: DatePickerState = reactive({
   start: '',
   end: ''
 })
+const isFocus = ref(false)
+
+const handleFocus = (event: FocusEvent) => {
+  isFocus.value = true
+  emit('focus', event)
+}
+const onClickOutside = () => {
+  isFocus.value = false
+}
 
 const subStartDisabledDate = (time: Date) => {
   if (props.startDisabledDate && isFunction(props.startDisabledDate)) {

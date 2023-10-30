@@ -1,0 +1,6 @@
+@forward 'element-plus/theme-chalk/src/mixins/config.scss' with (
+  $namespace: 'el'
+);
+@forward '../../theme-chalk/src/mixins/config.scss' with (
+  $el-namespace: 'el'
+);

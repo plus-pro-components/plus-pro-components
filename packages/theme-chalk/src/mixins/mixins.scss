@@ -1,0 +1,79 @@
+//  fork from element-plus  and rewrite
+
+@use './config' as *;
+@use './function' as *;
+
+// BEM
+@mixin b($block) {
+  $B: $plus-namespace + $plus-common-separator + $block !global;
+
+  .#{$B} {
+    @content;
+  }
+}
+@mixin elb($block) {
+  $B: $el-namespace + $plus-common-separator + $block !global;
+
+  .#{$B} {
+    @content;
+  }
+}
+
+@mixin e($element, $nest: false) {
+  $E: $element !global;
+  $selector: &;
+  $currentSelector: '';
+  @each $unit in $element {
+    $currentSelector: #{$currentSelector + '.' + $B + $plus-element-separator + $unit + ','};
+  }
+
+  @if hitAllSpecialNestRule($selector) {
+    @if $nest {
+      @at-root {
+        #{$selector} {
+          #{$currentSelector} {
+            @content;
+          }
+        }
+      }
+    } @else {
+      #{$selector} {
+        #{$currentSelector} {
+          @content;
+        }
+      }
+    }
+  } @else {
+    @if $nest {
+      @at-root {
+        #{$currentSelector} {
+          @content;
+        }
+      }
+    } @else {
+      #{$currentSelector} {
+        @content;
+      }
+    }
+  }
+}
+
+@mixin m($modifier, $nest: false) {
+  $selector: &;
+  $currentSelector: '';
+  @each $unit in $modifier {
+    $currentSelector: #{$currentSelector + $selector + $plus-modifier-separator + $unit + ','};
+  }
+
+  @if $nest {
+    @at-root {
+      #{$currentSelector} {
+        @content;
+      }
+    }
+  } @else {
+    #{$currentSelector} {
+      @content;
+    }
+  }
+}

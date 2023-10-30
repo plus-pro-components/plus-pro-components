@@ -56,9 +56,11 @@
 
     <el-autocomplete
       v-else-if="valueType === 'autocomplete'"
+      ref="fieldInstance"
       v-model="state"
       :placeholder="t('plus.field.pleaseEnter') + label"
       class="plus-form-item-field"
+      clearable
       v-bind="customFieldProps"
       @change="handleChange"
       @select="handleSelect"
@@ -66,20 +68,22 @@
 
     <el-cascader
       v-else-if="valueType === 'cascader'"
+      ref="fieldInstance"
       v-model="state"
       :placeholder="t('plus.field.pleaseSelect') + label"
       class="plus-form-item-field"
       :options="options"
+      clearable
       v-bind="customFieldProps"
       @change="handleChange"
     />
 
     <el-checkbox-group
       v-else-if="valueType === 'checkbox'"
+      ref="fieldInstance"
       v-model="state"
       :placeholder="t('plus.field.pleaseSelect') + label"
       class="plus-form-item-field"
-      clearable
       v-bind="customFieldProps"
       @change="handleChange"
     >
@@ -95,6 +99,7 @@
 
     <el-color-picker
       v-else-if="valueType === 'color-picker'"
+      ref="fieldInstance"
       v-model="state"
       :placeholder="t('plus.field.pleaseSelect') + label"
       class="plus-form-item-field"
@@ -104,6 +109,7 @@
 
     <el-date-picker
       v-else-if="valueType === 'date-picker'"
+      ref="fieldInstance"
       v-model="state"
       :placeholder="t('plus.field.pleaseSelect') + label"
       :start-placeholder="t('plus.datepicker.startPlaceholder')"
@@ -112,12 +118,14 @@
       format="YYYY-MM-DD HH:mm:ss"
       type="datetime"
       value-format="YYYY-MM-DD HH:mm:ss"
+      clearable
       v-bind="customFieldProps"
       @change="handleChange"
     />
 
     <PlusDatePicker
       v-else-if="valueType === 'plus-date-picker'"
+      ref="fieldInstance"
       v-model="state"
       class="plus-form-item-field"
       v-bind="customFieldProps"
@@ -126,17 +134,18 @@
 
     <el-input-number
       v-else-if="valueType === 'input-number'"
+      ref="fieldInstance"
       v-model="state"
       class="plus-form-item-field"
       :placeholder="t('plus.field.pleaseEnter') + label"
       autocomplete="off"
-      clearable
       v-bind="customFieldProps"
       @change="handleChange"
     />
 
     <PlusInputTag
       v-else-if="valueType === 'plus-input-tag'"
+      ref="fieldInstance"
       v-model="state"
       class="plus-form-item-field"
       v-bind="customFieldProps"
@@ -145,6 +154,7 @@
 
     <el-radio-group
       v-else-if="valueType === 'radio'"
+      ref="fieldInstance"
       v-model="state"
       :placeholder="t('plus.field.pleaseSelect') + label"
       class="plus-form-item-field"
@@ -164,6 +174,7 @@
 
     <PlusRadio
       v-else-if="valueType === 'plus-radio'"
+      ref="fieldInstance"
       v-model="state"
       class="plus-form-item-field"
       :options="options"
@@ -174,6 +185,7 @@
 
     <el-rate
       v-else-if="valueType === 'rate'"
+      ref="fieldInstance"
       v-model="state"
       class="plus-form-item-field"
       v-bind="customFieldProps"
@@ -181,7 +193,8 @@
     />
 
     <el-select
-      v-else-if="valueType === 'select'"
+      v-else-if="valueType === 'select' && customFieldPropsIsReady"
+      ref="fieldInstance"
       v-model="state"
       :placeholder="t('plus.field.pleaseSelect') + label"
       class="plus-form-item-field"
@@ -200,6 +213,7 @@
 
     <el-slider
       v-else-if="valueType === 'slider'"
+      ref="fieldInstance"
       v-model="state"
       class="plus-form-item-field"
       v-bind="customFieldProps"
@@ -208,6 +222,7 @@
 
     <el-switch
       v-else-if="valueType === 'switch'"
+      ref="fieldInstance"
       v-model="state"
       class="plus-form-item-field"
       v-bind="customFieldProps"
@@ -216,40 +231,51 @@
 
     <el-time-picker
       v-else-if="valueType === 'time-picker'"
+      ref="fieldInstance"
       v-model="state"
       :placeholder="t('plus.field.pleaseSelect') + label"
       class="plus-form-item-field"
+      clearable
+      value-format="YYYY-MM-DD HH:mm:ss"
       v-bind="customFieldProps"
       @change="handleChange"
     />
 
     <el-time-select
       v-else-if="valueType === 'time-select'"
+      ref="fieldInstance"
       v-model="state"
       class="plus-form-item-field"
       :placeholder="t('plus.field.pleaseSelect') + label"
+      clearable
       v-bind="customFieldProps"
       @change="handleChange"
     />
 
     <el-input
       v-else-if="valueType === 'textarea'"
+      ref="fieldInstance"
       v-model="state"
       type="textarea"
       class="plus-form-item-field"
       :placeholder="t('plus.field.pleaseEnter') + label"
       autocomplete="off"
-      clearable
       v-bind="customFieldProps"
       @change="handleChange"
     />
 
-    <span v-else-if="valueType === 'text'" class="plus-form-item-field" v-bind="customFieldProps">
+    <span
+      v-else-if="valueType === 'text'"
+      ref="fieldInstance"
+      class="plus-form-item-field"
+      v-bind="customFieldProps"
+    >
       {{ state }}
     </span>
 
     <el-input
       v-else
+      ref="fieldInstance"
       v-model="state"
       class="plus-form-item-field"
       :placeholder="t('plus.field.pleaseEnter') + label"
@@ -312,7 +338,6 @@ export interface PlusFormItemProps {
   // eslint-disable-next-line vue/require-default-prop
   valueType?: PlusColumn['valueType']
   options?: PlusColumn['options']
-  hideInForm?: PlusColumn['hideInForm']
   formItemProps?: PlusColumn['formItemProps']
   // eslint-disable-next-line vue/require-default-prop
   renderField?: PlusColumn['renderField']
@@ -357,7 +382,6 @@ const ElInput: Component = InputComponent
 const props = withDefaults(defineProps<PlusFormItemProps>(), {
   modelValue: '',
   tooltip: '',
-  hideInForm: false,
   formItemProps: () => ({}),
   fieldProps: () => ({}),
   options: () => [],
@@ -367,13 +391,15 @@ const emit = defineEmits<PlusFormItemEmits>()
 
 const { t } = useLocale()
 const options = useGetOptions(props)
-const formItemInstance = ref()
+const formItemInstance = ref<InstanceType<typeof FormItemComponent> | null>()
+const fieldInstance = ref()
 const customFormItemProps = ref<any>({})
 const customFieldProps = ref<any>({})
 const state = ref<FieldValueType>()
 const range = ['datetimerange', 'daterange', 'monthrange']
 const numberList = ['rate', 'input-number', 'slider']
 const arrayList = ['checkbox', 'plus-date-picker', 'plus-input-tag']
+const customFieldPropsIsReady = ref(false)
 
 /**
  * 默认值是数组的情况
@@ -463,6 +489,7 @@ watch(
     getCustomProps(val, state.value, props, props.index, 'fieldProps')
       .then(data => {
         customFieldProps.value = data
+        customFieldPropsIsReady.value = true
       })
       .catch(err => {
         throw err
@@ -499,6 +526,7 @@ const handleSelect = ({ value }: any) => {
 }
 
 defineExpose({
-  formItemInstance
+  formItemInstance,
+  fieldInstance
 })
 </script>

@@ -140,6 +140,14 @@ export default defineConfig({
               link: '/guide/i18n'
             },
             {
+              text: '命名空间',
+              link: '/guide/namespace'
+            },
+            {
+              text: '暗黑模式',
+              link: '/guide/dark-mode'
+            },
+            {
               text: '更新日志',
               link: '/guide/changelog'
             }

@@ -1,4 +1,4 @@
-# InputTag 输入标签
+# InputTag 输入标签 <el-tag>v0.0.1-beta.10</el-tag>
 
 InputTag 组件由 [ElTag](https://element-plus.org/zh-CN/component/tag.html) 和[ElInput](https://element-plus.org/zh-CN/component/input.html) 组成。
 

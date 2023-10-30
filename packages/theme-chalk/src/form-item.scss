@@ -1,17 +1,23 @@
-.plus-form-item {
+@use 'mixins/mixins' as *;
+@use 'mixins/config' as *;
+
+@include b(form-item) {
   width: 100%;
-  .plus-form-item__label {
+  @include e(label) {
     display: inline-flex;
     align-items: center;
 
-    .plus-table-column__label__icon {
+    @include b(table-column__label__icon) {
       margin-left: 2px;
     }
   }
-}
-.el-form-item.plus-form-item .plus-form-item-field {
-  width: 100%;
-}
-.plus-form-item-field {
-  width: 100%;
+
+  @include b(form-item) {
+    &-field {
+      width: 100%;
+    }
+    &-field.#{$el-namespace + -date-editor} {
+      width: 100%;
+    }
+  }
 }

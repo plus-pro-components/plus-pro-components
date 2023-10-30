@@ -166,7 +166,7 @@ const emit = defineEmits<PlusTableToolbarEmits>()
 const titleBarConfig = computed<TitleBar>(() => props.titleBar as any)
 
 const iconSize = computed(() => titleBarConfig.value.icon?.size || 18)
-const iconColor = computed(() => titleBarConfig.value.icon?.color || 'var(--el-text-color-regular)')
+const iconColor = computed(() => titleBarConfig.value.icon?.color)
 
 const { t } = useLocale()
 const buttonNameDensity: ButtonNameDensity[] = [
@@ -184,7 +184,7 @@ const buttonNameDensity: ButtonNameDensity[] = [
   }
 ]
 
-const subColumns = computed(() => props.columns.filter(item => item.hideInTable !== true))
+const subColumns = computed(() => props.columns.filter(item => unref(item.hideInTable) !== true))
 
 const state: State = reactive({
   checkAll: true,
