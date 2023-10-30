@@ -24,7 +24,7 @@ export const getTooltip = (tooltip: PlusColumn['tooltip']) => {
     return { content: tooltip }
   }
   if (isPlainObject(tooltip)) {
-    return tooltip
+    return tooltip as RecordType
   }
 }
 
