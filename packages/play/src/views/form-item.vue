@@ -149,6 +149,9 @@ const columns: PlusColumn[] = [
     width: 120,
     prop: 'status',
     valueType: 'select',
+    fieldProps: {
+      multiple: true
+    },
     options: [
       {
         label: '未解决',
@@ -263,7 +266,7 @@ const columns: PlusColumn[] = [
 
 const row = {
   name: 'name',
-  status: '1',
+  status: ['0'],
   tag: 'success',
   text: 'text',
   money: '100',

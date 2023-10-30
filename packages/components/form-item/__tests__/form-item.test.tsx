@@ -413,7 +413,8 @@ describe('form-item/index.vue', () => {
       return {
         clearable: true,
         size: 'large',
-        placeholder: 'placeholder'
+        placeholder: 'placeholder',
+        multiple: true
       }
     }
     const options = async () => {
@@ -447,17 +448,18 @@ describe('form-item/index.vue', () => {
       options,
       formItemProps
     }
-    const values = ref<FieldValueType>([])
+    const values = ref<FieldValueType>(['0'])
     const wrapper = mount(() => <FormItem modelValue={values.value} {...column} />, {
       global: {
         plugins: [ElementPlus]
       }
     })
     await nextTick()
-    setTimeout(() => {
-      expect(wrapper.find('.el-form-item__label').attributes('style')).includes('width: 200px;')
-      expect(wrapper.find('.el-select--large').exists()).toBe(true)
-      expect(wrapper.find('.el-input__inner').attributes('placeholder')).toBe('placeholder')
-    }, 1000)
+    await new Promise(resolve => setTimeout(resolve, 1000))
+
+    expect(wrapper.find('.el-form-item__label').attributes('style')).includes('width: 200px;')
+    expect(wrapper.find('.el-select--large').exists()).toBe(true)
+    expect(wrapper.find('.el-select__tags-text').text()).toBe('未解决')
+
   })
 })

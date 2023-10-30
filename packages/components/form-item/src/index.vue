@@ -193,7 +193,7 @@
     />
 
     <el-select
-      v-else-if="valueType === 'select'"
+      v-else-if="valueType === 'select' && customFieldPropsIsReady"
       ref="fieldInstance"
       v-model="state"
       :placeholder="t('plus.field.pleaseSelect') + label"
@@ -399,6 +399,7 @@ const state = ref<FieldValueType>()
 const range = ['datetimerange', 'daterange', 'monthrange']
 const numberList = ['rate', 'input-number', 'slider']
 const arrayList = ['checkbox', 'plus-date-picker', 'plus-input-tag']
+const customFieldPropsIsReady = ref(false)
 
 /**
  * 默认值是数组的情况
@@ -488,6 +489,7 @@ watch(
     getCustomProps(val, state.value, props, props.index, 'fieldProps')
       .then(data => {
         customFieldProps.value = data
+        customFieldPropsIsReady.value = true
       })
       .catch(err => {
         throw err
