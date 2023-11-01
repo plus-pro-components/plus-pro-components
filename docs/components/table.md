@@ -147,6 +147,14 @@ table/cell-edit
 
 :::
 
+## 可编辑表格 (手动控制)
+
+:::demo
+
+table/hand-edit
+
+:::
+
 ## 自定义表格项和表单项 ( 插槽 )
 
 :::warning 提示
@@ -393,9 +401,10 @@ el-table 的其他插槽 如 `append`,`empty`等
 
 ## Table Exposes
 
-| 名称            | 说明             | 类型                                      |
-| --------------- | ---------------- | ----------------------------------------- |
-| `tableInstance` | `el-table`的实例 | `import('element-plus')['TableInstance']` |
+| 名称            | 说明                                                                   | 类型                                                                                            |
+| --------------- | ---------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| `tableInstance` | `el-table`的实例                                                       | `object` `import('element-plus')['TableInstance']`                                              |
+| `formRefs`      | 表格中所有 form 的实例，可以用来控制表格是否可编辑，以及表格表单检验等 | `object` <docs-tip content='ShallowRef<Record<string / number, TableFormRefRow[]>>'></docs-tip> |
 
 **拿到 tableInstance 后支持所有[ElTable 方法](https://element-plus.org/zh-CN/component/table.html#table-%E6%96%B9%E6%B3%95)**
 

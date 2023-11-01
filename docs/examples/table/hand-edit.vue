@@ -16,9 +16,8 @@
 </template>
 
 <script lang="ts" setup>
-import type { PlusColumn } from '@plus-pro-components/types'
-import type { PlusTableInstance, TableFormRefRow } from '@plus-pro-components/components'
-import { useTable } from '@plus-pro-components/hooks'
+import type { PlusColumn, PlusTableInstance, TableFormRefRow } from 'plus-pro-components'
+import { useTable } from 'plus-pro-components'
 import { ref } from 'vue'
 
 interface TableRow {

@@ -130,7 +130,13 @@ import { default as PlusTableColumnComponent } from './table-column.vue'
 import PlusTableTableColumnIndex from './table-column-index.vue'
 import PlusTableColumnDragSort from './table-column-drag-sort.vue'
 import PlusTableTitleBar from './table-title-bar.vue'
-import type { ButtonsCallBackParams, TableState, ActionBarProps, TitleBar } from './type'
+import type {
+  ButtonsCallBackParams,
+  TableState,
+  ActionBarProps,
+  TitleBar,
+  TableFormRefRow
+} from './type'
 
 /**
  * 表格数据
@@ -241,7 +247,7 @@ const fieldSlots = filterSlots(slots, getFieldSlotName())
 /**
  * 表单的ref
  */
-const formRefs = shallowRef({})
+const formRefs = shallowRef<Record<string | number, TableFormRefRow[]>>({})
 provide(TableFormRefInjectionKey, formRefs)
 
 // 监听配置更改
@@ -315,6 +321,7 @@ const handleFormChange = (data: {
 const { subPageInfo, size } = toRefs(state)
 
 defineExpose({
+  formRefs,
   tableInstance: tableInstance as Ref<TableInstance>
 })
 </script>

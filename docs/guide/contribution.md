@@ -60,8 +60,8 @@ type(ComponentName?)：commit message
 
 - docs: fix typo in quickstart
 - build: optimize build speed
-- fix(Button): incorrect style
-- feat(Button): add color prop
+- fix(component[form-item]): incorrect style
+- feat(component[table]): add color prop
 
 可选的类型：
 
