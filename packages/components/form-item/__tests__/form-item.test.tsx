@@ -460,6 +460,5 @@ describe('form-item/index.vue', () => {
     expect(wrapper.find('.el-form-item__label').attributes('style')).includes('width: 200px;')
     expect(wrapper.find('.el-select--large').exists()).toBe(true)
     expect(wrapper.find('.el-select__tags-text').text()).toBe('未解决')
-
   })
 })
