@@ -1,3 +1,21 @@
+## [v0.0.1-beta.19](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-beta.18...v0.0.1-beta.19) (2023-11-01)
+
+
+### ✨ Features
+
+* **component[table]:** :sparkles: expose 'formRefs'([59da178](https://github.com/plus-pro-components/plus-pro-components/commit/59da178)) by@xiaofei
+* **all:** Merge pull request [#48](https://github.com/plus-pro-components/plus-pro-components/pull/48) from xusaihu/fix/form-item([9e048a7](https://github.com/plus-pro-components/plus-pro-components/commit/9e048a7)) by@xiaofei
+* **all:** Merge branch 'dev' of https://github.com/xusaihu/plus-pro-components into dev([fce58eb](https://github.com/plus-pro-components/plus-pro-components/commit/fce58eb)) by@xubanxian
+
+
+### 🐛 Bug Fixes
+
+* **components[utils]:** :bug: fix getTooltip types error.([7640f03](https://github.com/plus-pro-components/plus-pro-components/commit/7640f03)) by@xiaofei
+* **form-item:** :bug: 修复form-item添加multiple属性表现不正常([8beb634](https://github.com/plus-pro-components/plus-pro-components/commit/8beb634)) by@xubanxian
+
+
+
+
 ## [v0.0.1-beta.18](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-beta.17...v0.0.1-beta.18) (2023-10-25)
 
 
