@@ -2,6 +2,7 @@ import fs from 'node:fs/promises'
 import { fileURLToPath, URL } from 'node:url'
 import { format } from 'prettier'
 import glob from 'fast-glob'
+import { camelCase, upperFirst } from 'lodash'
 
 const resolve = (dir: string) => fileURLToPath(new URL(dir, import.meta.url))
 
@@ -30,7 +31,7 @@ export const gFiles = async () => {
     try {
       await fs.access(viewFile)
     } catch (error) {
-      const template = `<template>${routeName}</template>`
+      const template = `<template><Plus${upperFirst(camelCase(routeName))}/></template>`
       const data = format(template, { ...formatConfig, parser: 'vue' })
       await fs.writeFile(viewFile, data)
     }

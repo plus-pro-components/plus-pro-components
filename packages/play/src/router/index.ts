@@ -14,7 +14,10 @@ const getRoutes = (moduleFiles: Record<string, any>) => {
   return data.map(item => ({
     path: item.path,
     name: capitalize(item.name),
-    component: getComponent(item.path)
+    component: getComponent(item.path),
+    meta: {
+      title: capitalize(item.name)
+    }
   }))
 }
 
