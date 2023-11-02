@@ -185,6 +185,10 @@ export default defineConfig({
           text: '高级组件',
           items: [
             {
+              text: '布局',
+              link: '/components/layout'
+            },
+            {
               text: '表格',
               link: '/components/table'
             },

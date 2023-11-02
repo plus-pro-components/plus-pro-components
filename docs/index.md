@@ -37,7 +37,7 @@ features:
 
   - icon: 🛠️
     title: 丰富的组件库
-    details: PlusProComponents 基于 Element Plus 提供了大量的 UI 组件，包括表格、表单、图表等，能够满足大多数企业应用的需求。
+    details: PlusProComponents 基于 Element Plus 提供了大量的 UI 组件，包括表格、表单、布局等，能够满足大多数企业应用的需求。
 
   - icon: ➕
     title: 使用 TypeScript
