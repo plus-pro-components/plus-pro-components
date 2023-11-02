@@ -11,7 +11,7 @@ import { routes } from '../router/index'
 <style lang="scss">
 .sidebar {
   .plus-sidebar {
-    height: 89vh;
+    height: 100vh;
   }
 }
 </style>
