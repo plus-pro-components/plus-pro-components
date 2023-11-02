@@ -4,6 +4,8 @@
 
 ## 组件列表
 
+- [PlusLayout](/components/layout.html) 页面布局组件，抽解决布局的问题，提供开箱即用的菜单和面包屑功能。
+
 - [PlusPage](/components/page.html) 页面模板组件，抽象网络请求和表格格式化。
 
 - [PlusTable](/components/table.html) 表格模板组件。
@@ -28,7 +30,7 @@
 
 - 兼容 element-plus：`PlusProComponents` 100%兼容和 element-plus 同名的组件，包括属性，事件，方法，插槽等。
 
-- 丰富的组件库：`PlusProComponents` 基于 element-plus 提供了大量的 UI 组件，包括表格、表单、图表等，能够满足大多数企业应用的需求。
+- 丰富的组件库：`PlusProComponents` 基于 element-plus 提供了大量的 UI 组件，包括表格、表单、布局等，能够满足大多数企业应用的需求。
 
 - 使用 TypeScript：`PlusProComponents` 全量使用 TypeScript 编写，和你的 TypeScript 项目无缝衔接。
 
@@ -41,7 +43,5 @@
 `PlusProComponents` 是一个基于` Vue` 和 `element-plus` 的组件库，它提供了很多常用的 UI 组件和业务组件，可以方便地帮助开发者快速搭建前端页面。虽然 `PlusProComponents` 具有很多优点，但是也有以下一些缺点：
 
 - 学习成本高：`PlusProComponents` 的组件库比较复杂，学习所有组件可能需要花费较长时间。因此，对于新手开发者来说，学习成本可能会比较高。
-
-- 依赖项过多：`PlusProComponents` 依赖了很多第三方库和组件，这可能会增加项目的体积和加载时间。
 
 - 高度可定制有限：`PlusProComponents` 的组件支持高度可定制，但是任然不可能保证组件 100%完全自定义，定制需求非常高的项目谨慎使用。

@@ -22,7 +22,7 @@ plus-pro-components is a page level component library based on Vue and element p
 
 - Compatible with element plus: plus-pro-components are 100% compatible with components with the same name as element plus, including properties, events, methods, slots, and more.
 
-- Rich component library: plus-pro-components provide a large number of UI components based on element plus, including tables, forms, charts, etc., which can meet the needs of most enterprise applications.
+- Rich component library: plus-pro-components provide a large number of UI components based on element plus, including tables, forms, layout, etc., which can meet the needs of most enterprise applications.
 
 - Use TypeScript: plus-pro-components are fully written using TypeScript, seamlessly integrating with your TypeScript project.
 
@@ -30,12 +30,8 @@ plus-pro-components is a page level component library based on Vue and element p
 
 - Presets: plus-pro-components preset basic styles, which are in line with the element plus style. plus-pro-components preset basic behavior, with less code and more functionality.
 
-# Component List
+# Advanced Component List
 
-- [x] Dialog -- Finished
-- [x] Pagination -- Finished
-- [x] Radio -- Finished
-- [x] DatePicker -- Finished
 - [x] Table -- Finished
 - [x] Search -- Finished
 - [x] Page -- Finished
@@ -43,14 +39,27 @@ plus-pro-components is a page level component library based on Vue and element p
 - [x] DialogForm -- Finished
 - [x] DrawerForm -- Finished
 - [x] Descriptions -- Finished
+- [] Layout -- developing
+
+# Built-in Components List
+
+- [x] Dialog -- Finished
+- [x] Pagination -- Finished
+- [x] Radio -- Finished
+- [x] DatePicker -- Finished
+- [x] InputTag -- Finished
+- [x] DisplayItem -- Finished
+- [x] FormItem -- Finished
+- [] Sidebar -- developing
+- [] Breadcrumb -- developing
+- [] Header -- developing
+- [] Footer -- developing
 
 ## shortcoming
 
 plus-pro-components is a Vue and element plus based component library that provides many commonly used UI and business components, making it easy for developers to quickly build front-end pages. Although plus-pro components have many advantages, they also have the following drawbacks:
 
 - High learning costs:plus-pro-components is relatively complex, and learning all components may take a long time. Therefore, for novice developers, the learning cost may be relatively high.
-
-- Too many dependencies: plus-pro-components rely on many third-party libraries and components, which may increase the volume and loading time of the project.
 
 - Highly customizable limited: plus-pro-components support high customizability, but it is still impossible to guarantee 100% complete customization of the components. Projects with very high customization requirements should be used with caution.
 
