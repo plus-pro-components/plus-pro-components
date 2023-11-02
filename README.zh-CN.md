@@ -39,7 +39,7 @@ plus-pro-components 是一个基于 Vue 和 element-plus 的页面级别的组�
 - [x] DialogForm 弹窗表单 -- 完成
 - [x] DrawerForm 抽屉表单 -- 完成
 - [x] Descriptions 详情 -- 完成
-- [] Layout 详情 -- 开发中
+- [] Layout 布局 -- 开发中
 
 # 内置组件列表
 
