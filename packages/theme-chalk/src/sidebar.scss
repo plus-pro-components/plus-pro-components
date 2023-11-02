@@ -1,0 +1,25 @@
+@use 'mixins/mixins' as *;
+@use 'mixins/function' as *;
+
+@include b(sidebar) {
+  height: 100%;
+  padding-bottom: 60px;
+  box-sizing: border-box;
+  position: relative;
+
+  &:not(.el-menu--collapse) {
+    width: 200px;
+    min-height: 400px;
+  }
+
+  @include e(collapse) {
+    position: fixed;
+    bottom: getCssVar('menu-level-padding');
+    left: getCssVar('menu-icon-width');
+    [class^='el-icon'] {
+      font-size: 20px;
+      user-select: none;
+      cursor: pointer;
+    }
+  }
+}

@@ -7,7 +7,7 @@
       :to="item.redirect as string || item.path"
       :replace="replace"
     >
-      {{ item.meta.title }}
+      {{ item.meta?.title || item.name || item.path }}
     </el-breadcrumb-item>
   </el-breadcrumb>
 </template>
@@ -34,9 +34,7 @@ const route = useRoute()
 const breadcrumbList = ref<RouteLocationMatched[]>([])
 
 const getBreadcrumb = () => {
-  breadcrumbList.value = route.matched.filter(
-    item => item.meta && item.meta.title && item.meta.hiddenBreadcrumb !== true
-  )
+  breadcrumbList.value = route.matched.filter(item => item.meta.hiddenBreadcrumb !== true)
 }
 
 watch(

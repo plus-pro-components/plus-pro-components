@@ -102,3 +102,21 @@ export const isPlainObject = (val: any) => toTypeString(val) === '[object Object
  * @returns
  */
 export const isEmptyObject = (val: any) => isPlainObject(val) && Object.keys(val).length === 0
+
+/**
+ * 是否是链接
+ * @param url
+ * @returns
+ */
+export function isUrl(url: string) {
+  const regex = new RegExp(
+    '^(https?:\\/\\/)?' + // protocol
+      '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' + // domain name
+      '((\\d{1,3}\\.){3}\\d{1,3}))' + // OR ip (v4) address
+      '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + // port and path
+      '(\\?[;&a-z\\d%_.~+=-]*)?' + // query string
+      '(\\#[-a-z\\d_]*)?$',
+    'i'
+  )
+  return regex.test(url)
+}

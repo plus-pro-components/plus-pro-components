@@ -48,7 +48,7 @@ export const gFiles = async () => {
   const data = format(result, { ...formatConfig, parser: 'babel-ts' })
   const routesFile = resolve('./src/router/__routes.ts')
   const navFile = resolve('./src/__nav.vue')
-  const navDataStr = format(`<template><div>${navData.join(' ')}</div></template>`, {
+  const navDataStr = format(`<template><div class="nav">${navData.join(' ')}</div></template>`, {
     ...formatConfig,
     parser: 'vue'
   })
