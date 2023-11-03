@@ -1,0 +1,57 @@
+@use 'mixins/mixins' as *;
+@use 'mixins/function' as *;
+@use 'mixins/config' as *;
+
+@include b(header) {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: getCssVar('color-white');
+  border-bottom: solid 1px getCssVar('border-color');
+
+  &.is-fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+  }
+
+  @include e(left) {
+    display: flex;
+    align-items: center;
+
+    @include e(logo) {
+      height: 28px;
+    }
+    @include e(title) {
+      margin: 0 0 0 12px;
+      font-weight: 600;
+      font-size: 18px;
+      color: getCssVar('text-color-regular');
+    }
+  }
+
+  @include e(placeholder) {
+    flex: 1 1 0%;
+  }
+
+  @include e(right) {
+    @include e(dropdown-area) {
+      cursor: pointer;
+      user-select: none;
+      display: flex;
+      align-items: center;
+    }
+    @include e(avatar) {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      margin-right: 4px;
+    }
+  }
+}
+
+@include b(header-placeholder) {
+  height: 60px;
+  width: 100%;
+}

@@ -57,6 +57,9 @@ export default {
     },
     inputTag: {
       placeholder: 'Please enter keywords and press enter or space key'
+    },
+    header: {
+      logout: 'logout'
     }
   }
 }

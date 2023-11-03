@@ -57,6 +57,9 @@ export default {
     },
     inputTag: {
       placeholder: '请输入关键字后按回车/空格键'
+    },
+    header: {
+      logout: '退出登录'
     }
   }
 }

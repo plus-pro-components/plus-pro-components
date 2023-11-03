@@ -43,7 +43,6 @@ const toggle = () => {
 
 <style lang="scss" scoped>
 .nav {
-  padding-bottom: 20px;
   position: fixed;
   top: 0;
   right: 0;
