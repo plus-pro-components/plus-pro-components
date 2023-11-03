@@ -76,13 +76,11 @@ defineEmits<PlusSidebarItemEmits>()
 const router = useRouter()
 
 const resolveMenuItem = (item: PlusRouteRecordRaw) => {
-  console.log(item, 'item')
-
   // 没有子路由的情况
   if (!item.children?.length) return true
 
   const children = item.children.filter(i => i.meta?.hiddenMenu === true)
-  // 判断只有一个子路由的情况或者子路由都是隐藏状态
+  // 判断子路由都是隐藏状态
   if (!children.length) {
     return true
   }
