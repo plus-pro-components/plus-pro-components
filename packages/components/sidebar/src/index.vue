@@ -5,6 +5,8 @@
     :default-active="defaultActive"
     :collapse-transition="true"
     class="plus-sidebar"
+    :class="$attrs.mode === 'horizontal' ? 'is-horizontal' : 'is-vertical'"
+    :ellipsis="false"
     unique-opened
     v-bind="$attrs"
   >
@@ -16,11 +18,16 @@
         :item="item"
         :collapse="subCollapse"
       />
-      <div class="plus-sidebar__collapse" @click.stop="toggleSideBar">
-        <el-icon v-if="collapse"><Expand /></el-icon>
-        <el-icon v-else><Fold /></el-icon>
-      </div>
     </el-scrollbar>
+
+    <div
+      v-if="$attrs.mode !== 'horizontal'"
+      class="plus-sidebar__collapse"
+      @click.stop="toggleSideBar"
+    >
+      <el-icon v-if="collapse"><Expand /></el-icon>
+      <el-icon v-else><Fold /></el-icon>
+    </div>
   </el-menu>
 </template>
 
@@ -32,12 +39,13 @@ import { Expand, Fold } from '@element-plus/icons-vue'
 import { cloneDeep } from 'lodash-es'
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
-import type { PlusRouteRecordRaw } from '@plus-pro-components/types'
+import type { PlusRouteRecordRaw, RecordType } from '@plus-pro-components/types'
 import PlusSidebarItem from './sidebar-item.vue'
 
 export interface PlusSidebarProps {
   routes: PlusRouteRecordRaw[]
   collapse?: boolean
+  scrollbarProps?: RecordType
 }
 
 export interface PlusSidebarEmits {
@@ -50,6 +58,7 @@ defineOptions({
 
 const props = withDefaults(defineProps<PlusSidebarProps>(), {
   routes: () => [],
+  scrollbarProps: () => ({}),
   collapse: false
 })
 

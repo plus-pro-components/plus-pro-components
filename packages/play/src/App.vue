@@ -4,15 +4,10 @@
       <el-button class="switch-language" type="primary" @click="toggle">切换语言</el-button>
     </div>
 
+    <!-- 侧边栏竖模式 -->
     <el-container>
-      <el-aside>
-        <!-- 侧边栏竖模式 -->
-        <AppNav />
-      </el-aside>
-
-      <el-main>
-        <RouterView />
-      </el-main>
+      <AppNav />
+      <el-main> <RouterView /></el-main>
     </el-container>
   </el-config-provider>
 </template>
@@ -52,5 +47,6 @@ const toggle = () => {
   position: fixed;
   top: 0;
   right: 0;
+  z-index: 1;
 }
 </style>

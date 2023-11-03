@@ -1,22 +1,39 @@
 @use 'mixins/mixins' as *;
 @use 'mixins/function' as *;
+@use 'mixins/config' as *;
 
 @include b(sidebar) {
   height: 100%;
-  padding-bottom: 60px;
   box-sizing: border-box;
   position: relative;
 
-  &:not(.el-menu--collapse) {
-    width: 200px;
-    min-height: 400px;
+  &.is-vertical {
+    padding-bottom: 60px;
+    &:not(.#{$el-namespace + -menu--collapse}) {
+      min-height: 400px;
+      padding-bottom: 60px;
+      width: 160px;
+    }
+  }
+
+  &.#{$el-namespace + -menu--horizontal} {
+    .#{$el-namespace + -scrollbar} {
+      width: 100%;
+    }
+    .#{$el-namespace + -scrollbar__wrap} {
+      width: 100%;
+    }
+    .#{$el-namespace + -scrollbar__view} {
+      width: 100%;
+      display: flex;
+    }
   }
 
   @include e(collapse) {
-    position: fixed;
+    position: absolute;
     bottom: getCssVar('menu-level-padding');
     left: getCssVar('menu-icon-width');
-    [class^='el-icon'] {
+    [class*='-icon'] {
       font-size: 20px;
       user-select: none;
       cursor: pointer;
