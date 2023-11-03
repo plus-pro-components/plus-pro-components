@@ -53,7 +53,6 @@ plus-pro-components is a page level component library based on Vue and element p
 - [] Sidebar -- developing
 - [] Breadcrumb -- developing
 - [] Header -- developing
-- [] Footer -- developing
 
 ## shortcoming
 

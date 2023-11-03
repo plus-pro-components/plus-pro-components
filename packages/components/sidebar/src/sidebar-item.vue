@@ -9,13 +9,38 @@
         :disabled="item.meta?.disabled"
         @click="handleClickItem(item)"
       >
-        <el-icon v-if="item.meta && item.meta.icon" class="plus-sidebar__item-icon">
+        <!-- 自定义显示 -->
+        <component
+          :is="menuItemRender"
+          v-if="menuItemRender && isFunction(menuItemRender)"
+          v-bind="item"
+        />
+
+        <!-- menu-item 插槽 -->
+        <slot v-else-if="$slots['sidebar-item']" name="sidebar-item" v-bind="item" />
+
+        <el-icon v-else-if="item.meta && item.meta.icon" class="plus-sidebar__item-icon">
           <component :is="item.meta.icon" />
         </el-icon>
 
         <template #title>
           <span class="plus-sidebar__item-title">
-            {{ item.meta?.title || item.name || item.path }}
+            <component
+              :is="titleRender"
+              v-if="titleRender && isFunction(titleRender)"
+              v-bind="item"
+            />
+
+            <!-- menu-item title 插槽 -->
+            <slot
+              v-else-if="$slots['sidebar-item-title']"
+              name="sidebar-item-title"
+              v-bind="item"
+            />
+
+            <template v-else>
+              {{ item.meta?.title || item.name || item.path }}
+            </template>
           </span>
         </template>
       </el-menu-item>
@@ -30,12 +55,33 @@
       class="plus-sidebar__item-sub"
     >
       <template #title>
-        <el-icon v-if="item.meta && item.meta.icon" class="plus-sidebar__item-icon">
-          <component :is="item.meta.icon" />
+        <!-- 自定义显示 -->
+        <component
+          :is="subMenuItemRender"
+          v-if="subMenuItemRender && isFunction(subMenuItemRender)"
+          v-bind="item"
+        />
+
+        <!-- sub-menu 插槽 -->
+        <slot v-else-if="$slots['sidebar-sub']" name="sidebar-sub" v-bind="item" />
+
+        <el-icon v-else-if="item.meta && item.meta.icon" class="plus-sidebar__item-icon">
+          <component :is="item.meta.icon" v-bind="item" />
         </el-icon>
 
         <span class="plus-sidebar__item-title">
-          {{ item.meta?.title || item.name || item.path }}
+          <component
+            :is="titleRender"
+            v-if="titleRender && isFunction(titleRender)"
+            v-bind="item"
+          />
+
+          <!-- sub-menu title 插槽 -->
+          <slot v-else-if="$slots['sidebar-item-title']" name="sidebar-item-title" v-bind="item" />
+
+          <template v-else>
+            {{ item.meta?.title || item.name || item.path }}
+          </template>
         </span>
       </template>
       <PlusSidebarItem
@@ -49,18 +95,30 @@
 </template>
 
 <script lang="ts" setup>
+import type { VNode } from 'vue'
 import type { PlusRouteRecordRaw } from '@plus-pro-components/types'
 import { ElSubMenu, ElMenuItem, ElIcon } from 'element-plus'
 import { useRouter } from 'vue-router'
-import { isUrl } from '@plus-pro-components/components/utils'
+import { isUrl, isFunction } from '@plus-pro-components/components/utils'
 
 export interface PlusSidebarItemProps {
   item: PlusRouteRecordRaw
   collapse?: boolean
-}
-
-export interface PlusSidebarItemEmits {
-  (e: 'update:modelValue', data: string): void
+  /**
+   * 自定义 菜单的  menuItem
+   * @param route
+   */
+  menuItemRender?: (route: PlusRouteRecordRaw) => VNode
+  /**
+   * 自定义 菜单的 subMenu
+   * @param route
+   */
+  subMenuItemRender?: (route: PlusRouteRecordRaw) => VNode
+  /**
+   * 自定义 菜单的标题显示
+   * @param route
+   */
+  titleRender?: (route: PlusRouteRecordRaw) => VNode
 }
 
 defineOptions({
@@ -68,10 +126,11 @@ defineOptions({
 })
 
 withDefaults(defineProps<PlusSidebarItemProps>(), {
-  collapse: false
+  collapse: false,
+  menuItemRender: undefined,
+  subMenuItemRender: undefined,
+  titleRender: undefined
 })
-
-defineEmits<PlusSidebarItemEmits>()
 
 const router = useRouter()
 

@@ -2,7 +2,7 @@ import { excludeFiles } from './excludeFiles'
 
 export { excludeFiles }
 
-export const external = ['vue', 'element-plus']
+export const external = ['vue', 'element-plus', 'vue-router']
 
 export const externalModules = [
   ...external,

@@ -88,7 +88,8 @@
     "element-plus": "^2.3.4",
     "dayjs": "^1.11.3",
     "lodash-es": "^4.17.21",
-    "sortablejs": "^1.15.0"
+    "sortablejs": "^1.15.0",
+    "vue-router": "^4.2.0"
   },
   "devDependencies": {
     "@types/lodash-es": "^4.17.6",

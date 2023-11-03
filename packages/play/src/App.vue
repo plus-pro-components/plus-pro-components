@@ -1,14 +1,13 @@
 <template>
   <el-config-provider :locale="locales" namespace="el">
-    <div class="nav">
+    <div class="nav-wrapper">
+      <AppNav />
       <el-button class="switch-language" type="primary" @click="toggle">切换语言</el-button>
     </div>
 
-    <!-- 侧边栏竖模式 -->
-    <el-container>
-      <AppNav />
-      <el-main> <RouterView /></el-main>
-    </el-container>
+    <div class="place" />
+
+    <RouterView />
   </el-config-provider>
 </template>
 
@@ -22,7 +21,8 @@ import zhCn from 'element-plus/dist/locale/zh-cn'
 import en from 'element-plus/dist/locale/en'
 // @ts-ignore
 import { zhCn as plusZhCn, en as plusEn } from '../../locale'
-import AppNav from './views/sidebar.vue'
+// import AppNav from './views/sidebar.vue'
+import AppNav from './__nav.vue'
 
 const zhCnLocales = {
   ...zhCn,
@@ -42,10 +42,15 @@ const toggle = () => {
 </script>
 
 <style lang="scss" scoped>
-.nav {
+.nav-wrapper {
   position: fixed;
   top: 0;
-  right: 0;
+  left: 0;
   z-index: 1;
+  display: flex;
+}
+
+.place {
+  height: 60px;
 }
 </style>

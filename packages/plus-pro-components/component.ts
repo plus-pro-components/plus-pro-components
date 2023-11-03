@@ -19,6 +19,7 @@ import { PlusInputTag } from '@plus-pro-components/components/input-tag'
 import { PlusBreadcrumb } from '@plus-pro-components/components/breadcrumb'
 import { PlusSidebar } from '@plus-pro-components/components/sidebar'
 import { PlusHeader } from '@plus-pro-components/components/header'
+import { PlusLayout } from '@plus-pro-components/components/layout'
 
 const plugins: DefineComponent[] = [
   PlusDialog,
@@ -39,7 +40,8 @@ const plugins: DefineComponent[] = [
   PlusInputTag,
   PlusBreadcrumb,
   PlusSidebar,
-  PlusHeader
+  PlusHeader,
+  PlusLayout
 ] as unknown as DefineComponent[]
 
 export default plugins

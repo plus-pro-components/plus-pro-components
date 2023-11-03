@@ -20,6 +20,7 @@ declare module '@vue/runtime-core' {
     PlusBreadcrumb: typeof import('plus-pro-components')['PlusBreadcrumb']
     PlusSidebar: typeof import('plus-pro-components')['PlusSidebar']
     PlusHeader: typeof import('plus-pro-components')['PlusHeader']
+    PlusLayout: typeof import('plus-pro-components')['PlusLayout']
   }
 }
 

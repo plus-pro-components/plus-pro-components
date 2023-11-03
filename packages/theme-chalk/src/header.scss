@@ -6,7 +6,6 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
-  background-color: getCssVar('color-white');
   border-bottom: solid 1px getCssVar('border-color');
 
   &.is-fixed {

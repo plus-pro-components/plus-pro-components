@@ -1,16 +1,37 @@
 <template>
   <el-header class="plus-header" :class="{ 'is-fixed': fixed }">
     <div class="plus-header__left">
-      <slot name="header-left" :logo="logo" :title="title">
+      <component
+        :is="headerLeftRender"
+        v-if="headerLeftRender && isFunction(headerLeftRender)"
+        :logo="logo"
+        :title="title"
+      />
+
+      <slot v-else-if="$slots['header-left']" name="header-left" :logo="logo" :title="title" />
+
+      <template v-else>
         <img v-if="logo" :src="logo" alt="" class="plus-header__logo" />
         <h2 v-if="title" class="plus-header__title">{{ title }}</h2>
-      </slot>
+      </template>
     </div>
 
     <div class="plus-header__placeholder" />
 
     <div class="plus-header__right">
-      <slot name="header-right" :user-info="userInfo" :title="title" />
+      <component
+        :is="headerRightRender"
+        v-if="headerRightRender && isFunction(headerRightRender)"
+        :user-info="userInfo"
+        :title="title"
+      />
+
+      <slot
+        v-else-if="$slots['header-right']"
+        name="header-right"
+        :user-info="userInfo"
+        :title="title"
+      />
 
       <el-dropdown v-if="hasUserInfo" placement="bottom-end" trigger="click">
         <span class="plus-header__dropdown-area">
@@ -51,6 +72,8 @@
 import { ArrowDown, User } from '@element-plus/icons-vue'
 import { ElIcon, ElHeader, ElDropdown, ElDropdownItem, ElDropdownMenu } from 'element-plus'
 import { useLocale } from '@plus-pro-components/hooks'
+import type { VNode } from 'vue'
+import { isFunction } from '@plus-pro-components/components/utils'
 
 export interface PlusHeaderProps {
   logo?: string
@@ -59,6 +82,7 @@ export interface PlusHeaderProps {
   logoutText?: string
   trigger?: 'click' | 'hover'
   userInfo?: {
+    [index: string | number | symbol]: unknown
     username?: string
     avatar?: string
   }
@@ -67,6 +91,10 @@ export interface PlusHeaderProps {
     label: string
     value: string
   }[]
+  // eslint-disable-next-line vue/require-default-prop
+  headerLeftRender?: () => VNode
+  // eslint-disable-next-line vue/require-default-prop
+  headerRightRender?: () => VNode
 }
 
 export interface PlusHeaderEmits {
