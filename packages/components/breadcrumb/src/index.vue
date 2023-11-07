@@ -7,7 +7,7 @@
       :to="item.redirect as string || item.path"
       :replace="replace"
     >
-      <component :is="titleRender" v-if="titleRender && isFunction(titleRender)" v-bind="item" />
+      <component :is="renderTitle" v-if="renderTitle && isFunction(renderTitle)" v-bind="item" />
 
       <!-- 面包屑title 插槽 -->
       <slot
@@ -25,40 +25,39 @@
 
 <script lang="ts" setup>
 import type { VNode } from 'vue'
-import { ref, watch } from 'vue'
-import type { RouteLocationMatched } from 'vue-router'
-import { useRoute } from 'vue-router'
+import { ref, getCurrentInstance, watchEffect } from 'vue'
+import type { RouteLocationMatched, RouteLocationNormalizedLoaded } from 'vue-router'
 import { ElBreadcrumb, ElBreadcrumbItem } from 'element-plus'
 import { isFunction } from '@plus-pro-components/components/utils'
+import type { PlusRouteRecordRaw } from '@plus-pro-components/types'
 
 export interface PlusBreadcrumbProps {
+  routes?: PlusRouteRecordRaw[]
   replace?: boolean
   // eslint-disable-next-line vue/require-default-prop
-  titleRender?: () => VNode
+  renderTitle?: () => VNode
 }
 
 defineOptions({
   name: 'PlusBreadcrumb'
 })
 
-withDefaults(defineProps<PlusBreadcrumbProps>(), {
-  replace: false
+const props = withDefaults(defineProps<PlusBreadcrumbProps>(), {
+  replace: false,
+  routes: () => []
 })
 
-const route = useRoute()
+// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+const instance = getCurrentInstance()!
+const route = instance.appContext.config.globalProperties.$route as RouteLocationNormalizedLoaded
 const breadcrumbList = ref<RouteLocationMatched[]>([])
 
-const getBreadcrumb = () => {
-  breadcrumbList.value = route.matched.filter(item => item.meta.hiddenBreadcrumb !== true)
-}
-
-watch(
-  () => route.path,
-  () => {
-    getBreadcrumb()
-  },
-  {
-    immediate: true
-  }
-)
+watchEffect(() => {
+  const breadcrumb = props.routes?.length
+    ? (props.routes as unknown as RouteLocationMatched[])
+    : route
+    ? route.matched
+    : []
+  breadcrumbList.value = breadcrumb.filter(item => item.meta?.hiddenBreadcrumb !== true)
+})
 </script>

@@ -1,6 +1,6 @@
 <template>
   <div class="sidebar">
-    <PlusSidebar :routes="routes" />
+    <PlusSidebar :routes="routes" mode="horizontal" />
   </div>
 </template>
 
@@ -10,7 +10,7 @@ import { routes } from '../router/index'
 
 <style lang="scss">
 .sidebar {
-  .plus-sidebar {
+  .plus-sidebar.el-menu--vertical {
     height: 100vh;
   }
 }

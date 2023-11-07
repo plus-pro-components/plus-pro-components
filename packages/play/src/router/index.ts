@@ -24,7 +24,13 @@ const getRoutes = (moduleFiles: Record<string, any>) => {
     }
   }))
 
-  return routes
+  return routes.map(item => ({
+    ...item,
+    children:
+      item.path === '/dialog'
+        ? routes.map(item => ({ ...item, path: item.path.replace('/', ''), name: '' }))
+        : []
+  }))
 }
 
 export const routes = [
@@ -52,6 +58,6 @@ const router = createRouter({
   routes: routes as unknown as Readonly<RouteRecordRaw[]>
 })
 
-console.log(router.getRoutes())
+console.log(routes, 'routes')
 
 export default router

@@ -261,6 +261,18 @@ export default defineConfig({
             {
               text: '表单单项组件',
               link: '/components/form-item'
+            },
+            {
+              text: '面包屑',
+              link: '/components/breadcrumb'
+            },
+            {
+              text: '页头',
+              link: '/components/header'
+            },
+            {
+              text: '侧边栏',
+              link: '/components/sidebar'
             }
           ]
         }

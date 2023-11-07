@@ -21,7 +21,7 @@ import zhCn from 'element-plus/dist/locale/zh-cn'
 import en from 'element-plus/dist/locale/en'
 // @ts-ignore
 import { zhCn as plusZhCn, en as plusEn } from '../../locale'
-// import AppNav from './views/sidebar.vue'
+// import AppNav from './views/layout.vue'
 import AppNav from './__nav.vue'
 
 const zhCnLocales = {

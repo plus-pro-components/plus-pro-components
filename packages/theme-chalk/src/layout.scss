@@ -1,8 +1,9 @@
 @use 'mixins/mixins' as *;
 @use 'mixins/config' as *;
 @use 'mixins/function' as *;
+@use 'var/index';
 
-$layout-height: calc(100vh - 60px);
+$layout-height: calc(100vh - var(--plus-header-height));
 
 @include b(layout) {
   height: 100vh;
@@ -16,8 +17,8 @@ $layout-height: calc(100vh - 60px);
     height: $layout-height;
     padding-right: 10px;
   }
-}
 
-@include b(sidebar) {
-  height: $layout-height;
+  .#{$plus-namespace + -sidebar} {
+    height: $layout-height;
+  }
 }

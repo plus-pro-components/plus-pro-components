@@ -39,7 +39,7 @@
 
       <!-- 主内容 -->
       <el-main>
-        <el-scrollbar class="plus-layout__scrollbar" v-bind="scrollbarProps">
+        <el-scrollbar class="plus-layout-main__scrollbar" v-bind="scrollbarProps">
           <!-- 面包屑 -->
           <PlusBreadcrumb v-bind="breadcrumbProps">
             <!-- 面包屑title 插槽 -->
@@ -48,9 +48,9 @@
             </template>
           </PlusBreadcrumb>
 
-          <RouterView />
+          <slot />
 
-          <el-backtop target=".plus-layout .plus-layout__scrollbar" />
+          <el-backtop target=".plus-layout .plus-layout-main__scrollbar" />
         </el-scrollbar>
       </el-main>
     </el-container>
@@ -64,7 +64,6 @@ import type { PlusSidebarProps, PlusSidebarInstance } from '@plus-pro-components
 import { PlusSidebar as PlusSidebarComponent } from '@plus-pro-components/components/sidebar'
 import type { PlusHeaderProps } from '@plus-pro-components/components/header'
 import { PlusHeader as PlusHeaderComponent } from '@plus-pro-components/components/header'
-import { RouterView } from 'vue-router'
 import type { ScrollbarProps } from 'element-plus'
 import { ElContainer, ElMain, ElScrollbar, ElBacktop } from 'element-plus'
 import type { Mutable } from '@plus-pro-components/types'

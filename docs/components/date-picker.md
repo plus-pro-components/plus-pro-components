@@ -54,7 +54,7 @@ const endDisabledDate = (endTime, startValue) => {
 
 | 名称     | 说明           | 类型                                                               |
 | -------- | -------------- | ------------------------------------------------------------------ |
-| `change` | 用户选值时触发 | `function` <docs-tip content='value:string[]) => void'></docs-tip> |
+| `change` | 用户选值时触发 | `function` <docs-tip content='(value:string[]) => void'></docs-tip> |
 
 ::: tip 提示
 el-date-picker 的其他事件的支持写法 如 blur

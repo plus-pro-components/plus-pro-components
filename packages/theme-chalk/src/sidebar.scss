@@ -1,22 +1,59 @@
 @use 'mixins/mixins' as *;
 @use 'mixins/function' as *;
 @use 'mixins/config' as *;
+@use 'var/index';
 
 @include b(sidebar) {
   height: 100%;
-  box-sizing: border-box;
-  position: relative;
 
   &.is-vertical {
-    padding-bottom: 60px;
     &:not(.#{$el-namespace + -menu--collapse}) {
       min-height: 400px;
-      padding-bottom: 60px;
-      width: 160px;
+      width: var(--plus-sidebar-width);
+    }
+
+    &.#{$el-namespace + -menu--collapse} {
+      .#{$plus-namespace + -sidebar__item-title} {
+        height: 0;
+        width: 0;
+        overflow: hidden;
+        visibility: hidden;
+        display: inline-block;
+      }
+      .#{$el-namespace + -sub-menu__icon-arrow} {
+        display: none;
+      }
+    }
+
+    .#{$el-namespace + -scrollbar} {
+      height: calc(100% - var(--plus-sidebar-collapse-height));
+    }
+
+    .#{$plus-namespace + -sidebar__collapse} {
+      width: calc(var(--plus-sidebar-width) - 1px);
+      background-color: getCssVar('menu-bg-color');
+      height: var(--plus-sidebar-collapse-height);
+      box-sizing: border-box;
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      align-items: flex-start;
+
+      &.is-collapse {
+        width: calc(getCssVar('menu-icon-width') + getCssVar('menu-base-level-padding') * 2 - 1px);
+      }
+
+      [class*='-icon'] {
+        font-size: 20px;
+        user-select: none;
+        cursor: pointer;
+      }
     }
   }
 
-  &.#{$el-namespace + -menu--horizontal} {
+  &.is-horizontal {
+    width: 100%;
+
     .#{$el-namespace + -scrollbar} {
       width: 100%;
     }
@@ -25,18 +62,13 @@
     }
     .#{$el-namespace + -scrollbar__view} {
       width: 100%;
+      height: 100%;
       display: flex;
+      flex-wrap: nowrap;
     }
   }
 
-  @include e(collapse) {
-    position: absolute;
-    bottom: getCssVar('menu-level-padding');
-    left: getCssVar('menu-icon-width');
-    [class*='-icon'] {
-      font-size: 20px;
-      user-select: none;
-      cursor: pointer;
-    }
+  @include e(item-title) {
+    user-select: none;
   }
 }

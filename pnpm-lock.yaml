@@ -42,8 +42,8 @@ importers:
         specifier: ^1.11.7
         version: 1.11.7
       element-plus:
-        specifier: ^2.3.4
-        version: 2.3.4(vue@3.3.4)
+        specifier: ^2.4.2
+        version: 2.4.2(vue@3.3.4)
       lodash-es:
         specifier: ^4.17.21
         version: 4.17.21
@@ -313,8 +313,8 @@ importers:
   packages/play:
     dependencies:
       element-plus:
-        specifier: ^2.3.4
-        version: 2.3.4(vue@3.3.4)
+        specifier: ^2.4.2
+        version: 2.4.2(vue@3.3.4)
       vue:
         specifier: ^3.3.2
         version: 3.3.4
@@ -359,6 +359,70 @@ importers:
         specifier: ^1.6.4
         version: 1.6.4(typescript@5.0.4)
 
+  packages/play/node_modules/element-plus:
+    dependencies:
+      '@ctrl/tinycolor':
+        specifier: ^3.4.1
+        version: 3.6.0
+      '@element-plus/icons-vue':
+        specifier: ^2.0.6
+        version: 2.1.0(vue@3.3.4)
+      '@floating-ui/dom':
+        specifier: ^1.0.1
+        version: 1.2.8
+      '@popperjs/core':
+        specifier: npm:@sxzz/popperjs-es@^2.11.7
+        version: /@sxzz/popperjs-es@2.11.7
+      '@types/lodash':
+        specifier: ^4.14.182
+        version: 4.14.194
+      '@types/lodash-es':
+        specifier: ^4.17.6
+        version: 4.17.7
+      '@vueuse/core':
+        specifier: ^9.1.0
+        version: 9.13.0(vue@3.3.4)
+      async-validator:
+        specifier: ^4.2.5
+        version: 4.2.5
+      dayjs:
+        specifier: ^1.11.3
+        version: 1.11.7
+      element-plus:
+        specifier: ^2.4.2
+        version: 2.4.2(vue@3.3.4)
+      escape-html:
+        specifier: ^1.0.3
+        version: 1.0.3
+      lodash:
+        specifier: ^4.17.21
+        version: 4.17.21
+      lodash-es:
+        specifier: ^4.17.21
+        version: 4.17.21
+      lodash-unified:
+        specifier: ^1.0.2
+        version: 1.0.3(@types/lodash-es@4.17.7)(lodash-es@4.17.21)(lodash@4.17.21)
+      memoize-one:
+        specifier: ^6.0.0
+        version: 6.0.0
+      normalize-wheel-es:
+        specifier: ^1.2.0
+        version: 1.2.0
+    devDependencies:
+      '@types/node':
+        specifier: '*'
+        version: 20.1.4
+      csstype:
+        specifier: ^2.6.20
+        version: 2.6.21
+      vue:
+        specifier: ^3.2.37
+        version: 3.3.4
+      vue-router:
+        specifier: ^4.0.16
+        version: 4.2.0(vue@3.3.4)
+
   packages/plus-pro-components:
     dependencies:
       '@element-plus/icons-vue':
@@ -376,6 +440,9 @@ importers:
       sortablejs:
         specifier: ^1.15.0
         version: 1.15.0
+      vue-router:
+        specifier: ^4.2.0
+        version: 4.2.0(vue@3.2.47)
     devDependencies:
       '@types/lodash-es':
         specifier: ^4.17.6
@@ -4905,8 +4972,8 @@ packages:
       - '@vue/composition-api'
     dev: false
 
-  /element-plus@2.3.4(vue@3.3.4):
-    resolution: {integrity: sha512-SQr0J9z7N4z48WYk/l9NE2tizl8Q7j2OhqlpTc42k4pGncry3+rVX6dsmcsglFynn6vt3NzYxWJqmLFyDKQq+g==}
+  /element-plus@2.4.2(vue@3.3.4):
+    resolution: {integrity: sha512-E/HwXX7JF1LPvQSjs0fZ8WblIoc0quoXsRXQZiL7QDq7xJdNGSUaXtdk7xiEv7axPmLfEFtxE5du9fFspDrmJw==}
     peerDependencies:
       vue: ^3.2.0
     dependencies:
@@ -7841,7 +7908,7 @@ packages:
     dependencies:
       '@element-plus/icons-vue': 2.1.0(vue@3.3.4)
       dayjs: 1.11.7
-      element-plus: 2.3.4(vue@3.3.4)
+      element-plus: 2.4.2(vue@3.3.4)
       lodash-es: 4.17.21
       sortablejs: 1.15.0
       vue: 3.3.4
@@ -10520,6 +10587,15 @@ packages:
       - supports-color
     dev: false
 
+  /vue-router@4.2.0(vue@3.2.47):
+    resolution: {integrity: sha512-c+usESa6ZoWsm4PPdzRSyenp5A4dsUtnDJnrI03fY1IpIihA9TK3x5ffgkFDpjhLJZewsXoKURapNLFdZjuqTg==}
+    peerDependencies:
+      vue: ^3.2.0
+    dependencies:
+      '@vue/devtools-api': 6.5.0
+      vue: 3.2.47
+    dev: false
+
   /vue-router@4.2.0(vue@3.3.4):
     resolution: {integrity: sha512-c+usESa6ZoWsm4PPdzRSyenp5A4dsUtnDJnrI03fY1IpIihA9TK3x5ffgkFDpjhLJZewsXoKURapNLFdZjuqTg==}
     peerDependencies:
@@ -10527,7 +10603,6 @@ packages:
     dependencies:
       '@vue/devtools-api': 6.5.0
       vue: 3.3.4
-    dev: false
 
   /vue-template-compiler@2.7.14:
     resolution: {integrity: sha512-zyA5Y3ArvVG0NacJDkkzJuPQDF8RFeRlzV2vLeSnhSpieO6LK2OVbdLPi5MPPs09Ii+gMO8nY4S3iKQxBxDmWQ==}

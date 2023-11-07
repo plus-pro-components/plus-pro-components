@@ -2,8 +2,8 @@
   <el-header class="plus-header" :class="{ 'is-fixed': fixed }">
     <div class="plus-header__left">
       <component
-        :is="headerLeftRender"
-        v-if="headerLeftRender && isFunction(headerLeftRender)"
+        :is="renderHeaderLeft"
+        v-if="renderHeaderLeft && isFunction(renderHeaderLeft)"
         :logo="logo"
         :title="title"
       />
@@ -20,8 +20,8 @@
 
     <div class="plus-header__right">
       <component
-        :is="headerRightRender"
-        v-if="headerRightRender && isFunction(headerRightRender)"
+        :is="renderHeaderRight"
+        v-if="renderHeaderRight && isFunction(renderHeaderRight)"
         :user-info="userInfo"
         :title="title"
       />
@@ -92,9 +92,9 @@ export interface PlusHeaderProps {
     value: string
   }[]
   // eslint-disable-next-line vue/require-default-prop
-  headerLeftRender?: () => VNode
+  renderHeaderLeft?: () => VNode
   // eslint-disable-next-line vue/require-default-prop
-  headerRightRender?: () => VNode
+  renderHeaderRight?: () => VNode
 }
 
 export interface PlusHeaderEmits {

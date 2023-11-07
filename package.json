@@ -58,7 +58,7 @@
     "@plus-pro-components/types": "workspace:*",
     "@plus-pro-components/utils": "workspace:*",
     "dayjs": "^1.11.7",
-    "element-plus": "^2.3.4",
+    "element-plus": "^2.4.2",
     "lodash-es": "^4.17.21",
     "sortablejs": "^1.15.0",
     "vue": "^3.3.4"
