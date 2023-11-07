@@ -2,7 +2,7 @@ import { excludeFiles } from './excludeFiles'
 
 export { excludeFiles }
 
-export const external = ['vue', 'element-plus', 'vue-router']
+export const external = ['vue', 'element-plus']
 
 export const externalModules = [
   ...external,
@@ -10,5 +10,6 @@ export const externalModules = [
   '@vue/shared',
   'sortablejs',
   'dayjs',
-  'lodash-es'
+  'lodash-es',
+  'vue-router'
 ]
