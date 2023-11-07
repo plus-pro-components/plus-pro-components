@@ -1,3 +1,20 @@
+## [v0.0.1-beta.20](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-beta.19...v0.0.1-beta.20) (2023-11-07)
+
+
+### ✨ Features
+
+* **components:** :sparkles: perfect breadcrumb,header,sidebara and layout component([0b9e818](https://github.com/plus-pro-components/plus-pro-components/commit/0b9e818)) by@xiaofei
+* **components:** :sparkles: add layout component and perfect breadcrumb,sidebar,header component([41c5fdb](https://github.com/plus-pro-components/plus-pro-components/commit/41c5fdb)) by@xiaofei
+* **components:** :sparkles: add header component([639fd28](https://github.com/plus-pro-components/plus-pro-components/commit/639fd28)) by@xiaofei
+* **components:** :sparkles: sidebar add horizontal mode support,sidebar and breadcrumb add style([59b2880](https://github.com/plus-pro-components/plus-pro-components/commit/59b2880)) by@xiaofei
+* **components:** :sparkles: add sidebar component([8536499](https://github.com/plus-pro-components/plus-pro-components/commit/8536499)) by@xiaofei
+* **components:** :sparkles: add breadcrumb component([bec120c](https://github.com/plus-pro-components/plus-pro-components/commit/bec120c)) by@xiaofei
+
+
+
+
+
+
 ## [v0.0.1-beta.19](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-beta.18...v0.0.1-beta.19) (2023-11-01)
 
 
