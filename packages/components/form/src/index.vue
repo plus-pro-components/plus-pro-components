@@ -122,6 +122,7 @@ export interface PlusFormGroupRow {
 
 export interface PlusFormProps extends /* @vue-ignore */ Partial<Mutable<FormProps>> {
   modelValue?: FieldValues
+  defaultValues?: FieldValues
   columns?: PlusColumn[]
   labelWidth?: string
   labelPosition?: 'left' | 'right' | 'top'
@@ -156,6 +157,7 @@ defineOptions({
 
 const props = withDefaults(defineProps<PlusFormProps>(), {
   modelValue: () => ({}),
+  defaultValues: () => ({}),
   labelWidth: '80px',
   labelPosition: 'left',
   rowProps: () => ({}),
@@ -237,7 +239,8 @@ const handleSubmit = async () => {
 
 const handleReset = (): void => {
   clearValidate()
-  state.values = {}
+  state.values = { ...props.defaultValues }
+  emit('update:modelValue', state.values)
   emit('reset')
 }
 

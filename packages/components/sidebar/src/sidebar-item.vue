@@ -88,7 +88,25 @@
         :key="child.path"
         :item="child"
         :collapse="collapse"
-      />
+        :render-menu-item="renderMenuItem"
+        :render-sub-menu-item="renderSubMenuItem"
+        :render-title="renderTitle"
+      >
+        <!-- sidebar-item 插槽 -->
+        <template v-if="$slots['sidebar-item']" #sidebar-item="data">
+          <slot name="sidebar-item" v-bind="data" />
+        </template>
+
+        <!-- sidebar-sub 插槽 -->
+        <template v-if="$slots['sidebar-sub']" #sidebar-sub="data">
+          <slot name="sidebar-sub" v-bind="data" />
+        </template>
+
+        <!-- sidebar-item-title  插槽-->
+        <template v-if="$slots['sidebar-item-title']" #sidebar-item-title="data">
+          <slot name="sidebar-item-title" v-bind="data" />
+        </template>
+      </PlusSidebarItem>
     </el-sub-menu>
   </template>
 </template>

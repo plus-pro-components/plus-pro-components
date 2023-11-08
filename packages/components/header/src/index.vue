@@ -53,7 +53,7 @@
               {{ logoutText || t('plus.header.logout') }}
             </el-dropdown-item>
             <el-dropdown-item
-              v-for="item in dropdownItemList"
+              v-for="item in dropdownList"
               :key="item.value"
               @click="handleClickItem(item)"
             >
@@ -87,7 +87,7 @@ export interface PlusHeaderProps {
     avatar?: string
   }
   hasUserInfo?: boolean
-  dropdownItemList?: {
+  dropdownList?: {
     label: string
     value: string
   }[]
@@ -110,7 +110,7 @@ const props = withDefaults(defineProps<PlusHeaderProps>(), {
   title: 'PlusProComponents',
   trigger: 'click',
   userInfo: () => ({}),
-  dropdownItemList: () => [],
+  dropdownList: () => [],
   logoutText: '',
   hasUserInfo: true,
   fixed: false

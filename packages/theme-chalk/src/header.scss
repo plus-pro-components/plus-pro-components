@@ -37,6 +37,9 @@
   }
 
   @include e(right) {
+    display: flex;
+    align-items: center;
+
     @include e(dropdown-area) {
       cursor: pointer;
       user-select: none;
