@@ -39,7 +39,7 @@ plus-pro-components 是一个基于 Vue 和 element-plus 的页面级别的组�
 - [x] DialogForm 弹窗表单 -- 完成
 - [x] DrawerForm 抽屉表单 -- 完成
 - [x] Descriptions 详情 -- 完成
-- [] Layout 布局 -- 开发中
+- [x] Layout 布局 -- 完成
 
 # 内置组件列表
 
@@ -50,9 +50,9 @@ plus-pro-components 是一个基于 Vue 和 element-plus 的页面级别的组�
 - [x] InputTag 日期 -- 完成
 - [x] DisplayItem 单项显示 -- 完成
 - [x] FormItem 表单单项 -- 完成
-- [] Sidebar 侧边菜单 -- 开发中
-- [] Breadcrumb 面包屑 -- 开发中
-- [] Header 页头 -- 开发中
+- [x] Sidebar 侧边菜单 -- 完成
+- [x] Breadcrumb 面包屑 -- 完成
+- [x] Header 页头 -- 完成
 
 ## 缺点
 

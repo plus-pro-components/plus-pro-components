@@ -122,8 +122,11 @@ pnpm dev
   ├── index.ts          #主文件
   ├── src
   |  └── index.vue      #组件实际代码
+  ├── style
+  |  ├── index.ts       #组件按需加载 scss 样式，包含自身样式和外部样式
+  |  └── css.ts         #组件按需加载 css 样式，包含自身样式和外部样式
   └── __tests__
-    └── table.test.tsx #单元测试代码  主要测试组件中的 props、event、slots、样式、CSS class 名、生命周期钩子，和其他相关的问题。
+    └── table.test.tsx  #单元测试代码  主要测试组件中的 props、event、slots、样式、CSS class 名、生命周期钩子，和其他相关的问题。
   ```
 
   然后添加组件实际代码和对应的单元测试
@@ -145,7 +148,7 @@ pnpm dev
 
 - 在 `global.d.ts` 添加类型
 
-  ```ts
+  ```ts{3}
   declare module '@vue/runtime-core' {
     export interface GlobalComponents {
       PlusTable: typeof import('plus-pro-components')['PlusTable']

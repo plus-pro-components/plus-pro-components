@@ -39,7 +39,7 @@ plus-pro-components is a page level component library based on Vue and element p
 - [x] DialogForm -- Finished
 - [x] DrawerForm -- Finished
 - [x] Descriptions -- Finished
-- [] Layout -- developing
+- [x] Layout -- Finished
 
 # Built-in Components List
 
@@ -50,9 +50,9 @@ plus-pro-components is a page level component library based on Vue and element p
 - [x] InputTag -- Finished
 - [x] DisplayItem -- Finished
 - [x] FormItem -- Finished
-- [] Sidebar -- developing
-- [] Breadcrumb -- developing
-- [] Header -- developing
+- [x] Sidebar -- Finished
+- [x] Breadcrumb -- Finished
+- [x] Header -- Finished
 
 ## shortcoming
 
