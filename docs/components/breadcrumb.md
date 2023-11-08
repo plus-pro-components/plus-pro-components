@@ -63,6 +63,6 @@ breadcrumb/slots
 
 ## Breadcrumb Slots
 
-| 插槽名                  | 说明              |
-| ----------------------- | ----------------- |
-| `breadcrumb-item-title` | 自定义 面包屑显示 |
+| 插槽名                  | 说明              | 作用域插槽参数                                                       |
+| ----------------------- | ----------------- | -------------------------------------------------------------------- |
+| `breadcrumb-item-title` | 自定义 面包屑显示 | route [PlusRouteRecordRaw](/components/type.html#plusrouterecordraw) |

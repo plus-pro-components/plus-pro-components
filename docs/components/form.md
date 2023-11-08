@@ -207,6 +207,7 @@ form/all
 | 名称                    | 说明                      | 类型                                                                                     | 默认值  | 是否必须 |
 | ----------------------- | ------------------------- | ---------------------------------------------------------------------------------------- | ------- | -------- |
 | `model-value / v-model` | 表单绑定值                | `object` [FieldValues](/components/type.html#fieldvalues)                                |         | 否       |
+| `defaultValues`         | 点击重置按钮时 赋值给表单 | `object` [FieldValues](/components/type.html#fieldvalues)                                | `{}`    | 否       |
 | `columns`               | 表单配置信息              | `array`[PlusColumn[]](/components/config.html)                                           | `[]`    | 否       |
 | `rowProps`              | el-row 的 props           | `object`[RowProps](https://element-plus.org/zh-CN/component/layout.html#row-attributes)  |         | 否       |
 | `colProps`              | el-col 属性               | `object`[ColProps](https://element-plus.org/zh-CN/component/layout.html#col-attributes)  |         | 否       |

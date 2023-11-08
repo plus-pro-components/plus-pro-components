@@ -40,6 +40,4 @@ const getRoutes = (moduleFiles: Record<string, any>) => {
 }
 
 const routes = getRoutes(moduleFiles)
-
-console.log(JSON.parse(JSON.stringify(routes)))
 </script>
