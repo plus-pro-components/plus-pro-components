@@ -1,3 +1,15 @@
+## [v0.0.1-beta.21](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-beta.20...v0.0.1-beta.21) (2023-11-08)
+
+
+### ✨ Features
+
+* **components:** :sparkles: perfect header and sidebar component,form component add defaultValues([6a1f15a](https://github.com/plus-pro-components/plus-pro-components/commit/6a1f15a)) by@xiaofei
+
+
+
+
+
+
 ## [v0.0.1-beta.20](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-beta.19...v0.0.1-beta.20) (2023-11-07)
 
 
