@@ -50,7 +50,12 @@ const main = async () => {
   const testDir = path.resolve(targetDir, '__tests__')
   const testFile = path.resolve(testDir, `${componentName}.test.tsx`)
 
-  // 实际代码文件
+  // 样式文件
+  const styleDir = path.resolve(targetDir, 'style')
+  const styleIndexFile = path.resolve(styleDir, 'index.ts')
+  const styleCSSFile = path.resolve(styleDir, 'css.ts')
+
+  // src文件
   const srcDir = path.resolve(targetDir, 'src')
   const srcIndexFile = path.resolve(srcDir, 'index.vue')
 
@@ -62,11 +67,14 @@ const main = async () => {
     await fs.mkdir(targetDir, { recursive: true })
     await fs.mkdir(testDir, { recursive: true })
     await fs.mkdir(srcDir, { recursive: true })
+    await fs.mkdir(styleDir, { recursive: true })
     // 创建文件
     await fs.writeFile(targetFile, getTargetFileTemplate(componentName))
     await fs.writeFile(testFile, getTestFileTemplate(componentName))
     await fs.writeFile(srcIndexFile, getSrcFileTemplate(componentName))
-
+    // style 下文件
+    await fs.writeFile(styleIndexFile, '')
+    await fs.writeFile(styleCSSFile, '')
     return componentName
   }
 }
