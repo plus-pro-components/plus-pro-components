@@ -9,14 +9,22 @@
 </template>
 
 <script setup lang="ts">
+import { Document as DocumentIcon } from '@element-plus/icons-vue'
+
 const routes = [
   {
     path: '/breadcrumb',
-    name: 'breadcrumb'
+    name: 'breadcrumb',
+    meta: {
+      icon: DocumentIcon
+    }
   },
   {
     path: '/date-picker',
     name: 'date-picker',
+    meta: {
+      icon: DocumentIcon
+    },
     children: [
       {
         path: '/date-picker-1',
@@ -30,7 +38,10 @@ const routes = [
   },
   {
     path: '/description',
-    name: 'description'
+    name: 'description',
+    meta: {
+      icon: DocumentIcon
+    }
   }
 ]
 </script>
