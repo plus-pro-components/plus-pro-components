@@ -558,7 +558,7 @@ export type PlusRouteRecordRaw = Partial<Omit<RouteRecordRaw, 'children'>> & {
     /**
      * 隐藏面包屑，默认false 不隐藏
      */
-    hiddenInBreadcrumb?: boolean
+    hideInBreadcrumb?: boolean
     /**
      * 菜单是否禁用
      * @see https://element-plus.org/zh-CN/component/menu.html#menu-item-attributes

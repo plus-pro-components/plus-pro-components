@@ -58,6 +58,6 @@ watchEffect(() => {
     : route
     ? route.matched
     : []
-  breadcrumbList.value = breadcrumb.filter(item => item.meta?.hiddenInBreadcrumb !== true)
+  breadcrumbList.value = breadcrumb.filter(item => item.meta?.hideInBreadcrumb !== true)
 })
 </script>
