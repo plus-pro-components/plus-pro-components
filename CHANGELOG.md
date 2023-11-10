@@ -1,3 +1,16 @@
+## [v0.0.1-beta.23](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-beta.22...v0.0.1-beta.23) (2023-11-10)
+
+
+### ✨ Features
+
+* **all:** Merge pull request [#49](https://github.com/plus-pro-components/plus-pro-components/pull/49) from plus-pro-components/zpp([06885fb](https://github.com/plus-pro-components/plus-pro-components/commit/06885fb)) by@xiaofei
+* **components:** :sparkles: form component add hasLabel prop([c76db60](https://github.com/plus-pro-components/plus-pro-components/commit/c76db60)) by@zhangpp
+
+
+
+
+
+
 ## [v0.0.1-beta.22](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-beta.21...v0.0.1-beta.22) (2023-11-10)
 
 

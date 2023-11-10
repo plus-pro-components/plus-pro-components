@@ -1,6 +1,6 @@
 {
   "private": true,
-  "version": "0.0.1-beta.22",
+  "version": "0.0.1-beta.23",
   "description": "Page level components developed based on Element Plus.",
   "packageManager": "pnpm@8.5.0",
   "license": "MIT",
