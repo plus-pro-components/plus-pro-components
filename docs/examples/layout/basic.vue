@@ -1,6 +1,15 @@
 <template>
   <div class="sidebar">
-    <PlusLayout :sidebar-props="{ routes }"> 内容 </PlusLayout>
+    <PlusLayout :sidebar-props="{ routes }" :breadcrumb-props="{ routes: breadcrumbRoutes }">
+      <template #layout-extra>
+        <div class="tag">
+          <el-tag closable> breadcrumb </el-tag>
+          <el-tag closable> date-picker </el-tag>
+        </div>
+      </template>
+
+      内容
+    </PlusLayout>
   </div>
 </template>
 
@@ -41,5 +50,38 @@ const getRoutes = (moduleFiles: Record<string, any>) => {
 
 const routes = getRoutes(moduleFiles)
 
-console.log(routes)
+const breadcrumbRoutes = [
+  {
+    path: '/breadcrumb',
+    name: 'breadcrumb',
+    meta: {
+      icon: DocumentIcon
+    }
+  },
+  {
+    path: '/date-picker',
+    name: 'date-picker',
+    meta: {
+      icon: DocumentIcon
+    },
+    children: [
+      {
+        path: '/date-picker-1',
+        name: 'date-picker-1'
+      },
+      {
+        path: '/date-picker-2',
+        name: 'date-picker-2'
+      }
+    ]
+  }
+]
 </script>
+<style lang="scss" scoped>
+.tag {
+  margin-bottom: 20px;
+  .el-tag + .el-tag {
+    margin-left: 10px;
+  }
+}
+</style>

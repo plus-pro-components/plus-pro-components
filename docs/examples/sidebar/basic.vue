@@ -6,6 +6,7 @@
 
 <script setup lang="ts">
 import { Document as DocumentIcon } from '@element-plus/icons-vue'
+import type { PlusRouteRecordRaw } from 'plus-pro-components'
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
@@ -39,5 +40,5 @@ const getRoutes = (moduleFiles: Record<string, any>) => {
   }))
 }
 
-const routes = getRoutes(moduleFiles)
+const routes: PlusRouteRecordRaw[] = getRoutes(moduleFiles)
 </script>

@@ -1,16 +1,20 @@
 <template>
   <div class="sidebar">
-    <PlusSidebar :routes="routes">
-      <template #sidebar-item-title="item">
-        {{ item.name + '自定义' }}
-      </template>
-    </PlusSidebar>
+    <PlusSidebar
+      v-model:collapse="collapse"
+      :routes="routes"
+      :render-menu-extra="!collapse ? renderMenuExtra : undefined"
+    />
   </div>
 </template>
 
 <script setup lang="ts">
 import { Document as DocumentIcon } from '@element-plus/icons-vue'
+import { ElButton, ElInput, ElMessage } from 'element-plus'
 import type { PlusRouteRecordRaw } from 'plus-pro-components'
+import { ref, h } from 'vue'
+
+const collapse = ref(false)
 
 const routes: PlusRouteRecordRaw[] = [
   {
@@ -45,4 +49,29 @@ const routes: PlusRouteRecordRaw[] = [
     }
   }
 ]
+
+const renderMenuExtra = () => {
+  return h(
+    ElInput,
+    {
+      placeholder: '请输入关键字',
+      style: {
+        width: '150px',
+        marginLeft: '20px'
+      }
+    },
+    {
+      append: () =>
+        h(
+          ElButton,
+          {
+            onClick() {
+              ElMessage.success('搜索')
+            }
+          },
+          () => '搜索'
+        )
+    }
+  )
+}
 </script>

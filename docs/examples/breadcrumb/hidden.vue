@@ -21,7 +21,7 @@ const routes: PlusRouteRecordRaw[] = [
     name: 'Breadcrumb2',
     meta: {
       title: '面包屑2',
-      hiddenBreadcrumb: true
+      hiddenInBreadcrumb: true
     },
     children: []
   }

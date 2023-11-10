@@ -1,19 +1,20 @@
 <template>
   <div class="sidebar">
-    <PlusSidebar :routes="routes" :render-title="renderTitle" />
+    <PlusSidebar :routes="routes" />
   </div>
 </template>
 
 <script setup lang="ts">
-import type { PlusRouteRecordRaw } from 'plus-pro-components'
 import { Document as DocumentIcon } from '@element-plus/icons-vue'
+import type { PlusRouteRecordRaw } from 'plus-pro-components'
 
 const routes: PlusRouteRecordRaw[] = [
   {
     path: '/breadcrumb',
     name: 'breadcrumb',
     meta: {
-      icon: DocumentIcon
+      icon: DocumentIcon,
+      hideInMenu: true
     }
   },
   {
@@ -41,7 +42,4 @@ const routes: PlusRouteRecordRaw[] = [
     }
   }
 ]
-const renderTitle = (item: PlusRouteRecordRaw) => {
-  return (item.name as string) + '自定义'
-}
 </script>

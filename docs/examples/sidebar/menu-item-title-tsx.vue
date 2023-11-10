@@ -8,7 +8,7 @@
 import type { PlusRouteRecordRaw } from 'plus-pro-components'
 import { Document as DocumentIcon } from '@element-plus/icons-vue'
 
-const routes = [
+const routes: PlusRouteRecordRaw[] = [
   {
     path: '/breadcrumb',
     name: 'breadcrumb',
