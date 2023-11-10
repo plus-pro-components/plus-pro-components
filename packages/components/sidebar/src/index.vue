@@ -118,8 +118,6 @@ const props = withDefaults(defineProps<PlusSidebarProps>(), {
   width: 200
 })
 
-console.log(props.renderMenuExtra)
-
 const emit = defineEmits<PlusSidebarEmits>()
 
 const w = computed(() => (isString(props.width) ? props.width : props.width + 'px'))

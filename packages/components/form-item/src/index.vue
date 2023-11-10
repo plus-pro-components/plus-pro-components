@@ -1,12 +1,12 @@
 <template>
   <el-form-item
     ref="formItemInstance"
-    :label="label"
+    :label="hasLabel ? label : ''"
     :prop="prop"
     class="plus-form-item"
     v-bind="customFormItemProps"
   >
-    <template #label="{ label: currentLabel }">
+    <template v-if="hasLabel" #label="{ label: currentLabel }">
       <span class="plus-form-item__label">
         <PlusRender
           v-if="renderLabel && isFunction(renderLabel)"
@@ -332,6 +332,7 @@ import {
 
 export interface PlusFormItemProps {
   modelValue?: FieldValueType
+  hasLabel?: boolean
   label: PlusColumn['label']
   prop: PlusColumn['prop']
   fieldProps?: PlusColumn['fieldProps']
@@ -381,6 +382,7 @@ const ElInput: Component = InputComponent
 
 const props = withDefaults(defineProps<PlusFormItemProps>(), {
   modelValue: '',
+  hasLabel: true,
   tooltip: '',
   formItemProps: () => ({}),
   fieldProps: () => ({}),

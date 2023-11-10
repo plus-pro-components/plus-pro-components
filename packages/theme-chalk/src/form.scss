@@ -1,6 +1,13 @@
+@use 'mixins/config' as *;
 @use 'mixins/mixins' as *;
 
 @include b(form) {
+  &.no-has-label {
+    & + .#{$el-namespace + -form-item__label} {
+      width: 0;
+      padding: 0;
+    }
+  }
   @include e(footer) {
     display: flex;
     justify-content: flex-end;

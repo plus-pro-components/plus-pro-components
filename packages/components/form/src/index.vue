@@ -2,8 +2,9 @@
   <el-form
     ref="formInstance"
     :rules="rules"
-    :label-width="labelWidth"
+    :label-width="hasLabel ? labelWidth : 0"
     class="plus-form"
+    :class="hasLabel ? '' : 'no-has-label'"
     :label-position="labelPosition"
     :validate-on-rule-change="false"
     :label-suffix="labelSuffix"
@@ -57,6 +58,7 @@
           :row-props="rowProps"
           :col-props="colProps"
           :columns="state.subColumns"
+          :has-label="hasLabel"
           @change="handleChange"
         >
           <!--表单项label插槽 -->
@@ -132,6 +134,7 @@ export interface PlusFormProps extends /* @vue-ignore */ Partial<Mutable<FormPro
   hasErrorTip?: boolean
   hasFooter?: boolean
   hasReset?: boolean
+  hasLabel?: boolean
   submitText?: string
   resetText?: string
   submitLoading?: boolean
@@ -166,6 +169,7 @@ const props = withDefaults(defineProps<PlusFormProps>(), {
   hasErrorTip: true,
   hasFooter: true,
   hasReset: true,
+  hasLabel: true,
   submitLoading: false,
   submitText: '',
   resetText: '',
