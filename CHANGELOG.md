@@ -1,3 +1,15 @@
+## [v0.0.1-beta.24](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-beta.23...v0.0.1-beta.24) (2023-11-10)
+
+
+
+
+### 🐛 Bug Fixes
+
+* **components:** :bug: breadcrumb hiddenInMenu->hideInMenu([f3fc0b0](https://github.com/plus-pro-components/plus-pro-components/commit/f3fc0b0)) by@xiaofei
+
+
+
+
 ## [v0.0.1-beta.23](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-beta.22...v0.0.1-beta.23) (2023-11-10)
 
 
