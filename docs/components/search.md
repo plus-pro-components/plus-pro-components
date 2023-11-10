@@ -28,6 +28,16 @@ search/hide-unfold
 
 :::
 
+## 隐藏 label
+
+`has-label` 设置为 `false` 时, 隐藏 label
+
+:::demo
+
+search/hide-label
+
+:::
+
 ## 异步数据用法
 
 [PlusColumn](/components/config.html) 配置中的 `options` 支持数，函数和 Promise。

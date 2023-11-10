@@ -4,6 +4,7 @@
       <PlusFormItem
         v-model="state.values[item.prop]"
         v-bind="item"
+        :has-label="hasLabel"
         @change="(value: any) => handleChange(value, item)"
       >
         <!--表单项label插槽 -->
@@ -35,6 +36,7 @@ import { getLabelSlotName, getFieldSlotName } from '@plus-pro-components/compone
 
 export interface PlusFormContentProps extends /* @vue-ignore */ Partial<Mutable<FormProps>> {
   modelValue?: FieldValues
+  hasLabel?: boolean
   columns?: PlusColumn[]
   rowProps?: Partial<Mutable<RowProps>>
   colProps?: Partial<Mutable<ColProps>>
@@ -53,6 +55,7 @@ defineOptions({
 
 const props = withDefaults(defineProps<PlusFormContentProps>(), {
   modelValue: () => ({}),
+  hasLabel: true,
   rowProps: () => ({}),
   colProps: () => ({}),
   columns: () => []
