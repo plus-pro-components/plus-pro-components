@@ -35,7 +35,7 @@ export interface PlusBreadcrumbProps {
   routes?: PlusRouteRecordRaw[]
   replace?: boolean
   // eslint-disable-next-line vue/require-default-prop
-  renderTitle?: () => VNode
+  renderTitle?: () => VNode | string
 }
 
 defineOptions({
@@ -58,6 +58,6 @@ watchEffect(() => {
     : route
     ? route.matched
     : []
-  breadcrumbList.value = breadcrumb.filter(item => item.meta?.hiddenBreadcrumb !== true)
+  breadcrumbList.value = breadcrumb.filter(item => item.meta?.hiddenInBreadcrumb !== true)
 })
 </script>

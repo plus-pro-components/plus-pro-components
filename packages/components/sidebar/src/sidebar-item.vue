@@ -1,5 +1,5 @@
 <template>
-  <template v-if="item.meta?.hiddenMenu !== true">
+  <template v-if="item.meta?.hideInMenu !== true">
     <!-- 没有子菜单的情况 -->
     <template v-if="resolveMenuItem(item)">
       <el-menu-item
@@ -20,7 +20,7 @@
         <slot v-else-if="$slots['sidebar-item']" name="sidebar-item" v-bind="item" />
 
         <el-icon v-else-if="item.meta && item.meta.icon" class="plus-sidebar__item-icon">
-          <component :is="item.meta.icon" />
+          <component :is="item.meta.icon" v-bind="item" />
         </el-icon>
 
         <template #title>
@@ -126,17 +126,17 @@ export interface PlusSidebarItemProps {
    * 自定义 菜单的  menuItem
    * @param route
    */
-  renderMenuItem?: (route: PlusRouteRecordRaw) => VNode
+  renderMenuItem?: (route: PlusRouteRecordRaw) => VNode | string
   /**
    * 自定义 菜单的 subMenu
    * @param route
    */
-  renderSubMenuItem?: (route: PlusRouteRecordRaw) => VNode
+  renderSubMenuItem?: (route: PlusRouteRecordRaw) => VNode | string
   /**
    * 自定义 菜单的标题显示
    * @param route
    */
-  renderTitle?: (route: PlusRouteRecordRaw) => VNode
+  renderTitle?: (route: PlusRouteRecordRaw) => VNode | string
 }
 
 defineOptions({
@@ -158,7 +158,7 @@ const resolveMenuItem = (item: PlusRouteRecordRaw) => {
   // 没有子路由的情况
   if (!item.children?.length) return true
 
-  const children = item.children.filter(i => i.meta?.hiddenMenu !== true)
+  const children = item.children.filter(i => i.meta?.hideInMenu !== true)
   // 判断子路由都是隐藏状态
   if (!children.length) {
     return true

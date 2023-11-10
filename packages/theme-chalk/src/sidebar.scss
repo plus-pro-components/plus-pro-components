@@ -10,6 +10,7 @@
     &:not(.#{$el-namespace + -menu--collapse}) {
       min-height: 400px;
       width: var(--plus-sidebar-width);
+      flex-shrink: 0;
     }
 
     &.#{$el-namespace + -menu--collapse} {

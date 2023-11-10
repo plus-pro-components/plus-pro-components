@@ -40,6 +40,11 @@
       <!-- 主内容 -->
       <el-main>
         <el-scrollbar class="plus-layout-main__scrollbar" v-bind="scrollbarProps">
+          <!-- 面包屑上方 -->
+          <template v-if="$slots['layout-extra']">
+            <slot name="layout-extra" />
+          </template>
+
           <!-- 面包屑 -->
           <PlusBreadcrumb v-bind="breadcrumbProps">
             <!-- 面包屑title 插槽 -->

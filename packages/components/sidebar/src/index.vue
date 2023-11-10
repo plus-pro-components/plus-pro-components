@@ -78,22 +78,22 @@ export interface PlusSidebarProps {
    * 自定义 菜单的  menuItem
    * @param route
    */
-  renderMenuItem?: (route: PlusRouteRecordRaw) => VNode
+  renderMenuItem?: (route: PlusRouteRecordRaw) => VNode | string
   /**
    * 自定义 菜单的 subMenu
    * @param route
    */
-  renderSubMenuItem?: (route: PlusRouteRecordRaw) => VNode
+  renderSubMenuItem?: (route: PlusRouteRecordRaw) => VNode | string
   /**
    * 自定义 菜单的标题显示
    * @param route
    */
-  renderTitle?: (route: PlusRouteRecordRaw) => VNode
+  renderTitle?: (route: PlusRouteRecordRaw) => VNode | string
   /**
    * 可以为菜单增加一个额外内容，在菜单头和菜单之间
    * @param route
    */
-  renderMenuExtra?: (route: PlusRouteRecordRaw) => VNode
+  renderMenuExtra?: (route: PlusRouteRecordRaw) => VNode | string
   scrollbarProps?: Partial<Mutable<ScrollbarProps>>
   width?: number | string
 }
@@ -117,6 +117,8 @@ const props = withDefaults(defineProps<PlusSidebarProps>(), {
   renderMenuExtra: undefined,
   width: 200
 })
+
+console.log(props.renderMenuExtra)
 
 const emit = defineEmits<PlusSidebarEmits>()
 

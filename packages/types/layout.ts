@@ -1,6 +1,5 @@
 import type { RouteRecordRaw } from 'vue-router'
 import type { VNode, Component } from 'vue'
-
 /**
  * 路由配置类型
  *
@@ -18,33 +17,27 @@ export type PlusRouteRecordRaw = Partial<Omit<RouteRecordRaw, 'children'>> & {
      * 页面标题   标题存在面包屑和菜单名称显示标题  不存在显示路由的 name  name不存在显示路由的 path
      */
     title?: string
-
     /**
      * 图标
      */
-    icon?: Component | VNode
-
+    icon?: Component | VNode | ((route: PlusRouteRecordRaw) => VNode)
     /**
      * 排序，默认为0 只对第一级有效
      */
     sort?: number
-
     /**
      * 在侧边栏菜单中隐藏，默认false 不隐藏
      */
-    hiddenMenu?: boolean
-
+    hideInMenu?: boolean
     /**
      * 隐藏面包屑，默认false 不隐藏
      */
-    hiddenBreadcrumb?: boolean
-
+    hiddenInBreadcrumb?: boolean
     /**
      * 菜单是否禁用
      * @see https://element-plus.org/zh-CN/component/menu.html#menu-item-attributes
      */
     disabled?: boolean
   }
-
   children?: PlusRouteRecordRaw[]
 }
