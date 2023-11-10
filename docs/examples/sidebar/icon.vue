@@ -16,9 +16,6 @@ import type { PlusRouteRecordRaw } from 'plus-pro-components'
 import { h } from 'vue'
 import svg from '/home.svg?raw'
 
-// iconfont svg  symbol
-import '/iconfont-symbol.js?url'
-
 const routes: PlusRouteRecordRaw[] = [
   {
     path: '/breadcrumb',
@@ -72,6 +69,7 @@ const routes: PlusRouteRecordRaw[] = [
       title: 'iconfont icon'
     }
   },
+  // 已经在网站中 导入 iconfont-symbol.js
   {
     path: '/radio',
     name: 'radio',

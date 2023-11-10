@@ -41,6 +41,7 @@ export default defineConfig({
     ['meta', { name: 'keywords', content }],
     ['script', { src: '/hmt.js' }],
     ['script', { src: '/style.js' }],
+    ['script', { src: '/iconfont-symbol.js' }],
     ['link', { rel: 'icon', href: '/logo.png' }]
   ],
 
