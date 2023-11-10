@@ -1,3 +1,15 @@
+## [v0.0.1-beta.22](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-beta.21...v0.0.1-beta.22) (2023-11-10)
+
+
+### ✨ Features
+
+* **components:** :sparkles: layout component hide*->hideIn*,render add string support.([44cbd8a](https://github.com/plus-pro-components/plus-pro-components/commit/44cbd8a)) by@xiaofei
+
+
+
+
+
+
 ## [v0.0.1-beta.21](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-beta.20...v0.0.1-beta.21) (2023-11-08)
 
 
