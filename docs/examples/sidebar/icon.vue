@@ -15,8 +15,9 @@ import { Platform } from '@element-plus/icons-vue'
 import type { PlusRouteRecordRaw } from 'plus-pro-components'
 import { h } from 'vue'
 import svg from '/home.svg?raw'
-// symbol
-import 'https://at.alicdn.com/t/font_1251940_pr7stx0uzw.js'
+
+// iconfont svg  symbol
+import '/iconfont-symbol.js?url'
 
 const routes: PlusRouteRecordRaw[] = [
   {
