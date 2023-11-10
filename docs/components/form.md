@@ -221,7 +221,7 @@ form/all
 | `columns`               | 表单配置信息                                       | `array`[PlusColumn[]](/components/config.html)                                           | `[]`    | 否       |
 | `rowProps`              | el-row 的 props                                    | `object`[RowProps](https://element-plus.org/zh-CN/component/layout.html#row-attributes)  |         | 否       |
 | `colProps`              | el-col 属性                                        | `object`[ColProps](https://element-plus.org/zh-CN/component/layout.html#col-attributes)  |         | 否       |
-| `labelWidth`            | el-form 的 labelWidth                              | `string`                                                                                 | `84px`  | 否       |
+| `labelWidth`            | el-form 的 labelWidth                              | `string`                                                                                 | `80px`  | 否       |
 | `labelPosition`         | el-form 的 labelPosition                           | `string` <docs-tip content="'left' / 'right' / 'top'"></docs-tip>                        | `left`  | 否       |
 | `labelSuffix`           | el-form 的 labelSuffix                             | `string`                                                                                 | `:`     | 否       |
 | `hasErrorTip`           | 是否需要校验 message 提示                          | `boolean`                                                                                | `true`  | 否       |
