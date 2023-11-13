@@ -24,18 +24,12 @@ const getRoutes = (moduleFiles: Record<string, any>) => {
     }
   }))
 
-  return routes.map(item => ({
-    ...item,
-    children:
-      item.path === '/dialog'
-        ? routes.map(item => ({ ...item, path: item.path.replace('/', ''), name: '' }))
-        : []
-  }))
+  return routes
 }
 
 export const routes = [
   {
-    path: '/https://www.baidu.com',
+    path: '/https://plus-pro-components.com',
     name: 'index',
     meta: {
       title: '外链',
@@ -57,7 +51,5 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: routes as unknown as Readonly<RouteRecordRaw[]>
 })
-
-console.log(routes, 'routes')
 
 export default router

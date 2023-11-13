@@ -25,7 +25,7 @@
 
 <script lang="ts" setup>
 import type { VNode } from 'vue'
-import { ref, getCurrentInstance, watchEffect } from 'vue'
+import { ref, getCurrentInstance, watchEffect, computed } from 'vue'
 import type { RouteLocationMatched, RouteLocationNormalizedLoaded } from 'vue-router'
 import { ElBreadcrumb, ElBreadcrumbItem } from 'element-plus'
 import { isFunction } from '@plus-pro-components/components/utils'
@@ -49,14 +49,16 @@ const props = withDefaults(defineProps<PlusBreadcrumbProps>(), {
 
 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 const instance = getCurrentInstance()!
-const route = instance.appContext.config.globalProperties.$route as RouteLocationNormalizedLoaded
+const route = computed(
+  () => instance.appContext.config.globalProperties.$route as RouteLocationNormalizedLoaded
+)
 const breadcrumbList = ref<RouteLocationMatched[]>([])
 
 watchEffect(() => {
   const breadcrumb = props.routes?.length
     ? (props.routes as unknown as RouteLocationMatched[])
-    : route
-    ? route.matched
+    : route.value
+    ? route.value.matched
     : []
   breadcrumbList.value = breadcrumb.filter(item => item.meta?.hideInBreadcrumb !== true)
 })

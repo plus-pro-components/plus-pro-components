@@ -1,28 +1,24 @@
 <template>
   <el-config-provider :locale="locales" namespace="el">
-    <div class="nav-wrapper">
-      <AppNav />
-      <el-button class="switch-language" type="primary" @click="toggle">切换语言</el-button>
-    </div>
-
-    <div class="place" />
-
-    <RouterView />
+    <AppNav>
+      <el-button size="small" class="switch-language" type="primary" @click="toggle">
+        {{ language }}
+      </el-button>
+    </AppNav>
   </el-config-provider>
 </template>
 
 <script setup lang="ts">
 /* eslint-disable @typescript-eslint/ban-ts-comment*/
 import { ref, computed } from 'vue'
-import { RouterView } from 'vue-router'
 // @ts-ignore
 import zhCn from 'element-plus/dist/locale/zh-cn'
 // @ts-ignore
 import en from 'element-plus/dist/locale/en'
 // @ts-ignore
 import { zhCn as plusZhCn, en as plusEn } from '../../locale'
-// import AppNav from './views/layout.vue'
-import AppNav from './__nav.vue'
+import AppNav from './views/layout.vue'
+// import AppNav from './__nav.vue'
 
 const zhCnLocales = {
   ...zhCn,
@@ -50,7 +46,7 @@ const toggle = () => {
   display: flex;
 }
 
-.place {
-  height: 60px;
+.switch-language {
+  margin-right: 10px;
 }
 </style>

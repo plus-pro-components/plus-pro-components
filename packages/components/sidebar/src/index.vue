@@ -6,7 +6,7 @@
     }"
     mode="vertical"
     :collapse="subCollapse"
-    :default-active="defaultActive"
+    :default-active="subDefaultActive"
     :collapse-transition="true"
     class="plus-sidebar"
     :class="[$attrs.mode === 'horizontal' ? 'is-horizontal' : 'is-vertical']"
@@ -60,8 +60,8 @@
 </template>
 
 <script lang="ts" setup>
-import type { VNode } from 'vue'
-import { ref, computed, watchEffect, getCurrentInstance } from 'vue'
+import type { VNode, Ref, ComputedRef } from 'vue'
+import { ref, computed, watchEffect, getCurrentInstance, unref } from 'vue'
 import type { RouteLocationNormalizedLoaded } from 'vue-router'
 import type { ScrollbarProps } from 'element-plus'
 import { ElMenu, ElMenuItem, ElIcon, ElScrollbar } from 'element-plus'
@@ -74,6 +74,7 @@ import PlusSidebarItem from './sidebar-item.vue'
 export interface PlusSidebarProps {
   routes?: PlusRouteRecordRaw[]
   collapse?: boolean
+  defaultActive?: string | ComputedRef<string> | Ref<string>
   /**
    * 自定义 菜单的  menuItem
    * @param route
@@ -115,7 +116,8 @@ const props = withDefaults(defineProps<PlusSidebarProps>(), {
   renderSubMenuItem: undefined,
   renderTitle: undefined,
   renderMenuExtra: undefined,
-  width: 200
+  width: 200,
+  defaultActive: undefined
 })
 
 const emit = defineEmits<PlusSidebarEmits>()
@@ -124,7 +126,9 @@ const w = computed(() => (isString(props.width) ? props.width : props.width + 'p
 
 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 const instance = getCurrentInstance()!
-const route = instance.appContext.config.globalProperties.$route as RouteLocationNormalizedLoaded
+const route = computed(
+  () => instance.appContext.config.globalProperties.$route as RouteLocationNormalizedLoaded
+)
 
 const plusSidebarInstance = ref<InstanceType<typeof ElMenu> | null>(null)
 
@@ -134,9 +138,13 @@ const subRoutes = computed(() =>
 )
 
 // 激活的菜单
-const defaultActive = computed(
-  () => (route?.redirectedFrom && route?.redirectedFrom?.path) || route?.path
+const computedDefaultActive = computed(
+  () => (route.value?.redirectedFrom && route.value?.redirectedFrom?.path) || route.value?.path
 )
+
+const subDefaultActive = computed(
+  () => unref(props.defaultActive) || computedDefaultActive.value
+) as ComputedRef<string>
 
 // 切换菜单
 const toggleCollapse = () => {

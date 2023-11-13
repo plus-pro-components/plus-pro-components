@@ -1,25 +1,18 @@
 <template>
   <div class="layout">
-    <PlusLayout
-      :sidebar-props="{ routes, renderTitle }"
-      :breadcrumb-props="{
-        renderTitle
-      }"
-    >
+    <PlusLayout :sidebar-props="{ routes }">
+      <template #header-right>
+        <slot />
+      </template>
+
       <RouterView />
     </PlusLayout>
   </div>
 </template>
 
 <script setup lang="ts">
-import { h } from 'vue'
-import type { PlusRouteRecordRaw } from '@plus-pro-components/types'
 import { RouterView } from 'vue-router'
 import { routes } from '../router/index'
-
-const renderTitle = (data: PlusRouteRecordRaw) => {
-  return h('div', { data }, data.name as string)
-}
 </script>
 
 <style>
