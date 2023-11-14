@@ -35,7 +35,7 @@ export interface PlusBreadcrumbProps {
   routes?: PlusRouteRecordRaw[]
   replace?: boolean
   // eslint-disable-next-line vue/require-default-prop
-  renderTitle?: () => VNode | string
+  renderTitle?: (route: PlusRouteRecordRaw) => VNode | string
 }
 
 defineOptions({

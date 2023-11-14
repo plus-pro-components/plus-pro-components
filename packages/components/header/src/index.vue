@@ -92,9 +92,12 @@ export interface PlusHeaderProps {
     value: string
   }[]
   // eslint-disable-next-line vue/require-default-prop
-  renderHeaderLeft?: () => VNode
+  renderHeaderLeft?: (info: { logo: string; title: string }) => VNode | string
   // eslint-disable-next-line vue/require-default-prop
-  renderHeaderRight?: () => VNode
+  renderHeaderRight?: (info: {
+    userInfo: Record<string | number | symbol, unknown>
+    title: string
+  }) => VNode | string
 }
 
 export interface PlusHeaderEmits {

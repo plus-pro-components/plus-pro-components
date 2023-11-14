@@ -55,7 +55,11 @@
 
           <slot />
 
-          <el-backtop target=".plus-layout .plus-layout-main__scrollbar" />
+          <el-backtop
+            v-if="backtop"
+            v-bind="backtopProps"
+            target=".plus-layout .plus-layout-main__scrollbar"
+          />
         </el-scrollbar>
       </el-main>
     </el-container>
@@ -69,27 +73,30 @@ import type { PlusSidebarProps, PlusSidebarInstance } from '@plus-pro-components
 import { PlusSidebar as PlusSidebarComponent } from '@plus-pro-components/components/sidebar'
 import type { PlusHeaderProps } from '@plus-pro-components/components/header'
 import { PlusHeader as PlusHeaderComponent } from '@plus-pro-components/components/header'
-import type { ScrollbarProps } from 'element-plus'
+import { isPlainObject } from '@plus-pro-components/components/utils'
+import type { ScrollbarProps, BacktopProps } from 'element-plus'
 import { ElContainer, ElMain, ElScrollbar, ElBacktop } from 'element-plus'
-import type { Mutable } from '@plus-pro-components/types'
+import type { Mutable, RecordType } from '@plus-pro-components/types'
 import type { Component } from 'vue'
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 
 export interface PlusLayoutProps {
   sidebarProps?: PlusSidebarProps
   headerProps?: PlusHeaderProps
   breadcrumbProps?: PlusBreadcrumbProps
   scrollbarProps?: Partial<Mutable<ScrollbarProps>>
+  backtop?: boolean | Partial<Mutable<BacktopProps>>
 }
 
 defineOptions({
   name: 'PlusLayout'
 })
 
-withDefaults(defineProps<PlusLayoutProps>(), {
+const props = withDefaults(defineProps<PlusLayoutProps>(), {
   sidebarProps: undefined,
   headerProps: undefined,
   breadcrumbProps: undefined,
+  backtop: true,
   scrollbarProps: () => ({
     always: true
   })
@@ -103,6 +110,10 @@ const PlusSidebar: Component = PlusSidebarComponent
 const PlusHeader: Component = PlusHeaderComponent
 
 const plusSidebarInstance = ref<PlusSidebarInstance | null>()
+
+const backtopProps = computed(
+  () => (isPlainObject(props.backtop) ? props.backtop : {}) as RecordType
+)
 
 defineExpose({
   plusSidebarInstance
