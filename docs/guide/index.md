@@ -2,6 +2,10 @@
 
 **PlusProComponents 灵感来自于[AntDesign ProComponents](https://procomponents.ant.design/)。PlusProComponents 是基于 element-plus 而开发的模板组件，它提供了更高级别的抽象支持，开箱即用。可以显著的提升制作 CRUD 页面的效率，更加专注于页面。**
 
+## 组件架构设计
+
+![组件架构设计](/design.png 'design')
+
 ## 组件列表
 
 - [PlusLayout](/components/layout.html) 页面布局组件，解决布局的问题，提供开箱即用的菜单和面包屑功能。
