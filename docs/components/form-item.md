@@ -180,6 +180,13 @@ form-item/all
 | `fieldProps`            | 传递给具体表单项和表格显示的配置，如 el-input，el-select 的 props。 值支持对象 object，函数和 Promise。        | `object/function/promise`[PropsItemType](/components/type.html#propsitemtype)                                              |        | 否       |
 | `renderLabel`           | 自定义渲染 el-form-item 下 label 行显示内容                                                                    | `function` <docs-tip content='(label: any, data:{ row: object; index: number; column: PlusColumn}) =>  VNode '></docs-tip> |        | 否       |
 
+## FormItem Slots
+
+| 插槽名         | 说明                                                           | 作用域插槽参数                                 |
+| -------------- | -------------------------------------------------------------- | ---------------------------------------------- |
+| `plus-field-*` | 自定义表单项，组件会自动根据配置项的 prop 生成对应的插槽       | `{prop,label,fieldProps,valueType,column}` |
+| `plus-label-*` | 自定义表单项 label，组件会自动根据配置项的 prop 生成对应的插槽 | `{prop,label,fieldProps,valueType,column}`     |
+
 ## Exposes
 
 | 名称               | 说明                           | 类型                                                                     |

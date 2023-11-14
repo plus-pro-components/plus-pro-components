@@ -386,12 +386,14 @@ el-table 的其他事件写法示例 如 `select`,`select-all`,`row-click`等
 
 ## Table Slots
 
-| 插槽名    | 说明       |
-| --------- | ---------- |
-| `title`   | 表格标题   |
-| `toolbar` | 工具栏左侧 |
-| `expand`  | 展开行     |
-| ...       | ...        |
+| 插槽名          | 说明                                                            | 作用域插槽参数                                       |
+| --------------- | --------------------------------------------------------------- | ---------------------------------------------------- |
+| `title`         | 表格标题                                                        |                                                      |
+| `toolbar`       | 工具栏左侧                                                      |                                                      |
+| `expand`        | 展开行                                                          |                                                      |
+| `plus-cell-*`   | 自定义表格项，组件会自动根据配置项的 prop 生成对应的插槽        | `{row,prop,label,fieldProps,valueType,value,column}` |
+| `plus-header-*` | 自定义表格项 header，组件会自动根据配置项的 prop 生成对应的插槽 | `{prop,label,fieldProps,valueType,column}`           |
+| ...             | ...                                                             | ...                                                  |
 
 **`...`表示同时支持所有[ElTable 插槽](https://element-plus.org/zh-CN/component/table.html#table-%E6%8F%92%E6%A7%BD)**
 

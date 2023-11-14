@@ -18,7 +18,7 @@ date-picker/basic
 
 | 名称                    | 说明                                         | 类型                                                                                               | 默认值                                                              | 是否必须 |
 | ----------------------- | -------------------------------------------- | -------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------- | -------- |
-| `model-value / v-model` | 绑定值                                       | `array` <docs-tip content='string[]'></docs-tip>                                                   | `false`                                                             | 否       |
+| `model-value / v-model` | 绑定值                                       | `array` <docs-tip content='string[]'></docs-tip>                                                   |                                                                     | 否       |
 | `type`                  | el-date-picker 的类型                        | `string` <docs-tip content="'year' / 'month' / 'date' / 'dates' / 'datetime' / 'week'"></docs-tip> | `datetime`                                                          | 否       |
 | `format`                | 显示在输入框中的格式                         | `string`                                                                                           | `YYYY-MM-DD HH:mm:ss`                                               | 否       |
 | `valueFormat`           | 绑定值的格式。 不指定则绑定值为 Date 对象    | `string`                                                                                           | `YYYY-MM-DD HH:mm:ss`                                               | 否       |
@@ -52,8 +52,8 @@ const endDisabledDate = (endTime, startValue) => {
 
 ## DatePicker Events
 
-| 名称     | 说明           | 类型                                                               |
-| -------- | -------------- | ------------------------------------------------------------------ |
+| 名称     | 说明           | 类型                                                                |
+| -------- | -------------- | ------------------------------------------------------------------- |
 | `change` | 用户选值时触发 | `function` <docs-tip content='(value:string[]) => void'></docs-tip> |
 
 ::: tip 提示

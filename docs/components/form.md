@@ -262,11 +262,13 @@ form/all
 
 ## Form Slots
 
-| 插槽名         | 说明                                  |
-| -------------- | ------------------------------------- |
-| `default`      | 表单的内容 默认是 `PlusFormItem` 组件 |
-| `footer`       | 表单底部按钮                          |
-| `group-header` | 分组表单头部                          |
+| 插槽名         | 说明                                                           | 作用域插槽参数                             |
+| -------------- | -------------------------------------------------------------- | ------------------------------------------ |
+| `default`      | 表单的内容 默认是 `PlusFormItem` 组件                          |                                            |
+| `footer`       | 表单底部按钮                                                   |                                            |
+| `group-header` | 分组表单头部                                                   | `{title,columns,icon}`                     |
+| `plus-field-*` | 自定义表单项，组件会自动根据配置项的 prop 生成对应的插槽       | `{prop,label,fieldProps,valueType,column}` |
+| `plus-label-*` | 自定义表单项 label，组件会自动根据配置项的 prop 生成对应的插槽 | `{prop,label,fieldProps,valueType,column}` |
 
 ## Exposes
 
