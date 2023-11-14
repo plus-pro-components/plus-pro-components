@@ -2,7 +2,7 @@
 
 ## 简介
 
-PlusLayout 是由 [PlusBreadcrumb ](/components/breadcrumb.html)， [PlusHeader ](/components/header.html)， [PlusSidebar ](/components/sidebar.html)三个组件组合而成。
+PlusLayout 是由 [PlusBreadcrumb ](/components/breadcrumb.html)， [PlusHeader ](/components/header.html)， [PlusSidebar ](/components/sidebar.html)三个组件组合而成，解决布局的问题，提供开箱即用的菜单和面包屑功能。
 
 ## 基础用法
 

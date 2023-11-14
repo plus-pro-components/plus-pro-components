@@ -58,7 +58,7 @@ plus-pro-components is a page level component library based on Vue and element p
 
 plus-pro-components is a Vue and element plus based component library that provides many commonly used UI and business components, making it easy for developers to quickly build front-end pages. Although plus-pro components have many advantages, they also have the following drawbacks:
 
-- High learning costs:plus-pro-components is relatively complex, and learning all components may take a long time. Therefore, for novice developers, the learning cost may be relatively high.
+- Higher learning costs:plus-pro-components is relatively complex, and learning all components may take a long time. Therefore, for novice developers, the learning cost may be relatively high.
 
 - Highly customizable limited: plus-pro-components support high customizability, but it is still impossible to guarantee 100% complete customization of the components. Projects with very high customization requirements should be used with caution.
 

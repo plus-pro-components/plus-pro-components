@@ -58,7 +58,7 @@ plus-pro-components 是一个基于 Vue 和 element-plus 的页面级别的组�
 
 plus-pro-components 是一个基于 Vue 和 element-plus 的组件库，它提供了很多常用的 UI 组件和业务组件，可以方便地帮助开发者快速搭建前端页面。虽然 plus-pro-components 具有很多优点，但是也有以下一些缺点：
 
-- 学习成本高：plus-pro-components 的组件库比较复杂，学习所有组件可能需要花费较长时间。因此，对于新手开发者来说，学习成本可能会比较高。
+- 学习成本较高：plus-pro-components 的组件库比较复杂，学习所有组件可能需要花费较长时间。因此，对于新手开发者来说，学习成本可能会比较高。
 
 - 高度可定制有限：plus-pro-components 的组件支持高度可定制，但是任然不可能保证组件 100%完全自定义，定制需求非常高的项目谨慎使用。
 
