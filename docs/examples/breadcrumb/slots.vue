@@ -14,7 +14,7 @@ import type { PlusRouteRecordRaw } from 'plus-pro-components'
 const routes: PlusRouteRecordRaw[] = [
   {
     path: '/breadcrumb/1',
-    name: 'Breadcrumb2',
+    name: 'Breadcrumb1',
     meta: {
       title: '面包屑1'
     },

@@ -11,7 +11,7 @@ import type { PlusRouteRecordRaw } from 'plus-pro-components'
 const routes = [
   {
     path: '/breadcrumb/1',
-    name: 'Breadcrumb2',
+    name: 'Breadcrumb1',
     meta: {
       title: '面包屑1'
     },
@@ -35,7 +35,7 @@ const renderTitle = (route: PlusRouteRecordRaw) => {
         color: 'red'
       }
     },
-    route.name
+    () => route.name
   )
 }
 </script>

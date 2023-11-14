@@ -49,8 +49,8 @@ header/dropdown
 | `userInfo`          | 用户信息              | `object` <docs-tip content='{ username?: string; avatar?: string  }'></docs-tip>                                              | `{}`                                       | 否       |
 | `logoutText`        | 退出登录文字          | `string`                                                                                                                      | `退出登录`                                 | 否       |
 | `dropdownList`      | 下拉其他选项          | `array`<docs-tip content='{ label: string;value: string }[]'></docs-tip>                                                      | `[]`                                       | 否       |
-| `renderHeaderLeft`  | 自定义左侧            | `function`<docs-tip content='(item: { logo: string;title: string}) => VNode'></docs-tip>                                      |                                            | 否       |
-| `renderHeaderRight` | 自定义右侧            | `function`<docs-tip content='(item: { userinfo: { username?: string; avatar?: string  };title: string}) => VNode'></docs-tip> |                                            | 否       |
+| `renderHeaderLeft`  | 自定义左侧            | `function`<docs-tip content='(info: { logo: string;title: string}) => VNode'></docs-tip>                                      |                                            | 否       |
+| `renderHeaderRight` | 自定义右侧            | `function`<docs-tip content='(info: { userinfo: { username?: string; avatar?: string  };title: string}) => VNode'></docs-tip> |                                            | 否       |
 
 ## Header Events
 
