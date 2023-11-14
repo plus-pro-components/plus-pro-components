@@ -1,3 +1,15 @@
+## [v0.0.1-beta.25](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-beta.24...v0.0.1-beta.25) (2023-11-13)
+
+
+
+
+### 🐛 Bug Fixes
+
+* **components:** :bug: breadcrumb and sidebar component route not reactive([f83436a](https://github.com/plus-pro-components/plus-pro-components/commit/f83436a)) by@xiaofei
+
+
+
+
 ## [v0.0.1-beta.24](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-beta.23...v0.0.1-beta.24) (2023-11-10)
 
 
