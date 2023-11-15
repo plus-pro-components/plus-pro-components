@@ -20,6 +20,16 @@ sidebar/horizontal
 
 :::
 
+## 外链
+
+路由信息的`path`给 `/+ 链接` 例： `/https://plus-pro-components.com` 。路由信息配置[ PlusRouteRecordRaw](/components/type.html#plusrouterecordraw)
+
+:::demo
+
+sidebar/external
+
+:::
+
 ## 在菜单中不显示某一级
 
 路由信息的`meta` 中添加 `hideInMenu: true`即可。路由信息配置[ PlusRouteRecordRaw](/components/type.html#plusrouterecordraw)
