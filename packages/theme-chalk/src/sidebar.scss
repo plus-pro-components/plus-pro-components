@@ -7,8 +7,8 @@
   height: 100%;
 
   &.is-vertical {
+    min-height: 400px;
     &:not(.#{$el-namespace + -menu--collapse}) {
-      min-height: 400px;
       width: var(--plus-sidebar-width);
       flex-shrink: 0;
     }
