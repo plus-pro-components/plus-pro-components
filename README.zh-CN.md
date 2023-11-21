@@ -47,7 +47,7 @@ plus-pro-components 是一个基于 Vue 和 element-plus 的页面级别的组�
 - [x] Pagination 分页 -- 完成
 - [x] Radio 单选 -- 完成
 - [x] DatePicker 日期 -- 完成
-- [x] InputTag 日期 -- 完成
+- [x] InputTag 输入标签 -- 完成
 - [x] DisplayItem 单项显示 -- 完成
 - [x] FormItem 表单单项 -- 完成
 - [x] Sidebar 侧边菜单 -- 完成
