@@ -1,3 +1,24 @@
+## [v0.0.1-beta.26](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-beta.25...v0.0.1-beta.26) (2023-11-24)
+
+
+### ✨ Features
+
+* **components:** :sparkles: check-card  and check-card-group add slot support.([26ef18d](https://github.com/plus-pro-components/plus-pro-components/commit/26ef18d)) by@xiaofei
+* **components:** :sparkles: add plus-check-card-group component([8fe1da1](https://github.com/plus-pro-components/plus-pro-components/commit/8fe1da1)) by@xiaofei
+* **all:** Merge pull request [#51](https://github.com/plus-pro-components/plus-pro-components/pull/51) from plus-pro-components/gs([5a8fcae](https://github.com/plus-pro-components/plus-pro-components/commit/5a8fcae)) by@xiaofei
+* **components:** :sparkles: add check-card component([76df804](https://github.com/plus-pro-components/plus-pro-components/commit/76df804)) by@guosong
+
+
+### 🐛 Bug Fixes
+
+* **theme-chalk:** :bug: fix descriptions.scss filename error([46fb1d3](https://github.com/plus-pro-components/plus-pro-components/commit/46fb1d3)) by@xiaofei
+* **components:** :bug: fix steps-form and descriptions component scss file path inconsistency.([cf06144](https://github.com/plus-pro-components/plus-pro-components/commit/cf06144)) by@xiaofei
+* **theme-chalk:** :bug: sidebar.scss add 'min-height'([9cc6a79](https://github.com/plus-pro-components/plus-pro-components/commit/9cc6a79)) by@xiaofei
+* **components:** :bug: add layout related component ts type([e7aa18a](https://github.com/plus-pro-components/plus-pro-components/commit/e7aa18a)) by@xiaofei
+
+
+
+
 ## [v0.0.1-beta.25](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-beta.24...v0.0.1-beta.25) (2023-11-13)
 
 
