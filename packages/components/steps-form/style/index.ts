@@ -3,4 +3,4 @@ import '@external/step/style/index'
 
 import '@plus-pro-components/components/form/style/index'
 
-import '@plus-pro-components/theme-chalk/src/plus-steps-form.scss'
+import '@plus-pro-components/theme-chalk/src/steps-form.scss'
