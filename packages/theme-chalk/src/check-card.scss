@@ -1,0 +1,54 @@
+@use 'mixins/mixins' as *;
+@use 'mixins/function' as *;
+
+@include b(check-card) {
+  display: flex;
+  padding-inline: 12px;
+  padding-block: 16px;
+  border: 1px solid getCssVar('border-color');
+  border-radius: getCssVar('border-radius-base');
+  cursor: pointer;
+  color: getCssVar('text-color-regular');
+  @include m(large, true) {
+    width: 440px;
+  }
+  @include m(default, true) {
+    width: 320px;
+  }
+  @include m(small, true) {
+    width: 200px;
+  }
+  @include m(checked, true) {
+    position: relative;
+    border-color: getCssVar('color-primary');
+    background-color: rgba(getCssVar('color-primary-rgb'), 0.1);
+    &:after {
+      position: absolute;
+      inset-block-start: 2px;
+      inset-inline-end: 2px;
+      width: 0;
+      height: 0;
+      border: 10px solid getCssVar('color-primary');
+      border-block-end: 10px solid transparent;
+      border-inline-start: 10px solid transparent;
+      border-start-end-radius: 6px;
+      content: '';
+    }
+  }
+  @include m(disabled, true) {
+    background-color: getCssVar('color-info-light-9');
+    border-color: getCssVar('color-info-light-8');
+    cursor: not-allowed;
+    user-select: none;
+  }
+  @include b(check-card_avatar) {
+    padding-inline-end: 8px;
+  }
+  @include b(check-card_title) {
+    margin-block-end: 4px;
+    color: getCssVar('text-color-primary');
+  }
+  @include b(check-card_discription) {
+    color: getCssVar('text-color-regular');
+  }
+}
