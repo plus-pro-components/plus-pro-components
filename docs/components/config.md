@@ -4,6 +4,8 @@
 文中的一些类型来自 <a href="/components/type.html" style="text-decoration: underline;">基础 Ts 类型</a> 章节，建议先阅读。
 :::
 
+高级组件中除了布局组件[Layout](/components/layout.html)和多选卡片[CheckCard ](/components/check-card.html),[CheckCardGroup ](/components/check-card-group.html)之外的组件通用配置。
+
 配置的核心字段是`valueType`，渲染的 key 是`prop`（所以需要保证唯一）。
 
 ## columns 配置
@@ -34,14 +36,12 @@ TS 类型 `PlusColumn`
 | `formItemProps`         | 传递给 el-form-item 的配置，支持所有 el-form-item 的 props。值支持对象 object，函数和 Promise。                                                                                        | `object/function/promise`[PropsItemType](/components/type.html#propsitemtype)                                                    |         | 否       |
 | `fieldProps`            | 传递给具体表单项和表格显示的配置，如 el-input，el-select 的 props。 值支持对象 object，函数和 Promise。                                                                                | `object/function/promise` [PropsItemType](/components/type.html#propsitemtype)                                                   |         | 否       |
 | `colProps`              | el-col 的 props                                                                                                                                                                        | `object` [ColProps](https://element-plus.org/zh-CN/component/layout.html#col-attributes)                                         |         | 否       |
-| `hideInDescriptions`    | 在 PlusDescriptions 组件中 隐藏                                                                                                                                                        | `boolean` <docs-tip content='boolean / Ref<boolean> / ComputedRef<boolean>'></docs-tip>                                                                                                                         | `false` | 否       |
-| `hideInForm`            | 在 PlusForm 组件中 隐藏                                                                                                                                                                | `boolean` <docs-tip content='boolean / Ref<boolean> / ComputedRef<boolean>'></docs-tip>                                                                                                                         | `false` | 否       |
-| `hideInTable`           | 在 PlusTable 组件中 隐藏                                                                                                                                                               | `boolean`  <docs-tip content='boolean / Ref<boolean> / ComputedRef<boolean>'></docs-tip>                                                                                                                        | `false` | 否       |
-| `hideInSearch`          | 在 PlusSearch 组件中 隐藏                                                                                                                                                              | `boolean` <docs-tip content='boolean / Ref<boolean> / ComputedRef<boolean>'></docs-tip>                                                                                                                         | `false` | 否       |
+| `hideInDescriptions`    | 在 PlusDescriptions 组件中 隐藏                                                                                                                                                        | `boolean` <docs-tip content='boolean / Ref<boolean> / ComputedRef<boolean>'></docs-tip>                                          | `false` | 否       |
+| `hideInForm`            | 在 PlusForm 组件中 隐藏                                                                                                                                                                | `boolean` <docs-tip content='boolean / Ref<boolean> / ComputedRef<boolean>'></docs-tip>                                          | `false` | 否       |
+| `hideInTable`           | 在 PlusTable 组件中 隐藏                                                                                                                                                               | `boolean` <docs-tip content='boolean / Ref<boolean> / ComputedRef<boolean>'></docs-tip>                                          | `false` | 否       |
+| `hideInSearch`          | 在 PlusSearch 组件中 隐藏                                                                                                                                                              | `boolean` <docs-tip content='boolean / Ref<boolean> / ComputedRef<boolean>'></docs-tip>                                          | `false` | 否       |
 
 ## valueType 可选的表单值
-
-
 
 | valueType 表单值   | 对应 element-plus 的组件                                                                | 对应 plus-pro-components 的组件                  | 对应的表格显示                          |
 | ------------------ | --------------------------------------------------------------------------------------- | ------------------------------------------------ | --------------------------------------- |

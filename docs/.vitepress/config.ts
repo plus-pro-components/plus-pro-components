@@ -190,6 +190,19 @@ export default defineConfig({
               link: '/components/layout'
             },
             {
+              text: '多选卡片',
+              items: [
+                {
+                  text: '多选卡片',
+                  link: '/components/check-card'
+                },
+                {
+                  text: '多选卡片组',
+                  link: '/components/check-card-group'
+                }
+              ]
+            },
+            {
               text: '表格',
               link: '/components/table'
             },
