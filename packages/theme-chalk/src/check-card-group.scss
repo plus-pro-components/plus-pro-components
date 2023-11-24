@@ -1,0 +1,12 @@
+@use 'mixins/config' as *;
+@use 'mixins/mixins' as *;
+
+@include b(check-card-group) {
+  display: flex;
+  flex-wrap: wrap;
+
+  .#{$plus-namespace + -check-card} {
+    margin-right: 16px;
+    margin-bottom: 16px;
+  }
+}

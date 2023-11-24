@@ -7,8 +7,12 @@
   padding-block: 16px;
   border: 1px solid getCssVar('border-color');
   border-radius: getCssVar('border-radius-base');
+  user-select: none;
   cursor: pointer;
   color: getCssVar('text-color-regular');
+  overflow: hidden;
+  box-sizing: border-box;
+
   @include m(large, true) {
     width: 440px;
   }
@@ -39,16 +43,34 @@
     background-color: getCssVar('color-info-light-9');
     border-color: getCssVar('color-info-light-8');
     cursor: not-allowed;
-    user-select: none;
   }
-  @include b(check-card_avatar) {
+  @include e(avatar-wrapper) {
     padding-inline-end: 8px;
   }
-  @include b(check-card_title) {
+  @include e(right-content) {
+    width: 100%;
+    overflow: hidden;
+  }
+  @include e(title) {
+    width: 100%;
     margin-block-end: 4px;
     color: getCssVar('text-color-primary');
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
-  @include b(check-card_discription) {
+  @include e(title-left) {
+    display: flex;
+    align-items: center;
+  }
+  @include e(title-right) {
+    display: flex;
+    align-items: center;
+    vertical-align: middle;
+  }
+  @include e(description) {
+    width: 100%;
     color: getCssVar('text-color-regular');
+    word-break: break-all;
   }
 }

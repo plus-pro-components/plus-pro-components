@@ -21,6 +21,7 @@ import { PlusSidebar } from '@plus-pro-components/components/sidebar'
 import { PlusHeader } from '@plus-pro-components/components/header'
 import { PlusLayout } from '@plus-pro-components/components/layout'
 import { PlusCheckCard } from '@plus-pro-components/components/check-card'
+import { PlusCheckCardGroup } from '@plus-pro-components/components/check-card-group'
 
 const plugins: DefineComponent[] = [
   PlusDialog,
@@ -43,7 +44,8 @@ const plugins: DefineComponent[] = [
   PlusSidebar,
   PlusHeader,
   PlusLayout,
-  PlusCheckCard
+  PlusCheckCard,
+  PlusCheckCardGroup
 ] as unknown as DefineComponent[]
 
 export default plugins

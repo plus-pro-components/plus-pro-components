@@ -15,7 +15,7 @@ let componentName = arg
 
 const validateComponentName = (name: string) => {
   // eslint-disable-next-line no-useless-escape
-  const reg = /^[a-z]+\-?[a-z]+$/
+  const reg = /^[a-z]+\-?[a-z]+\-?[a-z]+$/
   return reg.test(name)
 }
 
