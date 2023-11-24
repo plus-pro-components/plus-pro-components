@@ -27,8 +27,8 @@
       <el-avatar v-else-if="isString(avatar)" :src="(avatar as string)" v-bind="avatarProps" />
     </div>
 
-    <div v-if="title || description" class="plus-check-card__right-content">
-      <div v-if="title" class="plus-check-card__title">
+    <div class="plus-check-card__right-content">
+      <div v-if="title || $slots.title" class="plus-check-card__title">
         <div class="plus-check-card__title-left">
           <component
             :is="title"
@@ -67,7 +67,7 @@
         </div>
       </div>
 
-      <div v-if="description" class="plus-check-card__description">
+      <div v-if="description || $slots.description" class="plus-check-card__description">
         <component
           :is="description"
           v-if="isFunction(description)"

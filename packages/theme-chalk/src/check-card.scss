@@ -43,6 +43,11 @@
     background-color: getCssVar('color-info-light-9');
     border-color: getCssVar('color-info-light-8');
     cursor: not-allowed;
+
+    &:after {
+      border-top-color: getCssVar('color-info-light-5');
+      border-right-color: getCssVar('color-info-light-5');
+    }
   }
   @include e(avatar-wrapper) {
     padding-inline-end: 8px;

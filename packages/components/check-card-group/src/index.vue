@@ -8,6 +8,7 @@
       v-bind="item"
       :model-value="getChecked(item.value)"
       @change="handleChange($event, item.value)"
+      @extra="handleExtra(item)"
     >
       <!--  插槽支持 统一插槽和个性化插槽 -->
       <template v-if="$slots['avatar-' + item.value] || $slots.avatar" #avatar="data">
@@ -30,6 +31,11 @@
           v-bind="data"
         />
         <slot v-if="$slots.description" name="description" v-bind="data" />
+      </template>
+
+      <template v-if="$slots['extra-' + item.value] || $slots.extra" #extra="data">
+        <slot v-if="$slots['extra-' + item.value]" :name="'extra-' + item.value" v-bind="data" />
+        <slot v-if="$slots.extra" name="extra" v-bind="data" />
       </template>
     </PlusCheckCard>
   </div>
@@ -56,6 +62,7 @@ export interface PlusCheckCardGroupProps {
 export interface PlusCheckCardGroupEmits {
   (e: 'update:modelValue', checked: ValueType): void
   (e: 'change', checked: ValueType): void
+  (e: 'extra', item: PlusCheckCardProps & { value: string | number }): void
 }
 
 export interface CheckCardState {
@@ -111,5 +118,10 @@ const handleChange = (model: boolean, value: SingleValueType) => {
     emit('update:modelValue', val)
     emit('change', val)
   }
+}
+
+const handleExtra = (item: PlusCheckCardProps & { value: string | number }) => {
+  if (props.disabled) return
+  emit('extra', item)
 }
 </script>
