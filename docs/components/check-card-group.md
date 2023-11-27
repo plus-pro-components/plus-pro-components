@@ -58,7 +58,7 @@ check-card-group/custom
 
 :::demo
 
-check-card-group/custom
+check-card-group/tsx
 
 :::
 

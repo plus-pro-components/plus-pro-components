@@ -190,17 +190,8 @@ export default defineConfig({
               link: '/components/layout'
             },
             {
-              text: '多选卡片',
-              items: [
-                {
-                  text: '多选卡片',
-                  link: '/components/check-card'
-                },
-                {
-                  text: '多选卡片组',
-                  link: '/components/check-card-group'
-                }
-              ]
+              text: '多选卡片组',
+              link: '/components/check-card-group'
             },
             {
               text: '表格',
@@ -287,6 +278,10 @@ export default defineConfig({
             {
               text: '侧边栏',
               link: '/components/sidebar'
+            },
+            {
+              text: '可选择卡片',
+              link: '/components/check-card'
             }
           ]
         }
