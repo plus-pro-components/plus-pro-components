@@ -4,4 +4,4 @@ import '@external/icon/style/index'
 import '@external/menu-item/style/index'
 import '@external/sub-menu/style/index'
 
-import '@plus-pro-components/theme-chalk/src/plus-sidebar.scss'
+import '@plus-pro-components/theme-chalk/src/sidebar.scss'
