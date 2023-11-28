@@ -1,3 +1,23 @@
+## [v0.0.1-beta.27](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-beta.26...v0.0.1-beta.27) (2023-11-28)
+
+
+### ✨ Features
+
+* **components:** :sparkles: form and search component 'reset' add params([0a49ecc](https://github.com/plus-pro-components/plus-pro-components/commit/0a49ecc)) by@xiaofei
+* **components:** :sparkles: page component add defaultValues support([adc5036](https://github.com/plus-pro-components/plus-pro-components/commit/adc5036)) by@xiaofei
+
+
+### 🐛 Bug Fixes
+
+* **components:** :bug: fix table 'paginationChange' immediate([b676570](https://github.com/plus-pro-components/plus-pro-components/commit/b676570)) by@xiaofei
+* **components:** :bug: fix sidebar/style/index import csss filename error.([dd6599b](https://github.com/plus-pro-components/plus-pro-components/commit/dd6599b)) by@xiaofei
+
+
+### ♻️ Code Refactoring
+
+* **components:** :recycle: display-item component use  'has-label=false'([e188935](https://github.com/plus-pro-components/plus-pro-components/commit/e188935)) by@xiaofei
+
+
 ## [v0.0.1-beta.26](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-beta.25...v0.0.1-beta.26) (2023-11-24)
 
 
