@@ -7,7 +7,7 @@
     :class="hasLabel ? '' : 'no-has-label'"
     :label-position="labelPosition"
     :validate-on-rule-change="false"
-    :label-suffix="labelSuffix"
+    :label-suffix="hasLabel ? labelSuffix : ''"
     v-bind="$attrs"
     :model="model"
   >
@@ -150,7 +150,7 @@ export interface PlusFormEmits {
   (e: 'update:modelValue', values: FieldValues): void
   (e: 'submit', values: FieldValues): void
   (e: 'change', values: FieldValues, column: PlusColumn): void
-  (e: 'reset'): void
+  (e: 'reset', values: FieldValues): void
   (e: 'submitError', errors: any): void
 }
 
@@ -245,7 +245,7 @@ const handleReset = (): void => {
   clearValidate()
   state.values = { ...props.defaultValues }
   emit('update:modelValue', state.values)
-  emit('reset')
+  emit('reset', state.values)
 }
 
 defineExpose({

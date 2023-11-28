@@ -1,14 +1,14 @@
 <template>
   <PlusForm
     ref="plusFormInstance"
+    v-bind="$attrs"
     v-model="state.values"
     :inline="inline"
     :row-props="rowProps"
     :col-props="colProps"
     :columns="subColumns"
-    :has-footer="false"
     class="plus-search"
-    v-bind="$attrs"
+    :has-footer="false"
     @change="handleChange"
   >
     <template #search-footer>
@@ -51,6 +51,7 @@ import { ElFormItem, ElButton, ElIcon } from 'element-plus'
 
 export interface PlusSearchProps extends /* @vue-ignore */ Partial<Mutable<FormProps>> {
   modelValue?: FieldValues
+  defaultValues?: FieldValues
   columns?: PlusColumn[]
   hasFooter?: boolean
   hasReset?: boolean
@@ -73,7 +74,7 @@ export interface PlusSearchEmits {
   (e: 'update:modelValue', values: FieldValues): void
   (e: 'search', values: FieldValues): void
   (e: 'change', values: FieldValues, column: PlusColumn): void
-  (e: 'reset'): void
+  (e: 'reset', values: FieldValues): void
 }
 
 defineOptions({
@@ -82,6 +83,7 @@ defineOptions({
 
 const props = withDefaults(defineProps<PlusSearchProps>(), {
   modelValue: () => ({}),
+  defaultValues: () => ({}),
   hasFooter: true,
   hasReset: true,
   hasUnfold: true,
@@ -143,12 +145,12 @@ const handleChange = async (values: FieldValues, column: PlusColumn) => {
 }
 
 const handleSearch = async () => {
-  emit('search', cloneDeep(state.values))
+  emit('search', state.values)
 }
 
 const handleReset = (): void => {
-  state.values = {}
-  emit('reset')
+  state.values = { ...props.defaultValues }
+  emit('reset', state.values)
 }
 
 const handleUnfold = () => {
