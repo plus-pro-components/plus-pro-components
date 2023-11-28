@@ -20,6 +20,16 @@ page/replace-search-key
 
 :::
 
+## 默认搜索参数
+
+配置 `search.defaultValues`属性，设置默认搜索参数，当页面**初始化**和**点击搜索重置按钮**时 [PlusSearch](/components/search.html) 组件的`model-value / v-model` 会被设置为 defaultValues。
+
+:::demo
+
+page/default-search-values
+
+:::
+
 ## 增删改查 (CRUD)
 
 典型的增删改查。

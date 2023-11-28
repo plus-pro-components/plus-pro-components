@@ -214,27 +214,27 @@ form/all
 
 ## Form Attributes
 
-| 名称                    | 说明                                               | 类型                                                                                     | 默认值  | 是否必须 |
-| ----------------------- | -------------------------------------------------- | ---------------------------------------------------------------------------------------- | ------- | -------- |
-| `model-value / v-model` | 表单绑定值                                         | `object` [FieldValues](/components/type.html#fieldvalues)                                |         | 否       |
-| `defaultValues`         | 点击重置按钮时 赋值给表单                          | `object` [FieldValues](/components/type.html#fieldvalues)                                | `{}`    | 否       |
-| `columns`               | 表单配置信息                                       | `array`[PlusColumn[]](/components/config.html)                                           | `[]`    | 否       |
-| `rowProps`              | el-row 的 props                                    | `object`[RowProps](https://element-plus.org/zh-CN/component/layout.html#row-attributes)  |         | 否       |
-| `colProps`              | el-col 属性                                        | `object`[ColProps](https://element-plus.org/zh-CN/component/layout.html#col-attributes)  |         | 否       |
-| `labelWidth`            | el-form 的 labelWidth                              | `string`                                                                                 | `80px`  | 否       |
-| `labelPosition`         | el-form 的 labelPosition                           | `string` <docs-tip content="'left' / 'right' / 'top'"></docs-tip>                        | `left`  | 否       |
-| `labelSuffix`           | el-form 的 labelSuffix                             | `string`                                                                                 | `:`     | 否       |
-| `hasErrorTip`           | 是否需要校验 message 提示                          | `boolean`                                                                                | `true`  | 否       |
-| `hasFooter`             | 是否需要全部底部按钮                               | `boolean`                                                                                | `true`  | 否       |
-| `footerAlign`           | 底部按钮对齐方式                                   | `string` <docs-tip content="'left' / 'right'"></docs-tip>                                | `left`  | 否       |
-| `hasReset`              | 是否需要底部按钮 `重置`                            | `boolean`                                                                                | `true`  | 否       |
-| `hasLabel`              | 是否显示 label,`false`时`label-width`会被设置为`0` | `boolean`                                                                                | `true`  | 否       |
-| `submitLoading`         | 确定按钮 loading                                   | `boolean`                                                                                | `false` | 否       |
-| `rules`                 | 表单校验                                           | `object` [FormRules](https://element-plus.org/zh-CN/component/form.html#form-attributes) | `{}`    | 否       |
-| `group`                 | 分组表单配置                                       | `false` / (`object` [PlusFormGroupRow](/components/type.html#plusformgrouprow) )         | `{}`    | 否       |
-| `submitText`            | 提交按钮文字                                       | `string`                                                                                 | `提交`  | 否       |
-| `resetText`             | 重置按钮文字                                       | `string`                                                                                 | `重置`  | 否       |
-| ...                     | ...                                                | ...                                                                                      | ...     | ...      |
+| 名称                    | 说明                                                                               | 类型                                                                                     | 默认值  | 是否必须 |
+| ----------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ------- | -------- |
+| `model-value / v-model` | 表单绑定值                                                                         | `object` [FieldValues](/components/type.html#fieldvalues)                                |         | 否       |
+| `defaultValues`         | 点击重置按钮时 赋值给表单                                                          | `object` [FieldValues](/components/type.html#fieldvalues)                                | `{}`    | 否       |
+| `columns`               | 表单配置信息                                                                       | `array`[PlusColumn[]](/components/config.html)                                           | `[]`    | 否       |
+| `rowProps`              | el-row 的 props                                                                    | `object`[RowProps](https://element-plus.org/zh-CN/component/layout.html#row-attributes)  |         | 否       |
+| `colProps`              | el-col 属性                                                                        | `object`[ColProps](https://element-plus.org/zh-CN/component/layout.html#col-attributes)  |         | 否       |
+| `labelWidth`            | el-form 的 labelWidth                                                              | `string`                                                                                 | `80px`  | 否       |
+| `labelPosition`         | el-form 的 labelPosition                                                           | `string` <docs-tip content="'left' / 'right' / 'top'"></docs-tip>                        | `left`  | 否       |
+| `labelSuffix`           | el-form 的 labelSuffix                                                             | `string`                                                                                 | `:`     | 否       |
+| `hasErrorTip`           | 是否需要校验 message 提示                                                          | `boolean`                                                                                | `true`  | 否       |
+| `hasFooter`             | 是否需要全部底部按钮                                                               | `boolean`                                                                                | `true`  | 否       |
+| `footerAlign`           | 底部按钮对齐方式                                                                   | `string` <docs-tip content="'left' / 'right'"></docs-tip>                                | `left`  | 否       |
+| `hasReset`              | 是否需要底部按钮 `重置`                                                            | `boolean`                                                                                | `true`  | 否       |
+| `hasLabel`              | 是否显示 label，值为`false`时`labelWidth`会被设置为`0`，labelSuffix 会被设置为`''` | `boolean`                                                                                | `true`  | 否       |
+| `submitLoading`         | 确定按钮 loading                                                                   | `boolean`                                                                                | `false` | 否       |
+| `rules`                 | 表单校验                                                                           | `object` [FormRules](https://element-plus.org/zh-CN/component/form.html#form-attributes) | `{}`    | 否       |
+| `group`                 | 分组表单配置                                                                       | `false` / (`object` [PlusFormGroupRow](/components/type.html#plusformgrouprow) )         | `{}`    | 否       |
+| `submitText`            | 提交按钮文字                                                                       | `string`                                                                                 | `提交`  | 否       |
+| `resetText`             | 重置按钮文字                                                                       | `string`                                                                                 | `重置`  | 否       |
+| ...                     | ...                                                                                | ...                                                                                      | ...     | ...      |
 
 **`...`表示同时支持所有[ElForm Attributes](https://element-plus.org/zh-CN/component/form.html#form-attributes)**
 
@@ -248,7 +248,7 @@ form/all
 | ------------- | -------------------------------- | ------------------------------------------------------------------------------------------- |
 | `submit`      | 点击提交按钮校验通过触发的事件   | `function` <docs-tip content='(values: FieldValues) => void'></docs-tip>                    |
 | `change`      | 表单变化触发的事件               | `function` <docs-tip content='(values: FieldValues,column: PlusColumn) => void'></docs-tip> |
-| `reset`       | 点击重置按钮触发的事件           | `function` <docs-tip content='() => void'></docs-tip>                                       |
+| `reset`       | 点击重置按钮触发的事件           | `function` <docs-tip content='(values: FieldValues) => void'></docs-tip>                                       |
 | `submitError` | 点击提交按钮校验不通过触发的事件 | `function` <docs-tip content='(error:any) => void'></docs-tip>                              |
 | ...           | ...                              | ...                                                                                         |
 

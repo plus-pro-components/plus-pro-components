@@ -56,6 +56,7 @@ search/async
 | 名称                    | 说明                                                                                                      | 类型                                                                                    | 默认值                              | 是否必须 |
 | ----------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | ----------------------------------- | -------- |
 | `model-value / v-model` | 搜索表单绑定值                                                                                            | `object`[FieldValues](/components/type.html#fieldvalues)                                |                                     | 否       |
+| `defaultValues`         | 点击重置按钮时 赋值给表单                                                                                 | `object` [FieldValues](/components/type.html#fieldvalues)                               | `{}`                                | 否       |
 | `columns`               | 搜索配置信息                                                                                              | `array` [PlusColumn[]](/components/config.html)                                         | `[]`                                | 否       |
 | `hasFooter`             | 是否需要全部按钮                                                                                          | `boolean`                                                                               | `true`                              | 否       |
 | `hasReset`              | 是否需要底部按钮 `重置`                                                                                   | `boolean`                                                                               | `true`                              | 否       |
@@ -79,7 +80,7 @@ search/async
 | -------- | ---------------------- | ------------------------------------------------------------------------------------------- |
 | `search` | 点击查询按钮触发的事件 | `function` <docs-tip content='(values: FieldValues) => void'></docs-tip>                    |
 | `change` | 表单变化触发的事件     | `function` <docs-tip content='(values: FieldValues,column: PlusColumn) => void'></docs-tip> |
-| `reset`  | 点击重置按钮触发的事件 | `function` <docs-tip content='() => void'></docs-tip>                                       |
+| `reset`  | 点击重置按钮触发的事件 | `function` <docs-tip content='(values: FieldValues) => void'></docs-tip>                    |
 
 ## Exposes
 
