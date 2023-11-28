@@ -3,10 +3,10 @@
     <component :is="renderWrapper().search" v-if="search">
       <PlusSearch
         ref="plusSearchInstance"
+        v-bind="search"
         v-model="state.params"
         :columns="columns"
         :search-loading="loadingStatus"
-        v-bind="search"
         @search="handleSearch"
         @reset="handleRest"
       >
@@ -185,7 +185,7 @@ const { tableData, pageInfo, total, loadingStatus } = useTable()
 const plusSearchInstance = ref<any>()
 const plusTableInstance = ref<any>()
 const state: PlusPageState = reactive({
-  params: {},
+  params: { ...(props.search as any)?.defaultValues },
   values: {}
 })
 
@@ -244,8 +244,8 @@ const handleSearch = (values: any) => {
   getList()
 }
 
-const handleRest = () => {
-  state.params = {}
+const handleRest = (values: any) => {
+  state.params = { ...values }
   pageInfo.value.page = 1
   getList()
 }
