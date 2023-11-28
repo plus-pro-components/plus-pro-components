@@ -6,8 +6,7 @@
     v-bind="column.formProps"
     :model="subRow"
     :has-footer="false"
-    label-suffix=""
-    label-width="0"
+    :has-label="false"
     class="plus-display-item__form"
   >
     <PlusFormItem
