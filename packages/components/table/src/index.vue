@@ -104,7 +104,12 @@
     </el-table>
 
     <!-- 分页 -->
-    <PlusPagination v-if="pagination" v-model="subPageInfo" v-bind="pagination" />
+    <PlusPagination
+      v-if="pagination"
+      v-model="subPageInfo"
+      v-bind="pagination"
+      @change="handlePaginationChange"
+    />
   </div>
 </template>
 
@@ -262,17 +267,10 @@ watch(
   }
 )
 
-// 监听分页数据，分发分页改变事件
-watch(
-  () => state.subPageInfo,
-  pageInfo => {
-    emit('paginationChange', { ...pageInfo })
-  },
-  {
-    deep: true,
-    immediate: true
-  }
-)
+// 发分页改变事件
+const handlePaginationChange = () => {
+  emit('paginationChange', { ...state.subPageInfo })
+}
 
 const handleAction = (res: ButtonsCallBackParams) => {
   const { row, buttonRow, index, e } = res
