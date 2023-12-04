@@ -12,27 +12,35 @@
     @change="handleChange"
   >
     <template #search-footer>
-      <el-form-item v-if="hasFooter" class="plus-search__button__wrapper">
-        <el-button v-if="hasReset" :icon="RefreshRight" @click="handleReset">
-          {{ resetText || t('plus.search.resetText') }}
-        </el-button>
-        <el-button type="primary" :loading="searchLoading" :icon="Search" @click="handleSearch">
-          {{ searchText || t('plus.search.searchText') }}
-        </el-button>
+      <slot
+        name="footer"
+        :is-show-unfold="isShowUnfold"
+        :handle-reset="handleReset"
+        :handle-search="handleSearch"
+        :handle-unfold="handleUnfold"
+      >
+        <el-form-item v-if="hasFooter" class="plus-search__button__wrapper">
+          <el-button v-if="hasReset" :icon="RefreshRight" @click="handleReset">
+            {{ resetText || t('plus.search.resetText') }}
+          </el-button>
+          <el-button type="primary" :loading="searchLoading" :icon="Search" @click="handleSearch">
+            {{ searchText || t('plus.search.searchText') }}
+          </el-button>
 
-        <el-button
-          v-if="hasUnfold && state.originData.length > showNumber"
-          type="primary"
-          link
-          @click="handleUnfold"
-        >
-          {{ isShowUnfold ? t('plus.search.retract') : t('plus.search.expand') }}
-          <el-icon>
-            <ArrowUp v-if="isShowUnfold" />
-            <ArrowDown v-else />
-          </el-icon>
-        </el-button>
-      </el-form-item>
+          <el-button
+            v-if="hasUnfold && state.originData.length > showNumber"
+            type="primary"
+            link
+            @click="handleUnfold"
+          >
+            {{ isShowUnfold ? t('plus.search.retract') : t('plus.search.expand') }}
+            <el-icon>
+              <ArrowUp v-if="isShowUnfold" />
+              <ArrowDown v-else />
+            </el-icon>
+          </el-button>
+        </el-form-item>
+      </slot>
     </template>
   </PlusForm>
 </template>
@@ -116,7 +124,12 @@ const state = reactive<PlusSearchState>({
 })
 
 state.originData = computed<any[]>(() => {
-  return props.columns.filter(item => unref(item.hideInSearch) !== true)
+  return (
+    props.columns
+      .filter(item => unref(item.hideInSearch) !== true)
+      // FIXME:  hideInForm 不应该传递
+      .map(item => ({ ...item, hideInForm: false }))
+  )
 })
 
 state.subColumns = computed<any[]>(() => {
@@ -158,7 +171,10 @@ const handleUnfold = () => {
 }
 
 defineExpose({
-  plusFormInstance: plusFormInstance as Ref<PlusFormInstance>
+  plusFormInstance: plusFormInstance as Ref<PlusFormInstance>,
+  handleReset,
+  handleSearch,
+  handleUnfold
 })
 
 const { isShowUnfold, subColumns } = toRefs(state)
