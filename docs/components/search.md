@@ -28,6 +28,26 @@ search/hide-unfold
 
 :::
 
+## 自定义搜索按钮
+
+使用`search-footer` 自定义搜索按钮.
+
+:::demo
+
+search/search-footer
+
+:::
+
+## 默认搜索参数
+
+配置 `defaultValues`属性，设置默认搜索参数，当页面**点击重置按钮**时 [PlusSearch](/components/search.html) 组件的`model-value / v-model` 会被设置为 defaultValues。
+
+:::demo
+
+search/default-values
+
+:::
+
 ## 隐藏 label
 
 `has-label` 设置为 `false` 时, 隐藏 label
@@ -82,11 +102,29 @@ search/async
 | `change` | 表单变化触发的事件     | `function` <docs-tip content='(values: FieldValues,column: PlusColumn) => void'></docs-tip> |
 | `reset`  | 点击重置按钮触发的事件 | `function` <docs-tip content='(values: FieldValues) => void'></docs-tip>                    |
 
+## Search Slots
+
+| 插槽名   | 说明                   | 作用域插槽参数 （参数说明见下文）                      |
+| -------- | ---------------------- | ------------------------------------------------------ |
+| `footer` | 自定义搜索 按钮组 区域 | `{isShowUnfold,handleReset,handleSearch,handleUnfold}` |
+
+**作用域插槽参数说明**
+
+| 作用域插槽参数 | 说明                 | 类型                                                 | 默认值  |
+| -------------- | -------------------- | ---------------------------------------------------- | ------- |
+| `isShowUnfold` | 多余搜索表单展开情况 | `boolean`                                            | `false` |
+| `handleReset`  | 执行重置按钮方法     | `function` <docs-tip content="()=> void"></docs-tip> |         |
+| `handleSearch` | 执行搜索按钮方法     | `function` <docs-tip content="()=> void"></docs-tip> |         |
+| `handleUnfold` | 执行展开按钮方法     | `function` <docs-tip content="()=> void"></docs-tip> |         |
+
 ## Exposes
 
-| 名称               | 说明            | 类型                                                      |
-| ------------------ | --------------- | --------------------------------------------------------- |
-| `plusFormInstance` | `PlusFrom` 实例 | `object` <docs-tip content="PlusFormInstance"></docs-tip> |
+| 名称               | 说明             | 类型                                                      |
+| ------------------ | ---------------- | --------------------------------------------------------- |
+| `plusFormInstance` | `PlusFrom` 实例  | `object` <docs-tip content="PlusFormInstance"></docs-tip> |
+| `handleReset`      | 执行重置按钮方法 | `function` <docs-tip content="()=> void"></docs-tip>      |
+| `handleSearch`     | 执行搜索按钮方法 | `function` <docs-tip content="()=> void"></docs-tip>      |
+| `handleUnfold`     | 执行展开按钮方法 | `function` <docs-tip content="()=> void"></docs-tip>      |
 
 **支持所有[PlusFrom 方法](/components/form.html)**
 

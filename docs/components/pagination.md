@@ -15,7 +15,7 @@ pagination/basic
 | 名称                    | 说明     | 类型                                                      | 默认值                                          | 是否必须 |
 | ----------------------- | -------- | --------------------------------------------------------- | ----------------------------------------------- | -------- |
 | `align`                 | 对齐方式 | `string` <docs-tip content="'left' / 'right'"></docs-tip> | `right`                                         | 否       |
-| `model-value / v-model` | 分页值   | `object` [PageInfo](/components/type.html#pageinfo)       | `{  page: 1,pageSize: 20}`                      | 否       |
+| `model-value / v-model` | 分页值   | `object` [PageInfo](/components/type.html#pageinfo)       | `{  page: 1,pageSize: 10}`                      | 否       |
 | `total`                 | 总数     | `number`                                                  | `0`                                             | 否       |
 | `pageSizeList`          | 分页列表 | `array` <docs-tip content="number[]"></docs-tip>          | `[10, 20, 30, 40, 50, 100, 200, 300, 400, 500]` | 否       |
 | ...                     | ...      | ...                                                       | ...                                             | ...      |

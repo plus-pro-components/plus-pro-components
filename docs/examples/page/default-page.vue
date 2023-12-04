@@ -3,14 +3,17 @@
     <PlusPage
       :columns="tableConfig"
       :request="getList"
-      :before-search-submit="handleBeforeSearch"
+      :default-page-info="defaultPageInfo"
+      :default-page-size-list="[5, 20, 50]"
+      :pagination="{
+        background: true
+      }"
     />
   </div>
 </template>
 
 <script lang="ts" setup>
 import type { PlusColumn, PageInfo } from 'plus-pro-components'
-import { cloneDeep } from 'lodash-es'
 
 const getList = async (
   query: PageInfo & {
@@ -18,12 +21,12 @@ const getList = async (
     name?: string
   }
 ) => {
-  const { page = 1, pageSize = 20, status, name } = query || {}
-  const total = 3
+  const { page = 1, pageSize = 5 } = query || {}
+  const total = 30
   const List = [...new Array(total)].map((item, index) => {
     return {
       id: index,
-      name: index === 0 ? 'name'.repeat(3) : index + 'name',
+      name: index === 0 ? 'name'.repeat(20) : index + 'name',
       status: String(index % 3),
       tag: index === 1 ? 'success' : index === 2 ? 'warning' : index === 3 ? 'info' : 'danger',
       progress: 10,
@@ -31,22 +34,16 @@ const getList = async (
       switch: index % 2 === 0 ? true : false,
       img: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
       time: new Date(),
+      code: `
+              const getData = async params => {
+                const data = await getData(params)
+                return { list: data.data, ...data }
+              }`,
       custom: 'custom' + index
     }
   })
 
-  const mockList = List.filter(item => {
-    if (status && status !== item.status) {
-      return false
-    }
-    if (name && name !== item.name) {
-      return false
-    }
-
-    return true
-  })
-
-  const pageList = mockList.filter(
+  const pageList = List.filter(
     (item, index) => index < pageSize * page && index >= pageSize * (page - 1)
   )
 
@@ -57,17 +54,12 @@ const getList = async (
     }, 2000)
   })
 
-  return { data: pageList, success: true, total: mockList.length }
+  return { data: pageList, success: true, total: List.length }
 }
 
-// 搜索之前函数
-const handleBeforeSearch = (values: any) => {
-  const params = cloneDeep(values)
-  Reflect.set(params, 'name1', Reflect.get(values, 'name'))
-  Reflect.deleteProperty(params, 'name')
-
-  // 返回新的参数
-  return params
+const defaultPageInfo = {
+  page: 1,
+  pageSize: 5
 }
 
 const tableConfig: PlusColumn[] = [
@@ -76,7 +68,6 @@ const tableConfig: PlusColumn[] = [
     tooltip: '名称最多显示6个字符',
     width: 120,
     prop: 'name',
-
     tableColumnProps: {
       'show-overflow-tooltip': true
     }
@@ -137,6 +128,13 @@ const tableConfig: PlusColumn[] = [
     }
   },
   {
+    label: '代码块',
+    width: 250,
+    prop: 'code',
+    hideInSearch: true,
+    valueType: 'code'
+  },
+  {
     label: '评分',
     width: 200,
     prop: 'rate',
@@ -156,8 +154,7 @@ const tableConfig: PlusColumn[] = [
     label: '时间',
     prop: 'time',
     valueType: 'date-picker',
-    hideInForm: true,
-    minWidth: '180px'
+    hideInForm: true
   }
 ]
 </script>

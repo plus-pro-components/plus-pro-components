@@ -30,6 +30,26 @@ page/default-search-values
 
 :::
 
+## 默认分页参数
+
+配置 `defaultPageInfo`属性，可以修改默认的分页参数，`defaultPageInfo`的`TS`类型为[PageInfo](/components/type.html#pageinfo)。配置`defaultPageSizeList`属性可以修改分页列表，其他分页属性配置可以使用`pagination`属性。
+
+:::demo
+
+page/default-page
+
+:::
+
+## 自定义搜索按钮
+
+使用`search-footer` 自定义搜索按钮.
+
+:::demo
+
+page/search-footer
+
+:::
+
 ## 增删改查 (CRUD)
 
 典型的增删改查。
@@ -44,24 +64,30 @@ page/crud
 
 ## Page Attributes
 
-| 名称                 | 说明                                                                                                                                                                                                                                       | 类型                                                                                                                           | 默认值 | 是否必须 |
-| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ | ------ | -------- |
-| `columns`            | 配置信息                                                                                                                                                                                                                                   | `array`[PlusColumn[]](/components/config.html)                                                                                 | `[]`   | 是       |
-| `request`            | request 是 Page 最重要的 API，request 会接收一个对象。对象中必须要有 data，如果需要手动分页 total 也是必需的。request 会接管 loading 的设置，同时在查询表单查询和 params 参数发生修改时重新执行。同时 查询表单的值和 params 参数也会带入。 | `function`<docs-tip content="(params:PageInfo & { [index: string]: any }) => Promise<{ data: any;total?: number}>"></docs-tip> |        | 是       |
-| `search`             | [PlusSearch](/components/search.html) 的 props                                                                                                                                                                                             | `false` / (`object`[PlusSearchProps](/components/search.html#search-attributes) )                                              | `{}`   | 否       |
-| `table`              | [PlusTable](/components/table.html) 的 props                                                                                                                                                                                               | `object`[PlusTableProps](/components/table.html#table-attributes)                                                              | `{}`   | 否       |
-| `params`             | request 的 params 其他参数，默认会带 pageSize，page 和 PlusSearch 组件中的值                                                                                                                                                               | `object`                                                                                                                       | `{}`   | 否       |
-| `postData`           | 对通过 request 获取的数据进行处理                                                                                                                                                                                                          | `function`<docs-tip content="<T = any>(data: T[]) => T[]"></docs-tip>                                                          |        | 否       |
-| `beforeSearchSubmit` | 搜索之前进行一些修改                                                                                                                                                                                                                       | `function` <docs-tip content="<T = any>(params: T) => T"></docs-tip>                                                           |        | 否       |
-| `isCard`             | 表格和搜索是否需要 el-card 包裹 默认 true                                                                                                                                                                                                  | `boolean`                                                                                                                      | `true` | 否       |
-| `searchCardProps`    | 搜索外层的 el-card 的 props ，当 isCard 为 true 时生效                                                                                                                                                                                     | `object`                                                                                                                       | `{}`   | 否       |
-| `tableCardProps`     | 表格外层的 el-card 的 props ，当 isCard 为 true 时生效                                                                                                                                                                                     | `object`                                                                                                                       | `{}`   |
+| 名称                  | 说明                                                                                                                                                                                                                                       | 类型                                                                                                                           | 默认值                                          | 是否必须 |
+| --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------- | -------- |
+| `columns`             | 配置信息                                                                                                                                                                                                                                   | `array`[PlusColumn[]](/components/config.html)                                                                                 | `[]`                                            | 是       |
+| `request`             | request 是 Page 最重要的 API，request 会接收一个对象。对象中必须要有 data，如果需要手动分页 total 也是必需的。request 会接管 loading 的设置，同时在查询表单查询和 params 参数发生修改时重新执行。同时 查询表单的值和 params 参数也会带入。 | `function`<docs-tip content="(params:PageInfo & { [index: string]: any }) => Promise<{ data: any;total?: number}>"></docs-tip> |                                                 | 是       |
+| `search`              | [PlusSearch](/components/search.html) 的 props，不包含`model-value / v-model`,`columns`，`searchLoading`属性。                                                                                                                             | `false` / (`object`[PlusSearchProps](/components/search.html#search-attributes) )                                              | `{}`                                            | 否       |
+| `table`               | [PlusTable](/components/table.html) 的 props，不包含`tableData`,`columns`，`loadingStatus`,`pagination`属性。                                                                                                                              | `object`[PlusTableProps](/components/table.html#table-attributes)                                                              | `{}`                                            | 否       |
+| `params`              | request 的 params 其他参数，默认会带 pageSize，page 和 PlusSearch 组件中的值，它的优先级高于其他配置。                                                                                                                                     | `object`                                                                                                                       | `{}`                                            | 否       |
+| `postData`            | 对通过 request 获取的数据进行处理                                                                                                                                                                                                          | `function`<docs-tip content="<T = any>(data: T[]) => T[]"></docs-tip>                                                          |                                                 | 否       |
+| `beforeSearchSubmit`  | 搜索之前进行一些修改                                                                                                                                                                                                                       | `function` <docs-tip content="<T = any>(params: T) => T"></docs-tip>                                                           |                                                 | 否       |
+| `defaultPageInfo`     | 默认分页参数                                                                                                                                                                                                                               | `object` [PageInfo](/components/type.html#pageinfo)                                                                            | `{page:1, pageSize:10}`                         | 否       |
+| `defaultPageSizeList` | 默认分页列表                                                                                                                                                                                                                               | `array` <docs-tip content="number[]"></docs-tip>                                                                               | `[10, 20, 30, 40, 50, 100, 200, 300, 400, 500]` | 否       |
+| `pagination`          | 分页组件[PlusPagination](/components/pagination.html) 的 props，不包含`total`，`modelValue`，`pageSizeList`。                                                                                                                              | `object`                                                                                                                       |                                                 | 否       |
+| `isCard`              | 表格和搜索是否需要 el-card 包裹 默认 true                                                                                                                                                                                                  | `boolean`                                                                                                                      | `true`                                          | 否       |
+| `searchCardProps`     | 搜索外层的 el-card 的 props ，当 isCard 为 true 时生效                                                                                                                                                                                     | `object`                                                                                                                       | `{}`                                            | 否       |
+| `tableCardProps`      | 表格外层的 el-card 的 props ，当 isCard 为 true 时生效                                                                                                                                                                                     | `object`                                                                                                                       | `{}`                                            |
 
 ## Page Events
 
-| 名称           | 说明               | 类型                                                            |
-| -------------- | ------------------ | --------------------------------------------------------------- |
-| `requestError` | 数据加载失败时触发 | `function` <docs-tip content='(error: any) => void'></docs-tip> |
+| 名称               | 说明               | 类型                                                                    |
+| ------------------ | ------------------ | ----------------------------------------------------------------------- |
+| `requestError`     | 数据加载失败时触发 | `function` <docs-tip content='(error: any) => void'></docs-tip>         |
+| `search`           | 点击搜索按钮时触发 | `function` <docs-tip content='(data: FieldValues) => void'></docs-tip>  |
+| `reset`            | 点击重置按钮时触发 | `function` <docs-tip content='(data: FieldValues) => void'></docs-tip>  |
+| `paginationChange` | 分页改变时触发     | `function` <docs-tip content='(pageInfo: PageInfo) => void'></docs-tip> |
 
 ::: tip 提示
 支持 [PlusSearch](/components/search.html) 和
