@@ -5,23 +5,25 @@
 初始化表格基本数据，配合 [PlusTable](/components/table.html) 组件使用
 
 ```ts
+import type { Ref } from 'vue'
 import type { ActionBarButtonsRow } from 'plus-pro-components/es/components/table'
+import type { PageInfo } from 'plus-pro-components/es/types'
 /**
  * 初始化表格基本数据
  *
  */
-declare function useTable<T extends Record<string, any>[] = any>(): {
-  tableData: import('vue').Ref<import('vue').UnwrapRef<T>>
-  pageInfo: import('vue').Ref<{
+export declare function useTable<T extends Record<string, any>[] = any>(
+  _pageInfo: PageInfo | Ref<PageInfo>
+): {
+  tableData: Ref<import('vue').UnwrapRef<T>>
+  pageInfo: Ref<{
     page: number
     pageSize: number
-    total?: number | undefined
   }>
-  total: import('vue').Ref<number>
-  loadingStatus: import('vue').Ref<boolean>
+  total: Ref<number>
+  loadingStatus: Ref<boolean>
   buttons: import('vue').ShallowRef<ActionBarButtonsRow[]>
 }
-export default useTable
 ```
 
 使用示例
