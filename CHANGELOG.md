@@ -1,3 +1,20 @@
+## [v0.0.1-beta.28](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-beta.27...v0.0.1-beta.28) (2023-12-04)
+
+
+### ✨ Features
+
+* **components:** :sparkles: page add 'defaultPageInfo','defaultPageSizeList','pagination' props.([e237cd2](https://github.com/plus-pro-components/plus-pro-components/commit/e237cd2)) by@xiaofei
+* **components:** :sparkles: search component add 'footer' slot.([522933c](https://github.com/plus-pro-components/plus-pro-components/commit/522933c)) by@xiaofei
+* **hooks:** :sparkles: useTable add 'pageInfo' params.([3fd40c9](https://github.com/plus-pro-components/plus-pro-components/commit/3fd40c9)) by@xiaofei
+
+
+### 🐛 Bug Fixes
+
+* **components:** :bug: fix  pagination component 'PlusPaginationProps' typescript type.([b35a298](https://github.com/plus-pro-components/plus-pro-components/commit/b35a298)) by@xiaofei
+
+
+
+
 ## [v0.0.1-beta.27](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-beta.26...v0.0.1-beta.27) (2023-11-28)
 
 
