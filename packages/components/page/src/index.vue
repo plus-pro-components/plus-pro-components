@@ -10,8 +10,8 @@
         @search="handleSearch"
         @reset="handleRest"
       >
-        <template v-if="$slots['search-footer']" #footer>
-          <slot name="search-footer" />
+        <template v-if="$slots['search-footer']" #footer="data">
+          <slot name="search-footer" v-bind="data" />
         </template>
       </PlusSearch>
     </component>
@@ -19,12 +19,17 @@
     <component :is="renderWrapper().table" class="plus-page__table_wrapper">
       <PlusTable
         ref="plusTableInstance"
+        :title-bar="{ refresh: true }"
+        v-bind="table"
         :table-data="tableData"
         :loading-status="loadingStatus"
         :columns="columns"
-        :pagination="{ total, modelValue: pageInfo }"
-        :title-bar="{ refresh: true }"
-        v-bind="table"
+        :pagination="{
+          ...pagination,
+          total,
+          modelValue: pageInfo,
+          pageSizeList: computedDefaultPageSizeList
+        }"
         @paginationChange="handlePaginationChange"
         @refresh="handleRefresh"
       >
@@ -80,7 +85,7 @@ import { PlusSearch as PlusSearchComponent } from '@plus-pro-components/componen
 import type { PlusTableProps, PlusTableInstance } from '@plus-pro-components/components/table'
 import { PlusTable as PlusTableComponent } from '@plus-pro-components/components/table'
 import type { Ref, Component } from 'vue'
-import { h, reactive, ref, useSlots } from 'vue'
+import { h, reactive, ref, useSlots, computed } from 'vue'
 import type { CardProps } from 'element-plus'
 import { ElCard } from 'element-plus'
 import { useTable } from '@plus-pro-components/hooks'
@@ -90,6 +95,7 @@ import {
   getFieldSlotName,
   filterSlots
 } from '@plus-pro-components/components/utils'
+import { DefaultPageInfo, DefaultPageSizeList } from '@plus-pro-components/constants'
 
 export interface PlusPageProps {
   /**
@@ -145,12 +151,18 @@ export interface PlusPageProps {
    *   表格外层的el-card的props ，当isCard为true时生效
    */
   tableCardProps?: Partial<Mutable<CardProps>>
+  defaultPageInfo?: PageInfo
+  defaultPageSizeList?: number[]
+  pagination?: RecordType
 }
 export interface PlusPageEmits {
   /**
    * 数据加载失败时触发
    */
   (e: 'requestError', error: any): void
+  (e: 'search', data: FieldValues): void
+  (e: 'reset', data: FieldValues): void
+  (e: 'paginationChange', pageInfo: PageInfo): void
 }
 export interface PlusPageState {
   params: FieldValues
@@ -166,8 +178,14 @@ const props = withDefaults(defineProps<PlusPageProps>(), {
   // eslint-disable-next-line vue/require-valid-default-prop
   search: () => ({}),
   table: () => ({}),
+  defaultPageInfo: () => ({ ...DefaultPageInfo }),
+  defaultPageSizeList: () => DefaultPageSizeList,
   searchCardProps: () => ({}),
-  tableCardProps: () => ({})
+  tableCardProps: () => ({}),
+  /**
+   * 分页组件的其他参数，不包含total，modelValue，pageSizeList
+   */
+  pagination: () => ({})
 })
 const emit = defineEmits<PlusPageEmits>()
 
@@ -181,7 +199,10 @@ defineOptions({
 const PlusSearch: Component = PlusSearchComponent
 const PlusTable: Component = PlusTableComponent
 
-const { tableData, pageInfo, total, loadingStatus } = useTable()
+const computedDefaultPageInfo = computed(() => props.defaultPageInfo)
+const computedDefaultPageSizeList = computed(() => props.defaultPageSizeList)
+
+const { tableData, pageInfo, total, loadingStatus } = useTable(computedDefaultPageInfo)
 const plusSearchInstance = ref<any>()
 const plusTableInstance = ref<any>()
 const state: PlusPageState = reactive({
@@ -236,18 +257,22 @@ getList()
 const handlePaginationChange = (_pageInfo: PageInfo): void => {
   pageInfo.value = _pageInfo
   getList()
+
+  emit('paginationChange', _pageInfo)
 }
 
 const handleSearch = (values: any) => {
   const data = (props.beforeSearchSubmit && props.beforeSearchSubmit(values)) || values
   state.params = data
   getList()
+  emit('search', state.params)
 }
 
 const handleRest = (values: any) => {
   state.params = { ...values }
   pageInfo.value.page = 1
   getList()
+  emit('reset', state.params)
 }
 
 const handleRefresh = () => {
