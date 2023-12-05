@@ -9,7 +9,7 @@ import type { PageInfo } from '@plus-pro-components/types'
  *
  */
 export function useTable<T extends Record<string, any>[] = any>(
-  _pageInfo: PageInfo | Ref<PageInfo>
+  _pageInfo?: PageInfo | Ref<PageInfo>
 ) {
   const defaultPageInfo = unref(_pageInfo) || DefaultPageInfo
   const tableData = ref<T>([] as any)

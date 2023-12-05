@@ -12,6 +12,7 @@
 import { isVNode, watch, ref } from 'vue'
 import type { VNode } from 'vue'
 import type { PlusColumn, FieldValueType } from '@plus-pro-components/types'
+import { isString } from '@plus-pro-components/components/utils'
 
 export interface PlusRenderProps {
   /**
@@ -98,6 +99,8 @@ const renderComponent = () => {
       ...dynamicComponent,
       props: payload
     } as VNode
+  } else if (isString(dynamicComponent)) {
+    return dynamicComponent
   }
 }
 </script>
