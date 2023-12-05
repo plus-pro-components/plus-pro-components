@@ -1,3 +1,19 @@
+## [v0.0.1-beta.29](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-beta.28...v0.0.1-beta.29) (2023-12-05)
+
+
+### ✨ Features
+
+* **all:** Merge pull request [#57](https://github.com/plus-pro-components/plus-pro-components/pull/57) from plus-pro-components/zpp([7312e4d](https://github.com/plus-pro-components/plus-pro-components/commit/7312e4d)) by@xiaofei
+* **all:** Merge pull request [#56](https://github.com/plus-pro-components/plus-pro-components/pull/56) from plus-pro-components/zpp([a4d339d](https://github.com/plus-pro-components/plus-pro-components/commit/a4d339d)) by@xiaofei
+
+
+
+
+### ♻️ Code Refactoring
+
+* **packages:** :recycle: update packages types([61e7523](https://github.com/plus-pro-components/plus-pro-components/commit/61e7523)) by@zhangpp
+
+
 ## [v0.0.1-beta.28](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-beta.27...v0.0.1-beta.28) (2023-12-04)
 
 
