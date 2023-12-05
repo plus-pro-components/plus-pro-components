@@ -1,4 +1,4 @@
-import type { VNode, Component } from 'vue'
+import type { VNode } from 'vue'
 import type { FormItemProps, ColProps } from 'element-plus'
 import type { PlusFormProps } from '@plus-pro-components/components/form'
 import type { PropsItemType, PlusColumn } from './plus'
@@ -83,7 +83,7 @@ export interface FormColumnProps {
     value: FieldValueType,
     onChange: (value: FieldValueType) => void,
     props: PlusColumn
-  ) => VNode | Component | string
+  ) => VNode | string
   /**
    * @desc el-col 的 props
    */
@@ -91,7 +91,7 @@ export interface FormColumnProps {
   /**
    * @desc 渲染form表单的label
    */
-  renderLabel?: (label: string, props: PlusColumn) => VNode
+  renderLabel?: (label: string, props: PlusColumn) => VNode | string
 }
 
 /**

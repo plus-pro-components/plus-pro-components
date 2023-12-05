@@ -104,7 +104,7 @@ form/custom-slot
 **renderField 的优先级高于插槽**。
 :::
 
-自定义表单项的核心方法是定义 `renderField`方法， `renderField` 方法需要调用 vue 的[渲染函数 h](https://cn.vuejs.org/guide/extras/render-function.html) 返回一个 `VNode`
+自定义表单项的核心方法是定义 `renderField`方法， `renderField` 方法需要调用 vue 的[渲染函数 h](https://cn.vuejs.org/guide/extras/render-function.html) 返回一个 `VNode`或`String`
 
 ::: tip 提示
 `renderField 返回的值`的`props` 和配置项的`fieldProps`会同时生效，`renderField 返回的值`的`props`优先级高于 `fieldProps`.
@@ -174,7 +174,7 @@ form/custom-label-slot
 **renderLabel 的优先级高于插槽**。
 :::
 
-自定义表单项的核心方法是定义 `renderLabel`方法， `renderLabel` 方法需要调用 vue 的[渲染函数 h](https://cn.vuejs.org/guide/extras/render-function.html) 返回一个 `VNode`
+自定义表单项的核心方法是定义 `renderLabel`方法， `renderLabel` 方法需要调用 vue 的[渲染函数 h](https://cn.vuejs.org/guide/extras/render-function.html) 返回一个 `VNode`或`String`
 
 :::demo
 
@@ -248,7 +248,7 @@ form/all
 | ------------- | -------------------------------- | ------------------------------------------------------------------------------------------- |
 | `submit`      | 点击提交按钮校验通过触发的事件   | `function` <docs-tip content='(values: FieldValues) => void'></docs-tip>                    |
 | `change`      | 表单变化触发的事件               | `function` <docs-tip content='(values: FieldValues,column: PlusColumn) => void'></docs-tip> |
-| `reset`       | 点击重置按钮触发的事件           | `function` <docs-tip content='(values: FieldValues) => void'></docs-tip>                                       |
+| `reset`       | 点击重置按钮触发的事件           | `function` <docs-tip content='(values: FieldValues) => void'></docs-tip>                    |
 | `submitError` | 点击提交按钮校验不通过触发的事件 | `function` <docs-tip content='(error:any) => void'></docs-tip>                              |
 | ...           | ...                              | ...                                                                                         |
 

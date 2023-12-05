@@ -1,6 +1,12 @@
 <template>
   <div>
-    <PlusForm v-model="state" :rules="rules" :columns="columns" :row-props="{ gutter: 20 }" />
+    <PlusForm
+      v-model="state"
+      label-width="140px"
+      :rules="rules"
+      :columns="columns"
+      :row-props="{ gutter: 20 }"
+    />
   </div>
 </template>
 
@@ -43,6 +49,13 @@ const columns: PlusColumn[] = [
     tooltip: '名称最多显示6个字符',
     renderLabel: value => {
       return h('div', {}, value as string)
+    }
+  },
+  {
+    label: '自定义label',
+    prop: 'customName',
+    renderLabel: () => {
+      return ''
     }
   },
   {

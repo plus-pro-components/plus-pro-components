@@ -145,7 +145,7 @@ export interface CommentType {
   render?: (
     value: FieldValueType,
     data: { row: RecordType; column: PlusColumn; index: number }
-  ) => VNode
+  ) => VNode | string
 
   /**
    * 自定义渲染单行显示内容 需要返回一个 html字符串，`renderHTML`的优先级低于`render`，高于`valueType`。
@@ -176,7 +176,7 @@ export interface CommentType {
   /**
    * @desc 渲染table表单的Header
    */
-  renderHeader?: (label: string, props: PlusColumn) => VNode
+  renderHeader?: (label: string, props: PlusColumn) => VNode | string
 }
 
 /**
