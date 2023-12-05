@@ -204,7 +204,7 @@ table/custom-cell-slot
 - 自定义表格项
 
   使用 render 函数自定义表格项。
-  `render` 方法需要调用 vue 的[渲染函数 h](https://cn.vuejs.org/guide/extras/render-function.html) 返回一个 `VNode`。
+  `render` 方法需要调用 vue 的[渲染函数 h](https://cn.vuejs.org/guide/extras/render-function.html) 返回一个 `VNode`或`String`。
 
   自定义表格项还支持 `renderHTML`方法，需要返回一个 HTML 字符串。
 
@@ -286,7 +286,7 @@ table/custom-header-slot
 :::
 
 - 使用 renderHeader 函数自定义表格项。
-  `renderHeader` 方法需要调用 vue 的[渲染函数 h](https://cn.vuejs.org/guide/extras/render-function.html) 返回一个 `VNode`。
+  `renderHeader` 方法需要调用 vue 的[渲染函数 h](https://cn.vuejs.org/guide/extras/render-function.html) 返回一个 `VNode`或`String`。
 
 :::demo
 
