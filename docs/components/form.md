@@ -104,7 +104,7 @@ form/custom-slot
 **renderField 的优先级高于插槽**。
 :::
 
-自定义表单项的核心方法是定义 `renderField`方法， `renderField` 方法需要调用 vue 的[渲染函数 h](https://cn.vuejs.org/guide/extras/render-function.html) 返回一个 `VNode`或`String`
+自定义表单项的核心方法是定义 `renderField`方法， `renderField` 方法需要返回一个 [VNode](https://cn.vuejs.org/guide/extras/render-function.html) 或 `String`
 
 ::: tip 提示
 `renderField 返回的值`的`props` 和配置项的`fieldProps`会同时生效，`renderField 返回的值`的`props`优先级高于 `fieldProps`.
@@ -174,7 +174,7 @@ form/custom-label-slot
 **renderLabel 的优先级高于插槽**。
 :::
 
-自定义表单项的核心方法是定义 `renderLabel`方法， `renderLabel` 方法需要调用 vue 的[渲染函数 h](https://cn.vuejs.org/guide/extras/render-function.html) 返回一个 `VNode`或`String`
+自定义表单项的核心方法是定义 `renderLabel`方法， `renderLabel` 方法需要返回一个 [VNode](https://cn.vuejs.org/guide/extras/render-function.html) 或 `String`
 
 :::demo
 
