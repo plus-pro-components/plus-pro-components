@@ -8,6 +8,8 @@ import plusZhCn from 'plus-pro-components/locale/zh-cn.mjs'
 import PlusProComponents from 'plus-pro-components'
 // 导入plus-pro-components样式，alias 处理过，正常导入是plus-pro-components/index.min.css
 import 'plus-pro-components-css'
+import 'element-plus/theme-chalk/dark/css-vars.css'
+
 
 import DocsCodeDemo from './components/docs-code-demo.vue'
 import DocsChangelog from './components/docs-changelog.vue'
