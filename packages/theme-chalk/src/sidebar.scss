@@ -32,7 +32,6 @@
 
     .#{$plus-namespace + -sidebar__collapse} {
       width: calc(var(--plus-sidebar-width) - 1px);
-      background-color: getCssVar('menu-bg-color');
       height: var(--plus-sidebar-collapse-height);
       box-sizing: border-box;
       position: absolute;
