@@ -1,7 +1,10 @@
 <template>
   <div class="sidebar">
     <!-- font-awesome -->
-    <link rel="stylesheet" href="https://unpkg.com/font-awesome@4.7.0/css/font-awesome.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.2/css/fontawesome.min.css"
+    />
 
     <!-- iconfont -->
     <link rel="stylesheet" href="https://at.alicdn.com/t/font_1251940_pr7stx0uzw.css" />

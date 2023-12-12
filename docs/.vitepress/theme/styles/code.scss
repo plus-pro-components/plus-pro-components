@@ -17,6 +17,18 @@
   --prism-selector: #0b8235;
 }
 
+html {
+  &:not(.dark) {
+    .main {
+      .vp-doc {
+        .language-vue {
+          background-color: #f5f7fa;
+        }
+      }
+    }
+  }
+}
+
 .main {
   .vp-doc {
     .el-pager li {
@@ -25,7 +37,6 @@
     .language-vue {
       margin: 0;
       border-radius: 0;
-      background-color: #f5f7fa;
       overflow-y: hidden;
       padding-top: 10px;
 
