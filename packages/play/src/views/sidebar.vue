@@ -1,6 +1,6 @@
 <template>
   <div class="sidebar">
-    <PlusSidebar :routes="routes" mode="horizontal" />
+    <PlusSidebar :routes="routes" />
   </div>
 </template>
 

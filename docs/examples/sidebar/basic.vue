@@ -42,3 +42,9 @@ const getRoutes = (moduleFiles: Record<string, any>) => {
 
 const routes: PlusRouteRecordRaw[] = getRoutes(moduleFiles)
 </script>
+
+<style scoped>
+.sidebar {
+  height: 100vh;
+}
+</style>
