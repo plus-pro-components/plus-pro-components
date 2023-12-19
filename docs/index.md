@@ -51,3 +51,6 @@ features:
     title: 预设
     details: PlusProComponents 预设基本的样式，与 element-plus 样式一脉相承。 PlusProComponents 预设基本的行为，更少的代码具备更多的功能。
 ---
+
+<!-- 自动跳转 -->
+<docs-jump/>

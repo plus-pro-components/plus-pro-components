@@ -17,6 +17,7 @@
   "license": "ISC",
   "devDependencies": {
     "@types/escape-html": "^1.0.2",
+    "@types/js-cookie": "^3.0.3",
     "@types/markdown-it": "^12.2.3",
     "@types/markdown-it-container": "^2.0.5",
     "@types/prismjs": "^1.26.0",
@@ -32,6 +33,7 @@
     "vitepress": "1.0.0-beta.7"
   },
   "dependencies": {
+    "js-cookie": "^3.0.5",
     "plus-pro-components": "npm:plus-pro-components@latest"
   }
 }

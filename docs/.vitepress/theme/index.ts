@@ -10,13 +10,12 @@ import PlusProComponents from 'plus-pro-components'
 import 'plus-pro-components-css'
 import 'element-plus/theme-chalk/dark/css-vars.css'
 
-
 import DocsCodeDemo from './components/docs-code-demo.vue'
 import DocsChangelog from './components/docs-changelog.vue'
 import DocsMarkdown from './components/docs-markdown.vue'
 import DocsTip from './components/docs-tip.vue'
+import DocsJump from './components/docs-jump.vue'
 import directive from './directives'
-
 import './styles/index.scss'
 
 export default {
@@ -30,6 +29,7 @@ export default {
     app.component('DocsChangelog', DocsChangelog)
     app.component('DocsMarkdown', DocsMarkdown)
     app.component('DocsTip', DocsTip)
+    app.component('DocsJump', DocsJump)
     directive(app)
   }
 }
