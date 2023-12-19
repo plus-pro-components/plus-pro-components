@@ -1,3 +1,16 @@
+## [v0.0.1-beta.30](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-beta.29...v0.0.1-beta.30) (2023-12-19)
+
+
+
+
+### 🐛 Bug Fixes
+
+* **theme-chalk:** :bug: fix sidebar collapse active background-color.([cf194d0](https://github.com/plus-pro-components/plus-pro-components/commit/cf194d0)) by@xiaofei
+* **theme-chalk:** :bug: fix display issues with sidebar components in dark mode.([29435ae](https://github.com/plus-pro-components/plus-pro-components/commit/29435ae)) by@xiaofei
+
+
+
+
 ## [v0.0.1-beta.29](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-beta.28...v0.0.1-beta.29) (2023-12-05)
 
 
