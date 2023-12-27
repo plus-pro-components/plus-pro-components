@@ -13,6 +13,18 @@
         margin-left: 2px;
       }
     }
+
+    @include when(center) {
+      @include b(table-column__header) {
+        justify-content: center;
+      }
+    }
+
+    @include when(right) {
+      @include b(table-column__header) {
+        justify-content: right;
+      }
+    }
   }
 
   /* 操作栏 */

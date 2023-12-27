@@ -64,6 +64,10 @@ const tableConfig = ref<PlusColumn[]>([
           }
         ]
       }
+    },
+    tableColumnProps: {
+      align: 'right',
+      headerAlign: 'right'
     }
   },
   {

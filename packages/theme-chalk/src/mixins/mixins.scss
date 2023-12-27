@@ -77,3 +77,11 @@
     }
   }
 }
+
+@mixin when($state) {
+  @at-root {
+    &.#{$plus-state-prefix + $state} {
+      @content;
+    }
+  }
+}
