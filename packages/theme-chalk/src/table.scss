@@ -6,11 +6,10 @@
   /* 自定义列栏 */
   @include b(table-column) {
     @include e(header) {
-      display: flex;
-      align-items: center;
-
       @include e(header__icon) {
+        margin-top: -2px;
         margin-left: 2px;
+        vertical-align: middle;
       }
     }
   }
