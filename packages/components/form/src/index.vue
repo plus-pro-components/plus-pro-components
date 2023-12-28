@@ -84,7 +84,7 @@
       class="plus-form__footer"
       :style="{ justifyContent: footerAlign === 'left' ? 'flex-start' : 'flex-end' }"
     >
-      <slot name="footer" v-bind="{ handleReset, handleSubmit, hasReset, submitLoading }">
+      <slot name="footer" v-bind="{ handleReset, handleSubmit }">
         <el-button v-if="hasReset" @click="handleReset">
           <!-- 重置 -->
           {{ resetText || t('plus.form.resetText') }}
@@ -249,6 +249,8 @@ const handleReset = (): void => {
 }
 
 defineExpose({
-  formInstance
+  formInstance,
+  handleSubmit,
+  handleReset
 })
 </script>
