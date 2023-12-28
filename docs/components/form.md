@@ -47,6 +47,14 @@ form/async
 
 :::
 
+## 自定义表单底部
+
+:::demo
+
+form/custom-footer
+
+:::
+
 ## 分组表单
 
 配置 `group` 字段，则显示分组。配置 `group` 字段后，`columns` 则不在生效。
@@ -262,13 +270,13 @@ form/all
 
 ## Form Slots
 
-| 插槽名         | 说明                                                           | 作用域插槽参数                             |
-| -------------- | -------------------------------------------------------------- | ------------------------------------------ |
-| `default`      | 表单的内容 默认是 `PlusFormItem` 组件                          |                                            |
-| `footer`       | 表单底部按钮                                                   |                                            |
-| `group-header` | 分组表单头部                                                   | `{title,columns,icon}`                     |
-| `plus-field-*` | 自定义表单项，组件会自动根据配置项的 prop 生成对应的插槽       | `{prop,label,fieldProps,valueType,column}` |
-| `plus-label-*` | 自定义表单项 label，组件会自动根据配置项的 prop 生成对应的插槽 | `{prop,label,fieldProps,valueType,column}` |
+| 插槽名         | 说明                                                           | 作用域插槽参数                                         |
+| -------------- | -------------------------------------------------------------- | ------------------------------------------------------ |
+| `default`      | 表单的内容 默认是 `PlusFormItem` 组件                          |                                                        |
+| `footer`       | 表单底部按钮                                                   | `{handleReset, handleSubmit, hasReset, submitLoading}` |
+| `group-header` | 分组表单头部                                                   | `{title,columns,icon}`                                 |
+| `plus-field-*` | 自定义表单项，组件会自动根据配置项的 prop 生成对应的插槽       | `{prop,label,fieldProps,valueType,column}`             |
+| `plus-label-*` | 自定义表单项 label，组件会自动根据配置项的 prop 生成对应的插槽 | `{prop,label,fieldProps,valueType,column}`             |
 
 ## Exposes
 

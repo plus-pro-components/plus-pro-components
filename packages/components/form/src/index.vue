@@ -84,7 +84,7 @@
       class="plus-form__footer"
       :style="{ justifyContent: footerAlign === 'left' ? 'flex-start' : 'flex-end' }"
     >
-      <slot name="footer">
+      <slot name="footer" v-bind="{ handleReset, handleSubmit, hasReset, submitLoading }">
         <el-button v-if="hasReset" @click="handleReset">
           <!-- 重置 -->
           {{ resetText || t('plus.form.resetText') }}
