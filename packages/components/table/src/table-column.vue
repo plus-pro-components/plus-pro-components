@@ -2,10 +2,10 @@
   <template v-for="item in columns" :key="getKey(item)">
     <el-table-column
       class-name="plus-table-column"
+      v-bind="item.tableColumnProps"
       :prop="item.prop"
       :width="item.width"
       :min-width="item.minWidth"
-      v-bind="item.tableColumnProps"
     >
       <template #header>
         <span class="plus-table-column__header">
