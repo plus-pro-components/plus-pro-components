@@ -39,7 +39,12 @@ const tableConfig: PlusColumn[] = [
   {
     label: '名称',
     prop: 'name',
-    headerFilter: true
+    headerFilter: true,
+    tooltip: '名称',
+    tableColumnProps: {
+      align: 'center',
+      showOverflowTooltip: true
+    }
   },
   {
     label: '状态',
