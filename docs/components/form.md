@@ -34,6 +34,16 @@ form/has-label
 
 :::
 
+## 自定义表单底部按钮
+
+组件提供 `footer` 插槽可以自定义表单底部，并提供默认的 **提交**方法、**重置**方法 的作用域插槽参数 `{handleSubmit,handleReset}`。
+
+:::demo
+
+form/custom-footer
+
+:::
+
 ## 异步数据用法
 
 [PlusColumn](/components/config.html) 配置中的 `options` 支持数组，函数和 Promise。
@@ -44,14 +54,6 @@ form/has-label
 :::demo
 
 form/async
-
-:::
-
-## 自定义表单底部
-
-:::demo
-
-form/custom-footer
 
 :::
 
@@ -270,19 +272,21 @@ form/all
 
 ## Form Slots
 
-| 插槽名         | 说明                                                           | 作用域插槽参数                                         |
-| -------------- | -------------------------------------------------------------- | ------------------------------------------------------ |
-| `default`      | 表单的内容 默认是 `PlusFormItem` 组件                          |                                                        |
-| `footer`       | 表单底部按钮                                                   | `{handleReset, handleSubmit, hasReset, submitLoading}` |
-| `group-header` | 分组表单头部                                                   | `{title,columns,icon}`                                 |
-| `plus-field-*` | 自定义表单项，组件会自动根据配置项的 prop 生成对应的插槽       | `{prop,label,fieldProps,valueType,column}`             |
-| `plus-label-*` | 自定义表单项 label，组件会自动根据配置项的 prop 生成对应的插槽 | `{prop,label,fieldProps,valueType,column}`             |
+| 插槽名         | 说明                                                           | 作用域插槽参数                             |
+| -------------- | -------------------------------------------------------------- | ------------------------------------------ |
+| `default`      | 表单的内容 默认是 `PlusFormItem` 组件                          |                                            |
+| `footer`       | 表单底部按钮                                                   | `{handleReset,handleSubmit}`               |
+| `group-header` | 分组表单头部                                                   | `{title,columns,icon}`                     |
+| `plus-field-*` | 自定义表单项，组件会自动根据配置项的 prop 生成对应的插槽       | `{prop,label,fieldProps,valueType,column}` |
+| `plus-label-*` | 自定义表单项 label，组件会自动根据配置项的 prop 生成对应的插槽 | `{prop,label,fieldProps,valueType,column}` |
 
 ## Exposes
 
-| 名称           | 说明           | 类型                                                                 |
-| -------------- | -------------- | -------------------------------------------------------------------- |
-| `formInstance` | `el-form` 实例 | `object` <docs-tip content="InstanceType<typeof ElForm>"></docs-tip> |
+| 名称           | 说明               | 类型                                                                 |
+| -------------- | ------------------ | -------------------------------------------------------------------- |
+| `formInstance` | `el-form` 实例     | `object` <docs-tip content="InstanceType<typeof ElForm>"></docs-tip> |
+| `handleReset`  | 表单默认的重置方法 | `function` <docs-tip content="() => void"></docs-tip>                |
+| `handleSubmit` | 表单默认的提交方法 | `function` <docs-tip content="() => void"></docs-tip>                |
 
 **拿到 formInstance 后支持所有[ElForm 方法](https://element-plus.org/zh-CN/component/form.html#form-exposes)**
 

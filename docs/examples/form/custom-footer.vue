@@ -1,10 +1,12 @@
 <template>
   <el-card>
     <PlusForm v-model="state" :columns="columns" :rules="rules" @submit="mySubmit">
-      <template #footer="{ handleSubmit }">
+      <template #footer="{ handleSubmit, handleReset }">
         <div style="margin: 0 auto">
-          <el-button type="success" @click="handleSubmit">通过</el-button>
-          <el-button type="danger" @click="handleSubmit">驳回</el-button>
+          <el-button type="info">返回</el-button>
+          <el-button type="primary" :loading="submitLoading" @click="handleSubmit">通过</el-button>
+          <el-button v-if="hasReset" type="warning" @click="handleReset">重置</el-button>
+          <el-button type="danger">驳回</el-button>
         </div>
       </template>
     </PlusForm>
@@ -19,6 +21,8 @@ const state = ref<FieldValues>({
   status: '0',
   content: ''
 })
+const submitLoading = ref(false)
+const hasReset = ref(true)
 
 const columns: PlusColumn[] = [
   {
