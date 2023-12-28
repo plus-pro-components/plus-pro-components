@@ -99,12 +99,13 @@ check-card-group/slot
 
 ## CheckCardGroup Attributes
 
-| 名称                    | 说明                                                                                                                                        | 类型                                                                                         | 默认值 | 是否必须 |
-| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | ------ | -------- |
-| `model-value / v-model` | 绑定值                                                                                                                                      | `string/number`                                                                              |        | 否       |
-| `options`               | 数据数组，支持 [PlusCheckCard](/components/check-card.html#checkcard-attributes) 的所有 `props` (`modelValue` 除外)，数组中`value` 为必选项 | `array` <docs-tip content=' (PlusCheckCardProps & { value: string / number })[]'></docs-tip> |        | 否       |
-| `size`                  | 尺寸                                                                                                                                        | `string` <docs-tip content='"default" / "small" / "large"'></docs-tip>                       |        | 否       |
-| `disabled`              | 禁用                                                                                                                                        | `boolean`                                                                                    |        | 否       |
+| 名称                    | 说明                                                                                                                                        | 类型                                                                                              | 默认值  | 是否必须 |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------- | -------- |
+| `model-value / v-model` | 绑定值                                                                                                                                      | `string/number` / (`array` <docs-tip content='string[]/number[]/(number /string)[]'></docs-tip> ) |         | 否       |
+| `options`               | 数据数组，支持 [PlusCheckCard](/components/check-card.html#checkcard-attributes) 的所有 `props` (`modelValue` 除外)，数组中`value` 为必选项 | `array` <docs-tip content=' (PlusCheckCardProps & { value: string / number })[]'></docs-tip>      |         | 否       |
+| `size`                  | 尺寸                                                                                                                                        | `string` <docs-tip content='"default" / "small" / "large"'></docs-tip>                            |         | 否       |
+| `disabled`              | 禁用                                                                                                                                        | `boolean`                                                                                         | `false` | 否       |
+| `multiple`              | 多选，当值为`true` 时 `v-model` 的类型是对应的数组。                                                                                        | `boolean`                                                                                         | `false` | 否       |
 
 ## CheckCardGroup Events
 
