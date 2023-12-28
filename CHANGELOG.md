@@ -1,3 +1,22 @@
+## [v0.0.1-beta.31](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-beta.30...v0.0.1-beta.31) (2023-12-28)
+
+
+### ✨ Features
+
+* **components:** :sparkles: update form component footer slot params and expose.([1294100](https://github.com/plus-pro-components/plus-pro-components/commit/1294100)) by@xiaofei
+* **types:** :sparkles: update tableColumnProps type([457ac9d](https://github.com/plus-pro-components/plus-pro-components/commit/457ac9d)) by@xiaofei
+* **all:** Merge pull request [#61](https://github.com/plus-pro-components/plus-pro-components/pull/61) from KeJunMao/KeJunMao/issue59([50d6d5e](https://github.com/plus-pro-components/plus-pro-components/commit/50d6d5e)) by@xiaofei
+* **components:** support scope to footer slot of PlusForm([84d571d](https://github.com/plus-pro-components/plus-pro-components/commit/84d571d)) by@kejun
+
+
+### 🐛 Bug Fixes
+
+* **components:** :bug: fix el-table-column attribute order.([60ceb9b](https://github.com/plus-pro-components/plus-pro-components/commit/60ceb9b)) by@xiaofei
+* **theme-chalk:** :bug: fix invalid table tableColumnProps['align'] attribute.([19d8820](https://github.com/plus-pro-components/plus-pro-components/commit/19d8820)) by@xiaofei
+
+
+
+
 ## [v0.0.1-beta.30](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-beta.29...v0.0.1-beta.30) (2023-12-19)
 
 
