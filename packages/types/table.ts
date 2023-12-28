@@ -1,4 +1,4 @@
-import type { RecordType } from './global'
+import type { TableColumnCtx } from 'element-plus'
 
 export {}
 
@@ -19,7 +19,7 @@ export type TableColumnProps = {
   /**
    * @desc 表格行的其他配置 （不包含label prop width minWidth）
    */
-  tableColumnProps?: RecordType
+  tableColumnProps?: Partial<Omit<TableColumnCtx<any>, 'label ' | 'prop' | 'width' | 'minWidth'>>
 
   /**
    * @desc 图片预览  默认开启  给 false 关闭  仅当 valueType 等于 img 时有效，
