@@ -72,7 +72,7 @@ const tableConfig: PlusColumn[] = [
     prop: 'name',
 
     tableColumnProps: {
-      'show-overflow-tooltip': true
+      showOverflowTooltip: true
     },
     colProps: {
       xs: 24,

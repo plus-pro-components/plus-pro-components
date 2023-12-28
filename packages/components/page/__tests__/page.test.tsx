@@ -68,7 +68,7 @@ describe('page/index.vue', () => {
         prop: 'name',
 
         tableColumnProps: {
-          'show-overflow-tooltip': true
+          showOverflowTooltip: true
         }
       },
       {
