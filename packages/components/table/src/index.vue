@@ -5,6 +5,7 @@
       :columns="columns"
       :default-size="size"
       :title-bar="titleBar"
+      :change-columns="subColumns"
       @click-density="handleClickDensity"
       @filter-table="handleFilterTableConfirm"
       @refresh="handleRefresh"
