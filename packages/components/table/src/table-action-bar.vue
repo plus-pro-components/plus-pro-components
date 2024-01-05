@@ -44,7 +44,7 @@
 </template>
 
 <script lang="ts" setup>
-import type { VNode } from 'vue'
+import type { VNode, AppContext } from 'vue'
 import { h, unref } from 'vue'
 import { ArrowDownBold } from '@element-plus/icons-vue'
 import type { TableColumnCtx } from 'element-plus'
@@ -190,6 +190,7 @@ const handleClickAction = (
     const message = t('plus.table.confirmToPerformThisOperation')
     let title = t('plus.table.prompt')
     let options: any = undefined
+    let appContext: AppContext | undefined | null = null
 
     if (isPlainObject(buttonRow.confirm) && typeof buttonRow.confirm !== 'boolean') {
       const tempTitle = isFunction(buttonRow.confirm.title)
@@ -209,9 +210,10 @@ const handleClickAction = (
       }
 
       options = buttonRow.confirm?.options
+      appContext = buttonRow.confirm?.appContext
     }
 
-    ElMessageBox.confirm(message, title, options)
+    ElMessageBox.confirm(message, title, options, appContext)
       .then(() => {
         emit('clickAction', data)
       })

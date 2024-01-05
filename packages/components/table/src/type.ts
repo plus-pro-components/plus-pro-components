@@ -10,7 +10,7 @@ import type {
   ElTooltipProps,
   TableColumnCtx
 } from 'element-plus'
-import type { DefineComponent, Ref, ComputedRef } from 'vue'
+import type { DefineComponent, Ref, ComputedRef, AppContext } from 'vue'
 
 /**
  * 表格操作栏按钮配置项的值的类型
@@ -73,6 +73,10 @@ export interface ActionBarButtonsRow {
          *  ElMessageBox.confirm 的options
          */
         options?: ElMessageBoxOptions
+        /**
+         *  ElMessageBox.confirm 的appContext
+         */
+        appContext?: AppContext | null
       }
 }
 
