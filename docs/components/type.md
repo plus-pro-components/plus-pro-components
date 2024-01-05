@@ -89,7 +89,7 @@ export interface PageInfo {
 
 ```ts
 import type { ElMessageBoxOptions } from 'element-plus'
-import type { DefineComponent, Ref, ComputedRef } from 'vue'
+import type { DefineComponent, Ref, ComputedRef, AppContext } from 'vue'
 import type { RecordType, ButtonsCallBackParams } from 'plus-pro-components'
 /**
  * 表格操作栏按钮配置项的值的类型
@@ -153,9 +153,14 @@ export interface ActionBarButtonsRow {
          */
         message?: string | ((data: ButtonsCallBackParams) => string)
         /**
-         *  ElMessageBox.confirm 的options
+         *  ElMessageBox.confirm的 options
          */
         options?: ElMessageBoxOptions
+
+        /**
+         *  ElMessageBox.confirm的 appContext
+         */
+        appContext?: AppContext | null
       }
 }
 ```
