@@ -47,7 +47,7 @@
 import type { VNode, AppContext } from 'vue'
 import { h, unref } from 'vue'
 import { ArrowDownBold } from '@element-plus/icons-vue'
-import type { TableColumnCtx } from 'element-plus'
+import type { TableColumnCtx, ElMessageBoxOptions } from 'element-plus'
 import {
   ElButton,
   ElIcon,
@@ -189,7 +189,7 @@ const handleClickAction = (
   if (buttonRow.confirm) {
     const message = t('plus.table.confirmToPerformThisOperation')
     let title = t('plus.table.prompt')
-    let options: any = undefined
+    let options: ElMessageBoxOptions | undefined = undefined
     let appContext: AppContext | undefined | null = null
 
     if (isPlainObject(buttonRow.confirm) && typeof buttonRow.confirm !== 'boolean') {
