@@ -1,6 +1,3 @@
-export * from './useAppendTag'
 export * from './useGetOptions'
-export * from './useIsEnterKeyboard'
-export * from './useIsOperation'
 export * from './useLocale'
 export * from './useTable'
