@@ -1,4 +1,4 @@
-# CheckCard 多选卡片
+# CheckCard 多选卡片 <el-tag>v0.0.1-beta.26</el-tag>
 
 ## 简介
 

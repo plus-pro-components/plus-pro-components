@@ -10,6 +10,26 @@ drawer-form/basic
 
 :::
 
+## 自定义表单项 <el-tag>v0.0.1-beta.32</el-tag>
+
+支持 [PlusForm 自定义表单项](/components/form.html#自定义表单项-renderfield) 自定义表单项 的三种(`renderField`/`slot`/`jsx`)方式。
+
+:::demo
+
+drawer-form/slot
+
+:::
+
+## 自定义表单 label <el-tag>v0.0.1-beta.32</el-tag>
+
+支持 [PlusForm 自定义表单 label](/components/form.html#自定义表单-label-插槽) 自定义表单项 的三种(`renderLabel`/`slot`/`jsx`)`方式。
+
+:::demo
+
+drawer-form/slot-label
+
+:::
+
 ## DrawerForm API
 
 ## DrawerForm Attributes
@@ -32,12 +52,14 @@ drawer-form/basic
 
 ## DrawerForm Slots
 
-| 插槽名              | 说明                                                                                      |
-| ------------------- | ----------------------------------------------------------------------------------------- |
-| `drawer-header`     | [ElDrawer](https://element-plus.gitee.io/zh-CN/component/drawer.html#插槽) 的 header slot |
-| `drawer-footer`     | [ElDrawer](https://element-plus.gitee.io/zh-CN/component/drawer.html#插槽) 的 footer slot |
-| `form-footer`       | [PlusForm-footer](/components/form.html#form-slots) 的 footer slot                        |
-| `form-group-header` | [PlusForm-group-header](/components/form.html#form-slots) 的 group-header slot            |
+| 插槽名              | 说明                                                                                      | 作用域插槽参数                             |
+| ------------------- | ----------------------------------------------------------------------------------------- | ------------------------------------------ |
+| `drawer-header`     | [ElDrawer](https://element-plus.gitee.io/zh-CN/component/drawer.html#插槽) 的 header slot |                                            |
+| `drawer-footer`     | [ElDrawer](https://element-plus.gitee.io/zh-CN/component/drawer.html#插槽) 的 footer slot |                                            |
+| `form-footer`       | [PlusForm-footer](/components/form.html#form-slots) 的 footer slot                        | `{handleReset,handleSubmit}`               |
+| `form-group-header` | [PlusForm-group-header](/components/form.html#form-slots) 的 group-header slot            | `{title,columns,icon}`                     |
+| `plus-field-*`      | 自定义表单项，组件会自动根据配置项的 prop 生成对应的插槽                                  | `{prop,label,fieldProps,valueType,column}` |
+| `plus-label-*`      | 自定义表单项 label，组件会自动根据配置项的 prop 生成对应的插槽                            | `{prop,label,fieldProps,valueType,column}` |
 
 ## Exposes
 
