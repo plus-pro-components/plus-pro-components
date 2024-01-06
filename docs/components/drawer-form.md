@@ -10,7 +10,9 @@ drawer-form/basic
 
 :::
 
-## 自定义表单项 <el-tag>v0.0.1-beta.32</el-tag>
+## 自定义表单项
+
+<el-tag>v0.0.1-beta.32</el-tag>
 
 支持 [PlusForm 自定义表单项](/components/form.html#自定义表单项-renderfield) 自定义表单项 的三种(`renderField`/`slot`/`jsx`)方式。
 
@@ -20,7 +22,9 @@ drawer-form/slot
 
 :::
 
-## 自定义表单 label <el-tag>v0.0.1-beta.32</el-tag>
+## 自定义表单 label
+
+<el-tag>v0.0.1-beta.32</el-tag>
 
 支持 [PlusForm 自定义表单 label](/components/form.html#自定义表单-label-插槽) 自定义表单项 的三种(`renderLabel`/`slot`/`jsx`)`方式。
 

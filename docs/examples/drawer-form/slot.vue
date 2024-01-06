@@ -2,11 +2,11 @@
   <el-button @click="handleOpen">打开抽屉表单</el-button>
   <PlusDrawerForm v-model:visible="visible" v-model="values" :form="{ columns }">
     <template #plus-field-name>
-      <el-input v-model="state.name" type="textarea" placeholder="自定义输入框插槽" />
+      <el-input v-model="values.name" type="textarea" placeholder="自定义输入框插槽" />
     </template>
 
     <template #plus-field-status>
-      <el-input v-model="state.status" type="textarea" placeholder="自定义输入框插槽" />
+      <el-input v-model="values.status" type="textarea" placeholder="自定义输入框插槽" />
     </template>
   </PlusDrawerForm>
 </template>
@@ -61,7 +61,6 @@ const columns: PlusColumn[] = [
 
 const visible = ref(false)
 const values = ref<FieldValues>({})
-const state = ref<FieldValues>({})
 
 const handleOpen = () => {
   visible.value = true
