@@ -1,3 +1,27 @@
+## [v0.0.1-beta.32](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-beta.31...v0.0.1-beta.32) (2024-01-06)
+
+
+### ✨ Features
+
+* **components:** :sparkles: drawer-form add 'plus-field-*' slot and 'plus-label-*' slot.([b80a96a](https://github.com/plus-pro-components/plus-pro-components/commit/b80a96a)) by@xiaofei
+* **components:** :sparkles: dialog-form add 'plus-field-*' slot and 'plus-label-*' slot.([14605f3](https://github.com/plus-pro-components/plus-pro-components/commit/14605f3)) by@xiaofei
+* **hooks:** :sparkles: remove useAppendTag useIsEnterKeyboard useIsOperation hooks.([3be0dfb](https://github.com/plus-pro-components/plus-pro-components/commit/3be0dfb)) by@xiaofei
+* **components:** :sparkles: merge pr #64([39e8bd3](https://github.com/plus-pro-components/plus-pro-components/commit/39e8bd3)) by@xiaofei
+* **all:** Merge pull request [#64](https://github.com/plus-pro-components/plus-pro-components/pull/64) from plus-pro-components/zpp([7909215](https://github.com/plus-pro-components/plus-pro-components/commit/7909215)) by@xiaofei
+* **components:** :sparkles: add drag and drop recolumn Settings([6281590](https://github.com/plus-pro-components/plus-pro-components/commit/6281590)) by@zhangpp
+* **components:** :sparkles: table ActionBarButtonsRow['confirm.options'] add type([ef25fd9](https://github.com/plus-pro-components/plus-pro-components/commit/ef25fd9)) by@xiaofei
+
+
+### 🐛 Bug Fixes
+
+* **components:** :bug: table ActionBarButtonsRow['confirm'] add 'appContext' Add support([a2df1ee](https://github.com/plus-pro-components/plus-pro-components/commit/a2df1ee)) by@xiaofei
+
+
+### ♻️ Code Refactoring
+
+* **components:** :recycle: update filterSlots type([6126755](https://github.com/plus-pro-components/plus-pro-components/commit/6126755)) by@xiaofei
+
+
 ## [v0.0.1-beta.31](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-beta.30...v0.0.1-beta.31) (2023-12-28)
 
 
