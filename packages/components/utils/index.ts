@@ -1,6 +1,6 @@
 import type { FieldValueType, RecordType, PlusColumn } from '@plus-pro-components/types'
 import { cloneDeep, get, set } from 'lodash-es'
-import type { useSlots } from 'vue'
+import type { SetupContext } from 'vue'
 import { isPromise, isFunction, isPlainObject, isEmptyObject, toRawType, isString } from './is'
 
 export * from './format'
@@ -146,8 +146,8 @@ export const getTableCellSlotName = (prop?: string | number) => {
  * @param name
  * @returns
  */
-export const filterSlots = (slots: RecordType, name: string): ReturnType<typeof useSlots> => {
-  const data: any = {}
+export const filterSlots = (slots: RecordType, name: string): SetupContext['slots'] => {
+  const data: Record<string, any> = {}
   Object.keys(slots || {}).forEach(key => {
     if (key.startsWith(name)) {
       data[key] = slots[key]
