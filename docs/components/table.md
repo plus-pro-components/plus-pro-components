@@ -52,7 +52,16 @@ table/action-bar
 
 :::
 
-## 拖动排序
+## 标题栏
+
+使用`title`，`toolbar`插槽。
+:::demo
+
+table/title-bar
+
+:::
+
+## 拖动排序行
 
 配置`drag-sortable`，同时配合`dragSortEnd`使用。
 
@@ -62,22 +71,19 @@ table/drag-sort
 
 :::
 
-## 列设置拖拽
+## 列设置拖拽排序列
 
-配置`title-bar`中`columnSetting`中`dragSort`为 true 或`sortableJs`使用，默认为 true 可拖拽。
+配置 [TitleBar](/components/type.html#titlebar) 中的`columnSetting`中的`dragSort`属性，默认为 `true` 可拖拽。
+
+不需要可以给 `false`，如下示例：
+
+```html
+<PlusTable :title-bar="{ columnSetting: { dragSort: false } }" />
+```
 
 :::demo
 
 table/drag-sort-column
-
-:::
-
-## 标题栏
-
-使用`title`，`toolbar`插槽。
-:::demo
-
-table/title-bar
 
 :::
 
@@ -377,7 +383,7 @@ el-table 的其他属性写法示例 如 `stripe`,`border`,`fit`等
 | `paginationChange`         | 分页改变触发                                     | `function` <docs-tip content='(pageInfo: PageInfo) => void'></docs-tip>                                                 |
 | `clickAction`              | 点击操作栏触发（需要二次确认的，点击确认时触发） | `function` [ButtonsCallBackParams](/components/type.html#buttonscallbackparams)                                         |
 | `clickActionConfirmCancel` | 点击操作栏需要二次确认的取消时触发               | `function` [ButtonsCallBackParams](/components/type.html#buttonscallbackparams)                                         |
-| `dragSortEnd`              | 拖拽排序列图标触发                               | `function` <docs-tip content='({newIndex: number, oldIndex: number}) => void'></docs-tip>                               |
+| `dragSortEnd`              | 拖拽排序行触发                                   | `function` <docs-tip content='({newIndex: number, oldIndex: number}) => void'></docs-tip>                               |
 | `formChange`               | 表格中有可以编辑的表单项目改变时触发             | `function` <docs-tip content='({ value: any; prop: string; row: any; index: number; column: any }) => void'></docs-tip> |
 | ...                        | ...                                              | ...                                                                                                                     |
 
