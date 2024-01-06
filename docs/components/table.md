@@ -62,6 +62,16 @@ table/drag-sort
 
 :::
 
+## 列设置拖拽
+
+配置`title-bar`中`columnSetting`中`dragSort`为 true 或`sortableJs`使用，默认为 true 可拖拽。
+
+:::demo
+
+table/drag-sort-column
+
+:::
+
 ## 标题栏
 
 使用`title`，`toolbar`插槽。

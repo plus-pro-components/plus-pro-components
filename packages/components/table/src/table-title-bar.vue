@@ -81,22 +81,24 @@
           {{ t('plus.table.selectAll') }}
         </el-checkbox>
         <el-checkbox-group v-model="state.checkList" @change="handleCheckGroupChange">
-          <el-checkbox
-            v-for="item in subColumns"
-            :key="item.label"
-            :label="getTableKey(item)"
-            :disabled="item.headerFilter"
-            class="plus-table-title-bar__toolbar__checkbox__item"
-          >
-            <el-tooltip
-              v-if="item.label?.length > filterTableHeaderOverflowLabelLength"
-              :content="item.label"
-              placement="right-start"
+          <div ref="checkboxGroupInstance" class="plus-checkbox-sortable-list">
+            <el-checkbox
+              v-for="item in subColumns"
+              :key="item.label"
+              :label="getTableKey(item)"
+              :disabled="item.headerFilter"
+              class="plus-table-title-bar__toolbar__checkbox__item plus-handle"
             >
-              {{ getLabel(item.label) }}
-            </el-tooltip>
-            <span v-else> {{ getLabel(item.label) }}</span>
-          </el-checkbox>
+              <el-tooltip
+                v-if="item.label?.length > filterTableHeaderOverflowLabelLength"
+                :content="item.label"
+                placement="right-start"
+              >
+                {{ getLabel(item.label) }}
+              </el-tooltip>
+              <span v-else> {{ getLabel(item.label) }}</span>
+            </el-checkbox>
+          </div>
         </el-checkbox-group>
 
         <template #reference>
@@ -117,7 +119,7 @@
 
 <script lang="ts" setup>
 import type { ComputedRef } from 'vue'
-import { reactive, computed, unref } from 'vue'
+import { reactive, computed, unref, onMounted, ref } from 'vue'
 import { cloneDeep } from 'lodash-es'
 import type { PlusColumn } from '@plus-pro-components/types'
 import { Setting, RefreshRight } from '@element-plus/icons-vue'
@@ -125,8 +127,10 @@ import { PlusPopover } from '@plus-pro-components/components/popover'
 import type { ComponentSize } from 'element-plus/es/constants'
 import type { CheckboxValueType } from 'element-plus'
 import { useLocale } from '@plus-pro-components/hooks'
-import { getTableKey } from '@plus-pro-components/components/utils'
+import { getTableKey, isPlainObject } from '@plus-pro-components/components/utils'
 import { ElCheckbox, ElCheckboxGroup, ElTooltip, ElIcon, ElButton } from 'element-plus'
+import type { SortableEvent, Options as SortableOptions } from 'sortablejs'
+import Sortable from 'sortablejs'
 
 import type { TitleBar } from './type'
 
@@ -135,6 +139,7 @@ export interface PlusTableToolbarProps {
   titleBar?: boolean | TitleBar
   filterTableHeaderOverflowLabelLength?: number
   defaultSize?: ComponentSize
+  changeColumns?: PlusColumn[]
 }
 export interface PlusTableToolbarEmits {
   (e: 'filterTable', columns: PlusColumn[]): void
@@ -159,10 +164,11 @@ const props = withDefaults(defineProps<PlusTableToolbarProps>(), {
   columns: () => [],
   titleBar: true,
   filterTableHeaderOverflowLabelLength: 6,
-  defaultSize: 'default'
+  defaultSize: 'default',
+  changeColumns: () => []
 })
 const emit = defineEmits<PlusTableToolbarEmits>()
-
+const checkboxGroupInstance = ref(null)
 const titleBarConfig = computed<TitleBar>(() => props.titleBar as any)
 
 const iconSize = computed(() => titleBarConfig.value.icon?.size || 18)
@@ -228,4 +234,43 @@ const getLabel = (label: string) => {
   }
   return label?.slice(0, props.filterTableHeaderOverflowLabelLength) + '...'
 }
+
+// checkbox列拖拽
+const handleDrop = () => {
+  console.log(checkboxGroupInstance)
+
+  const checkbox = checkboxGroupInstance.value // 获取容器元素
+  if (!checkbox) return
+  let config: SortableOptions = {
+    onEnd: handleDragEnd
+  }
+  const dragSort = (
+    (props.titleBar as any)?.columnSetting as { dragSort?: boolean | Partial<SortableOptions> }
+  )?.dragSort
+  if (isPlainObject(dragSort)) {
+    config = { ...config, ...(dragSort as SortableOptions), handle: '.plus-handle' }
+  }
+  new Sortable(checkbox as HTMLElement, config)
+}
+const handleDragEnd = (event: SortableEvent) => {
+  const subDragCheckboxList = cloneDeep(props.changeColumns)
+  // 更新subTableCloumns的顺序
+  const draggedCheckbox = props.changeColumns[event.oldIndex as number]
+
+  subDragCheckboxList.splice(event.oldIndex as number, 1)
+
+  subDragCheckboxList.splice(event.newIndex as number, 0, draggedCheckbox)
+  emit('filterTable', subDragCheckboxList)
+}
+
+onMounted(() => {
+  const dragSort = (
+    (props.titleBar as any)?.columnSetting as { dragSort?: boolean | Partial<SortableOptions> }
+  )?.dragSort
+  if (dragSort !== false) {
+    if (checkboxGroupInstance.value) {
+      handleDrop()
+    }
+  }
+})
 </script>

@@ -501,7 +501,7 @@ export type TitleBar = {
   /**
    * 是否需要列设置 默认true
    */
-  columnSetting?: boolean
+  columnSetting?: boolean | { dragSort?: boolean | Partial<SortableOptions> }
 
   /**
    * 工具栏 icon 的大小和颜色配置
