@@ -151,6 +151,10 @@ export default defineConfig({
             {
               text: '更新日志',
               link: '/guide/changelog'
+            },
+            {
+              text: '组件架构设计',
+              link: '/guide/design'
             }
           ]
         },
