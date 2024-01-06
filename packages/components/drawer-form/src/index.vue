@@ -33,18 +33,33 @@
       <template v-if="$slots['form-group-header']" #group-header>
         <slot name="form-group-header" />
       </template>
+
+      <!--表单项label插槽 -->
+      <template v-for="(_, key) in labelSlots" :key="key" #[key]="data">
+        <slot :name="key" v-bind="data" />
+      </template>
+
+      <!--表单单项的插槽 -->
+      <template v-for="(_, key) in fieldSlots" :key="key" #[key]="data">
+        <slot :name="key" v-bind="data" />
+      </template>
     </PlusForm>
   </el-drawer>
 </template>
 
 <script lang="ts" setup>
-import { ref, watch, computed } from 'vue'
+import { ref, watch, computed, useSlots } from 'vue'
 import { PlusForm } from '@plus-pro-components/components/form'
 import type { PlusFormProps } from '@plus-pro-components/components/form'
 import type { FieldValues, PlusColumn } from '@plus-pro-components/types'
 import { ElDrawer } from 'element-plus'
 import { useLocale } from '@plus-pro-components/hooks'
 import type { FormInstance } from 'element-plus'
+import {
+  getFieldSlotName,
+  getLabelSlotName,
+  filterSlots
+} from '@plus-pro-components/components/utils'
 
 export interface PlusDrawerFormProps {
   modelValue?: FieldValues
@@ -81,6 +96,17 @@ const computedFormInstance = computed(() => formInstance.value?.formInstance as 
 const drawerInstance = ref<InstanceType<typeof ElDrawer>>()
 const state = ref<FieldValues>({})
 const subVisible = ref(false)
+const slots = useSlots()
+
+/**
+ * 表单label的插槽
+ */
+const labelSlots = filterSlots(slots, getLabelSlotName())
+
+/*
+ * 表单单项的插槽
+ */
+const fieldSlots = filterSlots(slots, getFieldSlotName())
 
 watch(
   () => props.visible,
