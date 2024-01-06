@@ -54,13 +54,13 @@ dialog-form/slot-label
 
 ## DialogForm Slots
 
-| 插槽名              | 说明                                                                           | 作用域插槽参数                             |
-| ------------------- | ------------------------------------------------------------------------------ | ------------------------------------------ |
-| `dialog-header`     | [PlusDialog](/components/dialog.html#dialog-slots) 的 header slot              |                                            |
-| `form-footer`       | [PlusForm-footer](/components/form.html#form-slots) 的 footer slot             | `{handleReset,handleSubmit}`               |
-| `form-group-header` | [PlusForm-group-header](/components/form.html#form-slots) 的 group-header slot | `{title,columns,icon}`                     |
-| `plus-field-*`      | 自定义表单项，组件会自动根据配置项的 prop 生成对应的插槽                       | `{prop,label,fieldProps,valueType,column}` |
-| `plus-label-*`      | 自定义表单项 label，组件会自动根据配置项的 prop 生成对应的插槽                 | `{prop,label,fieldProps,valueType,column}` |
+| 插槽名              | 说明                                                                                                          | 作用域插槽参数                             |
+| ------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------ |
+| `dialog-header`     | [PlusDialog](/components/dialog.html#dialog-slots) 的 header slot                                             |                                            |
+| `form-footer`       | [PlusForm](/components/form.html#form-slots) 的 footer slot                                                   | `{handleReset,handleSubmit}`               |
+| `form-group-header` | [PlusForm](/components/form.html#form-slots) 的 group-header slot                                             | `{title,columns,icon}`                     |
+| `plus-field-*`      | [PlusForm](/components/form.html#form-slots) 的自定义表单项，组件会自动根据配置项的 prop 生成对应的插槽       | `{prop,label,fieldProps,valueType,column}` |
+| `plus-label-*`      | [PlusForm](/components/form.html#form-slots) 的自定义表单项 label，组件会自动根据配置项的 prop 生成对应的插槽 | `{prop,label,fieldProps,valueType,column}` |
 
 ## Exposes
 
