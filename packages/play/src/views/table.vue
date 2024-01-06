@@ -1,6 +1,15 @@
 <template>
   <div>
-    <PlusTable ref="plusTableInstance" :columns="tableConfig" :table-data="tableData" />
+    <PlusTable
+      ref="plusTableInstance"
+      :columns="tableConfig"
+      :table-data="tableData"
+      :title-bar="{
+        columnSetting: {
+          dragSort: false
+        }
+      }"
+    />
 
     <el-row style="margin-top: 10px">
       <el-button @click="handleStart(0)"> 开启第一行编辑 </el-button>
