@@ -1,3 +1,15 @@
+## [v0.0.1-beta.33](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-beta.32...v0.0.1-beta.33) (2024-01-08)
+
+
+### ✨ Features
+
+* **components:** :sparkles: fix table ActionBar confirm['appContext'] performance issues([5ebf269](https://github.com/plus-pro-components/plus-pro-components/commit/5ebf269)) by@xiaofei
+
+
+
+
+
+
 ## [v0.0.1-beta.32](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-beta.31...v0.0.1-beta.32) (2024-01-06)
 
 
