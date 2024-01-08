@@ -61,9 +61,7 @@ import {
 } from 'element-plus'
 import type { RecordType } from '@plus-pro-components/types'
 import { isFunction, isPlainObject } from '@plus-pro-components/components/utils'
-import { cloneDeep } from 'lodash-es'
 import { useLocale } from '@plus-pro-components/hooks'
-
 import type { ButtonsCallBackParams, ActionBarButtonsRow } from './type'
 
 export interface ActionBarProps {
@@ -120,7 +118,7 @@ const emit = defineEmits<PlusTableActionBarEmits>()
 const { t } = useLocale()
 
 const getSubButtons = (row: any, index: number) => {
-  const data = cloneDeep(props.buttons).filter(item => {
+  const data = props.buttons.filter(item => {
     if (isFunction(item.show)) {
       const tempFunction = item.show as (
         row: any,
