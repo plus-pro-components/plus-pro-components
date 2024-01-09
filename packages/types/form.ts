@@ -92,6 +92,13 @@ export interface FormColumnProps {
    * @desc 渲染form表单的label
    */
   renderLabel?: (label: string, props: PlusColumn) => VNode | string
+  /**
+   * 渲染el-form-item 下一行额外的内容
+   * @param label
+   * @param props
+   * @returns
+   */
+  renderExtra?: (column: PlusColumn) => VNode | string
 }
 
 /**
