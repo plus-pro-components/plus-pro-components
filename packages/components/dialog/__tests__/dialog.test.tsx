@@ -89,13 +89,15 @@ describe('dialog/index.vue', () => {
   test('slots test', async () => {
     const content = 'content'
     const header = 'header'
+    const footer = 'footer'
     const wrapper = mount(
       () => (
         <Dialog
           modelValue={true}
           append-to-body={false}
           v-slots={{
-            header: () => header
+            header: () => header,
+            footer: () => footer
           }}
         >
           {content}
@@ -110,5 +112,6 @@ describe('dialog/index.vue', () => {
     await nextTick()
     expect(wrapper.find('.el-dialog__header').text()).includes(header)
     expect(wrapper.find('.plus-dialog-body').text()).includes(content)
+    expect(wrapper.find('.el-dialog__footer').text()).includes(footer)
   })
 })

@@ -20,24 +20,22 @@
     </div>
 
     <template v-if="hasFooter" #footer>
-      <slot name="footer">
-        <div>
-          <span class="plus-dialog-footer">
-            <el-button @click="handleCancel">
-              {{ cancelText || t('plus.dialog.cancelText') }}
-            </el-button>
-            <el-button type="primary" :loading="confirmLoading" @click="handleConfirm">
-              {{ confirmText || t('plus.dialog.confirmText') }}
-            </el-button>
-          </span>
-        </div>
-      </slot>
+      <div class="plus-dialog-footer" :style="style">
+        <slot name="footer">
+          <el-button @click="handleCancel">
+            {{ cancelText || t('plus.dialog.cancelText') }}
+          </el-button>
+          <el-button type="primary" :loading="confirmLoading" @click="handleConfirm">
+            {{ confirmText || t('plus.dialog.confirmText') }}
+          </el-button>
+        </slot>
+      </div>
     </template>
   </el-dialog>
 </template>
 
 <script lang="ts" setup>
-import { ref, watchEffect } from 'vue'
+import { ref, watchEffect, computed } from 'vue'
 import type { DialogProps } from 'element-plus'
 import { ElDialog, ElButton } from 'element-plus'
 import { useLocale } from '@plus-pro-components/hooks'
@@ -49,6 +47,7 @@ export interface PlusDialogProps
   cancelText?: string
   confirmLoading?: boolean
   hasFooter?: boolean
+  footerAlign?: 'left' | 'right' | 'center'
   top?: string
   width?: string
   title?: string
@@ -71,10 +70,18 @@ const props = withDefaults(defineProps<PlusDialogProps>(), {
   hasFooter: true,
   title: '',
   top: '15vh',
-  width: '460px'
+  width: '460px',
+  footerAlign: 'right'
 })
 const emit = defineEmits<PlusDialogEmits>()
-
+const style = computed(() => ({
+  justifyContent:
+    props.footerAlign === 'left'
+      ? 'flex-start'
+      : props.footerAlign === 'center'
+      ? 'center'
+      : 'flex-end'
+}))
 const subVisible = ref(false)
 const { t } = useLocale()
 
