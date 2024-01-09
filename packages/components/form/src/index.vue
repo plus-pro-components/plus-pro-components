@@ -47,6 +47,11 @@
             <template v-for="(_, key) in fieldSlots" :key="key" #[key]="data">
               <slot :name="key" v-bind="data" />
             </template>
+
+            <!--el-form-item 下一行额外的内容 的插槽 -->
+            <template v-for="(_, key) in extraSlots" :key="key" #[key]="data">
+              <slot :name="key" v-bind="data" />
+            </template>
           </PlusFormContent>
         </el-card>
       </template>
@@ -68,6 +73,11 @@
 
           <!--表单项插槽 -->
           <template v-for="(_, key) in fieldSlots" :key="key" #[key]="data">
+            <slot :name="key" v-bind="data" />
+          </template>
+
+          <!--el-form-item 下一行额外的内容 的插槽 -->
+          <template v-for="(_, key) in extraSlots" :key="key" #[key]="data">
             <slot :name="key" v-bind="data" />
           </template>
 
@@ -105,6 +115,7 @@ import { cloneDeep } from 'lodash-es'
 import {
   getLabelSlotName,
   getFieldSlotName,
+  getExtraSlotName,
   filterSlots
 } from '@plus-pro-components/components/utils'
 import PlusFormContent from './form-content.vue'
@@ -205,6 +216,10 @@ const labelSlots = filterSlots(slots, getLabelSlotName())
  * 表单field的插槽
  */
 const fieldSlots = filterSlots(slots, getFieldSlotName())
+/**
+ * el-form-item 下一行额外的内容 的插槽
+ */
+const extraSlots = filterSlots(slots, getExtraSlotName())
 
 watch(
   () => props.modelValue,

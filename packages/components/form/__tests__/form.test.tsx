@@ -354,7 +354,8 @@ describe('form/index.vue', () => {
           v-slots={{
             footer,
             'plus-label-name': () => 'plus-label-name',
-            'plus-field-name': () => 'plus-field-name'
+            'plus-field-name': () => 'plus-field-name',
+            'plus-extra-name': () => 'plus-extra-name'
           }}
         />
       ),
@@ -372,5 +373,6 @@ describe('form/index.vue', () => {
     expect(wrapper.find('.custom-footer').text()).includes(resetText)
     expect(wrapper.find('.plus-form').text()).includes('plus-label-name')
     expect(wrapper.find('.plus-form').text()).includes('plus-field-name')
+    expect(wrapper.find('.plus-form-item-extra').text()).includes('plus-extra-name')
   })
 })
