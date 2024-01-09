@@ -1,1 +1,8 @@
- 
+@use 'mixins/mixins' as *;
+
+@include b(dialog) {
+  @include b(dialog-footer) {
+    display: flex;
+    align-items: center;
+  }
+}
