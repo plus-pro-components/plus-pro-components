@@ -1,5 +1,6 @@
 @use 'mixins/config' as *;
 @use 'mixins/mixins' as *;
+@use 'mixins/function' as *;
 
 @include b(form) {
   &.no-has-label {
@@ -22,5 +23,11 @@
         margin-right: 5px;
       }
     }
+  }
+
+  .#{$plus-namespace + -form-item-extra} {
+    color: getCssVar('text-color-placeholder');
+    font-size: getCssVar('font-size-base');
+    margin-bottom: 18px;
   }
 }
