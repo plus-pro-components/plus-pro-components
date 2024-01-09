@@ -235,8 +235,8 @@ form/all
 | `labelPosition`         | el-form 的 labelPosition                                                           | `string` <docs-tip content="'left' / 'right' / 'top'"></docs-tip>                        | `left`  | 否       |
 | `labelSuffix`           | el-form 的 labelSuffix                                                             | `string`                                                                                 | `:`     | 否       |
 | `hasErrorTip`           | 是否需要校验 message 提示                                                          | `boolean`                                                                                | `true`  | 否       |
-| `hasFooter`             | 是否需要全部底部按钮                                                               | `boolean`                                                                                | `true`  | 否       |
-| `footerAlign`           | 底部按钮对齐方式                                                                   | `string` <docs-tip content="'left' / 'right'"></docs-tip>                                | `left`  | 否       |
+| `hasFooter`             | 是否需要底部按钮                                                                   | `boolean`                                                                                | `true`  | 否       |
+| `footerAlign`           | 底部按钮对齐方式                                                                   | `string` <docs-tip content="'left' / 'right' / 'center' "></docs-tip>                    | `left`  | 否       |
 | `hasReset`              | 是否需要底部按钮 `重置`                                                            | `boolean`                                                                                | `true`  | 否       |
 | `hasLabel`              | 是否显示 label，值为`false`时`labelWidth`会被设置为`0`，labelSuffix 会被设置为`''` | `boolean`                                                                                | `true`  | 否       |
 | `submitLoading`         | 确定按钮 loading                                                                   | `boolean`                                                                                | `false` | 否       |
@@ -282,11 +282,11 @@ form/all
 
 ## Exposes
 
-| 名称           | 说明               | 类型                                                                 |
-| -------------- | ------------------ | -------------------------------------------------------------------- |
-| `formInstance` | `el-form` 实例     | `object` <docs-tip content="InstanceType<typeof ElForm>"></docs-tip> |
-| `handleReset`  | 表单默认的重置方法 | `function` <docs-tip content="() => void"></docs-tip>                |
-| `handleSubmit` | 表单默认的提交方法 | `function` <docs-tip content="() => void"></docs-tip>                |
+| 名称           | 说明                                                                | 类型                                                                 |
+| -------------- | ------------------------------------------------------------------- | -------------------------------------------------------------------- |
+| `formInstance` | `el-form` 实例                                                      | `object` <docs-tip content="InstanceType<typeof ElForm>"></docs-tip> |
+| `handleReset`  | 表单默认的重置方法                                                  | `function` <docs-tip content="() => void"></docs-tip>                |
+| `handleSubmit` | 表单默认的提交方法，有校验的话，校验成功返回`true`，失败返回`false` | `function` <docs-tip content=" () => Promise<boolean>"></docs-tip>   |
 
 **拿到 formInstance 后支持所有[ElForm 方法](https://element-plus.org/zh-CN/component/form.html#form-exposes)**
 
