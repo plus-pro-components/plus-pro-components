@@ -1,6 +1,6 @@
 import { nextTick, ref } from 'vue'
 import { mount } from '@vue/test-utils'
-import ElementPlus from 'element-plus'
+import ElementPlus, { ElButton } from 'element-plus'
 import { describe, expect, test } from 'vitest'
 import type { PlusColumn, FieldValues } from '@plus-pro-components/types'
 import DrawerForm from '../src/index.vue'
@@ -197,5 +197,45 @@ describe('drawer-form/index.vue', () => {
     )
     await nextTick()
     expect(wrapper.find('.el-drawer__title').text()).includes('Drawer form')
+  })
+
+  test('form-footer plus-*-* slots test', async () => {
+    const visible = ref(true)
+    const values = ref<FieldValues>({})
+    const slots = {
+      'form-footer': () => (
+        <>
+          <ElButton type="primary">确定</ElButton>
+          <ElButton type="warning">取消</ElButton>
+          <ElButton type="danger"> 返回</ElButton>
+        </>
+      ),
+      'plus-label-name': () => 'plus-label-name',
+      'plus-field-name': () => 'plus-field-name',
+      'plus-extra-name': () => 'plus-extra-name'
+    }
+    const wrapper = mount(
+      () => (
+        <DrawerForm
+          visible={visible.value}
+          modelValue={values.value}
+          append-to-body={false}
+          form={{ columns, hasFooter: true }}
+          v-slots={slots}
+        />
+      ),
+      {
+        global: {
+          plugins: [ElementPlus]
+        }
+      }
+    )
+    await nextTick()
+    expect(wrapper.find('.plus-form__footer').text()).includes('确定')
+    expect(wrapper.find('.plus-form__footer').text()).includes('取消')
+    expect(wrapper.find('.plus-form__footer').text()).includes('返回')
+    expect(wrapper.find('.plus-form').text()).includes('plus-label-name')
+    expect(wrapper.find('.plus-form').text()).includes('plus-field-name')
+    expect(wrapper.find('.plus-form-item-extra').text()).includes('plus-extra-name')
   })
 })

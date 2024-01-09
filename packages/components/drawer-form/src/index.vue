@@ -43,6 +43,11 @@
       <template v-for="(_, key) in fieldSlots" :key="key" #[key]="data">
         <slot :name="key" v-bind="data" />
       </template>
+
+      <!--el-form-item 下一行额外的内容 的插槽 -->
+      <template v-for="(_, key) in extraSlots" :key="key" #[key]="data">
+        <slot :name="key" v-bind="data" />
+      </template>
     </PlusForm>
   </el-drawer>
 </template>
@@ -58,6 +63,7 @@ import type { FormInstance } from 'element-plus'
 import {
   getFieldSlotName,
   getLabelSlotName,
+  getExtraSlotName,
   filterSlots
 } from '@plus-pro-components/components/utils'
 
@@ -107,6 +113,10 @@ const labelSlots = filterSlots(slots, getLabelSlotName())
  * 表单单项的插槽
  */
 const fieldSlots = filterSlots(slots, getFieldSlotName())
+/**
+ * el-form-item 下一行额外的内容 的插槽
+ */
+const extraSlots = filterSlots(slots, getExtraSlotName())
 
 watch(
   () => props.visible,
