@@ -79,11 +79,7 @@
       </template>
     </slot>
 
-    <div
-      v-if="hasFooter"
-      class="plus-form__footer"
-      :style="{ justifyContent: footerAlign === 'left' ? 'flex-start' : 'flex-end' }"
-    >
+    <div v-if="hasFooter" class="plus-form__footer" :style="style">
       <slot name="footer" v-bind="{ handleReset, handleSubmit }">
         <el-button v-if="hasReset" @click="handleReset">
           <!-- 重置 -->
@@ -138,7 +134,7 @@ export interface PlusFormProps extends /* @vue-ignore */ Partial<Mutable<FormPro
   submitText?: string
   resetText?: string
   submitLoading?: boolean
-  footerAlign?: 'left' | 'right'
+  footerAlign?: 'left' | 'right' | 'center'
   rules?: FormRules
   group?: false | PlusFormGroupRow[]
 }
@@ -186,13 +182,19 @@ const state = reactive<PlusFormState>({
   values: { ...props.modelValue },
   subColumns: []
 })
-const filterHide = (columns: PlusColumn[]) =>
-  columns.filter(item => unref(item.hideInForm) !== true)
-
+const filterHide = (columns: PlusColumn[]) => {
+  return columns.filter(item => unref(item.hideInForm) !== true)
+}
 const model = computed(() => cloneDeep(state.values))
-
+const style = computed(() => ({
+  justifyContent:
+    props.footerAlign === 'left'
+      ? 'flex-start'
+      : props.footerAlign === 'center'
+      ? 'center'
+      : 'flex-end'
+}))
 state.subColumns = computed<any>(() => filterHide(props.columns))
-
 const slots = useSlots()
 /**
  * 表单label的插槽
@@ -230,6 +232,7 @@ const handleSubmit = async () => {
     const valid = await formInstance.value?.validate()
     if (valid) {
       emit('submit', state.values)
+      return true
     }
   } catch (errors: any) {
     if (props.hasErrorTip) {
@@ -239,6 +242,7 @@ const handleSubmit = async () => {
     }
     emit('submitError', errors)
   }
+  return false
 }
 
 const handleReset = (): void => {

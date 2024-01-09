@@ -352,7 +352,9 @@ describe('form/index.vue', () => {
           rules={rules}
           columns={columns}
           v-slots={{
-            footer
+            footer,
+            'plus-label-name': () => 'plus-label-name',
+            'plus-field-name': () => 'plus-field-name'
           }}
         />
       ),
@@ -368,5 +370,7 @@ describe('form/index.vue', () => {
     expect(wrapper.find('.custom-footer .el-button').exists()).toBe(true)
     expect(wrapper.find('.custom-footer').text()).includes(submitText)
     expect(wrapper.find('.custom-footer').text()).includes(resetText)
+    expect(wrapper.find('.plus-form').text()).includes('plus-label-name')
+    expect(wrapper.find('.plus-form').text()).includes('plus-field-name')
   })
 })
