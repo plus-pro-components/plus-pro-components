@@ -11,6 +11,21 @@
     :has-footer="false"
     @change="handleChange"
   >
+    <!--表单项label插槽 -->
+    <template v-for="(_, key) in labelSlots" :key="key" #[key]="data">
+      <slot :name="key" v-bind="data" />
+    </template>
+
+    <!--表单单项的插槽 -->
+    <template v-for="(_, key) in fieldSlots" :key="key" #[key]="data">
+      <slot :name="key" v-bind="data" />
+    </template>
+
+    <!--el-form-item 下一行额外的内容 的插槽 -->
+    <template v-for="(_, key) in extraSlots" :key="key" #[key]="data">
+      <slot :name="key" v-bind="data" />
+    </template>
+
     <template #search-footer>
       <slot
         name="footer"
@@ -49,13 +64,19 @@
 import type { PlusFormInstance } from '@plus-pro-components/components/form'
 import { PlusForm } from '@plus-pro-components/components/form'
 import type { Ref } from 'vue'
-import { reactive, ref, toRefs, computed, watch, unref } from 'vue'
+import { reactive, ref, toRefs, computed, watch, unref, useSlots } from 'vue'
 import type { FormProps, RowProps, ColProps } from 'element-plus'
 import { ArrowDown, ArrowUp, Search, RefreshRight } from '@element-plus/icons-vue'
 import type { PlusColumn, FieldValues, Mutable } from '@plus-pro-components/types'
 import { cloneDeep } from 'lodash-es'
 import { useLocale } from '@plus-pro-components/hooks'
 import { ElFormItem, ElButton, ElIcon } from 'element-plus'
+import {
+  getFieldSlotName,
+  getLabelSlotName,
+  getExtraSlotName,
+  filterSlots
+} from '@plus-pro-components/components/utils'
 
 export interface PlusSearchProps extends /* @vue-ignore */ Partial<Mutable<FormProps>> {
   modelValue?: FieldValues
@@ -122,6 +143,22 @@ const state = reactive<PlusSearchState>({
   originData: [],
   isShowUnfold: false
 })
+
+const slots = useSlots()
+
+/**
+ * 表单label的插槽
+ */
+const labelSlots = filterSlots(slots, getLabelSlotName())
+
+/*
+ * 表单单项的插槽
+ */
+const fieldSlots = filterSlots(slots, getFieldSlotName())
+/**
+ * el-form-item 下一行额外的内容 的插槽
+ */
+const extraSlots = filterSlots(slots, getExtraSlotName())
 
 state.originData = computed<any[]>(() => {
   return (

@@ -1,7 +1,7 @@
 import { describe, expect, test } from 'vitest'
 import { nextTick, ref } from 'vue'
 import { mount } from '@vue/test-utils'
-import ElementPlus from 'element-plus'
+import ElementPlus, { ElButton } from 'element-plus'
 import type { PlusColumn, FieldValues } from '@plus-pro-components/types'
 import Search from '../src/index.vue'
 
@@ -244,5 +244,119 @@ describe('search/index.vue', () => {
     expect(wrapper.find('.el-rate').exists()).toBe(true)
     expect(wrapper.find('.el-switch').exists()).toBe(true)
     expect(wrapper.find('.el-radio-group').exists()).toBe(true)
+  })
+
+  test('slots test', async () => {
+    const state = ref<FieldValues>({
+      status: '0',
+      name: '',
+      rate: 4,
+      progress: 100,
+      switch: true,
+      time: new Date().toString(),
+      img: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg'
+    })
+
+    const rules = {
+      name: [
+        {
+          required: true,
+          message: '请输入名称'
+        }
+      ],
+      tag: [
+        {
+          required: true,
+          message: '请输入标签'
+        }
+      ]
+    }
+
+    const columns: PlusColumn[] = [
+      {
+        label: '名称',
+        width: 120,
+        prop: 'name',
+        valueType: 'copy',
+        tooltip: '名称最多显示6个字符'
+      },
+      {
+        label: '状态',
+        width: 120,
+        prop: 'status',
+        valueType: 'select',
+        options: [
+          {
+            label: '未解决',
+            value: '0',
+            color: 'red'
+          },
+          {
+            label: '已解决',
+            value: '1',
+            color: 'blue'
+          },
+          {
+            label: '解决中',
+            value: '2',
+            color: 'yellow'
+          },
+          {
+            label: '失败',
+            value: '3',
+            color: 'red'
+          }
+        ]
+      }
+    ]
+
+    const submitText = '提交'
+    const resetText = '重置'
+
+    const footer = ({
+      handleSubmit,
+      handleReset
+    }: {
+      handleSubmit: () => void
+      handleReset: () => void
+    }) => {
+      return (
+        <div class="custom-footer">
+          <ElButton onClick={handleSubmit}> {submitText} </ElButton>
+          <ElButton onClick={handleReset}> {resetText} </ElButton>
+        </div>
+      )
+    }
+
+    const wrapper = mount(
+      () => (
+        <Search
+          modelValue={state.value}
+          rules={rules}
+          hasUnfold={false}
+          columns={columns}
+          v-slots={{
+            footer,
+            'plus-label-name': () => 'plus-label-name',
+            'plus-field-name': () => 'plus-field-name',
+            'plus-extra-name': () => 'plus-extra-name'
+          }}
+        />
+      ),
+      {
+        global: {
+          plugins: [ElementPlus]
+        }
+      }
+    )
+
+    await nextTick()
+    expect(wrapper.find('.custom-footer').exists()).toBe(true)
+    expect(wrapper.find('.custom-footer .el-button').exists()).toBe(true)
+    expect(wrapper.find('.custom-footer').text()).includes(submitText)
+    expect(wrapper.find('.custom-footer').text()).includes(resetText)
+    expect(wrapper.find('.plus-form').text()).includes('plus-label-name')
+    expect(wrapper.find('.plus-form').text()).includes('plus-field-name')
+    expect(wrapper.find('.plus-form-item-extra').text()).includes('plus-extra-name')
   })
 })
