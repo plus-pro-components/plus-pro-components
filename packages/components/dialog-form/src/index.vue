@@ -15,9 +15,9 @@
     <PlusForm
       ref="formInstance"
       v-model="state"
+      :has-footer="false"
       footer-align="right"
       v-bind="form"
-      :has-footer="false"
       @change="handleChange"
     >
       <template v-if="$slots['form-footer']" #footer="data">
@@ -144,6 +144,8 @@ const handleCancel = () => {
 }
 
 defineExpose({
+  handleConfirm,
+  handleCancel,
   formInstance: computedFormInstance
 })
 </script>
