@@ -83,6 +83,11 @@
         <template v-for="(_, key) in fieldSlots" :key="key" #[key]="data">
           <slot :name="key" v-bind="data" />
         </template>
+
+        <!-- 表单el-form-item 下一行额外的内容 的插槽 -->
+        <template v-for="(_, key) in extraSlots" :key="key" #[key]="data">
+          <slot :name="key" v-bind="data" />
+        </template>
       </PlusTableColumn>
 
       <!-- 操作栏 -->
@@ -129,6 +134,7 @@ import {
   getTableCellSlotName,
   getTableHeaderSlotName,
   getFieldSlotName,
+  getExtraSlotName,
   filterSlots
 } from '@plus-pro-components/components/utils'
 import { default as PlusTableActionBarComponent } from './table-action-bar.vue'
@@ -249,6 +255,11 @@ const headerSlots = filterSlots(slots, getTableHeaderSlotName())
  * 表单单项的插槽
  */
 const fieldSlots = filterSlots(slots, getFieldSlotName())
+
+/**
+ * el-form-item 下一行额外的内容 的插槽
+ */
+const extraSlots = filterSlots(slots, getExtraSlotName())
 
 /**
  * 表单的ref

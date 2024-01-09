@@ -51,6 +51,14 @@
             <slot :name="getFieldSlotName(item.prop)" v-bind="data" />
           </template>
 
+          <!-- 表单el-form-item 下一行额外的内容 的插槽 -->
+          <template
+            v-if="$slots[getExtraSlotName(item.prop)]"
+            #[getExtraSlotName(item.prop)]="data"
+          >
+            <slot :name="getExtraSlotName(item.prop)" v-bind="data" />
+          </template>
+
           <!--表格单元格的插槽 -->
           <template
             v-if="$slots[getTableCellSlotName(item.prop)]"
@@ -74,10 +82,10 @@ import {
   getTableCellSlotName,
   getTableHeaderSlotName,
   getFieldSlotName,
+  getExtraSlotName,
   isFunction
 } from '@plus-pro-components/components/utils'
 import { TableFormRefInjectionKey } from '@plus-pro-components/constants'
-
 import { QuestionFilled } from '@element-plus/icons-vue'
 import type { Ref } from 'vue'
 import { shallowRef, inject, watch } from 'vue'
