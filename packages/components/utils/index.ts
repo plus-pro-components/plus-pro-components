@@ -125,6 +125,12 @@ export const getFieldSlotName = (prop?: string | number) => {
 export const getLabelSlotName = (prop?: string | number) => {
   return `${getSlotName('label', prop)}`
 }
+/**
+ *   处理form-item中的 extra slot名称
+ */
+export const getExtraSlotName = (prop?: string | number) => {
+  return `${getSlotName('extra', prop)}`
+}
 
 /**
  * 处理table中的 header slot名称
