@@ -1,6 +1,10 @@
 <template>
   <div>
     <PlusTable :columns="tableConfig" :table-data="tableData" @formChange="formChange">
+      <template #plus-field-name="{ row }">
+        <el-input v-model="row.name" placeholder="自定义表单" @change="handleChange" />
+      </template>
+      <template #plus-extra-name> 自定义下一行内容 </template>
       <template #toolbar>
         <el-button plain size="small" @click="editTable(false)">取消编辑</el-button>
         <el-button type="primary" size="small" @click="editTable(true)">开启编辑</el-button>
@@ -28,7 +32,7 @@ const TestServe = {
     const data = [...new Array(3)].map((item, index) => {
       return {
         id: index,
-        name: index + 'name',
+        name: index === 0 ? '' : index + 'name',
         status: String(index % 3),
         rate: index > 3 ? 2 : 3.5,
         switch: index % 2 === 0 ? true : false,
@@ -45,7 +49,7 @@ const tableConfig = ref<PlusColumn[]>([
     label: '名称',
     prop: 'name',
     editable: true,
-    width: 120
+    width: 200
   },
   {
     label: '状态',
@@ -114,6 +118,10 @@ const getList = async () => {
 getList()
 
 const formChange = (data: { value: any; prop: string; row: any; index: number; column: any }) => {
+  console.log(data)
+}
+
+const handleChange = (data: string) => {
   console.log(data)
 }
 

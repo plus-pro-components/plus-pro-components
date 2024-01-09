@@ -34,16 +34,6 @@ form/has-label
 
 :::
 
-## 自定义表单底部按钮
-
-组件提供 `footer` 插槽可以自定义表单底部，并提供默认的 **提交**方法、**重置**方法 的作用域插槽参数 `{handleSubmit,handleReset}`。
-
-:::demo
-
-form/custom-footer
-
-:::
-
 ## 异步数据用法
 
 [PlusColumn](/components/config.html) 配置中的 `options` 支持数组，函数和 Promise。
@@ -74,6 +64,16 @@ form/group
 :::demo
 
 form/group-header
+
+:::
+
+## 自定义表单底部按钮
+
+组件提供 `footer` 插槽可以自定义表单底部，并提供默认的 **提交**方法、**重置**方法 的作用域插槽参数 `{handleSubmit,handleReset}`。
+
+:::demo
+
+form/custom-footer
 
 :::
 
@@ -212,6 +212,18 @@ form/custom-label-tsx
 
 :::
 
+## 自定义表单下一行的内容
+
+<el-tag>v0.0.1-beta.34</el-tag>
+
+支持 [renderExtra](/components/config.html) 渲染函数，支持 jsx/tsx，支持插槽，插槽的生成规则就是 固定 key 值 [ **plus-extra-** ] 然后加上 配置项的 `prop`。
+
+:::demo
+
+form/extra
+
+:::
+
 ## 所有内置的表单类型
 
 :::demo
@@ -272,13 +284,14 @@ form/all
 
 ## Form Slots
 
-| 插槽名         | 说明                                                           | 作用域插槽参数                             |
-| -------------- | -------------------------------------------------------------- | ------------------------------------------ |
-| `default`      | 表单的内容 默认是 `PlusFormItem` 组件                          |                                            |
-| `footer`       | 表单底部按钮                                                   | `{handleReset,handleSubmit}`               |
-| `group-header` | 分组表单头部                                                   | `{title,columns,icon}`                     |
-| `plus-field-*` | 自定义表单项，组件会自动根据配置项的 prop 生成对应的插槽       | `{prop,label,fieldProps,valueType,column}` |
-| `plus-label-*` | 自定义表单项 label，组件会自动根据配置项的 prop 生成对应的插槽 | `{prop,label,fieldProps,valueType,column}` |
+| 插槽名         | 说明                                                                                 | 作用域插槽参数                             |
+| -------------- | ------------------------------------------------------------------------------------ | ------------------------------------------ |
+| `default`      | 表单的内容 默认是 `PlusFormItem` 组件                                                |                                            |
+| `footer`       | 表单底部按钮                                                                         | `{handleReset,handleSubmit}`               |
+| `group-header` | 分组表单头部                                                                         | `{title,columns,icon}`                     |
+| `plus-field-*` | 自定义表单项，组件会自动根据配置项的 prop 生成对应的插槽                             | `{prop,label,fieldProps,valueType,column}` |
+| `plus-label-*` | 自定义表单项 label，组件会自动根据配置项的 prop 生成对应的插槽                       | `{prop,label,fieldProps,valueType,column}` |
+| `plus-extra-*` | 自定义渲染 el-form-item 下一行额外的内容，组件会自动根据配置项的 prop 生成对应的插槽 | `{column}`                                 |
 
 ## Exposes
 

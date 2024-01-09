@@ -74,6 +74,7 @@ dialog-form/custom-footer
 | `form-group-header` | [PlusForm](/components/form.html#form-slots) 的 group-header slot                                             | `{title,columns,icon}`                                             |
 | `plus-field-*`      | [PlusForm](/components/form.html#form-slots) 的自定义表单项，组件会自动根据配置项的 prop 生成对应的插槽       | `{prop,label,fieldProps,valueType,column}`                         |
 | `plus-label-*`      | [PlusForm](/components/form.html#form-slots) 的自定义表单项 label，组件会自动根据配置项的 prop 生成对应的插槽 | `{prop,label,fieldProps,valueType,column}`                         |
+| `plus-extra-*`      | [PlusForm](/components/form.html#form-slots)的自定义渲染 el-form-item 下一行额外的内容，组件会自动根据配置项的 prop 生成对应的插槽 | `{column}`                                 |
 
 ## Exposes
 

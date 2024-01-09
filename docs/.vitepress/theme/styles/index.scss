@@ -47,6 +47,9 @@
 }
 
 .vp-doc {
+  .el-descriptions__table {
+    margin: 0;
+  }
   h2 {
     border-top: 0;
   }
