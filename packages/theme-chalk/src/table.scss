@@ -16,6 +16,10 @@
 
   /* 操作栏 */
   @include b(table-action-bar) {
+    &.#{$el-namespace + -table-fixed-column--right} {
+      background-color: getCssVar('bg-color');
+    }
+
     .cell {
       display: flex;
       align-items: center;
