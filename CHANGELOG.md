@@ -1,3 +1,32 @@
+## [v0.0.1-beta.34](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-beta.33...v0.0.1-beta.34) (2024-01-09)
+
+
+### ✨ Features
+
+* **types:** :sparkles: add renderExtra type([b7fd28d](https://github.com/plus-pro-components/plus-pro-components/commit/b7fd28d)) by@xiaofei
+* **theme-chalk:** :sparkles: form.scss add extra style([29c96ab](https://github.com/plus-pro-components/plus-pro-components/commit/29c96ab)) by@xiaofei
+* **components:** :sparkles: utils add getExtraSlotName([6bba0cb](https://github.com/plus-pro-components/plus-pro-components/commit/6bba0cb)) by@xiaofei
+* **components:** :sparkles: table add plus-extra-* slot([1c759a6](https://github.com/plus-pro-components/plus-pro-components/commit/1c759a6)) by@xiaofei
+* **components:** :sparkles: search add plus-*-* slot([253e162](https://github.com/plus-pro-components/plus-pro-components/commit/253e162)) by@xiaofei
+* **components:** :sparkles: dialog-form  drawer-form add plus-extra-* slot([47f020b](https://github.com/plus-pro-components/plus-pro-components/commit/47f020b)) by@xiaofei
+* **components:** :sparkles: form component add plus-extra-* slot and renderExtra.([6ed6542](https://github.com/plus-pro-components/plus-pro-components/commit/6ed6542)) by@xiaofei
+* **components:** :sparkles: dialog-form component add 'dialog-footer' slot([fcf894d](https://github.com/plus-pro-components/plus-pro-components/commit/fcf894d)) by@xiaofei
+* **components:** :sparkles: form handleSubmit method add return value([8e29bc0](https://github.com/plus-pro-components/plus-pro-components/commit/8e29bc0)) by@xiaofei
+* **theme-chalk:** :sparkles: dialog.scss add style([c34430b](https://github.com/plus-pro-components/plus-pro-components/commit/c34430b)) by@xiaofei
+* **components:** :sparkles: dialog component add 'footerAlign' props([78852d5](https://github.com/plus-pro-components/plus-pro-components/commit/78852d5)) by@xiaofei
+
+
+### 🐛 Bug Fixes
+
+* **theme-chalk:** :bug: fix darkmode actionBar background issue([14208fc](https://github.com/plus-pro-components/plus-pro-components/commit/14208fc)) by@xiaofei
+* **components:** :bug: fix invalid 'form-footer' slot([31e5612](https://github.com/plus-pro-components/plus-pro-components/commit/31e5612)) by@xiaofei
+
+
+### ♻️ Code Refactoring
+
+* **components:** :recycle: refactor display-item PlusForm and add plus-extra-* slot([81ad40a](https://github.com/plus-pro-components/plus-pro-components/commit/81ad40a)) by@xiaofei
+
+
 ## [v0.0.1-beta.33](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-beta.32...v0.0.1-beta.33) (2024-01-08)
 
 
