@@ -12,6 +12,10 @@
       <slot name="dialog-header" />
     </template>
 
+    <template v-if="$slots['dialog-footer']" #footer>
+      <slot name="dialog-footer" v-bind="{ handleConfirm, handleCancel }" />
+    </template>
+
     <PlusForm
       ref="formInstance"
       v-model="state"

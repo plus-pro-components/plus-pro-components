@@ -1,6 +1,6 @@
 import { nextTick, ref } from 'vue'
 import { mount } from '@vue/test-utils'
-import ElementPlus from 'element-plus'
+import ElementPlus, { ElButton } from 'element-plus'
 import { describe, expect, test } from 'vitest'
 import type { PlusColumn, FieldValues } from '@plus-pro-components/types'
 import DialogForm from '../src/index.vue'
@@ -204,5 +204,79 @@ describe('dialog-form/index.vue', () => {
     )
     await nextTick()
     expect(wrapper.find('.el-dialog__title').text()).includes('Dialog form')
+  })
+
+  test('dialog-footer dialog-header slots test', async () => {
+    const visible = ref(true)
+    const values = ref<FieldValues>({})
+    const slots = {
+      'dialog-footer': () => (
+        <>
+          <ElButton type="primary">确定</ElButton>
+          <ElButton type="warning">取消</ElButton>
+          <ElButton type="danger"> 返回</ElButton>
+        </>
+      ),
+      'dialog-header': () => 'dialog-header'
+    }
+    const wrapper = mount(
+      () => (
+        <DialogForm
+          visible={visible.value}
+          modelValue={values.value}
+          append-to-body={false}
+          form={{ columns }}
+          v-slots={slots}
+        />
+      ),
+      {
+        global: {
+          plugins: [ElementPlus]
+        }
+      }
+    )
+    await nextTick()
+    expect(wrapper.find('.plus-dialog-footer').text()).includes('确定')
+    expect(wrapper.find('.plus-dialog-footer').text()).includes('取消')
+    expect(wrapper.find('.plus-dialog-footer').text()).includes('返回')
+    expect(wrapper.find('.el-dialog__header').text()).includes('dialog-header')
+  })
+  test('form-footer plus-*-* slots test', async () => {
+    const visible = ref(true)
+    const values = ref<FieldValues>({})
+    const slots = {
+      'form-footer': () => (
+        <>
+          <ElButton type="primary">确定</ElButton>
+          <ElButton type="warning">取消</ElButton>
+          <ElButton type="danger"> 返回</ElButton>
+        </>
+      ),
+      'plus-label-name': () => 'plus-label-name',
+      'plus-field-name': () => 'plus-field-name'
+    }
+    const wrapper = mount(
+      () => (
+        <DialogForm
+          visible={visible.value}
+          modelValue={values.value}
+          append-to-body={false}
+          form={{ columns, hasFooter: true }}
+          dialog={{ hasFooter: false }}
+          v-slots={slots}
+        />
+      ),
+      {
+        global: {
+          plugins: [ElementPlus]
+        }
+      }
+    )
+    await nextTick()
+    expect(wrapper.find('.plus-form__footer').text()).includes('确定')
+    expect(wrapper.find('.plus-form__footer').text()).includes('取消')
+    expect(wrapper.find('.plus-form__footer').text()).includes('返回')
+    expect(wrapper.find('.plus-form').text()).includes('plus-label-name')
+    expect(wrapper.find('.plus-form').text()).includes('plus-field-name')
   })
 })
