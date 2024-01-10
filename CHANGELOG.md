@@ -1,3 +1,19 @@
+## [v0.0.1-beta.35](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-beta.34...v0.0.1-beta.35) (2024-01-10)
+
+
+
+
+### 🐛 Bug Fixes
+
+* **theme-chalk:** :bug: fix display-item form margin style([9d9d241](https://github.com/plus-pro-components/plus-pro-components/commit/9d9d241)) by@xiaofei
+* **components:** :bug: fix table and display-item multiple level display problem([0830947](https://github.com/plus-pro-components/plus-pro-components/commit/0830947)) by@xiaofei
+
+
+### ♻️ Code Refactoring
+
+* **components:** :recycle: table form  remove formItemInstance.([ef088b5](https://github.com/plus-pro-components/plus-pro-components/commit/ef088b5)) by@xiaofei
+
+
 ## [v0.0.1-beta.34](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-beta.33...v0.0.1-beta.34) (2024-01-09)
 
 
