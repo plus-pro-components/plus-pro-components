@@ -1,5 +1,6 @@
 @use 'mixins/mixins' as *;
 @use 'mixins/function' as *;
+@use 'mixins/config' as *;
 
 @include b(display-item) {
   @include e(image, true) {
@@ -54,12 +55,8 @@
     }
   }
   @include e(form, true) {
-    @include e(form__item) {
-      margin: 0;
-
-      @include elb(form-item__label) {
-        padding: 0;
-      }
+    .#{$plus-namespace + -form-item} {
+      margin-bottom: 0;
     }
   }
 
