@@ -18,7 +18,9 @@ import { ref } from 'vue'
 
 interface TableRow {
   id: number
-  name: string
+  name: {
+    name: string
+  }
   status: string
   rate: number
   switch: boolean
@@ -30,7 +32,9 @@ const TestServe = {
     const data = [...new Array(4)].map((item, index) => {
       return {
         id: index,
-        name: index < 2 ? '' : index + 'name',
+        name: {
+          name: index < 2 ? '' : index + 'name'
+        },
         status: String(index % 3),
         rate: index > 3 ? 2 : 3.5,
         switch: index % 2 === 0 ? true : false,
@@ -83,13 +87,12 @@ buttons.value = [
 const tableConfig = ref<PlusColumn[]>([
   {
     label: '名称',
-    prop: 'name',
-
+    prop: 'name.name',
     width: 120,
     formProps: {
       // 添加校验
       rules: {
-        name: [
+        'name.name': [
           {
             required: true,
             message: '请输入名称'
@@ -177,11 +180,14 @@ const formChange = (data: { value: any; prop: string; row: any; index: number; c
 const handleSave = async (data: ButtonsCallBackParams) => {
   try {
     if (data.formRefs) {
-      const formItem = data.formRefs?.find((item: TableFormRefRow) => item.prop === 'name')
-      await (formItem?.formItemInstance.value as any)?.validate()
+      const formItem = data.formRefs?.find((item: TableFormRefRow) => item.prop === 'name.name')
+
+      await (formItem?.formInstance.value as any)?.validate()
     }
   } catch (errors: any) {
     ElMessage.closeAll()
+    console.log(errors, 'errors')
+
     const values: any[] = Object.values(errors)
     ElMessage.warning(values[0]?.[0]?.message || '请完整填写表单并再次提交！')
   }
@@ -196,7 +202,7 @@ const handleClickButton = async (data: ButtonsCallBackParams) => {
     })
 
     data.formRefs?.forEach((item: TableFormRefRow) => {
-      if (item.prop === 'name') {
+      if (item.prop === 'name.name') {
         item.startCellEdit()
       }
     })

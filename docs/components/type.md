@@ -225,19 +225,6 @@ export interface TableFormRefRow {
    */
   formInstance: Ref<InstanceType<typeof ElForm>>
   /**
-   * 单元格的表单单项实例
-   */
-  formItemInstance: Ref<InstanceType<typeof ElFormItem>>
-  /**
-   * 获取显示组件实例
-   */
-  getDisplayItemInstance: () => {
-    index: number
-    prop: string
-    formInstance: Ref<InstanceType<typeof ElForm>>
-    formItemInstance: Ref<InstanceType<typeof ElFormItem>>
-  }
-  /**
    * 表格的行索引
    */
   index: number

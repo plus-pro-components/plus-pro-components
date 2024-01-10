@@ -18,7 +18,9 @@ import { ref } from 'vue'
 
 interface TableRow {
   id: number
-  name: string
+  name: {
+    name: string
+  }
   status: string
   rate: number
   switch: boolean
@@ -30,7 +32,9 @@ const TestServe = {
     const data = [...new Array(4)].map((item, index) => {
       return {
         id: index,
-        name: index < 2 ? '' : index + 'name',
+        name: {
+          name: index < 2 ? '' : index + 'name'
+        },
         status: String(index % 3),
         rate: index > 3 ? 2 : 3.5,
         switch: index % 2 === 0 ? true : false,
@@ -84,12 +88,12 @@ buttons.value = [
 const tableConfig = ref<PlusColumn[]>([
   {
     label: '名称',
-    prop: 'name',
+    prop: 'name.name',
     width: 120,
     formProps: {
       // 添加校验
       rules: {
-        name: [
+        'name.name': [
           {
             required: true,
             message: '请输入名称'
@@ -189,11 +193,13 @@ const formChange = (data: { value: any; prop: string; row: any; index: number; c
 const handleSave = async (data: ButtonsCallBackParams) => {
   try {
     if (data.formRefs) {
-      await Promise.all(
+      const da = await Promise.all(
         data.formRefs?.map((item: TableFormRefRow) => item.formInstance.value?.validate())
       )
+      console.log(da, 'da')
     }
   } catch (errors: any) {
+    console.log(errors, 'errors')
     ElMessage.closeAll()
     const values: any[] = Object.values(errors)
     ElMessage.warning(values[0]?.[0]?.message || '请完整填写表单并再次提交！')
