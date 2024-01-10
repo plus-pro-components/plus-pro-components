@@ -91,6 +91,7 @@ export interface TableFormRefRow {
   formInstance: Ref<InstanceType<typeof ElForm>>
   /**
    * 单元格的表单单项实例
+   * @deprecated v0.0.1-beta.34
    */
   formItemInstance: Ref<InstanceType<typeof ElFormItem>>
   /**
@@ -100,6 +101,10 @@ export interface TableFormRefRow {
     index: number
     prop: string
     formInstance: Ref<InstanceType<typeof ElForm>>
+    /**
+     * 单元格的表单单项实例
+     * @deprecated v0.0.1-beta.34
+     */
     formItemInstance: Ref<InstanceType<typeof ElFormItem>>
   }
   /**
