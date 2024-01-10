@@ -3,8 +3,8 @@
   <PlusForm
     v-if="isForm"
     ref="formInstance"
-    v-model="subRow"
-    :model="subRow"
+    v-model="modelValues"
+    :model="modelValues"
     :columns="columns"
     :has-footer="false"
     :has-label="false"
@@ -207,7 +207,6 @@ const isForm = computed(() => props.column.editable === true || isCellEdit.value
 const currentStatus = ref({})
 const customFieldProps = ref<any>({})
 const formInstance = ref<any>()
-const formItemInstance = ref()
 const options = useGetOptions(props.column)
 
 const columns = ref<any>([])
@@ -220,6 +219,18 @@ const displayValue = computed({
   },
   set(value) {
     setValue(subRow.value, props.column.prop, value)
+  }
+})
+
+/**
+ * 表单绑定值处理
+ */
+const modelValues = computed({
+  get() {
+    return { [props.column.prop]: displayValue.value }
+  },
+  set(values) {
+    displayValue.value = values[props.column.prop]
   }
 })
 
@@ -336,8 +347,7 @@ const getDisplayItemInstance = () => {
   return {
     index: props.index,
     prop: props.column.prop,
-    formInstance: computed(() => formInstance.value?.formInstance),
-    formItemInstance: computed(() => formItemInstance.value?.formItemInstance)
+    formInstance: computed(() => formInstance.value?.formInstance)
   }
 }
 
