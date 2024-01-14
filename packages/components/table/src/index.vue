@@ -59,7 +59,7 @@
       />
 
       <!-- 展开行 -->
-      <el-table-column v-if="hasExpand" type="expand">
+      <el-table-column v-if="hasExpand" type="expand" v-bind="expandTableColumnProps">
         <template #default="{ row, $index }">
           <div class="plus-table-expand-col">
             <slot name="expand" :row="row" :index="$index" />
@@ -186,6 +186,7 @@ export interface PlusTableProps extends /* @vue-ignore */ Partial<TableProps<any
   dragSortableTableColumnProps?: RecordType
   indexTableColumnProps?: RecordType
   selectionTableColumnProps?: RecordType
+  expandTableColumnProps?: RecordType
   indexContentStyle?: Partial<CSSProperties> | ((row: any, index: number) => Partial<CSSProperties>)
 }
 export interface PlusTableEmits {
@@ -227,7 +228,8 @@ const props = withDefaults(defineProps<PlusTableProps>(), {
   indexContentStyle: () => ({}),
   selectionTableColumnProps: () => ({
     width: 40
-  })
+  }),
+  expandTableColumnProps: () => ({})
 })
 const emit = defineEmits<PlusTableEmits>()
 
