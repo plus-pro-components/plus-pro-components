@@ -1,3 +1,25 @@
+## [v0.0.1-beta.36](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-beta.35...v0.0.1-beta.36) (2024-01-15)
+
+
+### ✨ Features
+
+* **components:** :sparkles: form component add  column['hasLabel'] support([34dbee5](https://github.com/plus-pro-components/plus-pro-components/commit/34dbee5)) by@xiaofei
+* **packages:** :sparkles: display-item add customGetStatus support([07433ab](https://github.com/plus-pro-components/plus-pro-components/commit/07433ab)) by@xiaofei
+* **all:** Merge pull request [#69](https://github.com/plus-pro-components/plus-pro-components/pull/69) from xusaihu/feat-update-table-attrubute([fc48431](https://github.com/plus-pro-components/plus-pro-components/commit/fc48431)) by@xiaofei
+* **components/table:** :sparkles: add table attribute expandTableColumnProps([6954c7e](https://github.com/plus-pro-components/plus-pro-components/commit/6954c7e)) by@xubanxian
+
+
+### 🐛 Bug Fixes
+
+* **components:** :bug: fix display-item component formInstance type([0d34139](https://github.com/plus-pro-components/plus-pro-components/commit/0d34139)) by@xiaofei
+
+
+### ♻️ Code Refactoring
+
+* **components:** :recycle: refactor form  getHasLabel method([9a0d7d6](https://github.com/plus-pro-components/plus-pro-components/commit/9a0d7d6)) by@xiaofei
+* **components:** :recycle: refactor display-item component type([e68bfe3](https://github.com/plus-pro-components/plus-pro-components/commit/e68bfe3)) by@xiaofei
+
+
 ## [v0.0.1-beta.35](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-beta.34...v0.0.1-beta.35) (2024-01-10)
 
 
