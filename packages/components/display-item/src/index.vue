@@ -5,7 +5,7 @@
     ref="formInstance"
     v-model="modelValues"
     :model="modelValues"
-    :columns="columns"
+    :columns="columns as  PlusColumn[]"
     :has-footer="false"
     :has-label="false"
     v-bind="column.formProps"
@@ -157,6 +157,7 @@
 
 <script lang="ts" setup>
 import { DocumentCopy, Select } from '@element-plus/icons-vue'
+import type { PlusFormInstance } from '@plus-pro-components/components/form'
 import { PlusForm } from '@plus-pro-components/components/form'
 import {
   formatDate,
@@ -204,12 +205,11 @@ const emit = defineEmits<PlusTableTableColumnEmits>()
 const isCellEdit = ref(false)
 const isForm = computed(() => props.column.editable === true || isCellEdit.value === true)
 
-const currentStatus = ref({})
-const customFieldProps = ref<any>({})
-const formInstance = ref<any>()
+const customFieldProps = ref<RecordType>({})
+const formInstance = ref<PlusFormInstance | null>(null)
 const options = useGetOptions(props.column)
 
-const columns = ref<any>([])
+const columns = ref<PlusColumn[] | undefined>([])
 const subRow = ref(props.row)
 
 /** 多层值支持 */
@@ -259,17 +259,6 @@ const getStatus = computed(() => {
   return option
 })
 
-watch(
-  options,
-  val => {
-    const option = val?.find(i => i.value === displayValue.value)
-    currentStatus.value = option || {}
-  },
-  {
-    immediate: true,
-    deep: true
-  }
-)
 watch(
   () => props.column,
   val => {
