@@ -91,7 +91,7 @@ const state = reactive<PlusFormContentState>({ values: {} })
 
 const getHasLabel = (hasLabel?: boolean | Ref<boolean> | ComputedRef<boolean>) => {
   const has = unref(hasLabel) as boolean
-  if (has !== undefined && has !== null) {
+  if (typeof has === 'boolean') {
     return has
   }
   return props.hasLabel
