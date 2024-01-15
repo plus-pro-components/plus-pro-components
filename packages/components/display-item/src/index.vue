@@ -157,7 +157,6 @@
 
 <script lang="ts" setup>
 import { DocumentCopy, Select } from '@element-plus/icons-vue'
-import type { PlusFormInstance } from '@plus-pro-components/components/form'
 import { PlusForm } from '@plus-pro-components/components/form'
 import {
   formatDate,
@@ -171,6 +170,7 @@ import {
   getValue,
   setValue
 } from '@plus-pro-components/components/utils'
+import type { Ref } from 'vue'
 import { ref, watch, computed } from 'vue'
 import type {
   PlusColumn,
@@ -204,12 +204,10 @@ const emit = defineEmits<PlusTableTableColumnEmits>()
 
 const isCellEdit = ref(false)
 const isForm = computed(() => props.column.editable === true || isCellEdit.value === true)
-
 const customFieldProps = ref<RecordType>({})
-const formInstance = ref<PlusFormInstance | null>(null)
+const formInstance = ref()
 const options = useGetOptions(props.column)
-
-const columns = ref<PlusColumn[] | undefined>([])
+const columns: Ref<PlusColumn[]> = ref([])
 const subRow = ref(props.row)
 
 /** 多层值支持 */
@@ -270,7 +268,7 @@ watch(
   () => props.column,
   val => {
     if (val) {
-      columns.value = [val as any]
+      columns.value = [val as PlusColumn]
     }
   },
   {
