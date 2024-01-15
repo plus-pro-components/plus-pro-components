@@ -6,7 +6,7 @@
 
 ## 基础用法
 
-配置`columns`表头和`table-data`表格数据。
+配置[columns](/components/config.html)表头和`table-data`表格数据。
 :::demo
 
 table/basic
@@ -15,7 +15,7 @@ table/basic
 
 ## 数据多级显示
 
-`columns`中的 `prop`支持 `x.y.z`形式的 多（无限）级数据形式。
+[columns](/components/config.html)中的 `prop`支持 `x.y.z`形式的 多（无限）级数据形式。
 
 :::warning 提示
 **数据级不宜过多，可能会影响性能**。
@@ -27,11 +27,15 @@ table/multiple-level-display
 
 :::
 
-## 自定义状态小圆点的背景色
+## 自定义状态
 
 配置项中`valueType`为`select`、`radio`或`checkbox `时，
-`columns`中的`options`中可配置`type`或`color属性`。
-`color` 优先级 高于 `type`。`type`支持`'success' | 'warning' | 'info' | 'primary' | 'danger'`。
+配置[columns](/components/config.html)中的[options](/components/type.html#optionstype)，表格会自动显示 `value` 对应的`状态`和 `label`。
+
+默认的逻辑是 表格中的实际值和 `options` 中 `value` 对比 严格相等的话，会取当前项的 `label` 显示在表格中，想
+
+自定义显示逻辑的话，只需配置[columns](/components/config.html) 中 `customGetStatus`即可。
+
 :::demo
 
 table/status
@@ -360,7 +364,7 @@ table/advanced
 | `dragSortableTableColumnProps` | 拖拽栏 el-table-column 的 props            | `object`                                                                                                                                                                      | `{}`          | 否       |
 | `indexTableColumnProps`        | 序号栏 el-table-column 的 props            | `object`                                                                                                                                                                      | `{}`          | 否       |
 | `selectionTableColumnProps`    | 选择栏 el-table-column 的 props            | `object`                                                                                                                                                                      | `{width: 40}` | 否       |
-| `expandTableColumnProps`       | 展开栏 el-table-column 的 props            | `object`                                                                                                                                                                      | `{}` | 否       |
+| `expandTableColumnProps`       | 展开栏 el-table-column 的 props            | `object`                                                                                                                                                                      | `{}`          | 否       |
 | ...                            | ...                                        | ...                                                                                                                                                                           | ...           | ...      |
 
 **`...`表示同时支持所有[ElTable Attributes](https://element-plus.org/zh-CN/component/table.html#table-%E5%B1%9E%E6%80%A7)**
