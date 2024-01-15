@@ -360,6 +360,7 @@ table/advanced
 | `dragSortableTableColumnProps` | 拖拽栏 el-table-column 的 props            | `object`                                                                                                                                                                      | `{}`          | 否       |
 | `indexTableColumnProps`        | 序号栏 el-table-column 的 props            | `object`                                                                                                                                                                      | `{}`          | 否       |
 | `selectionTableColumnProps`    | 选择栏 el-table-column 的 props            | `object`                                                                                                                                                                      | `{width: 40}` | 否       |
+| `expandTableColumnProps`       | 展开栏 el-table-column 的 props            | `object`                                                                                                                                                                      | `{}` | 否       |
 | ...                            | ...                                        | ...                                                                                                                                                                           | ...           | ...      |
 
 **`...`表示同时支持所有[ElTable Attributes](https://element-plus.org/zh-CN/component/table.html#table-%E5%B1%9E%E6%80%A7)**
