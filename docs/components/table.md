@@ -32,9 +32,7 @@ table/multiple-level-display
 配置项中`valueType`为`select`、`radio`或`checkbox `时，
 配置[columns](/components/config.html)中的[options](/components/type.html#optionstype)，表格会自动显示 `value` 对应的`状态`和 `label`。
 
-默认的逻辑是 表格中的实际值和 `options` 中 `value` 对比 严格相等的话，会取当前项的 `label` 显示在表格中，想
-
-自定义显示逻辑的话，只需配置[columns](/components/config.html) 中 `customGetStatus`即可。
+默认的逻辑是 表格中的实际值和 `options` 中 `value` 对比 严格相等的话，会取当前项的 `label` 显示在表格中，想自定义显示逻辑的话，只需配置[columns](/components/config.html) 中 `customGetStatus`即可。
 
 :::demo
 
