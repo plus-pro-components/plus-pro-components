@@ -26,7 +26,7 @@ form/mixed
 
 ## 隐藏 label
 
-`has-label` 设置为 `false` 时, 隐藏 label
+表单整体的`hasLabel` 设置为 `false` 时, 隐藏 label。配置[columns](/components/config.html)中的 `hasLabel`可以控制单个表单项的 label 是否显示， 优先级会更高。
 
 :::demo
 
