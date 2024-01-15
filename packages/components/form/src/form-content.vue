@@ -4,7 +4,8 @@
       <PlusFormItem
         v-model="state.values[item.prop]"
         v-bind="item"
-        :has-label="hasLabel"
+        :has-label="getHasLabel(item.hasLabel)"
+        :label-width="getHasLabel(item.hasLabel) ? item.labelWidth : '0px'"
         @change="(value: any) => handleChange(value, item)"
       >
         <!--表单项label插槽 -->
@@ -45,7 +46,8 @@
 </template>
 
 <script lang="ts" setup>
-import { reactive, watch } from 'vue'
+import type { Ref, ComputedRef } from 'vue'
+import { reactive, watch, unref } from 'vue'
 import type { FormProps, RowProps, ColProps } from 'element-plus'
 import { ElRow, ElCol } from 'element-plus'
 import { PlusFormItem } from '@plus-pro-components/components/form-item'
@@ -86,6 +88,14 @@ const props = withDefaults(defineProps<PlusFormContentProps>(), {
 const emit = defineEmits<PlusFormContentEmits>()
 
 const state = reactive<PlusFormContentState>({ values: {} })
+
+const getHasLabel = (hasLabel?: boolean | Ref<boolean> | ComputedRef<boolean>) => {
+  const has = unref(hasLabel) as boolean
+  if (has !== undefined && has !== null) {
+    return has
+  }
+  return props.hasLabel
+}
 
 watch(
   () => props.modelValue,

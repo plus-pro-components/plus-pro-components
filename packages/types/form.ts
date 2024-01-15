@@ -1,4 +1,4 @@
-import type { VNode } from 'vue'
+import type { VNode, Ref, ComputedRef } from 'vue'
 import type { FormItemProps, ColProps } from 'element-plus'
 import type { PlusFormProps } from '@plus-pro-components/components/form'
 import type { PropsItemType, PlusColumn } from './plus'
@@ -88,6 +88,11 @@ export interface FormColumnProps {
    * @desc el-col 的 props
    */
   colProps?: Partial<Mutable<ColProps>>
+
+  /**
+   * 表单中单个项目是否需要 label，默认undefined，优先级高于表单的整体 hasLabel
+   */
+  hasLabel?: boolean | Ref<boolean> | ComputedRef<boolean>
   /**
    * @desc 渲染form表单的label
    */
