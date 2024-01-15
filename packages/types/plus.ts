@@ -117,6 +117,16 @@ export interface CommentType {
    * el-select，el-radio-group，el-checkbox-group 选项 ，支持数组，函数，和Promise
    */
   options?: OptionsType
+  /**
+   *  自定义状态显示逻辑 需要返回一个 OptionsRow
+   * @param data
+   * @returns
+   */
+  customGetStatus?: (data: {
+    options: OptionsRow[]
+    value: string | number
+    row: RecordType
+  }) => OptionsRow
 
   /** @desc 展示一个 icon，hover 是展示一些提示信息 */
   tooltip?: ElTooltipProps | string

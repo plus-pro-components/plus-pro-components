@@ -252,7 +252,14 @@ const imageUrl = computed(() => {
 })
 
 const getStatus = computed(() => {
-  const option = options.value?.find(i => i.value === displayValue.value)
+  let option = options.value?.find(i => i.value === displayValue.value)
+  if (props.column?.customGetStatus && isFunction(props.column?.customGetStatus)) {
+    option = props.column?.customGetStatus({
+      options: options.value,
+      value: displayValue.value,
+      row: subRow.value
+    })
+  }
   if (!option) {
     return { label: '', value: '' }
   }
