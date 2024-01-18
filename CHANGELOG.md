@@ -1,3 +1,22 @@
+## [v0.0.1-beta.37](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-beta.36...v0.0.1-beta.37) (2024-01-18)
+
+
+### ✨ Features
+
+* **types:** :sparkles: optionsType and  PropsItemType add ComputedRef support.([c5a2c35](https://github.com/plus-pro-components/plus-pro-components/commit/c5a2c35)) by@xiaofei
+* **plus-pro-components:** :sparkles: update components type([d0f68ae](https://github.com/plus-pro-components/plus-pro-components/commit/d0f68ae)) by@xiaofei
+* **hooks:** :sparkles: options add computed support.([7ae742b](https://github.com/plus-pro-components/plus-pro-components/commit/7ae742b)) by@xiaofei
+* **components:** :sparkles: remove watch deep([943ba78](https://github.com/plus-pro-components/plus-pro-components/commit/943ba78)) by@xiaofei
+* **components:** :sparkles: formItemProps and fieldProps add computed support.([a10ad21](https://github.com/plus-pro-components/plus-pro-components/commit/a10ad21)) by@xiaofei
+
+
+### 🐛 Bug Fixes
+
+* **components:** :bug: fix table-action-bar SSR click el-link auto scrollTo page top.([858bf82](https://github.com/plus-pro-components/plus-pro-components/commit/858bf82)) by@xiaofei
+
+
+
+
 ## [v0.0.1-beta.36](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-beta.35...v0.0.1-beta.36) (2024-01-15)
 
 
