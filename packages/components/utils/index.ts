@@ -1,6 +1,7 @@
 import type { FieldValueType, RecordType, PlusColumn } from '@plus-pro-components/types'
-import { cloneDeep, get, set } from 'lodash-es'
+import { get, set } from 'lodash-es'
 import type { SetupContext } from 'vue'
+import { isRef } from 'vue'
 import { isPromise, isFunction, isPlainObject, isEmptyObject, toRawType, isString } from './is'
 
 export * from './format'
@@ -42,22 +43,23 @@ const throwError = (data: any, type: string) => {
  * @returns
  */
 export const getCustomProps = async (
-  props:
-    | Record<string, any>
-    | ((...arg: any) => Record<string, any> | Promise<Record<string, any>>)
-    | undefined,
+  props: RecordType | ((...arg: any) => RecordType | Promise<RecordType>) | undefined,
   value: FieldValueType | undefined,
-  row: Record<string, any>,
+  row: RecordType,
   index: number,
   type: 'formItemProps' | 'fieldProps'
 ): Promise<any> => {
   try {
-    let data: any = {}
-    const params = cloneDeep({ row, index })
+    let data: RecordType = {}
+    const params = { row, index }
 
     if (!props) {
       data = {}
+    } else if (isRef(props)) {
+      // computed 支持
+      data = props.value as RecordType
     } else if (isPlainObject(props)) {
+      // object 支持
       data = { ...props }
     } else if (isFunction(props)) {
       // 函数 和  函数返回一个Promise
@@ -153,7 +155,7 @@ export const getTableCellSlotName = (prop?: string | number) => {
  * @returns
  */
 export const filterSlots = (slots: RecordType, name: string): SetupContext['slots'] => {
-  const data: Record<string, any> = {}
+  const data: RecordType = {}
   Object.keys(slots || {}).forEach(key => {
     if (key.startsWith(name)) {
       data[key] = slots[key]

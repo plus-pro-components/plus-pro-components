@@ -74,6 +74,13 @@ export const isString = (val: any) => typeof val === 'string'
 export const isSymbol = (val: any) => typeof val === 'symbol'
 
 /**
+ * 判断是否是boolean
+ * @param val
+ * @returns
+ */
+export const isBoolean = (val: any) => typeof val === 'boolean'
+
+/**
  * 判断是否是object
  * @param val
  * @returns
