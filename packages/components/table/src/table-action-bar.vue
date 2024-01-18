@@ -162,13 +162,15 @@ const render = (row: any, buttonRow: ActionBarButtonsRow, index: number): VNode 
     )
   } else {
     const Tag = props.type === 'button' ? ElButton : ElLink
+
+    // FIXME: fix SSR click it auto scrollTo page top
+    const defaultProps = props.type === 'link' ? { href: 'javaScript:;' } : {}
     return h(
       Tag as any,
       {
         size: 'small',
-        // icon: buttonRow.icon,
+        ...defaultProps,
         ...buttonRow.props,
-
         onClick: (event: MouseEvent) => handleClickAction(row, buttonRow, index, event)
       },
       () => unref(buttonRow.text)
