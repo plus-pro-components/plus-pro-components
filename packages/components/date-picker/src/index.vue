@@ -127,8 +127,7 @@ watch(
     state.end = end
   },
   {
-    immediate: true,
-    deep: true
+    immediate: true
   }
 )
 

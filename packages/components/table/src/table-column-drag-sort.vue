@@ -47,8 +47,7 @@ watch(
     if (val && props.sortable) {
       rowDrop()
     }
-  },
-  { deep: true }
+  }
 )
 
 // 行拖拽

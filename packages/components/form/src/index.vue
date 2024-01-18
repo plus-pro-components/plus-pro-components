@@ -105,13 +105,12 @@
 </template>
 
 <script lang="ts" setup>
-import type { DefineComponent } from 'vue'
+import type { Component } from 'vue'
 import { reactive, ref, watch, computed, useSlots, unref } from 'vue'
 import type { FormInstance, FormRules, FormProps, RowProps, ColProps } from 'element-plus'
 import { ElMessage, ElForm, ElCard, ElButton, ElIcon } from 'element-plus'
 import { useLocale } from '@plus-pro-components/hooks'
 import type { PlusColumn, FieldValues, Mutable } from '@plus-pro-components/types'
-import { cloneDeep } from 'lodash-es'
 import {
   getLabelSlotName,
   getFieldSlotName,
@@ -125,7 +124,7 @@ import PlusFormContent from './form-content.vue'
  */
 export interface PlusFormGroupRow {
   title: string
-  icon?: DefineComponent
+  icon?: Component
   columns: PlusColumn[]
 }
 
@@ -196,7 +195,7 @@ const state = reactive<PlusFormState>({
 const filterHide = (columns: PlusColumn[]) => {
   return columns.filter(item => unref(item.hideInForm) !== true)
 }
-const model = computed(() => cloneDeep(state.values))
+const model = computed(() => state.values)
 const style = computed(() => ({
   justifyContent:
     props.footerAlign === 'left'
@@ -227,7 +226,6 @@ watch(
     state.values = val
   },
   {
-    deep: true,
     immediate: true
   }
 )

@@ -10,7 +10,7 @@ import type {
   ElTooltipProps,
   TableColumnCtx
 } from 'element-plus'
-import type { DefineComponent, Ref, ComputedRef, AppContext } from 'vue'
+import type { Component, Ref, ComputedRef, AppContext } from 'vue'
 import type { Options as SortableOptions } from 'sortablejs'
 
 /**
@@ -30,7 +30,7 @@ export interface ActionBarButtonsRow {
   /**
    * `@element-plus/icons-vue` 的图标名称，对ElButton,ElLink 和ElIcon 组件同时生效
    */
-  icon?: DefineComponent
+  icon?: Component
   /**
    * ElButton,ElLink和ElIcon 组件对应的props
    */

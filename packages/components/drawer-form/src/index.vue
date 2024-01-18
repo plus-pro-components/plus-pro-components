@@ -134,8 +134,7 @@ watch(
     state.value = val
   },
   {
-    immediate: true,
-    deep: true
+    immediate: true
   }
 )
 
