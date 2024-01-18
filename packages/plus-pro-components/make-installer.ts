@@ -1,8 +1,8 @@
-import type { App, DefineComponent } from 'vue'
+import type { App, Component } from 'vue'
 
-export const makeInstaller = (components: DefineComponent[] = []) => {
+export const makeInstaller = (components: Component[] = []) => {
   const install = (app: App): any => {
-    components.forEach((component: DefineComponent) => app.component(component.name, component))
+    components.forEach((component: Component) => app.component(component.name as string, component))
   }
   return {
     install

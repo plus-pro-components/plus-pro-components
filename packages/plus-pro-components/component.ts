@@ -1,4 +1,4 @@
-import type { DefineComponent } from 'vue'
+import type { Component } from 'vue'
 
 import { PlusDialog } from '@plus-pro-components/components/dialog'
 import { PlusPagination } from '@plus-pro-components/components/pagination'
@@ -23,7 +23,7 @@ import { PlusLayout } from '@plus-pro-components/components/layout'
 import { PlusCheckCard } from '@plus-pro-components/components/check-card'
 import { PlusCheckCardGroup } from '@plus-pro-components/components/check-card-group'
 
-const plugins: DefineComponent[] = [
+const plugins: Component[] = [
   PlusDialog,
   PlusPagination,
   PlusTable,
@@ -46,6 +46,6 @@ const plugins: DefineComponent[] = [
   PlusLayout,
   PlusCheckCard,
   PlusCheckCardGroup
-] as unknown as DefineComponent[]
+]
 
 export default plugins
