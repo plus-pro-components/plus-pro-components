@@ -85,8 +85,7 @@ const buildAll = async (minify?: boolean) => {
       name: PKG_CAMEL_CASE_NAME,
       globals: {
         vue: 'Vue',
-        'element-plus': 'ElementPlus',
-        'vue-router': 'VueRouter'
+        'element-plus': 'ElementPlus'
       },
       sourcemap: false
     },
