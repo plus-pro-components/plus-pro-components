@@ -21,10 +21,11 @@ export interface PageInfo {
 }
 
 /**
- *  自定义props类型  支持对象object ，函数，Promise
+ *  自定义props类型  支持对象object，computed，函数和Promise
  */
 export type PropsItemType<T extends Record<string, any> = any> =
   | Partial<T>
+  | ComputedRef<Partial<T>>
   | ((
       value: FieldValueType,
       data: {
@@ -58,10 +59,11 @@ export interface OptionsRow {
   children?: OptionsRow[]
 }
 /**
- * 选择类型   支持数组，函数和Promise
+ * 选择类型   支持数组，computed，函数和Promise
  */
 export type OptionsType =
   | OptionsRow[]
+  | ComputedRef<OptionsRow[]>
   | ((props?: PlusColumn) => OptionsRow[] | Promise<OptionsRow[]>)
   | Promise<OptionsRow[]>
 

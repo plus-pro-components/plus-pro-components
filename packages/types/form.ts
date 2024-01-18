@@ -40,12 +40,12 @@ export interface FormColumnProps {
    */
   formProps?: PropsItemType<PlusFormProps>
   /**
-   * @desc 传递给 el-form-item 的配置， 支持所有 el-form-item的props。值支持对象object，函数和 Promise。
+   * @desc 传递给 el-form-item 的配置， 支持所有 el-form-item的props。值支持对象 object，computed，函数和 Promise。
    */
   formItemProps?: PropsItemType<Mutable<FormItemProps>>
 
   /**
-   * @desc 支持类似el-input，el-select等所有表单项的props 以及 表格显示的每行 props。值支持对象object，函数和 Promise。
+   * @desc 支持类似el-input，el-select等所有表单项的props 以及 表格显示的每行 props。值支持对象 object，computed，函数和 Promise。
    */
   fieldProps?: PropsItemType
 
