@@ -11,7 +11,7 @@
 </template>
 
 <script lang="ts" setup>
-import type { DefineComponent } from 'vue'
+import type { Component } from 'vue'
 import { h, Fragment } from 'vue'
 import { useTable } from 'plus-pro-components'
 import type { PageInfo, PlusColumn } from 'plus-pro-components'
@@ -113,7 +113,7 @@ const tableConfig: PlusColumn[] = [
     // 返回一个VNode
     render: value => {
       const item = statusOptions.find(item => item.value === value)
-      return h(ElAlert as unknown as DefineComponent, { type: item?.type }, () => item?.label)
+      return h(ElAlert as unknown as Component, { type: item?.type }, () => item?.label)
     }
   },
   {

@@ -13,8 +13,8 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
-import type { PlusColumn, FieldValues } from 'plus-pro-components'
+import { ref, computed } from 'vue'
+import type { PlusColumn, FieldValues } from '@plus-pro-components/types'
 
 const state = ref<FieldValues>({
   status: '0',
@@ -207,6 +207,34 @@ const columns: PlusColumn[] = [
         }, 2000)
       })
     }
+  },
+  {
+    label: '要求1',
+    prop: 'demand1',
+    valueType: 'checkbox',
+    options: computed(() =>
+      state.value.status === '0'
+        ? [
+            {
+              label: '四六级',
+              value: '0'
+            },
+            {
+              label: '计算机二级证书',
+              value: '1'
+            },
+            {
+              label: '普通话证书',
+              value: '1'
+            }
+          ]
+        : [
+            {
+              label: '四六级',
+              value: '0'
+            }
+          ]
+    )
   },
   {
     label: '梦想',

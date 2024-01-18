@@ -12,9 +12,9 @@ form-item/basic
 
 :::
 
-## 异步数据用法
+## 异步（动态）数据用法
 
-`options` 支持数组，函数和 Promise。
+[PlusColumn](/components/config.html) 配置中的 `options` 支持数组， computed，函数和 Promise。
 
 :::demo
 
@@ -24,7 +24,7 @@ form-item/async
 
 ## 自定义表单项 (插槽)
 
-:::warning 提示
+:::warning 注意
 **插槽 的优先级低于 renderField，高于 valueType**。
 :::
 
@@ -54,7 +54,7 @@ form-item/custom-slot
 
 ## 自定义表单项 (renderField)
 
-:::warning 提示
+:::warning 注意
 **renderField 的优先级高于插槽**。
 :::
 
@@ -73,7 +73,7 @@ form-item/custom
 
 ## 自定义表单项 (jsx/tsx)
 
-:::warning 提示
+:::warning 注意
 
 jsx/tsx 的使用需要将 vue 单文件组件的`script`的属性 `lang`设置为`jsx`或者`tsx`，`jsx` 中值使用单花括号`{}`绑定。
 
@@ -93,7 +93,7 @@ form-item/custom-tsx
 
 ## 自定义表单 label (插槽)
 
-:::warning 提示
+:::warning 注意
 **插槽 的优先级低于 renderLabel，高于 label**。
 :::
 
@@ -123,7 +123,7 @@ form-item/custom-label-slot
 
 ## 自定义表单 label (renderLabel)
 
-:::warning 提示
+:::warning 注意
 **renderLabel 的优先级高于插槽**。
 :::
 
@@ -137,7 +137,7 @@ form-item/custom-label
 
 ## 自定义表单 label (jsx/tsx)
 
-:::warning 提示
+:::warning 注意
 
 jsx/tsx 的使用需要将 vue 单文件组件的`script`的属性 `lang`设置为`jsx`或者`tsx`，`jsx` 中值使用单花括号`{}`绑定。
 
@@ -167,25 +167,25 @@ form-item/all
 
 ## FormItem Attributes
 
-| 名称                    | 说明                                                                                                           | 类型                                                                                                                       | 默认值 | 是否必须 |
-| ----------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | ------ | -------- |
-| `model-value / v-model` | 表单绑定值                                                                                                     | `object`[FieldValues](/components/type.html#fieldvalues)                                                                   |        | 否       |
-| `label`                 | el-form-item 的 label                                                                                          | `string`                                                                                                                   |        | 是       |
-| `prop`                  | el-input 等所有表单项的双向绑定的值；                                                                          | `string`                                                                                                                   |        | 是       |
-| `valueType`             | 值的类型                                                                                                       | `string`[FormItemValueType](/components/type.html#formitemvaluetype)                                                       |        | 否       |
-| `options`               | el-select，el-radio-group，el-checkbox-group 选项 ，支持数组，函数，和 Promise                                 | `array/function/promise`[OptionsType](/components/type.html#optionstype)                                                   |        | 否       |
-| `tooltip`               | 展示一个 icon，hover 时展示一些提示信息                                                                        | `string` / (`object`[ElTooltipProps](https://element-plus.org/zh-CN/component/tooltip.html#attributes) )                   |        | 否       |
-| `renderField`           | 自定义渲染 el-form-item 下的 field-item 组件，自定义渲染同步表单的值的核心方法是调用 onChange 回调把值传给表单 | `function` <docs-tip content='(value:any,onChange: (value: any) => void, props: any ) => VNode '></docs-tip>               |        | 否       |
-| `formItemProps`         | 传递给 el-form-item 的配置，支持所有 el-form-item 的 props。值支持对象 object，函数和 Promise。                | `object/function/promise`[PropsItemType](/components/type.html#propsitemtype)                                              |        | 否       |
-| `fieldProps`            | 传递给具体表单项和表格显示的配置，如 el-input，el-select 的 props。 值支持对象 object，函数和 Promise。        | `object/function/promise`[PropsItemType](/components/type.html#propsitemtype)                                              |        | 否       |
-| `renderLabel`           | 自定义渲染 el-form-item 下 label 行显示内容                                                                    | `function` <docs-tip content='(label: any, data:{ row: object; index: number; column: PlusColumn}) =>  VNode '></docs-tip> |        | 否       |
+| 名称                    | 说明                                                                                                              | 类型                                                                                                                       | 默认值 | 是否必须 |
+| ----------------------- | ----------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | ------ | -------- |
+| `model-value / v-model` | 表单绑定值                                                                                                        | `object`[FieldValues](/components/type.html#fieldvalues)                                                                   |        | 否       |
+| `label`                 | el-form-item 的 label                                                                                             | `string`                                                                                                                   |        | 是       |
+| `prop`                  | el-input 等所有表单项的双向绑定的值；                                                                             | `string`                                                                                                                   |        | 是       |
+| `valueType`             | 值的类型                                                                                                          | `string`[FormItemValueType](/components/type.html#formitemvaluetype)                                                       |        | 否       |
+| `options`               | el-select，el-radio-group，el-checkbox-group 选项 ，支持数组，函数，和 Promise                                    | `array/function/promise`[OptionsType](/components/type.html#optionstype)                                                   |        | 否       |
+| `tooltip`               | 展示一个 icon，hover 时展示一些提示信息                                                                           | `string` / (`object`[ElTooltipProps](https://element-plus.org/zh-CN/component/tooltip.html#attributes) )                   |        | 否       |
+| `renderField`           | 自定义渲染 el-form-item 下的 field-item 组件，自定义渲染同步表单的值的核心方法是调用 onChange 回调把值传给表单    | `function` <docs-tip content='(value:any,onChange: (value: any) => void, props: any ) => VNode '></docs-tip>               |        | 否       |
+| `formItemProps`         | 传递给 el-form-item 的配置，支持所有 el-form-item 的 props。值支持对象 object，computed，函数和 Promise。         | `object/function/promise`[PropsItemType](/components/type.html#propsitemtype)                                              |        | 否       |
+| `fieldProps`            | 传递给具体表单项和表格显示的配置，如 el-input，el-select 的 props。 值支持对象 object，computed，函数和 Promise。 | `object/function/promise`[PropsItemType](/components/type.html#propsitemtype)                                              |        | 否       |
+| `renderLabel`           | 自定义渲染 el-form-item 下 label 行显示内容                                                                       | `function` <docs-tip content='(label: any, data:{ row: object; index: number; column: PlusColumn}) =>  VNode '></docs-tip> |        | 否       |
 
 ## FormItem Slots
 
-| 插槽名         | 说明                                                           | 作用域插槽参数                                 |
-| -------------- | -------------------------------------------------------------- | ---------------------------------------------- |
+| 插槽名         | 说明                                                           | 作用域插槽参数                             |
+| -------------- | -------------------------------------------------------------- | ------------------------------------------ |
 | `plus-field-*` | 自定义表单项，组件会自动根据配置项的 prop 生成对应的插槽       | `{prop,label,fieldProps,valueType,column}` |
-| `plus-label-*` | 自定义表单项 label，组件会自动根据配置项的 prop 生成对应的插槽 | `{prop,label,fieldProps,valueType,column}`     |
+| `plus-label-*` | 自定义表单项 label，组件会自动根据配置项的 prop 生成对应的插槽 | `{prop,label,fieldProps,valueType,column}` |
 
 ## Exposes
 

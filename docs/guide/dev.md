@@ -143,7 +143,7 @@ pnpm dev
   ```js
   import { PlusTable } from '@plus-pro-components/components/table'
 
-  const plugins: DefineComponent[] = [PlusDialog, PlusPagination, PlusTable]
+  const plugins: Component[] = [PlusDialog, PlusPagination, PlusTable]
   ```
 
 - 在 `global.d.ts` 添加类型

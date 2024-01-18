@@ -34,16 +34,28 @@ form/has-label
 
 :::
 
-## 异步数据用法
+## 异步（动态）数据用法
 
-[PlusColumn](/components/config.html) 配置中的 `options` 支持数组，函数和 Promise。
-[PlusColumn](/components/config.html) 配置中的 `fieldProps`和`formItemProps` 支持对象 object，函数和 Promise。
+[PlusColumn](/components/config.html) 配置中的 `options` 支持数组，computed，函数和 Promise。
+[PlusColumn](/components/config.html) 配置中的 `fieldProps`和`formItemProps` 支持对象 object，computed，函数和 Promise。
 
-**常见的使用场景是数据来自后端接口，这里调用后端接口，返回 [OptionsRow[]](/components/type.html#optionsrow)数组即可。**
+**常见的使用场景是数据来自后端接口，这里调用后端接口，options 返回 [OptionsRow[]](/components/type.html#optionsrow)数组即可。**
 
 :::demo
 
 form/async
+
+:::
+
+## 数据属性联动
+
+[PlusColumn](/components/config.html)的`fieldProps`，`formItemProps`，`options`，`hideInForm`等根据数据变化，动态显示设置。
+
+如下示例，点击状态选择框，当状态为`已解决` 时，`要求1 多选框`会变成 1 个可选， `名称 1，2 输入框`会被禁用，`标签 1 输入框`会被隐藏，`标签 2 输入框`会变成必填。
+
+:::demo
+
+form/data-attribute-linkage
 
 :::
 
@@ -79,7 +91,7 @@ form/custom-footer
 
 ## 自定义表单项 (插槽)
 
-:::warning 提示
+:::warning 注意
 **插槽 的优先级低于 renderField，高于 valueType**。
 :::
 
@@ -110,7 +122,7 @@ form/custom-slot
 
 ## 自定义表单项 (renderField)
 
-:::warning 提示
+:::warning 注意
 **renderField 的优先级高于插槽**。
 :::
 
@@ -129,7 +141,7 @@ form/custom
 
 ## 自定义表单项 (jsx/tsx)
 
-:::warning 提示
+:::warning 注意
 
 jsx/tsx 的使用需要将 vue 单文件组件的`script`的属性 `lang`设置为`jsx`或者`tsx`，`jsx` 中值使用单花括号`{}`绑定。
 
@@ -149,7 +161,7 @@ form/custom-tsx
 
 ## 自定义表单 label (插槽)
 
-:::warning 提示
+:::warning 注意
 **插槽 的优先级低于 renderLabel，高于 label**。
 :::
 
@@ -180,7 +192,7 @@ form/custom-label-slot
 
 ## 自定义表单 label (renderLabel)
 
-:::warning 提示
+:::warning 注意
 **renderLabel 的优先级高于插槽**。
 :::
 
@@ -194,7 +206,7 @@ form/custom-label
 
 ## 自定义表单 label (jsx/tsx)
 
-:::warning 提示
+:::warning 注意
 
 jsx/tsx 的使用需要将 vue 单文件组件的`script`的属性 `lang`设置为`jsx`或者`tsx`，`jsx` 中值使用单花括号`{}`绑定。
 

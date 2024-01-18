@@ -11,7 +11,7 @@
 </template>
 
 <script lang="ts" setup>
-import type { DefineComponent } from 'vue'
+import type { Component } from 'vue'
 import { h } from 'vue'
 import { useTable } from 'plus-pro-components'
 import type { PageInfo, PlusColumn } from 'plus-pro-components'
@@ -70,7 +70,7 @@ const tableConfig: PlusColumn[] = [
     prop: 'custom',
     // 返回一个VNode
     renderHeader: label => {
-      return h(ElAlert as unknown as DefineComponent, null, () => label)
+      return h(ElAlert as unknown as Component, null, () => label)
     }
   }
 ]

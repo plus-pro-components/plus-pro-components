@@ -1,4 +1,4 @@
-# CheckCardGroup 多选卡片组  <el-tag>v0.0.1-beta.26</el-tag>
+# CheckCardGroup 多选卡片组
 
 ## 简介
 
@@ -44,7 +44,7 @@ check-card-group/disabled
 
 ## 自定义 (render)
 
-:::warning 提示
+:::warning 注意
 **render 函数的优先级高于插槽**
 :::
 
@@ -64,7 +64,7 @@ check-card-group/tsx
 
 ## 自定义 (插槽)
 
-:::warning 提示
+:::warning 注意
 **插槽优先级低于 render**
 :::
 

@@ -1,4 +1,4 @@
-# Sidebar 侧边栏 <el-tag>v0.0.1-beta.20</el-tag>
+# Sidebar 侧边栏
 
 ## 简介
 
@@ -62,7 +62,7 @@ sidebar/extra
 
 ## 自定义菜单显示 (renderTitle)
 
-:::warning 提示
+:::warning 注意
 **render 函数的优先级高于插槽**
 :::
 
@@ -82,7 +82,7 @@ sidebar/menu-item-title-tsx
 
 ## 自定义菜单显示 (插槽)
 
-:::warning 提示
+:::warning 注意
 **插槽优先级低于 render**
 :::
 
@@ -126,7 +126,7 @@ sidebar/menu-item-title-slots
 | `sidebar-item-title` | 自定义菜单每项标题显示   | route [PlusRouteRecordRaw](/components/type.html#plusrouterecordraw) |
 | `sidebar-extra`      | 自定义在菜单头和菜单之间 | route [PlusRouteRecordRaw](/components/type.html#plusrouterecordraw) |
 
-:::warning 提示
+:::warning 注意
 **render 函数的优先级高于插槽**
 :::
 

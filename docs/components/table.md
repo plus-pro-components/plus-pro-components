@@ -17,7 +17,7 @@ table/basic
 
 [columns](/components/config.html)中的 `prop`支持 `x.y.z`形式的 多（无限）级数据形式。
 
-:::warning 提示
+:::warning 注意
 **数据级不宜过多，可能会影响性能**。
 :::
 
@@ -82,6 +82,8 @@ table/drag-sort
 ```html
 <PlusTable :title-bar="{ columnSetting: { dragSort: false } }" />
 ```
+
+如下示例， 点击 表格右上角列设置 <el-icon color="#606266" ><Setting /></el-icon> 图标，即可通过列设置拖拽排序列。
 
 :::demo
 
@@ -175,7 +177,7 @@ table/hand-edit
 
 ## 自定义表格项和表单项 ( 插槽 )
 
-:::warning 提示
+:::warning 注意
 **插槽 的优先级低于 render，高于数据**。
 :::
 
@@ -215,7 +217,7 @@ table/custom-cell-slot
 
 ## 自定义表格项和表单项 (render)
 
-:::tip 提示
+:::warning 提示
 **render 的优先级高于插槽**。
 :::
 
@@ -239,7 +241,7 @@ table/custom-cell
 
 ## 自定义表格项和表单项 (jsx/tsx)
 
-:::warning 提示
+:::warning 注意
 
 jsx/tsx 的使用需要将 vue 单文件组件的`script`的属性 `lang`设置为`jsx`或者`tsx`，`jsx` 中值使用单花括号`{}`绑定。
 
@@ -266,7 +268,7 @@ table/custom-cell-tsx
 
 ## 自定义表格表头 (插槽)
 
-:::warning 提示
+:::warning 注意
 **插槽 的优先级低于 renderHeader，高于 label**。
 :::
 
@@ -299,7 +301,7 @@ table/custom-header-slot
 
 ## 自定义表格表头 (renderHeader)
 
-:::warning 提示
+:::warning 注意
 **renderHeader 的优先级高于插槽**。
 :::
 
@@ -314,7 +316,7 @@ table/custom-header
 
 ## 自定义表格表头 (jsx/tsx)
 
-:::warning 提示
+:::warning 注意
 
 jsx/tsx 的使用需要将 vue 单文件组件的`script`的属性 `lang`设置为`jsx`或者`tsx`，`jsx` 中值使用单花括号`{}`绑定。
 
@@ -434,3 +436,7 @@ el-table 的其他插槽 如 `append`,`empty`等
 ::: tip 提示
 如 `clearSelection`,`getSelectionRows`等
 :::
+
+<script setup>
+import { Setting } from '@element-plus/icons-vue'
+</script>

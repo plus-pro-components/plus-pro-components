@@ -1,4 +1,4 @@
-# CheckCard 多选卡片 <el-tag>v0.0.1-beta.26</el-tag>
+# CheckCard 多选卡片
 
 ## 简介
 
@@ -42,7 +42,7 @@ check-card/extra
 
 ## 自定义 (render)
 
-:::warning 提示
+:::warning 注意
 **render 函数的优先级高于插槽**
 :::
 
@@ -64,7 +64,7 @@ check-card/tsx
 
 ## 自定义 (插槽)
 
-:::warning 提示
+:::warning 注意
 **插槽优先级低于 render**
 :::
 

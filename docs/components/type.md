@@ -89,7 +89,7 @@ export interface PageInfo {
 
 ```ts
 import type { ElMessageBoxOptions } from 'element-plus'
-import type { DefineComponent, Ref, ComputedRef, AppContext } from 'vue'
+import type { Component, Ref, ComputedRef, AppContext } from 'vue'
 import type { RecordType, ButtonsCallBackParams } from 'plus-pro-components'
 /**
  * 表格操作栏按钮配置项的值的类型
@@ -113,7 +113,7 @@ export interface ActionBarButtonsRow {
   /**
    * `@element-plus/icons-vue` 的图标名称，对ElButton,ElLink 和ElIcon 组件同时生效
    */
-  icon?: DefineComponent
+  icon?: Component
   /**
    * ElButton,ElLink和ElIcon 组件对应的props
    */
@@ -373,10 +373,11 @@ export type FieldValues = Record<string, FieldValueType>
 ```ts
 import type { FieldValueType } from 'plus-pro-components'
 /**
- *  自定义props类型  支持对象object ，函数，Promise
+ *  自定义props类型  值支持对象 object，computed，函数和 Promise。
  */
 export type PropsItemType<T extends Record<string, any> = any> =
   | Partial<T>
+  | ComputedRef<Partial<T>>
   | ((
       value: FieldValueType,
       data: {
@@ -424,11 +425,12 @@ export interface OptionsRow {
 ```ts
 import type { OptionsRow } from 'plus-pro-components'
 /**
- * 选择类型
+ * 选择类型   支持数组，computed，函数和Promise
  */
  */
 export type OptionsType =
   | OptionsRow[]
+  | ComputedRef<OptionsRow[]>
   | ((props?: PlusColumn) => OptionsRow[] | Promise<OptionsRow[]>)
   | Promise<OptionsRow[]>
 ```
@@ -436,7 +438,7 @@ export type OptionsType =
 ## PlusFormGroupRow
 
 ```ts
-import type { DefineComponent } from 'vue'
+import type { Component } from 'vue'
 import type { PlusColumn } from 'plus-pro-components'
 
 /**
@@ -444,7 +446,7 @@ import type { PlusColumn } from 'plus-pro-components'
  */
 export interface PlusFormGroupRow {
   title: string
-  icon?: DefineComponent
+  icon?: Component
   columns: PlusColumn[]
 }
 ```

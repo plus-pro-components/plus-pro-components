@@ -1,4 +1,4 @@
-# Breadcrumb 面包屑 <el-tag>v0.0.1-beta.20</el-tag>
+# Breadcrumb 面包屑
 
 ## 简介
 
@@ -24,7 +24,7 @@ breadcrumb/hidden
 
 ## 自定义 (renderTitle)
 
-:::warning 提示
+:::warning 注意
 **render 函数的优先级高于插槽**
 :::
 
@@ -44,7 +44,7 @@ breadcrumb/tsx
 
 ## 自定义 (插槽)
 
-:::warning 提示
+:::warning 注意
 **插槽优先级低于 render**
 :::
 
@@ -75,6 +75,6 @@ breadcrumb/slots
 | ----------------------- | ----------------- | -------------------------------------------------------------------- |
 | `breadcrumb-item-title` | 自定义 面包屑显示 | route [PlusRouteRecordRaw](/components/type.html#plusrouterecordraw) |
 
-:::warning 提示
+:::warning 注意
 **render 函数的优先级高于插槽**
 :::
