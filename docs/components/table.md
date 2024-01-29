@@ -83,9 +83,9 @@ table/drag-sort
 
 ## 列设置拖拽排序列
 
-配置 [TitleBar](/components/type.html#titlebar)中的`columnSetting`中的`dragSort`属性，默认为 `true` 可拖拽。 不需要可以给 `false`:
+配置 [TitleBar](/components/type.html#titlebar)中的`columnSetting`中的`dragSort`属性，默认为 `true` 可拖拽。
 
-`<PlusTable :title-bar="{ columnSetting: { dragSort: false } }" />`。
+不需要可以给 `false`: `<PlusTable :title-bar="{ columnSetting: { dragSort: false } }" />`。
 
 如下示例， 点击 表格右上角列设置 <el-icon color="#606266" ><Setting /></el-icon> 图标，即可通过列设置拖拽排序列。
 
