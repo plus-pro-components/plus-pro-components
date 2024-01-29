@@ -32,7 +32,7 @@ table/multiple-level-display
 配置项中`valueType`为`select`、`radio`或`checkbox `时，
 配置[columns](/components/config.html)中的[options](/components/type.html#optionstype)，表格会自动显示 `value` 对应的`状态`和 `label`。
 
-默认的逻辑是 表格中的实际值和 `options` 中 `value` 对比 严格相等的话，会取当前项的 `label` 显示在表格中，想自定义显示逻辑的话，只需配置[columns](/components/config.html) 中 `customGetStatus`即可。
+默认的逻辑是 表格的`tableData`中的`实际值`和 `options` 中 `value` 对比 严格相等的话，会取当前项的 `label` 显示在表格中，想自定义显示逻辑的话，只需配置[columns](/components/config.html) 中 `customGetStatus`即可。
 
 :::demo
 
@@ -40,13 +40,21 @@ table/status
 
 :::
 
+## 表格列样式简单修改
+
+配置[columns](/components/config.html)中的 `fieldProps`，不仅会作用于表单单项，也会作用于表格单项。使用 `fieldProps`可以做简单的样式修改，更强大的自定义样式，请使用[自定义表格项和表单项](/components/table.html#自定义表格项和表单项-插槽)。
+
+:::demo
+
+table/cell-style
+
+:::
+
 ## 自定义操作栏
 
-actionBar 的`type` 支持 `button`，`icon`和 `link`，对应 element plus 的 ElButton，ElIcon 和 ElLink 组件。
+默认不显示。配置`actionBar`即可。 `actionBar` 中的`type` 支持 `button`，`icon`和 `link`，对应`element plus` 的 [ElButton](https://element-plus.org/zh-CN/component/button.html)，[ElIcon](https://element-plus.org/zh-CN/component/icon.html) 和 [ElLink ](https://element-plus.org/zh-CN/component/link.html)组件。
 
-配置 `confirm` 即可实现二次确认。
-
-配置 `show` 即可实现权限和动态显示。
+配置 `confirm` 即可实现二次确认。配置 `show` 即可实现权限和动态显示。
 
 :::demo
 
@@ -56,7 +64,9 @@ table/action-bar
 
 ## 标题栏
 
-使用`title`，`toolbar`插槽。
+标题栏默认显示右侧工具栏， 可以使用`title`，`toolbar`插槽定制。不需要的的话配置
+`<PlusTable :title-bar="false" />`即可。
+
 :::demo
 
 table/title-bar
@@ -68,20 +78,14 @@ table/title-bar
 配置`drag-sortable`，同时配合`dragSortEnd`使用。
 
 :::demo
-
 table/drag-sort
-
 :::
 
 ## 列设置拖拽排序列
 
-配置 [TitleBar](/components/type.html#titlebar) 中的`columnSetting`中的`dragSort`属性，默认为 `true` 可拖拽。
+配置 [TitleBar](/components/type.html#titlebar)中的`columnSetting`中的`dragSort`属性，默认为 `true` 可拖拽。 不需要可以给 `false`:
 
-不需要可以给 `false`，如下示例：
-
-```html
-<PlusTable :title-bar="{ columnSetting: { dragSort: false } }" />
-```
+`<PlusTable :title-bar="{ columnSetting: { dragSort: false } }" />`。
 
 如下示例， 点击 表格右上角列设置 <el-icon color="#606266" ><Setting /></el-icon> 图标，即可通过列设置拖拽排序列。
 
@@ -93,7 +97,7 @@ table/drag-sort-column
 
 ## 分页栏
 
-配置`pagination`属性。
+默认不显示，配置`pagination`属性即可。
 
 :::demo
 
@@ -103,7 +107,7 @@ table/pagination
 
 ## 序号栏
 
-配置`indexContentStyle` 可定制序号栏样式。使用`indexTableColumnProps` 为序号栏配置属性。
+默认不显示。配置`hasIndexColumn` 为 `true`即可。 配置`indexContentStyle` 可定制序号栏样式。使用`indexTableColumnProps` 为序号栏配置[el-table-column](https://element-plus.org/zh-CN/component/table.html#table-column-%E5%B1%9E%E6%80%A7)属性。
 
 :::demo
 
@@ -226,7 +230,7 @@ table/custom-cell-slot
   使用 render 函数自定义表格项。
   `render` 方法需要返回一个 [VNode](https://cn.vuejs.org/guide/extras/render-function.html) 或 `String`。
 
-  自定义表格项还支持 `renderHTML`方法，需要返回一个 HTML 字符串。
+  自定义表格项还支持 `renderHTML`方法，需要返回一个 HTML 字符串。**谨慎使用，确保 HTML 字符串可信。**
 
 - 自定义表单项
 

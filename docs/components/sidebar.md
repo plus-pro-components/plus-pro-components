@@ -113,9 +113,9 @@ sidebar/menu-item-title-slots
 
 ## Sidebar Events
 
-| 名称             | 说明             | 类型                                                                  |
-| ---------------- | ---------------- | --------------------------------------------------------------------- |
-| `toggleCollapse` | 侧边栏闭合时触发 | `function` <docs-tip content='(collapse:boolean) => void'></docs-tip> |
+| 名称             | 说明                     | 类型                                                                  |
+| ---------------- | ------------------------ | --------------------------------------------------------------------- |
+| `toggleCollapse` | 侧边栏闭合（开启）时触发 | `function` <docs-tip content='(collapse:boolean) => void'></docs-tip> |
 
 ## Sidebar Slots
 

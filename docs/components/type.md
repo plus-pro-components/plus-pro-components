@@ -63,6 +63,19 @@ export type RecordType = {
 export type Nullable<T> = T | null
 ```
 
+## Mutable
+
+去除只读状态
+
+```ts
+/**
+ * 去除只读状态
+ */
+export type Mutable<T extends Record<string, any>> = {
+  -readonly [K in keyof T]: T[K]
+}
+```
+
 ## PageInfo
 
 分页参数
@@ -420,7 +433,7 @@ export interface OptionsRow {
 
 ## OptionsType
 
-选择类型 支持数组，函数和 Promise
+选择类型
 
 ```ts
 import type { OptionsRow } from 'plus-pro-components'
@@ -437,6 +450,8 @@ export type OptionsType =
 
 ## PlusFormGroupRow
 
+分步表单配置项
+
 ```ts
 import type { Component } from 'vue'
 import type { PlusColumn } from 'plus-pro-components'
@@ -452,6 +467,8 @@ export interface PlusFormGroupRow {
 ```
 
 ## PlusStepFrom
+
+分步表单配置项
 
 ```ts
 import type { Component } from 'vue'
