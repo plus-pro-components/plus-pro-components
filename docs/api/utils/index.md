@@ -15,15 +15,21 @@
 
 ## 独立安装
 
-```sh
-# 选择一个你喜欢的包管理器
-# NPM
-$ npm install @plus-pro-components/utils   --save
-# Yarn
-$ yarn add @plus-pro-components/utils
-# pnpm
-$ pnpm install @plus-pro-components/utils
+::: code-group
+
+```sh [npm]
+npm install @plus-pro-components/utils  --save
 ```
+
+```sh [yarn]
+yarn add @plus-pro-components/utils
+```
+
+```sh [pnpm]
+pnpm install @plus-pro-components/utils
+```
+
+:::
 
 ## 使用示例
 
