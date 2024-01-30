@@ -46,7 +46,7 @@
     "new": "tsx scripts/create-component/index.ts"
   },
   "dependencies": {
-    "@element-plus/icons-vue": "^2.1.0",
+    "@element-plus/icons-vue": "^2.3.1",
     "@plus-pro-components/components": "workspace:*",
     "@plus-pro-components/constants": "workspace:*",
     "@plus-pro-components/eslint-config": "workspace:*",
@@ -57,7 +57,7 @@
     "@plus-pro-components/types": "workspace:*",
     "@plus-pro-components/utils": "workspace:*",
     "dayjs": "^1.11.7",
-    "element-plus": "^2.4.2",
+    "element-plus": "^2.5.3",
     "lodash-es": "^4.17.21",
     "sortablejs": "^1.15.0",
     "vue": "^3.3.4"

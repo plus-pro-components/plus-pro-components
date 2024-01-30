@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@element-plus/icons-vue':
-        specifier: ^2.1.0
-        version: 2.1.0(vue@3.3.4)
+        specifier: ^2.3.1
+        version: 2.3.1(vue@3.3.4)
       '@plus-pro-components/components':
         specifier: workspace:*
         version: link:packages/components
@@ -42,8 +42,8 @@ importers:
         specifier: ^1.11.7
         version: 1.11.7
       element-plus:
-        specifier: ^2.4.2
-        version: 2.4.2(vue@3.3.4)
+        specifier: ^2.5.3
+        version: 2.5.3(vue@3.3.4)
       lodash-es:
         specifier: ^4.17.21
         version: 4.17.21
@@ -221,7 +221,7 @@ importers:
         version: 3.0.5
       plus-pro-components:
         specifier: npm:plus-pro-components@latest
-        version: 0.0.1-beta.29(vue@3.3.4)
+        version: 0.0.1-beta.37(vue@3.3.4)
     devDependencies:
       '@types/escape-html':
         specifier: ^1.0.2
@@ -1227,6 +1227,14 @@ packages:
 
   /@element-plus/icons-vue@2.1.0(vue@3.3.4):
     resolution: {integrity: sha512-PSBn3elNoanENc1vnCfh+3WA9fimRC7n+fWkf3rE5jvv+aBohNHABC/KAR5KWPecxWxDTVT1ERpRbOMRcOV/vA==}
+    peerDependencies:
+      vue: ^3.2.0
+    dependencies:
+      vue: 3.3.4
+    dev: false
+
+  /@element-plus/icons-vue@2.3.1(vue@3.3.4):
+    resolution: {integrity: sha512-XxVUZv48RZAd87ucGS48jPf6pKu0yV5UCg9f4FFwtrYxXOwWuVJo6wOvSLKEoMQKjv8GsX/mhP6UsC1lRwbUWg==}
     peerDependencies:
       vue: ^3.2.0
     dependencies:
@@ -5003,6 +5011,31 @@ packages:
       - '@vue/composition-api'
     dev: false
 
+  /element-plus@2.5.3(vue@3.3.4):
+    resolution: {integrity: sha512-wmtstxaMkD6UinIgD+45CjrhbRh4u0vt+/GgxfPeMLt5pDpIVwZFjkUaVcWqqxcxd5a80HP3XlDF74fW7wim9A==}
+    peerDependencies:
+      vue: ^3.2.0
+    dependencies:
+      '@ctrl/tinycolor': 3.6.0
+      '@element-plus/icons-vue': 2.3.1(vue@3.3.4)
+      '@floating-ui/dom': 1.2.8
+      '@popperjs/core': /@sxzz/popperjs-es@2.11.7
+      '@types/lodash': 4.14.194
+      '@types/lodash-es': 4.17.7
+      '@vueuse/core': 9.13.0(vue@3.3.4)
+      async-validator: 4.2.5
+      dayjs: 1.11.7
+      escape-html: 1.0.3
+      lodash: 4.17.21
+      lodash-es: 4.17.21
+      lodash-unified: 1.0.3(@types/lodash-es@4.17.7)(lodash-es@4.17.21)(lodash@4.17.21)
+      memoize-one: 6.0.0
+      normalize-wheel-es: 1.2.0
+      vue: 3.3.4
+    transitivePeerDependencies:
+      - '@vue/composition-api'
+    dev: false
+
   /emoji-regex@8.0.0:
     resolution: {integrity: sha512-MSjYzcWNOA0ewAHpz0MxpYFvwg6yjy1NG3xteoqz644VCo/RPgnr1/GGt+ic3iJTzQ8Eu3TdM14SawnVUmGE6A==}
     dev: true
@@ -7907,8 +7940,8 @@ packages:
       pathe: 1.1.0
     dev: true
 
-  /plus-pro-components@0.0.1-beta.29(vue@3.3.4):
-    resolution: {integrity: sha512-U1u2FFDEg4t4scvMFVdTRAFG4hpHVwW9IrVfhMmzIMfYU6AvEnEQRhZs5LkI6WGpik4LCmjD+pNyyk975d0RSA==}
+  /plus-pro-components@0.0.1-beta.37(vue@3.3.4):
+    resolution: {integrity: sha512-hY743wWtLw+EYaKJxhOu1a2Rc4PEQg76ilLTi7kcNsnHr0EZnXazd0T/c2nG+CnlT5U7SGFtQIOtZ7HVIrYy7A==}
     peerDependencies:
       vue: ^3.2.0
     dependencies:
