@@ -1,3 +1,17 @@
+## [v0.0.1-beta.38](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-beta.37...v0.0.1-beta.38) (2024-01-30)
+
+
+### ✨ Features
+
+* **plus-pro-components:** :sparkles: update element-plus version([7c7a0b6](https://github.com/plus-pro-components/plus-pro-components/commit/7c7a0b6)) by@xiaofei
+* **types:** :sparkles: plusColumn add fieldSlots type([03d4d81](https://github.com/plus-pro-components/plus-pro-components/commit/03d4d81)) by@xiaofei
+* **components:** :sparkles: display-item and form-item component add fieldSlots([70c1c72](https://github.com/plus-pro-components/plus-pro-components/commit/70c1c72)) by@xiaofei
+
+
+
+
+
+
 ## [v0.0.1-beta.37](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-beta.36...v0.0.1-beta.37) (2024-01-18)
 
 
