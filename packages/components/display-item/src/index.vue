@@ -60,7 +60,11 @@
     :src="imageUrl.url"
     :preview-src-list="column.preview !== false ? imageUrl.options : []"
     v-bind="customFieldProps"
-  />
+  >
+    <template v-for="(fieldSlot, key) in column.fieldSlots" :key="key" #[key]="data">
+      <component :is="fieldSlot" v-bind="data" />
+    </template>
+  </el-image>
 
   <!--显示链接 -->
   <el-link
@@ -69,6 +73,9 @@
     class="plus-display-item plus-display-item__link"
     v-bind="customFieldProps"
   >
+    <template v-for="(fieldSlot, key) in column.fieldSlots" :key="key" #[key]="data">
+      <component :is="fieldSlot" v-bind="data" />
+    </template>
     {{ column.linkText || displayValue }}
   </el-link>
 
@@ -117,6 +124,10 @@
     class="plus-display-item"
     v-bind="customFieldProps"
   >
+    <template v-for="(fieldSlot, key) in column.fieldSlots" :key="key" #[key]="data">
+      <component :is="fieldSlot" v-bind="data" />
+    </template>
+
     {{ displayValue }}
   </el-tag>
 
@@ -126,7 +137,11 @@
     class="plus-display-item"
     :percentage="displayValue"
     v-bind="customFieldProps"
-  />
+  >
+    <template v-for="(fieldSlot, key) in column.fieldSlots" :key="key" #[key]="data">
+      <component :is="fieldSlot" v-bind="data" />
+    </template>
+  </el-progress>
 
   <!-- 复制 -->
   <span v-else-if="column.valueType === 'copy'" class="plus-display-item">

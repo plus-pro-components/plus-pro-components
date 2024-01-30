@@ -64,7 +64,11 @@
       v-bind="customFieldProps"
       @change="handleChange"
       @select="handleSelect"
-    />
+    >
+      <template v-for="(fieldSlot, key) in fieldSlots" :key="key" #[key]="data">
+        <component :is="fieldSlot" v-bind="data" />
+      </template>
+    </el-autocomplete>
 
     <el-cascader
       v-else-if="valueType === 'cascader'"
@@ -76,7 +80,11 @@
       clearable
       v-bind="customFieldProps"
       @change="handleChange"
-    />
+    >
+      <template v-for="(fieldSlot, key) in fieldSlots" :key="key" #[key]="data">
+        <component :is="fieldSlot" v-bind="data" />
+      </template>
+    </el-cascader>
 
     <el-checkbox-group
       v-else-if="valueType === 'checkbox'"
@@ -87,6 +95,10 @@
       v-bind="customFieldProps"
       @change="handleChange"
     >
+      <template v-for="(fieldSlot, key) in fieldSlots" :key="key" #[key]="data">
+        <component :is="fieldSlot" v-bind="data" />
+      </template>
+
       <el-checkbox
         v-for="item in options"
         :key="item.label"
@@ -121,7 +133,11 @@
       clearable
       v-bind="customFieldProps"
       @change="handleChange"
-    />
+    >
+      <template v-for="(fieldSlot, key) in fieldSlots" :key="key" #[key]="data">
+        <component :is="fieldSlot" v-bind="data" />
+      </template>
+    </el-date-picker>
 
     <PlusDatePicker
       v-else-if="valueType === 'plus-date-picker'"
@@ -162,6 +178,10 @@
       v-bind="customFieldProps"
       @change="handleChange"
     >
+      <template v-for="(fieldSlot, key) in fieldSlots" :key="key" #[key]="data">
+        <component :is="fieldSlot" v-bind="data" />
+      </template>
+
       <el-radio
         v-for="item in options"
         :key="item.label"
@@ -202,6 +222,10 @@
       v-bind="customFieldProps"
       @change="handleChange"
     >
+      <template v-for="(fieldSlot, key) in fieldSlots" :key="key" #[key]="data">
+        <component :is="fieldSlot" v-bind="data" />
+      </template>
+
       <el-option
         v-for="item in options"
         :key="item.label"
@@ -227,7 +251,11 @@
       class="plus-form-item-field"
       v-bind="customFieldProps"
       @change="handleChange"
-    />
+    >
+      <template v-for="(fieldSlot, key) in fieldSlots" :key="key" #[key]="data">
+        <component :is="fieldSlot" v-bind="data" />
+      </template>
+    </el-switch>
 
     <el-time-picker
       v-else-if="valueType === 'time-picker'"
@@ -283,7 +311,11 @@
       clearable
       v-bind="customFieldProps"
       @change="handleChange"
-    />
+    >
+      <template v-for="(fieldSlot, key) in fieldSlots" :key="key" #[key]="data">
+        <component :is="fieldSlot" v-bind="data" />
+      </template>
+    </el-input>
   </el-form-item>
 </template>
 
@@ -332,7 +364,7 @@ import {
 
 export interface PlusFormItemProps {
   modelValue?: FieldValueType
-  hasLabel?: boolean
+  hasLabel?: PlusColumn['hasLabel']
   label: PlusColumn['label']
   prop: PlusColumn['prop']
   fieldProps?: PlusColumn['fieldProps']
@@ -345,6 +377,7 @@ export interface PlusFormItemProps {
   // eslint-disable-next-line vue/require-default-prop
   renderLabel?: PlusColumn['renderLabel']
   tooltip?: PlusColumn['tooltip']
+  fieldSlots?: PlusColumn['fieldSlots']
   index?: number
 }
 export interface PlusFormItemEmits {
@@ -387,6 +420,7 @@ const props = withDefaults(defineProps<PlusFormItemProps>(), {
   formItemProps: () => ({}),
   fieldProps: () => ({}),
   options: () => [],
+  fieldSlots: () => ({}),
   index: 0
 })
 const emit = defineEmits<PlusFormItemEmits>()
