@@ -80,13 +80,17 @@ const columns: PlusColumn[] = [
   {
     label: 'img',
     prop: 'img',
-    valueType: 'img'
+    valueType: 'img',
+    fieldSlots: {}
   },
   {
     label: '链接',
     prop: 'place',
     valueType: 'link',
-    linkText: 'link'
+    linkText: 'link',
+    fieldSlots: {
+      default: () => 'prefix'
+    }
   },
   {
     label: 'code',
