@@ -50,17 +50,14 @@ export interface FormColumnProps {
   fieldProps?: PropsItemType
 
   /**
-   * 自定义渲染 el-form-item 下的field-item组件。
-   * @param props
-   * @param onChange
-   * @param formItemInstance
-   * @returns
-   * 示例：
-   * ```js
-   *import { h } from 'vue'
-   *import { ElTag } from 'element-plus'
-   *
-   *const columns = [
+   * @desc 自定义渲染 el-form-item 下的field-item组件。 
+   * @example
+   * ```ts
+   * import { h } from 'vue'
+   * import { ElTag } from 'element-plus'
+   * import type { PlusColumn } from 'plus-pro-components'
+
+   * const columns:PlusColumn[]= [
    *  {
    *    label: '自定义el-input',
    *    prop: 'elData',
@@ -76,7 +73,8 @@ export interface FormColumnProps {
    *           onChange
    *      })
    *  }
-   *]
+   * ]
+   * 
    * ```
    */
   renderField?: (
@@ -84,6 +82,7 @@ export interface FormColumnProps {
     onChange: (value: FieldValueType) => void,
     props: PlusColumn
   ) => VNode | string
+
   /**
    * @desc el-col 的 props
    */
@@ -93,17 +92,91 @@ export interface FormColumnProps {
    * 表单中单个项目是否需要 label，默认undefined，优先级高于表单的整体 hasLabel
    */
   hasLabel?: boolean | Ref<boolean> | ComputedRef<boolean>
+
   /**
    * @desc 渲染form表单的label
+   * @example
+   * ```ts
+   * import { ref, h } from 'vue'
+   * import { ElButton } from 'element-plus'
+   * import type { PlusColumn } from 'plus-pro-components'
+   *
+   * const columns: PlusColumn[] = [
+   *   {
+   *    label: '名称',
+   *    prop: 'name',
+   *    renderLabel:() => 'renderExtra'
+   *   },
+   *   {
+   *    label: '标签',
+   *    prop: 'tag',
+   *    renderLabel: () => h(ElButton,'tag')
+   *   }
+   * ]
+   *
+   * ```
    */
   renderLabel?: (label: string, props: PlusColumn) => VNode | string
+
   /**
-   * 渲染el-form-item 下一行额外的内容
-   * @param label
-   * @param props
-   * @returns
+   * @desc  渲染el-form-item 下一行额外的内容
+   * @example
+   * ```ts
+   * import { ref, h } from 'vue'
+   * import { ElButton } from 'element-plus'
+   * import type { PlusColumn } from 'plus-pro-components'
+   *
+   * const columns: PlusColumn[] = [
+   *   {
+   *    label: '名称',
+   *    prop: 'name',
+   *    renderExtra:() => 'renderExtra'
+   *   },
+   *   {
+   *    label: '标签',
+   *    prop: 'tag',
+   *    renderExtra: () => h(ElButton,'tag')
+   *   }
+   * ]
+   *
+   * ```
    */
   renderExtra?: (column: PlusColumn) => VNode | string
+
+  /**
+   * @desc 表单（表格）单个项目的插槽，支持类似el-input，el-select， el-image ，el-link等所有表单（表格）单项的插槽
+   * @example
+   * ```ts
+   * import { ref, h } from 'vue'
+   * import { Search } from '@element-plus/icons-vue'
+   * import { ElIcon } from 'element-plus'
+   * import type { PlusColumn } from 'plus-pro-components'
+   *
+   * const columns: PlusColumn[] = [
+   *  {
+   *   label: '名称',
+   *   prop: 'name',
+   *   fieldSlots: {
+   *     suffix: () => h(ElIcon, null, () => h(Search)),
+   *     prefix: () => 'prefix',
+   *     prepend: () => 'prepend',
+   *     append: () => 'append'
+   *   }
+   *  },
+   *  {
+   *   label: '链接',
+   *   prop: 'place',
+   *   valueType: 'link',
+   *   linkText: 'link',
+   *   fieldSlots: {
+   *     default: () => 'prefix'
+   *   }
+   *  },
+   * ]
+   *
+   * ```
+   */
+  fieldSlots?: { [slotName: string]: (data?: any) => VNode | string }
 }
 
 /**

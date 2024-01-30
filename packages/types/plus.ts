@@ -66,8 +66,10 @@ export type OptionsType =
   | ComputedRef<OptionsRow[]>
   | ((props?: PlusColumn) => OptionsRow[] | Promise<OptionsRow[]>)
   | Promise<OptionsRow[]>
-
-export interface CommentType {
+/**
+ * 共享类型
+ */
+export interface CommonType {
   [index: string]: any
   /**
    * 表格表头显示的标题 ；在form 中是 el-form-item的label；在descriptions 是 el-descriptions-item的label；
@@ -135,14 +137,14 @@ export interface CommentType {
 
   /**
    *
-   * 自定义渲染表格单行显示内容 需要返回一个 VNode，`render`的优先级最高
+   * @desc 自定义渲染表格单行显示内容 需要返回一个 VNode，`render`的优先级最高
+   * @example
+   * ```ts
+   * import { h } from 'vue'
+   * import { ElTag } from 'element-plus'
+   * import type { PlusColumn } from 'plus-pro-components'
    *
-   * 示例：
-   * ```js
-   *import { h } from 'vue'
-   *import { ElTag } from 'element-plus'
-   *
-   * const tableColumns = [
+   * const tableColumns:PlusColumn[] = [
    *  {
    *     label: 'tag',
    *     prop: 'tag',
@@ -152,6 +154,7 @@ export interface CommentType {
    *     }
    *  }
    * ]
+   *
    * ```
    */
   render?: (
@@ -160,16 +163,16 @@ export interface CommentType {
   ) => VNode | string
 
   /**
-   * 自定义渲染单行显示内容 需要返回一个 html字符串，`renderHTML`的优先级低于`render`，高于`valueType`。
+   * @desc  自定义渲染单行显示内容 需要返回一个 html字符串，`renderHTML`的优先级低于`render`，高于`valueType`。
+   * @desc **注意：renderHTML 内部使用`v-html`渲染，使用时需要保证 html字符串可信。**
+   * @example
+   * ```ts
+   *  import type { PlusColumn } from 'plus-pro-components'
    *
-   * 注意：renderHTML 内部使用`v-html`渲染，使用时需要保证 html字符串 可信。
-   *
-   * 示例：
-   * ```js
-   *  const tableColumns = [
+   *  const tableColumns:PlusColumn[] = [
    *    {
    *       label: '自定义',
-   *       prop: '',
+   *       prop: 'custom',
    *       renderHTML: (value, { row }) => {
    *         return `
    *          <div>自定义: ${row.number || 0}</div>
@@ -177,8 +180,8 @@ export interface CommentType {
    *      }
    *    }
    *  ]
-   *```
    *
+   *```
    */
   renderHTML?: (
     value: FieldValueType,
@@ -187,6 +190,21 @@ export interface CommentType {
 
   /**
    * @desc 渲染table表单的Header
+   * @example
+   * ```ts
+   * import { h } from 'vue'
+   * import { ElButton } from 'element-plus'
+   * import type { PlusColumn } from 'plus-pro-components'
+   *
+   * const tableColumns:PlusColumn[] = [
+   *    {
+   *       label: '自定义',
+   *       prop: 'custom',
+   *       renderHeader:label => h(ElButton, null, () => label)
+   *    }
+   * ]
+   *
+   *```
    */
   renderHeader?: (label: string, props: PlusColumn) => VNode | string
 }
@@ -194,6 +212,6 @@ export interface CommentType {
 /**
  * 表格，表单，详情，搜索公共的类型
  */
-export interface PlusColumn extends CommentType, TableColumnProps, FormColumnProps {
+export interface PlusColumn extends CommonType, TableColumnProps, FormColumnProps {
   /** */
 }
