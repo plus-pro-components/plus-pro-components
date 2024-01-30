@@ -10,6 +10,14 @@ display-item/basic
 
 :::
 
+## 单项插槽配置
+
+:::demo
+
+display-item/field-slots
+
+:::
+
 ## DisplayItem API
 
 ## DisplayItem Attributes

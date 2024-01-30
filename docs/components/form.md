@@ -89,6 +89,33 @@ form/custom-footer
 
 :::
 
+## 表单单项插槽配置
+
+组件提供 `fieldSlots` 对象可以简易配置表单单项插槽， `fieldSlots` 的插槽配置是根据表单的 [valueType](/components/config.html#valuetype-可选的表单值) 自动进行匹配的，
+如：
+
+- `valueType` 是 `undefined`(默认值)时，`fieldSlots`的插槽就是给 [ElInput](https://element-plus.org/zh-CN/component/input.html#slots)的。
+- `valueType` 是 `autocomplete`时，`fieldSlots`的插槽就是给 [ElAutocomplete](https://element-plus.org/zh-CN/component/autocomplete.html#slots)的。
+- 其他以此类推（特殊的除外）
+
+**特殊的**
+
+- `valueType` 是 `checkbox`时，`fieldSlots`的插槽就是给 [ElCheckboxGroup ](https://element-plus.org/zh-CN/component/checkbox.html#checkboxbutton-api)的。
+- `valueType` 是 `radio`时，`fieldSlots`的插槽就是给 [ElRadioGroup ](https://element-plus.org/zh-CN/component/radio.html#radiogroup-slots)的。
+
+要实现更强大的自定义，请使用[自定义表单项](/components/form.html#自定义表单项-插槽)。
+
+::: warning 注意
+
+valueType 的值对应的组件本身没有插槽时，`fieldSlots`不生效。
+:::
+
+:::demo
+
+form/field-slots
+
+:::
+
 ## 自定义表单项 (插槽)
 
 :::warning 注意

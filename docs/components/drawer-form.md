@@ -1,6 +1,6 @@
 # DrawerForm 表单
 
-DrawerForm 组件是 [ElDrawer](https://element-plus.gitee.io/zh-CN/component/drawer.html)和 [PlusForm](/components/form.html) 组件的组合。
+DrawerForm 组件是 [ElDrawer](https://element-plus.org/zh-CN/component/drawer.html)和 [PlusForm](/components/form.html) 组件的组合。
 
 ## 基础用法
 
@@ -38,13 +38,13 @@ drawer-form/slot-label
 
 ## DrawerForm Attributes
 
-| 名称                        | 说明                                                                                                                 | 类型                                                                                                 | 默认值                                                                 | 是否必须 |
-| --------------------------- | -------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- | -------- |
-| `model-value / v-model`     | 表单绑定值                                                                                                           | `object`[FieldValues](/components/type.html#fieldvalues)                                             |                                                                        | 否       |
-| `visible / v-model:visible` | 抽屉显示                                                                                                             | `boolean`                                                                                            | `false`                                                                | 否       |
-| `size`                      | Drawer 窗体的大小, 当使用 number 类型时, 以像素为单位, 当使用 string 类型时, 请传入 'x%', 否则便会以 number 类型解释 | `string`/`number`                                                                                    | `540px`                                                                | 否       |
-| `form`                      | [PlusForm](/components/form.html) 的 props                                                                           | `object`[PlusFormProps](/components/form.html#form-attributes)                                       | `{footerAlign:"right"}`                                                | 否       |
-| `drawer`                    | [ElDrawer](https://element-plus.gitee.io/zh-CN/component/drawer.html) 的 props                                       | `object`[ElDrawerProps](https://element-plus.gitee.io/zh-CN/component/drawer.html#drawer-attributes) | `{closeOnClickModal:false,closeOnPressEscape:false, title:"抽屉表单"}` | 否       |
+| 名称                        | 说明                                                                                                                 | 类型                                                                                            | 默认值                                                                 | 是否必须 |
+| --------------------------- | -------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- | -------- |
+| `model-value / v-model`     | 表单绑定值                                                                                                           | `object`[FieldValues](/components/type.html#fieldvalues)                                        |                                                                        | 否       |
+| `visible / v-model:visible` | 抽屉显示                                                                                                             | `boolean`                                                                                       | `false`                                                                | 否       |
+| `size`                      | Drawer 窗体的大小, 当使用 number 类型时, 以像素为单位, 当使用 string 类型时, 请传入 'x%', 否则便会以 number 类型解释 | `string`/`number`                                                                               | `540px`                                                                | 否       |
+| `form`                      | [PlusForm](/components/form.html) 的 props                                                                           | `object`[PlusFormProps](/components/form.html#form-attributes)                                  | `{footerAlign:"right"}`                                                | 否       |
+| `drawer`                    | [ElDrawer](https://element-plus.org/zh-CN/component/drawer.html) 的 props                                            | `object`[ElDrawerProps](https://element-plus.org/zh-CN/component/drawer.html#drawer-attributes) | `{closeOnClickModal:false,closeOnPressEscape:false, title:"抽屉表单"}` | 否       |
 
 ## DrawerForm Events
 
@@ -58,8 +58,8 @@ drawer-form/slot-label
 
 | 插槽名              | 说明                                                                                                                               | 作用域插槽参数                             |
 | ------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------ |
-| `drawer-header`     | [ElDrawer](https://element-plus.gitee.io/zh-CN/component/drawer.html#插槽) 的 header slot                                          |                                            |
-| `drawer-footer`     | [ElDrawer](https://element-plus.gitee.io/zh-CN/component/drawer.html#插槽) 的 footer slot                                          |                                            |
+| `drawer-header`     | [ElDrawer](https://element-plus.org/zh-CN/component/drawer.html#插槽) 的 header slot                                               |                                            |
+| `drawer-footer`     | [ElDrawer](https://element-plus.org/zh-CN/component/drawer.html#插槽) 的 footer slot                                               |                                            |
 | `form-footer`       | [PlusForm](/components/form.html#form-slots) 的 footer slot                                                                        | `{handleReset,handleSubmit}`               |
 | `form-group-header` | [PlusForm](/components/form.html#form-slots) 的 group-header slot                                                                  | `{title,columns,icon}`                     |
 | `plus-field-*`      | [PlusForm](/components/form.html#form-slots) 的自定义表单项，组件会自动根据配置项的 prop 生成对应的插槽                            | `{prop,label,fieldProps,valueType,column}` |
