@@ -1,5 +1,6 @@
 import { nextTick, ref, h } from 'vue'
-import ElementPlus from 'element-plus'
+import ElementPlus, { ElButton, ElIcon, ElSelect, ElOption } from 'element-plus'
+import { Search } from '@element-plus/icons-vue'
 import { mount } from '@vue/test-utils'
 import { describe, expect, test } from 'vitest'
 import type { PlusColumn, FieldValues, FieldValueType } from '@plus-pro-components/types'
@@ -460,5 +461,203 @@ describe('form-item/index.vue', () => {
     expect(wrapper.find('.el-form-item__label').attributes('style')).includes('width: 200px;')
     expect(wrapper.find('.el-select--large').exists()).toBe(true)
     expect(wrapper.find('.el-select__tags-text').text()).toBe('未解决')
+  })
+
+  test('fieldSlots test', async () => {
+    interface RestaurantItem {
+      value: string
+      link: string
+    }
+
+    const values = ref<FieldValueType>('')
+    const restaurants = ref<RestaurantItem[]>([])
+    const querySearch = (queryString: string, cb: any) => {
+      const results = queryString
+        ? restaurants.value.filter(createFilter(queryString))
+        : restaurants.value
+      // call callback function to return suggestions
+      cb(results)
+    }
+    const createFilter = (queryString: string) => {
+      return (restaurant: RestaurantItem) => {
+        return restaurant.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0
+      }
+    }
+    const loadAll = () => {
+      return [
+        { value: 'vue', link: 'https://github.com/vuejs/vue' },
+        { value: 'element', link: 'https://github.com/ElemeFE/element' },
+        { value: 'cooking', link: 'https://github.com/ElemeFE/cooking' },
+        { value: 'mint-ui', link: 'https://github.com/ElemeFE/mint-ui' },
+        { value: 'vuex', link: 'https://github.com/vuejs/vuex' },
+        { value: 'vue-router', link: 'https://github.com/vuejs/vue-router' },
+        { value: 'babel', link: 'https://github.com/babel/babel' }
+      ]
+    }
+    restaurants.value = loadAll()
+
+    const options = [
+      {
+        value: 'guide',
+        label: 'Guide',
+        children: [
+          {
+            value: 'disciplines',
+            label: 'Disciplines',
+            children: [
+              {
+                value: 'consistency',
+                label: 'Consistency'
+              },
+              {
+                value: 'feedback',
+                label: 'Feedback'
+              },
+              {
+                value: 'efficiency',
+                label: 'Efficiency'
+              },
+              {
+                value: 'controllability',
+                label: 'Controllability'
+              }
+            ]
+          },
+          {
+            value: 'navigation',
+            label: 'Navigation',
+            children: [
+              {
+                value: 'side nav',
+                label: 'Side Navigation'
+              },
+              {
+                value: 'top nav',
+                label: 'Top Navigation'
+              }
+            ]
+          }
+        ]
+      }
+    ]
+
+    const columns: PlusColumn[] = [
+      {
+        label: '域名',
+        prop: 'domain',
+        fieldProps: { clearable: false },
+        fieldSlots: {
+          suffix: () => h(ElIcon, null, () => h(Search)),
+          prefix: () => '提示： ',
+          prepend: () => 'http://',
+          append: () => '.com'
+        }
+      },
+      {
+        label: '技术栈',
+        prop: 'it',
+        valueType: 'autocomplete',
+        fieldProps: { clearable: false, fetchSuggestions: querySearch },
+        fieldSlots: {
+          suffix: () => h(ElIcon, null, () => h(Search)),
+          prefix: () => 'vue 生态：',
+          prepend: () => '我喜欢用',
+          append: () =>
+            h(
+              ElButton,
+              {
+                icon: Search
+              },
+              () => '搜索'
+            )
+        }
+      },
+      {
+        label: 'input选择',
+        prop: 'inputSelect',
+        fieldProps: { clearable: false, placeholder: '请选择' },
+        fieldSlots: {
+          prepend: () => h(ElIcon, null, () => h(Search)),
+          append: () =>
+            h(
+              ElSelect,
+              {
+                style: { minWidth: '100px' }
+              },
+              () => [
+                h(ElOption, {
+                  label: 'Restaurant',
+                  value: '1'
+                }),
+                h(ElOption, {
+                  label: 'Order',
+                  value: '2'
+                }),
+                h(ElOption, {
+                  label: 'Tel',
+                  value: '3'
+                })
+              ]
+            )
+        }
+      },
+      {
+        label: '级联',
+        prop: 'cas',
+        valueType: 'cascader',
+        options: options,
+        fieldProps: { clearable: false, placeholder: '请选择' },
+        fieldSlots: {
+          default: ({ node, data }) => {
+            return h(
+              'div',
+              null,
+              `${data.label}${!node.isLeaf ? '（' + data.children.length + '）' : ''}`
+            )
+          }
+        }
+      },
+      {
+        label: '开关',
+        prop: 'switch',
+        valueType: 'switch',
+        tooltip: 'element-plus@2.4.4 版本开始支持',
+        fieldSlots: {
+          // element-plus@2.4.4 版本开始支持
+          'active-action': () => {
+            return h('span', 'T')
+          },
+          // element-plus@2.4.4 版本开始支持
+          'inactive-action': () => {
+            return h('span', 'F')
+          }
+        }
+      }
+    ]
+
+    const wrapper = mount(
+      () => {
+        return columns.map(column => <FormItem modelValue={values.value} {...column} />)
+      },
+      {
+        global: {
+          plugins: [ElementPlus]
+        }
+      }
+    )
+    await nextTick()
+    expect(wrapper.find('.el-form-item').text()).includes('提示：')
+    expect(wrapper.find('.el-form-item').text()).includes('http://')
+    expect(wrapper.find('.el-form-item').text()).includes('.com')
+    expect(wrapper.find('.el-icon').exists()).toBe(true)
+
+    expect(wrapper.findAll('.el-form-item')[1].text()).includes('vue 生态：')
+    expect(wrapper.findAll('.el-form-item')[1].text()).includes('我喜欢用')
+    expect(wrapper.findAll('.el-form-item')[1].text()).includes('搜索')
+    expect(wrapper.findAll('.el-form-item')[1].exists()).toBe(true)
+
+    expect(wrapper.findAll('.el-form-item')[2].exists()).toBe(true)
+
+    expect(wrapper.findAll('.el-form-item')[4].text()).includes('开关F')
   })
 })
