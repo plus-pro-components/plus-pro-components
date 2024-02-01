@@ -425,8 +425,21 @@ el-table 的其他事件写法示例 如 `select`,`select-all`,`row-click`等
 
 示例：
 
+> 模板中
+
 ```html
 <PlusTable @select="handleSelect" @select-all="handleSelectAll" />
+```
+
+> setup 中
+
+```ts
+const handleSelect = (selection: any[], row: any) => {
+  console.log(selection, row)
+}
+const handleSelectAll = (selection: any[]) => {
+  console.log(selection)
+}
 ```
 
 :::

@@ -116,9 +116,14 @@ check-card-group/slot
 
 ## CheckCardGroup Slots
 
-| 插槽名        | 说明          | 作用域插槽参数                                                      |
-| ------------- | ------------- | ------------------------------------------------------------------- |
-| `avatar`      | 自定义 头像   | `object` <docs-tip content='{avatar,title,description}'></docs-tip> |
-| `title`       | 自定义 头像   | `object` <docs-tip content='{avatar,title,description}'></docs-tip> |
-| `description` | 自定义 描述   | `object` <docs-tip content='{avatar,title,description}'></docs-tip> |
-| `extra`       | 自定义 操作栏 | `object` <docs-tip content='{avatar,title,description}'></docs-tip> |
+| 插槽名             | 说明          | 作用域插槽参数                                                      |
+| ------------------ | ------------- | ------------------------------------------------------------------- |
+| `avatar`(-\*)      | 自定义 头像   | `object` <docs-tip content='{avatar,title,description}'></docs-tip> |
+| `title`(-\*)       | 自定义 头像   | `object` <docs-tip content='{avatar,title,description}'></docs-tip> |
+| `description`(-\*) | 自定义 描述   | `object` <docs-tip content='{avatar,title,description}'></docs-tip> |
+| `extra`(-\*)       | 自定义 操作栏 | `object` <docs-tip content='{avatar,title,description}'></docs-tip> |
+
+:::tip 提示
+
+带 `-*` 表示是个性化插槽，组件会自动根据配置项的 value 生成对应的插槽
+:::

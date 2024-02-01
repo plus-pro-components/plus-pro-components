@@ -319,6 +319,22 @@ form/all
 
 如 el-form 的 validate。
 
+示例：
+
+> 模板中
+
+```html
+<PlusForm @validate="handleValidate" />
+```
+
+> setup 中
+
+```ts
+const handleValidate = (prop: FormItemProp, isValid: boolean, message: string) => {
+  console.log(dropdownItem)
+}
+```
+
 :::
 
 ## Form Slots
@@ -327,7 +343,7 @@ form/all
 | -------------- | ------------------------------------------------------------------------------------ | ------------------------------------------ |
 | `default`      | 表单的内容 默认是 `PlusFormItem` 组件                                                |                                            |
 | `footer`       | 表单底部按钮                                                                         | `{handleReset,handleSubmit}`               |
-| `group-header` | 分组表单头部                                                                         | `{title,columns,icon}`                     |
+| `group-header` | 分组表单头部，配置 group 字段时生效。                                                | `{title,columns,icon}`                     |
 | `plus-field-*` | 自定义表单项，组件会自动根据配置项的 prop 生成对应的插槽                             | `{prop,label,fieldProps,valueType,column}` |
 | `plus-label-*` | 自定义表单项 label，组件会自动根据配置项的 prop 生成对应的插槽                       | `{prop,label,fieldProps,valueType,column}` |
 | `plus-extra-*` | 自定义渲染 el-form-item 下一行额外的内容，组件会自动根据配置项的 prop 生成对应的插槽 | `{column}`                                 |
