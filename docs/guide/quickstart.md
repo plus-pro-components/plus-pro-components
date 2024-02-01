@@ -12,6 +12,8 @@
 
 - [渲染函数](https://cn.vuejs.org/guide/extras/render-function.html)
 
+- [透传 Attributes](https://cn.vuejs.org/guide/components/attrs.html)
+
 - [TypeScript](https://www.typescriptlang.org/) (非必须，但是有 TypeScript 基础，使用起来会更加方便。)
 
 <p style="margin-top:80px;"> </p>

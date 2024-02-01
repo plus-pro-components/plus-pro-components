@@ -1,6 +1,12 @@
 <template>
   <div class="sidebar">
-    <PlusLayout :sidebar-props="{ routes }" :breadcrumb-props="{ routes: breadcrumbRoutes }">
+    <PlusLayout
+      :sidebar-props="{ routes, onToggleCollapse: handleToggleCollapse }"
+      :breadcrumb-props="{ routes: breadcrumbRoutes }"
+      :header-props="{
+        onClickDropdownItem: handleClickDropdownItem
+      }"
+    >
       <template #layout-extra>
         <div class="tag">
           <el-tag closable> breadcrumb </el-tag>
@@ -15,6 +21,7 @@
 
 <script setup lang="ts">
 import { Document as DocumentIcon } from '@element-plus/icons-vue'
+import { ElMessage } from 'element-plus'
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
@@ -76,6 +83,14 @@ const breadcrumbRoutes = [
     ]
   }
 ]
+
+const handleClickDropdownItem = (dropdownItem: { label: string; value: string }) => {
+  ElMessage.success(dropdownItem.label)
+}
+
+const handleToggleCollapse = (collapse: boolean) => {
+  console.log(collapse)
+}
 </script>
 <style lang="scss" scoped>
 .tag {

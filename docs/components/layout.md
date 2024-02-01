@@ -22,6 +22,36 @@ layout/basic
 | `headerProps`     | PlusHeader 的 props     | `object`[PlusHeader ](/components/header.html#header-attributes)              |        | 否       |
 | `sidebarProps`    | PlusSidebar 的 props    | `object`[PlusSidebar ](/components/sidebar.html#sidebar-attributes)           |        | 否       |
 
+::: tip 提示
+子组件事件写法示例
+
+如 [PlusSidebar ](/components/sidebar.html) 的事件 `toggleCollapse`和 [PlusHeader ](/components/header.html)的事件`clickDropdownItem`。 参考 vue 官方文档 **[透传 Attributes](https://cn.vuejs.org/guide/components/attrs.html)**
+
+示例：
+
+> 模板中
+
+```html
+<PlusLayout
+  :sidebarProps="{ onToggleCollapse: handleToggleCollapse }"
+  :headerProps="{ onClickDropdownItem: handleClickDropdownItem}"
+/>
+```
+
+> setup 中
+
+```ts
+const handleClickDropdownItem = (dropdownItem: { label: string; value: string }) => {
+  console.log(dropdownItem)
+}
+
+const handleToggleCollapse = (collapse: boolean) => {
+  console.log(collapse)
+}
+```
+
+:::
+
 ## Exposes
 
 | 名称                  | 说明               | 类型     |
