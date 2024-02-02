@@ -6,7 +6,7 @@
 
 <script lang="ts" setup>
 import { computed, reactive } from 'vue'
-import type { PlusColumn, FieldValues } from '@plus-pro-components/types'
+import type { PlusColumn, FieldValues } from 'plus-pro-components'
 
 const state = reactive<FieldValues>({
   status: '0',

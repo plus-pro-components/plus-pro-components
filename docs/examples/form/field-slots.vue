@@ -6,7 +6,7 @@
 
 <script lang="ts" setup>
 import { ref, h } from 'vue'
-import type { PlusColumn, FieldValues } from '@plus-pro-components/types'
+import type { PlusColumn, FieldValues } from 'plus-pro-components'
 import { Search } from '@element-plus/icons-vue'
 import { ElButton, ElIcon, ElSelect, ElOption } from 'element-plus'
 
