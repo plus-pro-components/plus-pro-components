@@ -1,3 +1,17 @@
+## [v0.0.1](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-beta.38...v0.0.1) (2024-02-18)
+
+
+### ✨ Features
+
+* **utils:** :sparkles: update utils build method.([7f6f211](https://github.com/plus-pro-components/plus-pro-components/commit/7f6f211)) by@xiaofei
+* **plus-pro-components:** :sparkles: update install type.([a5098f9](https://github.com/plus-pro-components/plus-pro-components/commit/a5098f9)) by@xiaofei
+* **components:** :sparkles: remove components default export.([0d84a5c](https://github.com/plus-pro-components/plus-pro-components/commit/0d84a5c)) by@xiaofei
+
+
+
+
+
+
 ## [v0.0.1-beta.38](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-beta.37...v0.0.1-beta.38) (2024-01-30)
 
 
