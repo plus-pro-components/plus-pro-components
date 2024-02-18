@@ -1,6 +1,5 @@
-import PlusFormItem from './src/index.vue'
+import FormItem from './src/index.vue'
 
 export type { PlusFormItemProps } from './src/index.vue'
 
-export { PlusFormItem }
-export default PlusFormItem
+export const PlusFormItem = FormItem

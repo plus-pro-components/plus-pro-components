@@ -1,7 +1,6 @@
-import PlusPage from './src/index.vue'
+import Page from './src/index.vue'
 
-export type PlusPageInstance = InstanceType<typeof PlusPage>
+export type PlusPageInstance = InstanceType<typeof Page>
 export type { PlusPageProps } from './src/index.vue'
 
-export { PlusPage }
-export default PlusPage
+export const PlusPage = Page

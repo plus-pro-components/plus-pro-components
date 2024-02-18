@@ -1,9 +1,8 @@
 import type { PlusTableProps } from './src/index.vue'
-import PlusTable from './src/index.vue'
+import Table from './src/index.vue'
 
-export type PlusTableInstance = InstanceType<typeof PlusTable>
+export type PlusTableInstance = InstanceType<typeof Table>
 export * from './src/type'
 export type { PlusTableProps }
 
-export { PlusTable }
-export default PlusTable
+export const PlusTable = Table

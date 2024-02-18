@@ -1,7 +1,6 @@
-import PlusSearch from './src/index.vue'
+import Search from './src/index.vue'
 
-export type PlusSearchInstance = InstanceType<typeof PlusSearch>
+export type PlusSearchInstance = InstanceType<typeof Search>
 export type { PlusSearchProps } from './src/index.vue'
 
-export { PlusSearch }
-export default PlusSearch
+export const PlusSearch = Search

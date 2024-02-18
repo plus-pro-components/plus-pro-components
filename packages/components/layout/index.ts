@@ -1,4 +1,3 @@
-import PlusLayout from './src/index.vue'
+import Layout from './src/index.vue'
 
-export { PlusLayout }
-export default PlusLayout
+export const PlusLayout = Layout

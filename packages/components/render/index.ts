@@ -1,6 +1,5 @@
-import PlusRender from './src/index.vue'
+import Render from './src/index.vue'
 
 export type { PlusRenderProps } from './src/index.vue'
 
-export { PlusRender }
-export default PlusRender
+export const PlusRender = Render

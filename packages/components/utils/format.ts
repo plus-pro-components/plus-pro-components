@@ -1,5 +1,4 @@
-import dayjs from 'dayjs'
-import type { ConfigType } from 'dayjs'
+import { dayjs } from 'element-plus'
 
 /**
  *
@@ -7,7 +6,7 @@ import type { ConfigType } from 'dayjs'
  * @param format 默认 YYYY-MM-DD HH:mm:ss
  * @returns YYYY-MM-DD HH:mm:ss
  */
-export function formatDate(date?: ConfigType, format = 'YYYY-MM-DD HH:mm:ss'): string {
+export function formatDate(date?: dayjs.ConfigType, format = 'YYYY-MM-DD HH:mm:ss'): string {
   return dayjs(date || new Date()).format(format)
 }
 

@@ -1,7 +1,6 @@
-import PlusDialogForm from './src/index.vue'
+import DialogForm from './src/index.vue'
 
 export type { PlusDialogFormProps } from './src/index.vue'
-export type PlusDialogFormInstance = InstanceType<typeof PlusDialogForm>
+export type PlusDialogFormInstance = InstanceType<typeof DialogForm>
 
-export { PlusDialogForm }
-export default PlusDialogForm
+export const PlusDialogForm = DialogForm

@@ -1,7 +1,6 @@
-import PlusPagination from './src/index.vue'
+import Pagination from './src/index.vue'
 
 export type { PlusPaginationProps } from './src/type'
-export type PlusPaginationInstance = InstanceType<typeof PlusPagination>
+export type PlusPaginationInstance = InstanceType<typeof Pagination>
 
-export { PlusPagination }
-export default PlusPagination
+export const PlusPagination = Pagination

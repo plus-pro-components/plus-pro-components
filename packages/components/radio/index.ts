@@ -1,4 +1,3 @@
-import PlusRadio from './src/index.vue'
+import Radio from './src/index.vue'
 
-export { PlusRadio }
-export default PlusRadio
+export const PlusRadio = Radio

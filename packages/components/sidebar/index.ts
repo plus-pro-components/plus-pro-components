@@ -1,7 +1,8 @@
-import PlusSidebar from './src/index.vue'
-import PlusSidebarItem from './src/sidebar-item.vue'
+import Sidebar from './src/index.vue'
+import SidebarItem from './src/sidebar-item.vue'
 
-export type PlusSidebarInstance = InstanceType<typeof PlusSidebar>
+export type PlusSidebarInstance = InstanceType<typeof Sidebar>
 export type { PlusSidebarProps } from './src/index.vue'
-export { PlusSidebar, PlusSidebarItem }
-export default PlusSidebar
+
+export const PlusSidebar = Sidebar
+export const PlusSidebarItem = SidebarItem

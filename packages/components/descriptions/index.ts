@@ -1,7 +1,6 @@
-import PlusDescriptions from './src/index.vue'
+import Descriptions from './src/index.vue'
 
-export type PlusDescriptionsInstance = InstanceType<typeof PlusDescriptions>
+export type PlusDescriptionsInstance = InstanceType<typeof Descriptions>
 export type { PlusDescriptionsProps } from './src/index.vue'
 
-export { PlusDescriptions }
-export default PlusDescriptions
+export const PlusDescriptions = Descriptions

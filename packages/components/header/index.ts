@@ -1,6 +1,5 @@
-import PlusHeader from './src/index.vue'
+import Header from './src/index.vue'
 
 export type { PlusHeaderProps } from './src/index.vue'
 
-export { PlusHeader }
-export default PlusHeader
+export const PlusHeader = Header

@@ -1,6 +1,5 @@
-import PlusCheckCard from './src/index.vue'
+import CheckCard from './src/index.vue'
 
 export type { PlusCheckCardProps } from './src/index.vue'
 
-export { PlusCheckCard }
-export default PlusCheckCard
+export const PlusCheckCard = CheckCard

@@ -1,4 +1,3 @@
-import PlusInputTag from './src/index.vue'
+import InputTag from './src/index.vue'
 
-export { PlusInputTag }
-export default PlusInputTag
+export const PlusInputTag = InputTag
