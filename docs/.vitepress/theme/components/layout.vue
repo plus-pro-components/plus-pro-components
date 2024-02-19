@@ -1,17 +1,21 @@
 <script setup lang="ts">
 import DefaultTheme from 'vitepress/theme'
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import cookie from 'js-cookie'
 
 const { Layout } = DefaultTheme
 
 const isCloseNotice = 'Plus-Pro-Components-Notice-Key'
-const hasClose = ref(!!cookie.get(isCloseNotice))
+const hasClose = ref(true)
 
 const handleClose = () => {
   hasClose.value = true
   cookie.set(isCloseNotice, JSON.stringify(hasClose.value))
 }
+
+onMounted(() => {
+  hasClose.value = !!cookie.get(isCloseNotice)
+})
 </script>
 
 <template>
