@@ -17,8 +17,8 @@ const handleClose = () => {
 <template>
   <Layout>
     <template #home-hero-before>
-      <div class="home-notice" v-if="!hasClose">
-        <el-alert effect="dark" @close="handleClose">
+      <div class="home-notice">
+        <el-alert effect="dark" @close="handleClose" v-if="!hasClose">
           <template #title>
             PlusProComponents@v0.0.1 正式版本已发布，请使用公（内）测版本的用户尽快升级到正式版本！
           </template>
