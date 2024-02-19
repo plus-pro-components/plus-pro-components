@@ -15,11 +15,14 @@ import DocsChangelog from './components/docs-changelog.vue'
 import DocsMarkdown from './components/docs-markdown.vue'
 import DocsTip from './components/docs-tip.vue'
 import DocsJump from './components/docs-jump.vue'
+import MyLayout from './components/layout.vue'
+
 import directive from './directives'
 import './styles/index.scss'
 
 export default {
-  ...DefaultTheme,
+  extends: DefaultTheme,
+  Layout: MyLayout,
   enhanceApp({ app }: { app: App }) {
     app.use(ElementPlus, {
       locale: { ...zhCn, ...plusZhCn }
