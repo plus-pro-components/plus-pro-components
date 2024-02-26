@@ -119,7 +119,7 @@ check-card-group/slot
 | 插槽名             | 说明          | 作用域插槽参数                                                      |
 | ------------------ | ------------- | ------------------------------------------------------------------- |
 | `avatar`(-\*)      | 自定义 头像   | `object` <docs-tip content='{avatar,title,description}'></docs-tip> |
-| `title`(-\*)       | 自定义 头像   | `object` <docs-tip content='{avatar,title,description}'></docs-tip> |
+| `title`(-\*)       | 自定义 标题   | `object` <docs-tip content='{avatar,title,description}'></docs-tip> |
 | `description`(-\*) | 自定义 描述   | `object` <docs-tip content='{avatar,title,description}'></docs-tip> |
 | `extra`(-\*)       | 自定义 操作栏 | `object` <docs-tip content='{avatar,title,description}'></docs-tip> |
 
