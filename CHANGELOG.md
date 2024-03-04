@@ -1,3 +1,20 @@
+## [v0.0.2](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1...v0.0.2) (2024-03-04)
+
+
+### ✨ Features
+
+* **components:** :sparkles: add descriptions slot name method.([ca01303](https://github.com/plus-pro-components/plus-pro-components/commit/ca01303)) by@xiaofei
+* **types:** :sparkles: add renderDescriptionsItem and renderDescriptionsLabel type([06829a4](https://github.com/plus-pro-components/plus-pro-components/commit/06829a4)) by@xiaofei
+* **components:** :sparkles: descriptions component add renderDescriptions* and plus-desc-*.([75de7a4](https://github.com/plus-pro-components/plus-pro-components/commit/75de7a4)) by@xiaofei
+* **components:** :sparkles: table component add pagination-right/left slots.([88cec22](https://github.com/plus-pro-components/plus-pro-components/commit/88cec22)) by@xiaofei
+* **packages:** :sparkles: pagination component add pagination-right/left slots,remove type.ts.([4aa7555](https://github.com/plus-pro-components/plus-pro-components/commit/4aa7555)) by@xiaofei
+* **theme-chalk:** :sparkles: update pagination.scss support slot.([0fe6f01](https://github.com/plus-pro-components/plus-pro-components/commit/0fe6f01)) by@xiaofei
+
+
+
+
+
+
 ## [v0.0.1](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1-beta.38...v0.0.1) (2024-02-18)
 
 
