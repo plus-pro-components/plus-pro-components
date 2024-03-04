@@ -147,6 +147,18 @@ export const getTableHeaderSlotName = (prop?: string | number) => {
 export const getTableCellSlotName = (prop?: string | number) => {
   return `${getSlotName('cell', prop)}`
 }
+/**
+ * 处理el-descriptions-item 的  slot名称
+ */
+export const getDescSlotName = (prop?: string | number) => {
+  return `${getSlotName('desc', prop)}`
+}
+/**
+ * 处理el-descriptions-item  label的  slot名称
+ */
+export const getDescLabelSlotName = (prop?: string | number) => {
+  return `${getSlotName('desc-label', prop)}`
+}
 
 /**
  * 过滤slots
