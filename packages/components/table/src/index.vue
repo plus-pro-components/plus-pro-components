@@ -115,7 +115,14 @@
       v-model="subPageInfo"
       v-bind="pagination"
       @change="handlePaginationChange"
-    />
+    >
+      <template v-if="$slots['pagination-left']" #pagination-left>
+        <slot name="pagination-left" />
+      </template>
+      <template v-if="$slots['pagination-right']" #pagination-right>
+        <slot name="pagination-right" />
+      </template>
+    </PlusPagination>
   </div>
 </template>
 
