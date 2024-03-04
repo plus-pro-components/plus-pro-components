@@ -207,6 +207,22 @@ export interface CommonType {
    *```
    */
   renderHeader?: (label: string, props: PlusColumn) => VNode | string
+  /**
+   * 自定义el-descriptions-item 里的内容 优先级高于 render, renderHTML
+   */
+  renderDescriptionsItem?: (data: {
+    value: string
+    column: PlusColumn
+    row: RecordType
+  }) => VNode | string
+  /**
+   * 自定义el-descriptions-item 里的label
+   */
+  renderDescriptionsLabel?: (data: {
+    label: string
+    column: PlusColumn
+    row: RecordType
+  }) => VNode | string
 }
 
 /**
