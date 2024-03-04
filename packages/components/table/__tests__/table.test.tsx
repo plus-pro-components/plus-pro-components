@@ -155,7 +155,7 @@ describe('table/index.vue', () => {
     })
   })
 
-  test('slots test', async () => {
+  test('plus-header-* plus-cell-*  slots test', async () => {
     const label = 'label'
     const prop = 'input'
 
@@ -209,5 +209,67 @@ describe('table/index.vue', () => {
         'green'
       )
     })
+  })
+  test('pagination slots test', async () => {
+    const label = 'label'
+    const prop = 'input'
+
+    const columns: PlusColumn[] = [
+      {
+        label: label,
+        width: 120,
+        prop: prop
+      }
+    ]
+
+    const tableData = [...new Array(5)].map((item, index) => {
+      return {
+        index,
+        name: index === 0 ? 'name'.repeat(20) : index + 'name',
+        rate: index > 3 ? 2 : 3.5,
+        switch: index > 3 ? true : false,
+        time: new Date()
+      }
+    })
+
+    const wrapper = mount(
+      () => (
+        <PlusTable
+          columns={columns}
+          tableData={tableData}
+          pagination={{ total: 100 }}
+          v-slots={{
+            'pagination-left': () => 'pagination-left'
+          }}
+        />
+      ),
+      {
+        global: {
+          plugins: [ElementPlus]
+        }
+      }
+    )
+    await nextTick()
+    expect(wrapper.find('.plus-pagination').text()).includes('pagination-left')
+
+    const wrapper1 = mount(
+      () => (
+        <PlusTable
+          columns={columns}
+          tableData={tableData}
+          pagination={{ total: 100, align: 'left' }}
+          v-slots={{
+            'pagination-right': () => 'pagination-right'
+          }}
+        />
+      ),
+      {
+        global: {
+          plugins: [ElementPlus]
+        }
+      }
+    )
+    await nextTick()
+    expect(wrapper1.find('.plus-pagination').text()).includes('pagination-right')
   })
 })
