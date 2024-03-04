@@ -34,7 +34,7 @@ dialog/slot
 | ...                     | ...                | ...                                                                   | ...     | ...      |
 
 :::tip 提示
-**`...`表示同时支持所有 `el-dialog` Attributes**
+**`...`表示同时支持所有 [el-dialog](https://element-plus.org/zh-CN/component/dialog.html#attributes) Attributes**
 :::
 
 ## Dialog Events

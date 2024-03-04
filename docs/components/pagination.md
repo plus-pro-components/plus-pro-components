@@ -32,7 +32,7 @@ pagination/slot
 | ...                     | ...      | ...                                                       | ...                                             | ...      |
 
 :::tip 提示
-**`...`表示同时支持所有 `el-pagination` Attributes**
+**`...`表示同时支持所有 [el-pagination](https://element-plus.org/zh-CN/component/pagination.html#%E5%B1%9E%E6%80%A7) Attributes**
 :::
 
 ## Pagination Events

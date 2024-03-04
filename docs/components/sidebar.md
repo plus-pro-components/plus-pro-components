@@ -108,7 +108,7 @@ sidebar/menu-item-title-slots
 | ...                         | ...                      | ...                                                                                     | ...     | ...      |
 
 :::tip 提示
-**`...`表示同时支持所有 `el-menu` Attributes**
+**`...`表示同时支持所有 [el-menu](https://element-plus.org/zh-CN/component/menu.html#menu-attributes) Attributes**
 :::
 
 ## Sidebar Events

@@ -228,7 +228,7 @@ export default defineConfig({
             },
             {
               text: '描述列表',
-              link: '/components/description'
+              link: '/components/descriptions'
             },
             {
               text: '页面',

@@ -66,7 +66,7 @@ breadcrumb/slots
 | ...           | ...                                            | ...                                                                                     | ...     | ...      |
 
 :::tip 提示
-**`...`表示同时支持所有 `el-breadcrumb` Attributes**
+**`...`表示同时支持所有 [el-breadcrumb](https://element-plus.org/zh-CN/component/breadcrumb.html#breadcrumb-attributes) Attributes**
 :::
 
 ## Breadcrumb Slots
