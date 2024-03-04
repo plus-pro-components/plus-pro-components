@@ -24,7 +24,8 @@ onMounted(() => {
       <div class="home-notice">
         <el-alert effect="dark" @close="handleClose" v-if="!hasClose">
           <template #title>
-            PlusProComponents@v0.0.1 正式版本已发布，请使用公（内）测版本的用户尽快升级到正式版本！
+            PlusProComponents@v0.0.1
+            正式版本已发布，请使用公（内）测版本的用户尽快升级到最新正式版本！
           </template>
         </el-alert>
       </div>
