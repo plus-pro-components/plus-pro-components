@@ -253,8 +253,6 @@ form/custom-label-tsx
 
 ## 自定义表单下一行的内容
 
-<el-tag>v0.0.1-beta.34</el-tag>
-
 支持 [renderExtra](/components/config.html) 渲染函数，支持 jsx/tsx，支持插槽，插槽的生成规则就是 固定 key 值 [ **plus-extra-** ] 然后加上 配置项的 `prop`。
 
 :::demo

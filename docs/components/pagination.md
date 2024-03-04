@@ -8,6 +8,17 @@ pagination/basic
 
 :::
 
+## 左右侧内容 自定义
+
+<el-tag>v0.0.2</el-tag>
+
+`align` 属性默认是 `right`，插槽 `pagination-left` 默认生效。要使用`pagination-right` 插槽，需要设置`align` 属性为 `left`。
+:::demo
+
+pagination/slot
+
+:::
+
 ## Pagination API
 
 ## Pagination Attributes
@@ -36,3 +47,14 @@ el-pagination 的其他事件的支持写法 如 prev-click
 ```html
 <PlusPagination @prev-click="handlePrevClick" />
 ```
+
+:::
+
+## Pagination Slots
+
+<el-tag>v0.0.2</el-tag>
+
+| 插槽名             | 说明                                                    |
+| ------------------ | ------------------------------------------------------- |
+| `pagination-left`  | 分页器左侧内容 （默认生效，`align` 属性默认是 `right`） |
+| `pagination-right` | 分页器右侧内容 （`align` 属性是 `left`时生效）          |
