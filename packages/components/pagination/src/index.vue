@@ -1,8 +1,9 @@
 <template>
-  <div
-    class="plus-pagination"
-    :style="{ justifyContent: align === 'left' ? 'flex-start' : 'flex-end' }"
-  >
+  <div class="plus-pagination">
+    <slot v-if="align === 'right'" name="pagination-left">
+      <span />
+    </slot>
+
     <el-pagination
       layout="total, sizes, prev, pager, next, jumper"
       :background="false"
@@ -14,6 +15,7 @@
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
     />
+    <slot v-if="align === 'left'" name="pagination-right"> <span /></slot>
   </div>
 </template>
 
