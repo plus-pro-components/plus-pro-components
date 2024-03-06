@@ -52,9 +52,7 @@ el-pagination 的其他事件的支持写法 如 prev-click
 
 ## Pagination Slots
 
-<el-tag>v0.0.2</el-tag>
-
-| 插槽名             | 说明                                                    |
-| ------------------ | ------------------------------------------------------- |
-| `pagination-left`  | 分页器左侧内容 （默认生效，`align` 属性默认是 `right`） |
-| `pagination-right` | 分页器右侧内容 （`align` 属性是 `left`时生效）          |
+| 插槽名                                    | 说明                                                    |
+| ----------------------------------------- | ------------------------------------------------------- |
+| `pagination-left`<el-tag>v0.0.2</el-tag>  | 分页器左侧内容 （默认生效，`align` 属性默认是 `right`） |
+| `pagination-right`<el-tag>v0.0.2</el-tag> | 分页器右侧内容 （`align` 属性是 `left`时生效）          |

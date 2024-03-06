@@ -1,4 +1,4 @@
-# 自定义命名空间 <el-tag>v0.0.1-beta.18</el-tag>
+# 自定义命名空间
 
 支持 element-plus 的命名空间
 
