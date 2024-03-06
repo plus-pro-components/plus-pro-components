@@ -3,9 +3,7 @@
     ref="plusInputTagInstance"
     v-click-outside="onClickOutside"
     class="plus-input-tag"
-    :class="{
-      'is-focus': state.isFocus
-    }"
+    :class="{ 'is-focus': state.isFocus }"
     @click="handleClick"
   >
     <el-tag
@@ -17,7 +15,7 @@
       closable
       @close="handleClose(tag)"
     >
-      {{ tag }}
+      {{ formatTag && isFunction(formatTag) ? formatTag(tag) : tag }}
     </el-tag>
     <el-input
       ref="inputInstance"
@@ -27,9 +25,9 @@
       :disabled="state.tags.length >= limit"
       v-bind="inputProps"
       clearable
-      @blur="handle('blur')"
-      @keyup.enter.exact="handle('enter')"
-      @keyup.space.exact="handle('space')"
+      @blur="handle($event, 'blur')"
+      @keyup.enter.exact="handle($event, 'enter')"
+      @keyup.space.exact="handle($event, 'space')"
     />
   </div>
 </template>
@@ -40,7 +38,7 @@ import { ElTag, ElInput, ClickOutside as vClickOutside } from 'element-plus'
 import { reactive, ref, watch } from 'vue'
 import type { Mutable } from '@plus-pro-components/types'
 import { useLocale } from '@plus-pro-components/hooks'
-import { isArray, isString } from '@plus-pro-components/components/utils'
+import { isArray, isString, isFunction } from '@plus-pro-components/components/utils'
 
 type TriggerType = 'blur' | 'enter' | 'space'
 export interface PlusInputTagProps {
@@ -49,10 +47,16 @@ export interface PlusInputTagProps {
   inputProps?: Partial<Mutable<InputProps>>
   tagProps?: Partial<Mutable<TagProps>>
   limit?: number
+  formatTag?: (tag: string) => string
+  retainInputValue?: boolean
 }
 export interface PlusInputTagEmits {
   (e: 'update:modelValue', data: string[]): void
   (e: 'change', data: string[]): void
+  (e: 'remove', tag: string): void
+  (e: 'blur', value: string, event: FocusEvent): void
+  (e: 'enter', value: string, event: MouseEvent): void
+  (e: 'space', value: string, event: MouseEvent): void
 }
 
 export interface PlusInputTagState {
@@ -70,7 +74,9 @@ const props = withDefaults(defineProps<PlusInputTagProps>(), {
   trigger: () => ['blur', 'enter', 'space'],
   limit: Infinity,
   inputProps: () => ({}),
-  tagProps: () => ({})
+  tagProps: () => ({}),
+  formatTag: undefined,
+  retainInputValue: false
 })
 const emit = defineEmits<PlusInputTagEmits>()
 
@@ -103,6 +109,7 @@ const handleClick = () => {
 
 const handleClose = (tag: string) => {
   state.tags = state.tags.filter(item => item !== tag)
+  emit('remove', tag)
 }
 
 const handleValue = () => {
@@ -113,17 +120,25 @@ const handleValue = () => {
   ) {
     state.tags.push(state.inputValue.trim())
   }
-  state.inputValue = ''
+
+  // Retain input value
+  if (!props.retainInputValue) {
+    state.inputValue = ''
+  }
+
   emit('update:modelValue', state.tags)
   emit('change', state.tags)
 }
 
-const handle = (type: TriggerType) => {
+const handle = (event: MouseEvent | FocusEvent, type: TriggerType) => {
+  emit(type as any, state.inputValue, event)
+
   const triggerList = isArray(props.trigger)
     ? props.trigger
     : isString(props.trigger)
     ? [props.trigger]
     : ['blur', 'enter', 'space']
+
   if (triggerList.includes(type)) {
     handleValue()
   }
