@@ -11,10 +11,8 @@
   box-sizing: border-box;
   border-radius: getCssVar('border-radius-base');
   border: 1px solid getCssVar('border-color');
-  padding: 0 2px;
+  padding: 1px 2px;
   box-sizing: border-box;
-  height: getCssVar('component-size');
-  line-height: getCssVar('component-size');
 
   &:hover {
     border-color: getCssVar('border-color-hover');
@@ -24,7 +22,9 @@
   }
 
   @include e(tag) {
-    margin-right: 5px;
+    margin-right: 4px;
+    margin-top: 1px;
+    margin-bottom: 1px;
   }
 
   @include e(input) {
@@ -33,11 +33,12 @@
     width: 208px;
     min-width: 85px;
     box-sizing: border-box;
-    padding: 2px 0;
+    padding: 0;
 
     @include elb(input__wrapper) {
       box-sizing: border-box;
       box-shadow: none;
+      padding: 0 4px;
     }
     @include elb(input__inner) {
       line-height: 24px;
