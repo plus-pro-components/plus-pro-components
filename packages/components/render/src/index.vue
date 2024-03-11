@@ -86,9 +86,9 @@ const renderComponent = () => {
     const payload =
       props.renderType === 'form'
         ? {
+            modelValue: state.value,
             ...props.customFieldProps,
-            ...dynamicComponent.props,
-            modelValue: state.value
+            ...dynamicComponent.props
           }
         : {
             ...props.customFieldProps,
