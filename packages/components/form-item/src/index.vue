@@ -29,7 +29,9 @@
         </slot>
 
         <el-tooltip v-if="tooltip" placement="top" v-bind="getTooltip(tooltip)">
-          <el-icon class="plus-table-column__label__icon" :size="16"><QuestionFilled /></el-icon>
+          <slot name="tooltip-icon">
+            <el-icon class="plus-table-column__label__icon" :size="16"><QuestionFilled /></el-icon>
+          </slot>
         </el-tooltip>
       </span>
     </template>

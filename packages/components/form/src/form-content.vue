@@ -17,6 +17,11 @@
         <template v-if="$slots[getFieldSlotName(item.prop)]" #[getFieldSlotName(item.prop)]="data">
           <slot :name="getFieldSlotName(item.prop)" v-bind="data" />
         </template>
+
+        <!--表单tooltip插槽 -->
+        <template v-if="$slots['tooltip-icon']" #tooltip-icon>
+          <slot name="tooltip-icon" />
+        </template>
       </PlusFormItem>
 
       <!-- el-form-item 下一行额外的内容 -->

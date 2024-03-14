@@ -46,6 +46,11 @@
       <template v-for="(_, key) in extraSlots" :key="key" #[key]="data">
         <slot :name="key" v-bind="data" />
       </template>
+
+      <!--表单tooltip插槽 -->
+      <template v-if="$slots['tooltip-icon']" #tooltip-icon>
+        <slot name="tooltip-icon" />
+      </template>
     </PlusForm>
   </PlusDialog>
 </template>
