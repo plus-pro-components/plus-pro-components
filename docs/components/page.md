@@ -103,14 +103,21 @@ page/crud
 
 ## Page Slots
 
-| 插槽名          | 说明                                                     |
-| --------------- | -------------------------------------------------------- |
-| `table-title`   | [PlusTable](/components/table.html) 表格标题             |
-| `table-toolbar` | [PlusTable](/components/table.html) 工具栏左侧           |
-| `table-expand`  | [PlusTable](/components/table.html) 展开行               |
-| `table-append`  | [PlusTable](/components/table.html)（el-table） 最后一行 |
-| `table-empty`   | [PlusTable](/components/table.html) （el-table）空状态   |
-| `search-footer` | [PlusSearch](/components/search.html) 的 footer          |
+| 插槽名                                        | 说明                                                                                       | 作用域插槽参数 |
+| --------------------------------------------- | ------------------------------------------------------------------------------------------ | -------------- |
+| `table-title`                                 | [PlusTable](/components/table.html) 表格标题                                               |                |
+| `table-toolbar`                               | [PlusTable](/components/table.html) 工具栏左侧                                             |                |
+| `table-expand`                                | [PlusTable](/components/table.html) 展开行                                                 |                |
+| `table-append`                                | [PlusTable](/components/table.html)（el-table） 最后一行                                   |                |
+| `table-empty`                                 | [PlusTable](/components/table.html) （el-table）空状态                                     |                |
+| `search-footer`                               | [PlusSearch](/components/search.html) 的 footer                                            |                |
+| `pagination-left`<el-tag>v0.0.3</el-tag>      | [PlusTable](/components/table.html)分页器左侧内容 （默认生效，`align` 属性默认是 `right`） |                |
+| `pagination-right`<el-tag>v0.0.3</el-tag>     | [PlusTable](/components/table.html) 分页器右侧内容 （`align` 属性是 `left`时生效）         |                |
+| `action-bar-more-icon`<el-tag>v0.0.3</el-tag> | [PlusTable](/components/table.html)操作栏更多傍边的 icon                                   |                |
+| `tooltip-icon`<el-tag>v0.0.3</el-tag>         | [PlusTable](/components/table.html) 表格表头 tooltip icon                                  |                |
+| `drag-sort-icon`<el-tag>v0.0.3</el-tag>       | [PlusTable](/components/table.html)表格拖拽行 和 列设置里拖拽 icon                         |                |
+| `column-settings-icon`<el-tag>v0.0.3</el-tag> | [PlusTable](/components/table.html)表格表头 列设置 icon                                    |                |
+| `density-icon`<el-tag>v0.0.3</el-tag>         | [PlusTable](/components/table.html)表格表头 密度 icon                                      |                |
 
 ## Page Exposes
 

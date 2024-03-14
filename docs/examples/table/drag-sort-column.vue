@@ -6,8 +6,7 @@
       columnSetting: {
         dragSort: {
           animation: 180,
-          delay: 0,
-          ghostClass: 'plus-ghost-class'
+          delay: 0
         }
       }
     }"
@@ -115,10 +114,3 @@ const getList = async () => {
 }
 getList()
 </script>
-<style>
-.plus-ghost-class {
-  padding: 0 5px;
-  border: 1px dashed #1677ff;
-  background-color: #fff;
-}
-</style>

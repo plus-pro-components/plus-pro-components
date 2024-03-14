@@ -362,6 +362,18 @@ table/custom-header-tsx
 
 ## 自定义 icon
 
+<el-tag>v0.0.3</el-tag>
+
+组件提供了以下插槽可以自定义 icon
+
+| 插槽名                 | 说明                            |
+| ---------------------- | ------------------------------- |
+| `action-bar-more-icon` | 操作栏更多傍边的 icon           |
+| `tooltip-icon`         | 表格表头 tooltip icon           |
+| `drag-sort-icon`       | 表格拖拽行 和 列设置里拖拽 icon |
+| `column-settings-icon` | 表格表头 列设置 icon            |
+| `density-icon`         | 表格表头 密度 icon              |
+
 :::demo
 
 table/icon-slot
@@ -454,18 +466,23 @@ const handleSelectAll = (selection: any[]) => {
 
 ## Table Slots
 
-| 插槽名                                                   | 说明                                                                                                                                                                                               | 作用域插槽参数                                       |
-| -------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------- |
-| `title`                                                  | 表格标题                                                                                                                                                                                           |                                                      |
-| `toolbar`                                                | 工具栏左侧                                                                                                                                                                                         |                                                      |
-| `expand`                                                 | 展开行                                                                                                                                                                                             |                                                      |
-| `pagination-left`<el-tag class="inline">v0.0.2</el-tag>  | 分页器左侧内容 （默认生效，`align` 属性默认是 `right`）                                                                                                                                            |                                                      |
-| `pagination-right`<el-tag class="inline">v0.0.2</el-tag> | 分页器右侧内容 （`align` 属性是 `left`时生效）                                                                                                                                                     |                                                      |
-| `plus-cell-*`                                            | 自定义表格项，组件会自动根据配置项的 prop 生成对应的插槽                                                                                                                                           | `{row,prop,label,fieldProps,valueType,value,column}` |
-| `plus-header-*`                                          | 自定义表格项 header，组件会自动根据配置项的 prop 生成对应的插槽                                                                                                                                    | `{prop,label,fieldProps,valueType,column}`           |
-| `plus-field-*`                                           | [PlusForm](/components/form.html#form-slots) 的自定义表单项，组件会自动根据配置项的 prop 生成对应的插槽 ，需要开启属性 [PlusColumn['editable']](/components/config.html)                           | `{prop,label,fieldProps,valueType,column,row}`       |
-| `plus-extra-*`                                           | [PlusForm](/components/form.html#form-slots)的自定义渲染 el-form-item 下一行额外的内容，组件会自动根据配置项的 prop 生成对应的插槽，需要开启属性 [PlusColumn['editable']](/components/config.html) | `{column,row}`                                       |
-| ...                                                      | ...                                                                                                                                                                                                | ...                                                  |
+| 插槽名                                        | 说明                                                                                                                                                                                               | 作用域插槽参数                                       |
+| --------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------- |
+| `title`                                       | 表格标题                                                                                                                                                                                           |                                                      |
+| `toolbar`                                     | 工具栏左侧                                                                                                                                                                                         |                                                      |
+| `expand`                                      | 展开行                                                                                                                                                                                             |                                                      |
+| `pagination-left`<el-tag>v0.0.2</el-tag>      | 分页器左侧内容 （默认生效，`align` 属性默认是 `right`）                                                                                                                                            |                                                      |
+| `pagination-right`<el-tag>v0.0.2</el-tag>     | 分页器右侧内容 （`align` 属性是 `left`时生效）                                                                                                                                                     |                                                      |
+| `action-bar-more-icon`<el-tag>v0.0.3</el-tag> | 操作栏更多傍边的 icon                                                                                                                                                                              |                                                      |
+| `tooltip-icon`<el-tag>v0.0.3</el-tag>         | 表格表头 tooltip icon                                                                                                                                                                              |                                                      |
+| `drag-sort-icon`<el-tag>v0.0.3</el-tag>       | 表格拖拽行 和 列设置里拖拽 icon                                                                                                                                                                    |                                                      |
+| `column-settings-icon`<el-tag>v0.0.3</el-tag> | 表格表头 列设置 icon                                                                                                                                                                               |                                                      |
+| `density-icon`<el-tag>v0.0.3</el-tag>         | 表格表头 密度 icon                                                                                                                                                                                 |                                                      |
+| `plus-cell-*`                                 | 自定义表格项，组件会自动根据配置项的 prop 生成对应的插槽                                                                                                                                           | `{row,prop,label,fieldProps,valueType,value,column}` |
+| `plus-header-*`                               | 自定义表格项 header，组件会自动根据配置项的 prop 生成对应的插槽                                                                                                                                    | `{prop,label,fieldProps,valueType,column}`           |
+| `plus-field-*`                                | [PlusForm](/components/form.html#form-slots) 的自定义表单项，组件会自动根据配置项的 prop 生成对应的插槽 ，需要开启属性 [PlusColumn['editable']](/components/config.html)                           | `{prop,label,fieldProps,valueType,column,row}`       |
+| `plus-extra-*`                                | [PlusForm](/components/form.html#form-slots)的自定义渲染 el-form-item 下一行额外的内容，组件会自动根据配置项的 prop 生成对应的插槽，需要开启属性 [PlusColumn['editable']](/components/config.html) | `{column,row}`                                       |
+| ...                                           | ...                                                                                                                                                                                                | ...                                                  |
 
 **`...`表示同时支持所有[ElTable 插槽](https://element-plus.org/zh-CN/component/table.html#table-%E6%8F%92%E6%A7%BD)**
 
