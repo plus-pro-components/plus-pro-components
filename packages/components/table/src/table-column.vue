@@ -30,7 +30,11 @@
           </slot>
 
           <el-tooltip v-if="item.tooltip" placement="top" v-bind="getTooltip(item.tooltip)">
-            <el-icon class="plus-table-column__header__icon" :size="16"><QuestionFilled /></el-icon>
+            <slot name="tooltip-icon">
+              <el-icon class="plus-table-column__header__icon" :size="16">
+                <QuestionFilled />
+              </el-icon>
+            </slot>
           </el-tooltip>
         </span>
       </template>

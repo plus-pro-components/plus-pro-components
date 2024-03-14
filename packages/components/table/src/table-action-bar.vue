@@ -21,10 +21,10 @@
         class="plus-table-action-bar__dropdown"
       >
         <span class="plus-table-action-bar__dropdown__link">
-          {{ t('plus.table.more') }}
-          <el-icon>
-            <ArrowDownBold />
-          </el-icon>
+          <span class="plus-table-action-bar__more-text"> {{ t('plus.table.more') }}</span>
+          <slot name="action-bar-more-icon">
+            <el-icon> <ArrowDownBold /> </el-icon>
+          </slot>
         </span>
 
         <!-- 下拉按钮 -->

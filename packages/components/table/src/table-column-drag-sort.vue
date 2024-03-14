@@ -6,7 +6,9 @@
     class-name="plus-table-column-drag-sort"
     v-bind="dragSortableTableColumnProps"
   >
-    <span class="plus-table-column-drag-icon">☷</span>
+    <span class="plus-table-column-drag-icon">
+      <slot name="drag-sort-icon">☷</slot>
+    </span>
   </el-table-column>
 </template>
 

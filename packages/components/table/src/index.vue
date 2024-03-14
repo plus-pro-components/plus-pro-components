@@ -17,6 +17,18 @@
       <template #toolbar>
         <slot name="toolbar" />
       </template>
+
+      <template v-if="$slots['drag-sort-icon']" #drag-sort-icon>
+        <slot name="drag-sort-icon" />
+      </template>
+
+      <template v-if="$slots['density-icon']" #density-icon>
+        <slot name="density-icon" />
+      </template>
+
+      <template v-if="$slots['column-settings-icon']" #column-settings-icon>
+        <slot name="column-settings-icon" />
+      </template>
     </PlusTableTitleBar>
 
     <el-table
@@ -56,7 +68,11 @@
         :drag-sortable-table-column-props="dragSortableTableColumnProps"
         :table-instance="tableInstance"
         @dragSortEnd="handleDragSortEnd"
-      />
+      >
+        <template v-if="$slots['drag-sort-icon']" #drag-sort-icon>
+          <slot name="drag-sort-icon" />
+        </template>
+      </PlusTableColumnDragSort>
 
       <!-- 展开行 -->
       <el-table-column v-if="hasExpand" type="expand" v-bind="expandTableColumnProps">
@@ -88,6 +104,11 @@
         <template v-for="(_, key) in extraSlots" :key="key" #[key]="data">
           <slot :name="key" v-bind="data" />
         </template>
+
+        <!-- tooltip-icon  插槽 -->
+        <template v-if="$slots['tooltip-icon']" #tooltip-icon>
+          <slot name="tooltip-icon" />
+        </template>
       </PlusTableColumn>
 
       <!-- 操作栏 -->
@@ -96,7 +117,12 @@
         v-bind="actionBar"
         @clickAction="handleAction"
         @clickActionConfirmCancel="handleClickActionConfirmCancel"
-      />
+      >
+        <!-- 操作栏更多icon插槽 -->
+        <template v-if="$slots['action-bar-more-icon']" #action-bar-more-icon>
+          <slot name="action-bar-more-icon" />
+        </template>
+      </PlusTableActionBar>
 
       <!-- 插入至表格最后一行之后的内容 -->
       <template #append>
