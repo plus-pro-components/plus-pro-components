@@ -57,7 +57,7 @@ const tableConfig: PlusColumn[] = [
   {
     label: '名称',
     prop: 'name',
-    headerFilter: true,
+    disabledHeaderFilter: true,
     tooltip: '名称',
     tableColumnProps: {
       align: 'center',

@@ -39,7 +39,7 @@ const tableConfig: PlusColumn[] = [
   {
     label: '名称',
     prop: 'name',
-    headerFilter: true,
+    disabledHeaderFilter: true,
     fieldProps: {
       style: {
         color: 'red',

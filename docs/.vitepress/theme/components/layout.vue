@@ -3,6 +3,8 @@ import DefaultTheme from 'vitepress/theme'
 import { ref, onMounted } from 'vue'
 import cookie from 'js-cookie'
 
+const hasNotice = false
+
 const { Layout } = DefaultTheme
 
 const isCloseNotice = 'Plus-Pro-Components-Notice-Key'
@@ -20,7 +22,7 @@ onMounted(() => {
 
 <template>
   <Layout>
-    <template #home-hero-before>
+    <template #home-hero-before v-if="hasNotice">
       <div class="home-notice">
         <el-alert effect="dark" @close="handleClose" v-if="!hasClose">
           <template #title>

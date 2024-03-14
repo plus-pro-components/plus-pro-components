@@ -141,6 +141,15 @@ export default defineConfig({
               link: '/guide/i18n'
             },
             {
+              text: '版本升级',
+              items: [
+                {
+                  text: '从 v0.0.2 迁移',
+                  link: '/guide/upgrade/upgrade-to-0.0.3'
+                }
+              ]
+            },
+            {
               text: '命名空间',
               link: '/guide/namespace'
             },
@@ -238,6 +247,7 @@ export default defineConfig({
         },
         {
           text: '内置组件',
+          collapsed: true,
           items: [
             {
               text: '弹窗',
