@@ -247,7 +247,6 @@ export default defineConfig({
         },
         {
           text: '内置组件',
-          collapsed: true,
           items: [
             {
               text: '弹窗',
