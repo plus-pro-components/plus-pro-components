@@ -18,16 +18,19 @@
         <slot name="toolbar" />
       </template>
 
+      <!-- 表格拖拽行 和 列设置里拖拽 icon -->
       <template v-if="$slots['drag-sort-icon']" #drag-sort-icon>
         <slot name="drag-sort-icon" />
       </template>
 
-      <template v-if="$slots['density-icon']" #density-icon>
-        <slot name="density-icon" />
-      </template>
-
+      <!-- 表格表头 列设置 icon   -->
       <template v-if="$slots['column-settings-icon']" #column-settings-icon>
         <slot name="column-settings-icon" />
+      </template>
+
+      <!-- 表表格表头 密度 icon  -->
+      <template v-if="$slots['density-icon']" #density-icon>
+        <slot name="density-icon" />
       </template>
     </PlusTableTitleBar>
 

@@ -67,6 +67,38 @@
         <template v-if="$slots['table-empty']" #empty>
           <slot name="table-empty" />
         </template>
+
+        <template v-if="$slots['pagination-left']" #pagination-left>
+          <slot name="pagination-left" />
+        </template>
+
+        <template v-if="$slots['pagination-right']" #pagination-right>
+          <slot name="pagination-right" />
+        </template>
+
+        <!-- 表格拖拽行 和 列设置里拖拽 icon -->
+        <template v-if="$slots['drag-sort-icon']" #drag-sort-icon>
+          <slot name="drag-sort-icon" />
+        </template>
+
+        <!-- 表格表头 列设置 icon   -->
+        <template v-if="$slots['column-settings-icon']" #column-settings-icon>
+          <slot name="column-settings-icon" />
+        </template>
+
+        <!-- 表表格表头 密度 icon  -->
+        <template v-if="$slots['density-icon']" #density-icon>
+          <slot name="density-icon" />
+        </template>
+
+        <!--table tooltip-icon  插槽 -->
+        <template v-if="$slots['tooltip-icon']" #tooltip-icon>
+          <slot name="tooltip-icon" />
+        </template>
+        <!--table 操作栏更多icon插槽 -->
+        <template v-if="$slots['action-bar-more-icon']" #action-bar-more-icon>
+          <slot name="action-bar-more-icon" />
+        </template>
       </PlusTable>
     </component>
   </div>
