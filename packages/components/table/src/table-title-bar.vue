@@ -100,7 +100,7 @@
 
               <el-checkbox
                 :label="getTableKey(item)"
-                :disabled="item.headerFilter"
+                :disabled="item.disabledHeaderFilter"
                 class="plus-table-title-bar__toolbar__checkbox__item"
               >
                 <el-tooltip
@@ -212,7 +212,7 @@ const subColumns = computed(() => props.columns.filter(item => unref(item.hideIn
 const getCheckList = (hasDisabled = false) => {
   if (hasDisabled) {
     return cloneDeep(subColumns.value)
-      .filter(item => item.headerFilter === true)
+      .filter(item => item.disabledHeaderFilter === true)
       .map(item => getTableKey(item))
   }
 
