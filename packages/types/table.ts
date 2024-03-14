@@ -13,8 +13,13 @@ export type TableValueType = 'img' | 'link' | 'money' | 'tag' | 'progress' | 'co
 export type TableColumnProps = {
   /**
    *  @desc 禁止表头过滤 默认`false`
+   *  @deprecated 请使用 `disabledHeaderFilter` 代替
    */
   headerFilter?: boolean
+  /**
+   *  @desc 禁止表头过滤 默认`false`
+   */
+  disabledHeaderFilter?: boolean
 
   /**
    * @desc 表格行的其他配置 （不包含label prop width minWidth）
