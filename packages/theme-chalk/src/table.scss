@@ -26,8 +26,12 @@
     }
 
     @include e(dropdown__link) {
-      display: inline-block;
+      display: inline-flex;
       cursor: pointer;
+      user-select: none;
+    }
+    @include e(more-text) {
+      margin-right: 2px;
     }
     @include e(column__link) {
       margin-right: 10px;
@@ -120,5 +124,16 @@
 }
 /* 列设置 */
 @include b(table-title-bar__toolbar__checkbox__item) {
+  margin-left: 6px;
+}
+/* 列设置 拖拽 item */
+@include b(table-checkbox-item) {
+  display: flex;
+  align-items: center;
   margin-left: 20px;
+}
+/* 列设置 拖拽handle  */
+@include b(table-checkbox-handle) {
+  font-size: 18px;
+  cursor: move;
 }
