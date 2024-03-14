@@ -209,17 +209,27 @@ const buttonNameDensity: ButtonNameDensity[] = [
 
 const subColumns = computed(() => props.columns.filter(item => unref(item.hideInTable) !== true))
 
+const getCheckList = (hasDisabled = false) => {
+  if (hasDisabled) {
+    return cloneDeep(subColumns.value)
+      .filter(item => item.headerFilter === true)
+      .map(item => getTableKey(item))
+  }
+
+  return cloneDeep(subColumns.value).map(item => getTableKey(item))
+}
+
 const state: State = reactive({
   checkAll: true,
   isIndeterminate: false,
   bigImageVisible: false,
   srcList: [],
-  checkList: cloneDeep(subColumns.value).map(item => getTableKey(item))
+  checkList: getCheckList()
 })
 
 const handleCheckAllChange = (val: CheckboxValueType) => {
-  state.checkList = val ? cloneDeep(subColumns.value).map(item => getTableKey(item)) : []
-  state.isIndeterminate = false
+  state.checkList = val ? getCheckList() : getCheckList(true)
+  handleFilterTableConfirm()
 }
 
 const handleFilterTableConfirm = () => {
@@ -257,7 +267,8 @@ const handleDrop = () => {
   const checkbox = checkboxGroupInstance.value // 获取容器元素
   if (!checkbox) return
   let config: SortableOptions = {
-    onEnd: handleDragEnd
+    onEnd: handleDragEnd,
+    ghostClass: 'plus-table-ghost-class'
   }
   const dragSort = (
     (props.titleBar as any)?.columnSetting as { dragSort?: boolean | Partial<SortableOptions> }
