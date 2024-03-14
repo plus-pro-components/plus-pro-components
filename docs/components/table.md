@@ -360,6 +360,14 @@ table/custom-header-tsx
 
 :::
 
+## 自定义 icon
+
+:::demo
+
+table/icon-slot
+
+:::
+
 ## 综合表格
 
 :::demo

@@ -8,7 +8,7 @@
       :columns="tableConfig"
       :table-data="tableData"
       has-index-column
-      :is-show-drag-sort="true"
+      :drag-sort="true"
       table-title="表格"
       :pagination="{ total, modelValue: pageInfo }"
       :action-bar="{

@@ -12,6 +12,15 @@
       }
     }"
   />
+  <PlusTable
+    :columns="tableConfig"
+    :table-data="tableData"
+    :title-bar="{
+      columnSetting: {
+        dragSort: false
+      }
+    }"
+  />
 </template>
 
 <script lang="ts" setup>
@@ -107,12 +116,6 @@ const getList = async () => {
 getList()
 </script>
 <style>
-.plus-handle::before {
-  content: '☷';
-  color: '#ccc';
-  margin-right: 10px;
-  cursor: grab;
-}
 .plus-ghost-class {
   padding: 0 5px;
   border: 1px dashed #1677ff;
