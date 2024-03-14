@@ -137,3 +137,9 @@
   font-size: 18px;
   cursor: move;
 }
+
+@include b(table-ghost-class) {
+  padding: 0 5px;
+  border: 1px dashed getCssVar('color-primary');
+  background-color: #fff;
+}
