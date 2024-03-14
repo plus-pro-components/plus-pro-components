@@ -261,6 +261,18 @@ form/extra
 
 :::
 
+## 自定义 tooltip icon
+
+<el-tag>v0.0.3</el-tag>
+
+使用`tooltip-icon`插槽 可自定义 tooltip icon。
+
+:::demo
+
+form/tooltip-icon-slot
+
+:::
+
 ## 所有内置的表单类型
 
 :::demo
@@ -337,14 +349,15 @@ const handleValidate = (prop: FormItemProp, isValid: boolean, message: string) =
 
 ## Form Slots
 
-| 插槽名         | 说明                                                                                 | 作用域插槽参数                             |
-| -------------- | ------------------------------------------------------------------------------------ | ------------------------------------------ |
-| `default`      | 表单的内容 默认是 `PlusFormItem` 组件                                                |                                            |
-| `footer`       | 表单底部按钮                                                                         | `{handleReset,handleSubmit}`               |
-| `group-header` | 分组表单头部，配置 group 字段时生效。                                                | `{title,columns,icon}`                     |
-| `plus-field-*` | 自定义表单项，组件会自动根据配置项的 prop 生成对应的插槽                             | `{prop,label,fieldProps,valueType,column}` |
-| `plus-label-*` | 自定义表单项 label，组件会自动根据配置项的 prop 生成对应的插槽                       | `{prop,label,fieldProps,valueType,column}` |
-| `plus-extra-*` | 自定义渲染 el-form-item 下一行额外的内容，组件会自动根据配置项的 prop 生成对应的插槽 | `{column}`                                 |
+| 插槽名                                | 说明                                                                                 | 作用域插槽参数                             |
+| ------------------------------------- | ------------------------------------------------------------------------------------ | ------------------------------------------ |
+| `default`                             | 表单的内容 默认是 `PlusFormItem` 组件                                                |                                            |
+| `footer`                              | 表单底部按钮                                                                         | `{handleReset,handleSubmit}`               |
+| `tooltip-icon`<el-tag>v0.0.3</el-tag> | tooltip icon                                                                         |                                            |
+| `group-header`                        | 分组表单头部，配置 group 字段时生效。                                                | `{title,columns,icon}`                     |
+| `plus-field-*`                        | 自定义表单项，组件会自动根据配置项的 prop 生成对应的插槽                             | `{prop,label,fieldProps,valueType,column}` |
+| `plus-label-*`                        | 自定义表单项 label，组件会自动根据配置项的 prop 生成对应的插槽                       | `{prop,label,fieldProps,valueType,column}` |
+| `plus-extra-*`                        | 自定义渲染 el-form-item 下一行额外的内容，组件会自动根据配置项的 prop 生成对应的插槽 | `{column}`                                 |
 
 ## Exposes
 
