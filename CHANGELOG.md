@@ -1,3 +1,27 @@
+## [v0.0.3](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.2...v0.0.3) (2024-03-14)
+
+
+### ✨ Features
+
+* **types:** :sparkles: types headerFilter deprecated, headerFilter=>disabledHeaderFilter([5f0f0f6](https://github.com/plus-pro-components/plus-pro-components/commit/5f0f0f6)) by@xiaofei
+* **components:** :sparkles: columns 'headerFilter'=>'disabledHeaderFilter'([a35da2b](https://github.com/plus-pro-components/plus-pro-components/commit/a35da2b)) by@xiaofei
+* **components:** :sparkles: page component add icon slot.([eaa92d0](https://github.com/plus-pro-components/plus-pro-components/commit/eaa92d0)) by@xiaofei
+* **theme-chalk:** :sparkles: table.scss add 'plus-table-ghost-class'([a768fef](https://github.com/plus-pro-components/plus-pro-components/commit/a768fef)) by@xiaofei
+* **theme-chalk:** :sparkles: update table.scss([9c5eda6](https://github.com/plus-pro-components/plus-pro-components/commit/9c5eda6)) by@xiaofei
+* **components:** :sparkles: table component add icon slot.([efc0b38](https://github.com/plus-pro-components/plus-pro-components/commit/efc0b38)) by@xiaofei
+* **components:** :sparkles: form add 'tooltip-icon' slot.([6a39af0](https://github.com/plus-pro-components/plus-pro-components/commit/6a39af0)) by@xiaofei
+* **components:** :sparkles: input-tag component add 'formatTag' and 'retainInputValue' props.([9731f7c](https://github.com/plus-pro-components/plus-pro-components/commit/9731f7c)) by@xiaofei
+
+
+### 🐛 Bug Fixes
+
+* **components:** :bug: fix table column setting checkAll issues.([abda49a](https://github.com/plus-pro-components/plus-pro-components/commit/abda49a)) by@xiaofei
+* **components:** :bug: render form  priority 'fieldProps<modelValue' => 'fieldProps>modelValue'([81de288](https://github.com/plus-pro-components/plus-pro-components/commit/81de288)) by@xiaofei
+* **theme-chalk:** :bug: fix input-tag wrap error.([95ad002](https://github.com/plus-pro-components/plus-pro-components/commit/95ad002)) by@xiaofei
+
+
+
+
 ## [v0.0.2](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.1...v0.0.2) (2024-03-04)
 
 
