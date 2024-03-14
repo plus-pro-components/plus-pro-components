@@ -3,6 +3,7 @@ import { mount } from '@vue/test-utils'
 import ElementPlus from 'element-plus'
 import { describe, expect, test } from 'vitest'
 import type { PlusColumn, FieldValueType } from '@plus-pro-components/types'
+import { useTable } from '@plus-pro-components/hooks'
 import PlusTable from '../src/index.vue'
 
 describe('table/index.vue', () => {
@@ -271,5 +272,175 @@ describe('table/index.vue', () => {
     )
     await nextTick()
     expect(wrapper1.find('.plus-pagination').text()).includes('pagination-right')
+  })
+  test('icon slots test', async () => {
+    const columns: PlusColumn[] = [
+      {
+        label: '名称',
+        tooltip: '名称最多显示6个字符',
+        width: 120,
+        prop: 'name',
+        tableColumnProps: {
+          showOverflowTooltip: true
+        }
+      },
+      {
+        label: '多级数据',
+        width: 120,
+        prop: 'level.state.value'
+      },
+      {
+        label: '状态',
+        width: 120,
+        prop: 'status',
+        valueType: 'select',
+        options: [
+          {
+            label: '未解决',
+            value: '0',
+            type: 'warning'
+          },
+          {
+            label: '已解决',
+            value: '1',
+            type: 'success'
+          },
+          {
+            label: '解决中',
+            value: '2',
+            type: 'primary'
+          },
+          {
+            label: '失败',
+            value: '3',
+            type: 'danger'
+          }
+        ]
+      },
+      {
+        label: '标签',
+        width: 120,
+        prop: 'tag',
+        valueType: 'tag',
+        fieldProps: (value: string) => {
+          return { type: value }
+        }
+      },
+
+      {
+        label: '评分',
+        width: 200,
+        prop: 'rate',
+        valueType: 'rate',
+        editable: true
+      },
+      {
+        label: '开关',
+        width: 100,
+        prop: 'switch',
+        valueType: 'switch',
+        editable: true
+      },
+      {
+        label: '图片',
+        prop: 'img',
+        width: 100,
+        valueType: 'img'
+      }
+    ]
+
+    const tableData = [...new Array(3)].map((item, index) => {
+      return {
+        index,
+        id: index,
+        name: index === 0 ? 'name'.repeat(20) : index + 'name',
+        status: String(index % 3),
+        tag: index === 1 ? 'success' : index === 2 ? 'warning' : index === 3 ? 'info' : 'danger',
+        progress: Math.ceil(Math.random() * index * 10),
+        rate: index > 3 ? 2 : 3.5,
+        switch: index % 2 === 0 ? true : false,
+        img: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
+        time: new Date(),
+        code: `
+            const getData = async params => {
+              const data = await getData(params)
+              return { list: data.data, ...data }
+            }`,
+        custom: 'custom' + index,
+        level: {
+          state: {
+            value: 'level' + index
+          }
+        }
+      }
+    })
+
+    const { pageInfo, buttons } = useTable()
+
+    buttons.value = [
+      {
+        // 查看
+        text: '查看',
+        props: {
+          type: 'primary'
+        }
+      },
+      {
+        // 修改
+        text: '修改',
+        props: {
+          type: 'success'
+        }
+      },
+      {
+        // 删除
+        text: '删除',
+        props: {
+          type: 'warning'
+        },
+        confirm: {}
+      },
+      {
+        text: '复制',
+        props: {
+          type: 'primary'
+        },
+        confirm: {}
+      }
+    ]
+
+    const wrapper = mount(
+      () => (
+        <PlusTable
+          drag-sortable
+          has-index-column
+          columns={columns}
+          tableData={tableData}
+          pagination={{ total: 3, modelValue: pageInfo.value }}
+          action-bar={{ buttons: buttons.value, showNumber: 3 }}
+          v-slots={{
+            'action-bar-more-icon': () => 'action-bar-more-icon',
+            'tooltip-icon': () => 'tooltip-icon',
+            'drag-sort-icon': () => 'drag-sort-icon',
+            'column-settings-icon': () => 'column-settings-icon',
+            'density-icon': () => 'density-icon'
+          }}
+        />
+      ),
+      {
+        global: {
+          plugins: [ElementPlus]
+        }
+      }
+    )
+    await nextTick()
+
+    setTimeout(() => {
+      expect(wrapper.find('.plus-table').text()).includes('action-bar-more-icon')
+      expect(wrapper.find('.plus-table').text()).includes('tooltip-icon')
+      expect(wrapper.find('.plus-table').text()).includes('drag-sort-icon')
+      expect(wrapper.find('.plus-table').text()).includes('column-settings-icon')
+      expect(wrapper.find('.plus-table').text()).includes('density-icon')
+    })
   })
 })
