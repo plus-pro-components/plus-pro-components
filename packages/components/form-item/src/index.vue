@@ -215,7 +215,7 @@
     />
 
     <el-select
-      v-else-if="valueType === 'select' && customFieldPropsIsReady"
+      v-else-if="valueType === 'select'"
       ref="fieldInstance"
       v-model="state"
       :placeholder="t('plus.field.pleaseSelect') + label"
@@ -540,13 +540,13 @@ watch(
 )
 
 watch(
-  () => props.modelValue,
-  val => {
-    setValue(val)
+  computed(() => [props.modelValue, customFieldPropsIsReady.value]),
+  ([val, isReady]) => {
+    isReady && setValue(val)
   },
   {
-    flush: 'post',
-    immediate: true
+    immediate: true,
+    flush: 'post'
   }
 )
 
