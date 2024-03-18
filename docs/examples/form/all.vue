@@ -17,14 +17,40 @@ import { ref } from 'vue'
 import type { PlusColumn, FieldValues } from 'plus-pro-components'
 
 const state = ref<FieldValues>({
-  status: '0',
-  name: '',
-  rate: 4,
-  progress: 100,
+  autocomplete: 'vue',
+  cascader: ['0', '0-0', '0-0-0'],
+  'cascader-multiple': [
+    ['0', '0-0', '0-0-0'],
+    ['0', '0-0', '0-0-1'],
+    ['0', '0-0', '0-0-2']
+  ],
+  checkbox: ['0'],
+  'color-picker': 'rgba(255, 69, 0, 0.68)',
+  year: '2024',
+  years: ['2024', '2005'],
+  month: '2024-02',
+  date: '2024-03-05',
+  dates: ['2024-03-05', '2024-03-06'],
+  datetime: '2024-03-19 00:00:00',
+  week: '2024-03-19',
+  datetimerange: ['2024-03-07 00:00:00', '2024-03-09 00:00:00'],
+  daterange: ['2024-02-29', '2024-03-29'],
+  monthrange: ['2024-03', '2024-05'],
+  select: '0',
+  'select-multiple': ['0', '1'],
+  input: '单行文本',
+  textarea: '多行文本',
+  'input-number': 4,
+  rate: '3',
   switch: true,
+  radio: '0',
+  slider: 50,
+  'time-picker': '2024-03-18 09:55:31',
+  'time-select': '09:55:31',
   text: '文本',
-  time: new Date().toString(),
-  img: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg'
+  'plus-radio': 1,
+  'plus-date-picker': ['2024-03-18 09:55:31', '2024-03-20 09:55:31'],
+  'plus-input-tag': ['tag', 'tag1']
 })
 
 interface RestaurantItem {
@@ -53,6 +79,57 @@ const loadAll = () => {
 
 restaurants.value = loadAll()
 
+const cascaderOptions = [
+  {
+    value: '0',
+    label: '陕西',
+    children: [
+      {
+        value: '0-0',
+        label: '西安',
+        children: [
+          {
+            value: '0-0-0',
+            label: '新城区'
+          },
+          {
+            value: '0-0-1',
+            label: '高新区'
+          },
+          {
+            value: '0-0-2',
+            label: '灞桥区'
+          }
+        ]
+      }
+    ]
+  },
+  {
+    value: '1',
+    label: '山西',
+    children: [
+      {
+        value: '1-0',
+        label: '太原',
+        children: [
+          {
+            value: '1-0-0',
+            label: '小店区'
+          },
+          {
+            value: '1-0-1',
+            label: '古交市'
+          },
+          {
+            value: '1-0-2',
+            label: '万柏林区'
+          }
+        ]
+      }
+    ]
+  }
+]
+
 const columns: PlusColumn[] = [
   {
     label: 'autocomplete',
@@ -74,56 +151,16 @@ const columns: PlusColumn[] = [
     label: 'cascader',
     prop: 'cascader',
     valueType: 'cascader',
-    options: [
-      {
-        value: '0',
-        label: '陕西',
-        children: [
-          {
-            value: '0-0',
-            label: '西安',
-            children: [
-              {
-                value: '0-0-0',
-                label: '新城区'
-              },
-              {
-                value: '0-0-1',
-                label: '高新区'
-              },
-              {
-                value: '0-0-2',
-                label: '灞桥区'
-              }
-            ]
-          }
-        ]
-      },
-      {
-        value: '1',
-        label: '山西',
-        children: [
-          {
-            value: '1-0',
-            label: '太原',
-            children: [
-              {
-                value: '1-0-0',
-                label: '小店区'
-              },
-              {
-                value: '1-0-1',
-                label: '古交市'
-              },
-              {
-                value: '1-0-2',
-                label: '万柏林区'
-              }
-            ]
-          }
-        ]
-      }
-    ]
+    options: cascaderOptions
+  },
+  {
+    label: 'cascader-multiple',
+    prop: 'cascader-multiple',
+    valueType: 'cascader',
+    options: cascaderOptions,
+    fieldProps: {
+      props: { multiple: true }
+    }
   },
   {
     label: 'checkbox',
@@ -150,14 +187,89 @@ const columns: PlusColumn[] = [
     valueType: 'color-picker'
   },
   {
-    label: 'time',
-    prop: 'time',
-    valueType: 'date-picker'
+    label: 'year',
+    prop: 'year',
+    valueType: 'date-picker',
+    fieldProps: {
+      type: 'year'
+    }
+  },
+  // {
+  //   label: 'years',
+  //   prop: 'years',
+  //   valueType: 'date-picker',
+  //   fieldProps: {
+  //     type: 'years'
+  //   }
+  // },
+  {
+    label: 'month',
+    prop: 'month',
+    valueType: 'date-picker',
+    fieldProps: {
+      type: 'month'
+    }
+  },
+  {
+    label: 'date',
+    prop: 'date',
+    valueType: 'date-picker',
+    fieldProps: {
+      type: 'date'
+    }
+  },
+  {
+    label: 'dates',
+    prop: 'dates',
+    valueType: 'date-picker',
+    fieldProps: {
+      type: 'dates'
+    }
+  },
+  {
+    label: 'datetime',
+    prop: 'datetime',
+    valueType: 'date-picker',
+    fieldProps: {
+      type: 'datetime'
+    }
+  },
+  {
+    label: 'week',
+    prop: 'week',
+    valueType: 'date-picker',
+    fieldProps: {
+      type: 'week'
+    }
+  },
+  {
+    label: 'datetimerange',
+    prop: 'datetimerange',
+    valueType: 'date-picker',
+    fieldProps: {
+      type: 'datetimerange'
+    }
+  },
+  {
+    label: 'daterange',
+    prop: 'daterange',
+    valueType: 'date-picker',
+    fieldProps: {
+      type: 'daterange'
+    }
+  },
+  {
+    label: 'monthrange',
+    prop: 'monthrange',
+    valueType: 'date-picker',
+    fieldProps: {
+      type: 'monthrange'
+    }
   },
   {
     label: 'select',
     width: 120,
-    prop: 'status',
+    prop: 'select',
     valueType: 'select',
     options: [
       {
@@ -183,13 +295,44 @@ const columns: PlusColumn[] = [
     ]
   },
   {
+    label: 'select-multiple',
+    width: 120,
+    prop: 'select-multiple',
+    valueType: 'select',
+    options: [
+      {
+        label: '未解决',
+        value: '0',
+        color: 'red'
+      },
+      {
+        label: '已解决',
+        value: '1',
+        color: 'blue'
+      },
+      {
+        label: '解决中',
+        value: '2',
+        color: 'yellow'
+      },
+      {
+        label: '失败',
+        value: '3',
+        color: 'red'
+      }
+    ],
+    fieldProps: {
+      multiple: true
+    }
+  },
+  {
     label: 'input',
     width: 120,
     prop: 'input'
   },
   {
     label: 'input-number',
-    prop: 'number',
+    prop: 'input-number',
     valueType: 'input-number',
     fieldProps: { precision: 2, step: 2 }
   },

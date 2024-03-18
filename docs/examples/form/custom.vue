@@ -52,6 +52,7 @@ const columns: PlusColumn[] = [
         })
       }
       return h(ElTransfer as any, {
+        modelValue: [],
         data: [...data],
         onChange
       })
