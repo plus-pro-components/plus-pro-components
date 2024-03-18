@@ -180,7 +180,7 @@ export interface FormColumnProps {
 }
 
 /**
- * 单个表单值的类型
+ * 通用的单个表单值的类型
  */
 export type FieldValueType =
   | string
@@ -196,8 +196,10 @@ export type FieldValueType =
   | [Date, Date]
   | [number, number]
   | [string, string]
+  | string[][]
+  | number[][]
 
 /**
- * 整体表单值的类型
+ * 通用的整体表单值的类型
  */
-export type FieldValues = Record<string, FieldValueType>
+export type FieldValues = Record<keyof any, FieldValueType>
