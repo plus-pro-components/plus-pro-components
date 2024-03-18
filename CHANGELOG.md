@@ -1,3 +1,23 @@
+## [v0.0.4](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.3...v0.0.4) (2024-03-18)
+
+
+### ✨ Features
+
+* **theme-chalk:** :sparkles: input-tag.scss remove input 'width','max-width'([5efe94e](https://github.com/plus-pro-components/plus-pro-components/commit/5efe94e)) by@xiaofei
+* **types:** :sparkles: fieldValueType type add 'string[][]','number[][]'([544f3a5](https://github.com/plus-pro-components/plus-pro-components/commit/544f3a5)) by@xiaofei
+* **constants:** :sparkles: datePickerValueIsArrayList add 'years','dates'([27171b8](https://github.com/plus-pro-components/plus-pro-components/commit/27171b8)) by@xiaofei
+* **components:** :sparkles: form-item component form value is Array  add 'years','dates'([5ccc1e9](https://github.com/plus-pro-components/plus-pro-components/commit/5ccc1e9)) by@xiaofei
+* **components:** :sparkles: form-item component remove el-date-picker 'format' and 'value-format'([87b4cde](https://github.com/plus-pro-components/plus-pro-components/commit/87b4cde)) by@xiaofei
+* **all:** Merge pull request [#75](https://github.com/plus-pro-components/plus-pro-components/pull/75) from plus-pro-components/gs([93cdca7](https://github.com/plus-pro-components/plus-pro-components/commit/93cdca7)) by@xiaofei
+
+
+### 🐛 Bug Fixes
+
+* **components:** :bug: fix fieldProps has a higher priority than modelValue([5e75b53](https://github.com/plus-pro-components/plus-pro-components/commit/5e75b53)) by@guosong
+
+
+
+
 ## [v0.0.3](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.2...v0.0.3) (2024-03-14)
 
 
