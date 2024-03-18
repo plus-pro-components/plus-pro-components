@@ -129,9 +129,7 @@
       :start-placeholder="t('plus.datepicker.startPlaceholder')"
       :end-placeholder="t('plus.datepicker.endPlaceholder')"
       class="plus-form-item-field"
-      format="YYYY-MM-DD HH:mm:ss"
       type="datetime"
-      value-format="YYYY-MM-DD HH:mm:ss"
       clearable
       v-bind="customFieldProps"
       @change="handleChange"
@@ -213,6 +211,29 @@
       v-bind="customFieldProps"
       @change="handleChange"
     />
+
+    <el-select
+      v-else-if="valueType === 'select' && customFieldProps.multiple === true"
+      ref="fieldInstance"
+      v-model="state"
+      :placeholder="t('plus.field.pleaseSelect') + label"
+      class="plus-form-item-field"
+      clearable
+      v-bind="customFieldProps"
+      @change="handleChange"
+    >
+      <template v-for="(fieldSlot, key) in fieldSlots" :key="key" #[key]="data">
+        <component :is="fieldSlot" v-bind="data" />
+      </template>
+
+      <el-option
+        v-for="item in options"
+        :key="item.label"
+        :label="item.label"
+        :value="item.value"
+        v-bind="item.fieldItemProps"
+      />
+    </el-select>
 
     <el-select
       v-else-if="valueType === 'select'"
@@ -434,7 +455,7 @@ const fieldInstance = ref()
 const customFormItemProps = ref<any>({})
 const customFieldProps = ref<any>({})
 const state = ref<FieldValueType>()
-const range = ['datetimerange', 'daterange', 'monthrange']
+const range = ['datetimerange', 'daterange', 'monthrange', 'years', 'dates']
 const numberList = ['rate', 'input-number', 'slider']
 const arrayList = ['checkbox', 'plus-date-picker', 'plus-input-tag']
 const customFieldPropsIsReady = ref(false)
