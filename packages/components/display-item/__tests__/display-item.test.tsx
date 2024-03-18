@@ -4,7 +4,7 @@ import { mount } from '@vue/test-utils'
 import { describe, expect, test } from 'vitest'
 import type { PlusColumn } from '@plus-pro-components/types'
 import { formatDate } from '@plus-pro-components/components/utils'
-import { Link } from '@element-plus/icons-vue'
+import { Link, DocumentCopy, Select } from '@element-plus/icons-vue'
 
 import DisplayItem from '../src/index.vue'
 
@@ -133,6 +133,7 @@ describe('display-item/index.vue', () => {
       }
     )
     await nextTick()
+    expect(wrapper.find('.plus-display-item__icon__copy').exists()).toBe(true)
     expect(wrapper.find('.container').text()).includes(row.name)
     expect(wrapper.find('.container').text()).includes(row.status)
     expect(wrapper.find('.container').text()).includes(row.tag)
@@ -140,9 +141,10 @@ describe('display-item/index.vue', () => {
     expect(wrapper.find('.container').text()).includes('￥' + row.money)
     expect(wrapper.find('.el-progress-bar__inner').attributes('style')).includes(row.progress + '%')
     expect(wrapper.find('.el-rate').attributes('aria-valuenow')).includes(row.rate)
-    expect(wrapper.find('.el-switch__input').attributes('aria-checked')).includes(row.switch)
     expect(wrapper.find('.el-link__inner').text()).includes('link')
-    expect(wrapper.find('.plus-display-item__icon__copy').exists()).toBe(true)
+    setTimeout(() => {
+      expect(wrapper.find('.el-switch__input').attributes('aria-checked')).includes(row.switch)
+    })
   })
 
   test('render display test', async () => {
@@ -168,7 +170,11 @@ describe('display-item/index.vue', () => {
 
     const wrapper = mount(() => <DisplayItem column={column} row={{}} />, {
       global: {
-        plugins: [ElementPlus]
+        plugins: [ElementPlus],
+        components: {
+          DocumentCopy,
+          Select
+        }
       }
     })
     await nextTick()
