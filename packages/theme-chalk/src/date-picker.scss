@@ -24,6 +24,7 @@
 
   @include e(start) {
     font-size: 14px;
+    flex: 1;
     @include elb(input__wrapper) {
       border: none;
       box-shadow: none;
@@ -45,6 +46,7 @@
 @include b(date-picker) {
   @include e(end) {
     font-size: 14px;
+    flex: 1;
     @include elb(input__wrapper) {
       border: none;
       box-shadow: none;
