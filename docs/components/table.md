@@ -368,7 +368,7 @@ table/custom-header-tsx
 
 | 插槽名                 | 说明                            |
 | ---------------------- | ------------------------------- |
-| `action-bar-more-icon` | 操作栏更多傍边的 icon           |
+| `action-bar-more-icon` | 操作栏更多旁边的 icon           |
 | `tooltip-icon`         | 表格表头 tooltip icon           |
 | `drag-sort-icon`       | 表格拖拽行 和 列设置里拖拽 icon |
 | `column-settings-icon` | 表格表头 列设置 icon            |
@@ -473,7 +473,7 @@ const handleSelectAll = (selection: any[]) => {
 | `expand`                                      | 展开行                                                                                                                                                                                             |                                                      |
 | `pagination-left`<el-tag>v0.0.2</el-tag>      | 分页器左侧内容 （默认生效，`align` 属性默认是 `right`）                                                                                                                                            |                                                      |
 | `pagination-right`<el-tag>v0.0.2</el-tag>     | 分页器右侧内容 （`align` 属性是 `left`时生效）                                                                                                                                                     |                                                      |
-| `action-bar-more-icon`<el-tag>v0.0.3</el-tag> | 操作栏更多傍边的 icon                                                                                                                                                                              |                                                      |
+| `action-bar-more-icon`<el-tag>v0.0.3</el-tag> | 操作栏更多旁边的 icon                                                                                                                                                                              |                                                      |
 | `tooltip-icon`<el-tag>v0.0.3</el-tag>         | 表格表头 tooltip icon                                                                                                                                                                              |                                                      |
 | `drag-sort-icon`<el-tag>v0.0.3</el-tag>       | 表格拖拽行 和 列设置里拖拽 icon                                                                                                                                                                    |                                                      |
 | `column-settings-icon`<el-tag>v0.0.3</el-tag> | 表格表头 列设置 icon                                                                                                                                                                               |                                                      |

@@ -21,7 +21,7 @@
       @clickAction="handleClickButton"
       @dragSortEnd="handleSortEnd"
     >
-      <!-- 操作栏更多傍边的icon -->
+      <!-- 操作栏更多旁边的icon -->
       <template #action-bar-more-icon>
         <el-icon :size="12" style="margin-top: 1px"><ArrowRightBold /></el-icon>
       </template>
