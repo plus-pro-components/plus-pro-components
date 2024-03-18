@@ -355,7 +355,6 @@ import {
   getLabelSlotName,
   getFieldSlotName
 } from '@plus-pro-components/components/utils'
-
 import { QuestionFilled } from '@element-plus/icons-vue'
 import { useGetOptions, useLocale } from '@plus-pro-components/hooks'
 import { PlusRadio } from '@plus-pro-components/components/radio'
@@ -384,6 +383,12 @@ import {
   ElTimeSelect as TimeSelectComponent,
   ElInput as InputComponent
 } from 'element-plus'
+import {
+  DatePickerValueIsArrayList,
+  ValueIsArrayList,
+  ValueIsNumberList,
+  ValueIsBooleanList
+} from '@plus-pro-components/constants'
 
 export interface PlusFormItemProps {
   modelValue?: FieldValueType
@@ -455,28 +460,25 @@ const fieldInstance = ref()
 const customFormItemProps = ref<any>({})
 const customFieldProps = ref<any>({})
 const state = ref<FieldValueType>()
-const range = ['datetimerange', 'daterange', 'monthrange', 'years', 'dates']
-const numberList = ['rate', 'input-number', 'slider']
-const arrayList = ['checkbox', 'plus-date-picker', 'plus-input-tag']
 const customFieldPropsIsReady = ref(false)
 
 /**
  * 默认值是数组的情况
  */
 const isArrayValue = computed(() => {
-  if (arrayList.includes(props.valueType as string)) {
+  if (ValueIsArrayList.includes(props.valueType as string)) {
     return true
   }
   if (props.valueType === 'select' && customFieldProps.value?.multiple === true) {
     return true
   }
-  if (props.valueType === 'date-picker' && range.includes(customFieldProps.value?.type)) {
+  if (
+    props.valueType === 'date-picker' &&
+    DatePickerValueIsArrayList.includes(customFieldProps.value?.type)
+  ) {
     return true
   }
   if (props.valueType === 'time-picker' && customFieldProps.value?.isRange === true) {
-    return true
-  }
-  if (props.valueType === 'cascader' && customFieldProps.value?.multiple) {
     return true
   }
   return false
@@ -486,7 +488,17 @@ const isArrayValue = computed(() => {
  * 默认值是数字的情况
  */
 const isNumberValue = computed(() => {
-  if (numberList.includes(props.valueType as string)) {
+  if (ValueIsNumberList.includes(props.valueType as string)) {
+    return true
+  }
+  return false
+})
+
+/**
+ * 默认值是布尔的情况
+ */
+const isBooleanValue = computed(() => {
+  if (ValueIsBooleanList.includes(props.valueType as string)) {
     return true
   }
   return false
@@ -510,7 +522,7 @@ const setValue = (val: any) => {
     }
   } else if (isNumberValue.value) {
     state.value = Number(val)
-  } else if (props.valueType === 'switch') {
+  } else if (isBooleanValue.value) {
     state.value = Boolean(val)
   } else if (isDate(val)) {
     state.value = String(val)
