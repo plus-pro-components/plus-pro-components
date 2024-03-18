@@ -142,12 +142,7 @@ export default defineConfig({
             },
             {
               text: '版本升级',
-              items: [
-                {
-                  text: '从 v0.0.2 迁移',
-                  link: '/guide/upgrade/upgrade-to-0.0.3'
-                }
-              ]
+              link: '/guide/upgrade'
             },
             {
               text: '命名空间',
