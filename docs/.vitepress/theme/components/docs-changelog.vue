@@ -38,7 +38,7 @@ onMounted(async () => {
     <ClientOnly>
       <el-skeleton :loading="loading">
         <div class="docs-changelog-versions">
-          <p>请选择版本:</p>
+          <p class="docs-changelog-text">请选择版本:</p>
           <el-select
             :model-value="currentRelease.name"
             placeholder="请选择版本"
@@ -83,8 +83,9 @@ onMounted(async () => {
   justify-content: space-between;
   margin-bottom: 1rem;
 
-  p {
-    margin-right: 2rem;
+  .docs-changelog-text {
+    margin-right: 10px;
+    flex: 0 0 86px;
   }
 }
 .docs-changelog-header {
