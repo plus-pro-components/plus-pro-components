@@ -5,10 +5,10 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, reactive } from 'vue'
+import { computed, ref } from 'vue'
 import type { PlusColumn, FieldValues } from 'plus-pro-components'
 
-const state = reactive<FieldValues>({
+const state = ref<FieldValues>({
   status: '0',
   name: '',
   rate: 4,
@@ -43,7 +43,7 @@ const columns: PlusColumn[] = [
     prop: 'demand1',
     valueType: 'checkbox',
     options: computed(() =>
-      state.status === '0'
+      state.value.status === '0'
         ? [
             {
               label: '四六级',
@@ -72,13 +72,13 @@ const columns: PlusColumn[] = [
     prop: 'name1',
     valueType: 'copy',
     tooltip: '名称最多显示6个字符',
-    fieldProps: { disabled: computed(() => state.status === '1') }
+    fieldProps: { disabled: computed(() => state.value.status === '1') }
   },
   {
     label: '标签1',
     width: 120,
     prop: 'tag1',
-    hideInForm: computed(() => state.status === '1')
+    hideInForm: computed(() => state.value.status === '1')
   },
   {
     label: '名称2',
@@ -86,13 +86,13 @@ const columns: PlusColumn[] = [
     prop: 'name2',
     valueType: 'copy',
     tooltip: '名称最多显示6个字符',
-    fieldProps: computed(() => ({ disabled: state.status === '1' }))
+    fieldProps: computed(() => ({ disabled: state.value.status === '1' }))
   },
   {
     label: '标签2',
     width: 120,
     prop: 'tag2',
-    formItemProps: computed(() => ({ required: state.status === '1' }))
+    formItemProps: computed(() => ({ required: state.value.status === '1' }))
   }
 ]
 </script>
