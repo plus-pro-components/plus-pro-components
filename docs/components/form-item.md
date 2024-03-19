@@ -2,6 +2,10 @@
 
 [PlusForm](/components/form.html) 组件的每一项。
 
+::: warning 注意
+表单`v-model`绑定的值尽量使用 ref 定义绑定的值，以避免 reactive 带来的响应式丢失问题。 <el-text  type="primary" tag="ins">[参考 reactive 的局限性](https://cn.vuejs.org/guide/essentials/reactivity-fundamentals.html#limitations-of-reactive)</el-text>
+:::
+
 ## 基础用法
 
 设置 `valueType` 控制表单的类型。
@@ -169,7 +173,7 @@ form-item/all
 
 | 名称                    | 说明                                                                                                              | 类型                                                                                                                       | 默认值 | 是否必须 |
 | ----------------------- | ----------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | ------ | -------- |
-| `model-value / v-model` | 表单绑定值                                                                                                        | `object`[FieldValues](/components/type.html#fieldvalues)                                                                   |        | 否       |
+| `model-value / v-model` | 表单绑定值 <el-text type="warning">（尽量使用 ref 定义绑定的值，以避免 reactive 带来的响应式丢失问题）</el-text>  | `object`[FieldValues](/components/type.html#fieldvalues)                                                                   |        | 否       |
 | `label`                 | el-form-item 的 label                                                                                             | `string`                                                                                                                   |        | 是       |
 | `prop`                  | el-input 等所有表单项的双向绑定的值；                                                                             | `string`                                                                                                                   |        | 是       |
 | `valueType`             | 值的类型                                                                                                          | `string`[FormItemValueType](/components/type.html#formitemvaluetype)                                                       |        | 否       |

@@ -2,6 +2,10 @@
 
 DialogForm 组件是 [PlusDialog](/components/dialog.html)和 [PlusForm](/components/form.html) 组件的组合。
 
+::: warning 注意
+表单`v-model`绑定的值尽量使用 ref 定义绑定的值，以避免 reactive 带来的响应式丢失问题。 <el-text  type="primary" tag="ins">[参考 reactive 的局限性](https://cn.vuejs.org/guide/essentials/reactivity-fundamentals.html#limitations-of-reactive)</el-text>
+:::
+
 ## 基础用法
 
 :::demo
@@ -43,12 +47,12 @@ dialog-form/custom-footer
 
 ## DialogForm Attributes
 
-| 名称                        | 说明                                           | 类型                                                               | 默认值                                         | 是否必须 |
-| --------------------------- | ---------------------------------------------- | ------------------------------------------------------------------ | ---------------------------------------------- | -------- |
-| `model-value / v-model`     | 表单绑定值                                     | `object`[FieldValues](/components/type.html#fieldvalues)           |                                                | 否       |
-| `visible / v-model:visible` | 弹窗显示                                       | `boolean`                                                          | `false`                                        | 否       |
-| `form`                      | [PlusForm](/components/form.html) 的 props     | `object`[PlusFormProps](/components/form.html#form-attributes)     | `{hasFooter:false,footerAlign:'right'}`        | 否       |
-| `dialog`                    | [PlusDialog](/components/dialog.html) 的 props | `object`[PlusDialogProps](/components/form.html#dialof-attributes) | `{width:"800px",top:"10vh", title:"弹窗表单"}` | 否       |
+| 名称                        | 说明                                                                                                             | 类型                                                               | 默认值                                         | 是否必须 |
+| --------------------------- | ---------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------ | ---------------------------------------------- | -------- |
+| `model-value / v-model`     | 表单绑定值 <el-text type="warning">（尽量使用 ref 定义绑定的值，以避免 reactive 带来的响应式丢失问题）</el-text> | `object`[FieldValues](/components/type.html#fieldvalues)           |                                                | 否       |
+| `visible / v-model:visible` | 弹窗显示                                                                                                         | `boolean`                                                          | `false`                                        | 否       |
+| `form`                      | [PlusForm](/components/form.html) 的 props                                                                       | `object`[PlusFormProps](/components/form.html#form-attributes)     | `{hasFooter:false,footerAlign:'right'}`        | 否       |
+| `dialog`                    | [PlusDialog](/components/dialog.html) 的 props                                                                   | `object`[PlusDialogProps](/components/form.html#dialof-attributes) | `{width:"800px",top:"10vh", title:"弹窗表单"}` | 否       |
 
 ## DialogForm Events
 

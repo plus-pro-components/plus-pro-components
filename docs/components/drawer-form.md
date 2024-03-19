@@ -2,6 +2,10 @@
 
 DrawerForm 组件是 [ElDrawer](https://element-plus.org/zh-CN/component/drawer.html)和 [PlusForm](/components/form.html) 组件的组合。
 
+::: warning 注意
+表单`v-model`绑定的值尽量使用 ref 定义绑定的值，以避免 reactive 带来的响应式丢失问题。 <el-text  type="primary" tag="ins">[参考 reactive 的局限性](https://cn.vuejs.org/guide/essentials/reactivity-fundamentals.html#limitations-of-reactive)</el-text>
+:::
+
 ## 基础用法
 
 :::demo
@@ -36,7 +40,7 @@ drawer-form/slot-label
 
 | 名称                        | 说明                                                                                                                 | 类型                                                                                            | 默认值                                                                 | 是否必须 |
 | --------------------------- | -------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- | -------- |
-| `model-value / v-model`     | 表单绑定值                                                                                                           | `object`[FieldValues](/components/type.html#fieldvalues)                                        |                                                                        | 否       |
+| `model-value / v-model`     | 表单绑定 <el-text type="warning">（尽量使用 ref 定义绑定的值，以避免 reactive 带来的响应式丢失问题）</el-text> 值    | `object`[FieldValues](/components/type.html#fieldvalues)                                        |                                                                        | 否       |
 | `visible / v-model:visible` | 抽屉显示                                                                                                             | `boolean`                                                                                       | `false`                                                                | 否       |
 | `size`                      | Drawer 窗体的大小, 当使用 number 类型时, 以像素为单位, 当使用 string 类型时, 请传入 'x%', 否则便会以 number 类型解释 | `string`/`number`                                                                               | `540px`                                                                | 否       |
 | `form`                      | [PlusForm](/components/form.html) 的 props                                                                           | `object`[PlusFormProps](/components/form.html#form-attributes)                                  | `{footerAlign:"right"}`                                                | 否       |
