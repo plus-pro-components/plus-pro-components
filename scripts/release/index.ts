@@ -7,6 +7,7 @@ import { checkbox, select, input } from '@inquirer/prompts'
 import { findWorkspacePackages } from '@pnpm/find-workspace-packages'
 import { projRoot, projPackage } from '../utils/paths'
 import { PKG_NAME } from '../utils'
+import { genVersion } from './gen-version'
 
 type SemverRow = {
   release: semver.ReleaseType
@@ -127,6 +128,9 @@ async function commit(version?: string) {
     if (version) {
       await run('npm', ['run', '--name', 'changelog'])
     }
+
+    // 更新导出 版本号
+    await genVersion(version)
 
     await run('git', ['add', '-A'])
     await run('npm', ['run', '--name', 'gitcz'])
