@@ -101,14 +101,29 @@
         <component :is="fieldSlot" v-bind="data" />
       </template>
 
-      <el-checkbox
-        v-for="item in options"
-        :key="item.label"
-        :label="item.value"
-        v-bind="item.fieldItemProps"
-      >
-        {{ item.label }}
-      </el-checkbox>
+      <!-- element-plus 版本号小于2.6.0 -->
+      <template v-if="versionIsLessThan">
+        <el-checkbox
+          v-for="item in options"
+          :key="item.label"
+          :label="item.value"
+          v-bind="item.fieldItemProps"
+        >
+          {{ item.label }}
+        </el-checkbox>
+      </template>
+
+      <!-- element-plus 版本号大于等于2.6.0 -->
+      <template v-else>
+        <el-checkbox
+          v-for="item in options"
+          :key="item.label"
+          :value="item.value"
+          v-bind="item.fieldItemProps"
+        >
+          {{ item.label }}
+        </el-checkbox>
+      </template>
     </el-checkbox-group>
 
     <el-color-picker
@@ -353,7 +368,8 @@ import {
   getTooltip,
   getCustomProps,
   getLabelSlotName,
-  getFieldSlotName
+  getFieldSlotName,
+  compareVersion
 } from '@plus-pro-components/components/utils'
 import { QuestionFilled } from '@element-plus/icons-vue'
 import { useGetOptions, useLocale } from '@plus-pro-components/hooks'
@@ -381,7 +397,8 @@ import {
   ElSwitch as SwitchComponent,
   ElTimePicker as TimePickerComponent,
   ElTimeSelect as TimeSelectComponent,
-  ElInput as InputComponent
+  ElInput as InputComponent,
+  version
 } from 'element-plus'
 import {
   DatePickerValueIsArrayList,
@@ -416,6 +433,11 @@ export interface PlusFormItemEmits {
 defineOptions({
   name: 'PlusFormItem'
 })
+
+/**
+ * element-plus版本号是否小于'2.6.0'
+ */
+const versionIsLessThan = compareVersion(version, '2.6.0') < 0
 
 /**
  * FIXME: The inferred type of this node exceeds the maximum length the compiler will serialize. An explicit type annotation is needed.
