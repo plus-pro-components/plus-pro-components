@@ -2,9 +2,6 @@ import { fileURLToPath, URL } from 'node:url'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
-import AutoImport from 'unplugin-auto-import/vite'
-import Components from 'unplugin-vue-components/vite'
-import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import { gFiles } from './gFiles'
 
 const resolve = (dir: string) => fileURLToPath(new URL(dir, import.meta.url))
@@ -19,28 +16,10 @@ export default async () => {
   return defineConfig({
     css: {
       preprocessorOptions: {
-        scss: {
-          additionalData: `@use "./src/style.scss" as *;`
-        }
+        scss: {}
       }
     },
-    plugins: [
-      vue(),
-      vueJsx(),
-      AutoImport({
-        resolvers: [ElementPlusResolver()],
-        dts: false
-      }),
-      Components({
-        resolvers: [
-          ElementPlusResolver({
-            importStyle: 'sass'
-          })
-        ],
-        dts: false,
-        directoryAsNamespace: true
-      })
-    ],
+    plugins: [vue(), vueJsx()],
     resolve: {
       alias: {
         '@': resolve('./src')
