@@ -196,3 +196,20 @@ export const getValue = (target: RecordType, key: string) => {
 export const setValue = (target: RecordType, key: string, value: any) => {
   return set(target, key, value)
 }
+
+/**
+ * 版本比较
+ * @param version1
+ * @param version2
+ * @returns
+ */
+export const compareVersion = (version1: string, version2: string) => {
+  const arr1 = version1.split('.').map(item => Number(item))
+  const arr2 = version2.split('.').map(item => Number(item))
+  const length = Math.max(arr1.length, arr2.length)
+  for (let i = 0; i < length; i++) {
+    if ((arr1[i] || 0) > (arr2[i] || 0)) return 1
+    if ((arr1[i] || 0) < (arr2[i] || 0)) return -1
+  }
+  return 0
+}
