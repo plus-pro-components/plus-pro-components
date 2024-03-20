@@ -8,7 +8,7 @@ export {}
 export type TableValueType = 'img' | 'link' | 'money' | 'tag' | 'progress' | 'copy' | 'code' | ''
 
 /**
- * 所有表单的类型 默认是 text
+ *  表格的类型
  */
 export type TableColumnProps = {
   /**
@@ -24,7 +24,9 @@ export type TableColumnProps = {
   /**
    * @desc 表格行的其他配置 （不包含label prop width minWidth）
    */
-  tableColumnProps?: Partial<Omit<TableColumnCtx<any>, 'label ' | 'prop' | 'width' | 'minWidth'>>
+  tableColumnProps?: Partial<
+    Omit<TableColumnCtx<any>, 'label ' | 'prop' | 'width' | 'minWidth'> & { [key: string]: any }
+  >
 
   /**
    * @desc 图片预览  默认开启  给 false 关闭  仅当 valueType 等于 img 时有效，
