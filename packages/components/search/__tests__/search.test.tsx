@@ -339,7 +339,8 @@ describe('search/index.vue', () => {
             footer,
             'plus-label-name': () => 'plus-label-name',
             'plus-field-name': () => 'plus-field-name',
-            'plus-extra-name': () => 'plus-extra-name'
+            'plus-extra-name': () => 'plus-extra-name',
+            'tooltip-icon': () => 'tooltip-icon'
           }}
         />
       ),
@@ -357,6 +358,7 @@ describe('search/index.vue', () => {
     expect(wrapper.find('.custom-footer').text()).includes(resetText)
     expect(wrapper.find('.plus-form').text()).includes('plus-label-name')
     expect(wrapper.find('.plus-form').text()).includes('plus-field-name')
+    expect(wrapper.find('.plus-form').text()).includes('tooltip-icon')
     expect(wrapper.find('.plus-form-item-extra').text()).includes('plus-extra-name')
   })
 })
