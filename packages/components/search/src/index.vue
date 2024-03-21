@@ -27,14 +27,14 @@
     </template>
 
     <template #search-footer>
-      <slot
-        name="footer"
-        :is-show-unfold="isShowUnfold"
-        :handle-reset="handleReset"
-        :handle-search="handleSearch"
-        :handle-unfold="handleUnfold"
-      >
-        <el-form-item v-if="hasFooter" class="plus-search__button__wrapper">
+      <el-form-item v-if="hasFooter" class="plus-search__button__wrapper">
+        <slot
+          name="footer"
+          :is-show-unfold="isShowUnfold"
+          :handle-reset="handleReset"
+          :handle-search="handleSearch"
+          :handle-unfold="handleUnfold"
+        >
           <el-button v-if="hasReset" :icon="RefreshRight" @click="handleReset">
             {{ resetText || t('plus.search.resetText') }}
           </el-button>
@@ -54,8 +54,8 @@
               <ArrowDown v-else />
             </el-icon>
           </el-button>
-        </el-form-item>
-      </slot>
+        </slot>
+      </el-form-item>
     </template>
   </PlusForm>
 </template>
