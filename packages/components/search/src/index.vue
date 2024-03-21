@@ -26,6 +26,11 @@
       <slot :name="key" v-bind="data" />
     </template>
 
+    <!--表单tooltip插槽 -->
+    <template v-if="$slots['tooltip-icon']" #tooltip-icon>
+      <slot name="tooltip-icon" />
+    </template>
+
     <template #search-footer>
       <el-form-item v-if="hasFooter" class="plus-search__button__wrapper">
         <slot
