@@ -33,7 +33,7 @@ const banner = `/*! ${PKG_NAME} v${pkg.version} */\n`
 const buildAll = async (minify?: boolean) => {
   const plugins = [
     PlusProComponentsAlias(),
-    vuePlugin() as Plugin,
+    vuePlugin({ isProduction: true }) as Plugin,
     nodeResolve({
       extensions: ['.mjs', '.js', '.json', '.ts']
     }),

@@ -53,7 +53,7 @@ const buildModules = async () => {
       plugins: [
         PlusProComponentsExternal(options),
         PlusProComponentsAlias(),
-        vuePlugin() as Plugin,
+        vuePlugin({ isProduction: true }) as Plugin,
         nodeResolve({
           extensions: ['.mjs', '.js', '.json', '.ts']
         }),
