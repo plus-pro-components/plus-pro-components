@@ -1,0 +1,91 @@
+name: "\U0001F41E Bug report"
+description: Create a report to help us improve
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **在你开始之前**
+
+         此表单仅用于提交错误报告。如果您有使用问题或者不确定这是否真的是一个bug，请确保:
+
+        - 阅读 [文档](https://plus-pro-components.github.io/)
+        - 在 [GitHub Discussions]( https://github.com/plus-pro-components/plus-pro-components/discussions) 上寻求帮助 
+        - 在[Stack Overflow](https://stackoverflow.com/questions/ask?tags=plus-pro-components)上寻求帮助 
+
+        并且，请尝试在 GitHub 上搜索你遇到的问题——可能已经在 dev 分支中解决或修复。 但是，如果你发现一个很久都不活跃的或已关闭的 issue 在最新版本中仍然存在，那么请使用下面的表单提交一个新的 issue，请不要发表评论到旧的 issue。
+  - type: input
+    id: version
+    attributes:
+      label: plus-pro-components 版本
+      placeholder: 版本号
+    validations:
+      required: true
+  - type: input
+    id: vue-version
+    attributes:
+      label: vue 版本
+      placeholder: 版本号
+    validations:
+      required: true
+  - type: input
+    id: element-plus-version
+    attributes:
+      label: element-plus 版本
+      placeholder: 版本号
+    validations:
+      required: true
+  - type: input
+    id: reproduction-link
+    attributes:
+      label: 最小复现环境的链接
+      description: 请提供有效的地址链接。如：github仓库地址、[gitee](https://gitee.com/) 仓库地址、[JSFiddle](https://jsfiddle.net/) 地址 、[CodePen](https://codepen.io/) 地址、[CodeSandbox](https://codesandbox.io/) 地址等。如果暂时没有可填写无。
+      placeholder: 链接地址
+    validations:
+      required: true
+  - type: textarea
+    id: steps-to-reproduce
+    attributes:
+      label: 复现步骤
+      description: 在打开您的repro后，我们需要怎样做什么才能让bug发生？清晰简洁的说明对我们能够及时分类您的问题非常重要。请注意，您可以使用Markdown来格式化列表和代码。
+      placeholder: 复现步骤
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: 期望的行为
+    validations:
+      required: true
+  - type: textarea
+    id: actually-happening
+    attributes:
+      label: 实际的行为
+    validations:
+      required: true
+  - type: textarea
+    id: system-info
+    attributes:
+      label: 系统信息
+      description: 执行 `npx envinfo --system --npmPackages vue,element-plus,plus-pro-components --binaries --browsers`
+      render: shell
+      placeholder: 浏览器、操作系统、运行环境
+  - type: dropdown
+    id: build-tools
+    attributes:
+      label: 构建工具
+      description: Vite，Webpack等
+      options:
+        - Vite
+        - Webpack
+        - Vue CLI
+        - Rollup
+        - esbuild
+        - Nuxt
+        - CDN
+        - 其他
+      default: 0
+  - type: textarea
+    id: additional-comments
+    attributes:
+      label: 额外留言（可选）
+      description: 例如，您如何遇到此错误的一些背景/上下文。

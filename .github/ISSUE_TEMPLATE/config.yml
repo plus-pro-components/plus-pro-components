@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Questions & Discussions
+    url: https://github.com/plus-pro-components/plus-pro-components/discussions
+    about: Use GitHub discussions for message-board style questions and discussions.
+  - name: Open Collective
+    url: https://opencollective.com/plus-pro-components
+    about: Love plus-pro-components? Please consider supporting us via Open Collective.

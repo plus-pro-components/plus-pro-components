@@ -1,0 +1,35 @@
+name: Feature request
+description: Suggest an idea for this project
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **在你开始之前**
+
+         此表单仅用于提交新功能需求。如果您有使用问题或者不确定这是否真的是一个新功能需求，请确保:
+
+        - 阅读 [文档](https://plus-pro-components.github.io/)
+        - 尝试自己修改样式
+        - 在 [GitHub Discussions]( https://github.com/plus-pro-components/plus-pro-components/discussions) 上寻求帮助 
+        - 在[Stack Overflow](https://stackoverflow.com/questions/ask?tags=plus-pro-components)上寻求帮助 
+
+        并且，请尝试在 GitHub 上搜索你遇到的问题——可能已经在 dev 分支中解决。 但是，如果你发现一个很久都不活跃的或已关闭的 issue 在最新版本中仍然存在，那么请使用下面的表单提交一个新的 issue，请不要发表评论到旧的 issue。
+  - type: input
+    id: component
+    attributes:
+      label: 需要增强的组件
+      description: 如 PlusForm、PlusTable、PlusSearch等
+      placeholder: 组件
+    validations:
+      required: true
+  - type: textarea
+    id: system-info
+    attributes:
+      label: 描述
+      placeholder: 描述
+    validations:
+      required: true
+  - type: textarea
+    id: additional-comments
+    attributes:
+      label: 额外留言（可选）
