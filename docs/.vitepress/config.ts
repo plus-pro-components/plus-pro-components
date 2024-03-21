@@ -91,6 +91,10 @@ export default defineConfig({
         text: `v${pkg.version}`,
         items: [
           {
+            text: '版本升级',
+            link: '/guide/upgrade'
+          },
+          {
             text: '历史版本',
             link: 'https://github.com/plus-pro-components/plus-pro-components/releases'
           },
