@@ -1,3 +1,28 @@
+## [v0.0.5](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.4...v0.0.5) (2024-03-21)
+
+
+### ✨ Features
+
+* **components:** :sparkles: form-item and radio compatible with element-plus@2.6.0([acf366c](https://github.com/plus-pro-components/plus-pro-components/commit/acf366c)) by@xiaofei
+* **components:** :sparkles: search component add 'tooltip-icon' slot.([78beb99](https://github.com/plus-pro-components/plus-pro-components/commit/78beb99)) by@xiaofei
+* **components:** :sparkles: update form search-footer slot.([9486d72](https://github.com/plus-pro-components/plus-pro-components/commit/9486d72)) by@xiaofei
+* **theme-chalk:** :sparkles: add style support  search-footer defaults to right alignment.([cbbba19](https://github.com/plus-pro-components/plus-pro-components/commit/cbbba19)) by@xiaofei
+* **components:** :sparkles: search-footer defaults to right alignment.([04ce82f](https://github.com/plus-pro-components/plus-pro-components/commit/04ce82f)) by@xiaofei
+* **plus-pro-components:** :sparkles: export version([19e5978](https://github.com/plus-pro-components/plus-pro-components/commit/19e5978)) by@xiaofei
+* **components:** :sparkles: export missing props types.([aabd041](https://github.com/plus-pro-components/plus-pro-components/commit/aabd041)) by@xiaofei
+* **components:** :sparkles: form-item component compatible with element-plus@2.6.0([bb90ad7](https://github.com/plus-pro-components/plus-pro-components/commit/bb90ad7)) by@xiaofei
+* **components:** :sparkles: utils add compareVersion method.([e59e694](https://github.com/plus-pro-components/plus-pro-components/commit/e59e694)) by@xiaofei
+* **types:** :sparkles: add FieldProps type.([5a0aa80](https://github.com/plus-pro-components/plus-pro-components/commit/5a0aa80)) by@xiaofei
+* **all:** Merge pull request [#76](https://github.com/plus-pro-components/plus-pro-components/pull/76) from plus-pro-components/simmi([1041cfa](https://github.com/plus-pro-components/plus-pro-components/commit/1041cfa)) by@xiaofei
+
+
+### 🐛 Bug Fixes
+
+* **theme-chalk:** :bug: date-picker not used up width.([c061f27](https://github.com/plus-pro-components/plus-pro-components/commit/c061f27)) by@xiaofei
+
+
+
+
 ## [v0.0.4](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.3...v0.0.4) (2024-03-18)
 
 
