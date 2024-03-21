@@ -33,7 +33,7 @@ interface TableRow {
 
 const TestServe = {
   getList: async () => {
-    const dataLazy = [...new Array(3)].map((item, index) => {
+    const dataLazy = Array.from({ length: 3 }).map((item, index) => {
       return {
         id: index,
         name: index + 'name',
@@ -44,7 +44,7 @@ const TestServe = {
         children: []
       }
     })
-    const data = [...new Array(3)].map((item, index) => {
+    const data = Array.from({ length: 3 }).map((item, index) => {
       return {
         id: index,
         name: index + 'name',

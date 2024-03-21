@@ -20,7 +20,7 @@ import type { PlusColumn } from 'plus-pro-components'
 
 const TestServe = {
   getList: async () => {
-    const data = [...new Array(3)].map((item, index) => {
+    const data = Array.from({ length: 3 }).map((item, index) => {
       return {
         name: index + 'name',
         status: String(index % 2),

@@ -29,7 +29,7 @@ interface TableRow {
 
 const TestServe = {
   getList: async () => {
-    const data = [...new Array(3)].map((item, index) => {
+    const data = Array.from({ length: 3 }).map((item, index) => {
       return {
         id: index,
         name: index === 0 ? '' : index + 'name',
@@ -126,6 +126,8 @@ const handleChange = (data: string) => {
 }
 
 const editTable = (isEdit: boolean) => {
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
   tableConfig.value = tableConfig.value.map(item => {
     if (item.valueType === 'rate' || item.valueType === 'switch') {
       return {
