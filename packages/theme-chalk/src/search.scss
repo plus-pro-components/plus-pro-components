@@ -1,9 +1,22 @@
 @use 'mixins/mixins' as *;
+@use 'mixins/config' as *;
 
 @include b(search) {
   @include e(button__wrapper) {
+    flex: auto;
+    max-width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    &.#{$el-namespace + -form-item} {
+      margin-right: 10px;
+    }
+
     @include elb(form-item__content) {
       flex-wrap: nowrap;
+      flex: none;
     }
   }
 }
