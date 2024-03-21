@@ -108,12 +108,13 @@ search/async
 
 ## Search Slots
 
-| 插槽名         | 说明                                                                                                                               | 作用域插槽参数                                         |
-| -------------- | ---------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------ |
-| `footer`       | 自定义搜索 按钮组 区域                                                                                                             | `{isShowUnfold,handleReset,handleSearch,handleUnfold}` |
-| `plus-field-*` | [PlusForm](/components/form.html#form-slots) 的自定义表单项，组件会自动根据配置项的 prop 生成对应的插槽                            | `{prop,label,fieldProps,valueType,column}`             |
-| `plus-label-*` | [PlusForm](/components/form.html#form-slots) 的自定义表单项 label，组件会自动根据配置项的 prop 生成对应的插槽                      | `{prop,label,fieldProps,valueType,column}`             |
-| `plus-extra-*` | [PlusForm](/components/form.html#form-slots)的自定义渲染 el-form-item 下一行额外的内容，组件会自动根据配置项的 prop 生成对应的插槽 | `{column}`                                             |
+| 插槽名                                | 说明                                                                                                                               | 作用域插槽参数                                         |
+| ------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------ |
+| `footer`                              | 自定义搜索 按钮组 区域                                                                                                             | `{isShowUnfold,handleReset,handleSearch,handleUnfold}` |
+| `tooltip-icon`<el-tag>v0.0.5</el-tag> | tooltip icon                                                                                                                       |                                                        |
+| `plus-field-*`                        | [PlusForm](/components/form.html#form-slots) 的自定义表单项，组件会自动根据配置项的 prop 生成对应的插槽                            | `{prop,label,fieldProps,valueType,column}`             |
+| `plus-label-*`                        | [PlusForm](/components/form.html#form-slots) 的自定义表单项 label，组件会自动根据配置项的 prop 生成对应的插槽                      | `{prop,label,fieldProps,valueType,column}`             |
+| `plus-extra-*`                        | [PlusForm](/components/form.html#form-slots)的自定义渲染 el-form-item 下一行额外的内容，组件会自动根据配置项的 prop 生成对应的插槽 | `{column}`                                             |
 
 **footer 作用域插槽参数说明**
 
