@@ -44,9 +44,7 @@
     </el-col>
 
     <!-- 搜索的footer插槽  -->
-    <el-col v-if="$slots['search-footer']" v-bind="colProps">
-      <slot name="search-footer" />
-    </el-col>
+    <slot name="search-footer" />
   </el-row>
 </template>
 
