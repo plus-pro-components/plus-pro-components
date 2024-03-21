@@ -1,16 +1,33 @@
 <template>
   <el-radio-group ref="radioGroupInstance" v-model="state.radio" v-bind="$attrs">
-    <el-radio
-      v-for="item in options"
-      :key="item.value"
-      ref="radioInstance"
-      :label="item.value"
-      v-bind="item.fieldItemProps"
-      @click="radioClick($event, item.value, item.fieldItemProps)"
-      @change="change(item.value)"
-    >
-      {{ item.label }}
-    </el-radio>
+    <!-- element-plus 版本号小于2.6.0 -->
+    <template v-if="versionIsLessThan260">
+      <el-radio
+        v-for="item in options"
+        :key="item.value"
+        ref="radioInstance"
+        :label="item.value"
+        v-bind="item.fieldItemProps"
+        @click="radioClick($event, item.value, item.fieldItemProps)"
+        @change="change(item.value)"
+      >
+        {{ item.label }}
+      </el-radio>
+    </template>
+    <!-- element-plus 版本号大于等于2.6.0 -->
+    <template v-else>
+      <el-radio
+        v-for="item in options"
+        :key="item.value"
+        ref="radioInstance"
+        :value="item.value"
+        v-bind="item.fieldItemProps"
+        @click="radioClick($event, item.value, item.fieldItemProps)"
+        @change="change(item.value)"
+      >
+        {{ item.label }}
+      </el-radio>
+    </template>
   </el-radio-group>
 </template>
 
@@ -18,6 +35,7 @@
 import { reactive, watch, ref, useAttrs } from 'vue'
 import { ElRadio, ElRadioGroup } from 'element-plus'
 import type { OptionsRow } from '@plus-pro-components/types'
+import { versionIsLessThan260 } from '@plus-pro-components/components/utils'
 
 type ValueType = string | number | boolean
 export interface PlusRadioProps {

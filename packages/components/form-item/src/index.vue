@@ -102,7 +102,7 @@
       </template>
 
       <!-- element-plus 版本号小于2.6.0 -->
-      <template v-if="versionIsLessThan">
+      <template v-if="versionIsLessThan260">
         <el-checkbox
           v-for="item in options"
           :key="item.label"
@@ -197,14 +197,28 @@
         <component :is="fieldSlot" v-bind="data" />
       </template>
 
-      <el-radio
-        v-for="item in options"
-        :key="item.label"
-        :label="item.value"
-        v-bind="item.fieldItemProps"
-      >
-        {{ item.label }}
-      </el-radio>
+      <!-- element-plus 版本号小于2.6.0 -->
+      <template v-if="versionIsLessThan260">
+        <el-radio
+          v-for="item in options"
+          :key="item.label"
+          :label="item.value"
+          v-bind="item.fieldItemProps"
+        >
+          {{ item.label }}
+        </el-radio>
+      </template>
+      <!-- element-plus 版本号大于等于2.6.0 -->
+      <template v-else>
+        <el-radio
+          v-for="item in options"
+          :key="item.label"
+          :value="item.value"
+          v-bind="item.fieldItemProps"
+        >
+          {{ item.label }}
+        </el-radio>
+      </template>
     </el-radio-group>
 
     <PlusRadio
@@ -369,7 +383,7 @@ import {
   getCustomProps,
   getLabelSlotName,
   getFieldSlotName,
-  compareVersion
+  versionIsLessThan260
 } from '@plus-pro-components/components/utils'
 import { QuestionFilled } from '@element-plus/icons-vue'
 import { useGetOptions, useLocale } from '@plus-pro-components/hooks'
@@ -397,8 +411,7 @@ import {
   ElSwitch as SwitchComponent,
   ElTimePicker as TimePickerComponent,
   ElTimeSelect as TimeSelectComponent,
-  ElInput as InputComponent,
-  version
+  ElInput as InputComponent
 } from 'element-plus'
 import {
   DatePickerValueIsArrayList,
@@ -433,11 +446,6 @@ export interface PlusFormItemEmits {
 defineOptions({
   name: 'PlusFormItem'
 })
-
-/**
- * element-plus版本号是否小于'2.6.0'
- */
-const versionIsLessThan = compareVersion(version, '2.6.0') < 0
 
 /**
  * FIXME: The inferred type of this node exceeds the maximum length the compiler will serialize. An explicit type annotation is needed.
