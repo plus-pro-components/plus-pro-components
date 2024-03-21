@@ -119,6 +119,10 @@ export type FieldProps = Partial<
      * @desc el-select，el-time-select 的 effect
      */
     effect: ISelectProps['effect']
+    /**
+     * @desc `valueType` 为 `slider` 时是`string`类型，其余是`number`字符串类型
+     */
+    height: string | number
   } & Mutable<
     // 表单
     Omit<AutocompleteProps, OmitTypes> &
@@ -131,7 +135,7 @@ export type FieldProps = Partial<
       Omit<RadioGroupProps, OmitTypes> &
       Omit<RateProps, OmitTypes> &
       Omit<ISelectProps, 'filterMethod' | 'effect' | OmitTypes> &
-      Omit<SliderProps, 'step' | OmitTypes> &
+      Omit<SliderProps, 'step' | 'height' | OmitTypes> &
       Omit<SwitchProps, 'loading' | OmitTypes> &
       Omit<TimePickerDefaultProps, 'format' | OmitTypes> &
       Omit<TimeSelectProps, 'step' | 'format' | 'effect' | OmitTypes> &
@@ -141,7 +145,7 @@ export type FieldProps = Partial<
       Omit<PlusInputTagProps, OmitTypes> &
       // 显示
       Omit<TextProps, 'type'> &
-      Omit<ImageProps, 'loading'> &
+      Omit<ImageProps, 'loading' | 'src'> &
       Omit<LinkProps, 'type'> &
       Omit<TagProps, 'type'> &
       Omit<ProgressProps, 'type' | 'format'>
