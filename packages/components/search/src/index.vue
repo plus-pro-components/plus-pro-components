@@ -109,6 +109,7 @@ export interface PlusSearchEmits {
   (e: 'search', values: FieldValues): void
   (e: 'change', values: FieldValues, column: PlusColumn): void
   (e: 'reset', values: FieldValues): void
+  (e: 'collapse', isShowUnfold: boolean): void
 }
 
 defineOptions({
@@ -209,6 +210,7 @@ const handleReset = (): void => {
 
 const handleUnfold = () => {
   state.isShowUnfold = !state.isShowUnfold
+  emit('collapse', state.isShowUnfold)
 }
 
 defineExpose({
