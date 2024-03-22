@@ -7,6 +7,7 @@
       @change="handleChange"
       @search="handleSearch"
       @reset="handleRest"
+      @collapse="onCollapse"
     />
   </el-card>
 </template>
@@ -161,5 +162,8 @@ const handleSearch = (values: any) => {
 }
 const handleRest = () => {
   console.log('handleRest')
+}
+const onCollapse = (isShowUnfold: boolean) => {
+  console.log('onCollapse', isShowUnfold)
 }
 </script>
