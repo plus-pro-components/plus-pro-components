@@ -65,7 +65,23 @@ export type InputType =
   | 'url'
   | 'week'
 
-export type OmitTypes = 'modelValue' | 'id'
+/**
+ * 需要去除或者需要重新定义的类型
+ */
+export type OmitTypes =
+  // 去除的
+  | 'modelValue'
+  | 'src'
+  // 重新定义过的
+  | 'autocomplete'
+  | 'type'
+  | 'loading'
+  | 'step'
+  | 'format'
+  | 'filterMethod'
+  | 'id'
+  | 'effect'
+  | 'height'
 
 /**
  * 表单和现实组件所有字段类型
@@ -79,6 +95,7 @@ export type FieldProps = Partial<
      * @desc 补充element-plus input:type='textarea' 时的ts类型缺失
      */
     rows: number
+    autocomplete: string
     /**
      * type 类型
      */
@@ -90,11 +107,11 @@ export type FieldProps = Partial<
       | InputType
       | 'textarea'
     /**
-     *@desc `valueType` 为 `img `时是 `"lazy" | "eager"`，其余是布尔类型
+     *@desc `valueType` 为 `img `时是 `"lazy" | "eager"`，其余是`boolean`类型
      */
     loading: SwitchProps['loading'] | ImageProps['loading']
     /**
-     * @desc `valueType` 为 `time-select` 时是字符串类型， 其余是数字类型
+     * @desc `valueType` 为 `time-select` 时是`string`类型， 其余是`number`类型
      */
     step: SliderProps['step'] | TimeSelectProps['step'] | InputNumberProps['step']
     /**
@@ -112,7 +129,7 @@ export type FieldProps = Partial<
      */
     filterMethod: CascaderProps['filterMethod'] | ISelectProps['filterMethod']
     /**
-     * @desc `valueType` 为 `date-picker` 时**可能**是`[string, string]`类型，其余是`string`字符串类型
+     * @desc `valueType` 为 `date-picker` 时**可能**是`[string, string]`类型，其余是`string`类型
      */
     id: string | [string, string]
     /**
@@ -120,35 +137,35 @@ export type FieldProps = Partial<
      */
     effect: ISelectProps['effect']
     /**
-     * @desc `valueType` 为 `slider` 时是`string`类型，其余是`number`字符串类型
+     * @desc `valueType` 为 `slider` 时是`string`类型，其余是`number`类型
      */
     height: string | number
   } & Mutable<
     // 表单
     Omit<AutocompleteProps, OmitTypes> &
-      Omit<CascaderProps, 'filterMethod' | OmitTypes> &
+      Omit<CascaderProps, OmitTypes> &
       Omit<CheckboxGroupProps, OmitTypes> &
       Omit<ColorPickerProps, OmitTypes> &
-      Omit<DatePickerProps, 'type' | 'format' | OmitTypes> &
+      Omit<DatePickerProps, OmitTypes> &
       Omit<InputProps, OmitTypes> &
-      Omit<InputNumberProps, 'step' | OmitTypes> &
+      Omit<InputNumberProps, OmitTypes> &
       Omit<RadioGroupProps, OmitTypes> &
       Omit<RateProps, OmitTypes> &
-      Omit<ISelectProps, 'filterMethod' | 'effect' | OmitTypes> &
-      Omit<SliderProps, 'step' | 'height' | OmitTypes> &
-      Omit<SwitchProps, 'loading' | OmitTypes> &
-      Omit<TimePickerDefaultProps, 'format' | OmitTypes> &
-      Omit<TimeSelectProps, 'step' | 'format' | 'effect' | OmitTypes> &
+      Omit<ISelectProps, OmitTypes> &
+      Omit<SliderProps, OmitTypes> &
+      Omit<SwitchProps, OmitTypes> &
+      Omit<TimePickerDefaultProps, OmitTypes> &
+      Omit<TimeSelectProps, OmitTypes> &
       // 内置组件表单
       Omit<PlusRadioProps, OmitTypes> &
-      Omit<PlusDatePickerProps, 'type' | OmitTypes> &
+      Omit<PlusDatePickerProps, OmitTypes> &
       Omit<PlusInputTagProps, OmitTypes> &
       // 显示
-      Omit<TextProps, 'type'> &
-      Omit<ImageProps, 'loading' | 'src'> &
-      Omit<LinkProps, 'type'> &
-      Omit<TagProps, 'type'> &
-      Omit<ProgressProps, 'type' | 'format'>
+      Omit<TextProps, OmitTypes> &
+      Omit<ImageProps, OmitTypes> &
+      Omit<LinkProps, OmitTypes> &
+      Omit<TagProps, OmitTypes> &
+      Omit<ProgressProps, OmitTypes>
   >
 >
 
