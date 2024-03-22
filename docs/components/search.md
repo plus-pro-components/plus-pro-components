@@ -100,11 +100,12 @@ search/async
 
 ## Search Events
 
-| 名称     | 说明                   | 类型                                                                                        |
-| -------- | ---------------------- | ------------------------------------------------------------------------------------------- |
-| `search` | 点击查询按钮触发的事件 | `function` <docs-tip content='(values: FieldValues) => void'></docs-tip>                    |
-| `change` | 表单变化触发的事件     | `function` <docs-tip content='(values: FieldValues,column: PlusColumn) => void'></docs-tip> |
-| `reset`  | 点击重置按钮触发的事件 | `function` <docs-tip content='(values: FieldValues) => void'></docs-tip>                    |
+| 名称                              | 说明                    | 类型                                                                                        |
+| --------------------------------- | ----------------------- | ------------------------------------------------------------------------------------------- |
+| `search`                          | 点击查询按钮触发的事件  | `function` <docs-tip content='(values: FieldValues) => void'></docs-tip>                    |
+| `change`                          | 表单变化触发的事件      | `function` <docs-tip content='(values: FieldValues,column: PlusColumn) => void'></docs-tip> |
+| `reset`                           | 点击重置按钮触发的事件  | `function` <docs-tip content='(values: FieldValues) => void'></docs-tip>                    |
+| `collapse`<el-tag>v0.0.6</el-tag> | 点击展开/收起触发的事件 | `function` <docs-tip content='(isShowUnfold: Boolean) => void'></docs-tip>                  |
 
 ## Search Slots
 
