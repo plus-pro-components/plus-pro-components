@@ -50,7 +50,7 @@ TS 类型 `PlusColumn`
 
 ## valueType 可选的表单值
 
-| valueType 表单值   | 对应 element-plus 的组件                                                                 | 对应 plus-pro-components 的组件                  | 对应的表格显示                          |
+| valueType 表单值   | 对应 element-plus 的表单组件                                                             | 对应 plus-pro-components 的组件                  | 对应的表格显示                          |
 | ------------------ | ---------------------------------------------------------------------------------------- | ------------------------------------------------ | --------------------------------------- |
 | `autocomplete`     | [el-autocomplete](https://element-plus.org/zh-CN/component/autocomplete.html)            |                                                  | 文本显示                                |
 | `cascader`         | [el-cascader](https://element-plus.org/zh-CN/component/cascader.html)                    |                                                  | 文本显示                                |
@@ -67,20 +67,21 @@ TS 类型 `PlusColumn`
 | `time-select`      | [el-time-select](https://element-plus.org/zh-CN/component/time-select.html)              |                                                  | 文本显示                                |
 | `textarea`         | [el-input ](https://element-plus.org/zh-CN/component/input.html#文本域) (type=textarea)  |                                                  | 文本显示                                |
 | `input`            | [el-input](https://element-plus.org/zh-CN/component/input.html) 表单默认值               |                                                  | 文本显示                                |
-| `text`             | 文本显示                                                                                 |                                                  | 文本显示                                |
+| `text`             | [el-text ](https://element-plus.org/zh-CN/component/text.html)                           |                                                  | 文本显示                                |
 | `plus-radio`       |                                                                                          | [ plus-radio](/components/radio.html)            | 显示值对应`options`的 `label`           |
 | `plus-date-picker` |                                                                                          | [plus-date-picker](/components/date-picker.html) | 文本显示                                |
 | `plus-input-tag`   |                                                                                          | [plus-input-tag](/components/input-tag.html)     | 文本显示                                |
 
 ## valueType 可选的显示值
 
-| valueType 表单值 | 说明                                                   | 对应的编辑状态组件                                               |
-| ---------------- | ------------------------------------------------------ | ---------------------------------------------------------------- |
-| `undefined`      | 显示默认值，显示文本                                   | [el-input ](https://element-plus.org/zh-CN/component/input.html) |
-| `img`            | 显示图片，自带预览，可使用配置项`preview`禁止          | [el-input ](https://element-plus.org/zh-CN/component/input.html) |
-| `link`           | 显示 el-link ，配合配置项`fieldProps`和`linkText` 使用 | [el-input ](https://element-plus.org/zh-CN/component/input.html) |
-| `money`          | 显示金钱                                               | [el-input ](https://element-plus.org/zh-CN/component/input.html) |
-| `tag`            | 显示 el-tag，配合配置项`fieldProps` 使用               | [el-input ](https://element-plus.org/zh-CN/component/input.html) |
-| `progress`       | 显示 el-progress，配合配置项`fieldProps` 使用          | [el-input ](https://element-plus.org/zh-CN/component/input.html) |
-| `copy`           | 文本后面有可以复制按钮                                 | [el-input ](https://element-plus.org/zh-CN/component/input.html) |
-| `code`           | 显示代码                                               | [el-input ](https://element-plus.org/zh-CN/component/input.html) |
+| valueType 表单值 | 对应 element-plus/原生 的显示组件                                 | 说明                                                   | 对应的编辑状态组件                                               |
+| ---------------- | ----------------------------------------------------------------- | ------------------------------------------------------ | ---------------------------------------------------------------- |
+| `undefined`      | `span`                                                            | 显示默认值，显示文本                                   | [el-input ](https://element-plus.org/zh-CN/component/input.html) |
+| `img`            | [el-image](https://element-plus.org/zh-CN/component/image.html)   | 显示图片，自带预览，可使用配置项`preview`禁止          | [el-input ](https://element-plus.org/zh-CN/component/input.html) |
+| `link`           | [el-link](https://element-plus.org/zh-CN/component/link.html)     | 显示 el-link ，配合配置项`fieldProps`和`linkText` 使用 | [el-input ](https://element-plus.org/zh-CN/component/input.html) |
+| `money`          | `span`                                                            | 显示金钱                                               | [el-input ](https://element-plus.org/zh-CN/component/input.html) |
+| `tag`            | [el-tag](https://element-plus.org/zh-CN/component/tag.html)       | 显示 el-tag，配合配置项`fieldProps` 使用               | [el-input ](https://element-plus.org/zh-CN/component/input.html) |
+| `progress`       | [el-link](https://element-plus.org/zh-CN/component/progress.html) | 显示 el-progress，配合配置项`fieldProps` 使用          | [el-input ](https://element-plus.org/zh-CN/component/input.html) |
+| `copy`           | `span`                                                            | 文本后面有可以复制按钮                                 | [el-input ](https://element-plus.org/zh-CN/component/input.html) |
+| `code`           | `span`                                                            | 显示代码                                               | [el-input ](https://element-plus.org/zh-CN/component/input.html) |
+| `text`           | `span`                                                            | 显示文本                                               | [el-text ](https://element-plus.org/zh-CN/component/text.html)   |
