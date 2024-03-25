@@ -10,6 +10,7 @@ body:
 
         - 阅读 [文档](https://plus-pro-components.github.io/)
         - 尝试自己修改样式
+        - 尝试使用插槽或者渲染函数自定义
         - 在 [GitHub Discussions]( https://github.com/plus-pro-components/plus-pro-components/discussions) 上寻求帮助 
         - 在[Stack Overflow](https://stackoverflow.com/questions/ask?tags=plus-pro-components)上寻求帮助 
 
@@ -17,9 +18,9 @@ body:
   - type: input
     id: component
     attributes:
-      label: 需要增强的组件
-      description: 如 PlusForm、PlusTable、PlusSearch等
-      placeholder: 组件
+      label: 需要增强的组件/模块
+      description: 如 PlusForm、PlusTable、PlusSearch、国际化、TS类型等
+      placeholder: 组件/模块
     validations:
       required: true
   - type: textarea
