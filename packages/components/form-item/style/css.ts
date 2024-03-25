@@ -18,6 +18,7 @@ import '@external/switch/style/css'
 import '@external/time-picker/style/css'
 import '@external/time-select/style/css'
 import '@external/input/style/css'
+import '@external/text/style/css'
 
 import '@plus-pro-components/components/radio/style/css'
 import '@plus-pro-components/components/date-picker/style/css'

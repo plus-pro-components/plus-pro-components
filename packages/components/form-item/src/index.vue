@@ -344,14 +344,14 @@
       @change="handleChange"
     />
 
-    <span
+    <el-text
       v-else-if="valueType === 'text'"
       ref="fieldInstance"
       class="plus-form-item-field"
       v-bind="customFieldProps"
     >
       {{ state }}
-    </span>
+    </el-text>
 
     <el-input
       v-else
@@ -411,7 +411,8 @@ import {
   ElSwitch as SwitchComponent,
   ElTimePicker as TimePickerComponent,
   ElTimeSelect as TimeSelectComponent,
-  ElInput as InputComponent
+  ElInput as InputComponent,
+  ElText as TextComponent
 } from 'element-plus'
 import {
   DatePickerValueIsArrayList,
@@ -470,6 +471,7 @@ const ElSwitch: Component = SwitchComponent
 const ElTimePicker: Component = TimePickerComponent
 const ElTimeSelect: Component = TimeSelectComponent
 const ElInput: Component = InputComponent
+const ElText: Component = TextComponent
 
 const props = withDefaults(defineProps<PlusFormItemProps>(), {
   modelValue: '',
