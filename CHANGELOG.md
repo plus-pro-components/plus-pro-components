@@ -1,3 +1,21 @@
+## [v0.0.6](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.5...v0.0.6) (2024-03-25)
+
+
+### ✨ Features
+
+* **components:** :sparkles: form-item component valueType === 'text':'span'=>'el-text'([c8058f4](https://github.com/plus-pro-components/plus-pro-components/commit/c8058f4)) by@xiaofei
+* **types:** :sparkles: redefine FieldProps['autocomplete'] type.([0c262e9](https://github.com/plus-pro-components/plus-pro-components/commit/0c262e9)) by@xiaofei
+* **all:** Merge pull request [#81](https://github.com/plus-pro-components/plus-pro-components/pull/81) from plus-pro-components/simmi([38d722a](https://github.com/plus-pro-components/plus-pro-components/commit/38d722a)) by@xiaofei
+* **components:** :sparkles: expand and collapse events of search components([4da05bf](https://github.com/plus-pro-components/plus-pro-components/commit/4da05bf)) by@ex-cuishengnan
+
+
+### 🐛 Bug Fixes
+
+* **types:** :bug: fix FieldProps['height'] type.([37d4cae](https://github.com/plus-pro-components/plus-pro-components/commit/37d4cae)) by@xiaofei
+
+
+
+
 ## [v0.0.5](https://github.com/plus-pro-components/plus-pro-components/compare/v0.0.4...v0.0.5) (2024-03-21)
 
 
