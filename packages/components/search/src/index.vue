@@ -206,6 +206,7 @@ const handleSearch = async () => {
 const handleReset = (): void => {
   state.values = { ...props.defaultValues }
   emit('reset', state.values)
+  emit('update:modelValue', state.values)
 }
 
 const handleUnfold = () => {
