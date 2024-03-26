@@ -406,7 +406,7 @@ export type PropsItemType<T extends Record<string, any> = any> =
 选择框类型
 
 ```ts
-import type { PropsItemType } from 'plus-pro-components'
+import type { PropsItemType, RecordType } from 'plus-pro-components'
 /**
  * 选择框类型
  */
@@ -421,13 +421,25 @@ export interface OptionsRow {
   /**
    * 小圆点背景色，
    * type 优先级 低于 color，
-   * 支持 'success' | 'warning' | 'info' | 'primary' | 'danger'
+   * 只支持 'success' | 'warning' | 'info' | 'primary' | 'danger'
    */
-  type?: 'success' | 'warning' | 'info' | 'primary' | 'danger'
+  type?: Exclude<ButtonType, 'default' | 'text' | ''>
   /**
    * 表单子项的props  如 el-checkbox-group下的el-checkbox的props
    */
-  fieldItemProps?: PropsItemType
+  fieldItemProps?: RecordType
+  /**
+   * el-checkbox-group下的，每一项el-checkbox的各自插槽(即el-checkbox的default插槽)。
+   * el-radio-group下的，每一项el-checkbox的内容各自插槽(即el--radio的default插槽)。
+   *
+   * @see https://element-plus.org/zh-CN/component/checkbox.html#checkbox-slots
+   * @see https://element-plus.org/zh-CN/component/radio.html#radio-slots
+   */
+  fieldSlot?: (option?: OptionsRow) => VNode | string
+  /**
+   * 子选项
+   */
+  children?: OptionsRow[]
 }
 ```
 

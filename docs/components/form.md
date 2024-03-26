@@ -265,6 +265,25 @@ form/extra
 
 :::
 
+## 自定义表单每一项子项的内容
+
+<el-tag>v0.0.7</el-tag>
+
+::: warning 注意
+
+- 仅当[PlusColumn](/components/config.html)的`valueType` 为 `checkbox` | `radio` |`plus-radio`之一时生效。
+
+- 当 `fieldSlot`函数 和`fieldChildrenSlot`函数同时出现的时候，`fieldSlot`函数的优先级更高。
+  :::
+
+[PlusColumn](/components/config.html)提供 [fieldChildrenSlot](/components/config.html) 函数可整体自定义表单每一项的子项，[PlusColumn](/components/config.html)的`options`中提供 [fieldSlot](/components/type.html#optionsrow) 函数可单独自定义表单每一项子项的内容。
+
+:::demo
+
+form/field-children-slot
+
+:::
+
 ## 自定义 tooltip icon
 
 <el-tag>v0.0.3</el-tag>
