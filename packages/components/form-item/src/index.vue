@@ -294,7 +294,17 @@
         :label="item.label"
         :value="item.value"
         v-bind="item.fieldItemProps"
-      />
+      >
+        <template #default>
+          <component :is="item.fieldSlot" v-if="isFunction(item.fieldSlot)" v-bind="item" />
+          <component
+            :is="fieldChildrenSlot"
+            v-else-if="isFunction(fieldChildrenSlot)"
+            v-bind="item"
+          />
+          <template v-else> {{ item.label }} </template>
+        </template>
+      </el-option>
     </el-select>
 
     <el-select
@@ -317,7 +327,17 @@
         :label="item.label"
         :value="item.value"
         v-bind="item.fieldItemProps"
-      />
+      >
+        <template #default>
+          <component :is="item.fieldSlot" v-if="isFunction(item.fieldSlot)" v-bind="item" />
+          <component
+            :is="fieldChildrenSlot"
+            v-else-if="isFunction(fieldChildrenSlot)"
+            v-bind="item"
+          />
+          <template v-else> {{ item.label }} </template>
+        </template>
+      </el-option>
     </el-select>
 
     <el-slider
