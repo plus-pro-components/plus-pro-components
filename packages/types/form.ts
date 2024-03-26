@@ -345,12 +345,14 @@ export interface FormColumnProps {
 
   /**
    *
-   * 自定义表单每一项子项的插槽 valueType 为 `checkbox` | `radio` |`plus-radio` 生效。
+   * 自定义表单每一项子项的插槽 valueType 为 `checkbox` | `radio` | `select` |`plus-radio` 之一时生效。
    * el-checkbox-group下的，所有el-checkbox的内容整体插槽(即el-checkbox的default插槽)。
-   * el-radio-group下的，所有el-checkbox的内容整体插槽(即el--radio的default插槽)。
+   * el-radio-group下的，所有el-checkbox的内容整体插槽(即el-radio的default插槽)。
+   * el-select下的，所有el-option的内容整体插槽(即el-option的default插槽)。
    *
    * @see https://element-plus.org/zh-CN/component/checkbox.html#checkbox-slots
    * @see https://element-plus.org/zh-CN/component/radio.html#radio-slots
+   * @see https://element-plus.gitee.io/zh-CN/component/select.html#option-slots
    */
   fieldChildrenSlot?: (option?: OptionsRow) => VNode | string
 }
