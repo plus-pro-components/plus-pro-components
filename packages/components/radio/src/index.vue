@@ -1,5 +1,9 @@
 <template>
   <el-radio-group ref="radioGroupInstance" v-model="state.radio" v-bind="$attrs">
+    <template v-for="(fieldSlot, key) in fieldSlots" :key="key" #[key]="data">
+      <component :is="fieldSlot" v-bind="data" />
+    </template>
+
     <!-- element-plus 版本号小于2.6.0 -->
     <template v-if="versionIsLessThan260">
       <el-radio
@@ -11,7 +15,15 @@
         @click="radioClick($event, item.value, item.fieldItemProps)"
         @change="change(item.value)"
       >
-        {{ item.label }}
+        <template #default>
+          <component :is="item.fieldSlot" v-if="isFunction(item.fieldSlot)" v-bind="item" />
+          <component
+            :is="fieldChildrenSlot"
+            v-else-if="isFunction(fieldChildrenSlot)"
+            v-bind="item"
+          />
+          <template v-else> {{ item.label }} </template>
+        </template>
       </el-radio>
     </template>
     <!-- element-plus 版本号大于等于2.6.0 -->
@@ -25,7 +37,15 @@
         @click="radioClick($event, item.value, item.fieldItemProps)"
         @change="change(item.value)"
       >
-        {{ item.label }}
+        <template #default>
+          <component :is="item.fieldSlot" v-if="isFunction(item.fieldSlot)" v-bind="item" />
+          <component
+            :is="fieldChildrenSlot"
+            v-else-if="isFunction(fieldChildrenSlot)"
+            v-bind="item"
+          />
+          <template v-else> {{ item.label }} </template>
+        </template>
       </el-radio>
     </template>
   </el-radio-group>
@@ -34,14 +54,16 @@
 <script setup lang="ts">
 import { reactive, watch, ref, useAttrs } from 'vue'
 import { ElRadio, ElRadioGroup } from 'element-plus'
-import type { OptionsRow } from '@plus-pro-components/types'
-import { versionIsLessThan260 } from '@plus-pro-components/components/utils'
+import type { OptionsRow, PlusColumn } from '@plus-pro-components/types'
+import { versionIsLessThan260, isFunction } from '@plus-pro-components/components/utils'
 
 type ValueType = string | number | boolean
 export interface PlusRadioProps {
   modelValue?: ValueType
   options: OptionsRow[]
   isCancel?: boolean
+  fieldSlots?: PlusColumn['fieldSlots']
+  fieldChildrenSlot?: PlusColumn['fieldChildrenSlot']
 }
 export interface PlusRadioEmits {
   (e: 'change', value: ValueType): void
@@ -58,7 +80,9 @@ defineOptions({
 const props = withDefaults(defineProps<PlusRadioProps>(), {
   modelValue: '',
   options: () => [],
-  isCancel: true
+  isCancel: true,
+  fieldSlots: undefined,
+  fieldChildrenSlot: undefined
 })
 const emit = defineEmits<PlusRadioEmits>()
 
