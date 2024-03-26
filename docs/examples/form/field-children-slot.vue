@@ -25,6 +25,9 @@ const state = ref<FieldValues>({
   radio: '0',
   radioAll: '0',
   radioMixed: '0',
+  select: '0',
+  selectAll: '0',
+  selectMixed: '0',
   plusRadio: '0',
   plusRadioAll: '0',
   plusRadioMixed: '0'
@@ -83,6 +86,37 @@ const columns: PlusColumn[] = [
         value: '2',
         fieldSlot: ({ label }) => {
           return h('div', { style: { color: 'var(--el-color-info)' } }, `单个自定义1-${label}`)
+        }
+      }
+    ]
+  },
+  {
+    label: '单个自定义select',
+    prop: 'select',
+    valueType: 'select',
+    options: [
+      {
+        label: '未解决',
+        value: '0',
+        color: 'var(--el-color-warning )',
+        fieldSlot: ({ label, color }) => {
+          return h('div', { style: { color } }, `${label}`)
+        }
+      },
+      {
+        label: '已解决',
+        value: '1',
+        color: 'var(--el-color-success )',
+        fieldSlot: ({ label, color }) => {
+          return h('div', { style: { color } }, `${label}`)
+        }
+      },
+      {
+        label: '解决中',
+        value: '2',
+        color: 'var(--el-color-info )',
+        fieldSlot: ({ label, color }) => {
+          return h('div', { style: { color } }, `${label}`)
         }
       }
     ]
@@ -160,6 +194,31 @@ const columns: PlusColumn[] = [
     ]
   },
   {
+    label: '整体自定义select',
+    prop: 'selectAll',
+    valueType: 'select',
+    fieldChildrenSlot: ({ label }) => {
+      return h('div', { style: { color: 'var(--el-color-warning)' } }, `整体自定义-${label}`)
+    },
+    options: [
+      {
+        label: '未解决',
+        value: '0',
+        color: 'var(--el-color-warning )'
+      },
+      {
+        label: '已解决',
+        value: '1',
+        color: 'var(--el-color-success )'
+      },
+      {
+        label: '解决中',
+        value: '2',
+        color: 'var(--el-color-info )'
+      }
+    ]
+  },
+  {
     label: '整体自定义plus-radio',
     prop: 'plusRadioAll',
     valueType: 'plus-radio',
@@ -232,6 +291,34 @@ const columns: PlusColumn[] = [
       {
         label: '美食',
         value: '2'
+      }
+    ]
+  },
+  {
+    label: '混合自定义select',
+    prop: 'selectMixed',
+    valueType: 'select',
+    fieldChildrenSlot: ({ label }) => {
+      return h('div', { style: { color: 'var(--el-color-success)' } }, `${label}`)
+    },
+    options: [
+      {
+        label: '未解决',
+        value: '0',
+        color: 'var(--el-color-warning )',
+        fieldSlot: ({ label, color }) => {
+          return h('div', { style: { color } }, `${label}`)
+        }
+      },
+      {
+        label: '已解决',
+        value: '1',
+        color: 'var(--el-color-success )'
+      },
+      {
+        label: '解决中',
+        value: '2',
+        color: 'var(--el-color-info )'
       }
     ]
   },

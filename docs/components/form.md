@@ -271,9 +271,12 @@ form/extra
 
 ::: warning 注意
 
-- 仅当[PlusColumn](/components/config.html)的`valueType` 为 `checkbox` | `radio` |`plus-radio`之一时生效。
+- 仅当[PlusColumn](/components/config.html)的`valueType` 为 `checkbox` | `radio` | `select` |`plus-radio`之一时生效。
+
+- 当[PlusColumn](/components/config.html)的`valueType` 为`select`时，不建议定义`label`【无法回显】
 
 - 当 `fieldSlot`函数 和`fieldChildrenSlot`函数同时出现的时候，`fieldSlot`函数的优先级更高。
+
   :::
 
 [PlusColumn](/components/config.html)提供 [fieldChildrenSlot](/components/config.html) 函数可整体自定义表单每一项的子项，[PlusColumn](/components/config.html)的`options`中提供 [fieldSlot](/components/type.html#optionsrow) 函数可单独自定义表单每一项子项的内容。
