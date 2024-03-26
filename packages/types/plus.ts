@@ -56,6 +56,17 @@ export interface OptionsRow {
    * 表单子项的props  如 el-checkbox-group下的el-checkbox的props
    */
   fieldItemProps?: RecordType
+  /**
+   * el-checkbox-group下的，每一项el-checkbox的各自插槽(即el-checkbox的default插槽)。
+   * el-radio-group下的，每一项el-checkbox的内容各自插槽(即el--radio的default插槽)。
+   *
+   * @see https://element-plus.org/zh-CN/component/checkbox.html#checkbox-slots
+   * @see https://element-plus.org/zh-CN/component/radio.html#radio-slots
+   */
+  fieldSlot?: (option?: OptionsRow) => VNode | string
+  /**
+   * 子选项
+   */
   children?: OptionsRow[]
 }
 /**
