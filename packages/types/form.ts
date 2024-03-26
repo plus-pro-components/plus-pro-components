@@ -28,7 +28,7 @@ import type { PlusFormProps } from '@plus-pro-components/components/form'
 import type { PlusRadioProps } from '@plus-pro-components/components/radio'
 import type { PlusDatePickerProps } from '@plus-pro-components/components/date-picker'
 import type { PlusInputTagProps } from '@plus-pro-components/components/input-tag'
-import type { PropsItemType, PlusColumn } from './plus'
+import type { PropsItemType, PlusColumn, OptionsRow } from './plus'
 import type { Mutable } from './global'
 
 export {}
@@ -342,6 +342,17 @@ export interface FormColumnProps {
    * ```
    */
   fieldSlots?: { [slotName: string]: (data?: any) => VNode | string }
+
+  /**
+   *
+   * 自定义表单每一项子项的插槽 valueType 为 `checkbox` | `radio` |`plus-radio` 生效。
+   * el-checkbox-group下的，所有el-checkbox的内容整体插槽(即el-checkbox的default插槽)。
+   * el-radio-group下的，所有el-checkbox的内容整体插槽(即el--radio的default插槽)。
+   *
+   * @see https://element-plus.org/zh-CN/component/checkbox.html#checkbox-slots
+   * @see https://element-plus.org/zh-CN/component/radio.html#radio-slots
+   */
+  fieldChildrenSlot?: (option?: OptionsRow) => VNode | string
 }
 
 /**
