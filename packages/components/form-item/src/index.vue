@@ -109,7 +109,15 @@
           :label="item.value"
           v-bind="item.fieldItemProps"
         >
-          {{ item.label }}
+          <template #default>
+            <component :is="item.fieldSlot" v-if="isFunction(item.fieldSlot)" v-bind="item" />
+            <component
+              :is="fieldChildrenSlot"
+              v-else-if="isFunction(fieldChildrenSlot)"
+              v-bind="item"
+            />
+            <template v-else> {{ item.label }} </template>
+          </template>
         </el-checkbox>
       </template>
 
@@ -121,7 +129,15 @@
           :value="item.value"
           v-bind="item.fieldItemProps"
         >
-          {{ item.label }}
+          <template #default>
+            <component :is="item.fieldSlot" v-if="isFunction(item.fieldSlot)" v-bind="item" />
+            <component
+              :is="fieldChildrenSlot"
+              v-else-if="isFunction(fieldChildrenSlot)"
+              v-bind="item"
+            />
+            <template v-else> {{ item.label }} </template>
+          </template>
         </el-checkbox>
       </template>
     </el-checkbox-group>
@@ -205,7 +221,15 @@
           :label="item.value"
           v-bind="item.fieldItemProps"
         >
-          {{ item.label }}
+          <template #default>
+            <component :is="item.fieldSlot" v-if="isFunction(item.fieldSlot)" v-bind="item" />
+            <component
+              :is="fieldChildrenSlot"
+              v-else-if="isFunction(fieldChildrenSlot)"
+              v-bind="item"
+            />
+            <template v-else> {{ item.label }} </template>
+          </template>
         </el-radio>
       </template>
       <!-- element-plus 版本号大于等于2.6.0 -->
@@ -216,7 +240,15 @@
           :value="item.value"
           v-bind="item.fieldItemProps"
         >
-          {{ item.label }}
+          <template #default>
+            <component :is="item.fieldSlot" v-if="isFunction(item.fieldSlot)" v-bind="item" />
+            <component
+              :is="fieldChildrenSlot"
+              v-else-if="isFunction(fieldChildrenSlot)"
+              v-bind="item"
+            />
+            <template v-else> {{ item.label }} </template>
+          </template>
         </el-radio>
       </template>
     </el-radio-group>
@@ -227,6 +259,7 @@
       v-model="state"
       class="plus-form-item-field"
       :options="options"
+      :field-children-slot="fieldChildrenSlot"
       is-cancel
       v-bind="customFieldProps"
       @change="handleChange"
@@ -427,16 +460,14 @@ export interface PlusFormItemProps {
   label: PlusColumn['label']
   prop: PlusColumn['prop']
   fieldProps?: PlusColumn['fieldProps']
-  // eslint-disable-next-line vue/require-default-prop
   valueType?: PlusColumn['valueType']
   options?: PlusColumn['options']
   formItemProps?: PlusColumn['formItemProps']
-  // eslint-disable-next-line vue/require-default-prop
   renderField?: PlusColumn['renderField']
-  // eslint-disable-next-line vue/require-default-prop
   renderLabel?: PlusColumn['renderLabel']
   tooltip?: PlusColumn['tooltip']
   fieldSlots?: PlusColumn['fieldSlots']
+  fieldChildrenSlot?: PlusColumn['fieldChildrenSlot']
   index?: number
 }
 export interface PlusFormItemEmits {
@@ -481,6 +512,10 @@ const props = withDefaults(defineProps<PlusFormItemProps>(), {
   fieldProps: () => ({}),
   options: () => [],
   fieldSlots: () => ({}),
+  valueType: undefined,
+  renderField: undefined,
+  renderLabel: undefined,
+  fieldChildrenSlot: undefined,
   index: 0
 })
 const emit = defineEmits<PlusFormItemEmits>()
