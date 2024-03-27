@@ -104,7 +104,7 @@
       <!-- element-plus 版本号小于2.6.0 -->
       <template v-if="versionIsLessThan260">
         <el-checkbox
-          v-for="item in options"
+          v-for="item in customOptions"
           :key="item.label"
           :label="item.value"
           v-bind="item.fieldItemProps"
@@ -124,7 +124,7 @@
       <!-- element-plus 版本号大于等于2.6.0 -->
       <template v-else>
         <el-checkbox
-          v-for="item in options"
+          v-for="item in customOptions"
           :key="item.label"
           :value="item.value"
           v-bind="item.fieldItemProps"
@@ -216,7 +216,7 @@
       <!-- element-plus 版本号小于2.6.0 -->
       <template v-if="versionIsLessThan260">
         <el-radio
-          v-for="item in options"
+          v-for="item in customOptions"
           :key="item.label"
           :label="item.value"
           v-bind="item.fieldItemProps"
@@ -235,7 +235,7 @@
       <!-- element-plus 版本号大于等于2.6.0 -->
       <template v-else>
         <el-radio
-          v-for="item in options"
+          v-for="item in customOptions"
           :key="item.label"
           :value="item.value"
           v-bind="item.fieldItemProps"
@@ -289,7 +289,7 @@
       </template>
 
       <el-option
-        v-for="item in options"
+        v-for="item in customOptions"
         :key="item.label"
         :label="item.label"
         :value="item.value"
@@ -322,7 +322,7 @@
       </template>
 
       <el-option
-        v-for="item in options"
+        v-for="item in customOptions"
         :key="item.label"
         :label="item.label"
         :value="item.value"
@@ -541,7 +541,7 @@ const props = withDefaults(defineProps<PlusFormItemProps>(), {
 const emit = defineEmits<PlusFormItemEmits>()
 
 const { t } = useLocale()
-const options = useGetOptions(props)
+const { customOptions, customOptionsIsReady } = useGetOptions(props)
 const formItemInstance = ref<InstanceType<typeof FormItemComponent> | null>()
 const fieldInstance = ref()
 const customFormItemProps = ref<any>({})
@@ -660,9 +660,11 @@ watch(
 )
 
 watch(
-  computed(() => [props.modelValue, customFieldPropsIsReady.value]),
-  ([val, isReady]) => {
-    isReady && setValue(val)
+  computed(() => [props.modelValue, customFieldPropsIsReady.value, customOptionsIsReady.value]),
+  ([val, fieldPropsIsReady, optionsIsReady]) => {
+    if (fieldPropsIsReady && optionsIsReady) {
+      setValue(val)
+    }
   },
   {
     immediate: true,
