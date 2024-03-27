@@ -127,6 +127,12 @@ const main = async () => {
       ).format('YYYY-MM-DD')})`
     }
 
+    const getFormatContent = (item: Log) => {
+      return `* **${item.scoped || 'all'}:**${item.content}([${item.sha}](${target}commit/${
+        item.sha
+      })) by@${item.author}\n`
+    }
+
     const featData = item.content
       .filter(item => item.type === 'feat' || item.content.includes('Merge'))
       .map(
@@ -138,25 +144,22 @@ const main = async () => {
 
     const fixData = item.content
       .filter(item => item.type === 'fix')
-      .map(
-        item =>
-          `* **${item.scoped || 'all'}:**${item.content}([${item.sha}](${target}commit/${
-            item.sha
-          })) by@${item.author}\n`
-      )
+      .map(item => getFormatContent(item))
+
     const refactorData = item.content
       .filter(item => item.type === 'refactor')
-      .map(
-        item =>
-          `* **${item.scoped || 'all'}:**${item.content}([${item.sha}](${target}commit/${
-            item.sha
-          })) by@${item.author}\n`
-      )
+      .map(item => getFormatContent(item))
+
+    const perfData = item.content
+      .filter(item => item.type === 'perf')
+      .map(item => getFormatContent(item))
 
     const content =
       md +
       '\n\n\n' +
       (featData.length ? `### ✨ Features\n\n${featData.join('')}` : '') +
+      '\n\n' +
+      (perfData.length ? `### ⚡ Performance Improvements\n\n${perfData.join('')}` : '') +
       '\n\n' +
       (fixData.length ? `### 🐛 Bug Fixes\n\n${fixData.join('')}` : '') +
       '\n\n' +
