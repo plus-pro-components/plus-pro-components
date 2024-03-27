@@ -9,17 +9,25 @@ const throwError = (data: unknown) => {
   }
 }
 
-export const useGetOptions = (props: PlusColumn): Ref<OptionsRow[]> => {
+export const useGetOptions = (
+  props: PlusColumn
+): {
+  customOptions: Ref<OptionsRow[]>
+  customOptionsIsReady: Ref<boolean>
+} => {
   const options = ref<OptionsRow[]>([])
+  const optionsIsReady = ref<boolean>(false)
 
   if (!props.options) {
     options.value = []
+    optionsIsReady.value = true
   } else if (isRef(props.options)) {
     // computed
     watch(
       props.options,
       val => {
         options.value = val
+        optionsIsReady.value = true
       },
       {
         immediate: true
@@ -28,6 +36,7 @@ export const useGetOptions = (props: PlusColumn): Ref<OptionsRow[]> => {
   } else if (isArray(props.options)) {
     // 数组
     options.value = [...props.options]
+    optionsIsReady.value = true
   } else if (isFunction(props.options)) {
     // 函数或Promise
     const getValue = props.options as
@@ -40,6 +49,7 @@ export const useGetOptions = (props: PlusColumn): Ref<OptionsRow[]> => {
       ;(result as Promise<OptionsRow[]>)
         .then((res: OptionsRow[]) => {
           options.value = res
+          optionsIsReady.value = true
           throwError(options.value)
         })
         .catch((err: unknown) => {
@@ -48,6 +58,7 @@ export const useGetOptions = (props: PlusColumn): Ref<OptionsRow[]> => {
     } else {
       // 函数
       options.value = result as OptionsRow[]
+      optionsIsReady.value = true
     }
   } else if (isPromise(props.options)) {
     // 本身是一个Promise
@@ -55,14 +66,16 @@ export const useGetOptions = (props: PlusColumn): Ref<OptionsRow[]> => {
     getValue
       .then((res: OptionsRow[]) => {
         options.value = res
+        optionsIsReady.value = true
         throwError(options.value)
       })
       .catch((err: unknown) => {
         throw err
       })
   } else {
+    optionsIsReady.value = true
     throwError(props.options)
   }
 
-  return options
+  return { customOptions: options, customOptionsIsReady: optionsIsReady }
 }
