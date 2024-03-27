@@ -221,7 +221,7 @@ const isCellEdit = ref(false)
 const isForm = computed(() => props.column.editable === true || isCellEdit.value === true)
 const customFieldProps = ref<RecordType>({})
 const formInstance = ref()
-const options = useGetOptions(props.column)
+const { customOptions: options } = useGetOptions(props.column)
 const columns: Ref<PlusColumn[]> = ref([])
 const subRow = ref(props.row)
 
