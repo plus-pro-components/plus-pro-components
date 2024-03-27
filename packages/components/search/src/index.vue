@@ -73,7 +73,6 @@ import { reactive, ref, toRefs, computed, watch, unref, useSlots } from 'vue'
 import type { FormProps, RowProps, ColProps } from 'element-plus'
 import { ArrowDown, ArrowUp, Search, RefreshRight } from '@element-plus/icons-vue'
 import type { PlusColumn, FieldValues, Mutable } from '@plus-pro-components/types'
-import { cloneDeep } from 'lodash-es'
 import { useLocale } from '@plus-pro-components/hooks'
 import { ElFormItem, ElButton, ElIcon } from 'element-plus'
 import {
@@ -176,7 +175,7 @@ state.originData = computed<any[]>(() => {
 })
 
 state.subColumns = computed<any[]>(() => {
-  const data = cloneDeep(state.originData)
+  const data = state.originData
   if (props.hasUnfold && !state.isShowUnfold) {
     return data.slice(0, props.showNumber)
   } else {
