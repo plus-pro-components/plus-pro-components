@@ -78,7 +78,7 @@
       v-model="state"
       :placeholder="t('plus.field.pleaseSelect') + label"
       class="plus-form-item-field"
-      :options="options"
+      :options="customOptions"
       clearable
       v-bind="customFieldProps"
       @change="handleChange"
@@ -258,7 +258,7 @@
       ref="fieldInstance"
       v-model="state"
       class="plus-form-item-field"
-      :options="options"
+      :options="customOptions"
       :field-children-slot="fieldChildrenSlot"
       is-cancel
       v-bind="customFieldProps"
