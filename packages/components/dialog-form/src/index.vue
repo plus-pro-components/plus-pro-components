@@ -124,6 +124,10 @@ watch(
   () => props.visible,
   val => {
     subVisible.value = val
+
+    if (val === false) {
+      computedFormInstance.value.resetFields()
+    }
   },
   {
     immediate: true
