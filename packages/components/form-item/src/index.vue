@@ -625,7 +625,6 @@ const setValue = (val: any) => {
   } else {
     state.value = val
   }
-  console.log(state.value, ' state.value')
   valueIsReady.value = true
 }
 
