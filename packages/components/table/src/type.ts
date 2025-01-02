@@ -165,24 +165,45 @@ export interface TableFormRefRow {
    * 单元格的表单单项实例
    * @deprecated v0.0.1-beta.34
    */
-  formItemInstance: Ref<InstanceType<typeof ElFormItem>>
+  formItemInstance?: Ref<InstanceType<typeof ElFormItem>>
   /**
    * 获取显示组件实例
    */
   getDisplayItemInstance: () => {
     index: number
+    /**
+     * 表格的行索引，同 index
+     * @version 0.1.20
+     */
+    rowIndex: number
+    /**
+     * 单元格的列索引
+     * * @version 0.1.20
+     */
+    cellIndex: number
     prop: string
     formInstance: Ref<InstanceType<typeof ElForm>>
     /**
      * 单元格的表单单项实例
      * @deprecated v0.0.1-beta.34
      */
-    formItemInstance: Ref<InstanceType<typeof ElFormItem>>
+    formItemInstance?: Ref<InstanceType<typeof ElFormItem>>
   }
   /**
    * 表格的行索引
    */
   index: number
+  /**
+   * 表格的行索引, 同 index
+   * @version 0.1.20
+   */
+  rowIndex: number
+
+  /**
+   * 单元格的列索引
+   * * @version 0.1.20
+   */
+  cellIndex: number
   /**
    * 表格的列字段
    */

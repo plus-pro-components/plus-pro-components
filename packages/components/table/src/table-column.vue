@@ -112,10 +112,11 @@ import {
 } from '@plus-pro-components/components/utils'
 import { TableFormRefInjectionKey } from '@plus-pro-components/constants'
 import { QuestionFilled } from '@element-plus/icons-vue'
-import type { Ref, ComputedRef } from 'vue'
+import type { Ref } from 'vue'
 import { ref, inject, watch, computed } from 'vue'
 import { PlusRender } from '@plus-pro-components/components/render'
 import type { TableColumnCtx } from 'element-plus'
+import { set } from 'lodash-es'
 import { ElTableColumn, ElTooltip, ElIcon } from 'element-plus'
 import type { TableFormRefRow, FormChangeCallBackParams } from './type'
 
@@ -148,18 +149,17 @@ const formRefs = inject(TableFormRefInjectionKey) as Ref<Record<string | number,
  */
 const setFormRef = () => {
   if (!plusDisplayItemInstance.value?.length) return
-  const data: RecordType = {}
-  const list: { index: number; prop: string; formInstance: ComputedRef<any> }[] =
+
+  const list: TableFormRefRow[] =
     plusDisplayItemInstance.value?.map(item => ({ ...item, ...item?.getDisplayItemInstance() })) ||
     []
   list.forEach(item => {
-    if (!data[item.index]) {
-      data[item.index] = []
+    if (!formRefs.value[item.index]) {
+      formRefs.value[item.index] = []
     }
-    data[item.index].push(item)
-  })
 
-  formRefs.value = data
+    set(formRefs.value[item.rowIndex], item.cellIndex, item)
+  })
 }
 
 watch(

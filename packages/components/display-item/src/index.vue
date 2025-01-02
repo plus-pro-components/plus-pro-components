@@ -577,6 +577,8 @@ const getDisplayItemInstance = () => {
   return {
     isEdit: isEdit,
     index: props.index,
+    rowIndex: props.index,
+    cellIndex: props.rest.cellIndex,
     prop: props.column.prop,
     formInstance: computed(() => formInstance.value?.formInstance)
   }
