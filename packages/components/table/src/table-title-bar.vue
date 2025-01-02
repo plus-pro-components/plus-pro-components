@@ -347,7 +347,7 @@ const handleDragEnd = (event: SortableEvent) => {
 }
 
 const resetCheckBoxList = () => {
-  state.checkList = originColumns.map(item => item.label + item.prop)
+  state.checkList = originColumns.map(item => getTableKey(item))
   setCheckAllState(state.checkList)
   const filterColumns = originColumns.map(item => ({ ...item, __selfHideInTable: false }))
   emit('filterTable', filterColumns)
