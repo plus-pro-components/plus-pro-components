@@ -81,13 +81,25 @@
         trigger="click"
         :title="t('plus.table.columnSettings')"
       >
-        <el-checkbox
-          v-model="state.checkAll"
-          :indeterminate="state.isIndeterminate"
-          @change="handleCheckAllChange"
-        >
-          {{ t('plus.table.selectAll') }}
-        </el-checkbox>
+        <div class="plus-table-checkbox-checkAll">
+          <el-checkbox
+            v-model="state.checkAll"
+            :indeterminate="state.isIndeterminate"
+            @change="handleCheckAllChange"
+          >
+            {{ t('plus.table.selectAll') }}
+          </el-checkbox>
+          <el-link
+            v-if="columnSetting?.reset !== false"
+            type="primary"
+            :underline="false"
+            href="javaScript:;"
+            v-bind="isPlainObject(columnSetting?.reset) ? columnSetting?.reset : {}"
+            @click.stop.prevent="resetCheckBoxList"
+            >重置</el-link
+          >
+        </div>
+
         <el-checkbox-group v-model="state.checkList" @change="handleCheckGroupChange">
           <div ref="checkboxGroupInstance" class="plus-table-checkbox-sortable-list">
             <div v-for="item in columns" :key="item.prop" class="plus-table-checkbox-item">
@@ -167,7 +179,7 @@ import {
   versionIsLessThan260,
   getLabel
 } from '@plus-pro-components/components/utils'
-import { ElCheckbox, ElCheckboxGroup, ElTooltip, ElIcon, ElButton } from 'element-plus'
+import { ElCheckbox, ElCheckboxGroup, ElTooltip, ElIcon, ElButton, ElLink } from 'element-plus'
 import type { SortableEvent, Options as SortableOptions } from 'sortablejs'
 import Sortable from 'sortablejs'
 import type { TitleBar, ColumnSetting } from './type'
@@ -206,6 +218,8 @@ const props = withDefaults(defineProps<PlusTableToolbarProps>(), {
   columnsIsChange: false
 })
 const emit = defineEmits<PlusTableToolbarEmits>()
+
+const originColumns: PlusColumn[] = cloneDeep(props.columns)
 
 const { t } = useLocale()
 
@@ -330,6 +344,13 @@ const handleDragEnd = (event: SortableEvent) => {
    */
   const list = subDragCheckboxList.filter(item => item)
   emit('filterTable', list)
+}
+
+const resetCheckBoxList = () => {
+  state.checkList = originColumns.map(item => item.label + item.prop)
+  setCheckAllState(state.checkList)
+  const filterColumns = originColumns.map(item => ({ ...item, __selfHideInTable: false }))
+  emit('filterTable', filterColumns)
 }
 
 onMounted(() => {

@@ -25,8 +25,8 @@
         <slot name="form-footer" />
       </template>
 
-      <template v-if="$slots['form-group-header']" #group-header>
-        <slot name="form-group-header" />
+      <template v-if="$slots['form-group-header']" #group-header="data">
+        <slot name="form-group-header" v-bind="data" />
       </template>
 
       <!--表单项label插槽 -->
