@@ -158,3 +158,9 @@
 @include b(table-column__edit) {
   cursor: pointer;
 }
+@include b(table-checkbox-checkAll) {
+display: flex;
+justify-content: space-between;
+}
+
+

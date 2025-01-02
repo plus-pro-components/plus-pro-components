@@ -340,8 +340,12 @@ export interface PlusTableState {
 
 /**
  * 列设置类型
+ * @version v0.1.20 新增reset,默认：true
  */
-export type ColumnSetting = { dragSort?: boolean | Partial<SortableOptions> }
+export type ColumnSetting = {
+  dragSort?: boolean | Partial<SortableOptions>
+  reset?: boolean | Partial<Mutable<LinkProps>>
+}
 
 /**
  * 标题栏
