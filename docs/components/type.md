@@ -309,19 +309,35 @@ export interface TableFormRefRow {
    * 单元格的表单实例
    */
   formInstance: Ref<InstanceType<typeof ElForm>>
+
   /**
    * 表格的行索引
    */
   index: number
+
+  /**
+   * 表格的行索引, 同 index
+   * @version 0.1.20
+   */
+  rowIndex: number
+
+  /**
+   * 单元格的列索引
+   *  @version 0.1.20
+   */
+  cellIndex: number
+
   /**
    * 表格的列字段
    */
   prop: string
+
   /**
    * 单元格的表单开启编辑
    * @returns
    */
   startCellEdit: () => void
+
   /**
    * 单元格的表单停止编辑
    * @returns
@@ -700,6 +716,17 @@ export interface PlusStepFromRow {
 
 ```ts
 import type { Options as SortableOptions } from 'sortablejs'
+import type { LinkProps } from 'element-plus'
+import type { Mutable } from 'element-plus/es/utils'
+
+export type ColumnSetting = {
+  dragSort?: boolean | Partial<SortableOptions>
+  /**
+   * 列设置类型
+   * @version v0.1.20 新增reset, 默认：true
+   */
+  reset?: boolean | Partial<Mutable<LinkProps>>
+}
 
 /**
  * 标题栏
@@ -722,7 +749,7 @@ export type TitleBar = {
   /**
    * 是否需要列设置 默认true
    */
-  columnSetting?: boolean | { dragSort?: boolean | Partial<SortableOptions> }
+  columnSetting?: boolean | ColumnSetting
 
   /**
    * 工具栏 icon 的大小和颜色配置
