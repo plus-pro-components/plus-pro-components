@@ -4,6 +4,7 @@
     v-bind="$attrs"
     v-model="values"
     :inline="inline"
+    :rules="rules"
     :label-position="labelPosition"
     :row-props="rowProps"
     :col-props="colProps"
@@ -79,7 +80,8 @@
 <script lang="ts" setup>
 import type { PlusFormInstance } from '@plus-pro-components/components/form'
 import { PlusForm } from '@plus-pro-components/components/form'
-import { ref, computed, watch, unref, useSlots } from 'vue'
+import type { ComputedRef } from 'vue'
+import { ref, computed, watch, unref, useSlots, useAttrs } from 'vue'
 import { ArrowDown, ArrowUp, Search, RefreshRight } from '@element-plus/icons-vue'
 import type { PlusColumn, FieldValues } from '@plus-pro-components/types'
 import { useLocale } from '@plus-pro-components/hooks'
@@ -91,6 +93,7 @@ import {
   getExtraSlotName,
   filterSlots
 } from '@plus-pro-components/components/utils'
+import type { FormRules } from 'element-plus'
 import type { PlusSearchSelfProps as PlusSearchProps, PlusSearchEmits } from './type'
 
 defineOptions({
@@ -132,6 +135,10 @@ const plusFormInstance = ref<PlusFormInstance | null>()
 const isShowUnfold = ref<boolean>(false)
 const values = ref<FieldValues>({})
 const slots = useSlots()
+const attrs = useAttrs()
+const rules: ComputedRef<FormRules | undefined> = computed(() =>
+  props.needValidate ? (attrs.rules as FormRules) : undefined
+)
 
 /**
  * 表单label的插槽
