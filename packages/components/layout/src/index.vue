@@ -63,7 +63,9 @@
 
         <el-main class="plus-layout-content" :style="{ height }">
           <el-scrollbar class="plus-layout-main__scrollbar" v-bind="scrollbarProps">
-            <slot />
+            <el-main>
+              <slot />
+            </el-main>
 
             <el-backtop
               v-if="backtop"

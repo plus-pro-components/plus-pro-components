@@ -15,7 +15,7 @@ $layout-height: calc(100vh - var(--plus-header-height));
 
   .#{$plus-namespace + -sidebar} {
     height: $layout-height;
-    min-width: 64px;
+    min-width: var(--plus-sidebar-min-width);
   }
 
   .#{$plus-namespace + -layout-main} {
@@ -31,6 +31,6 @@ $layout-height: calc(100vh - var(--plus-header-height));
   }
 
   .#{$plus-namespace + -layout-content} {
-    padding: 20px;
+    padding: 0;
   }
 }
