@@ -46,6 +46,7 @@
 
     <el-menu-item
       v-if="$attrs.mode !== 'horizontal'"
+      index="collapse"
       class="plus-sidebar__collapse"
       :class="subCollapse ? 'is-collapse' : ''"
       @click="toggleCollapse"
