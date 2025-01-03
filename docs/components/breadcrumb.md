@@ -14,7 +14,7 @@ breadcrumb/basic
 
 ## 不显示某一级
 
-路由信息的`meta` 中添加 `hiddenInBreadcrumb: true`即可。 路由信息配置[ PlusRouteRecordRaw](/components/type.html#plusrouterecordraw)
+路由信息的`meta` 中添加 `hideInBreadcrumb: true`即可。 路由信息配置[ PlusRouteRecordRaw](/components/type.html#plusrouterecordraw)
 
 :::demo
 
