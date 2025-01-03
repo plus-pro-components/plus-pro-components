@@ -1,9 +1,6 @@
 <template>
   <el-menu
     ref="plusSidebarInstance"
-    :style="{
-      '--plus-sidebar-width': w
-    }"
     mode="vertical"
     :collapse="subCollapse"
     :default-active="subDefaultActive"
@@ -66,7 +63,7 @@ import type { RouteLocationNormalizedLoaded } from 'vue-router'
 import { ElMenu, ElMenuItem, ElIcon, ElScrollbar } from 'element-plus'
 import { Expand, Fold } from '@element-plus/icons-vue'
 import { cloneDeep } from 'lodash-es'
-import { isFunction, isString } from '@plus-pro-components/components/utils'
+import { isFunction } from '@plus-pro-components/components/utils'
 import PlusSidebarItem from './sidebar-item.vue'
 import type { PlusSidebarSelfProps as PlusSidebarProps, PlusSidebarEmits } from './type'
 
@@ -82,13 +79,15 @@ const props = withDefaults(defineProps<PlusSidebarProps>(), {
   renderSubMenuItem: undefined,
   renderTitle: undefined,
   renderMenuExtra: undefined,
+  /**
+   * 菜单的宽度
+   * @deprecated 0.1.20
+   */
   width: 200,
   defaultActive: undefined
 })
 
 const emit = defineEmits<PlusSidebarEmits>()
-
-const w = computed(() => (isString(props.width) ? props.width : props.width + 'px'))
 
 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 const instance = getCurrentInstance()!

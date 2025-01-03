@@ -32,6 +32,11 @@ export interface PlusSidebarSelfProps {
    */
   renderMenuExtra?: (route: PlusRouteRecordRaw) => RenderTypes
   scrollbarProps?: Partial<Mutable<ScrollbarProps>>
+
+  /**
+   * 菜单的宽度
+   * @deprecated 0.1.20
+   */
   width?: number | string
 }
 

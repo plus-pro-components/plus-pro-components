@@ -1,5 +1,9 @@
 <template>
-  <el-container class="plus-layout" :style="!hasHeader ? '--plus-header-height: 0px' : void 0">
+  <el-container
+    class="plus-layout"
+    :style="!hasHeader ? '--plus-header-height: 0px' : void 0"
+    :class="{ collapse }"
+  >
     <!-- 头部 -->
     <PlusHeader v-if="hasHeader" v-bind="headerProps">
       <!-- 左侧插槽 -->
@@ -13,9 +17,14 @@
       </template>
     </PlusHeader>
 
-    <el-container>
+    <el-container class="plus-layout-main-wrapper">
       <!-- 侧边栏 -->
-      <PlusSidebar v-if="hasSidebar" v-bind="sidebarProps" ref="plusSidebarInstance">
+      <PlusSidebar
+        v-if="hasSidebar"
+        v-bind="sidebarProps"
+        ref="plusSidebarInstance"
+        v-model:collapse="collapse"
+      >
         <!-- 菜单头插槽 -->
         <template v-if="$slots['sidebar-extra']" #sidebar-extra="data">
           <slot name="sidebar-extra" v-bind="data" />
@@ -127,6 +136,7 @@ const PlusSidebar: Component = PlusSidebarComponent
 const PlusHeader: Component = PlusHeaderComponent
 
 const height = ref('100%')
+const collapse = ref(false)
 const plusSidebarInstance = ref<PlusSidebarInstance | null>()
 const plusBreadcrumbInstance = ref()
 
