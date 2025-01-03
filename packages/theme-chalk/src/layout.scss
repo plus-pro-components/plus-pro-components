@@ -15,15 +15,22 @@ $layout-height: calc(100vh - var(--plus-header-height));
 
   .#{$plus-namespace + -sidebar} {
     height: $layout-height;
+    min-width: 64px;
   }
 
   .#{$plus-namespace + -layout-main} {
     height: $layout-height;
     flex: 1;
-    max-width: calc(100vw - var(--plus-sidebar-width, 200px));
+    width: calc(100% - var(--plus-sidebar-width));
+  }
+
+  &.collapse {
+    .#{$plus-namespace + -layout-main} {
+      width: calc(100% - var(--plus-sidebar-min-width));
+    }
   }
 
   .#{$plus-namespace + -layout-content} {
-    padding-right: 10px;
+    padding: 20px;
   }
 }

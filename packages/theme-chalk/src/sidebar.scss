@@ -8,9 +8,20 @@
 
   &.is-vertical {
     min-height: 400px;
+
     &:not(.#{$el-namespace + -menu--collapse}) {
       width: var(--plus-sidebar-width);
       flex-shrink: 0;
+    }
+
+    &.#{$el-namespace + -menu--collapse} {
+      .#{$el-namespace + -menu-item} {
+        width: calc(getCssVar('menu-icon-width') + getCssVar('menu-base-level-padding') * 2);
+      }
+    }
+
+    .#{$el-namespace + -scrollbar__wrap} {
+      overflow-x: hidden;
     }
 
     &.#{$el-namespace + -menu--collapse} {
@@ -31,7 +42,7 @@
     }
 
     .#{$plus-namespace + -sidebar__collapse} {
-      width: calc(var(--plus-sidebar-width) - 1px);
+      width: calc(var(--plus-sidebar-width));
       background-color: getCssVar('menu-bg-color');
       height: var(--plus-sidebar-collapse-height);
       box-sizing: border-box;
@@ -39,10 +50,12 @@
       left: 0;
       bottom: 0;
       align-items: flex-start;
+      border-right: 1px solid var(--el-menu-border-color);
 
       &.is-collapse {
-        width: calc(getCssVar('menu-icon-width') + getCssVar('menu-base-level-padding') * 2 - 1px);
+        width: calc(getCssVar('menu-icon-width') + getCssVar('menu-base-level-padding') * 2);
       }
+
       &.is-active {
         background-color: getCssVar('menu-bg-color');
       }
@@ -62,9 +75,11 @@
     .#{$el-namespace + -scrollbar} {
       width: 100%;
     }
+
     .#{$el-namespace + -scrollbar__wrap} {
       width: 100%;
     }
+
     .#{$el-namespace + -scrollbar__view} {
       width: 100%;
       height: 100%;
