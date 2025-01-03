@@ -16,7 +16,7 @@
 
     &.#{$el-namespace + -menu--collapse} {
       .#{$el-namespace + -menu-item} {
-        width: calc(getCssVar('menu-icon-width') + getCssVar('menu-base-level-padding') * 2);
+        width: calc(var(--plus-sidebar-min-width) - 2px);
       }
     }
 
@@ -42,7 +42,7 @@
     }
 
     .#{$plus-namespace + -sidebar__collapse} {
-      width: calc(var(--plus-sidebar-width));
+      width: calc(var(--plus-sidebar-width) - 2px);
       background-color: getCssVar('menu-bg-color');
       height: var(--plus-sidebar-collapse-height);
       box-sizing: border-box;
@@ -50,10 +50,9 @@
       left: 0;
       bottom: 0;
       align-items: flex-start;
-      border-right: 1px solid var(--el-menu-border-color);
 
       &.is-collapse {
-        width: calc(getCssVar('menu-icon-width') + getCssVar('menu-base-level-padding') * 2);
+        width: calc(var(--plus-sidebar-min-width) - 2px);
       }
 
       &.is-active {
