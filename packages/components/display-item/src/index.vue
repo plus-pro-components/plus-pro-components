@@ -541,7 +541,7 @@ const copy = (data: string) => {
 }
 
 const handelClickCopy = (item: PlusColumn, row: RecordType) => {
-  copy(row[item.prop])
+  copy(formatterValue.value)
   row.isCopy = true
   setTimeout(() => {
     row.isCopy = false
