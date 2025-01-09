@@ -1,3 +1,30 @@
+## [v0.1.20](https://github.com/plus-pro-components/plus-pro-components/compare/v0.1.19...v0.1.20) (2025-01-07)
+
+### ✨ Features
+
+- **all:** Merge pull request [#255](https://github.com/plus-pro-components/plus-pro-components/pull/255) from plus-pro-components/gs([d744a74](https://github.com/plus-pro-components/plus-pro-components/commit/d744a74)) by@fn(callback)
+- **components:** :sparkles: update layout style([ae554a2](https://github.com/plus-pro-components/plus-pro-components/commit/ae554a2)) by@xiaofei
+- **components:** :sparkles: update table-title-bar reset method([b1b10f4](https://github.com/plus-pro-components/plus-pro-components/commit/b1b10f4)) by@xiaofei
+- **all:** Merge branch 'dev' of https://github.com/plus-pro-components/plus-pro-components into dev([5806262](https://github.com/plus-pro-components/plus-pro-components/commit/5806262)) by@xiaofei
+- **all:** Merge pull request [#253](https://github.com/plus-pro-components/plus-pro-components/pull/253) from plus-pro-components/gs([23993db](https://github.com/plus-pro-components/plus-pro-components/commit/23993db)) by@xiaofei
+- **all:** Merge pull request [#252](https://github.com/plus-pro-components/plus-pro-components/pull/252) from plus-pro-components/gs([e7eec02](https://github.com/plus-pro-components/plus-pro-components/commit/e7eec02)) by@xiaofei
+- **components:** :sparkles: plusTable titlebar add reset([79fbaf6](https://github.com/plus-pro-components/plus-pro-components/commit/79fbaf6)) by@guosong
+- **components:** :sparkles: showLimitIncludeMore default value should be false([fdcc32e](https://github.com/plus-pro-components/plus-pro-components/commit/fdcc32e)) by@xiaofei
+- **all:** Merge pull request [#243](https://github.com/plus-pro-components/plus-pro-components/pull/243) from superAlibi/dev([98f678e](https://github.com/plus-pro-components/plus-pro-components/commit/98f678e)) by@xiaofei
+
+### 🐛 Bug Fixes
+
+- **components:** :bug: valueType: 'copy' in multi-level fields, clipboard value is undefined([8082d39](https://github.com/plus-pro-components/plus-pro-components/commit/8082d39)) by@guosong
+- **components:** :bug: fix invalid event arguments: event validation failed for event “click“([407d5da](https://github.com/plus-pro-components/plus-pro-components/commit/407d5da)) by@xiaofei
+- **components:** :bug: fix search verification issues when needValidate is false([32ba168](https://github.com/plus-pro-components/plus-pro-components/commit/32ba168)) by@xiaofei
+- **theme-chalk:** :bug: fix sidebar has horizontal scrollbar([84175c3](https://github.com/plus-pro-components/plus-pro-components/commit/84175c3)) by@xiaofei
+- **theme-chalk:** :bug: fix layout overflow([c397daf](https://github.com/plus-pro-components/plus-pro-components/commit/c397daf)) by@xiaofei
+- **components:** :bug: fix layout overflow([834c128](https://github.com/plus-pro-components/plus-pro-components/commit/834c128)) by@xiaofei
+- **theme-chalk:** :bug: fix table toolbar wrap([0263f5d](https://github.com/plus-pro-components/plus-pro-components/commit/0263f5d)) by@xiaofei
+- **components:** :bug: fix multiple-level-header formRefs erorr([1dc0a2a](https://github.com/plus-pro-components/plus-pro-components/commit/1dc0a2a)) by@xiaofei
+- **components:** :bug: plusDrawerForm repair form-group-header slot data([e33c4cc](https://github.com/plus-pro-components/plus-pro-components/commit/e33c4cc)) by@guosong
+- **components:** :bug: fix plus-field-\* column is not exist([112a83a](https://github.com/plus-pro-components/plus-pro-components/commit/112a83a)) by@xiaofei
+
 ## [v0.1.19](https://github.com/plus-pro-components/plus-pro-components/compare/v0.1.18...v0.1.19) (2024-12-12)
 
 ### ✨ Features
