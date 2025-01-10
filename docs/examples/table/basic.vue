@@ -21,7 +21,7 @@ const TestServe = {
     const data = Array.from({ length: 3 }).map((item, index) => {
       return {
         id: index,
-        name: index + 'name',
+        name: index === 0 ? index + 'name'.repeat(100) : index + 'name',
         status: String(index % 3),
         tag: index === 1 ? 'success' : index === 2 ? 'warning' : index === 3 ? 'info' : 'danger',
         time: new Date()
@@ -84,7 +84,11 @@ const tableConfig: PlusColumn[] = [
   {
     label: '时间',
     prop: 'time',
-    valueType: 'date-picker'
+    valueType: 'date-picker',
+    tableColumnProps: {
+      align: 'center',
+      sortable: true
+    }
   }
 ]
 

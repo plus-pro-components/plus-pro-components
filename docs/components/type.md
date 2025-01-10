@@ -266,6 +266,7 @@ export interface ActionBarProps {
    * true时,showNumber限制的包括更多按钮在内,即包括更多按钮在内,总按钮个数为showNumber
    * false时,showNumber限制的不包括更多按钮在内，即总按钮个数为showNumber+1,+1是因为'更多'按钮不在showNumber的限制内
    * @default false
+   * @version v0.1.20 
    */
   showLimitIncludeMore?: boolean
   /**
