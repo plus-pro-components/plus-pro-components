@@ -13,14 +13,14 @@
         <component
           :is="renderMenuItem"
           v-if="renderMenuItem && isFunction(renderMenuItem)"
-          v-bind="item"
+          v-bind="removeChildrenField(item)"
         />
 
         <!-- menu-item 插槽 -->
         <slot v-else-if="$slots['sidebar-item']" name="sidebar-item" v-bind="item" />
 
         <el-icon v-else-if="item.meta && item.meta.icon" class="plus-sidebar__item-icon">
-          <component :is="item.meta.icon" v-bind="item" />
+          <component :is="item.meta.icon" v-bind="removeChildrenField(item)" />
         </el-icon>
 
         <template #title>
@@ -28,7 +28,7 @@
             <component
               :is="renderTitle"
               v-if="renderTitle && isFunction(renderTitle)"
-              v-bind="item"
+              v-bind="removeChildrenField(item)"
             />
 
             <!-- menu-item title 插槽 -->
@@ -58,21 +58,21 @@
         <component
           :is="renderSubMenuItem"
           v-if="renderSubMenuItem && isFunction(renderSubMenuItem)"
-          v-bind="item"
+          v-bind="removeChildrenField(item)"
         />
 
         <!-- sub-menu 插槽 -->
         <slot v-else-if="$slots['sidebar-sub']" name="sidebar-sub" v-bind="item" />
 
         <el-icon v-else-if="item.meta?.icon" class="plus-sidebar__item-icon">
-          <component :is="item.meta?.icon" v-bind="item" />
+          <component :is="item.meta?.icon" v-bind="removeChildrenField(item)" />
         </el-icon>
 
         <span class="plus-sidebar__item-title">
           <component
             :is="renderTitle"
             v-if="renderTitle && isFunction(renderTitle)"
-            v-bind="item"
+            v-bind="removeChildrenField(item)"
           />
 
           <!-- sub-menu title 插槽 -->
@@ -116,7 +116,7 @@ import { getCurrentInstance } from 'vue'
 import type { PlusRouteRecordRaw, RenderTypes } from '@plus-pro-components/types'
 import { ElSubMenu, ElMenuItem, ElIcon } from 'element-plus'
 import type { Router } from 'vue-router'
-import { isUrl, isFunction } from '@plus-pro-components/components/utils'
+import { isUrl, isFunction, removeChildrenField } from '@plus-pro-components/components/utils'
 
 export interface PlusSidebarItemProps {
   item: PlusRouteRecordRaw

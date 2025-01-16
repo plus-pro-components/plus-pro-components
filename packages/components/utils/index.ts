@@ -1,5 +1,10 @@
 import { version } from 'element-plus'
-import type { FieldValueType, RecordType, PlusColumn } from '@plus-pro-components/types'
+import type {
+  FieldValueType,
+  RecordType,
+  PlusColumn,
+  PlusRouteRecordRaw
+} from '@plus-pro-components/types'
 import { get, set } from 'lodash-es'
 import type { SetupContext } from 'vue'
 import { isRef, unref } from 'vue'
@@ -238,3 +243,16 @@ export const versionIsLessThan260 = compareVersion(version, '2.6.0') < 0
  * @returns
  */
 export const getLabel = (label: PlusColumn['label']) => (label ? unref(label) : '')
+
+/**
+ * 移除children字段
+ * @param item *
+ * @version 0.1.21
+ * @fixed https://github.com/plus-pro-components/plus-pro-components/issues/258
+ */
+export const removeChildrenField = (item: PlusRouteRecordRaw) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { children, ...rest } = item
+  const data = { ...rest, __children: children }
+  return data
+}

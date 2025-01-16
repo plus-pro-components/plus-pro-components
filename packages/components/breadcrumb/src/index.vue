@@ -13,7 +13,11 @@
       :to="item.redirect as string || item.path"
       :replace="replace"
     >
-      <component :is="renderTitle" v-if="renderTitle && isFunction(renderTitle)" v-bind="item" />
+      <component
+        :is="renderTitle"
+        v-if="renderTitle && isFunction(renderTitle)"
+        v-bind="removeChildrenField(item)"
+      />
 
       <!-- 面包屑title 插槽 -->
       <slot
@@ -33,7 +37,7 @@
 import { ref, getCurrentInstance, watchEffect, computed } from 'vue'
 import type { RouteLocationMatched, RouteLocationNormalizedLoaded } from 'vue-router'
 import { ElBreadcrumb, ElBreadcrumbItem } from 'element-plus'
-import { isFunction } from '@plus-pro-components/components/utils'
+import { isFunction, removeChildrenField } from '@plus-pro-components/components/utils'
 import type { PlusBreadcrumbSelfProps as PlusBreadcrumbProps } from './type'
 
 defineOptions({
