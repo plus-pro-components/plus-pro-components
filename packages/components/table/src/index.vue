@@ -373,16 +373,19 @@ const currentForm = ref()
 
 const handleCellEdit = (row: RecordType, column: PlusColumn, type: 'click' | 'dblclick') => {
   const rowIndex = __tableData.value.indexOf(row)
-  const columnIndex = column.index
-  const columnConfig = subColumns.value[column.index]
+  const columnIndex = column.getColumnIndex()
+  const columnConfig = subColumns.value[columnIndex]
 
   // 不是可编辑行，如操作栏
   if (!columnConfig) return
 
   if (props.editable === type) {
-    document.addEventListener('click', handleStopEditClick)
-
     const currentCellForm = formRefs.value[rowIndex][columnIndex]
+
+    // 不是可编辑行，如索引栏，多选栏
+    if (!currentCellForm) return
+
+    document.addEventListener('click', handleStopEditClick)
 
     // 停止上一个表单的编辑状态
     if (currentForm.value) {
@@ -434,13 +437,15 @@ const handleDoubleClickCell = (
 // 退出编辑状态
 const handleStopEditClick = (e: MouseEvent) => {
   if (tableWrapperInstance.value && currentForm.value) {
-    const wrapperClass = '.el-table__body-wrapper'
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    const tbody = tableWrapperInstance.value.querySelector(wrapperClass)!
     const target = e?.target as HTMLElement
-    const cls = Array.from(target.classList).join('.')
-    const tempCls = cls ? `.${cls}` : ''
-    const contains = tempCls && tbody.querySelector(tempCls)
+
+    if (target.classList.contains('el-icon')) {
+      return
+    }
+
+    const contains = tableWrapperInstance.value?.contains(target)
+
     if (!contains && !isSVGElement(target)) {
       currentForm.value?.stopCellEdit()
       emit('edited')
