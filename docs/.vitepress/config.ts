@@ -121,7 +121,7 @@ export default defineConfig({
       },
       {
         text: '演练场',
-        link: 'https://playground.plus-pro-components.com/'
+        link: 'http://playground.plus-pro-components.com/'
       }
     ],
     sidebar: {

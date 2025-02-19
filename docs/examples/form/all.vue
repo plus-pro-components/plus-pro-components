@@ -62,7 +62,9 @@ const state = ref<FieldValues>({
   transfer: [1, 2, 3, 4, 5, 6],
   'plus-radio': 1,
   'plus-date-picker': ['2024-03-18 09:55:31', '2024-03-20 09:55:31'],
-  'plus-input-tag': ['tag', 'tag1']
+  'plus-input-tag': ['tag', 'tag1'],
+  'select-v2': 'Option 1',
+  'select-v2-multiple': ['Option 1', 'Option 2']
 })
 
 const generateData = () => {
@@ -455,6 +457,35 @@ const columns: PlusColumn[] = [
     label: 'plus-input-tag',
     prop: 'plus-input-tag',
     valueType: 'plus-input-tag'
+  },
+  {
+    label: 'select-v2 ',
+    prop: 'select-v2',
+    // v0.2.21 新增
+    valueType: 'select-v2',
+    options: () => {
+      const initials = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j']
+      return Array.from({ length: 1000 }).map((_, idx) => ({
+        value: `Option ${idx + 1}`,
+        label: `${initials[idx % 10]}${idx}`
+      }))
+    }
+  },
+  {
+    label: 'select-v2-multiple',
+    prop: 'select-v2-multiple',
+    // v0.2.21 新增
+    valueType: 'select-v2',
+    options: () => {
+      const initials = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j']
+      return Array.from({ length: 1000 }).map((_, idx) => ({
+        value: `Option ${idx + 1}`,
+        label: `${initials[idx % 10]}${idx}`
+      }))
+    },
+    fieldProps: {
+      multiple: true
+    }
   }
 ]
 

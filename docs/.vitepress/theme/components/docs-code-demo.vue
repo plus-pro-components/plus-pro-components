@@ -61,7 +61,7 @@ import { getPlaygroundEncoded } from '../../utils'
 
 // 编辑地址
 const editUrl = 'https://github.com/plus-pro-components/plus-pro-components/edit/dev/docs/examples'
-const editPlaygroundUrl = 'https://playground.plus-pro-components.com'
+const editPlaygroundUrl = 'http://playground.plus-pro-components.com'
 // const editPlaygroundUrl = 'http://127.0.0.1:3002'
 
 // 自动加载 asyncRouter 文件夹下所有的异步路由

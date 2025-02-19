@@ -266,7 +266,7 @@ export interface ActionBarProps {
    * true时,showNumber限制的包括更多按钮在内,即包括更多按钮在内,总按钮个数为showNumber
    * false时,showNumber限制的不包括更多按钮在内，即总按钮个数为showNumber+1,+1是因为'更多'按钮不在showNumber的限制内
    * @default false
-   * @version v0.1.20 
+   * @version v0.1.20
    */
   showLimitIncludeMore?: boolean
   /**
@@ -512,10 +512,18 @@ export type FormItemValueType =
   | 'plus-radio'
   | 'plus-date-picker'
   | 'plus-input-tag'
-  // v0.1.0 新增
+  /**
+   * @version 0.1.1 新增
+   */
   | 'transfer'
-  // v0.1.1 新增
+  /**
+   * @version 0.1.1 新增
+   */
   | 'tree-select'
+  /**
+   * @version 0.1.21 新增
+   */
+  | 'select-v2'
   | undefined
 ```
 
