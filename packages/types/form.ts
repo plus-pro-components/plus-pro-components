@@ -197,11 +197,21 @@ export type FormItemValueType =
   | 'textarea'
   | 'input'
   | 'text'
-  | 'transfer'
-  | 'tree-select'
   | 'plus-radio'
   | 'plus-date-picker'
   | 'plus-input-tag'
+  /**
+   * @version 0.1.1 新增
+   */
+  | 'transfer'
+  /**
+   * @version 0.1.1 新增
+   */
+  | 'tree-select'
+  /**
+   * @version 0.1.21 新增
+   */
+  | 'select-v2'
   | undefined
 
 /**

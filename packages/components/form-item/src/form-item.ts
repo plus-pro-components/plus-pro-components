@@ -17,7 +17,8 @@ import {
   ElTimeSelect,
   ElInput,
   ElTransfer,
-  ElTreeSelect
+  ElTreeSelect,
+  ElSelectV2
 } from 'element-plus'
 import { PlusRadio } from '@plus-pro-components/components/radio'
 import { PlusDatePicker } from '@plus-pro-components/components/date-picker'
@@ -146,6 +147,10 @@ export const FieldComponentMap: FieldComponentMapType = {
   },
   'tree-select': {
     component: ElTreeSelect
+  },
+  'select-v2': {
+    component: ElSelectV2,
+    hasOptions: true
   }
 }
 
