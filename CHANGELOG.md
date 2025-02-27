@@ -1,3 +1,14 @@
+## [v0.1.21](https://github.com/plus-pro-components/plus-pro-components/compare/v0.1.20...v0.1.21) (2025-02-27)
+
+### ✨ Features
+
+- **components:** :sparkles: valueType add select-v2.([e528e46](https://github.com/plus-pro-components/plus-pro-components/commit/e528e46)) by@xiaofei
+
+### 🐛 Bug Fixes
+
+- **components:** :bug: fix table click edit index error([cae3d72](https://github.com/plus-pro-components/plus-pro-components/commit/cae3d72)) by@xiaofei
+- **components:** :bug: fixed set element children property.([a746701](https://github.com/plus-pro-components/plus-pro-components/commit/a746701)) by@xiaofei
+
 ## [v0.1.20](https://github.com/plus-pro-components/plus-pro-components/compare/v0.1.19...v0.1.20) (2025-01-07)
 
 ### ✨ Features
