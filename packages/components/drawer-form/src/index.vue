@@ -8,7 +8,7 @@
     :close-on-click-modal="false"
     :close-on-press-escape="false"
     v-bind="$attrs"
-    @close="handleCancel"
+    @close="handleClose"
   >
     <template v-if="$slots['drawer-header']" #header>
       <slot name="drawer-header" />
@@ -191,10 +191,22 @@ const handleConfirm = async () => {
   }
 }
 
-const handleCancel = () => {
-  subVisible.value = false
+/*
+ * 处理 Drawer 关闭事件
+ * 调用 handleCancel 关闭 Drawer，并触发响应的事件
+ */
+const handleClose = () => {
+  handleCancel()
   emit('update:visible', subVisible.value)
   emit('cancel')
+}
+
+/*
+ * 关闭 Drawer
+ * 仅更新 subVisible 状态，同时会自动触发 el-drawer 的 close 事件
+ */
+const handleCancel = () => {
+  subVisible.value = false
 }
 
 defineExpose({
