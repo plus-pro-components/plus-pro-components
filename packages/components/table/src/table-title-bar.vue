@@ -182,7 +182,7 @@ import {
 import { ElCheckbox, ElCheckboxGroup, ElTooltip, ElIcon, ElButton, ElLink } from 'element-plus'
 import type { SortableEvent, Options as SortableOptions } from 'sortablejs'
 import Sortable from 'sortablejs'
-import type { TitleBar, ColumnSetting } from './type'
+import type { TitleBar, ColumnSetting, FilterTableHeaderEventType } from './type'
 
 export interface PlusTableToolbarProps {
   columns?: PlusColumn[]
@@ -192,7 +192,7 @@ export interface PlusTableToolbarProps {
   columnsIsChange?: boolean
 }
 export interface PlusTableToolbarEmits {
-  (e: 'filterTable', columns: PlusColumn[]): void
+  (e: 'filterTableHeader', columns: PlusColumn[], eventType: FilterTableHeaderEventType): void
   (e: 'clickDensity', size: ComponentSize): void
   (e: 'refresh'): void
 }
@@ -249,9 +249,12 @@ const getCheckList = (hasDisabled = false) => {
   if (hasDisabled) {
     return props.columns
       .filter(item => item.disabledHeaderFilter === true)
+      .filter(item => unref(item.headerIsChecked) !== false)
       .map(item => getTableKey(item))
   }
-  return props.columns.map(item => getTableKey(item))
+  return props.columns
+    .filter(item => unref(item.headerIsChecked) !== false)
+    .map(item => getTableKey(item))
 }
 
 const state: State = reactive({
@@ -279,26 +282,32 @@ watch(
   }
 )
 
+// 全选/取消全选
 const handleCheckAllChange = (val: CheckboxValueType) => {
-  state.checkList = val ? getCheckList() : getCheckList(true)
+  state.checkList = val
+    ? props.columns.map(item => getTableKey(item))
+    : props.columns
+        .filter(item => item.disabledHeaderFilter === true)
+        .map(item => getTableKey(item))
+
   setCheckAllState(state.checkList)
-  handleFilterTableConfirm()
+  handleFilterTableConfirm('allCheck')
 }
 
-const handleFilterTableConfirm = () => {
+const handleFilterTableConfirm = (type: 'check' | 'allCheck' | 'drag') => {
   const filterColumns = props.columns.map(item => {
     if (state.checkList.includes(getTableKey(item))) {
-      return { ...item, __selfHideInTable: false }
+      return { ...item, headerIsChecked: true }
     }
 
-    return { ...item, __selfHideInTable: true }
+    return { ...item, headerIsChecked: false }
   })
-  emit('filterTable', filterColumns)
+  emit('filterTableHeader', filterColumns, type)
 }
 
 const handleCheckGroupChange = (value: CheckboxValueType[]) => {
   setCheckAllState(value)
-  handleFilterTableConfirm()
+  handleFilterTableConfirm('check')
 }
 
 // 密度
@@ -343,14 +352,17 @@ const handleDragEnd = (event: SortableEvent) => {
    * filter item is undefined
    */
   const list = subDragCheckboxList.filter(item => item)
-  emit('filterTable', list)
+  emit('filterTableHeader', list, 'drag')
 }
 
+// 重置
 const resetCheckBoxList = () => {
-  state.checkList = originColumns.map(item => getTableKey(item))
+  state.checkList = originColumns
+    .filter(item => unref(item.headerIsChecked) !== false)
+    .map(item => getTableKey(item))
   setCheckAllState(state.checkList)
-  const filterColumns = originColumns.map(item => ({ ...item, __selfHideInTable: false }))
-  emit('filterTable', filterColumns)
+  const filterColumns = originColumns.map(item => ({ ...item }))
+  emit('filterTableHeader', filterColumns, 'reset')
 }
 
 onMounted(() => {

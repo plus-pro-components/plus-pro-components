@@ -476,6 +476,14 @@ export type PlusTableSelfProps = {
 export type PlusTableProps = PlusTableSelfProps & Partial<TableProps<any[]>> & RecordType
 
 /**
+ *
+ * @version v0.1.22
+ * 表头过滤的类型
+ * eventType  check：表头单个check；  allCheck：全选/取消全选check；  drag：拖拽；  reset：重置；
+ */
+export type FilterTableHeaderEventType = 'check' | 'allCheck' | 'drag' | 'reset'
+
+/**
  * fork  https://github.com/element-plus/element-plus/blob/dev/packages/components/table/src/table.vue#L203-L222
  *
  */
@@ -545,4 +553,11 @@ export type PlusTableEmits = {
     cell: HTMLTableCellElement,
     event: Event
   ): void
+
+  /**
+   * @version 0.1.22
+   * 过滤表头  type含义  check：表头单个check  allCheck：全选/取消全选check  drag：拖拽
+   *
+   */
+  (e: 'filterTableHeader', columns: PlusColumn[], eventType: FilterTableHeaderEventType): void
 }

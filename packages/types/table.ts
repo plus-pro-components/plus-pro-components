@@ -34,6 +34,13 @@ export type TableColumnProps = {
   disabledHeaderFilter?: boolean
 
   /**
+   * 表头过滤中默认是否勾选
+   * @version v0.1.22 新增
+   * @default true
+   */
+  headerIsChecked?: boolean
+
+  /**
    * @desc 表格行的其他配置 （不包含label prop width minWidth）
    */
   tableColumnProps?: Partial<

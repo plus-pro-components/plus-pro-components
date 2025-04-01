@@ -7,7 +7,7 @@
       :columns-is-change="columnsIsChange"
       :title-bar="titleBar"
       @click-density="handleClickDensity"
-      @filter-table="handleFilterTableConfirm"
+      @filter-table-header="handleFilterTableConfirm"
       @refresh="handleRefresh"
     >
       <template #title>
@@ -228,7 +228,8 @@ import type {
   PlusTableSelfProps as PlusTableProps,
   PlusTableEmits,
   TableFormRefRow,
-  FormChangeCallBackParams
+  FormChangeCallBackParams,
+  FilterTableHeaderEventType
 } from './type'
 
 defineOptions({
@@ -320,8 +321,17 @@ provide(TableFormFieldRefInjectionKey, formFieldRefs)
 watch(
   () => props.columns,
   val => {
-    subColumns.value = val.filter(item => unref(item.hideInTable) !== true)
-    filterColumns.value = cloneDeep(subColumns.value)
+    const filterOriginColumns = val.filter(item => unref(item.hideInTable) !== true)
+
+    // 用于表头过滤的数据
+    filterColumns.value = cloneDeep(filterOriginColumns).map(item => ({
+      ...item,
+      headerIsChecked: item.headerIsChecked ?? true
+    }))
+
+    // 用于实际显示的数据
+    subColumns.value = filterOriginColumns.filter(item => unref(item.headerIsChecked) !== false)
+
     columnsIsChange.value = !columnsIsChange.value
   },
   {
@@ -343,10 +353,18 @@ const handleClickActionConfirmCancel = (callbackParams: ButtonsCallBackParams) =
   emit('clickActionConfirmCancel', callbackParams)
 }
 
-const handleFilterTableConfirm = (_columns: PlusColumn[]) => {
+// 表头过滤
+const handleFilterTableConfirm = (
+  _columns: PlusColumn[],
+  eventType: FilterTableHeaderEventType
+) => {
   filterColumns.value = _columns
+
+  // 分发表头过滤事件
+  emit('filterTableHeader', _columns, eventType)
+
   subColumns.value = _columns.filter(
-    item => unref(item.hideInTable) !== true && item.__selfHideInTable !== true
+    item => unref(item.hideInTable) !== true && item.headerIsChecked !== false
   )
 }
 
