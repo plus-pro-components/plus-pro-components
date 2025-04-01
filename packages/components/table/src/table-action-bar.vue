@@ -49,7 +49,7 @@
 import type { VNode, AppContext, Ref, ComputedRef, Component } from 'vue'
 import { h, unref, withDirectives, inject, ref } from 'vue'
 import { ArrowDownBold } from '@element-plus/icons-vue'
-import type { TableColumnCtx, ElMessageBoxOptions } from 'element-plus'
+import type { ElMessageBoxOptions } from 'element-plus'
 import {
   ElButton,
   ElIcon,
@@ -66,50 +66,13 @@ import type { RecordType } from '@plus-pro-components/types'
 import { isFunction, isPlainObject } from '@plus-pro-components/components/utils'
 import { useLocale } from '@plus-pro-components/hooks'
 import { TableFormRefInjectionKey } from '@plus-pro-components/constants'
-import type { ButtonsCallBackParams, ActionBarButtonsRow, TableFormRefRow } from './type'
+import type {
+  ButtonsCallBackParams,
+  ActionBarButtonsRow,
+  TableFormRefRow,
+  ActionBarProps
+} from './type'
 
-export interface ActionBarProps {
-  /**
-   * 操作栏名称  默认值为 `'操作栏'`
-   * @version v0.1.0 类型新增ComputedRef<string>
-   */
-  label?: string | ComputedRef<string>
-  /**
-   * 操作栏固定   默认值为 `'right'`
-   */
-  fixed?: string
-  /**
-   * 显示出来的按钮个数  默认值为 `3`
-   */
-  showNumber?: number
-  /**
-   * 更多按钮显示策略
-   * @version 0.1.20
-   * @default false
-   */
-  showLimitIncludeMore?: boolean
-  /**
-   * 操作按钮的类型   默认值为 `'link'`
-   */
-  type?: 'icon' | 'button' | 'link'
-  /**
-   * 操作按钮集合   默认值为 `[]`
-   */
-  buttons?: ActionBarButtonsRow[]
-  /**
-   * 表格操作栏 el-table-column 的其width   默认值为 `200`
-   */
-  width?: string | number
-  /**
-   * 表格操作栏 el-table-column 的其他props   默认值为 `{}`
-   */
-  actionBarTableColumnProps?: Partial<TableColumnCtx<RecordType>>
-  /**
-   * 表格操作栏 需要二次确认的类型，默认是 messageBox
-   * @version v0.1.17
-   */
-  confirmType?: 'messageBox' | 'popconfirm'
-}
 export interface PlusTableActionBarEmits {
   (e: 'clickAction', data: ButtonsCallBackParams): void
   (e: 'clickActionConfirmCancel', data: ButtonsCallBackParams): void

@@ -314,13 +314,12 @@ export interface FormChangeCallBackParams extends TableCellParams {
 
 /**
  * 操作栏的整体类型
- */
-export interface ActionBarProps {
+ */ export interface ActionBarProps {
   /**
    * 操作栏名称  默认值为 `'操作栏'`
-   *
+   * @version v0.1.0 类型新增ComputedRef<string>
    */
-  label?: string
+  label?: string | ComputedRef<string>
   /**
    * 操作栏固定   默认值为 `'right'`
    */
@@ -329,6 +328,12 @@ export interface ActionBarProps {
    * 显示出来的按钮个数  默认值为 `3`
    */
   showNumber?: number
+  /**
+   * 更多按钮显示策略
+   * @version 0.1.20
+   * @default false
+   */
+  showLimitIncludeMore?: boolean
   /**
    * 操作按钮的类型   默认值为 `'link'`
    */
@@ -344,7 +349,12 @@ export interface ActionBarProps {
   /**
    * 表格操作栏 el-table-column 的其他props   默认值为 `{}`
    */
-  actionBarTableColumnProps?: Partial<TableColumnCtx<any>>
+  actionBarTableColumnProps?: Partial<TableColumnCtx<RecordType>>
+  /**
+   * 表格操作栏 需要二次确认的类型，默认是 messageBox
+   * @version v0.1.17
+   */
+  confirmType?: 'messageBox' | 'popconfirm'
 }
 
 /**
