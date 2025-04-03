@@ -712,10 +712,14 @@ import type { PlusFormProps } from 'plus-pro-components'
  */
 export interface PlusStepFromRow {
   title: string
+
+  /**
+   * @version 0.1.22 变更为可选
+   */
+  form: PlusFormProps
   description?: string
   icon?: string | Component
   status?: '' | 'wait' | 'process' | 'finish' | 'error' | 'success'
-  form: PlusFormProps
 }
 ```
 
