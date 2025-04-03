@@ -28,7 +28,10 @@
       </el-step>
     </el-steps>
 
+    <slot v-if="$slots[slotName]" :name="slotName" v-bind="data[currentIndex]" />
+
     <PlusForm
+      v-else
       v-bind="data[active - 1].form"
       :has-reset="active !== 1"
       :submit-text="
@@ -45,7 +48,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, watchEffect } from 'vue'
+import { ref, watchEffect, computed } from 'vue'
 import { ElSteps, ElStep } from 'element-plus'
 import type { FieldValues, PlusColumn } from '@plus-pro-components/types'
 import { useLocale } from '@plus-pro-components/hooks'
@@ -108,6 +111,10 @@ const active = ref()
 watchEffect(() => {
   active.value = props.modelValue
 })
+
+const currentIndex = computed(() => active.value - 1)
+
+const slotName = computed(() => `step-${active.value}`)
 
 const handleChange = (values: FieldValues, column: PlusColumn) => {
   emit('change', values, column)
