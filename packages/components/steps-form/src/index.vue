@@ -28,11 +28,8 @@
       </el-step>
     </el-steps>
 
-    <slot v-if="$slots[slotName]" :name="slotName" v-bind="data[currentIndex]" />
-
     <PlusForm
-      v-else
-      v-bind="data[active - 1].form"
+      v-bind="data[currentIndex].form"
       :has-reset="active !== 1"
       :submit-text="
         active === data.length
@@ -43,7 +40,9 @@
       @submit="next"
       @reset="pre"
       @change="handleChange"
-    />
+    >
+      <slot v-if="$slots[slotName]" :name="slotName" v-bind="data[currentIndex]" />
+    </PlusForm>
   </div>
 </template>
 
