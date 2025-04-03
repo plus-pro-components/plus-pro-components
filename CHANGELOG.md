@@ -1,3 +1,19 @@
+## [v0.1.22](https://github.com/plus-pro-components/plus-pro-components/compare/v0.1.21...v0.1.22) (2025-04-03)
+
+### ✨ Features
+
+- **components:** :sparkles: update steps-form step slot([96446dd](https://github.com/plus-pro-components/plus-pro-components/commit/96446dd)) by@xiaofei
+- **components:** :sparkles: stepsForm add step slot([e183fb7](https://github.com/plus-pro-components/plus-pro-components/commit/e183fb7)) by@xiaofei
+- **components:** :sparkles: titleBar add filterTableHeader method([3a4f4c5](https://github.com/plus-pro-components/plus-pro-components/commit/3a4f4c5)) by@xiaofei
+- **all:** Merge pull request [#270](https://github.com/plus-pro-components/plus-pro-components/pull/270) from condorheroblog/dev([637cbd7](https://github.com/plus-pro-components/plus-pro-components/commit/637cbd7)) by@xiaofei
+- **all:** Merge pull request [#268](https://github.com/plus-pro-components/plus-pro-components/pull/268) from condorheroblog/fix/plus-drawer-form-oncancel-duplicate([71f8c29](https://github.com/plus-pro-components/plus-pro-components/commit/71f8c29)) by@xiaofei
+
+### 🐛 Bug Fixes
+
+- **components:** :bug: fix ActionsBar type error([c967fed](https://github.com/plus-pro-components/plus-pro-components/commit/c967fed)) by@xiaofei
+- **all:** correct typo in key name from `collapseTransition` to `collapseDuration`([3331c02](https://github.com/plus-pro-components/plus-pro-components/commit/3331c02)) by@Condor Hero
+- **PlusDrawerForm:** prevent onCancel from being triggered twice(#266)([5d38489](https://github.com/plus-pro-components/plus-pro-components/commit/5d38489)) by@Condor Hero
+
 ## [v0.1.21](https://github.com/plus-pro-components/plus-pro-components/compare/v0.1.20...v0.1.21) (2025-02-27)
 
 ### ✨ Features
