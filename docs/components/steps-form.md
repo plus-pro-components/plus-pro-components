@@ -5,7 +5,7 @@ StepsForm 组件是 [ElSteps,ElStep](https://element-plus.org/zh-CN/component/st
 
 ## 基础用法
 
-设置 `active` 属性，接受一个 `Number`，表明步骤的 `index`，从 0 开始。`data` 是分步表单所需的数据。
+设置 `active` 属性，接受一个 `Number`，表明步骤，从 1 开始。`data` 是分步表单所需的数据。
 
 :::demo
 
@@ -42,7 +42,7 @@ steps-form/simple
 
 :::
 
-## 插槽渲染分步表单
+## 插槽渲染分步表单头部
 
 设置 simple 可应用简洁风格，该条件下 align-center / description / direction / space 都将失效。
 :::demo
@@ -51,33 +51,46 @@ steps-form/slots
 
 :::
 
+## 插槽渲染分步表单每一步内容
+
+<el-tag>v0.1.22</el-tag> 新增
+
+设置 step-\* 可应用自定义插槽渲染每一步内容，\*表示的是步骤数，从 1 开始。
+
+:::demo
+
+steps-form/step-slots
+
+:::
+
 ## StepsForm API
 
 ## StepsForm Attributes
 
-| 名称                                  | 说明                   | 类型                                                         | 默认值   | 是否必须                                      |
-| ------------------------------------- | ---------------------- | ------------------------------------------------------------ | -------- | --------------------------------------------- |
-| `model-value / v-model`               | 分步表单绑定的第几步值 | `number`                                                     | `1`      | 否 (<el-tag>v0.1.14</el-tag> 版本前是 `必须`) |
-| `data`                                | 分步表单展示的数据     | `array` [PlusStepFrom[]](/components/type.html#plusstepfrom) | `[]`     | 否 (<el-tag>v0.1.14</el-tag> 版本前是 `必须`) |
-| `submitText` <el-tag>v0.1.14</el-tag> | 提交按钮文字           | `string`                                                     | `提交`   | 否                                            |
-| `nextText` <el-tag>v0.1.14</el-tag>   | 下一步按钮文字         | `string`                                                     | `下一步` | 否                                            |
-| `preText` <el-tag>v0.1.14</el-tag>    | 上一步按钮文字         | `string`                                                     | `上一步` | 否                                            |
-| ...                                   | ...                    | ...                                                          | ...      | ...                                           |
+| 名称                                  | 说明                   | 类型                                                               | 默认值   | 是否必须                                      |
+| ------------------------------------- | ---------------------- | ------------------------------------------------------------------ | -------- | --------------------------------------------- |
+| `model-value / v-model`               | 分步表单绑定的第几步值 | `number`                                                           | `1`      | 否 (<el-tag>v0.1.14</el-tag> 版本前是 `必须`) |
+| `data`                                | 分步表单展示的数据     | `array` [PlusStepFromRow[]](/components/type.html#plusstepfromrow) | `[]`     | 否 (<el-tag>v0.1.14</el-tag> 版本前是 `必须`) |
+| `submitText` <el-tag>v0.1.14</el-tag> | 提交按钮文字           | `string`                                                           | `提交`   | 否                                            |
+| `nextText` <el-tag>v0.1.14</el-tag>   | 下一步按钮文字         | `string`                                                           | `下一步` | 否                                            |
+| `preText` <el-tag>v0.1.14</el-tag>    | 上一步按钮文字         | `string`                                                           | `上一步` | 否                                            |
+| ...                                   | ...                    | ...                                                                | ...      | ...                                           |
 
 `...`表示同时支持所有 [ElSteps Attributes](https://element-plus.org/zh-CN/component/steps.html#steps-%E5%B1%9E%E6%80%A7)
 
 ## StepsForm Events
 
-| 名称     | 说明                                       | 类型                                                                                        |
-| -------- | ------------------------------------------ | ------------------------------------------------------------------------------------------- |
-| `change` | 表单变化触发的事件                         | `function` <docs-tip content='(values: FieldValues,column: PlusColumn) => void'></docs-tip> |
+| 名称     | 说明                                         | 类型                                                                                        |
+| -------- | -------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| `change` | 表单变化触发的事件                           | `function` <docs-tip content='(values: FieldValues,column: PlusColumn) => void'></docs-tip> |
 | `next`   | 点击`下一步`（`提交`）按钮校验通过触发的事件 | `function` <docs-tip content='(active: number, values: FieldValues) => void'></docs-tip>    |
 | `pre`    | 点击`上一步`按钮触发的事件                   | `function` <docs-tip content='(active: number) => void'></docs-tip>                         |
 
 ## StepsForm Slots
 
-| 插槽名 | 说明 |
-| ------ | ---- |
-| ...    | ...  |
+| 插槽名                           | 说明                                          | 作用域插槽参数                                                                                  |
+| -------------------------------- | --------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| step-\* <el-tag>v0.1.22</el-tag> | 每一步内容的插槽，\*表示的是步骤数，从 1 开始 | `{title,form,description,icon,status}` [PlusStepFromRow](/components/type.html#plusstepfromrow) |
+| ...                              | ...                                           | ...                                                                                             |
 
-`...`表示同时支持所有 [ElStep](https://element-plus.org/zh-CN/component/steps.html#step-%E6%8F%92%E6%A7%BD) 的其他插槽 如 `icon title description `
+`...`表示同时支持所有 [ElStep](https://element-plus.org/zh-CN/component/steps.html#step-%E6%8F%92%E6%A7%BD) 的其他插槽 如 `icon, title, description `

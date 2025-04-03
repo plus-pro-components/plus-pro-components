@@ -1,6 +1,12 @@
 <template>
   <el-button @click="handleOpen">打开弹窗表单</el-button>
-  <PlusDialogForm v-model:visible="visible" v-model="values" :form="{ columns, rules }" />
+  <PlusDialogForm
+    v-model:visible="visible"
+    v-model="values"
+    :form="{ columns, rules }"
+    :dialog="{ title: '表单标题', width: 800, confirmLoading }"
+    @confirm="handleSubmit"
+  />
 </template>
 
 <script lang="ts" setup>
@@ -199,10 +205,18 @@ const columns: PlusColumn[] = [
   }
 ]
 
+const confirmLoading = ref(false)
 const visible = ref(false)
-const values = ref<FieldValues>({})
+const values = ref<FieldValues>({ name: '名称' })
 
 const handleOpen = () => {
   visible.value = true
+}
+const handleSubmit = () => {
+  confirmLoading.value = true
+  setTimeout(() => {
+    confirmLoading.value = false
+    visible.value = false
+  }, 2000)
 }
 </script>

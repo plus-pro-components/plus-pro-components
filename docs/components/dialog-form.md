@@ -1,6 +1,6 @@
 # DialogForm 表单
 
-DialogForm 组件是 [PlusDialog](/components/dialog.html)和 [PlusForm](/components/form.html) 组件的组合，是在 [PlusForm](/components/form.html) 组件上自定义 `footer` 的基础上构建而来，除下文提到 [PlusDialogForm](/components/dialog-form.html) 特有的属性和方法外，同时支持 [PlusForm](/components/form.html) 组件的所有自定义函数和插槽。
+DialogForm 组件是 [PlusDialog](/components/dialog.html)和 [PlusForm](/components/form.html) 组件的组合，是在 [PlusDialog](/components/dialog.html) 组件上自定义 `footer` 的基础上构建而来，除下文提到 [PlusDialogForm](/components/dialog-form.html) 特有的属性和方法外，同时支持 [PlusForm](/components/form.html) 组件的所有自定义函数和插槽。
 
 ::: warning 注意
 表单`v-model`绑定的值尽量使用 ref 定义绑定的值，以避免 reactive 带来的响应式丢失问题。 <el-text  type="primary" tag="ins">[参考 reactive 的局限性](https://cn.vuejs.org/guide/essentials/reactivity-fundamentals.html#limitations-of-reactive)</el-text>
