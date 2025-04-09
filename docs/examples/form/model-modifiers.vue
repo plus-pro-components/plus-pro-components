@@ -14,7 +14,7 @@
 
 <script lang="ts" setup>
 import { ref, h } from 'vue'
-import type { PlusColumn, FieldValues } from '@plus-pro-components/types'
+import type { PlusColumn, FieldValues } from 'plus-pro-components'
 import { ElInput } from 'element-plus'
 
 const state = ref<FieldValues>({
