@@ -242,8 +242,10 @@ const render = (
                   trigger: 'click',
                   ...(isPlainObject(buttonRow.confirm) ? buttonRow.confirm?.popconfirmProps : {}),
                   title: msg.message,
-                  onConfirm: (event: MouseEvent) => handleConfirm({ ...callbackParams, e: event }),
-                  onCancel: (event: MouseEvent) => handleCancel({ ...callbackParams, e: event })
+                  onConfirm: (event: MouseEvent) =>
+                    handleConfirm({ ...callbackParams, e: event, formRefs: formRefs.value[index] }),
+                  onCancel: (event: MouseEvent) =>
+                    handleCancel({ ...callbackParams, e: event, formRefs: formRefs.value[index] })
                 },
                 {
                   reference: () =>
@@ -259,7 +261,10 @@ const render = (
                             hideOnClick.value = false
 
                             if (isFunction(buttonRow.onClick)) {
-                              buttonRow.onClick(callbackParams)
+                              buttonRow.onClick({
+                                ...callbackParams,
+                                formRefs: formRefs.value[index]
+                              })
                             }
                           }
                         },
@@ -277,7 +282,10 @@ const render = (
                   size: 16,
                   ...buttonRowProps,
                   onClick: (event: MouseEvent) =>
-                    handleClickAction({ ...callbackParams, e: event }, msg)
+                    handleClickAction(
+                      { ...callbackParams, e: event, formRefs: formRefs.value[index] },
+                      msg
+                    )
                 },
                 () => (buttonRow.icon ? h(buttonRow.icon) : '')
               ),
@@ -297,8 +305,10 @@ const render = (
             trigger: 'click',
             ...(isPlainObject(buttonRow.confirm) ? buttonRow.confirm?.popconfirmProps : {}),
             title: msg.message,
-            onConfirm: (event: MouseEvent) => handleConfirm({ ...callbackParams, e: event }),
-            onCancel: (event: MouseEvent) => handleCancel({ ...callbackParams, e: event })
+            onConfirm: (event: MouseEvent) =>
+              handleConfirm({ ...callbackParams, e: event, formRefs: formRefs.value[index] }),
+            onCancel: (event: MouseEvent) =>
+              handleCancel({ ...callbackParams, e: event, formRefs: formRefs.value[index] })
           },
           {
             reference: () =>
@@ -314,7 +324,7 @@ const render = (
                       hideOnClick.value = false
 
                       if (isFunction(buttonRow.onClick)) {
-                        buttonRow.onClick(callbackParams)
+                        buttonRow.onClick({ ...callbackParams, formRefs: formRefs.value[index] })
                       }
                     }
                   },
@@ -332,7 +342,10 @@ const render = (
               ...defaultProps,
               ...buttonRowProps,
               onClick: (event: MouseEvent) =>
-                handleClickAction({ ...callbackParams, e: event }, msg)
+                handleClickAction(
+                  { ...callbackParams, e: event, formRefs: formRefs.value[index] },
+                  msg
+                )
             },
             () => text
           ),
