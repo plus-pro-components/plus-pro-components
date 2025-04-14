@@ -1,9 +1,9 @@
 <template>
   <ClientOnly>
-    <div class="docs-example-showcase">
+    <div class="docs-example-showcase" :data-path="path">
       <AppAsyncComponent />
     </div>
-    <div class="docs-example-btns">
+    <div class="docs-example-btns" :data-path="path">
       <el-tooltip content="在 Playground 中编辑">
         <el-icon :size="size" @click="handleEditPlayground">
           <svg
@@ -37,6 +37,7 @@
         display: show ? 'block' : 'none'
       }"
       class="docs-example-language-vue language-vue"
+      :data-path="path"
     >
       <div class="content">
         <highlightjs language="js" :code="decoded"></highlightjs>

@@ -87,7 +87,7 @@ form/multiple-level-form
 
 :::
 
-## 表单配置项 v-model 饰符的使用
+## 表单配置项 v-model 修饰符的使用
 
 对于输入框想添加`.trim`，`.number` 和 `.lazy` 这些修饰符，可以配置 `columns`中 `fieldProps`的`modelModifiers`属性。
 
