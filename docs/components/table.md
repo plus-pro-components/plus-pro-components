@@ -75,11 +75,12 @@ table/cell-style
 
 ## 操作栏
 
-默认不显示。配置[actionBar](/components/type.html#actionbarbuttonsrow) 即可。 `actionBar` 中的`type` 支持 `button`，`icon`和 `link`，对应`element plus` 的 [ElButton](https://element-plus.org/zh-CN/component/button.html)，[ElIcon](https://element-plus.org/zh-CN/component/icon.html) 和 [ElLink ](https://element-plus.org/zh-CN/component/link.html)组件。
+默认不显示。配置[actionBar](/components/type.html#actionbarprops) 即可，`actionBar `配置参考 [ActionBarProps](/components/type.html#actionbarprops)。
 
-配置 `confirm` 即可实现二次确认。配置 `show` 即可实现权限和动态显示。
+`actionBar` 中的`type` 支持 `button`，`icon`和 `link`，对应`element plus` 的 [ElButton](https://element-plus.org/zh-CN/component/button.html)，[ElIcon](https://element-plus.org/zh-CN/component/icon.html) 和 [ElLink ](https://element-plus.org/zh-CN/component/link.html)组件。
 
-操作栏`actionBar` 配置详情参考 [ActionBarButtonsRow](/components/type.html#actionbarbuttonsrow)
+操作栏`actionBar` 中`buttons`配置参考 [ActionBarButtonsRow](/components/type.html#actionbarbuttonsrow)，
+`buttons`中每项配置 `confirm` 即可实现二次确认，配置 `show` 即可实现权限和动态显示。
 
 :::demo
 
