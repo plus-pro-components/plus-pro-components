@@ -31,7 +31,7 @@
       <PlusPopover
         v-if="titleBarConfig?.density !== false"
         placement="bottom"
-        :width="150"
+        :width="200"
         trigger="click"
         :title="t('plus.table.density')"
       >
@@ -77,7 +77,7 @@
       <PlusPopover
         v-if="titleBarConfig?.columnSetting !== false"
         placement="bottom"
-        :width="100"
+        :width="columnSettingPopverWidth"
         trigger="click"
         :title="t('plus.table.columnSettings')"
       >
@@ -228,6 +228,7 @@ const titleBarConfig = computed(() => props.titleBar as TitleBar)
 const iconSize = computed(() => titleBarConfig.value?.icon?.size || 18)
 const iconColor = computed(() => titleBarConfig.value?.icon?.color || '')
 const columnSetting = computed(() => titleBarConfig.value?.columnSetting as ColumnSetting)
+const columnSettingPopverWidth = computed(() => titleBarConfig.value?.popoverWidth || 100)
 const sortable = ref<Sortable | null>(null)
 
 const buttonNameDensity: ButtonNameDensity[] = [

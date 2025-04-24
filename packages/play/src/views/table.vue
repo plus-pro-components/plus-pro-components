@@ -8,7 +8,8 @@
       :title-bar="{
         columnSetting: {
           dragSort: false
-        }
+        },
+        popoverWidth: 300
       }"
       @form-change="formChange"
     />
