@@ -39,14 +39,14 @@ export interface ActionBarButtonsRow {
    * @version v0.0.8 新增函数类型
    */
   text:
-  | string
-  | Ref<string>
-  | ComputedRef<string>
-  | ((
-    row: any,
-    index: number,
-    button: ActionBarButtonsRow
-  ) => string | Ref<string> | ComputedRef<string>)
+    | string
+    | Ref<string>
+    | ComputedRef<string>
+    | ((
+        row: any,
+        index: number,
+        button: ActionBarButtonsRow
+      ) => string | Ref<string> | ComputedRef<string>)
   /**
    * 操作按钮唯一code，可用来判断按钮类型
    */
@@ -61,9 +61,9 @@ export interface ActionBarButtonsRow {
    *  @version v0.1.16 新增函数类型和计算属性
    */
   props?:
-  | ButtonRowProps
-  | ((row: any, index: number, button: ActionBarButtonsRow) => ButtonRowProps)
-  | ComputedRef<ButtonRowProps>
+    | ButtonRowProps
+    | ((row: any, index: number, button: ActionBarButtonsRow) => ButtonRowProps)
+    | ComputedRef<ButtonRowProps>
 
   /**
    * ElTooltip组件的props， type 为icon 时生效
@@ -76,50 +76,50 @@ export interface ActionBarButtonsRow {
    * 可以用来控制权限
    */
   show?:
-  | boolean
-  | Ref<boolean>
-  | ComputedRef<boolean>
-  | ((
-    row: any,
-    index: number,
-    button: ActionBarButtonsRow
-  ) => boolean | Ref<boolean> | ComputedRef<boolean>)
+    | boolean
+    | Ref<boolean>
+    | ComputedRef<boolean>
+    | ((
+        row: any,
+        index: number,
+        button: ActionBarButtonsRow
+      ) => boolean | Ref<boolean> | ComputedRef<boolean>)
 
   /**
    * 操作是不是需要二次确认  默认值为 `false`
    */
   confirm?:
-  | boolean
-  | {
-    /**
-     * ElMessageBox.confirm 的title  默认 `提示`
-     */
-    title?: string | ((data: ButtonsCallBackParams) => string)
-    /**
-     * ElMessageBox.confirm  的message  默认 `确定执行本次操作`
-     *
-     * @version v0.1.17  message 会作为 ElPopconfirm 的title   当ActionBarProps.confirmType为 `popconfirm` 时生效
-     */
-    message?: string | ((data: ButtonsCallBackParams) => string)
+    | boolean
+    | {
+        /**
+         * ElMessageBox.confirm 的title  默认 `提示`
+         */
+        title?: string | ((data: ButtonsCallBackParams) => string)
+        /**
+         * ElMessageBox.confirm  的message  默认 `确定执行本次操作`
+         *
+         * @version v0.1.17  message 会作为 ElPopconfirm 的title   当ActionBarProps.confirmType为 `popconfirm` 时生效
+         */
+        message?: string | ((data: ButtonsCallBackParams) => string)
 
-    /**
-     *  ElMessageBox.confirm 的options
-     */
-    options?: ElMessageBoxOptions
+        /**
+         *  ElMessageBox.confirm 的options
+         */
+        options?: ElMessageBoxOptions
 
-    /**
-     * ElPopconfirm的props
-     *
-     * 当ActionBarProps.confirmType为 `popconfirm` 时生效
-     *  @version v0.1.17
-     * @see https://element-plus.org/zh-CN/component/popconfirm.html#attributes
-     */
-    popconfirmProps?: Partial<Mutable<PopconfirmProps>>
-    /**
-     *  ElMessageBox.confirm 的appContext
-     */
-    appContext?: AppContext | null
-  }
+        /**
+         * ElPopconfirm的props
+         *
+         * 当ActionBarProps.confirmType为 `popconfirm` 时生效
+         *  @version v0.1.17
+         * @see https://element-plus.org/zh-CN/component/popconfirm.html#attributes
+         */
+        popconfirmProps?: Partial<Mutable<PopconfirmProps>>
+        /**
+         *  ElMessageBox.confirm 的appContext
+         */
+        appContext?: AppContext | null
+      }
 
   /**
    * 指令，可以用来控制权限，数据类型是二维数组
@@ -459,21 +459,21 @@ export type PlusTableSelfProps = {
   selectionTableColumnProps?: Partial<TableColumnCtx<any>>
   expandTableColumnProps?: Partial<TableColumnCtx<any>>
   indexContentStyle?:
-  | Partial<CSSProperties>
-  | ((row: RecordType, index: number) => Partial<CSSProperties>)
+    | Partial<CSSProperties>
+    | ((row: RecordType, index: number) => Partial<CSSProperties>)
   editable?: boolean | 'click' | 'dblclick'
   /**
    * @version 0.1.17
    * @default false
    */
   adaptive?:
-  | boolean
-  | {
-    /** 表格距离页面底部的偏移量，默认值为 `20` */
-    offsetBottom?: number
-    /** 页面 `resize` 时的防抖时间，默认值为 `60` ms */
-    timeout?: number
-  }
+    | boolean
+    | {
+        /** 表格距离页面底部的偏移量，默认值为 `20` */
+        offsetBottom?: number
+        /** 页面 `resize` 时的防抖时间，默认值为 `60` ms */
+        timeout?: number
+      }
 }
 
 export type PlusTableProps = PlusTableSelfProps & Partial<TableProps<any[]>> & RecordType
