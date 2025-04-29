@@ -192,7 +192,6 @@ const handleClickItem = (item: PlusRouteRecordRaw) => {
     window.open(url)
   } else {
     router && router.push(getIndex(item))
-    console.log('router', router)
   }
 }
 </script>
