@@ -22,10 +22,12 @@
         v-for="item in subRoutes"
         :key="item.path"
         :item="item"
+        :parent="subRoutes"
         :collapse="subCollapse"
         :render-menu-item="renderMenuItem"
         :render-sub-menu-item="renderSubMenuItem"
         :render-title="renderTitle"
+        @click-menu-item="onClickMenuItem"
       >
         <!-- sidebar-item 插槽 -->
         <template v-if="$slots['sidebar-item']" #sidebar-item="data">
@@ -59,11 +61,12 @@
 
 <script lang="ts" setup>
 import type { ComputedRef } from 'vue'
-import { ref, computed, watchEffect, getCurrentInstance, unref } from 'vue'
+import { ref, computed, watchEffect, getCurrentInstance, unref, useAttrs } from 'vue'
 import type { RouteLocationNormalizedLoaded } from 'vue-router'
 import { ElMenu, ElMenuItem, ElIcon, ElScrollbar } from 'element-plus'
 import { Expand, Fold } from '@element-plus/icons-vue'
 import { cloneDeep } from 'lodash-es'
+import type { PlusRouteRecordRaw } from '@plus-pro-components/types'
 import { isFunction } from '@plus-pro-components/components/utils'
 import PlusSidebarItem from './sidebar-item.vue'
 import type { PlusSidebarSelfProps as PlusSidebarProps, PlusSidebarEmits } from './type'
@@ -112,6 +115,10 @@ const subDefaultActive = computed(
   () => unref(props.defaultActive) || computedDefaultActive.value
 ) as ComputedRef<string>
 
+const onClickMenuItem = useAttrs().onClickMenuItem as (
+  item: PlusRouteRecordRaw,
+  parent: PlusRouteRecordRaw | PlusRouteRecordRaw[]
+) => void
 // 切换菜单
 const toggleCollapse = () => {
   subCollapse.value = !subCollapse.value

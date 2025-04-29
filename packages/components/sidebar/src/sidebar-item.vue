@@ -87,10 +87,12 @@
         v-for="child in item.children"
         :key="child.path"
         :item="child"
+        :parent="item"
         :collapse="collapse"
         :render-menu-item="renderMenuItem"
         :render-sub-menu-item="renderSubMenuItem"
         :render-title="renderTitle"
+        @click-menu-item="onClickMenuItem"
       >
         <!-- sidebar-item 插槽 -->
         <template v-if="$slots['sidebar-item']" #sidebar-item="data">
@@ -112,13 +114,14 @@
 </template>
 
 <script lang="ts" setup>
-import { getCurrentInstance } from 'vue'
+import { getCurrentInstance, useAttrs } from 'vue'
 import type { PlusRouteRecordRaw, RenderTypes } from '@plus-pro-components/types'
 import { ElSubMenu, ElMenuItem, ElIcon } from 'element-plus'
 import type { Router } from 'vue-router'
 import { isUrl, isFunction, removeChildrenField } from '@plus-pro-components/components/utils'
 
 export interface PlusSidebarItemProps {
+  parent: PlusRouteRecordRaw | PlusRouteRecordRaw[]
   item: PlusRouteRecordRaw
   collapse?: boolean
   /**
@@ -139,15 +142,21 @@ export interface PlusSidebarItemProps {
 }
 
 defineOptions({
-  name: 'PlusSidebarItem'
+  name: 'PlusSidebarItem',
+  inheritAttrs: false
 })
 
-withDefaults(defineProps<PlusSidebarItemProps>(), {
+const props = withDefaults(defineProps<PlusSidebarItemProps>(), {
   collapse: false,
   renderMenuItem: undefined,
   renderSubMenuItem: undefined,
   renderTitle: undefined
 })
+
+const onClickMenuItem = useAttrs().onClickMenuItem as (
+  item: PlusRouteRecordRaw,
+  parent: PlusRouteRecordRaw | PlusRouteRecordRaw[]
+) => void
 
 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 const instance = getCurrentInstance()!
@@ -173,11 +182,17 @@ const getIndex = (item: PlusRouteRecordRaw) => {
 }
 
 const handleClickItem = (item: PlusRouteRecordRaw) => {
+  if (isFunction(onClickMenuItem)) {
+    onClickMenuItem(item, props.parent)
+    return
+  }
+
   if (isUrl(replacePath(item.path as string))) {
     const url = replacePath(item.path as string)
     window.open(url)
   } else {
     router && router.push(getIndex(item))
+    console.log('router', router)
   }
 }
 </script>
