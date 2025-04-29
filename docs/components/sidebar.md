@@ -96,16 +96,16 @@ sidebar/menu-item-title-slots
 
 ## Sidebar Attributes
 
-| 名称                                                                                                                              | 说明                     | 类型                                                                                    | 默认值  | 是否必须 |
-| --------------------------------------------------------------------------------------------------------------------------------- | ------------------------ | --------------------------------------------------------------------------------------- | ------- | -------- |
-| `routes`                                                                                                                          | 侧边栏的路由信息         | `array` [PlusRouteRecordRaw[]](/components/type.html#plusrouterecordraw)                | `[]`    | 否       |
-| `collapse/v-model:collapse`                                                                                                       | 侧边栏闭合               | `boolean`                                                                               | `false` | 否       |
+| 名称                                                                                                                             | 说明                     | 类型                                                                                    | 默认值  | 是否必须 |
+| -------------------------------------------------------------------------------------------------------------------------------- | ------------------------ | --------------------------------------------------------------------------------------- | ------- | -------- |
+| `routes`                                                                                                                         | 侧边栏的路由信息         | `array` [PlusRouteRecordRaw[]](/components/type.html#plusrouterecordraw)                | `[]`    | 否       |
+| `collapse/v-model:collapse`                                                                                                      | 侧边栏闭合               | `boolean`                                                                               | `false` | 否       |
 | <el-text tag="del">`width`</el-text> <el-tag type="danger">deprecated v0.1.20</el-tag>(使用`css`变量`--plus-sidebar-width` 代替) | 侧边栏不闭合时的宽度     | `number / string`                                                                       | `200`   | 否       |
-| `renderTitle`                                                                                                                     | 自定义菜单每项标题显示   | `function` <docs-tip content='(route:PlusRouteRecordRaw) => VNode / string'></docs-tip> |         | 否       |
-| `renderMenuItem`                                                                                                                  | 自定义 菜单的 menuItem   | `function` <docs-tip content='(route:PlusRouteRecordRaw) => VNode / string'></docs-tip> |         | 否       |
-| `renderSubMenuItem`                                                                                                               | 自定义 菜单的 subMenu    | `function` <docs-tip content='(route:PlusRouteRecordRaw) => VNode / string'></docs-tip> |         | 否       |
-| `renderMenuExtra`                                                                                                                 | 自定义在菜单头和菜单之间 | `function` <docs-tip content='(route:PlusRouteRecordRaw) => VNode / string'></docs-tip> |         | 否       |
-| ...                                                                                                                               | ...                      | ...                                                                                     | ...     | ...      |
+| `renderTitle`                                                                                                                    | 自定义菜单每项标题显示   | `function` <docs-tip content='(route:PlusRouteRecordRaw) => VNode / string'></docs-tip> |         | 否       |
+| `renderMenuItem`                                                                                                                 | 自定义 菜单的 menuItem   | `function` <docs-tip content='(route:PlusRouteRecordRaw) => VNode / string'></docs-tip> |         | 否       |
+| `renderSubMenuItem`                                                                                                              | 自定义 菜单的 subMenu    | `function` <docs-tip content='(route:PlusRouteRecordRaw) => VNode / string'></docs-tip> |         | 否       |
+| `renderMenuExtra`                                                                                                                | 自定义在菜单头和菜单之间 | `function` <docs-tip content='(route:PlusRouteRecordRaw) => VNode / string'></docs-tip> |         | 否       |
+| ...                                                                                                                              | ...                      | ...                                                                                     | ...     | ...      |
 
 :::tip 提示
 **`...`表示同时支持所有 [el-menu](https://element-plus.org/zh-CN/component/menu.html#menu-attributes) Attributes**
@@ -113,9 +113,10 @@ sidebar/menu-item-title-slots
 
 ## Sidebar Events
 
-| 名称             | 说明                     | 类型                                                                  |
-| ---------------- | ------------------------ | --------------------------------------------------------------------- |
-| `toggleCollapse` | 侧边栏闭合（开启）时触发 | `function` <docs-tip content='(collapse:boolean) => void'></docs-tip> |
+| 名称                                    | 说明                                                                                 | 类型                                                                                                                              |
+| --------------------------------------- | ------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------- |
+| `toggleCollapse`                        | 侧边栏闭合（开启）时触发                                                             | `function` <docs-tip content='(collapse:boolean) => void'></docs-tip>                                                             |
+| `clickMenuItem`<el-tag>v0.1.23</el-tag> | 自定义点击菜单每一项的事件，**当此事件存在时原有的点击菜单路由跳转的事件将会失效**。 | `function` <docs-tip content='(item: PlusRouteRecordRaw, parent: PlusRouteRecordRaw \| PlusRouteRecordRaw[]) => void'></docs-tip> |
 
 ## Sidebar Slots
 
