@@ -123,8 +123,9 @@ const getSubButtons = (row: RecordType, index: number) => {
     }
     return unref(item.show) !== false
   })
+  const showNumber = isFunction(props.showNumber) ? props.showNumber(row, index) : props.showNumber
   //  显示更多
-  const showMore = data.length > props.showNumber
+  const showMore = data.length > showNumber
   if (!showMore) {
     return {
       showMore,
@@ -135,14 +136,14 @@ const getSubButtons = (row: RecordType, index: number) => {
   if (props.showLimitIncludeMore) {
     return {
       showMore,
-      preButtons: data.slice(0, props.showNumber - 1),
-      nextButtons: data.slice(props.showNumber - 1)
+      preButtons: data.slice(0, showNumber - 1),
+      nextButtons: data.slice(showNumber - 1)
     }
   }
   return {
     showMore,
-    preButtons: data.slice(0, props.showNumber),
-    nextButtons: data.slice(props.showNumber)
+    preButtons: data.slice(0, showNumber),
+    nextButtons: data.slice(showNumber)
   }
 }
 
