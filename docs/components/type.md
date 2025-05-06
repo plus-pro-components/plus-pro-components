@@ -260,7 +260,12 @@ export interface ActionBarProps {
   /**
    * 显示出来的按钮个数  默认值为 `3`
    */
-  showNumber?: number
+  showNumber?: 
+    | number
+    | ((
+        row: RecordType,
+        index: number,
+      ) => number)
   /**
    * 更多按钮展示策略
    * true时,showNumber限制的包括更多按钮在内,即包括更多按钮在内,总按钮个数为showNumber
