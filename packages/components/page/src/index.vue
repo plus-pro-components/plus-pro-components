@@ -375,6 +375,14 @@ const clearSearchFieldsValue = () => {
   values.value = {}
 }
 
+/**
+ * @version 0.1.23
+ */
+const setTableData = (data?: RecordType[], _total?: number) => {
+  tableData.value = data || []
+  total.value = _total || data?.length || 0
+}
+
 defineExpose({
   plusSearchInstance,
   plusTableInstance,
@@ -386,6 +394,10 @@ defineExpose({
   handleRest: handleReset,
   setSearchFieldsValue,
   getSearchFieldsValue,
-  clearSearchFieldsValue
+  clearSearchFieldsValue,
+  /**
+   * @version 0.1.23
+   */
+  setTableData
 })
 </script>
