@@ -150,7 +150,7 @@ page/crud
 | `plus-cell-*`                                 | 自定义表格项，组件会自动根据配置项的 prop 生成对应的插槽                                                                                                                 | `object` <docs-tip content='{row,prop,label,fieldProps,valueType,value,column}'></docs-tip> |
 | `plus-header-*`                               | 自定义表格项 header，组件会自动根据配置项的 prop 生成对应的插槽                                                                                                          | `object` <docs-tip content='{prop,label,fieldProps,valueType,column}'></docs-tip>           |
 | `plus-field-*`                                | [PlusForm](/components/form.html#form-slots) 的自定义表单项，组件会自动根据配置项的 prop 生成对应的插槽 ，需要开启属性 [PlusColumn['editable']](/components/config.html) | `object` <docs-tip content='{prop,label,fieldProps,valueType,column,row}'></docs-tip>       |
-|  |
+|                                               |
 
 ## Page Exposes
 
@@ -162,5 +162,6 @@ page/crud
 | <el-text tag="del"> `handleRest` </el-text> <el-tag type="danger">deprecated v0.1.14</el-tag> | 重置搜索数据，并将 page 置为 1 ，然后重新加载 getList                             | `function` <docs-tip content='() => void'></docs-tip>                                        |
 | `handleReset`<el-tag>v0.1.14</el-tag>                                                         | 重置搜索数据，并将 page 置为 1 ，然后重新加载 getList                             | `function` <docs-tip content='() => void'></docs-tip>                                        |
 | `setSearchFieldsValue`<el-tag>v0.1.17</el-tag>                                                | 手动设置搜索值 ，传入一个对象参数，只会修改对象参数中对应值。                     | `function` <docs-tip content=' (val: RecordType) => void'></docs-tip>                        |
-| `getSearchFieldsValue`<el-tag>v0.1.17</el-tag>                                                | 手动获取搜索值 ，传入一个字段`key`则获取的得是字段`key`对应的值，默认返回所有值。 | `function` <docs-tip content='(key?: keyof any) => FieldValueType\| FieldValues'></docs-tip> |
+| `getSearchFieldsValue`<el-tag>v0.1.17</el-tag>                                                | 手动获取搜索值 ，传入一个字段`key`则获取的是字段`key`对应的值，默认返回所有值。 | `function` <docs-tip content='(key?: keyof any) => FieldValueType\| FieldValues'></docs-tip> |
 | `clearSearchFieldsValue`<el-tag>v0.1.17</el-tag>                                              | 手动清空搜索值                                                                    | `function` <docs-tip content='() => void'></docs-tip>                                        |
+| `setTableData`<el-tag>v0.1.23</el-tag>                                                        | 手动设置表格数据和分页总数。不给参数会清空表格数据。                              | `function` <docs-tip content='(data?: RecordType[], total?: number) => void'></docs-tip>     |
