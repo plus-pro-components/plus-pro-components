@@ -216,7 +216,7 @@ import {
   isSVGElement,
   isPlainObject
 } from '@plus-pro-components/components/utils'
-import { cloneDeep, debounce } from 'lodash-es'
+import { debounce } from 'lodash-es'
 import PlusTableActionBar from './table-action-bar.vue'
 import PlusTableColumn from './table-column.vue'
 import PlusTableTableColumnIndex from './table-column-index.vue'
@@ -324,7 +324,7 @@ watch(
     const filterOriginColumns = val.filter(item => unref(item.hideInTable) !== true)
 
     // 用于表头过滤的数据
-    filterColumns.value = cloneDeep(filterOriginColumns).map(item => ({
+    filterColumns.value = filterOriginColumns.map(item => ({
       ...item,
       headerIsChecked: item.headerIsChecked ?? true
     }))

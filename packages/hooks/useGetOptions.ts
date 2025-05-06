@@ -8,7 +8,6 @@ import {
   isPlainObject
 } from '@plus-pro-components/components/utils'
 import type { OptionsRow, PlusColumn } from '@plus-pro-components/types'
-import { cloneDeep } from 'lodash-es'
 
 const throwError = (data: unknown) => {
   if (!isArray(data)) {
@@ -24,7 +23,7 @@ const throwError = (data: unknown) => {
  * @returns
  */
 export const getOptionsByOptionsMap = (options: OptionsRow[], props: PlusColumn): OptionsRow[] => {
-  const optionsMap = props.optionsMap
+  const optionsMap = props.optionsMap || {}
   const valueType = props.valueType
 
   // 不处理级联，optionsMap不存在处理
@@ -33,9 +32,9 @@ export const getOptionsByOptionsMap = (options: OptionsRow[], props: PlusColumn)
   }
 
   const data = options.map(item => {
-    const temp = cloneDeep(item)
-    const label = optionsMap.label || 'label'
-    const value = optionsMap.value || 'value'
+    const temp = item
+    const label = optionsMap?.label || 'label'
+    const value = optionsMap?.value || 'value'
     const __origin = {
       [label]: temp[label],
       [value]: temp[value]
@@ -45,7 +44,7 @@ export const getOptionsByOptionsMap = (options: OptionsRow[], props: PlusColumn)
     return { ...temp, __origin, label: item[label], value: item[value] }
   })
 
-  return data
+  return data || []
 }
 
 export const useGetOptions = (
