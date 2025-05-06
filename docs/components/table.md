@@ -136,6 +136,16 @@ table/action-bar-popconfirm
 
 :::
 
+## 操作栏显示的按钮数量
+
+配置[actionBar](/components/type.html#actionbarprops) `showNumber` 属性，`showNumber`在<el-tag>v0.1.23</el-tag> 版本中新增了函数支持。
+
+:::demo
+
+table/show-number
+
+:::
+
 ## 标题栏
 
 标题栏默认显示右侧工具栏， 可以使用`title`，`toolbar`插槽定制。不需要的的话配置
