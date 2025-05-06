@@ -326,13 +326,10 @@ export interface FormChangeCallBackParams extends TableCellParams {
   fixed?: string
   /**
    * 显示出来的按钮个数  默认值为 `3`
+   * @version 0.1.23 新增函数类型
+   * @default 3
    */
-  showNumber?: 
-    | number
-    | ((
-        row: RecordType,
-        index: number,
-      ) => number)
+  showNumber?: number | ((row: RecordType, index: number) => number)
   /**
    * 更多按钮显示策略
    * @version 0.1.20
