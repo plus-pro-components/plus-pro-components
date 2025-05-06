@@ -9,7 +9,7 @@ export interface PlusDialogSelfProps {
   hasFooter?: boolean
   footerAlign?: 'left' | 'right' | 'center'
   top?: string
-  width?: string
+  width?: string | number
   title?: string
 }
 
