@@ -1,4 +1,5 @@
 import { defineConfig, HeadConfig } from 'vitepress'
+import llmstxt from 'vitepress-plugin-llms'
 import { mdPlugin } from './plugins/mdPlugin'
 import pkg from '../../package.json'
 
@@ -384,5 +385,8 @@ export default defineConfig({
   markdown: {
     lineNumbers: true,
     config: md => mdPlugin(md)
+  },
+  vite: {
+    plugins: [llmstxt()]
   }
 })

@@ -29,6 +29,13 @@ $primaryColor: #0072ff;
   max-width: 1200px;
 }
 
+.wechat-link {
+  &::before {
+    content: 'fei1446628111';
+    display: inline-block;
+  }
+}
+
 .tagline-link {
   font-weight: 500;
   color: var(--vp-c-brand);
