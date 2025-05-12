@@ -50,7 +50,8 @@ export default {
       more: 'もっと見る',
       confirmToPerformThisOperation: 'この操作を実行してもよろしいですか？',
       prompt: 'ヒント',
-      sort: '並べ替え'
+      sort: '並べ替え',
+      resetText: 'リセット'
     },
     stepsForm: {
       nextText: '次へ',

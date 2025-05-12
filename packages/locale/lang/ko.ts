@@ -50,7 +50,8 @@ export default {
       more: '더',
       confirmToPerformThisOperation: '이 작업을 수행하려면 확인하세요?',
       prompt: '힌트',
-      sort: '종류'
+      sort: '종류',
+      resetText: '초기화'
     },
     stepsForm: {
       nextText: '다음 단계',

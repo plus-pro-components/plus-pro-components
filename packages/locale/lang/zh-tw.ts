@@ -50,7 +50,8 @@ export default {
       more: '更多',
       confirmToPerformThisOperation: '確定執行本次操作?',
       prompt: '提示',
-      sort: '排序'
+      sort: '排序',
+      resetText: '重置'
     },
     stepsForm: {
       nextText: '下一步',

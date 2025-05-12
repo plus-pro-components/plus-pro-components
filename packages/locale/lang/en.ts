@@ -50,7 +50,8 @@ export default {
       more: 'More',
       confirmToPerformThisOperation: 'Confirm to perform this operation?',
       prompt: 'Prompt',
-      sort: 'Sort'
+      sort: 'Sort',
+      resetText: 'Reset'
     },
     stepsForm: {
       nextText: 'Next step',
