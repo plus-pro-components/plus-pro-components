@@ -737,10 +737,23 @@ import type { Mutable } from 'element-plus/es/utils'
 export type ColumnSetting = {
   dragSort?: boolean | Partial<SortableOptions>
   /**
-   * 列设置类型
-   * @version v0.1.20 新增reset, 默认：true
+   * 列设置是否需要重置按钮，当值为对象时是el-link按钮的props
+   * @version v0.1.20
+   * @default true
    */
   reset?: boolean | Partial<Mutable<LinkProps>>
+  /**
+   * 列设置popover的宽度
+   * @version v0.1.23
+   * @default 100
+   */
+  popoverWidth?: number | string
+  /**
+   * 列设置 checkbox label 隐藏的长度
+   *  @version v0.1.23
+   * @default 6
+   */
+  overflowLabelLength?: number
 }
 
 /**
