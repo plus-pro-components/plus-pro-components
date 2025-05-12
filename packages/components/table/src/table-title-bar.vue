@@ -77,7 +77,7 @@
       <PlusPopover
         v-if="titleBarConfig?.columnSetting !== false"
         placement="bottom"
-        :width="columnSettingPopverWidth"
+        :width="columnSettingPopoverWidth"
         trigger="click"
         :title="t('plus.table.columnSettings')"
       >
@@ -96,8 +96,9 @@
             href="javaScript:;"
             v-bind="isPlainObject(columnSetting?.reset) ? columnSetting?.reset : {}"
             @click.stop.prevent="resetCheckBoxList"
-            >重置</el-link
           >
+            {{ t('plus.table.resetText') }}
+          </el-link>
         </div>
 
         <el-checkbox-group v-model="state.checkList" @change="handleCheckGroupChange">
@@ -115,7 +116,7 @@
                   class="plus-table-title-bar__toolbar__checkbox__item"
                 >
                   <el-tooltip
-                    v-if="getLabel(item.label).length > filterTableHeaderOverflowLabelLength"
+                    v-if="getLabel(item.label).length > overflowLabelLength"
                     :content="getLabel(item.label)"
                     placement="right-start"
                   >
@@ -132,7 +133,7 @@
                   class="plus-table-title-bar__toolbar__checkbox__item"
                 >
                   <el-tooltip
-                    v-if="getLabel(item.label).length > filterTableHeaderOverflowLabelLength"
+                    v-if="getLabel(item.label).length > overflowLabelLength"
                     :content="getLabel(item.label)"
                     placement="right-start"
                   >
@@ -187,7 +188,6 @@ import type { TitleBar, ColumnSetting, FilterTableHeaderEventType } from './type
 export interface PlusTableToolbarProps {
   columns?: PlusColumn[]
   titleBar?: boolean | Partial<TitleBar>
-  filterTableHeaderOverflowLabelLength?: number
   defaultSize?: ComponentSize
   columnsIsChange?: boolean
 }
@@ -213,7 +213,6 @@ defineOptions({
 const props = withDefaults(defineProps<PlusTableToolbarProps>(), {
   columns: () => [],
   titleBar: true,
-  filterTableHeaderOverflowLabelLength: 6,
   defaultSize: 'default',
   columnsIsChange: false
 })
@@ -228,7 +227,8 @@ const titleBarConfig = computed(() => props.titleBar as TitleBar)
 const iconSize = computed(() => titleBarConfig.value?.icon?.size || 18)
 const iconColor = computed(() => titleBarConfig.value?.icon?.color || '')
 const columnSetting = computed(() => titleBarConfig.value?.columnSetting as ColumnSetting)
-const columnSettingPopverWidth = computed(() => titleBarConfig.value?.popoverWidth || 100)
+const columnSettingPopoverWidth = computed(() => columnSetting.value?.popoverWidth || 100)
+const overflowLabelLength = computed(() => columnSetting.value?.overflowLabelLength || 6)
 const sortable = ref<Sortable | null>(null)
 
 const buttonNameDensity: ButtonNameDensity[] = [
@@ -322,10 +322,10 @@ const handleRefresh = () => {
 
 const getLabelValue = (label?: PlusColumn['label']) => {
   const tempLabel = getLabel(label)
-  if (tempLabel && tempLabel?.length <= props.filterTableHeaderOverflowLabelLength) {
+  if (tempLabel && tempLabel?.length <= overflowLabelLength.value) {
     return tempLabel
   }
-  return tempLabel?.slice(0, props.filterTableHeaderOverflowLabelLength) + '...'
+  return tempLabel?.slice(0, overflowLabelLength.value) + '...'
 }
 
 // checkbox列拖拽

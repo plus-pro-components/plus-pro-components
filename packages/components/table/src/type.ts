@@ -377,7 +377,24 @@ export interface PlusTableState {
  */
 export type ColumnSetting = {
   dragSort?: boolean | Partial<SortableOptions>
+  /**
+   * 列设置是否需要重置按钮，当值为对象时是el-link按钮的props
+   * @version v0.1.20
+   * @default true
+   */
   reset?: boolean | Partial<Mutable<LinkProps>>
+  /**
+   * 列设置popover的宽度
+   * @version v0.1.23
+   * @default 100
+   */
+  popoverWidth?: number | string
+  /**
+   * 列设置 checkbox label 隐藏的长度
+   *  @version v0.1.23
+   * @default 6
+   */
+  overflowLabelLength?: number
 }
 
 /**
@@ -402,10 +419,7 @@ export type TitleBar = Partial<{
    * 是否需要列设置 默认true
    */
   columnSetting?: boolean | ColumnSetting
-  /**
-   * popover的宽度
-   */
-  popoverWidth?: number
+
   /**
    * 工具栏 icon 的大小和颜色配置
    */
@@ -476,6 +490,11 @@ export type PlusTableSelfProps = {
         /** 页面 `resize` 时的防抖时间，默认值为 `60` ms */
         timeout?: number
       }
+
+  /**
+   * @version 0.1.23
+   */
+  filterTableHeaderOverflowLabelLength?: number
 }
 
 export type PlusTableProps = PlusTableSelfProps & Partial<TableProps<any[]>> & RecordType
