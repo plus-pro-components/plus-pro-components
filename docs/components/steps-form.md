@@ -80,11 +80,12 @@ steps-form/step-slots
 
 ## StepsForm Events
 
-| 名称     | 说明                                         | 类型                                                                                        |
-| -------- | -------------------------------------------- | ------------------------------------------------------------------------------------------- |
-| `change` | 表单变化触发的事件                           | `function` <docs-tip content='(values: FieldValues,column: PlusColumn) => void'></docs-tip> |
-| `next`   | 点击`下一步`（`提交`）按钮校验通过触发的事件 | `function` <docs-tip content='(active: number, values: FieldValues) => void'></docs-tip>    |
-| `pre`    | 点击`上一步`按钮触发的事件                   | `function` <docs-tip content='(active: number) => void'></docs-tip>                         |
+| 名称                              | 说明                                         | 类型                                                                                                                                                           |
+| --------------------------------- | -------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `change`                          | 表单变化触发的事件                           | `function` <docs-tip content='(values: FieldValues,column: PlusColumn) => void'></docs-tip>                                                                    |
+| `pre`                             | 点击`上一步`按钮触发的事件                   | `function` <docs-tip content='(active: number) => void'></docs-tip>                                                                                            |
+| `next`                            | 点击`下一步`（`提交`）按钮校验通过触发的事件 | `function` <docs-tip content='(active: number, values: FieldValues, allValues: FieldValues) => void'></docs-tip> `allValues`参数为<el-tag>v0.1.23</el-tag>新增 |
+| `submit` <el-tag>v0.1.23</el-tag> | 点击`提交`按钮触发的事件                     | `function` <docs-tip content='(active: number, values: FieldValues, allValues: FieldValues) => void'></docs-tip>                                               |
 
 ## StepsForm Slots
 
