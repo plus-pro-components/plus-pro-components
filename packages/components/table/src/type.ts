@@ -23,6 +23,7 @@ import type { Mutable } from 'element-plus/es/utils'
 import type { PlusPaginationProps } from '@plus-pro-components/components/pagination'
 import type { RecordType, PageInfo, FieldValueType, PlusColumn } from '@plus-pro-components/types'
 import type { ComponentSize } from 'element-plus/es/constants'
+import type { PlusRadioProps } from '@plus-pro-components/components/radio'
 
 /**
  * 按钮属性的类型
@@ -458,8 +459,15 @@ export type PlusTableSelfProps = {
   hasIndexColumn?: boolean
   /** 是否工具栏*/
   titleBar?: boolean | Partial<TitleBar>
-  /** 是否是多选表格*/
-  isSelection?: boolean
+  /**
+   * 是否是多选表格
+   *
+   */
+  isSelection?: boolean | 'radio'
+  /**
+   *是否是单选选表格
+   */
+  isRadio?: boolean
   /** 是否需要展开行*/
   hasExpand?: boolean
   /** loading状态*/
@@ -473,6 +481,22 @@ export type PlusTableSelfProps = {
   dragSortableTableColumnProps?: Partial<TableColumnCtx<any>>
   indexTableColumnProps?: Partial<TableColumnCtx<any>>
   selectionTableColumnProps?: Partial<TableColumnCtx<any>>
+  /**
+   * 单选框的表格列配置
+   * @version 0.1.23
+   */
+  radioTableColumnProps?: Partial<TableColumnCtx<any>>
+  /**
+   *  单选框的props  (plus-radio)
+   * @version 0.1.23
+   * @see https://plus-pro-components.com/components/radio.html#radio-attributes
+   */
+  radioProps?: Partial<PlusRadioProps>
+  /**
+   * 默认选择的单选框值，对应表格某一行的数据
+   * @version 0.1.23
+   */
+  defaultSelectedRadioRow?: RecordType | ComputedRef<RecordType>
   expandTableColumnProps?: Partial<TableColumnCtx<any>>
   indexContentStyle?:
     | Partial<CSSProperties>
@@ -584,4 +608,8 @@ export type PlusTableEmits = {
    *
    */
   (e: 'filterTableHeader', columns: PlusColumn[], eventType: FilterTableHeaderEventType): void
+  /**
+   * @version 0.1.23
+   */
+  (e: 'radioChange', row: RecordType, index: number): void
 }

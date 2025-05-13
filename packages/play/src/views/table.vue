@@ -2,37 +2,20 @@
   <div>
     <PlusTable
       ref="plusTableInstance"
-      editable
+      is-radio
       :columns="tableConfig"
       :table-data="tableData"
-      :title-bar="{
-        columnSetting: {
-          dragSort: false
-        },
-        popoverWidth: 300
-      }"
-      @form-change="formChange"
+      :default-selected-radio-row="defaultSelectedRadioRow"
+      @radioChange="handleRadioChange"
     />
-
-    <el-row style="margin-top: 10px">
-      <el-button @click="handleStart(0)"> 开启第一行编辑 </el-button>
-      <el-button @click="handleStop(0)"> 关闭第一行编辑 </el-button>
-
-      <el-button @click="handleStart(2)"> 开启第三行编辑 </el-button>
-      <el-button @click="handleStop(2)"> 关闭第三行编辑 </el-button>
-
-      <el-button @click="handleStart(1, 'status')"> 开启第二行第二列编辑 </el-button>
-      <el-button @click="handleStop(1, 'status')"> 关闭第二行第二列编辑 </el-button>
-    </el-row>
   </div>
 </template>
 
 <script lang="ts" setup>
 import type { PlusColumn } from '@plus-pro-components/types'
-import type { PlusTableInstance, TableFormRefRow } from '@plus-pro-components/components'
+import type { PlusTableInstance } from '@plus-pro-components/components'
 import { useTable } from '@plus-pro-components/hooks'
 import { ref } from 'vue'
-import { set } from 'lodash-es'
 
 interface TableRow {
   id: number
@@ -64,6 +47,7 @@ const TestServe = {
 const { tableData } = useTable<TableRow[]>()
 
 const plusTableInstance = ref<PlusTableInstance | null>(null)
+const defaultSelectedRadioRow = ref()
 
 const tableConfig = ref<PlusColumn[]>([
   {
@@ -168,37 +152,12 @@ const getList = async () => {
   try {
     const { data } = await TestServe.getList()
     tableData.value = data.map(item => ({ ...item }))
+    defaultSelectedRadioRow.value = tableData.value[0]
   } catch (error) {}
 }
 getList()
 
-const handleStart = (index: number, prop?: string) => {
-  if (plusTableInstance.value?.formRefs) {
-    let cell = Reflect.get(plusTableInstance.value?.formRefs, index) as TableFormRefRow[]
-    if (prop) {
-      cell = cell.filter(item => item.prop === prop)
-    }
-    cell.forEach(item => {
-      item.startCellEdit()
-    })
-  }
-}
-
-const handleStop = (index: number, prop?: string) => {
-  if (plusTableInstance.value?.formRefs) {
-    let cell = Reflect.get(plusTableInstance.value?.formRefs, index) as TableFormRefRow[]
-    if (prop) {
-      cell = cell.filter(item => item.prop === prop)
-    }
-    cell.forEach(item => {
-      item.stopCellEdit()
-    })
-  }
-}
-
-const formChange = ({ index, prop, value }: any) => {
-  set(tableData.value[index], prop, value)
-
-  console.log(tableData.value, 'tableData.value')
+const handleRadioChange = (row: any, index: number) => {
+  console.log(row, index, 'handleRadioChange')
 }
 </script>

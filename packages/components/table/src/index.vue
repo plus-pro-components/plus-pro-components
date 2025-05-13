@@ -53,7 +53,18 @@
       <!-- 默认插槽 -->
       <template #default>
         <slot name="default">
-          <!-- 选择栏 -->
+          <!-- 单选选择栏 -->
+          <el-table-column v-if="isRadio" key="radio-selection" v-bind="radioTableColumnProps">
+            <template #default="scoped">
+              <PlusRadio
+                :model-value="isEqual(radioRow, scoped.row)"
+                :options="[{ value: true }]"
+                v-bind="radioProps"
+                @change="value => handleRadioChange(value, scoped.row, scoped.$index)"
+              />
+            </template>
+          </el-table-column>
+          <!-- 多选选择栏 -->
           <el-table-column
             v-if="isSelection"
             key="selection"
@@ -185,13 +196,16 @@ import {
   unref,
   computed,
   onMounted,
-  onBeforeUnmount
+  onBeforeUnmount,
+  watchEffect
 } from 'vue'
 import type {
   PlusPaginationProps,
   PlusPaginationInstance
 } from '@plus-pro-components/components/pagination'
 import { PlusPagination } from '@plus-pro-components/components/pagination'
+import type { PlusRadioProps } from '@plus-pro-components/components/radio'
+import { PlusRadio } from '@plus-pro-components/components/radio'
 import {
   DefaultPageInfo,
   TableFormRefInjectionKey,
@@ -216,7 +230,7 @@ import {
   isSVGElement,
   isPlainObject
 } from '@plus-pro-components/components/utils'
-import { debounce } from 'lodash-es'
+import { debounce, isEqual } from 'lodash-es'
 import PlusTableActionBar from './table-action-bar.vue'
 import PlusTableColumn from './table-column.vue'
 import PlusTableTableColumnIndex from './table-column-index.vue'
@@ -244,6 +258,7 @@ const props = withDefaults(defineProps<PlusTableProps>(), {
   hasIndexColumn: false,
   titleBar: true,
   isSelection: false,
+  isRadio: false,
   hasExpand: false,
   loadingStatus: false,
   tableData: () => [],
@@ -260,11 +275,18 @@ const props = withDefaults(defineProps<PlusTableProps>(), {
   selectionTableColumnProps: () => ({
     width: 40
   }),
+  radioTableColumnProps: () => ({
+    width: 50
+  }),
+  defaultSelectedRadioRow: undefined,
+  radioProps: undefined,
   expandTableColumnProps: () => ({}),
   editable: false,
   adaptive: false
 })
 const emit = defineEmits<PlusTableEmits>()
+
+const radioRow = ref()
 
 const subColumns: Ref<PlusColumn[]> = ref([])
 const columnsIsChange: Ref<boolean> = ref(false)
@@ -340,6 +362,10 @@ watch(
   }
 )
 
+watchEffect(() => {
+  radioRow.value = props.defaultSelectedRadioRow ? unref(props.defaultSelectedRadioRow) : {}
+})
+
 // 发分页改变事件
 const handlePaginationChange = () => {
   emit('paginationChange', { ...state.subPageInfo })
@@ -384,6 +410,11 @@ const handleRefresh = () => {
 
 const handleFormChange = (data: FormChangeCallBackParams) => {
   emit('formChange', data)
+}
+
+const handleRadioChange = (value: PlusRadioProps['modelValue'], row: RecordType, index: number) => {
+  radioRow.value = value ? row : {}
+  emit('radioChange', row, index)
 }
 
 // 保存活动的表单
