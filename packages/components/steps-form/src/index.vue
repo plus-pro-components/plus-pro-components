@@ -149,7 +149,7 @@ const next = (values: FieldValues) => {
   emit('next', active.value, values, allValues.value);
 
   // Check if moving from last step to completion
-  if (currentActive === props.data.length - 1 && active.value === props.data.length) {
+  if (currentActive === props.data.length && active.value === props.data.length) {
     emit('submit', active.value, values, allValues.value);
   }
 }

@@ -1,6 +1,13 @@
 <template>
   <!-- @vue-ignore -->
-  <PlusStepsForm v-model="active" direction="vertical" :space="120" :data="stepForm" @next="next">
+  <PlusStepsForm
+    v-model="active"
+    direction="vertical"
+    :space="120"
+    :data="stepForm"
+    @next="next"
+    @submit="submit"
+  >
     <template #title="{ title }">{{ title }}</template>
   </PlusStepsForm>
 </template>
@@ -176,6 +183,9 @@ const stepForm = ref([
 const active = ref(1)
 const next = (actives: number, values: any) => {
   active.value = actives
-  console.log(actives, values, stepForm.value)
+  console.log('next', actives, values, stepForm.value)
+}
+const submit = (actives: number, values: any) => {
+  console.log('submit', actives, values, stepForm.value)
 }
 </script>
