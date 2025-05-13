@@ -1,3 +1,27 @@
+## [v0.1.23](https://github.com/plus-pro-components/plus-pro-components/compare/v0.1.22...v0.1.23) (2025-05-13)
+
+### ✨ Features
+
+- **components:** :sparkles: plusColumn add renderErrorMessage([27e7283](https://github.com/plus-pro-components/plus-pro-components/commit/27e7283)) by@xiaofei
+- **components:** :sparkles: steps-form add submit event([3636ace](https://github.com/plus-pro-components/plus-pro-components/commit/3636ace)) by@xiaofei
+- **components:** :sparkles: search footer slot add searchLoading params([3658e8a](https://github.com/plus-pro-components/plus-pro-components/commit/3658e8a)) by@xiaofei
+- **components:** :sparkles: table add radio select([d16951c](https://github.com/plus-pro-components/plus-pro-components/commit/d16951c)) by@xiaofei
+- **components:** :sparkles: columnSetting add popoverWidth and overflowLabelLength([716a799](https://github.com/plus-pro-components/plus-pro-components/commit/716a799)) by@xiaofei
+- **locale:** :sparkles: locale add table.resetText([6fd98ec](https://github.com/plus-pro-components/plus-pro-components/commit/6fd98ec)) by@xiaofei
+- **components:** :sparkles: page component expose setTableData function([7ae402c](https://github.com/plus-pro-components/plus-pro-components/commit/7ae402c)) by@xiaofei
+- **components:** :sparkles: table/action-bar add showNumber type([1b0b45e](https://github.com/plus-pro-components/plus-pro-components/commit/1b0b45e)) by@xiaofei
+- **all:** Merge pull request [#293](https://github.com/plus-pro-components/plus-pro-components/pull/293) from fiture/dev([a96027e](https://github.com/plus-pro-components/plus-pro-components/commit/a96027e)) by@xiaofei
+- **components:** ✨ table support custom function for ActionBarProps.showNumber per row([1e0ee50](https://github.com/plus-pro-components/plus-pro-components/commit/1e0ee50)) by@fiture
+- **components:** :sparkles: sidebar add clickMenuItem event([07ef02c](https://github.com/plus-pro-components/plus-pro-components/commit/07ef02c)) by@xiaofei
+- **all:** Merge pull request [#290](https://github.com/plus-pro-components/plus-pro-components/pull/290) from JanderFan/dev([e437240](https://github.com/plus-pro-components/plus-pro-components/commit/e437240)) by@xiaofei
+- **all:** :sparkles: 对 Titlebar 属性扩展了 popoverWidth 属性([fcc83bb](https://github.com/plus-pro-components/plus-pro-components/commit/fcc83bb)) by@fanjinde
+
+### 🐛 Bug Fixes
+
+- **components:** :bug: fix PlusDialog component width prop type warning([4a7a300](https://github.com/plus-pro-components/plus-pro-components/commit/4a7a300)) by@xiaofei
+- **components:** :bug: fix column options use computed error([195876c](https://github.com/plus-pro-components/plus-pro-components/commit/195876c)) by@xiaofei
+- **components.:** :bug: fix table cell edit need 2 times.([1d05ee1](https://github.com/plus-pro-components/plus-pro-components/commit/1d05ee1)) by@xiaofei
+
 ## [v0.1.22](https://github.com/plus-pro-components/plus-pro-components/compare/v0.1.21...v0.1.22) (2025-04-03)
 
 ### ✨ Features
