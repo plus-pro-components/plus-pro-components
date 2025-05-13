@@ -86,7 +86,14 @@ export interface PlusStepsFormProps {
 }
 export interface PlusStepsFormEmits {
   (e: 'pre', modelValue: number): void
-  (e: 'next', modelValue: number, values: FieldValues): void
+  /**
+   * @version 0.1.23 新增参数  allValues
+   */
+  (e: 'next', modelValue: number, values: FieldValues, allValues: FieldValues): void
+  /**
+   * @version 0.1.23
+   */
+  (e: 'submit', modelValue: number, values: FieldValues, allValues: FieldValues): void
   (e: 'update:modelValue', active: number): void
   (e: 'change', values: FieldValues, column: PlusColumn): void
 }
@@ -115,6 +122,10 @@ const currentIndex = computed(() => active.value - 1)
 
 const slotName = computed(() => `step-${active.value}`)
 
+const allValues = computed(() =>
+  props.data?.reduce((pre, current) => ({ ...pre, ...current.form?.modelValue }), {})
+)
+
 const handleChange = (values: FieldValues, column: PlusColumn) => {
   emit('change', values, column)
 }
@@ -130,6 +141,10 @@ const pre = () => {
 const next = (values: FieldValues) => {
   if (active.value++ > props.data.length - 1) active.value = props.data.length
   emit('update:modelValue', active.value)
-  emit('next', active.value, values)
+  emit('next', active.value, values, allValues.value)
+
+  if (active.value === props.data.length) {
+    emit('submit', active.value, values, allValues.value)
+  }
 }
 </script>
