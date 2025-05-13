@@ -45,6 +45,7 @@
           :handle-reset="handleReset"
           :handle-search="handleSearch"
           :handle-unfold="handleUnfold"
+          :search-loading="searchLoading"
         >
           <el-button v-if="hasReset" :icon="RefreshRight" @click="handleReset">
             {{ resetText || t('plus.search.resetText') }}
