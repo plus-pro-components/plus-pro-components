@@ -387,6 +387,20 @@ export interface FormColumnProps {
    * @see https://element-plus.gitee.io/zh-CN/component/select.html#option-slots
    */
   fieldChildrenSlot?: (option?: OptionsRow) => RenderTypes
+
+  /**
+   * 渲染el-form-item的error 信息
+   * @param column
+   * @version 0.1.23
+   * @returns
+   */
+  renderErrorMessage?: (
+    props: PlusColumn & {
+      value?: FieldValueType
+      error?: string
+      label?: string
+    }
+  ) => RenderTypes
 }
 
 /**

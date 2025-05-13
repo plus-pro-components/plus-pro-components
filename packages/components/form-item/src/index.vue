@@ -8,6 +8,18 @@
       v-bind="customFormItemProps"
       :label-width="hasLabel ? customFormItemProps?.labelWidth : '0px'"
     >
+      <template v-if="isFunction(renderErrorMessage)" #error="{ error }">
+        <div class="el-form-item__error">
+          <component
+            :is="renderErrorMessage"
+            v-bind="props"
+            :value="state"
+            :error="error"
+            :label="labelValue"
+          />
+        </div>
+      </template>
+
       <template v-if="hasLabel" #label="{ label: currentLabel }">
         <span class="plus-form-item__label">
           <template v-if="renderLabel && isFunction(renderLabel)">
@@ -240,6 +252,7 @@ export interface PlusFormItemProps {
   tooltip?: PlusColumn['tooltip']
   fieldSlots?: PlusColumn['fieldSlots']
   fieldChildrenSlot?: PlusColumn['fieldChildrenSlot']
+  renderErrorMessage?: PlusColumn['renderErrorMessage']
   /**
    * @desc 对options 进行映射
    * @version v0.1.15
@@ -284,6 +297,7 @@ const props = withDefaults(defineProps<PlusFormItemProps>(), {
   renderField: undefined,
   renderLabel: undefined,
   fieldChildrenSlot: undefined,
+  renderErrorMessage: undefined,
   optionsMap: undefined,
   clearable: true,
   index: 0
