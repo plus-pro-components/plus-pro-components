@@ -610,6 +610,7 @@ export type PlusTableEmits = {
   (e: 'filterTableHeader', columns: PlusColumn[], eventType: FilterTableHeaderEventType): void
   /**
    * @version 0.1.23
+   * @version 0.1.24 参数新增radio 的值
    */
-  (e: 'radioChange', row: RecordType, index: number): void
+  (e: 'radioChange', row: RecordType, index: number, value: boolean): void
 }
