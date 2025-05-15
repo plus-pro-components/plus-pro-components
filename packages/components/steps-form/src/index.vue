@@ -140,17 +140,17 @@ const pre = () => {
 // 下一步
 const next = (values: FieldValues) => {
   // Save current active value for comparison
-  const currentActive = active.value;
+  const currentActive = active.value
 
   // Update active value, ensuring it doesn't exceed max index
-  active.value = Math.min(currentActive + 1, props.data.length);
+  active.value = Math.min(currentActive + 1, props.data.length)
 
-  emit('update:modelValue', active.value);
-  emit('next', active.value, values, allValues.value);
+  emit('update:modelValue', active.value)
+  emit('next', active.value, values, allValues.value)
 
   // Check if moving from last step to completion
   if (currentActive === props.data.length && active.value === props.data.length) {
-    emit('submit', active.value, values, allValues.value);
+    emit('submit', active.value, values, allValues.value)
   }
 }
 </script>

@@ -414,7 +414,6 @@ const handleFormChange = (data: FormChangeCallBackParams) => {
 
 const handleRadioChange = (value: PlusRadioProps['modelValue'], row: RecordType, index: number) => {
   radioRow.value = value ? row : {}
-  console.log('radioRow', row, index, !!value)
   emit('radioChange', row, index, !!value)
 }
 
