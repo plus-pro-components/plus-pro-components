@@ -15,6 +15,6 @@ git commit -m 'deploy'
 
 git push -f https://github.com/plus-pro-components/plus-pro-components.github.io.git master:gh-pages
 
-rsync -av --exclude=".*" ./ root@39.103.160.178:/root/plus-pro-components
+rsync -av --exclude=".*" ./ root@47.109.84.50:/root/plus-pro-components
 
 cd -
