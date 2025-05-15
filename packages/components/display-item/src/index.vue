@@ -59,7 +59,7 @@
 
   <!-- 状态显示 `select`, `radio`, `checkbox`-->
   <span
-    v-else-if="statusValueTypes.includes(column.valueType)"
+    v-else-if="selectValueTypeList.includes(column.valueType)"
     class="plus-display-item plus-display-item__badge"
     v-bind="customFieldProps"
     :class="{ 'is-list': isArray(getStatus) }"
@@ -209,7 +209,7 @@ import type {
   OptionsRow
 } from '@plus-pro-components/types'
 import { useGetOptions } from '@plus-pro-components/hooks'
-import { TableFormRowInfoInjectionKey } from '@plus-pro-components/constants'
+import { TableFormRowInfoInjectionKey, selectValueTypeList } from '@plus-pro-components/constants'
 import { PlusRender } from '@plus-pro-components/components/render'
 import { ElIcon, ElDivider } from 'element-plus'
 import { hasDisplayComponent, getDisplayComponent } from './display-item'
@@ -257,7 +257,6 @@ const subRow = ref(cloneDeep(props.row))
 
 const isEdit = ref(false)
 const falseArray = [false, 'click', 'dblclick']
-const statusValueTypes: (string | undefined)[] = ['select', 'radio', 'checkbox']
 
 watch(
   () => props.row,
@@ -319,7 +318,7 @@ const formatterValue = computed(() => {
       : displayValue.value
 
   // 格式化，不包含状态类型和表单
-  if (!statusValueTypes.includes(props.column.valueType) && !isEdit.value) {
+  if (!selectValueTypeList.includes(props.column.valueType) && !isEdit.value) {
     // formatter 第一优先
     if (props.column.formatter && isFunction(props.column.formatter)) {
       return props.column.formatter(value, renderParams.value)
