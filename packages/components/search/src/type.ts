@@ -10,6 +10,12 @@ export type PlusSearchSelfProps = {
   hasFooter?: boolean
   hasReset?: boolean
   hasUnfold?: boolean
+  /**
+   * 默认是否展开
+   * @version 0.1.24
+   * @default false
+   */
+  defaultUnfold?: boolean
   searchText?: string
   resetText?: string
   retractText?: string

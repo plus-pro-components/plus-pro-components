@@ -109,6 +109,7 @@ const props = withDefaults(defineProps<PlusSearchProps>(), {
   hasFooter: true,
   hasReset: true,
   hasUnfold: true,
+  defaultUnfold: false,
   searchLoading: false,
   searchText: '',
   resetText: '',
@@ -135,7 +136,7 @@ const emit = defineEmits<PlusSearchEmits>()
 const { t } = useLocale()
 const plusFormInstance = ref<PlusFormInstance | null>()
 
-const isShowUnfold = ref<boolean>(false)
+const isShowUnfold = ref<boolean>(props.defaultUnfold ?? false)
 const values = ref<FieldValues>({})
 const slots = useSlots()
 const attrs = useAttrs()
