@@ -89,10 +89,12 @@
           >
             {{ t('plus.table.selectAll') }}
           </el-checkbox>
+
+          <!-- @vue-ignore -->
           <el-link
             v-if="columnSetting?.reset !== false"
             type="primary"
-            :underline="false"
+            :underline="versionIsLessThan299 ? false : 'never'"
             href="javaScript:;"
             v-bind="isPlainObject(columnSetting?.reset) ? columnSetting?.reset : {}"
             @click.stop.prevent="resetCheckBoxList"
@@ -178,6 +180,7 @@ import {
   getTableKey,
   isPlainObject,
   versionIsLessThan260,
+  versionIsLessThan299,
   getLabel
 } from '@plus-pro-components/components/utils'
 import { ElCheckbox, ElCheckboxGroup, ElTooltip, ElIcon, ElButton, ElLink } from 'element-plus'

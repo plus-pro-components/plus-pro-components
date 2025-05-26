@@ -236,6 +236,10 @@ export const compareVersion = (version1: string, version2: string) => {
  * element-plus版本号是否小于'2.6.0'
  */
 export const versionIsLessThan260 = compareVersion(version, '2.6.0') < 0
+/**
+ * element-plus版本号是否小于'2.9.9'
+ */
+export const versionIsLessThan299 = compareVersion(version, '2.9.9') < 0
 
 /**
  * 获取label

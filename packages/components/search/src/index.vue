@@ -54,11 +54,12 @@
             {{ searchText || t('plus.search.searchText') }}
           </el-button>
 
+          <!-- @vue-ignore -->
           <el-link
             v-if="hasUnfold && originData.length > showNumber"
             class="plus-search__unfold"
             type="primary"
-            :underline="false"
+            :underline="versionIsLessThan299 ? false : 'never'"
             href="javaScript:;"
             @click="handleUnfold"
           >
@@ -92,7 +93,8 @@ import {
   getFieldSlotName,
   getLabelSlotName,
   getExtraSlotName,
-  filterSlots
+  filterSlots,
+  versionIsLessThan299
 } from '@plus-pro-components/components/utils'
 import type { FormRules } from 'element-plus'
 import type { PlusSearchSelfProps as PlusSearchProps, PlusSearchEmits } from './type'
