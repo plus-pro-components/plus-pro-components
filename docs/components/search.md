@@ -99,6 +99,7 @@ search/async
 | `collapseTransition`<el-tag>v0.1.15</el-tag> | 是否开启折叠动画                                                                                                     | `boolean`                                                                               | `true`                              | 否       |
 | `collapseDuration`<el-tag>v0.1.15</el-tag>   | 折叠动画持续时长(单位：ms)                                                                                           | `number`                                                                                | `300`                               | 否       |
 | `needValidate`<el-tag>v0.1.15</el-tag>       | 搜索是否需要校验 ，默认不需要校验表单                                                                                | `boolean`                                                                               | `false`                             | 否       |
+| `defaultUnfold`<el-tag>v0.1.34</el-tag>      | 默认展开搜索                                                                                                         | `boolean`                                                                               | `false`                             | 否       |
 | ...                                          | ...                                                                                                                  | ...                                                                                     | ...                                 | ...      |
 
 :::tip 提示
