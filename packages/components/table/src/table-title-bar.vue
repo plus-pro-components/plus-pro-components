@@ -90,11 +90,10 @@
             {{ t('plus.table.selectAll') }}
           </el-checkbox>
 
-          <!-- @vue-ignore -->
           <el-link
             v-if="columnSetting?.reset !== false"
             type="primary"
-            :underline="versionIsLessThan299 ? false : 'never'"
+            :underline="(versionIsLessThan299 ? false : 'never') as any"
             href="javaScript:;"
             v-bind="isPlainObject(columnSetting?.reset) ? columnSetting?.reset : {}"
             @click.stop.prevent="resetCheckBoxList"

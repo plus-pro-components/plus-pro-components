@@ -54,12 +54,11 @@
             {{ searchText || t('plus.search.searchText') }}
           </el-button>
 
-          <!-- @vue-ignore -->
           <el-link
             v-if="hasUnfold && originData.length > showNumber"
             class="plus-search__unfold"
             type="primary"
-            :underline="versionIsLessThan299 ? false : 'never'"
+            :underline="(versionIsLessThan299 ? false : 'never') as any"
             href="javaScript:;"
             @click="handleUnfold"
           >
