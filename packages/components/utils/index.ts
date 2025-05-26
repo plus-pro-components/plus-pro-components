@@ -1,4 +1,4 @@
-import { version } from 'element-plus'
+import { version } from 'element-plus/es/version'
 import type {
   FieldValueType,
   RecordType,
