@@ -106,6 +106,7 @@
           <PlusTableColumn
             :columns="subColumns"
             :editable="editable"
+            :table-data-length="tableDataLength"
             @formChange="handleFormChange"
           >
             <!--表格单元格表头的插槽 -->
@@ -211,7 +212,7 @@ import {
   TableFormRefInjectionKey,
   TableFormFieldRefInjectionKey
 } from '@plus-pro-components/constants'
-import type { Ref, ComputedRef } from 'vue'
+import type { Ref } from 'vue'
 import type { ComponentSize } from 'element-plus/es/constants'
 import type { TableInstance } from 'element-plus'
 import { ElTable, ElTableColumn, vLoading } from 'element-plus'
@@ -300,9 +301,14 @@ const state = reactive<PlusTableState>({
   },
   size: props.defaultSize
 })
-const __tableData: ComputedRef<RecordType[]> = computed(() =>
-  props.tableData?.length ? props.tableData : props.data
-)
+const cachedTableData = ref<RecordType[]>([])
+
+watchEffect(() => {
+  cachedTableData.value = props.tableData?.length ? props.tableData : props.data
+})
+
+const __tableData = computed(() => cachedTableData.value)
+const tableDataLength = computed(() => __tableData.value.length)
 
 const hasAdaptive = computed(() => typeof props.height === 'undefined' && props.adaptive)
 
@@ -357,14 +363,19 @@ watch(
     columnsIsChange.value = !columnsIsChange.value
   },
   {
-    deep: true,
     immediate: true
   }
 )
 
-watchEffect(() => {
-  radioRow.value = props.defaultSelectedRadioRow ? unref(props.defaultSelectedRadioRow) : {}
-})
+watch(
+  () => props.defaultSelectedRadioRow,
+  val => {
+    radioRow.value = val ? unref(props.defaultSelectedRadioRow) : {}
+  },
+  {
+    immediate: true
+  }
+)
 
 // 发分页改变事件
 const handlePaginationChange = () => {

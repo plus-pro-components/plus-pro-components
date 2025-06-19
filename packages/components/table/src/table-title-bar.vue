@@ -168,7 +168,6 @@
 <script lang="ts" setup>
 import type { ComputedRef } from 'vue'
 import { reactive, computed, unref, onMounted, ref, watch } from 'vue'
-import { cloneDeep } from 'lodash-es'
 import type { PlusColumn } from '@plus-pro-components/types'
 import { Setting, RefreshRight } from '@element-plus/icons-vue'
 import { PlusPopover } from '@plus-pro-components/components/popover'
@@ -219,8 +218,6 @@ const props = withDefaults(defineProps<PlusTableToolbarProps>(), {
   columnsIsChange: false
 })
 const emit = defineEmits<PlusTableToolbarEmits>()
-
-const originColumns: PlusColumn[] = cloneDeep(props.columns)
 
 const { t } = useLocale()
 
@@ -345,7 +342,7 @@ const handleDrop = () => {
   sortable.value = new Sortable(checkboxGroupInstance.value as HTMLElement, config)
 }
 const handleDragEnd = (event: SortableEvent) => {
-  const subDragCheckboxList = cloneDeep(props.columns)
+  const subDragCheckboxList = [...props.columns]
   const draggedCheckbox = props.columns[event.oldIndex as number]
   subDragCheckboxList.splice(event.oldIndex as number, 1)
   subDragCheckboxList.splice(event.newIndex as number, 0, draggedCheckbox)
@@ -360,11 +357,11 @@ const handleDragEnd = (event: SortableEvent) => {
 
 // 重置
 const resetCheckBoxList = () => {
-  state.checkList = originColumns
+  state.checkList = props.columns
     .filter(item => unref(item.headerIsChecked) !== false)
     .map(item => getTableKey(item))
   setCheckAllState(state.checkList)
-  const filterColumns = originColumns.map(item => ({ ...item }))
+  const filterColumns = props.columns.map(item => ({ ...item }))
   emit('filterTableHeader', filterColumns, 'reset')
 }
 

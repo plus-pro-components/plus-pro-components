@@ -47,6 +47,7 @@
           <PlusTableColumn
             :columns="item.children"
             :editable="editable"
+            :table-data-length="tableDataLength"
             @formChange="handleFormChange"
           />
           {{ item.label }}
@@ -123,6 +124,7 @@ import type { TableFormRefRow, FormChangeCallBackParams } from './type'
 export interface PlusTableColumnProps {
   columns?: PlusColumn[]
   editable?: boolean | 'click' | 'dblclick'
+  tableDataLength?: number
 }
 export interface PlusTableColumnEmits {
   (e: 'formChange', data: FormChangeCallBackParams): void
@@ -134,9 +136,12 @@ defineOptions({
 
 const props = withDefaults(defineProps<PlusTableColumnProps>(), {
   columns: () => [],
+  tableDataLength: 0,
   editable: false
 })
 const emit = defineEmits<PlusTableColumnEmits>()
+
+console.log(props.columns, 'columns')
 
 /**
  *  表单ref处理
@@ -153,22 +158,23 @@ const setFormRef = () => {
   const list: TableFormRefRow[] =
     plusDisplayItemInstance.value?.map(item => ({ ...item, ...item?.getDisplayItemInstance() })) ||
     []
-  list.forEach(item => {
+
+  for (let index = 0; index < list.length; index++) {
+    const item = list[index]
     if (!formRefs.value[item.index]) {
       formRefs.value[item.index] = []
     }
 
     set(formRefs.value[item.rowIndex], item.cellIndex, item)
-  })
+  }
 }
 
 watch(
-  plusDisplayItemInstance,
+  () => props.tableDataLength,
   () => {
     setFormRef()
   },
   {
-    deep: true,
     flush: 'post'
   }
 )
