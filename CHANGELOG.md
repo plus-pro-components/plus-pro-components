@@ -1,3 +1,27 @@
+## [v0.1.24](https://github.com/plus-pro-components/plus-pro-components/compare/v0.1.23...v0.1.24) (2025-06-19)
+
+### ✨ Features
+
+- **components:** :sparkles: plusSearch add defaultUnfold props([b3426dc](https://github.com/plus-pro-components/plus-pro-components/commit/b3426dc)) by@xiaofei
+- **components:** :sparkles: adaptation element-plus 2.9.9 version.([10d5d6e](https://github.com/plus-pro-components/plus-pro-components/commit/10d5d6e)) by@xiaofei
+- **all:** Merge branch 'dev' of https://github.com/plus-pro-components/plus-pro-components into dev([a537506](https://github.com/plus-pro-components/plus-pro-components/commit/a537506)) by@xiaofei
+- **all:** Merge pull request [#299](https://github.com/plus-pro-components/plus-pro-components/pull/299) from condorheroblog/dev([450e29a](https://github.com/plus-pro-components/plus-pro-components/commit/450e29a)) by@xiaofei
+- **components:** :sparkles: table radioChange add radio value params([350c404](https://github.com/plus-pro-components/plus-pro-components/commit/350c404)) by@xiaofei
+
+### ⚡ Performance Improvements
+
+- **table:** :zap: default slots and other isolation for tables([837cd01](https://github.com/plus-pro-components/plus-pro-components/commit/837cd01)) by@xiaofei
+- **components:** :zap: code optimization([27c64d5](https://github.com/plus-pro-components/plus-pro-components/commit/27c64d5)) by@xiaofei
+- **components:** :zap: optimize table performance([c644162](https://github.com/plus-pro-components/plus-pro-components/commit/c644162)) by@xiaofei
+
+### 🐛 Bug Fixes
+
+- **components:** :bug: fix multiple header table plus-header-\* invalid([b28ecd0](https://github.com/plus-pro-components/plus-pro-components/commit/b28ecd0)) by@xiaofei
+- **components:** :bug: fix el-link underline type error([f41a017](https://github.com/plus-pro-components/plus-pro-components/commit/f41a017)) by@xiaofei
+- **components:** :bug: fix element-plus Version lead to Tree Shaking invalid([bba93ef](https://github.com/plus-pro-components/plus-pro-components/commit/bba93ef)) by@xiaofei
+- **components:** :bug: fix select-v2 display error in table([849695d](https://github.com/plus-pro-components/plus-pro-components/commit/849695d)) by@xiaofei
+- **steps-form:** prevent premature submit on last step navigation([81cd99b](https://github.com/plus-pro-components/plus-pro-components/commit/81cd99b)) by@Condor Hero
+
 ## [v0.1.23](https://github.com/plus-pro-components/plus-pro-components/compare/v0.1.22...v0.1.23) (2025-05-13)
 
 ### ✨ Features
