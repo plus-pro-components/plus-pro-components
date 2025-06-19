@@ -49,7 +49,11 @@
             :editable="editable"
             :table-data-length="tableDataLength"
             @formChange="handleFormChange"
-          />
+          >
+            <template v-for="(_, key) in $slots" :key="key" #[key]="data">
+              <slot :name="key" v-bind="data" />
+            </template>
+          </PlusTableColumn>
           {{ item.label }}
         </template>
 
