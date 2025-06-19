@@ -62,11 +62,7 @@
             href="javaScript:;"
             @click="handleUnfold"
           >
-            {{
-              isShowUnfold
-                ? retractText || t('plus.search.retract')
-                : expandText || t('plus.search.expand')
-            }}
+            {{ unfoldText }}
             <el-icon>
               <ArrowUp v-if="isShowUnfold" />
               <ArrowDown v-else />
@@ -141,6 +137,11 @@ const slots = useSlots()
 const attrs = useAttrs()
 const rules: ComputedRef<FormRules | undefined> = computed(() =>
   props.needValidate ? (attrs.rules as FormRules) : undefined
+)
+const unfoldText = computed(() =>
+  isShowUnfold.value
+    ? props.retractText || t('plus.search.retract')
+    : props.expandText || t('plus.search.expand')
 )
 
 /**
