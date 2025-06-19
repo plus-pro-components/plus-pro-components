@@ -145,8 +145,6 @@ const props = withDefaults(defineProps<PlusTableColumnProps>(), {
 })
 const emit = defineEmits<PlusTableColumnEmits>()
 
-console.log(props.columns, 'columns')
-
 /**
  *  表单ref处理
  */

@@ -52,56 +52,56 @@
     >
       <!-- 默认插槽 -->
       <template #default>
+        <!-- 单选选择栏 -->
+        <el-table-column v-if="isRadio" key="radio-selection" v-bind="radioTableColumnProps">
+          <template #default="scoped">
+            <PlusRadio
+              :model-value="isEqual(radioRow, scoped.row)"
+              :options="[{ value: true }]"
+              v-bind="radioProps"
+              @change="value => handleRadioChange(value, scoped.row, scoped.$index)"
+            />
+          </template>
+        </el-table-column>
+        <!-- 多选选择栏 -->
+        <el-table-column
+          v-if="isSelection"
+          key="selection"
+          type="selection"
+          v-bind="selectionTableColumnProps"
+        />
+
+        <!-- 序号栏 -->
+        <PlusTableTableColumnIndex
+          v-if="hasIndexColumn"
+          :index-content-style="indexContentStyle"
+          :index-table-column-props="indexTableColumnProps"
+          :page-info="(pagination as PlusPaginationProps)?.modelValue"
+        />
+
+        <!-- 拖拽行 -->
+        <PlusTableColumnDragSort
+          v-if="dragSortable"
+          :sortable="dragSortable"
+          :drag-sortable-table-column-props="dragSortableTableColumnProps"
+          :table-instance="tableInstance"
+          @dragSortEnd="handleDragSortEnd"
+        >
+          <template v-if="$slots['drag-sort-icon']" #drag-sort-icon>
+            <slot name="drag-sort-icon" />
+          </template>
+        </PlusTableColumnDragSort>
+
+        <!-- 展开行 -->
+        <el-table-column v-if="hasExpand" type="expand" v-bind="expandTableColumnProps">
+          <template #default="scoped">
+            <div class="plus-table-expand-col">
+              <slot name="expand" :index="scoped.$index" v-bind="scoped" />
+            </div>
+          </template>
+        </el-table-column>
+
         <slot name="default">
-          <!-- 单选选择栏 -->
-          <el-table-column v-if="isRadio" key="radio-selection" v-bind="radioTableColumnProps">
-            <template #default="scoped">
-              <PlusRadio
-                :model-value="isEqual(radioRow, scoped.row)"
-                :options="[{ value: true }]"
-                v-bind="radioProps"
-                @change="value => handleRadioChange(value, scoped.row, scoped.$index)"
-              />
-            </template>
-          </el-table-column>
-          <!-- 多选选择栏 -->
-          <el-table-column
-            v-if="isSelection"
-            key="selection"
-            type="selection"
-            v-bind="selectionTableColumnProps"
-          />
-
-          <!-- 序号栏 -->
-          <PlusTableTableColumnIndex
-            v-if="hasIndexColumn"
-            :index-content-style="indexContentStyle"
-            :index-table-column-props="indexTableColumnProps"
-            :page-info="(pagination as PlusPaginationProps)?.modelValue"
-          />
-
-          <!-- 拖拽行 -->
-          <PlusTableColumnDragSort
-            v-if="dragSortable"
-            :sortable="dragSortable"
-            :drag-sortable-table-column-props="dragSortableTableColumnProps"
-            :table-instance="tableInstance"
-            @dragSortEnd="handleDragSortEnd"
-          >
-            <template v-if="$slots['drag-sort-icon']" #drag-sort-icon>
-              <slot name="drag-sort-icon" />
-            </template>
-          </PlusTableColumnDragSort>
-
-          <!-- 展开行 -->
-          <el-table-column v-if="hasExpand" type="expand" v-bind="expandTableColumnProps">
-            <template #default="scoped">
-              <div class="plus-table-expand-col">
-                <slot name="expand" :index="scoped.$index" v-bind="scoped" />
-              </div>
-            </template>
-          </el-table-column>
-
           <!--配置渲染栏  -->
           <PlusTableColumn
             :columns="subColumns"
@@ -139,20 +139,19 @@
               <slot name="edit-icon" />
             </template>
           </PlusTableColumn>
-
-          <!-- 操作栏 -->
-          <PlusTableActionBar
-            v-if="actionBar"
-            v-bind="actionBar"
-            @clickAction="handleAction"
-            @clickActionConfirmCancel="handleClickActionConfirmCancel"
-          >
-            <!-- 操作栏更多icon插槽 -->
-            <template v-if="$slots['action-bar-more-icon']" #action-bar-more-icon>
-              <slot name="action-bar-more-icon" />
-            </template>
-          </PlusTableActionBar>
         </slot>
+        <!-- 操作栏 -->
+        <PlusTableActionBar
+          v-if="actionBar"
+          v-bind="actionBar"
+          @clickAction="handleAction"
+          @clickActionConfirmCancel="handleClickActionConfirmCancel"
+        >
+          <!-- 操作栏更多icon插槽 -->
+          <template v-if="$slots['action-bar-more-icon']" #action-bar-more-icon>
+            <slot name="action-bar-more-icon" />
+          </template>
+        </PlusTableActionBar>
       </template>
 
       <!-- 插入至表格最后一行之后的内容 -->
