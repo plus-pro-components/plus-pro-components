@@ -156,7 +156,13 @@ const getList = async () => {
 }
 getList()
 
-const handleRadioChange = (row: any, index: number) => {
-  console.log(row, index, 'handleRadioChange')
+/**
+ *
+ * @param row
+ * @param index
+ * @param value  value（是否选中）参数为 v0.1.24 新增
+ */
+const handleRadioChange = (row: any, index: number, value: boolean) => {
+  console.log(row, index, value, 'handleRadioChange')
 }
 </script>
