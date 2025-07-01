@@ -70,8 +70,9 @@ export interface OptionsRow<T = undefined> {
   type?: Exclude<ButtonType, 'default' | 'text' | ''>
   /**
    * 表单子项的props  如 el-checkbox-group下的el-checkbox的props
+   * @version v0.1.25 新增函数类型支持 ((item: OptionsRow) => RecordType)
    */
-  fieldItemProps?: RecordType
+  fieldItemProps?: RecordType | ((item: OptionsRow) => RecordType)
   /**
    * el-checkbox-group下的，每一项el-checkbox的各自插槽(即el-checkbox的default插槽)。
    * el-radio-group下的，每一项el-checkbox的内容各自插槽(即el-radio的default插槽)。

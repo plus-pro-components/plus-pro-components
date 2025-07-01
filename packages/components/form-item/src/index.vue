@@ -84,7 +84,7 @@
           :key="item.label"
           :label="item.label"
           :value="item.value"
-          v-bind="item.fieldItemProps"
+          v-bind="isFunction(item.fieldItemProps) ? item.fieldItemProps(item) : item.fieldItemProps"
         >
           <template #default>
             <component :is="item.fieldSlot" v-if="isFunction(item.fieldSlot)" v-bind="item" />
@@ -445,7 +445,7 @@ const getChildrenProps = (item: OptionsRow) => {
           label: item.label,
           value: item.value
         }),
-    ...item.fieldItemProps
+    ...(isFunction(item.fieldItemProps) ? item.fieldItemProps(item) : item.fieldItemProps)
   }
 }
 
