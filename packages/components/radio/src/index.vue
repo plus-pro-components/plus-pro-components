@@ -11,8 +11,16 @@
         :key="`${item.label}${item.value}`"
         ref="radioInstance"
         :label="item.value"
-        v-bind="item.fieldItemProps"
-        @click="radioClick($event, item.value, item.fieldItemProps)"
+        v-bind="isFunction(item.fieldItemProps) ? item.fieldItemProps(item as unknown as OptionsRow ) : item.fieldItemProps"
+        @click="
+          radioClick(
+            $event,
+            item.value,
+            isFunction(item.fieldItemProps)
+              ? item.fieldItemProps(item as unknown as OptionsRow)
+              : item.fieldItemProps
+          )
+        "
         @change="change(item.value)"
       >
         <template #default>
@@ -41,8 +49,16 @@
         :key="`${item.label}${item.value}`"
         ref="radioInstance"
         :value="item.value"
-        v-bind="item.fieldItemProps"
-        @click="radioClick($event, item.value, item.fieldItemProps)"
+        v-bind="isFunction(item.fieldItemProps) ? item.fieldItemProps(item as unknown as OptionsRow ) : item.fieldItemProps"
+        @click="
+          radioClick(
+            $event,
+            item.value,
+            isFunction(item.fieldItemProps)
+              ? item.fieldItemProps(item as unknown as OptionsRow)
+              : item.fieldItemProps
+          )
+        "
         @change="change(item.value)"
       >
         <template #default>
@@ -116,12 +132,8 @@ watch(
 
 const attrs = useAttrs()
 
-const radioClick = (
-  e: MouseEvent,
-  val: ValueType | undefined,
-  fieldItemProps: OptionsRow['fieldItemProps']
-) => {
-  if (Reflect.has(attrs, 'disabled') || fieldItemProps?.disabled) {
+const radioClick = (e: MouseEvent, val: ValueType | undefined, fieldItemProps: RecordType) => {
+  if (Reflect.get(attrs, 'disabled') || fieldItemProps?.disabled) {
     return
   }
   if (!props.isCancel) {
