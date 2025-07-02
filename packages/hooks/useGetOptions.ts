@@ -39,8 +39,7 @@ export const getOptionsByOptionsMap = (options: OptionsRow[], props: PlusColumn)
       [label]: temp[label],
       [value]: temp[value]
     }
-    optionsMap.label && Reflect.deleteProperty(temp, label)
-    optionsMap.value && Reflect.deleteProperty(temp, value)
+
     return { ...temp, __origin, label: item[label], value: item[value] }
   })
 
