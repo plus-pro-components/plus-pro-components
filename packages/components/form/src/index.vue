@@ -38,7 +38,14 @@
             </slot>
           </template>
 
+          <slot
+            v-if="$slots[getSlotName('form-group', groupItem.name)]"
+            :name="getSlotName('form-group', groupItem.name)"
+            v-bind="groupItem"
+          />
+
           <PlusFormContent
+            v-else
             v-model="values"
             :row-props="rowProps"
             :col-props="colProps"
@@ -141,7 +148,8 @@ import {
   filterSlots,
   isArray,
   isPlainObject,
-  isFunction
+  isFunction,
+  getSlotName
 } from '@plus-pro-components/components/utils'
 import PlusFormContent from './form-content.vue'
 import type { PlusFormSelfProps, PlusFormEmits } from './type'
@@ -182,8 +190,8 @@ const { t } = useLocale()
 const formInstance = ref<FormInstance | null>(null)
 const values = ref<FieldValues>({})
 
-const filterHide = (columns: PlusColumn[]) => {
-  return columns.filter(item => unref(item.hideInForm) !== true)
+const filterHide = (columns?: PlusColumn[]) => {
+  return columns?.filter(item => unref(item.hideInForm) !== true) || []
 }
 const model = computed(() => values.value)
 const style = computed(() => ({
