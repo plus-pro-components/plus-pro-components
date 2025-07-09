@@ -42,6 +42,7 @@
             v-if="$slots[getSlotName('form-group', groupItem.name)]"
             :name="getSlotName('form-group', groupItem.name)"
             v-bind="groupItem"
+            :index="index"
           />
 
           <PlusFormContent
