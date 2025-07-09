@@ -5,6 +5,7 @@
     top="10vh"
     :title="t('plus.dialogForm.title')"
     v-bind="dialog"
+    @close="handleClose"
     @cancel="handleCancel"
     @confirm="handleConfirm"
   >
@@ -86,6 +87,7 @@ export interface PlusDialogFormEmits {
   (e: 'confirm', values: FieldValues): void
   (e: 'change', values: FieldValues, column: PlusColumn): void
   (e: 'cancel'): void
+  (e: 'close'): void
   (e: 'confirmError', errors: unknown): void
 }
 
@@ -172,6 +174,11 @@ const handleCancel = () => {
   subVisible.value = false
   emit('update:visible', subVisible.value)
   emit('cancel')
+}
+const handleClose = () => {
+  subVisible.value = false
+  emit('update:visible', subVisible.value)
+  emit('close')
 }
 
 defineExpose({
