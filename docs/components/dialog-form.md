@@ -57,12 +57,13 @@ dialog-form/custom-footer
 
 ## DialogForm Events
 
-| 名称                                  | 说明                             | 类型                                                                                        |
-| ------------------------------------- | -------------------------------- | ------------------------------------------------------------------------------------------- |
-| `confirm`                             | 点击确定按钮触发的事件           | `function` <docs-tip content='(values: FieldValues) => void'></docs-tip>                    |
-| `change`                              | 表单变化触发的事件               | `function` <docs-tip content='(values: FieldValues,column: PlusColumn) => void'></docs-tip> |
-| `cancel`                              | 点击取消按钮触发的事件           | `function` <docs-tip content='() => void'></docs-tip>                                       |
-| `submitError`<el-tag>v0.0.10</el-tag> | 点击提交按钮校验不通过触发的事件 | `function` <docs-tip content='(error:any) => void'></docs-tip>                              |
+| 名称                                  | 说明                                                                                       | 类型                                                                                        |
+| ------------------------------------- | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------- |
+| `confirm`                             | 点击确定按钮触发的事件                                                                     | `function` <docs-tip content='(values: FieldValues) => void'></docs-tip>                    |
+| `change`                              | 表单变化触发的事件                                                                         | `function` <docs-tip content='(values: FieldValues,column: PlusColumn) => void'></docs-tip> |
+| `cancel`                              | 点击取消按钮触发的事件                                                                     | `function` <docs-tip content='() => void'></docs-tip>                                       |
+| `close` <el-tag>v0.1.25</el-tag>      | [el-dialog](https://element-plus.org/zh-CN/component/dialog.html#attributes) 的`close`事件 | `function` <docs-tip content='() => void'></docs-tip>                                       |
+| `submitError`<el-tag>v0.0.10</el-tag> | 点击提交按钮校验不通过触发的事件                                                           | `function` <docs-tip content='(error:any) => void'></docs-tip>                              |
 
 ## DialogForm Slots
 
