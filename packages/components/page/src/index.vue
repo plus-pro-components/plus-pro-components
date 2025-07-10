@@ -13,6 +13,10 @@
         <template v-if="$slots['search-footer']" #footer="data">
           <slot name="search-footer" v-bind="data" />
         </template>
+
+        <template v-for="(_, key) in searchSlots" :key="key" #[key]="data">
+          <slot :name="key" v-bind="data" />
+        </template>
       </PlusSearch>
     </component>
 
@@ -41,21 +45,6 @@
         @paginationChange="handlePaginationChange"
         @refresh="handleRefresh"
       >
-        <!--表格单元格表头的插槽 -->
-        <template v-for="(_, key) in headerSlots" :key="key" #[key]="data">
-          <slot :name="key" v-bind="data" />
-        </template>
-
-        <!--表格单元格的插槽 -->
-        <template v-for="(_, key) in cellSlots" :key="key" #[key]="data">
-          <slot :name="key" v-bind="data" />
-        </template>
-
-        <!--表单单项的插槽 -->
-        <template v-for="(_, key) in fieldSlots" :key="key" #[key]="data">
-          <slot :name="key" v-bind="data" />
-        </template>
-
         <template v-if="$slots['table-title']" #title>
           <slot name="table-title" />
         </template>
@@ -76,41 +65,8 @@
           <slot name="table-empty" />
         </template>
 
-        <template v-if="$slots['pagination-left']" #pagination-left>
-          <slot name="pagination-left" />
-        </template>
-
-        <template v-if="$slots['pagination-right']" #pagination-right>
-          <slot name="pagination-right" />
-        </template>
-
-        <!-- 表格拖拽行 和 列设置里拖拽 icon -->
-        <template v-if="$slots['drag-sort-icon']" #drag-sort-icon>
-          <slot name="drag-sort-icon" />
-        </template>
-
-        <!-- 表格表头 列设置 icon   -->
-        <template v-if="$slots['column-settings-icon']" #column-settings-icon>
-          <slot name="column-settings-icon" />
-        </template>
-
-        <!-- 表表格表头 密度 icon  -->
-        <template v-if="$slots['density-icon']" #density-icon>
-          <slot name="density-icon" />
-        </template>
-
-        <!--table tooltip-icon  插槽 -->
-        <template v-if="$slots['tooltip-icon']" #tooltip-icon>
-          <slot name="tooltip-icon" />
-        </template>
-        <!--table 操作栏更多icon插槽 -->
-        <template v-if="$slots['action-bar-more-icon']" #action-bar-more-icon>
-          <slot name="action-bar-more-icon" />
-        </template>
-
-        <!--表格单元格编辑的插槽 -->
-        <template v-if="$slots['edit-icon']" #edit-icon>
-          <slot name="edit-icon" />
+        <template v-for="(_, key) in tableSlots" :key="key" #[key]="data">
+          <slot :name="key" v-bind="data" />
         </template>
       </PlusTable>
     </component>
@@ -130,17 +86,11 @@ import { PlusSearch } from '@plus-pro-components/components/search'
 import type { PlusTableProps, PlusTableInstance } from '@plus-pro-components/components/table'
 import { PlusTable } from '@plus-pro-components/components/table'
 import type { PlusPaginationProps } from '@plus-pro-components/components/pagination'
-import { h, ref, useSlots, computed } from 'vue'
+import { h, ref, computed, useSlots } from 'vue'
 import type { CardProps } from 'element-plus'
 import { ElCard, ElDivider } from 'element-plus'
 import { useTable } from '@plus-pro-components/hooks'
-import {
-  getTableCellSlotName,
-  getTableHeaderSlotName,
-  getFieldSlotName,
-  filterSlots,
-  isPlainObject
-} from '@plus-pro-components/components/utils'
+import { isPlainObject } from '@plus-pro-components/components/utils'
 import { DefaultPageInfo, DefaultPageSizeList } from '@plus-pro-components/constants'
 
 export interface PlusPageProps {
@@ -213,6 +163,13 @@ export interface PlusPageProps {
    * 可以修改默认的分页参数
    */
   pageInfoMap?: { page?: string; pageSize?: string }
+
+  /**
+   * 自定义的插槽是否对Search 组件提供，当启用时：自定义的插槽 对表格内的表单不生效
+   * @version v0.1.25
+   * @default false
+   */
+  searchSlot?: boolean
 }
 export interface PlusPageEmits {
   (e: 'search', data: FieldValues): void
@@ -254,31 +211,20 @@ const props = withDefaults(defineProps<PlusPageProps>(), {
   pageInfoMap: () => ({
     page: 'page',
     pageSize: 'pageSize'
-  })
+  }),
+  searchSlot: false
 })
 const emit = defineEmits<PlusPageEmits>()
-const slots = useSlots()
+
+const searchSlots = props.searchSlot ? useSlots() : {}
+const tableSlots = props.searchSlot ? {} : useSlots()
 
 const computedDefaultPageInfo = computed(() => props.defaultPageInfo)
 const computedDefaultPageSizeList = computed(() => props.defaultPageSizeList)
-
 const { tableData, pageInfo, total, loadingStatus } = useTable(computedDefaultPageInfo)
 const plusSearchInstance = ref<PlusSearchInstance | null>(null)
 const plusTableInstance = ref<PlusTableInstance | null>(null)
 const values = ref<FieldValues>({ ...(props.search as Partial<PlusSearchProps>)?.defaultValues })
-
-/**
- * 表格单元格的插槽
- */
-const cellSlots = filterSlots(slots, getTableCellSlotName())
-/**
- * 表格单元格表头的插槽
- */
-const headerSlots = filterSlots(slots, getTableHeaderSlotName())
-/**
- * 表单单项的插槽
- */
-const fieldSlots = filterSlots(slots, getFieldSlotName())
 
 /** 渲染包裹层 */
 const renderWrapper = () => {
