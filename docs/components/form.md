@@ -325,6 +325,18 @@ form/extra
 
 :::
 
+## 自定义表单上一行的内容
+
+<el-tag>v0.1.25</el-tag>
+
+支持 [renderPrevious](/components/config.html) 渲染函数，支持 jsx/tsx，支持插槽，插槽的生成规则就是 固定 key 值 [ **plus-previous-** ] 然后加上 配置项的 `prop`。
+
+:::demo
+
+form/previous
+
+:::
+
 ## 自定义表单每一项子项的内容
 
 <el-tag>v0.0.7</el-tag>
@@ -448,6 +460,7 @@ const handleValidate = (prop: FormItemProp, isValid: boolean, message: string) =
 | `plus-field-*`                               | 自定义表单项，组件会自动根据配置项的 `prop` 生成对应的插槽                                                                                               | `{prop,label,fieldProps,valueType,column}`                        |
 | `plus-label-*`                               | 自定义表单项 `label`，组件会自动根据配置项的 `prop` 生成对应的插槽                                                                                       | `{prop,label,fieldProps,valueType,column}`                        |
 | `plus-extra-*`                               | 自定义渲染[el-form-item](https://element-plus.org/zh-CN/component/form.html#formitem-api) 下一行额外的内容，组件会自动根据配置项的 `prop` 生成对应的插槽 | `{column}`                                                        |
+| `plus-previous-*` <el-tag>v0.1.25</el-tag>   | 自定义渲染[el-form-item](https://element-plus.org/zh-CN/component/form.html#formitem-api) 上一行额外的内容，组件会自动根据配置项的 `prop` 生成对应的插槽 | `{column}`                                                        |
 | `plus-form-group-*` <el-tag>v0.1.25</el-tag> | 分组表单自定义每一步内容，组件会自动根据分组表单`group`配置项的 `name` 生成对应的插槽                                                                    | `{title,columns,icon,index,name}`                                 |
 
 ## Exposes
