@@ -13,24 +13,8 @@
     :has-footer="false"
     @change="handleChange"
   >
-    <!--表单项label插槽 -->
-    <template v-for="(_, key) in labelSlots" :key="key" #[key]="data">
+    <template v-for="(_, key) in $slots" :key="key" #[key]="data">
       <slot :name="key" v-bind="data" />
-    </template>
-
-    <!--表单单项的插槽 -->
-    <template v-for="(_, key) in fieldSlots" :key="key" #[key]="data">
-      <slot :name="key" v-bind="data" />
-    </template>
-
-    <!--el-form-item 下一行额外的内容 的插槽 -->
-    <template v-for="(_, key) in extraSlots" :key="key" #[key]="data">
-      <slot :name="key" v-bind="data" />
-    </template>
-
-    <!--表单tooltip插槽 -->
-    <template v-if="$slots['tooltip-icon']" #tooltip-icon>
-      <slot name="tooltip-icon" />
     </template>
 
     <template #search-footer>
@@ -78,19 +62,13 @@
 import type { PlusFormInstance } from '@plus-pro-components/components/form'
 import { PlusForm } from '@plus-pro-components/components/form'
 import type { ComputedRef } from 'vue'
-import { ref, computed, watch, unref, useSlots, useAttrs } from 'vue'
+import { ref, computed, watch, unref, useAttrs } from 'vue'
 import { ArrowDown, ArrowUp, Search, RefreshRight } from '@element-plus/icons-vue'
 import type { PlusColumn, FieldValues } from '@plus-pro-components/types'
 import { useLocale } from '@plus-pro-components/hooks'
 import { ElFormItem, ElButton, ElIcon, ElLink } from 'element-plus'
 import { orderBy } from 'lodash-es'
-import {
-  getFieldSlotName,
-  getLabelSlotName,
-  getExtraSlotName,
-  filterSlots,
-  versionIsLessThan299
-} from '@plus-pro-components/components/utils'
+import { versionIsLessThan299 } from '@plus-pro-components/components/utils'
 import type { FormRules } from 'element-plus'
 import type { PlusSearchSelfProps as PlusSearchProps, PlusSearchEmits } from './type'
 
@@ -133,7 +111,7 @@ const plusFormInstance = ref<PlusFormInstance | null>()
 
 const isShowUnfold = ref<boolean>(props.defaultUnfold ?? false)
 const values = ref<FieldValues>({})
-const slots = useSlots()
+
 const attrs = useAttrs()
 const rules: ComputedRef<FormRules | undefined> = computed(() =>
   props.needValidate ? (attrs.rules as FormRules) : undefined
@@ -143,20 +121,6 @@ const unfoldText = computed(() =>
     ? props.retractText || t('plus.search.retract')
     : props.expandText || t('plus.search.expand')
 )
-
-/**
- * 表单label的插槽
- */
-const labelSlots = filterSlots(slots, getLabelSlotName())
-
-/*
- * 表单单项的插槽
- */
-const fieldSlots = filterSlots(slots, getFieldSlotName())
-/**
- * el-form-item 下一行额外的内容 的插槽
- */
-const extraSlots = filterSlots(slots, getExtraSlotName())
 
 const originData = computed<PlusColumn[]>(() => {
   const filterData = props.columns

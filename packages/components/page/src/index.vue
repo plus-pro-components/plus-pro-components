@@ -165,7 +165,7 @@ export interface PlusPageProps {
   pageInfoMap?: { page?: string; pageSize?: string }
 
   /**
-   * 自定义的插槽是否对Search 组件提供，当启用时：自定义的插槽 对表格内的表单不生效
+   * 自定义的插槽是否对 PlusSearch 组件提供。当启用时，自定义的插槽 PlusTable 内的表单不生效
    * @version v0.1.25
    * @default false
    */

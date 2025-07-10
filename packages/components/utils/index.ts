@@ -151,6 +151,12 @@ export const getLabelSlotName = (prop?: string | number) => {
 export const getExtraSlotName = (prop?: string | number) => {
   return `${getSlotName('extra', prop)}`
 }
+/**
+ *   处理form-item中的 previous slot名称
+ */
+export const getPreviousSlotName = (prop?: string | number) => {
+  return `${getSlotName('previous', prop)}`
+}
 
 /**
  * 处理table中的 header slot名称

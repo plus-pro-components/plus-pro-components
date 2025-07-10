@@ -109,34 +109,8 @@
             :table-data-length="tableDataLength"
             @formChange="handleFormChange"
           >
-            <!--表格单元格表头的插槽 -->
-            <template v-for="(_, key) in headerSlots" :key="key" #[key]="data">
+            <template v-for="(_, key) in $slots" :key="key" #[key]="data">
               <slot :name="key" v-bind="data" />
-            </template>
-
-            <!--表格单元格的插槽 -->
-            <template v-for="(_, key) in cellSlots" :key="key" #[key]="data">
-              <slot :name="key" v-bind="data" />
-            </template>
-
-            <!--表单单项的插槽 -->
-            <template v-for="(_, key) in fieldSlots" :key="key" #[key]="data">
-              <slot :name="key" v-bind="data" />
-            </template>
-
-            <!-- 表单el-form-item 下一行额外的内容 的插槽 -->
-            <template v-for="(_, key) in extraSlots" :key="key" #[key]="data">
-              <slot :name="key" v-bind="data" />
-            </template>
-
-            <!-- tooltip-icon  插槽 -->
-            <template v-if="$slots['tooltip-icon']" #tooltip-icon>
-              <slot name="tooltip-icon" />
-            </template>
-
-            <!--表格单元格编辑的插槽 -->
-            <template v-if="$slots['edit-icon']" #edit-icon>
-              <slot name="edit-icon" />
             </template>
           </PlusTableColumn>
         </slot>
@@ -192,7 +166,6 @@ import {
   ref,
   provide,
   shallowRef,
-  useSlots,
   unref,
   computed,
   onMounted,
@@ -221,15 +194,7 @@ import type {
   RecordType,
   FormFieldRefsType
 } from '@plus-pro-components/types'
-import {
-  getTableCellSlotName,
-  getTableHeaderSlotName,
-  getFieldSlotName,
-  getExtraSlotName,
-  filterSlots,
-  isSVGElement,
-  isPlainObject
-} from '@plus-pro-components/components/utils'
+import { isSVGElement, isPlainObject } from '@plus-pro-components/components/utils'
 import { debounce, isEqual } from 'lodash-es'
 import PlusTableActionBar from './table-action-bar.vue'
 import PlusTableColumn from './table-column.vue'
@@ -310,28 +275,6 @@ const __tableData = computed(() => cachedTableData.value)
 const tableDataLength = computed(() => __tableData.value.length)
 
 const hasAdaptive = computed(() => typeof props.height === 'undefined' && props.adaptive)
-
-const slots = useSlots()
-
-/**
- * 表格单元格的插槽
- */
-const cellSlots = filterSlots(slots, getTableCellSlotName())
-
-/**
- * 表格单元格表头的插槽
- */
-const headerSlots = filterSlots(slots, getTableHeaderSlotName())
-
-/**
- * 表单单项的插槽
- */
-const fieldSlots = filterSlots(slots, getFieldSlotName())
-
-/**
- * el-form-item 下一行额外的内容 的插槽
- */
-const extraSlots = filterSlots(slots, getExtraSlotName())
 
 /**
  * 表单的ref

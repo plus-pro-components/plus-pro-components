@@ -67,33 +67,8 @@
           :rest="{ column, ...rest }"
           @change="data => handleChange(data, $index, column, item, rest)"
         >
-          <!--表单单项的插槽 -->
-          <template
-            v-if="$slots[getFieldSlotName(item.prop)]"
-            #[getFieldSlotName(item.prop)]="data"
-          >
-            <slot :name="getFieldSlotName(item.prop)" v-bind="data" />
-          </template>
-
-          <!-- 表单el-form-item 下一行额外的内容 的插槽 -->
-          <template
-            v-if="$slots[getExtraSlotName(item.prop)]"
-            #[getExtraSlotName(item.prop)]="data"
-          >
-            <slot :name="getExtraSlotName(item.prop)" v-bind="data" />
-          </template>
-
-          <!--表格单元格的插槽 -->
-          <template
-            v-if="$slots[getTableCellSlotName(item.prop)]"
-            #[getTableCellSlotName(item.prop)]="data"
-          >
-            <slot :name="getTableCellSlotName(item.prop)" v-bind="data" />
-          </template>
-
-          <!--表格单元格编辑的插槽 -->
-          <template v-if="$slots['edit-icon']" #edit-icon>
-            <slot name="edit-icon" />
+          <template v-for="(_, key) in $slots" :key="key" #[key]="data">
+            <slot :name="key" v-bind="data" />
           </template>
         </PlusDisplayItem>
       </template>
@@ -108,10 +83,7 @@ import type { PlusColumn, RecordType } from '@plus-pro-components/types'
 import {
   getTooltip,
   getTableKey,
-  getTableCellSlotName,
   getTableHeaderSlotName,
-  getFieldSlotName,
-  getExtraSlotName,
   isFunction,
   getLabel
 } from '@plus-pro-components/components/utils'

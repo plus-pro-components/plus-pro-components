@@ -341,6 +341,32 @@ export interface FormColumnProps {
   renderExtra?: (column: PlusColumn) => RenderTypes
 
   /**
+   * @desc  渲染el-form-item 上一行的内容
+   * @version 0.1.25 新增
+   * @example
+   * ```ts
+   * import { ref, h } from 'vue'
+   * import { ElButton } from 'element-plus'
+   * import type { PlusColumn } from 'plus-pro-components'
+   *
+   * const columns: PlusColumn[] = [
+   *   {
+   *    label: '名称',
+   *    prop: 'name',
+   *    renderPrevious:() => 'renderPrevious'
+   *   },
+   *   {
+   *    label: '标签',
+   *    prop: 'tag',
+   *    renderPrevious: () => h(ElButton,'tag')
+   *   }
+   * ]
+   *
+   * ```
+   */
+  renderPrevious?: (column: PlusColumn) => RenderTypes
+
+  /**
    * @desc 表单（表格）单个项目的插槽，支持类似el-input，el-select， el-image ，el-link等所有表单（表格）单项的插槽
    * @example
    * ```ts

@@ -29,24 +29,8 @@
         <slot name="form-group-header" v-bind="data" />
       </template>
 
-      <!--表单项label插槽 -->
-      <template v-for="(_, key) in labelSlots" :key="key" #[key]="data">
+      <template v-for="(_, key) in $slots" :key="key" #[key]="data">
         <slot :name="key" v-bind="data" />
-      </template>
-
-      <!--表单单项的插槽 -->
-      <template v-for="(_, key) in fieldSlots" :key="key" #[key]="data">
-        <slot :name="key" v-bind="data" />
-      </template>
-
-      <!--el-form-item 下一行额外的内容 的插槽 -->
-      <template v-for="(_, key) in extraSlots" :key="key" #[key]="data">
-        <slot :name="key" v-bind="data" />
-      </template>
-
-      <!--表单tooltip插槽 -->
-      <template v-if="$slots['tooltip-icon']" #tooltip-icon>
-        <slot name="tooltip-icon" />
       </template>
     </PlusForm>
 
@@ -66,20 +50,14 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, watch, computed, useSlots } from 'vue'
+import { ref, watch, computed } from 'vue'
 import { PlusForm } from '@plus-pro-components/components/form'
 import type { PlusFormProps, PlusFormInstance } from '@plus-pro-components/components/form'
 import type { FieldValues, Mutable, PlusColumn, RecordType } from '@plus-pro-components/types'
 import type { FormInstance, DrawerProps } from 'element-plus'
 import { ElDrawer, ElMessage, ElButton } from 'element-plus'
 import { useLocale } from '@plus-pro-components/hooks'
-import {
-  getFieldSlotName,
-  getLabelSlotName,
-  getExtraSlotName,
-  filterSlots,
-  isPlainObject
-} from '@plus-pro-components/components/utils'
+import { isPlainObject } from '@plus-pro-components/components/utils'
 
 export interface PlusDrawerFormProps {
   modelValue?: FieldValues
@@ -132,21 +110,6 @@ const computedFormInstance = computed(() => formInstance.value?.formInstance as 
 const drawerInstance = ref<InstanceType<typeof ElDrawer>>()
 const state = ref<FieldValues>({})
 const subVisible = ref(false)
-const slots = useSlots()
-
-/**
- * 表单label的插槽
- */
-const labelSlots = filterSlots(slots, getLabelSlotName())
-
-/*
- * 表单单项的插槽
- */
-const fieldSlots = filterSlots(slots, getFieldSlotName())
-/**
- * el-form-item 下一行额外的内容 的插槽
- */
-const extraSlots = filterSlots(slots, getExtraSlotName())
 
 watch(
   () => props.visible,
