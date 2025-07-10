@@ -5,6 +5,24 @@
       :collapse-transition="collapseTransition"
     >
       <el-col v-for="item in columns" :key="item.prop" v-bind="item.colProps || colProps">
+        <!-- el-form-item上一行的内容 -->
+        <div
+          v-if="item.renderPrevious || $slots[getPreviousSlotName(item.prop)]"
+          class="plus-form-item-previous"
+        >
+          <component
+            :is="item.renderPrevious"
+            v-if="isFunction(item.renderPrevious)"
+            v-bind="item"
+          />
+
+          <slot
+            v-else-if="$slots[getPreviousSlotName(item.prop)]"
+            :name="getPreviousSlotName(item.prop)"
+            v-bind="item"
+          />
+        </div>
+
         <PlusFormItem
           :model-value="getModelValue(item.prop)"
           v-bind="item"
@@ -70,6 +88,7 @@ import {
   getLabelSlotName,
   getFieldSlotName,
   getExtraSlotName,
+  getPreviousSlotName,
   isFunction,
   getValue,
   setValue,
