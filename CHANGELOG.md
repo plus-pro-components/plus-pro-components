@@ -1,3 +1,24 @@
+## [v0.1.25](https://github.com/plus-pro-components/plus-pro-components/compare/v0.1.24...v0.1.25) (2025-07-11)
+
+### ✨ Features
+
+- **components:** :sparkles: plus-page add 'search-slot' props([edb7e20](https://github.com/plus-pro-components/plus-pro-components/commit/edb7e20)) by@xiaofei
+- **component:** :sparkles: form add previous custom slot and function([8806434](https://github.com/plus-pro-components/plus-pro-components/commit/8806434)) by@xiaofei
+- **components:** :sparkles: plus-form plus-form-group-\* slot add 'index' slot scoped params([401d7e6](https://github.com/plus-pro-components/plus-pro-components/commit/401d7e6)) by@xiaofei
+- **components:** :sparkles: plus-form add plus-form-group-\* slot([040766f](https://github.com/plus-pro-components/plus-pro-components/commit/040766f)) by@xiaofei
+- **components:** :sparkles: plusDialogForm add 'close' event([6bd8b51](https://github.com/plus-pro-components/plus-pro-components/commit/6bd8b51)) by@xiaofei
+- **components:** :sparkles: plusRadio Options['fieldItemProps'] add function type([1fa75fd](https://github.com/plus-pro-components/plus-pro-components/commit/1fa75fd)) by@xiaofei
+- **components:** :sparkles: OptionsRow['fieldItemProps'] add function type([bd7e5c1](https://github.com/plus-pro-components/plus-pro-components/commit/bd7e5c1)) by@xiaofei
+
+### 🐛 Bug Fixes
+
+- **hooks:** :bug: fix optionsMap invalid([c8cc025](https://github.com/plus-pro-components/plus-pro-components/commit/c8cc025)) by@xiaofei
+
+### ♻️ Code Refactoring
+
+- **components:** :recycle: refactor slots([9918194](https://github.com/plus-pro-components/plus-pro-components/commit/9918194)) by@xiaofei
+- **components:** :recycle: rmeove slots filter([61481ed](https://github.com/plus-pro-components/plus-pro-components/commit/61481ed)) by@xiaofei
+
 ## [v0.1.24](https://github.com/plus-pro-components/plus-pro-components/compare/v0.1.23...v0.1.24) (2025-06-19)
 
 ### ✨ Features
