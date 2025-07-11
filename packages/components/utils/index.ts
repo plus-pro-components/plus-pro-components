@@ -157,6 +157,12 @@ export const getExtraSlotName = (prop?: string | number) => {
 export const getPreviousSlotName = (prop?: string | number) => {
   return `${getSlotName('previous', prop)}`
 }
+/**
+ *   处理form中的 每一步分组的 slot名称
+ */
+export const getFormGroupSlotName = (prop?: string | number) => {
+  return `${getSlotName('group', prop)}`
+}
 
 /**
  * 处理table中的 header slot名称

@@ -28,6 +28,14 @@
       >
         <slot :name="getExtraSlotName(column.prop)" v-bind="scoped" />
       </template>
+
+      <!-- 表单el-form-item 上一行的内容 的插槽 -->
+      <template
+        v-if="$slots[getPreviousSlotName(column.prop)]"
+        #[getPreviousSlotName(column.prop)]="scoped"
+      >
+        <slot :name="getPreviousSlotName(column.prop)" v-bind="scoped" />
+      </template>
     </PlusForm>
   </template>
 
@@ -196,6 +204,7 @@ import {
   getTableCellSlotName,
   getFieldSlotName,
   getExtraSlotName,
+  getPreviousSlotName,
   getValue,
   setValue
 } from '@plus-pro-components/components/utils'

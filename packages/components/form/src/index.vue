@@ -39,8 +39,8 @@
           </template>
 
           <slot
-            v-if="$slots[getSlotName('form-group', groupItem.name)]"
-            :name="getSlotName('form-group', groupItem.name)"
+            v-if="$slots[getFormGroupSlotName(groupItem.name)]"
+            :name="getFormGroupSlotName(groupItem.name)"
             v-bind="groupItem"
             :index="index"
           />
@@ -109,7 +109,7 @@ import {
   isArray,
   isPlainObject,
   isFunction,
-  getSlotName
+  getFormGroupSlotName
 } from '@plus-pro-components/components/utils'
 import PlusFormContent from './form-content.vue'
 import type { PlusFormSelfProps, PlusFormEmits } from './type'

@@ -24,7 +24,7 @@
 
     <slot name="extra" />
 
-    <component :is="renderWrapper().table" class="plus-page__table_wrapper">
+    <component :is="renderWrapper().table" :key="searchSlot" class="plus-page__table_wrapper">
       <PlusTable
         ref="plusTableInstance"
         :title-bar="{ refresh: true }"
@@ -90,7 +90,13 @@ import { h, ref, computed, useSlots } from 'vue'
 import type { CardProps } from 'element-plus'
 import { ElCard, ElDivider } from 'element-plus'
 import { useTable } from '@plus-pro-components/hooks'
-import { isPlainObject } from '@plus-pro-components/components/utils'
+import {
+  isPlainObject,
+  getFieldSlotName,
+  getLabelSlotName,
+  getExtraSlotName,
+  getPreviousSlotName
+} from '@plus-pro-components/components/utils'
 import { DefaultPageInfo, DefaultPageSizeList } from '@plus-pro-components/constants'
 
 export interface PlusPageProps {
@@ -216,8 +222,31 @@ const props = withDefaults(defineProps<PlusPageProps>(), {
 })
 const emit = defineEmits<PlusPageEmits>()
 
-const searchSlots = props.searchSlot ? useSlots() : {}
-const tableSlots = props.searchSlot ? {} : useSlots()
+const formSlotList = [
+  getFieldSlotName(),
+  getLabelSlotName(),
+  getExtraSlotName(),
+  getPreviousSlotName()
+]
+
+const slots = useSlots()
+
+const group = computed(() => {
+  const formSlots = {}
+  const otherSlots = {}
+  Object.keys(slots).forEach(key => {
+    const has = formSlotList.some(i => key.includes(i))
+    if (has) {
+      formSlots[key] = slots[key]
+    } else {
+      otherSlots[key] = slots[key]
+    }
+  })
+  return { formSlots, otherSlots }
+})
+
+const searchSlots = computed(() => (props.searchSlot ? group.value.formSlots : {}))
+const tableSlots = computed(() => (props.searchSlot ? group.value.otherSlots : slots))
 
 const computedDefaultPageInfo = computed(() => props.defaultPageInfo)
 const computedDefaultPageSizeList = computed(() => props.defaultPageSizeList)
