@@ -9,7 +9,7 @@
       @submit-error="handleSubmitError"
       @reset="handleReset"
     >
-      <template #plus-form-group-one="scoped">
+      <template #plus-group-one="scoped">
         【{{ scoped.index }}】 自定义 {{ scoped.title }} 内容 【{{ scoped.name }}】
       </template>
     </PlusForm>
@@ -50,9 +50,9 @@ const group: PlusFormGroupRow[] = [
   {
     title: '第一分组',
     icon: CreditCard,
-    // 自动生成 plus-form-group-one 插槽，v0.1.25 新增
+    // 自动生成 plus-group-one 插槽，v0.1.25 新增
     name: 'one',
-    // 当plus-form-group-one 插槽存在时，这里的配置将不会生效
+    // 当plus-group-one 插槽存在时，这里的配置将不会生效
     columns: [
       {
         label: '名称',

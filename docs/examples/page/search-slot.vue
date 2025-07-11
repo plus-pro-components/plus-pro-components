@@ -1,35 +1,54 @@
 <template>
   <div>
-    <el-row style="margin-bottom: 10px">
-      <el-button @click="setSearchFieldsValue">设置搜索值</el-button>
-      <el-button @click="getSearchFieldsValue"> 获取搜索值</el-button>
-      <el-button @click="clearSearchFieldsValue">清空搜索值</el-button>
+    <el-row style="margin-bottom: 20px">
+      <el-text style="margin-right: 10px">表单插槽作用于 </el-text>
+
+      <el-radio-group v-model="searchSlot">
+        <el-radio value="search">search 搜索 </el-radio>
+        <el-radio value="table">table 表格</el-radio>
+      </el-radio-group>
     </el-row>
 
-    <PlusPage ref="plusPageInstance" :columns="tableConfig" :request="getList" />
+    <PlusPage
+      :columns="tableConfig"
+      :request="getList"
+      :is-card="false"
+      :search-slot="searchSlot === 'search'"
+      :table="{ editable: true }"
+      :search="{ hasUnfold: false, labelWidth: 'auto' }"
+      :divider-prop="{ isShow: true, style: { margin: '10px 0' } }"
+    >
+      <template #plus-previous-name>上一行 </template>
+      <template #plus-field-name>
+        <el-input v-model="state" placeholder="自定义搜索内容" />
+      </template>
+      <template #plus-label-name="scoped"> 自定义搜索 {{ scoped.label }} </template>
+      <template #plus-extra-name>下一行 </template>
+
+      <!-- table 的插槽 依然作用于 PlusTable -->
+      <template #table-append> <div style="text-align: center">末尾的</div> </template>
+    </PlusPage>
   </div>
 </template>
 
 <script lang="ts" setup>
-/* eslint-disable  @typescript-eslint/ban-ts-comment */
-import type { PlusColumn, PageInfo, PlusPageInstance } from 'plus-pro-components'
-import { ElButton, ElMessage } from 'element-plus'
 import { ref } from 'vue'
+import type { PlusColumn, PageInfo } from 'plus-pro-components'
 
-const plusPageInstance = ref<PlusPageInstance | null>()
-
+const state = ref('')
+const searchSlot = ref('search')
 const getList = async (
-  query: Partial<PageInfo> & {
+  query: PageInfo & {
     status?: string
     name?: string
   }
 ) => {
   const { page = 1, pageSize = 20, status, name } = query || {}
-  const total = 1000
+  const total = 5
   const List = Array.from({ length: total }).map((item, index) => {
     return {
       id: index,
-      name: index === 0 ? 'name'.repeat(20) : index + 'name',
+      name: index + 'name',
       status: String(index % 3),
       tag: index === 1 ? 'success' : index === 2 ? 'warning' : index === 3 ? 'info' : 'danger',
       progress: 10,
@@ -37,6 +56,11 @@ const getList = async (
       switch: index % 2 === 0 ? true : false,
       img: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
       time: new Date(),
+      code: `
+          const getData = async params => {
+            const data = await getData(params)
+            return { list: data.data, ...data }
+          }`,
       custom: 'custom' + index
     }
   })
@@ -69,18 +93,15 @@ const getList = async (
 const tableConfig: PlusColumn[] = [
   {
     label: '名称',
-    tooltip: '名称最多显示6个字符',
-    width: 120,
-    prop: 'name',
-    tableColumnProps: {
-      showOverflowTooltip: true
-    }
+    width: 160,
+    prop: 'name'
   },
   {
     label: '状态',
     width: 120,
     prop: 'status',
     valueType: 'select',
+    hideInSearch: true,
     options: [
       {
         label: '未解决',
@@ -108,12 +129,20 @@ const tableConfig: PlusColumn[] = [
     label: '标签',
     width: 120,
     prop: 'tag',
+    hideInSearch: true,
     valueType: 'tag',
     fieldProps: (value: string) => {
       return { type: value }
     }
   },
 
+  {
+    label: '代码块',
+    width: 250,
+    prop: 'code',
+    hideInSearch: true,
+    valueType: 'code'
+  },
   {
     label: '评分',
     width: 200,
@@ -130,41 +159,12 @@ const tableConfig: PlusColumn[] = [
     valueType: 'switch',
     editable: true
   },
+
   {
     label: '时间',
     prop: 'time',
     valueType: 'date-picker',
-    hideInForm: true
+    hideInSearch: true
   }
 ]
-
-/**
- * 设置搜索值
- */
-const setSearchFieldsValue = () => {
-  // @ts-ignore
-  plusPageInstance.value?.setSearchFieldsValue({ name: '小明', status: '0' })
-}
-
-/**
- * 获取搜索值
- */
-const getSearchFieldsValue = () => {
-  //  不传参数就是获取所有值，返回一个对象
-  // @ts-ignore
-  const values = plusPageInstance.value?.getSearchFieldsValue()
-  ElMessage.info(JSON.stringify(values))
-
-  //  传参数就是获取当前key所对应的值，返回一个值
-  // @ts-ignore
-  const name = plusPageInstance.value?.getSearchFieldsValue('name')
-  ElMessage.info(name as string)
-}
-/**
- * 清空搜索值
- */
-const clearSearchFieldsValue = () => {
-  // @ts-ignore
-  plusPageInstance.value?.clearSearchFieldsValue()
-}
 </script>

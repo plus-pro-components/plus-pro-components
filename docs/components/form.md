@@ -109,7 +109,7 @@ form/group
 
 :::
 
-## 动态分组表单
+## 分组表单动态隐藏
 
 <el-tag>v0.1.4</el-tag>
 
@@ -135,21 +135,11 @@ form/group-header
 
 <el-tag>v0.1.25</el-tag>
 
-[PlusFormGroupRow](/components/type.html#plusformgrouprow) 新增`value`属性，`PlusForm` 组件会自动根据 `group` 配置项的 `name` 生成对应的插槽，例如下面的配置项，则会自动生成名称叫做 [ **plus-form-group-`one`** ]的个插槽，插槽的生成规则就是 固定 key 值 [ **plus-form-group-** ] 然后加上`group`配置项的 `name`。
+[PlusFormGroupRow](/components/type.html#plusformgrouprow) 新增`value`属性，`PlusForm` 组件会自动根据 `group` 配置项的 `name` 生成对应的插槽，例如下面的配置项，则会自动生成名称叫做 [ **plus-group-`one`** ]的个插槽，插槽的生成规则就是 固定 key 值 [ **plus-group-** ] 然后加上`group`配置项的 `name`。
 
 :::demo
 
 form/form-group-slot
-
-:::
-
-## 自定义表单底部按钮
-
-组件提供 `footer` 插槽可以自定义表单底部，并提供默认的 **提交**方法、**重置**方法 的作用域插槽参数 `{handleSubmit,handleReset}`。
-
-:::demo
-
-form/custom-footer
 
 :::
 
@@ -177,6 +167,16 @@ valueType 的值对应的组件本身没有插槽时，`fieldSlots`不生效。
 :::demo
 
 form/field-slots
+
+:::
+
+## 自定义表单底部按钮
+
+组件提供 `footer` 插槽可以自定义表单底部，并提供默认的 **提交**方法、**重置**方法 的作用域插槽参数 `{handleSubmit,handleReset}`。
+
+:::demo
+
+form/custom-footer
 
 :::
 
@@ -451,17 +451,17 @@ const handleValidate = (prop: FormItemProp, isValid: boolean, message: string) =
 
 ## Form Slots
 
-| 插槽名                                       | 说明                                                                                                                                                     | 作用域插槽参数                                                    |
-| -------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------- |
-| `default`                                    | 表单的内容 默认是 `PlusFormItem` 组件                                                                                                                    |                                                                   |
-| `footer`                                     | 表单底部按钮                                                                                                                                             | `{handleReset,handleSubmit}`                                      |
-| `tooltip-icon`<el-tag>v0.0.3</el-tag>        | tooltip icon                                                                                                                                             |                                                                   |
-| `group-header`                               | 分组表单头部，配置 `group` 字段时生效。                                                                                                                  | `{title,columns,icon,index}` <el-tag>v0.1.17</el-tag> 新增`index` |
-| `plus-field-*`                               | 自定义表单项，组件会自动根据配置项的 `prop` 生成对应的插槽                                                                                               | `{prop,label,fieldProps,valueType,column}`                        |
-| `plus-label-*`                               | 自定义表单项 `label`，组件会自动根据配置项的 `prop` 生成对应的插槽                                                                                       | `{prop,label,fieldProps,valueType,column}`                        |
-| `plus-extra-*`                               | 自定义渲染[el-form-item](https://element-plus.org/zh-CN/component/form.html#formitem-api) 下一行额外的内容，组件会自动根据配置项的 `prop` 生成对应的插槽 | `{column}`                                                        |
-| `plus-previous-*` <el-tag>v0.1.25</el-tag>   | 自定义渲染[el-form-item](https://element-plus.org/zh-CN/component/form.html#formitem-api) 上一行额外的内容，组件会自动根据配置项的 `prop` 生成对应的插槽 | `{column}`                                                        |
-| `plus-form-group-*` <el-tag>v0.1.25</el-tag> | 分组表单自定义每一步内容，组件会自动根据分组表单`group`配置项的 `name` 生成对应的插槽                                                                    | `{title,columns,icon,index,name}`                                 |
+| 插槽名                                     | 说明                                                                                                                                                     | 作用域插槽参数                                                    |
+| ------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------- |
+| `default`                                  | 表单的内容 默认是 `PlusFormItem` 组件                                                                                                                    |                                                                   |
+| `footer`                                   | 表单底部按钮                                                                                                                                             | `{handleReset,handleSubmit}`                                      |
+| `tooltip-icon`<el-tag>v0.0.3</el-tag>      | tooltip icon                                                                                                                                             |                                                                   |
+| `group-header`                             | 分组表单头部，配置 `group` 字段时生效。                                                                                                                  | `{title,columns,icon,index}` <el-tag>v0.1.17</el-tag> 新增`index` |
+| `plus-field-*`                             | 自定义表单项，组件会自动根据配置项的 `prop` 生成对应的插槽                                                                                               | `{prop,label,fieldProps,valueType,column}`                        |
+| `plus-label-*`                             | 自定义表单项 `label`，组件会自动根据配置项的 `prop` 生成对应的插槽                                                                                       | `{prop,label,fieldProps,valueType,column}`                        |
+| `plus-extra-*`                             | 自定义渲染[el-form-item](https://element-plus.org/zh-CN/component/form.html#formitem-api) 下一行额外的内容，组件会自动根据配置项的 `prop` 生成对应的插槽 | `{column}`                                                        |
+| `plus-previous-*` <el-tag>v0.1.25</el-tag> | 自定义渲染[el-form-item](https://element-plus.org/zh-CN/component/form.html#formitem-api) 上一行额外的内容，组件会自动根据配置项的 `prop` 生成对应的插槽 | `{column}`                                                        |
+| `plus-group-*` <el-tag>v0.1.25</el-tag>    | 分组表单自定义每一步内容，组件会自动根据分组表单`group`配置项的 `name` 生成对应的插槽                                                                    | `{title,columns,icon,index,name}`                                 |
 
 ## Exposes
 
