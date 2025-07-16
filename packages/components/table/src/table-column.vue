@@ -144,12 +144,13 @@ const setFormRef = () => {
 }
 
 watch(
-  () => props.tableDataLength,
+  () => [props.tableDataLength, plusDisplayItemInstance.value],
   () => {
     setFormRef()
   },
   {
-    flush: 'post'
+    flush: 'post',
+    immediate: true
   }
 )
 
