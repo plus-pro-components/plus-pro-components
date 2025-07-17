@@ -1,3 +1,10 @@
+## [v0.1.26](https://github.com/plus-pro-components/plus-pro-components/compare/v0.1.25...v0.1.26) (2025-07-17)
+
+### 🐛 Bug Fixes
+
+- **theme-chalk:** :bug: fix Global built-in functions are deprecated Sass 3.0.0([68eb0a4](https://github.com/plus-pro-components/plus-pro-components/commit/68eb0a4)) by@xiaofei
+- **components:** :bug: fix formRefs is undefined([8aefd84](https://github.com/plus-pro-components/plus-pro-components/commit/8aefd84)) by@xiaofei
+
 ## [v0.1.25](https://github.com/plus-pro-components/plus-pro-components/compare/v0.1.24...v0.1.25) (2025-07-11)
 
 ### ✨ Features
