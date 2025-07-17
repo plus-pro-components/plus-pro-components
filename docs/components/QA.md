@@ -131,3 +131,65 @@ const columns: PlusColumn[] = [
   }
 ]
 ```
+
+## 表单中的某项如何添加 ref 获取实例，使用实例的方法？
+
+```vue {15,50-52}
+<template>
+  <el-card>
+    <PlusForm v-model="state" label-width="140px" :columns="columns" />
+  </el-card>
+</template>
+
+<script lang="ts" setup>
+import { ref, watch } from 'vue'
+import type { PlusColumn, FieldValues } from 'plus-pro-components'
+
+const state = ref<FieldValues>({
+  'tree-select': ''
+})
+
+const treeSelectInstance = ref()
+
+watch(treeSelectInstance, val => {
+  console.log(val, 'val')
+})
+
+const cascaderOptions = [
+  {
+    value: '0',
+    label: '陕西',
+    children: [
+      {
+        value: '0-0',
+        label: '西安',
+        children: [
+          {
+            value: '0-0-0',
+            label: '新城区'
+          },
+          {
+            value: '0-0-1',
+            label: '高新区'
+          }
+        ]
+      }
+    ]
+  }
+]
+
+const columns: PlusColumn[] = [
+  {
+    label: 'tree-select',
+    prop: 'tree-select',
+    valueType: 'tree-select',
+    fieldProps: {
+      ref: e => {
+        treeSelectInstance.value = e
+      },
+      data: cascaderOptions
+    }
+  }
+]
+</script>
+```
