@@ -187,6 +187,7 @@ import Sortable from 'sortablejs'
 import type { TitleBar, ColumnSetting, FilterTableHeaderEventType } from './type'
 
 export interface PlusTableToolbarProps {
+  originColumns?: PlusColumn[]
   columns?: PlusColumn[]
   titleBar?: boolean | Partial<TitleBar>
   defaultSize?: ComponentSize
@@ -212,6 +213,7 @@ defineOptions({
 })
 
 const props = withDefaults(defineProps<PlusTableToolbarProps>(), {
+  originColumns: () => [],
   columns: () => [],
   titleBar: true,
   defaultSize: 'default',
@@ -357,11 +359,11 @@ const handleDragEnd = (event: SortableEvent) => {
 
 // 重置
 const resetCheckBoxList = () => {
-  state.checkList = props.columns
+  state.checkList = props.originColumns
     .filter(item => unref(item.headerIsChecked) !== false)
     .map(item => getTableKey(item))
   setCheckAllState(state.checkList)
-  const filterColumns = props.columns.map(item => ({ ...item }))
+  const filterColumns = props.originColumns.map(item => ({ ...item }))
   emit('filterTableHeader', filterColumns, 'reset')
 }
 

@@ -2,6 +2,7 @@
   <div ref="tableWrapperInstance" class="plus-table">
     <PlusTableTitleBar
       v-if="titleBar"
+      :origin-columns="columns"
       :columns="filterColumns"
       :default-size="size"
       :columns-is-change="columnsIsChange"
