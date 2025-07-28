@@ -19,9 +19,15 @@ import type {
   CSSProperties
 } from 'vue'
 import type { Options as SortableOptions } from 'sortablejs'
-import type { Mutable } from 'element-plus/es/utils'
 import type { PlusPaginationProps } from '@plus-pro-components/components/pagination'
-import type { RecordType, PageInfo, FieldValueType, PlusColumn } from '@plus-pro-components/types'
+import type {
+  RecordType,
+  PageInfo,
+  FieldValueType,
+  PlusColumn,
+  Mutable,
+  IntrinsicAttributes
+} from '@plus-pro-components/types'
 import type { ComponentSize } from 'element-plus/es/constants'
 import type { PlusRadioProps } from '@plus-pro-components/components/radio'
 
@@ -29,8 +35,15 @@ import type { PlusRadioProps } from '@plus-pro-components/components/radio'
  * 按钮属性的类型
  */
 export type ButtonRowProps = Partial<
-  Mutable<ButtonProps & LinkProps & IconProps & { [index: string]: any }>
+  Mutable<ButtonProps & LinkProps & IconProps & IntrinsicAttributes>
 >
+
+/**
+ * 表格列配置项的值的类型
+ * @version v0.1.27
+ */
+export type TableColumn = Partial<TableColumnCtx<RecordType>>
+
 /**
  * 表格操作栏按钮配置项的值的类型
  */
@@ -115,7 +128,7 @@ export interface ActionBarButtonsRow {
          *  @version v0.1.17
          * @see https://element-plus.org/zh-CN/component/popconfirm.html#attributes
          */
-        popconfirmProps?: Partial<Mutable<PopconfirmProps>>
+        popconfirmProps?: Partial<Mutable<PopconfirmProps> & IntrinsicAttributes>
         /**
          *  ElMessageBox.confirm 的appContext
          */
@@ -352,7 +365,7 @@ export interface FormChangeCallBackParams extends TableCellParams {
   /**
    * 表格操作栏 el-table-column 的其他props   默认值为 `{}`
    */
-  actionBarTableColumnProps?: Partial<TableColumnCtx<RecordType>>
+  actionBarTableColumnProps?: TableColumn
   /**
    * 表格操作栏 需要二次确认的类型，默认是 messageBox
    * @version v0.1.17
@@ -383,7 +396,7 @@ export type ColumnSetting = {
    * @version v0.1.20
    * @default true
    */
-  reset?: boolean | Partial<Mutable<LinkProps>>
+  reset?: boolean | Partial<Mutable<LinkProps> & IntrinsicAttributes>
   /**
    * 列设置popover的宽度
    * @version v0.1.23
@@ -478,26 +491,26 @@ export type PlusTableSelfProps = {
   rowKey?: TableProps<any[]>['rowKey']
   /** sortablejs配置 */
   dragSortable?: false | Partial<SortableOptions>
-  dragSortableTableColumnProps?: Partial<TableColumnCtx<any>>
-  indexTableColumnProps?: Partial<TableColumnCtx<any>>
-  selectionTableColumnProps?: Partial<TableColumnCtx<any>>
+  dragSortableTableColumnProps?: TableColumn
+  indexTableColumnProps?: TableColumn
+  selectionTableColumnProps?: TableColumn
   /**
    * 单选框的表格列配置
    * @version 0.1.23
    */
-  radioTableColumnProps?: Partial<TableColumnCtx<any>>
+  radioTableColumnProps?: TableColumn
   /**
    *  单选框的props  (plus-radio)
    * @version 0.1.23
    * @see https://plus-pro-components.com/components/radio.html#radio-attributes
    */
-  radioProps?: Partial<PlusRadioProps>
+  radioProps?: Partial<PlusRadioProps & IntrinsicAttributes>
   /**
    * 默认选择的单选框值，对应表格某一行的数据
    * @version 0.1.23
    */
   defaultSelectedRadioRow?: RecordType | ComputedRef<RecordType>
-  expandTableColumnProps?: Partial<TableColumnCtx<any>>
+  expandTableColumnProps?: TableColumn
   indexContentStyle?:
     | Partial<CSSProperties>
     | ((row: RecordType, index: number) => Partial<CSSProperties>)

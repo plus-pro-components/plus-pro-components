@@ -78,8 +78,9 @@ import type {
   PlusColumn,
   PageInfo,
   RecordType,
-  Mutable,
-  FieldValues
+  FieldValues,
+  PlusCardProps,
+  IntrinsicAttributes
 } from '@plus-pro-components/types'
 import type { PlusSearchProps, PlusSearchInstance } from '@plus-pro-components/components/search'
 import { PlusSearch } from '@plus-pro-components/components/search'
@@ -87,7 +88,6 @@ import type { PlusTableProps, PlusTableInstance } from '@plus-pro-components/com
 import { PlusTable } from '@plus-pro-components/components/table'
 import type { PlusPaginationProps } from '@plus-pro-components/components/pagination'
 import { h, ref, computed, useSlots } from 'vue'
-import type { CardProps } from 'element-plus'
 import { ElCard, ElDivider } from 'element-plus'
 import { useTable } from '@plus-pro-components/hooks'
 import {
@@ -119,11 +119,11 @@ export interface PlusPageProps {
   /**
    * PlusSearchProps
    */
-  search?: false | Partial<PlusSearchProps>
+  search?: false | Partial<PlusSearchProps & IntrinsicAttributes>
   /**
    * PlusTableProps
    */
-  table?: Partial<PlusTableProps>
+  table?: Partial<PlusTableProps & IntrinsicAttributes>
 
   /**
    * request的 params 其他参数，默认会带pageSize，page和 PlusSearch组件中的值
@@ -148,11 +148,11 @@ export interface PlusPageProps {
   /**
    * 搜索外层的el-card的props ，当isCard为true时生效
    */
-  searchCardProps?: Partial<Mutable<CardProps>>
+  searchCardProps?: PlusCardProps
   /**
    *   表格外层的el-card的props ，当isCard为true时生效
    */
-  tableCardProps?: Partial<Mutable<CardProps>>
+  tableCardProps?: PlusCardProps
   defaultPageInfo?: PageInfo
   defaultPageSizeList?: number[]
   pagination?: false | Omit<PlusPaginationProps, 'total' | 'modelValue' | 'pageSizeList'>

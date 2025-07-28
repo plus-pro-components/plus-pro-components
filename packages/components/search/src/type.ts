@@ -1,7 +1,10 @@
-import type { PlusColumn, FieldValues, Mutable } from '@plus-pro-components/types'
+import type {
+  PlusColumn,
+  FieldValues,
+  PlusColProps,
+  PlusRowProps
+} from '@plus-pro-components/types'
 import type { PlusFormProps } from '@plus-pro-components/components'
-
-import type { RowProps, ColProps } from 'element-plus'
 
 export type PlusSearchSelfProps = {
   modelValue?: FieldValues
@@ -24,8 +27,8 @@ export type PlusSearchSelfProps = {
   inline?: boolean
   showNumber?: number
   labelPosition?: 'left' | 'right' | 'top'
-  rowProps?: Partial<Mutable<RowProps>>
-  colProps?: Partial<Mutable<ColProps>>
+  rowProps?: PlusRowProps
+  colProps?: PlusColProps
   /**
    * 搜索是否需要校验 ，默认不需要校验表单
    * @variation v0.1.15

@@ -32,11 +32,11 @@ import { computed, type CSSProperties } from 'vue'
 import { isFunction, isPlainObject } from '@plus-pro-components/components/utils'
 import { ElTableColumn } from 'element-plus'
 import { isNumber } from 'lodash-es'
-import type { TableColumnCtx } from 'element-plus'
+import type { TableColumn } from './type'
 
 export interface PlusTableTableColumnIndexProps {
   pageInfo?: PageInfo
-  indexTableColumnProps?: Partial<TableColumnCtx<any>>
+  indexTableColumnProps?: TableColumn
   indexContentStyle?:
     | Partial<CSSProperties>
     | ((row: RecordType, index: number) => Partial<CSSProperties>)

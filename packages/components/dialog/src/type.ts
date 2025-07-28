@@ -1,5 +1,5 @@
 import type { DialogProps } from 'element-plus'
-import type { RecordType, Mutable } from '@plus-pro-components/types'
+import type { Mutable, IntrinsicAttributes } from '@plus-pro-components/types'
 
 export interface PlusDialogSelfProps {
   modelValue?: boolean
@@ -13,7 +13,8 @@ export interface PlusDialogSelfProps {
   title?: string
 }
 
-export type PlusDialogProps = PlusDialogSelfProps & Partial<Mutable<DialogProps>> & RecordType
+export type PlusDialogProps = PlusDialogSelfProps &
+  Partial<Mutable<DialogProps> & IntrinsicAttributes>
 
 export interface PlusDialogEmits {
   (e: 'update:modelValue', visible: boolean): void

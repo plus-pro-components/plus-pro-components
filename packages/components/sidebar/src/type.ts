@@ -3,6 +3,7 @@ import type { ScrollbarProps } from 'element-plus'
 import type {
   PlusRouteRecordRaw,
   Mutable,
+  IntrinsicAttributes,
   RenderTypes,
   RecordType
 } from '@plus-pro-components/types'
@@ -31,7 +32,7 @@ export interface PlusSidebarSelfProps {
    * @param route
    */
   renderMenuExtra?: (route: PlusRouteRecordRaw) => RenderTypes
-  scrollbarProps?: Partial<Mutable<ScrollbarProps>>
+  scrollbarProps?: Partial<Mutable<ScrollbarProps> & IntrinsicAttributes>
 
   /**
    * 菜单的宽度

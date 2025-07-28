@@ -1,5 +1,5 @@
 import type { PaginationProps } from 'element-plus'
-import type { PageInfo, RecordType, Mutable } from '@plus-pro-components/types'
+import type { PageInfo, Mutable, IntrinsicAttributes } from '@plus-pro-components/types'
 
 export interface PlusPaginationSelfProps {
   modelValue?: PageInfo
@@ -9,8 +9,7 @@ export interface PlusPaginationSelfProps {
 }
 
 export type PlusPaginationProps = PlusPaginationSelfProps &
-  Partial<Mutable<PaginationProps>> &
-  RecordType
+  Partial<Mutable<PaginationProps> & IntrinsicAttributes>
 
 export interface PlusPaginationEmits {
   (e: 'update:modelValue', pageInfo: PageInfo): void

@@ -53,7 +53,13 @@
 import { ref, watch, computed } from 'vue'
 import { PlusForm } from '@plus-pro-components/components/form'
 import type { PlusFormProps, PlusFormInstance } from '@plus-pro-components/components/form'
-import type { FieldValues, Mutable, PlusColumn, RecordType } from '@plus-pro-components/types'
+import type {
+  FieldValues,
+  Mutable,
+  PlusColumn,
+  RecordType,
+  IntrinsicAttributes
+} from '@plus-pro-components/types'
 import type { FormInstance, DrawerProps } from 'element-plus'
 import { ElDrawer, ElMessage, ElButton } from 'element-plus'
 import { useLocale } from '@plus-pro-components/hooks'
@@ -65,7 +71,7 @@ export interface PlusDrawerFormProps {
   /**
    * @deprecated v0.1.5
    */
-  drawer?: Partial<Mutable<DrawerProps>>
+  drawer?: Partial<Mutable<DrawerProps> & IntrinsicAttributes>
   size?: string | number
   form?: PlusFormProps
   hasFooter?: boolean

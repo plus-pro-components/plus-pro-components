@@ -89,7 +89,7 @@ import { PlusHeader as PlusHeaderComponent } from '@plus-pro-components/componen
 import { isPlainObject } from '@plus-pro-components/components/utils'
 import type { ScrollbarProps, BacktopProps } from 'element-plus'
 import { ElContainer, ElMain, ElScrollbar, ElBacktop } from 'element-plus'
-import type { Mutable, RecordType } from '@plus-pro-components/types'
+import type { Mutable, RecordType, IntrinsicAttributes } from '@plus-pro-components/types'
 import type { Component } from 'vue'
 import { ref, computed, onMounted } from 'vue'
 
@@ -109,8 +109,8 @@ export interface PlusLayoutProps {
   sidebarProps?: PlusSidebarProps
   headerProps?: PlusHeaderProps
   breadcrumbProps?: PlusBreadcrumbProps
-  scrollbarProps?: Partial<Mutable<ScrollbarProps>>
-  backtop?: boolean | Partial<Mutable<BacktopProps>>
+  scrollbarProps?: Partial<Mutable<ScrollbarProps> & IntrinsicAttributes>
+  backtop?: boolean | Partial<Mutable<BacktopProps> & IntrinsicAttributes>
 }
 
 defineOptions({

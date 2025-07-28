@@ -99,7 +99,13 @@ import type { ExtractPropTypes } from 'vue'
 import { computed, unref, ref, shallowRef, watch } from 'vue'
 import type { descriptionProps } from 'element-plus'
 import { ElDescriptions, ElDescriptionsItem } from 'element-plus'
-import type { PlusColumn, RecordType, Mutable, FieldValueType } from '@plus-pro-components/types'
+import type {
+  PlusColumn,
+  RecordType,
+  Mutable,
+  FieldValueType,
+  IntrinsicAttributes
+} from '@plus-pro-components/types'
 import type { TableFormRefRow } from '@plus-pro-components/components/table'
 import { PlusDisplayItem } from '@plus-pro-components/components/display-item'
 import {
@@ -112,7 +118,9 @@ import {
 import type { PlusDisplayItemInstance } from '@plus-pro-components/components/display-item'
 import type { PlusFormProps } from '@plus-pro-components/components/form'
 
-export type DescriptionProps = Partial<Mutable<ExtractPropTypes<typeof descriptionProps>>>
+export type DescriptionProps = Partial<
+  Mutable<ExtractPropTypes<typeof descriptionProps>> & IntrinsicAttributes
+>
 
 type FormChangeCallBackParams = {
   column: PlusColumn

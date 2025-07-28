@@ -1,6 +1,14 @@
 import type { Component, ComputedRef } from 'vue'
-import type { FormRules, RowProps, ColProps, CardProps, ComponentSize } from 'element-plus'
-import type { PlusColumn, FieldValues, Mutable, RecordType } from '@plus-pro-components/types'
+import type { FormRules, ComponentSize } from 'element-plus'
+import type {
+  PlusColumn,
+  FieldValues,
+  RecordType,
+  PlusColProps,
+  PlusRowProps,
+  PlusCardProps,
+  IntrinsicAttributes
+} from '@plus-pro-components/types'
 
 /**
  * fork https://github.com/element-plus/element-plus/blob/dev/packages/components/form/src/form.ts#L14-L110
@@ -89,8 +97,9 @@ export interface PlusFormGroupRow {
   /**
    * @desc 分组表单el-card的props，优先级高于整体的cardProps
    * @version v0.1.1
+   * @version v0.1.27 类型修改为 PlusCardProps
    */
-  cardProps?: Partial<Mutable<CardProps>>
+  cardProps?: PlusCardProps
   hideInGroup?: boolean | ComputedRef<boolean>
   /**
    * @version  v0.1.25 调整为可选
@@ -104,8 +113,14 @@ export type PlusFormSelfProps = {
   columns?: PlusColumn[]
   labelWidth?: ElementPlusFormProps['labelWidth']
   labelPosition?: ElementPlusFormProps['labelPosition']
-  rowProps?: Partial<Mutable<RowProps>>
-  colProps?: Partial<Mutable<ColProps>>
+  /**
+   * @version v0.1.27 类型修改为 PlusRowProps
+   */
+  rowProps?: PlusRowProps
+  /**
+   * @version v0.1.27 类型修改为 PlusColProps
+   */
+  colProps?: PlusColProps
   labelSuffix?: ElementPlusFormProps['labelSuffix']
   hasErrorTip?: boolean
   hasFooter?: boolean
@@ -117,7 +132,10 @@ export type PlusFormSelfProps = {
   footerAlign?: 'left' | 'right' | 'center'
   rules?: ElementPlusFormProps['rules']
   group?: false | PlusFormGroupRow[]
-  cardProps?: Partial<Mutable<CardProps>>
+  /**
+   * @version v0.1.27 类型修改为 PlusCardProps
+   */
+  cardProps?: PlusCardProps
   /**
    * @desc 阻止el-form的默认提交表单行为
    * @version v0.1.12
@@ -139,7 +157,7 @@ export type PlusFormSelfProps = {
   clearable?: boolean
 }
 
-export type PlusFormProps = PlusFormSelfProps & Partial<ElementPlusFormProps> & RecordType
+export type PlusFormProps = PlusFormSelfProps & Partial<ElementPlusFormProps> & IntrinsicAttributes
 
 export interface PlusFormState {
   values: FieldValues

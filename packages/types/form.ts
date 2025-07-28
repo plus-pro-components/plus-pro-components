@@ -2,6 +2,7 @@ import type { Ref, ComputedRef, ExtractPropTypes, CSSProperties } from 'vue'
 import type {
   FormItemProps,
   ColProps,
+  RowProps,
   // 表单
   AutocompleteProps,
   cascaderProps,
@@ -31,7 +32,13 @@ import type {
   PlusDatePickerProps,
   PlusInputTagProps
 } from '@plus-pro-components/components'
-import type { PropsItemType, PlusColumn, OptionsRow, RenderTypes } from './plus'
+import type {
+  PropsItemType,
+  PlusColumn,
+  OptionsRow,
+  RenderTypes,
+  IntrinsicAttributes
+} from './plus'
 import type { Mutable, RecordType } from './global'
 
 export {}
@@ -92,8 +99,23 @@ export type OmitTypes =
  */
 export type FieldProps = Partial<
   {
-    [key: string]: any
+    [index: string]: any
+    [index: number]: any
+    [index: symbol]: any
+    /**
+     * @version v0.1.27
+     */
+    class: any
     style: CSSProperties
+    /**
+     * @version v0.1.27
+     */
+    modelModifiers: {
+      [index: string]: any
+      lazy?: boolean
+      trim?: boolean
+      number?: boolean
+    }
     /**
      * @desc 输入框行数，仅 type 为 'textarea' 时有效
      * @desc 补充element-plus input:type='textarea' 时的ts类型缺失
@@ -215,6 +237,17 @@ export type FormItemValueType =
   | undefined
 
 /**
+ * el-col列的props
+ * @version v0.1.27
+ */
+export type PlusColProps = Partial<Mutable<ColProps> & IntrinsicAttributes>
+/**
+ * el-row列的props
+ * @version v0.1.27
+ */
+export type PlusRowProps = Partial<Mutable<RowProps> & IntrinsicAttributes>
+
+/**
  * 表单项的props
  */
 export interface FormColumnProps {
@@ -283,7 +316,7 @@ export interface FormColumnProps {
   /**
    * @desc el-col 的 props
    */
-  colProps?: Partial<Mutable<ColProps> & { [key: string]: any; style?: CSSProperties }>
+  colProps?: PlusColProps
 
   /**
    * 表单中单个项目是否需要 label，默认undefined，优先级高于表单的整体 hasLabel

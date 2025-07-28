@@ -40,7 +40,7 @@
 import type { InputProps, TagProps, InputInstance, TagInstance } from 'element-plus'
 import { ElTag, ElInput, ClickOutside as vClickOutside, useFormDisabled } from 'element-plus'
 import { reactive, ref, watch } from 'vue'
-import type { Mutable } from '@plus-pro-components/types'
+import type { Mutable, IntrinsicAttributes } from '@plus-pro-components/types'
 import { useLocale } from '@plus-pro-components/hooks'
 import { isArray, isString, isFunction } from '@plus-pro-components/components/utils'
 
@@ -48,8 +48,8 @@ type TriggerType = 'blur' | 'enter' | 'space'
 export interface PlusInputTagProps {
   modelValue?: string[]
   trigger?: TriggerType[] | TriggerType
-  inputProps?: Partial<Mutable<InputProps>>
-  tagProps?: Partial<Mutable<TagProps>>
+  inputProps?: Partial<Mutable<InputProps> & IntrinsicAttributes>
+  tagProps?: Partial<Mutable<TagProps> & IntrinsicAttributes>
   limit?: number
   formatTag?: (tag: string) => string
   retainInputValue?: boolean

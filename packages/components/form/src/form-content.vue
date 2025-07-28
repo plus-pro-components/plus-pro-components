@@ -80,10 +80,15 @@
 <script lang="ts" setup>
 import type { Ref, ComputedRef } from 'vue'
 import { ref, watch, unref } from 'vue'
-import type { RowProps, ColProps } from 'element-plus'
 import { ElRow, ElCol } from 'element-plus'
 import { PlusFormItem } from '@plus-pro-components/components/form-item'
-import type { PlusColumn, FieldValues, FieldValueType, Mutable } from '@plus-pro-components/types'
+import type {
+  PlusColumn,
+  FieldValues,
+  FieldValueType,
+  PlusRowProps,
+  PlusColProps
+} from '@plus-pro-components/types'
 import {
   getLabelSlotName,
   getFieldSlotName,
@@ -100,8 +105,8 @@ export interface PlusFormContentProps {
   modelValue?: FieldValues
   hasLabel?: boolean
   columns?: PlusColumn[]
-  rowProps?: Partial<Mutable<RowProps>>
-  colProps?: Partial<Mutable<ColProps>>
+  rowProps?: PlusRowProps
+  colProps?: PlusColProps
   /**
    * @desc 动画时长
    * @version v0.1.15

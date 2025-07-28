@@ -1,6 +1,6 @@
-import type { ElTooltipProps, ButtonType } from 'element-plus'
-import type { VNode, Ref, ComputedRef, Component } from 'vue'
-import type { RecordType } from './global'
+import type { ElTooltipProps, ButtonType, CardProps } from 'element-plus'
+import type { VNode, Ref, ComputedRef, Component, CSSProperties } from 'vue'
+import type { RecordType, Mutable } from './global'
 import type { TableValueType, TableColumnProps } from './table'
 import type { FormItemValueType, FormColumnProps, FieldValueType } from './form'
 
@@ -10,6 +10,12 @@ export {}
  * 渲染函数的返回值的类型
  */
 export type RenderTypes = string | VNode | JSX.Element | Component
+
+/**
+ * 内在属性
+ * @version v0.1.27
+ */
+export type IntrinsicAttributes = { style?: CSSProperties; class?: any } & RecordType
 
 /**
  * 分页参数
@@ -24,6 +30,19 @@ export interface PageInfo {
    */
   pageSize: number
 }
+
+/**
+ * el-card列的props
+ * @version v0.1.27
+ */
+export type PlusCardProps = Partial<Mutable<CardProps> & IntrinsicAttributes>
+
+/**
+ * el-tooltip的props
+ *
+ * @version v0.1.27
+ */
+export type PlusTooltipProps = Partial<Mutable<ElTooltipProps> & IntrinsicAttributes>
 
 /**
  *  自定义props类型  支持对象object，computed，函数和Promise
@@ -175,11 +194,7 @@ export interface CommonType {
    * @desc 展示一个 icon，hover 时展示一些提示信息
    * @version v0.1.15 新增 `ComputedRef<string>`  | `ComputedRef<Partial<ElTooltipProps>>`
    */
-  tooltip?:
-    | string
-    | Partial<ElTooltipProps>
-    | ComputedRef<string>
-    | ComputedRef<Partial<ElTooltipProps>>
+  tooltip?: string | PlusTooltipProps | ComputedRef<string> | ComputedRef<PlusTooltipProps>
 
   /**
    *

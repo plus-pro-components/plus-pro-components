@@ -92,10 +92,9 @@ import { QuestionFilled } from '@element-plus/icons-vue'
 import type { Ref } from 'vue'
 import { ref, inject, watch, computed } from 'vue'
 import { PlusRender } from '@plus-pro-components/components/render'
-import type { TableColumnCtx } from 'element-plus'
 import { set } from 'lodash-es'
 import { ElTableColumn, ElTooltip, ElIcon } from 'element-plus'
-import type { TableFormRefRow, FormChangeCallBackParams } from './type'
+import type { TableFormRefRow, FormChangeCallBackParams, TableColumn } from './type'
 
 export interface PlusTableColumnProps {
   columns?: PlusColumn[]
@@ -175,7 +174,7 @@ const getKey = (item: PlusColumn) => getTableKey(item, true)
 const handleChange = (
   data: { value: any; prop: string; row: RecordType },
   index: number,
-  column: TableColumnCtx<RecordType>,
+  column: TableColumn,
   item: PlusColumn,
   rest: RecordType
 ) => {
