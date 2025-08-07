@@ -1,3 +1,13 @@
+## [v0.1.27](https://github.com/plus-pro-components/plus-pro-components/compare/v0.1.26...v0.1.27) (2025-07-28)
+
+### ✨ Features
+
+- **components:** :sparkles: props add 'style' and 'class' support([71833fd](https://github.com/plus-pro-components/plus-pro-components/commit/71833fd)) by@xiaofei
+
+### 🐛 Bug Fixes
+
+- **components:** :bug: fix table-title-bar columnSetting reset is invalid([8814464](https://github.com/plus-pro-components/plus-pro-components/commit/8814464)) by@xiaofei
+
 ## [v0.1.26](https://github.com/plus-pro-components/plus-pro-components/compare/v0.1.25...v0.1.26) (2025-07-17)
 
 ### 🐛 Bug Fixes
