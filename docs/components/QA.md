@@ -193,3 +193,143 @@ const columns: PlusColumn[] = [
 ]
 </script>
 ```
+
+## PlusTable 设置了 adaptive 属性，在搜索栏没有展开表格内容是可以自适应的 展开后表格高度还是之前的怎么办？
+
+在 [PlusSearch](/components/search.html#search-events) 的事件 [collapse](/components/search.html#search-events) 中主动触发 [PlusTable](/components/table.html) 的 `resize` 方法
+
+```vue {2,127-132}
+<template>
+  <PlusSearch v-model="state" :columns="columns" :show-number="2" @collapse="handleCollapse" />
+
+  <div class="adaptive-table-wrapper">
+    <PlusTable
+      ref="plusTableInstance"
+      :columns="columns"
+      :table-data="tableData"
+      :pagination="{
+        total: 10
+      }"
+      adaptive
+    />
+  </div>
+</template>
+
+<script lang="ts" setup>
+import type { PlusColumn, PlusTableInstance } from 'plus-pro-components'
+import { useTable } from 'plus-pro-components'
+import { ref } from 'vue'
+
+interface TableRow {
+  id: number
+  name: string
+  status: string
+  rate: number
+  switch: boolean
+  time: string
+  tag: string
+}
+
+const TestServe = {
+  getList: async () => {
+    const data = Array.from({ length: 10 }).map((item, index) => {
+      return {
+        id: index,
+        name: index < 2 ? '' : index + 'name',
+        status: String(index % 3),
+        rate: index > 3 ? 2 : 3.5,
+        switch: index % 2 === 0 ? true : false,
+        time: index < 2 ? '' : new Date(),
+        tag: index === 1 ? 'success' : index === 2 ? 'warning' : index === 3 ? 'info' : ''
+      }
+    })
+
+    return { data: data as TableRow[] }
+  }
+}
+const { tableData } = useTable<TableRow[]>()
+const state = ref({})
+
+const plusTableInstance = ref<PlusTableInstance | null>(null)
+
+const columns = ref<PlusColumn[]>([
+  {
+    label: '名称',
+    prop: 'name',
+    width: 120
+  },
+  {
+    label: '状态',
+    prop: 'status',
+    valueType: 'select',
+    options: [
+      {
+        label: '未解决',
+        value: '0',
+        color: 'red'
+      },
+      {
+        label: '已解决',
+        value: '1',
+        color: 'blue'
+      },
+      {
+        label: '解决中',
+        value: '2',
+        color: 'yellow'
+      },
+      {
+        label: '失败',
+        value: '3',
+        color: 'red'
+      }
+    ]
+  },
+  {
+    label: '评分',
+    width: 200,
+    prop: 'rate',
+    valueType: 'rate'
+  },
+  {
+    label: '标签',
+    width: 200,
+    prop: 'tag',
+    valueType: 'tag'
+  },
+  {
+    label: '开关',
+    width: 100,
+    prop: 'switch',
+    valueType: 'switch'
+  },
+  {
+    label: '日期',
+    prop: 'time',
+    valueType: 'date-picker',
+    width: 250,
+    fieldProps: {
+      type: 'date',
+      placeholder: '请选择日期',
+      format: 'YYYY-MM-DD',
+      valueFormat: 'YYYY-MM-DD'
+    }
+  }
+])
+
+const getList = async () => {
+  try {
+    const { data } = await TestServe.getList()
+    tableData.value = data.map(item => ({ ...item }))
+  } catch (error) {}
+}
+getList()
+
+const handleCollapse = () => {
+  // 延时是为了拿到最新的位置
+  setTimeout(() => {
+    window.dispatchEvent(new Event('resize'))
+  }, 160)
+}
+</script>
+```

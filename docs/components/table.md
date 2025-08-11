@@ -32,6 +32,10 @@ boolean | {
 表格设置`height`属性后， `adaptive`属性将**不在生效**。
 :::
 
+::: tip 提示
+在和 搜索栏一起使用时，可能存在高度未更新情况，请参考[QA](/components/QA.html#plustable-设置了-adaptive-属性-在搜索栏没有展开表格内容是可以自适应的-展开后表格高度还是之前的怎么办)。
+:::
+
 :::demo
 table/height-adaptive
 :::
@@ -646,8 +650,6 @@ table/formatter
 table/advanced
 
 :::
-
-
 
 ## Table API
 
