@@ -1,6 +1,6 @@
 <template>
-  <div class="plus-pagination">
-    <slot v-if="align === 'right'" name="pagination-left">
+  <div class="plus-pagination" :class="[`plus-pagination--${align}`]">
+    <slot v-if="align === 'right' || align === 'center'" name="pagination-left">
       <span />
     </slot>
 
@@ -15,7 +15,10 @@
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
     />
-    <slot v-if="align === 'left'" name="pagination-right"> <span /></slot>
+
+    <slot v-if="align === 'left' || align === 'center'" name="pagination-right">
+      <span />
+    </slot>
   </div>
 </template>
 
