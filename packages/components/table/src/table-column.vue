@@ -90,7 +90,7 @@ import {
 import { TableFormRefInjectionKey } from '@plus-pro-components/constants'
 import { QuestionFilled } from '@element-plus/icons-vue'
 import type { Ref } from 'vue'
-import { ref, inject, watch, computed } from 'vue'
+import { ref, inject, watch, computed, getCurrentInstance } from 'vue'
 import { PlusRender } from '@plus-pro-components/components/render'
 import { set } from 'lodash-es'
 import { ElTableColumn, ElTooltip, ElIcon } from 'element-plus'
@@ -115,6 +115,28 @@ const props = withDefaults(defineProps<PlusTableColumnProps>(), {
   editable: false
 })
 const emit = defineEmits<PlusTableColumnEmits>()
+
+/**
+ * FIXME:解决el-table-column获取不到父组件的store问题
+ * @see https://github.com/plus-pro-components/plus-pro-components/issues/321
+ */
+const instance = getCurrentInstance()
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+const store = computed(() => instance?.parent?.store || {})
+watch(
+  store,
+  () => {
+    if (store.value) {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      instance.store = store.value
+    }
+  },
+  {
+    immediate: true
+  }
+)
 
 /**
  *  表单ref处理
