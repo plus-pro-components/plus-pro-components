@@ -360,10 +360,13 @@ const handleDragEnd = (event: SortableEvent) => {
 // 重置
 const resetCheckBoxList = () => {
   state.checkList = props.originColumns
+    .filter(item => unref(item.hideInTable) !== true)
     .filter(item => unref(item.headerIsChecked) !== false)
     .map(item => getTableKey(item))
   setCheckAllState(state.checkList)
-  const filterColumns = props.originColumns.map(item => ({ ...item }))
+  const filterColumns = props.originColumns
+    .filter(item => unref(item.hideInTable) !== true)
+    .map(item => ({ ...item }))
   emit('filterTableHeader', filterColumns, 'reset')
 }
 
