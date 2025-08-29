@@ -176,6 +176,48 @@ const columns: PlusColumn[] = [
     ]
   },
   {
+    label: 'select-option-group',
+    width: 120,
+    prop: 'select-option-group',
+    valueType: 'select',
+    fieldProps: {
+      multiple: true
+    },
+    options: [
+      {
+        label: 'Popular cities',
+        options: [
+          {
+            value: 'Shanghai',
+            label: 'Shanghai'
+          },
+          {
+            value: 'Beijing',
+            label: 'Beijing'
+          }
+        ]
+      },
+      {
+        label: 'City name',
+        disabled: true,
+        options: [
+          {
+            value: 'Chengdu',
+            label: 'Chengdu'
+          },
+          {
+            value: 'Guangzhou',
+            label: 'Guangzhou'
+          },
+          {
+            value: 'Dalian',
+            label: 'Dalian'
+          }
+        ]
+      }
+    ]
+  },
+  {
     label: 'input',
     width: 120,
     prop: 'input'
