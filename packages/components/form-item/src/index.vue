@@ -79,23 +79,44 @@
           <component :is="fieldSlot" v-bind="data" />
         </template>
 
-        <el-option
-          v-for="item in customOptions"
-          :key="item.label"
-          :label="item.label"
-          :value="item.value"
-          v-bind="isFunction(item.fieldItemProps) ? item.fieldItemProps(item) : item.fieldItemProps"
-        >
-          <template #default>
-            <component :is="item.fieldSlot" v-if="isFunction(item.fieldSlot)" v-bind="item" />
-            <component
-              :is="fieldChildrenSlot"
-              v-else-if="isFunction(fieldChildrenSlot)"
-              v-bind="item"
-            />
-            <template v-else> {{ item.label }} </template>
-          </template>
-        </el-option>
+        <template v-for="item in customOptions" :key="item.label">
+          <el-option-group v-if="item.options" :label="item.label" :disabled="item.disabled">
+            <el-option
+              v-for="option in item.options"
+              :key="option.value"
+              :label="option.label"
+              :value="option.value"
+              v-bind="isFunction(option.fieldItemProps) ? option.fieldItemProps(option) : option.fieldItemProps"
+            >
+              <template #default>
+                <component :is="option.fieldSlot" v-if="isFunction(option.fieldSlot)" v-bind="option" />
+                <component
+                  :is="fieldChildrenSlot"
+                  v-else-if="isFunction(fieldChildrenSlot)"
+                  v-bind="option"
+                />
+                <template v-else>{{ option.label }}</template>
+              </template>
+            </el-option>
+          </el-option-group>
+
+          <el-option
+            v-else
+            :label="item.label"
+            :value="item.value"
+            v-bind="isFunction(item.fieldItemProps) ? item.fieldItemProps(item) : item.fieldItemProps"
+          >
+            <template #default>
+              <component :is="item.fieldSlot" v-if="isFunction(item.fieldSlot)" v-bind="item" />
+              <component
+                :is="fieldChildrenSlot"
+                v-else-if="isFunction(fieldChildrenSlot)"
+                v-bind="item"
+              />
+              <template v-else>{{ item.label }}</template>
+            </template>
+          </el-option>
+        </template>
       </el-select>
 
       <!-- 统一处理 -->
@@ -227,7 +248,8 @@ import {
   ElText,
   ElDivider,
   ElSelect as SelectComponent,
-  ElOption as OptionComponent
+  ElOption as OptionComponent,
+  ElOptionGroup as OptionGroupComponent
 } from 'element-plus'
 import {
   DatePickerValueIsArrayList,
@@ -283,6 +305,7 @@ const ElIcon: Component = IconComponent
 const ElInput: Component = InputComponent
 const ElSelect: Component = SelectComponent
 const ElOption: Component = OptionComponent
+const ElOptionGroup: Component = OptionGroupComponent
 
 const props = withDefaults(defineProps<PlusFormItemProps>(), {
   label: '',

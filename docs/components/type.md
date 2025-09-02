@@ -647,6 +647,10 @@ export interface OptionsRow<T = undefined> {
    * 子选项，仅valueType 为 `cascader` 时生效
    */
   children?: OptionsRow[]
+  /**
+   * @version 0.1.28 当 valueType 为 select 时，将选项进行分组显示
+   */
+  options?: OptionsRow[]
 }
 ```
 

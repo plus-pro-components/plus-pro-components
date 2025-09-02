@@ -49,6 +49,7 @@ const state = ref<FieldValues>({
   monthrange: ['2024-03', '2024-05'],
   select: '0',
   'select-multiple': ['0', '1'],
+  'select-option-group': ['Shanghai'],
   input: '单行文本',
   textarea: '多行文本',
   'input-number': 4,
@@ -345,6 +346,48 @@ const columns: PlusColumn[] = [
     fieldProps: {
       multiple: true
     }
+  },
+  {
+    label: 'select-opt-group',
+    width: 120,
+    prop: 'select-option-group',
+    valueType: 'select',
+    fieldProps: {
+      multiple: true
+    },
+    options: [
+      {
+        label: 'Popular cities',
+        options: [
+          {
+            value: 'Shanghai',
+            label: 'Shanghai'
+          },
+          {
+            value: 'Beijing',
+            label: 'Beijing'
+          }
+        ]
+      },
+      {
+        label: 'City name',
+        disabled: true,
+        options: [
+          {
+            value: 'Chengdu',
+            label: 'Chengdu'
+          },
+          {
+            value: 'Guangzhou',
+            label: 'Guangzhou'
+          },
+          {
+            value: 'Dalian',
+            label: 'Dalian'
+          }
+        ]
+      }
+    ]
   },
   {
     label: 'input',
