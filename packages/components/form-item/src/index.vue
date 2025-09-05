@@ -86,10 +86,18 @@
               :key="option.value"
               :label="option.label"
               :value="option.value"
-              v-bind="isFunction(option.fieldItemProps) ? option.fieldItemProps(option) : option.fieldItemProps"
+              v-bind="
+                isFunction(option.fieldItemProps)
+                  ? option.fieldItemProps(option)
+                  : option.fieldItemProps
+              "
             >
               <template #default>
-                <component :is="option.fieldSlot" v-if="isFunction(option.fieldSlot)" v-bind="option" />
+                <component
+                  :is="option.fieldSlot"
+                  v-if="isFunction(option.fieldSlot)"
+                  v-bind="option"
+                />
                 <component
                   :is="fieldChildrenSlot"
                   v-else-if="isFunction(fieldChildrenSlot)"
@@ -104,7 +112,9 @@
             v-else
             :label="item.label"
             :value="item.value"
-            v-bind="isFunction(item.fieldItemProps) ? item.fieldItemProps(item) : item.fieldItemProps"
+            v-bind="
+              isFunction(item.fieldItemProps) ? item.fieldItemProps(item) : item.fieldItemProps
+            "
           >
             <template #default>
               <component :is="item.fieldSlot" v-if="isFunction(item.fieldSlot)" v-bind="item" />
