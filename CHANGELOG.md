@@ -1,3 +1,23 @@
+## [v0.1.28](https://github.com/plus-pro-components/plus-pro-components/compare/v0.1.27...v0.1.28) (2025-09-05)
+
+### ✨ Features
+
+- **all:** Merge pull request [#326](https://github.com/plus-pro-components/plus-pro-components/pull/326) from condorheroblog/dev([95a6381](https://github.com/plus-pro-components/plus-pro-components/commit/95a6381)) by@xiaofei
+- **table:** add more button display type options([5010a95](https://github.com/plus-pro-components/plus-pro-components/commit/5010a95)) by@Condor Hero
+- **all:** Merge pull request [#324](https://github.com/plus-pro-components/plus-pro-components/pull/324) from condorheroblog/dev([2292920](https://github.com/plus-pro-components/plus-pro-components/commit/2292920)) by@xiaofei
+- **select:** add option group support([5eb232e](https://github.com/plus-pro-components/plus-pro-components/commit/5eb232e)) by@Condor Hero
+- **all:** Merge pull request [#323](https://github.com/plus-pro-components/plus-pro-components/pull/323) from IceyWu/pagination([3feb8ce](https://github.com/plus-pro-components/plus-pro-components/commit/3feb8ce)) by@xiaofei
+- **pagination:** add center alignment support and examples([7beb73f](https://github.com/plus-pro-components/plus-pro-components/commit/7beb73f)) by@IceyWu
+
+### 🐛 Bug Fixes
+
+- **components:** :bug: fix PlusTableColumn unable to obtain the store of the parent component([7d6feed](https://github.com/plus-pro-components/plus-pro-components/commit/7d6feed)) by@xiaofei
+- **components:** :bug: fix table titlebar reset show hideIntable data([ea83c7b](https://github.com/plus-pro-components/plus-pro-components/commit/ea83c7b)) by@xiaofei
+
+### ♻️ Code Refactoring
+
+- **components:** :recycle: refactor ActionBarProps moreType([6d3a6b3](https://github.com/plus-pro-components/plus-pro-components/commit/6d3a6b3)) by@xiaofei
+
 ## [v0.1.27](https://github.com/plus-pro-components/plus-pro-components/compare/v0.1.26...v0.1.27) (2025-07-28)
 
 ### ✨ Features
