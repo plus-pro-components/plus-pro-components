@@ -20,22 +20,25 @@
         class="plus-table-action-bar__dropdown"
         :hide-on-click="hideOnClick"
       >
-        <template v-if="moreType === 'text'">
+        <template v-if="moreType === 'icon'">
           <span class="plus-table-action-bar__dropdown__link">
-            <span class="plus-table-action-bar__more-text"> {{ t('plus.table.more') }}</span>
             <slot name="action-bar-more-icon">
-              <el-icon color="var(--el-color-primary)">
-                <ArrowDownBold />
+              <el-icon>
+                <MoreFilled />
               </el-icon>
             </slot>
           </span>
         </template>
-        <template v-if="moreType === 'icon'">
-          <slot name="action-bar-more-icon">
-            <el-icon color="var(--el-color-primary)">
-              <MoreFilled />
-            </el-icon>
-          </slot>
+        <!-- 默认 -->
+        <template v-else>
+          <span class="plus-table-action-bar__dropdown__link">
+            <span class="plus-table-action-bar__more-text"> {{ t('plus.table.more') }}</span>
+            <slot name="action-bar-more-icon">
+              <el-icon>
+                <ArrowDownBold />
+              </el-icon>
+            </slot>
+          </span>
         </template>
 
         <!-- 下拉按钮 -->

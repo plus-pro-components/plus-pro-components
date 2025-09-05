@@ -40,6 +40,7 @@
       display: inline-flex;
       cursor: pointer;
       user-select: none;
+      color: getCssVar('color-primary');
     }
     @include e(more-text) {
       margin-right: 2px;
@@ -167,9 +168,4 @@
 @include b(table-checkbox-checkAll) {
   display: flex;
   justify-content: space-between;
-}
-
-/* 操作栏 下拉菜单 触发器 文字颜色 */
-@include b(table-action-bar__dropdown__link) {
-  color: var(--el-color-primary);
 }
