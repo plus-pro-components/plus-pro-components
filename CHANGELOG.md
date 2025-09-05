@@ -1,3 +1,9 @@
+## [v0.1.29](https://github.com/plus-pro-components/plus-pro-components/compare/v0.1.28...v0.1.29) (2025-09-05)
+
+### 🐛 Bug Fixes
+
+- **components:** :bug: fix store is undefined([4e38245](https://github.com/plus-pro-components/plus-pro-components/commit/4e38245)) by@xiaofei
+
 ## [v0.1.28](https://github.com/plus-pro-components/plus-pro-components/compare/v0.1.27...v0.1.28) (2025-09-05)
 
 ### ✨ Features
