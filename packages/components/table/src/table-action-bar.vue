@@ -20,14 +20,23 @@
         class="plus-table-action-bar__dropdown"
         :hide-on-click="hideOnClick"
       >
-        <span class="plus-table-action-bar__dropdown__link">
-          <span class="plus-table-action-bar__more-text"> {{ t('plus.table.more') }}</span>
+        <template v-if="moreType === 'text'">
+          <span class="plus-table-action-bar__dropdown__link">
+            <span class="plus-table-action-bar__more-text"> {{ t('plus.table.more') }}</span>
+            <slot name="action-bar-more-icon">
+              <el-icon color="var(--el-color-primary)">
+                <ArrowDownBold />
+              </el-icon>
+            </slot>
+          </span>
+        </template>
+        <template v-if="moreType === 'icon'">
           <slot name="action-bar-more-icon">
-            <el-icon>
-              <ArrowDownBold />
+            <el-icon color="var(--el-color-primary)">
+              <MoreFilled />
             </el-icon>
           </slot>
-        </span>
+        </template>
 
         <!-- 下拉按钮 -->
         <template #dropdown>
@@ -48,7 +57,7 @@
 <script lang="ts" setup>
 import type { VNode, AppContext, Ref, ComputedRef, Component } from 'vue'
 import { h, unref, withDirectives, inject, ref } from 'vue'
-import { ArrowDownBold } from '@element-plus/icons-vue'
+import { ArrowDownBold, MoreFilled } from '@element-plus/icons-vue'
 import type { ElMessageBoxOptions } from 'element-plus'
 import {
   ElButton,
@@ -99,7 +108,8 @@ const props = withDefaults(defineProps<ActionBarProps>(), {
   showNumber: 3,
   actionBarTableColumnProps: () => ({}),
   confirmType: 'messageBox',
-  showLimitIncludeMore: false
+  showLimitIncludeMore: false,
+  moreType: 'text'
 })
 const emit = defineEmits<PlusTableActionBarEmits>()
 
