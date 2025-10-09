@@ -4,7 +4,7 @@
       :collapse-duration="collapseDuration"
       :collapse-transition="collapseTransition"
     >
-      <el-col v-for="item in columns" :key="item.prop" v-bind="item.colProps || colProps">
+      <el-col v-for="item in columns" :key="item.prop" v-bind="unref(item.colProps) || colProps">
         <!-- el-form-item上一行的内容 -->
         <div
           v-if="item.renderPrevious || $slots[getPreviousSlotName(item.prop)]"

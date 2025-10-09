@@ -239,11 +239,13 @@ export type FormItemValueType =
 /**
  * el-col列的props
  * @version v0.1.27
+ * @see https://element-plus.org/zh-CN/component/layout#col-api
  */
 export type PlusColProps = Partial<Mutable<ColProps> & IntrinsicAttributes>
 /**
  * el-row列的props
  * @version v0.1.27
+ * @see https://element-plus.org/zh-CN/component/layout#row-api
  */
 export type PlusRowProps = Partial<Mutable<RowProps> & IntrinsicAttributes>
 
@@ -315,8 +317,9 @@ export interface FormColumnProps {
 
   /**
    * @desc el-col 的 props
+   * @version v0.1.30 新增 computed 支持
    */
-  colProps?: PlusColProps
+  colProps?: PlusColProps | ComputedRef<PlusColProps>
 
   /**
    * 表单中单个项目是否需要 label，默认undefined，优先级高于表单的整体 hasLabel
