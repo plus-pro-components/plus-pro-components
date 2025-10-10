@@ -112,7 +112,8 @@ defineOptions({
 const props = withDefaults(defineProps<PlusTableColumnProps>(), {
   columns: () => [],
   tableDataLength: 0,
-  editable: false
+  editable: false,
+  subPageInfo: () => ({})
 })
 const emit = defineEmits<PlusTableColumnEmits>()
 
@@ -165,12 +166,13 @@ const setFormRef = () => {
 }
 
 watch(
-  () => [props.tableDataLength, plusDisplayItemInstance.value],
+  () => [props.tableDataLength, plusDisplayItemInstance.value, props.subPageInfo],
   () => {
     setFormRef()
   },
   {
     flush: 'post',
+    deep: true,
     immediate: true
   }
 )
