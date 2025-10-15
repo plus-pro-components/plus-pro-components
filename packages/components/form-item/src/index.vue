@@ -79,7 +79,7 @@
           <component :is="fieldSlot" v-bind="data" />
         </template>
 
-        <template v-for="item in customOptions" :key="item.label">
+        <template v-for="item in customOptions" :key="item.value">
           <el-option-group v-if="item.options" :label="item.label" :disabled="item.disabled">
             <el-option
               v-for="option in item.options"
@@ -149,7 +149,7 @@
           <component
             :is="getFieldComponent(valueType).children"
             v-for="item in customOptions"
-            :key="item.label"
+            :key="item.value"
             v-bind="getChildrenProps(item)"
           >
             <template #default>
