@@ -7,14 +7,24 @@
       :columns="tableConfig"
       :table-data="tableData"
       :action-bar="{ buttons, width: 140 }"
+      :pagination="{
+        total,
+        modelValue: pageInfo
+      }"
       @formChange="formChange"
       @clickAction="handleClickButton"
+      @paginationChange="handlePaginationChange"
     />
   </div>
 </template>
 
 <script lang="ts" setup>
-import type { ButtonsCallBackParams, TableFormRefRow, PlusColumn } from 'plus-pro-components'
+import type {
+  ButtonsCallBackParams,
+  TableFormRefRow,
+  PlusColumn,
+  PageInfo
+} from 'plus-pro-components'
 import { useTable } from 'plus-pro-components'
 import { ElMessage } from 'element-plus'
 import { ref } from 'vue'
@@ -33,7 +43,9 @@ interface TableRow {
 
 const TestServe = {
   getList: async () => {
-    const data = Array.from({ length: 4 }).map((item, index) => {
+    const data = Array.from({ length: 10 }).map((item, i) => {
+      const index = (pageInfo.value.page - 1) * pageInfo.value.pageSize + i + 1
+
       return {
         id: index,
         name: {
@@ -45,10 +57,11 @@ const TestServe = {
         time: index < 2 ? '' : new Date()
       }
     })
-    return { data: data as TableRow[] }
+    return { data: data as TableRow[], total: 100 }
   }
 }
-const { tableData, buttons } = useTable<TableRow[]>()
+const { tableData, buttons, pageInfo, total } = useTable<TableRow[]>()
+total.value = 100
 
 const show = ref<boolean[]>([])
 
@@ -59,7 +72,7 @@ buttons.value = [
     props: {
       type: 'warning'
     },
-    show: (_, index) => !!show.value[index]
+    show: row => !!show.value[row.id]
   },
   {
     // 保存
@@ -68,7 +81,7 @@ buttons.value = [
     props: {
       type: 'primary'
     },
-    show: (_, index) => !!show.value[index]
+    show: row => !!show.value[row.id]
   },
   {
     text: '编辑',
@@ -76,7 +89,7 @@ buttons.value = [
     props: {
       type: 'primary'
     },
-    show: (_, index) => !show.value[index]
+    show: row => !show.value[row.id]
   },
   {
     text: '删除',
@@ -85,7 +98,7 @@ buttons.value = [
       type: 'danger'
     },
     confirm: {},
-    show: (_, index) => !show.value[index]
+    show: row => !show.value[row.id]
   }
 ]
 
@@ -214,6 +227,12 @@ const formChange = ({ value, prop, index }) => {
   console.log(tableData.value, 'tableData.value')
 }
 
+const handlePaginationChange = (_pageInfo: PageInfo): void => {
+  pageInfo.value = _pageInfo
+
+  getList()
+}
+
 const handleSave = async (data: ButtonsCallBackParams) => {
   try {
     if (data.formRefs) {
@@ -234,7 +253,7 @@ const handleClickButton = async (data: ButtonsCallBackParams) => {
   if (data.buttonRow.code === 'edit') {
     tableData.value.forEach(item => {
       if (item.id === data.row.id) {
-        show.value[data.index] = true
+        show.value[data.row.id] = true
       }
     })
 
@@ -244,7 +263,7 @@ const handleClickButton = async (data: ButtonsCallBackParams) => {
   } else if (data.buttonRow.code === 'cancel') {
     tableData.value.forEach(item => {
       if (item.id === data.row.id) {
-        show.value[data.index] = false
+        show.value[data.row.id] = false
       }
     })
     data.formRefs?.forEach((item: TableFormRefRow) => {
