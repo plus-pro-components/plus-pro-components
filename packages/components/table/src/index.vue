@@ -107,6 +107,7 @@
           <PlusTableColumn
             :columns="subColumns"
             :editable="editable"
+            :sub-page-info="subPageInfo"
             :table-data-length="tableDataLength"
             @formChange="handleFormChange"
           >
