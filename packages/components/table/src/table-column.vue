@@ -79,7 +79,7 @@
 <script lang="ts" setup>
 import { PlusDisplayItem } from '@plus-pro-components/components/display-item'
 import type { PlusDisplayItemInstance } from '@plus-pro-components/components/display-item'
-import type { PlusColumn, RecordType } from '@plus-pro-components/types'
+import type { PageInfo, PlusColumn, RecordType } from '@plus-pro-components/types'
 import {
   getTooltip,
   getTableKey,
@@ -100,6 +100,7 @@ export interface PlusTableColumnProps {
   columns?: PlusColumn[]
   editable?: boolean | 'click' | 'dblclick'
   tableDataLength?: number
+  subPageInfo?: Partial<PageInfo>
 }
 export interface PlusTableColumnEmits {
   (e: 'formChange', data: FormChangeCallBackParams): void
