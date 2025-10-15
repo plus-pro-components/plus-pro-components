@@ -1,3 +1,16 @@
+## [v0.1.30](https://github.com/plus-pro-components/plus-pro-components/compare/v0.1.29...v0.1.30) (2025-10-15)
+
+### ✨ Features
+
+- **components:** :sparkles: plusTableColumnProps subPageInfo add type([70c6843](https://github.com/plus-pro-components/plus-pro-components/commit/70c6843)) by@xiaofei
+- **all:** Merge pull request [#330](https://github.com/plus-pro-components/plus-pro-components/pull/330) from KingGloose/dev([252e900](https://github.com/plus-pro-components/plus-pro-components/commit/252e900)) by@xiaofei
+- **components:** :sparkles: plusColumn['colProps'] add computed support.([0caf114](https://github.com/plus-pro-components/plus-pro-components/commit/0caf114)) by@xiaofei
+
+### 🐛 Bug Fixes
+
+- **components:** :bug: fix form-item key is label([22aaf3a](https://github.com/plus-pro-components/plus-pro-components/commit/22aaf3a)) by@xiaofei
+- **all:** :bug: add subPageInfo prop to PlusTableColumn for enhanced data handling([4bd7b04](https://github.com/plus-pro-components/plus-pro-components/commit/4bd7b04)) by@zhangjiahui04
+
 ## [v0.1.29](https://github.com/plus-pro-components/plus-pro-components/compare/v0.1.28...v0.1.29) (2025-09-05)
 
 ### 🐛 Bug Fixes
