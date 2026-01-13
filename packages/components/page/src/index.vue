@@ -176,6 +176,10 @@ export interface PlusPageProps {
    * @default false
    */
   searchSlot?: boolean
+  /**
+   * 重置后是否调用getList
+   */
+  resetSearch?: boolean
 }
 export interface PlusPageEmits {
   (e: 'search', data: FieldValues): void
@@ -218,7 +222,8 @@ const props = withDefaults(defineProps<PlusPageProps>(), {
     page: 'page',
     pageSize: 'pageSize'
   }),
-  searchSlot: false
+  searchSlot: false,
+  resetSearch: true
 })
 const emit = defineEmits<PlusPageEmits>()
 
@@ -311,7 +316,7 @@ const handleSearch = (val: FieldValues) => {
 const handleReset = (val: FieldValues) => {
   values.value = { ...val }
   pageInfo.value.page = 1
-  getList()
+  props.resetSearch && getList()
   emit('reset', values.value)
 }
 
