@@ -209,6 +209,7 @@ export type FormItemValueType =
   | 'color-picker'
   | 'date-picker'
   | 'input-number'
+  | 'radio-button'
   | 'radio'
   | 'rate'
   | 'select'

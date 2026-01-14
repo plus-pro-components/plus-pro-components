@@ -45,6 +45,7 @@ const state = ref<FieldValues>({
   rate: '3',
   switch: true,
   radio: '0',
+  'radio-button': '0',
   slider: 50,
   'time-picker': '2024-03-18 09:55:31',
   'time-select': '09:55:31',
@@ -534,6 +535,28 @@ const columns: PlusColumn[] = [
       activeText: '',
       activeActionIcon: '',
       beforeChange: () => false
+    }
+  },
+  {
+    label: 'radio-button',
+    prop: 'radio-button',
+    valueType: 'radio-button',
+    options: [
+      {
+        label: '诗',
+        value: '0'
+      },
+      {
+        label: '远方',
+        value: '1'
+      },
+      {
+        label: '美食',
+        value: '2'
+      }
+    ],
+    fieldProps: {
+      textColor: ''
     }
   },
   {
