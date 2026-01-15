@@ -8,6 +8,7 @@ import {
   ElInputNumber,
   ElRadioGroup,
   ElRadio,
+  ElRadioButton,
   ElRate,
   ElSelect,
   ElOption,
@@ -114,6 +115,10 @@ export const FieldComponentMap: FieldComponentMapType = {
     component: ElRadioGroup,
     children: ElRadio,
     hasVersionCompatibility: true
+  },
+  'radio-button': {
+    component: ElRadioGroup,
+    children: ElRadioButton
   },
   rate: {
     component: ElRate

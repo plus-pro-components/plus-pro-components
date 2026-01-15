@@ -271,6 +271,25 @@ const columns: PlusColumn[] = [
     ]
   },
   {
+    label: 'radio-button',
+    prop: 'radio-button',
+    valueType: 'radio-button',
+    options: [
+      {
+        label: '诗',
+        value: '0'
+      },
+      {
+        label: '远方',
+        value: '1'
+      },
+      {
+        label: '美食',
+        value: '2'
+      }
+    ]
+  },
+  {
     label: 'slider',
     prop: 'slider',
     valueType: 'slider'
@@ -320,7 +339,9 @@ const row = {
   slider: 10,
   code: `const data = 100`,
   copy: 'copy',
-  img: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg'
+  img: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
+  radio: '0',
+  'radio-button': '0'
 }
 const values = ref<FieldValues>({ ...row })
 
