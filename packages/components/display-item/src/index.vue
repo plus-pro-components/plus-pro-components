@@ -65,6 +65,19 @@
     v-html="column.renderHTML(displayValue, renderParams)"
   />
 
+  <!-- 值为空 -->
+  <template
+    v-else-if="
+      (displayValue == null || displayValue === '') && isFunction(props.column.defaultRender)
+    "
+  >
+    <PlusRender
+      v-if="customFieldPropsIsReady"
+      :render="column.defaultRender"
+      :callback-value="renderParams"
+      :custom-field-props="customFieldProps"
+    />
+  </template>
   <!-- 状态显示 `select`, `radio`, `checkbox`-->
   <span
     v-else-if="selectValueTypeList.includes(column.valueType)"
@@ -311,7 +324,13 @@ const hasEditIcon = computed(
 /** 多层值支持，原始值 */
 const displayValue = computed({
   get() {
-    return getValue(subRow.value, props.column.prop)
+    const value = getValue(subRow.value, props.column.prop)
+    // 为空返回默认值
+    // eslint-disable-next-line eqeqeq
+    if ((value == null || value === '') && props.column.defaultValue != null) {
+      return cloneDeep(props.column.defaultValue)
+    }
+    return value
   },
   set(value) {
     setValue(subRow.value, props.column.prop, value)

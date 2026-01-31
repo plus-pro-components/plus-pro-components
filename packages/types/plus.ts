@@ -292,6 +292,16 @@ export interface CommonType {
    * 多级表头
    */
   children?: PlusColumn[]
+
+  /**
+   * 获取到的值为空时返回的的默认值
+   */
+  defaultValue?: any
+
+  /**
+   * 获取到值为空时渲染的的内容
+   */
+  defaultRender?: (data: { row: RecordType; column: PlusColumn; index: number }) => RenderTypes
 }
 
 /**
