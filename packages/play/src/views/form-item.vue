@@ -132,7 +132,8 @@ const columns: PlusColumn[] = [
         label: '普通话证书',
         value: '2'
       }
-    ]
+    ],
+    defaultValue: ['0']
   },
   {
     label: 'color-picker',
@@ -297,7 +298,8 @@ const columns: PlusColumn[] = [
   {
     label: 'text',
     prop: 'text',
-    valueType: 'text'
+    valueType: 'text',
+    defaultValue: 'defaultText'
   },
   {
     label: 'time-picker',

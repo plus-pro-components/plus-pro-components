@@ -40,7 +40,8 @@ const columns: PlusColumn[] = [
         value: '3',
         color: 'red'
       }
-    ]
+    ],
+    defaultValue: '3'
   },
   {
     label: '标签',
@@ -106,7 +107,6 @@ const columns: PlusColumn[] = [
 ]
 const row = {
   name: 'name',
-  status: '1',
   tag: 'success',
   money: '100',
   progress: 30,

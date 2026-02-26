@@ -296,6 +296,7 @@ export interface PlusFormItemProps {
    *  @version v0.1.18
    */
   clearable?: boolean
+  defaultValue?: PlusColumn['defaultValue']
 }
 export interface PlusFormItemEmits {
   (e: 'update:modelValue', value: FieldValueType): void
@@ -319,7 +320,7 @@ const ElOptionGroup: Component = OptionGroupComponent
 
 const props = withDefaults(defineProps<PlusFormItemProps>(), {
   label: '',
-  modelValue: '',
+  modelValue: null,
   hasLabel: true,
   tooltip: '',
   formItemProps: () => ({}),
@@ -333,7 +334,8 @@ const props = withDefaults(defineProps<PlusFormItemProps>(), {
   renderErrorMessage: undefined,
   optionsMap: undefined,
   clearable: true,
-  index: 0
+  index: 0,
+  defaultValue: undefined
 })
 const emit = defineEmits<PlusFormItemEmits>()
 
@@ -531,7 +533,8 @@ watch(
   computed(() => [props.modelValue, customFieldPropsIsReady.value, customOptionsIsReady.value]),
   ([val, fieldPropsIsReady, optionsIsReady]) => {
     if (fieldPropsIsReady && optionsIsReady) {
-      setValue(val)
+      // eslint-disable-next-line eqeqeq
+      setValue(val === null && props.defaultValue != null ? props.defaultValue : val)
     }
   },
   {
