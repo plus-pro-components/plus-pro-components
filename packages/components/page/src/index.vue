@@ -9,6 +9,7 @@
         :search-loading="loadingStatus"
         @search="handleSearch"
         @reset="handleReset"
+        @change="handleSearchChange"
       >
         <template v-if="$slots['search-footer']" #footer="data">
           <slot name="search-footer" v-bind="data" />
@@ -87,7 +88,7 @@ import { PlusSearch } from '@plus-pro-components/components/search'
 import type { PlusTableProps, PlusTableInstance } from '@plus-pro-components/components/table'
 import { PlusTable } from '@plus-pro-components/components/table'
 import type { PlusPaginationProps } from '@plus-pro-components/components/pagination'
-import { h, ref, computed, useSlots } from 'vue'
+import { h, ref, computed, useSlots, watch } from 'vue'
 import { ElCard, ElDivider } from 'element-plus'
 import { useTable } from '@plus-pro-components/hooks'
 import {
@@ -100,6 +101,10 @@ import {
 import { DefaultPageInfo, DefaultPageSizeList } from '@plus-pro-components/constants'
 
 export interface PlusPageProps {
+  /**
+   * 搜索表单的值（v-model:searchValues）
+   */
+  searchValues?: FieldValues
   /**
    * 配置
    */
@@ -182,8 +187,10 @@ export interface PlusPageProps {
   resetSearch?: boolean
 }
 export interface PlusPageEmits {
+  (e: 'update:searchValues', data: FieldValues): void
   (e: 'search', data: FieldValues): void
   (e: 'reset', data: FieldValues): void
+  (e: 'searchChange', data: FieldValues, column: PlusColumn): void
   (e: 'paginationChange', pageInfo: PageInfo): void
   /**
    * 数据加载失败时触发
@@ -200,6 +207,7 @@ defineOptions({
 })
 
 const props = withDefaults(defineProps<PlusPageProps>(), {
+  searchValues: undefined,
   params: () => ({}),
   columns: () => [],
   postData: undefined,
@@ -258,7 +266,18 @@ const computedDefaultPageSizeList = computed(() => props.defaultPageSizeList)
 const { tableData, pageInfo, total, loadingStatus } = useTable(computedDefaultPageInfo)
 const plusSearchInstance = ref<PlusSearchInstance | null>(null)
 const plusTableInstance = ref<PlusTableInstance | null>(null)
-const values = ref<FieldValues>({ ...(props.search as Partial<PlusSearchProps>)?.defaultValues })
+const values = ref<FieldValues>(
+  props.searchValues ?? { ...(props.search as Partial<PlusSearchProps>)?.defaultValues }
+)
+
+watch(
+  () => props.searchValues,
+  val => {
+    if (val !== undefined) {
+      values.value = val
+    }
+  }
+)
 
 /** 渲染包裹层 */
 const renderWrapper = () => {
@@ -305,11 +324,17 @@ const handlePaginationChange = (_pageInfo: PageInfo): void => {
   emit('paginationChange', _pageInfo)
 }
 
+const handleSearchChange = (val: FieldValues, column: PlusColumn) => {
+  emit('update:searchValues', val)
+  emit('searchChange', val, column)
+}
+
 const handleSearch = (val: FieldValues) => {
   const data = (props.beforeSearchSubmit && props.beforeSearchSubmit(val)) || val
   values.value = data
   pageInfo.value.page = 1
   getList()
+  emit('update:searchValues', values.value)
   emit('search', values.value)
 }
 
@@ -317,6 +342,7 @@ const handleReset = (val: FieldValues) => {
   values.value = { ...val }
   pageInfo.value.page = 1
   props.resetSearch && getList()
+  emit('update:searchValues', values.value)
   emit('reset', values.value)
 }
 
@@ -333,6 +359,7 @@ const setSearchFieldsValue = (val: RecordType) => {
     Object.keys(val).forEach(key => {
       Reflect.set(values.value, key, val[key])
     })
+    emit('update:searchValues', { ...values.value })
   }
 }
 
@@ -353,6 +380,7 @@ const getSearchFieldsValue = (key?: keyof any) => {
  */
 const clearSearchFieldsValue = () => {
   values.value = {}
+  emit('update:searchValues', values.value)
 }
 
 /**
