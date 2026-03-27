@@ -2,7 +2,7 @@
   <div>
     <el-alert type="info" :closable="false" style="margin-bottom: 10px">
       <template #title>
-        当前搜索值：<el-text tag="code">{{ JSON.stringify(searchValues) }}</el-text>
+        当前搜索值：<el-text tag="code">{{ searchValues }}</el-text>
       </template>
     </el-alert>
 
@@ -10,6 +10,9 @@
       v-model:search-values="searchValues"
       :columns="tableConfig"
       :request="getList"
+      :search="{
+        showNumber: 3
+      }"
       @search-change="handleChange"
     />
   </div>
@@ -20,7 +23,11 @@ import type { PlusColumn, PageInfo, FieldValues } from 'plus-pro-components'
 import { ElMessage } from 'element-plus'
 import { ref } from 'vue'
 
-const searchValues = ref<FieldValues>({})
+const searchValues = ref<FieldValues>({
+  status: '0',
+  name: '4name',
+  time: ''
+})
 
 const handleChange = (values: FieldValues, column: PlusColumn) => {
   ElMessage.info(`字段 "${column.label}" 变化，当前值：${JSON.stringify(values)}`)
@@ -30,9 +37,10 @@ const getList = async (
   query: Partial<PageInfo> & {
     status?: string
     name?: string
+    time?: string
   }
 ) => {
-  const { page = 1, pageSize = 20, status, name } = query || {}
+  const { page = 1, pageSize = 20, status, name, time } = query || {}
   const total = 100
   const List = Array.from({ length: total }).map((item, index) => {
     return {
@@ -40,7 +48,7 @@ const getList = async (
       name: index === 0 ? 'name'.repeat(20) : index + 'name',
       status: String(index % 4),
       tag: index === 1 ? 'success' : index === 2 ? 'warning' : index === 3 ? 'info' : 'danger',
-      time: new Date()
+      time: new Date().toString()
     }
   })
 
@@ -49,6 +57,9 @@ const getList = async (
       return false
     }
     if (name && name !== item.name) {
+      return false
+    }
+    if (time && time !== item.time) {
       return false
     }
     return true
