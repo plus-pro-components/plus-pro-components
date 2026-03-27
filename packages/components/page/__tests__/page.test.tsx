@@ -1,10 +1,17 @@
-import { describe, expect, test } from 'vitest'
-import type { PlusColumn, PageInfo } from '@plus-pro-components/types'
+import { describe, expect, test, vi } from 'vitest'
+import type { PlusColumn, PageInfo, FieldValues } from '@plus-pro-components/types'
 import ElementPlus from 'element-plus'
-import { nextTick } from 'vue'
+import { h, nextTick, ref } from 'vue'
 import { mount } from '@vue/test-utils'
 import { useTable } from '@plus-pro-components/hooks'
+import { PlusSearch } from '@plus-pro-components/components/search'
 import PlusPage from '../src/index.vue'
+
+type PlusPageExposed = {
+  setSearchFieldsValue: (values: FieldValues) => void
+  getSearchFieldsValue: (key?: keyof FieldValues) => FieldValues | FieldValues[keyof FieldValues]
+  clearSearchFieldsValue: () => void
+}
 
 describe('page/index.vue', () => {
   test('render  and instance  test', async () => {
@@ -162,8 +169,6 @@ describe('page/index.vue', () => {
     const wrapper = mount(PlusPage, {
       props: {
         columns: tableConfig,
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
         request: getList
       },
       global: {
@@ -176,9 +181,7 @@ describe('page/index.vue', () => {
     expect(wrapper.find('.plus-pagination').exists()).toBe(true)
 
     const wrapper1 = mount(
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
-      () => <PlusPage search={false} columns={tableConfig} request={getList} />,
+      () => h(PlusPage, { search: false, columns: tableConfig, request: getList }),
       {
         global: {
           plugins: [ElementPlus]
@@ -362,19 +365,20 @@ describe('page/index.vue', () => {
     ]
 
     const wrapper = mount(
-      () => (
-        <PlusPage
-          columns={columns}
-          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-          // @ts-ignore
-          request={getList}
-          table={{
-            pagination: { total: 3, modelValue: pageInfo.value },
-            actionBar: { buttons: buttons.value, showNumber: 3 },
-            dragSortable: {},
-            hasIndexColumn: true
-          }}
-          v-slots={{
+      () =>
+        h(
+          PlusPage,
+          {
+            columns,
+            request: getList,
+            table: {
+              pagination: { total: 3, modelValue: pageInfo.value },
+              actionBar: { buttons: buttons.value, showNumber: 3 },
+              dragSortable: {},
+              hasIndexColumn: true
+            }
+          },
+          {
             'action-bar-more-icon': () => 'action-bar-more-icon',
             'tooltip-icon': () => 'tooltip-icon',
             'drag-sort-icon': () => 'drag-sort-icon',
@@ -382,9 +386,8 @@ describe('page/index.vue', () => {
             'density-icon': () => 'density-icon',
             'pagination-left': () => 'pagination-left',
             extra: () => 'extra'
-          }}
-        />
-      ),
+          }
+        ),
       {
         global: {
           plugins: [ElementPlus]
@@ -398,5 +401,91 @@ describe('page/index.vue', () => {
     expect(wrapper.find('.plus-table').text()).includes('column-settings-icon')
     expect(wrapper.find('.plus-table').text()).includes('density-icon')
     expect(wrapper.find('.plus-page').text()).includes('extra')
+  })
+
+  test('v-model:searchValues and searchChange event', async () => {
+    const getList = async (_query: PageInfo & Record<string, unknown>) => {
+      return { data: [], success: true, total: 0 }
+    }
+
+    const columns: PlusColumn[] = [
+      {
+        label: '名称',
+        prop: 'name'
+      },
+      {
+        label: '状态',
+        prop: 'status',
+        valueType: 'select',
+        options: [
+          { label: '未解决', value: '0' },
+          { label: '已解决', value: '1' }
+        ]
+      }
+    ]
+
+    const searchValues = ref<FieldValues>({})
+    const searchChangeHandler = vi.fn()
+
+    const wrapper = mount(PlusPage, {
+      props: {
+        searchValues: searchValues.value,
+        'onUpdate:searchValues': (val: FieldValues) => {
+          searchValues.value = val
+        },
+        onSearchChange: searchChangeHandler,
+        columns,
+        request: getList,
+        immediate: false
+      },
+      global: {
+        plugins: [ElementPlus]
+      }
+    })
+    await nextTick()
+
+    expect(wrapper.find('.plus-search').exists()).toBe(true)
+
+    // Test initial searchValues is empty
+    expect(searchValues.value).toEqual({})
+
+    // Test setSearchFieldsValue triggers update:searchValues
+    const pageVm = wrapper.findComponent(PlusPage).vm as unknown as PlusPageExposed
+    pageVm.setSearchFieldsValue({ name: 'test', status: '1' })
+    await nextTick()
+    expect(searchValues.value).toEqual({ name: 'test', status: '1' })
+
+    wrapper.findComponent(PlusSearch).vm.$emit('change', { name: 'next' }, columns[0])
+    await nextTick()
+    expect(searchChangeHandler).toHaveBeenCalledWith({ name: 'next' }, columns[0])
+
+    // Test clearSearchFieldsValue triggers update:searchValues
+    pageVm.clearSearchFieldsValue()
+    await nextTick()
+    expect(searchValues.value).toEqual({})
+  })
+
+  test('searchValues prop initializes internal values', async () => {
+    const getList = async (_query: PageInfo & Record<string, unknown>) => {
+      return { data: [], success: true, total: 0 }
+    }
+
+    const columns: PlusColumn[] = [{ label: '名称', prop: 'name' }]
+
+    const wrapper = mount(PlusPage, {
+      props: {
+        searchValues: { name: 'initial' },
+        columns,
+        request: getList,
+        immediate: false
+      },
+      global: {
+        plugins: [ElementPlus]
+      }
+    })
+    await nextTick()
+
+    const values = (wrapper.vm as unknown as PlusPageExposed).getSearchFieldsValue()
+    expect(values).toEqual({ name: 'initial' })
   })
 })
