@@ -48,6 +48,7 @@
             :columns="item.children"
             :editable="editable"
             :table-data-length="tableDataLength"
+            :empty-value="emptyValue"
             @formChange="handleFormChange"
           >
             <template v-for="(_, key) in $slots" :key="key" #[key]="data">
@@ -65,6 +66,7 @@
           :index="$index"
           :editable="editable"
           :rest="{ column, ...rest }"
+          :empty-value="emptyValue"
           @change="data => handleChange(data, $index, column, item, rest)"
         >
           <template v-for="(_, key) in $slots" :key="key" #[key]="data">
@@ -101,6 +103,11 @@ export interface PlusTableColumnProps {
   editable?: boolean | 'click' | 'dblclick'
   tableDataLength?: number
   subPageInfo?: Partial<PageInfo>
+  /**
+   * 获取到的值为空（null,undefined,''）时返回的的默认值，优先级低于于column.emptyValue
+   * @version 0.1.31
+   */
+  emptyValue?: PlusColumn['emptyValue']
 }
 export interface PlusTableColumnEmits {
   (e: 'formChange', data: FormChangeCallBackParams): void
@@ -114,7 +121,8 @@ const props = withDefaults(defineProps<PlusTableColumnProps>(), {
   columns: () => [],
   tableDataLength: 0,
   editable: false,
-  subPageInfo: () => ({})
+  subPageInfo: () => ({}),
+  emptyValue: undefined
 })
 const emit = defineEmits<PlusTableColumnEmits>()
 

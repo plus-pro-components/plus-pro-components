@@ -65,19 +65,6 @@
     v-html="column.renderHTML(displayValue, renderParams)"
   />
 
-  <!-- 值为空 -->
-  <template
-    v-else-if="
-      (displayValue == null || displayValue === '') && isFunction(props.column.defaultRender)
-    "
-  >
-    <PlusRender
-      v-if="customFieldPropsIsReady"
-      :render="column.defaultRender"
-      :callback-value="renderParams"
-      :custom-field-props="customFieldProps"
-    />
-  </template>
   <!-- 状态显示 `select`, `radio`, `checkbox`-->
   <span
     v-else-if="selectValueTypeList.includes(column.valueType)"
@@ -101,8 +88,13 @@
               ]"
               :style="{ backgroundColor: item.color }"
             />
-            {{ item.label }}
+            {{ item.label ?? column.emptyValue ?? emptyValue ?? '' }}
           </span>
+        </template>
+
+        <!-- 为空时显示默认值  -->
+        <template v-if="!getStatus.length">
+          {{ column.emptyValue ?? emptyValue ?? '' }}
         </template>
       </template>
     </template>
@@ -122,7 +114,7 @@
       {{
         isFunction(column.formatter)
           ? column.formatter(displayValue, renderParams)
-          : getStatus.label
+          : getStatus.label || (column.emptyValue ?? emptyValue ?? '')
       }}
     </template>
   </span>
@@ -247,6 +239,12 @@ export interface PlusDisplayItemProps {
    * @version 0.1.17
    */
   formProps?: PlusFormProps
+
+  /**
+   * 获取到的值为空（null,undefined,''）时返回的的默认值，优先级高于表格的emptyValue
+   * @version 0.1.31
+   */
+  emptyValue?: PlusColumn['emptyValue']
 }
 export interface PlusTableTableColumnEmits {
   (e: 'change', data: { value: FieldValueType; prop: string; row: RecordType }): void
@@ -262,7 +260,8 @@ const props = withDefaults(defineProps<PlusDisplayItemProps>(), {
   index: 0,
   editable: false,
   rest: () => ({}),
-  formProps: () => ({})
+  formProps: () => ({}),
+  emptyValue: undefined
 })
 const emit = defineEmits<PlusTableTableColumnEmits>()
 
@@ -324,13 +323,7 @@ const hasEditIcon = computed(
 /** 多层值支持，原始值 */
 const displayValue = computed({
   get() {
-    const value = getValue(subRow.value, props.column.prop)
-    // 为空返回默认值
-    // eslint-disable-next-line eqeqeq
-    if ((value == null || value === '') && props.column.defaultValue != null) {
-      return cloneDeep(props.column.defaultValue)
-    }
-    return value
+    return getValue(subRow.value, props.column.prop)
   },
   set(value) {
     setValue(subRow.value, props.column.prop, value)
@@ -352,6 +345,11 @@ const formatterValue = computed(() => {
       return props.column.formatter(value, renderParams.value)
     }
 
+    // 为空返回默认值
+    if (value === null || value === undefined || value === '') {
+      return props.column.emptyValue ?? props.emptyValue ?? ''
+    }
+
     // 自身的 format，日期和金钱
     if (displayComponent.value.format && isFunction(displayComponent.value.format)) {
       return displayComponent.value.format(
@@ -359,6 +357,11 @@ const formatterValue = computed(() => {
         customFieldProps.value.format || customFieldProps.value.valueFormat
       )
     }
+  }
+
+  // 为空返回默认值
+  if (value === null || value === undefined || value === '') {
+    return props.column.emptyValue ?? props.emptyValue ?? ''
   }
 
   return value

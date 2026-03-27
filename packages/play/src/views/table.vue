@@ -32,7 +32,7 @@ const TestServe = {
     const data = Array.from({ length: 4 }).map((item, index) => {
       return {
         id: index,
-        name: index < 2 ? '' : index + 'name',
+        // name: index < 2 ? '' : index + 'name',
         status: String(index % 3),
         rate: index > 3 ? 2 : 3.5,
         switch: index % 2 === 0 ? true : false,
@@ -54,6 +54,7 @@ const tableConfig = ref<PlusColumn[]>([
     label: '名称',
     prop: 'name',
     width: 120,
+    emptyValue: '/',
     formProps: {
       // 添加校验
       rules: {

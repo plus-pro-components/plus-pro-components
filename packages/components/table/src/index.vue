@@ -109,6 +109,7 @@
             :editable="editable"
             :sub-page-info="subPageInfo"
             :table-data-length="tableDataLength"
+            :empty-value="emptyValue"
             @formChange="handleFormChange"
           >
             <template v-for="(_, key) in $slots" :key="key" #[key]="data">
@@ -249,7 +250,8 @@ const props = withDefaults(defineProps<PlusTableProps>(), {
   radioProps: undefined,
   expandTableColumnProps: () => ({}),
   editable: false,
-  adaptive: false
+  adaptive: false,
+  emptyValue: undefined
 })
 const emit = defineEmits<PlusTableEmits>()
 

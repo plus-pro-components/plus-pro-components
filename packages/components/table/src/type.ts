@@ -539,6 +539,12 @@ export type PlusTableSelfProps = {
    * @version 0.1.23
    */
   filterTableHeaderOverflowLabelLength?: number
+
+  /**
+   * 获取到的值为空（null,undefined,''）时返回的的默认值，优先级低于于column.emptyValue
+   * @version 0.1.31
+   */
+  emptyValue?: PlusColumn['emptyValue']
 }
 
 export type PlusTableProps = PlusTableSelfProps & Partial<TableProps<any[]>> & RecordType

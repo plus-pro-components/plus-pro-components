@@ -294,14 +294,10 @@ export interface CommonType {
   children?: PlusColumn[]
 
   /**
-   * 获取到的值为空时返回的的默认值
+   * 获取到的值为空（null,undefined,''）时返回的的默认值，优先级高于表格的emptyValue
+   * @version 0.1.31
    */
-  defaultValue?: any
-
-  /**
-   * 获取到值为空时渲染的的内容
-   */
-  defaultRender?: (data: { row: RecordType; column: PlusColumn; index: number }) => RenderTypes
+  emptyValue?: string | number
 }
 
 /**
