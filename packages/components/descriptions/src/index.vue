@@ -1,5 +1,6 @@
 <template>
   <el-descriptions
+    :key="subColumnsKey"
     :title="title"
     :column="column"
     class="plus-description"
@@ -8,80 +9,80 @@
     v-bind="$attrs"
   >
     <slot>
-      <template v-for="(item, index) in subColumns" :key="item.prop">
-        <el-descriptions-item
-          :label="getLabel(item.label)"
-          :class-name="
-            (item.descriptionsItemProps?.className || '') +
-            ' plus-description__name  plus-description__content'
-          "
-          :label-class-name="
-            (item.descriptionsItemProps?.labelClassName || '') +
-            ' plus-description__label' +
-            (getIsRequired(item, index) ? ' is-required' : '')
-          "
-          v-bind="item.descriptionsItemProps || descriptionsItemProps"
-        >
-          <template #label>
-            <component
-              :is="item.renderDescriptionsLabel"
-              v-if="item.renderDescriptionsLabel && isFunction(item.renderDescriptionsLabel)"
-              :label="getLabel(item.label)"
-              :column="item"
-              :row="data"
-            />
-
-            <!-- plus-desc-label-* -->
-            <template v-else-if="$slots[getDescLabelSlotName(item.prop)]">
-              <slot
-                :name="getDescLabelSlotName(item.prop)"
-                :column="item"
-                :row="data"
-                :label="getLabel(item.label)"
-              />
-            </template>
-
-            <!-- normal -->
-            <template v-else>{{ getLabel(item.label) }}</template>
-          </template>
-
-          <!-- 第一优先级表单 -->
-          <template v-if="editable">
-            <PlusDisplayItem
-              ref="plusDisplayItemInstance"
-              :column="item"
-              :row="data"
-              editable
-              :form-props="formProps"
-              @change="data => handleChange(data, index, item)"
-            />
-          </template>
-
-          <!-- renderDescriptionsItem -->
+      <el-descriptions-item
+        v-for="(item, index) in subColumns"
+        :key="item.prop"
+        :label="getLabel(item.label)"
+        :class-name="
+          (item.descriptionsItemProps?.className || '') +
+          ' plus-description__name  plus-description__content'
+        "
+        :label-class-name="
+          (item.descriptionsItemProps?.labelClassName || '') +
+          ' plus-description__label' +
+          (getIsRequired(item, index) ? ' is-required' : '')
+        "
+        v-bind="item.descriptionsItemProps || descriptionsItemProps"
+      >
+        <template #label>
           <component
-            :is="item.renderDescriptionsItem"
-            v-else-if="item.renderDescriptionsItem && isFunction(item.renderDescriptionsItem)"
-            :value="getDisplayValue(item.prop)"
+            :is="item.renderDescriptionsLabel"
+            v-if="item.renderDescriptionsLabel && isFunction(item.renderDescriptionsLabel)"
+            :label="getLabel(item.label)"
             :column="item"
             :row="data"
           />
 
-          <!-- plus-desc-* -->
-          <template v-else-if="$slots[getDescSlotName(item.prop)]">
+          <!-- plus-desc-label-* -->
+          <template v-else-if="hasDescLabelSlot(item.prop)">
             <slot
-              :name="getDescSlotName(item.prop)"
+              :name="getDescLabelSlotName(item.prop)"
               :column="item"
               :row="data"
-              :value="getDisplayValue(item.prop)"
+              :label="getLabel(item.label)"
             />
           </template>
 
           <!-- normal -->
-          <template v-else>
-            <PlusDisplayItem :column="item" :row="data" />
-          </template>
-        </el-descriptions-item>
-      </template>
+          <template v-else>{{ getLabel(item.label) }}</template>
+        </template>
+
+        <!-- 第一优先级表单 -->
+        <template v-if="editable">
+          <PlusDisplayItem
+            ref="plusDisplayItemInstance"
+            :column="item"
+            :row="data"
+            editable
+            :form-props="formProps"
+            @change="data => handleChange(data, index, item)"
+          />
+        </template>
+
+        <!-- renderDescriptionsItem -->
+        <component
+          :is="item.renderDescriptionsItem"
+          v-else-if="item.renderDescriptionsItem && isFunction(item.renderDescriptionsItem)"
+          :value="getDisplayValue(item.prop)"
+          :column="item"
+          :row="data"
+        />
+
+        <!-- plus-desc-* -->
+        <template v-else-if="hasDescSlot(item.prop)">
+          <slot
+            :name="getDescSlotName(item.prop)"
+            :column="item"
+            :row="data"
+            :value="getDisplayValue(item.prop)"
+          />
+        </template>
+
+        <!-- normal -->
+        <template v-else>
+          <PlusDisplayItem :column="item" :row="data" />
+        </template>
+      </el-descriptions-item>
     </slot>
 
     <template #title>
@@ -96,7 +97,7 @@
 
 <script lang="ts" setup>
 import type { ExtractPropTypes } from 'vue'
-import { computed, unref, ref, shallowRef, watch } from 'vue'
+import { computed, unref, ref, shallowRef, watch, useSlots } from 'vue'
 import type { descriptionProps } from 'element-plus'
 import { ElDescriptions, ElDescriptionsItem } from 'element-plus'
 import type {
@@ -176,6 +177,7 @@ const props = withDefaults(defineProps<PlusDescriptionsProps>(), {
 })
 
 const emit = defineEmits<PlusDescriptionsEmits>()
+const slots = useSlots()
 
 const plusDisplayItemInstance = ref<PlusDisplayItemInstance[] | null>()
 
@@ -191,6 +193,11 @@ const subColumns = computed(() =>
 )
 
 const getDisplayValue = (prop: string) => getValue(props.data, prop)
+
+const hasDescSlot = (prop: string) => !!slots[getDescSlotName(prop)]
+const hasDescLabelSlot = (prop: string) => !!slots[getDescLabelSlotName(prop)]
+
+const subColumnsKey = computed(() => subColumns.value.map(i => i.prop).join(','))
 
 /**
  *  设置表单ref
@@ -242,7 +249,6 @@ const handleChange = (
   item: PlusColumn
 ) => {
   const formChangeCallBackParams = { ...data, index, column: { ...item } }
-  console.log(formChangeCallBackParams, 'formChangeCallBackParams')
   emit('formChange', formChangeCallBackParams)
 }
 

@@ -473,7 +473,7 @@ const displayComponentProps = computed<any>(() => {
     // progress
     ...(props.column.valueType === 'progress'
       ? {
-          percentage: formatterValue.value
+          percentage: formatterValue.value || 0
         }
       : null),
     // link
