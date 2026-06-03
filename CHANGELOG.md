@@ -1,3 +1,22 @@
+## [v0.1.31](https://github.com/plus-pro-components/plus-pro-components/compare/v0.1.30...v0.1.31) (2026-06-03)
+
+### ✨ Features
+
+- **all:** :sparkles: redesign the "empty Value"([eda116d](https://github.com/plus-pro-components/plus-pro-components/commit/eda116d)) by@xiaofei
+- **all:** Merge pull request [#346](https://github.com/plus-pro-components/plus-pro-components/pull/346) from IceyWu/page([0db4e6e](https://github.com/plus-pro-components/plus-pro-components/commit/0db4e6e)) by@xiaofei
+- **components:** PlusPage add reactive search value support with v-model:search-values binding and the searchChange even([ffc96a7](https://github.com/plus-pro-components/plus-pro-components/commit/ffc96a7)) by@IceyWu
+- **all:** Merge pull request [#344](https://github.com/plus-pro-components/plus-pro-components/pull/344) from fuhahaha/dev([a9d262d](https://github.com/plus-pro-components/plus-pro-components/commit/a9d262d)) by@xiaofei
+- **component[form-item,display-item]:** add default values setting about([3ff05a8](https://github.com/plus-pro-components/plus-pro-components/commit/3ff05a8)) by@boothezong
+- **all:** Merge pull request [#339](https://github.com/plus-pro-components/plus-pro-components/pull/339) from fuhahaha/dev([a64dac2](https://github.com/plus-pro-components/plus-pro-components/commit/a64dac2)) by@xiaofei
+- **all:** Merge branch 'plus-pro-components:dev' into dev([2a48fc0](https://github.com/plus-pro-components/plus-pro-components/commit/2a48fc0)) by@fuhahaha
+- **all:** Merge pull request [#338](https://github.com/plus-pro-components/plus-pro-components/pull/338) from fuhahaha/dev([3d9bf6e](https://github.com/plus-pro-components/plus-pro-components/commit/3d9bf6e)) by@xiaofei
+- **all:** Merge pull request [#337](https://github.com/plus-pro-components/plus-pro-components/pull/337) from bryqiu/dev([df1c6ad](https://github.com/plus-pro-components/plus-pro-components/commit/df1c6ad)) by@xiaofei
+- **locale:** 添加`zh-hk`繁体中文语言包([5f6f613](https://github.com/plus-pro-components/plus-pro-components/commit/5f6f613)) by@fifteen
+
+### 🐛 Bug Fixes
+
+- **components:** :bug: fix PlusDescriptions show issure([ee7ba72](https://github.com/plus-pro-components/plus-pro-components/commit/ee7ba72)) by@xiaofei
+
 ## [v0.1.30](https://github.com/plus-pro-components/plus-pro-components/compare/v0.1.29...v0.1.30) (2025-10-15)
 
 ### ✨ Features
