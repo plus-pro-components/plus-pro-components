@@ -151,6 +151,68 @@ describe('table/index.vue', () => {
     expect(wrapper.find('.el-tag').exists()).toBe(false)
   })
 
+  test('special columns order test', async () => {
+    const columns: PlusColumn[] = [
+      {
+        label: 'name',
+        width: 120,
+        prop: 'name'
+      }
+    ]
+
+    const tableData = [
+      {
+        id: 1,
+        name: 'name'
+      }
+    ]
+
+    const wrapper = mount(
+      () => (
+        <PlusTable
+          is-radio
+          is-selection
+          has-index-column
+          has-expand
+          drag-sortable
+          columns={columns}
+          tableData={tableData}
+          specialColumnsOrder={['expand', 'selection', 'index', 'dragSort', 'radio']}
+          expandTableColumnProps={{ className: 'custom-expand-column' }}
+          selectionTableColumnProps={{ className: 'custom-selection-column' }}
+          indexTableColumnProps={{ className: 'custom-index-column', fixed: false }}
+          dragSortableTableColumnProps={{ className: 'custom-drag-sort-column' }}
+          radioTableColumnProps={{ className: 'custom-radio-column' }}
+          v-slots={{
+            expand: () => 'expand'
+          }}
+        />
+      ),
+      {
+        global: {
+          plugins: [ElementPlus]
+        }
+      }
+    )
+
+    await nextTick()
+    await new Promise(resolve => setTimeout(resolve, 0))
+
+    const columnOrder = wrapper
+      .findAll('th')
+      .map(item => item.classes())
+      .map(classList => {
+        if (classList.includes('custom-expand-column')) return 'expand'
+        if (classList.includes('custom-selection-column')) return 'selection'
+        if (classList.includes('custom-index-column')) return 'index'
+        if (classList.includes('custom-drag-sort-column')) return 'dragSort'
+        if (classList.includes('custom-radio-column')) return 'radio'
+        return 'column'
+      })
+
+    expect(columnOrder.slice(0, 5)).toEqual(['expand', 'selection', 'index', 'dragSort', 'radio'])
+  })
+
   test('render and renderHeader test', async () => {
     const render = (value: FieldValueType) =>
       h(

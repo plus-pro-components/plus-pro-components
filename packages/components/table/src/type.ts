@@ -393,6 +393,12 @@ export interface PlusTableState {
 }
 
 /**
+ * 表格内置特殊列类型
+ * @version v0.1.32
+ */
+export type TableSpecialColumnType = 'radio' | 'selection' | 'index' | 'dragSort' | 'expand'
+
+/**
  * 列设置类型
  * @version v0.1.20 新增reset,默认：true
  */
@@ -490,6 +496,11 @@ export type PlusTableSelfProps = {
   isRadio?: boolean
   /** 是否需要展开行*/
   hasExpand?: boolean
+  /**
+   * 内置特殊列展示顺序
+   * @version 0.1.32
+   */
+  specialColumnsOrder?: TableSpecialColumnType[]
   /** loading状态*/
   loadingStatus?: boolean
   height?: TableProps<any[]>['height']

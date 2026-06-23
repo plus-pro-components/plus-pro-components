@@ -53,54 +53,66 @@
     >
       <!-- 默认插槽 -->
       <template #default>
-        <!-- 单选选择栏 -->
-        <el-table-column v-if="isRadio" key="radio-selection" v-bind="radioTableColumnProps">
-          <template #default="scoped">
-            <PlusRadio
-              :model-value="isEqual(radioRow, scoped.row)"
-              :options="[{ value: true }]"
-              v-bind="radioProps"
-              @change="value => handleRadioChange(value, scoped.row, scoped.$index)"
-            />
-          </template>
-        </el-table-column>
-        <!-- 多选选择栏 -->
-        <el-table-column
-          v-if="isSelection"
-          key="selection"
-          type="selection"
-          v-bind="selectionTableColumnProps"
-        />
+        <!-- 内置特殊列，支持通过 specialColumnsOrder 调整展示顺序 -->
+        <template v-for="columnType in sortedSpecialColumns" :key="columnType">
+          <!-- 单选选择栏 -->
+          <el-table-column
+            v-if="columnType === 'radio'"
+            key="radio-selection"
+            v-bind="radioTableColumnProps"
+          >
+            <template #default="scoped">
+              <PlusRadio
+                :model-value="isEqual(radioRow, scoped.row)"
+                :options="[{ value: true }]"
+                v-bind="radioProps"
+                @change="value => handleRadioChange(value, scoped.row, scoped.$index)"
+              />
+            </template>
+          </el-table-column>
 
-        <!-- 序号栏 -->
-        <PlusTableTableColumnIndex
-          v-if="hasIndexColumn"
-          :index-content-style="indexContentStyle"
-          :index-table-column-props="indexTableColumnProps"
-          :page-info="(pagination as PlusPaginationProps)?.modelValue"
-        />
+          <!-- 多选选择栏 -->
+          <el-table-column
+            v-if="columnType === 'selection'"
+            key="selection"
+            type="selection"
+            v-bind="selectionTableColumnProps"
+          />
 
-        <!-- 拖拽行 -->
-        <PlusTableColumnDragSort
-          v-if="dragSortable"
-          :sortable="dragSortable"
-          :drag-sortable-table-column-props="dragSortableTableColumnProps"
-          :table-instance="tableInstance"
-          @dragSortEnd="handleDragSortEnd"
-        >
-          <template v-if="$slots['drag-sort-icon']" #drag-sort-icon>
-            <slot name="drag-sort-icon" />
-          </template>
-        </PlusTableColumnDragSort>
+          <!-- 序号栏 -->
+          <PlusTableTableColumnIndex
+            v-if="columnType === 'index'"
+            :index-content-style="indexContentStyle"
+            :index-table-column-props="indexTableColumnProps"
+            :page-info="(pagination as PlusPaginationProps)?.modelValue"
+          />
 
-        <!-- 展开行 -->
-        <el-table-column v-if="hasExpand" type="expand" v-bind="expandTableColumnProps">
-          <template #default="scoped">
-            <div class="plus-table-expand-col">
-              <slot name="expand" :index="scoped.$index" v-bind="scoped" />
-            </div>
-          </template>
-        </el-table-column>
+          <!-- 拖拽行 -->
+          <PlusTableColumnDragSort
+            v-if="columnType === 'dragSort'"
+            :sortable="dragSortable"
+            :drag-sortable-table-column-props="dragSortableTableColumnProps"
+            :table-instance="tableInstance"
+            @dragSortEnd="handleDragSortEnd"
+          >
+            <template v-if="$slots['drag-sort-icon']" #drag-sort-icon>
+              <slot name="drag-sort-icon" />
+            </template>
+          </PlusTableColumnDragSort>
+
+          <!-- 展开行 -->
+          <el-table-column
+            v-if="columnType === 'expand'"
+            type="expand"
+            v-bind="expandTableColumnProps"
+          >
+            <template #default="scoped">
+              <div class="plus-table-expand-col">
+                <slot name="expand" :index="scoped.$index" v-bind="scoped" />
+              </div>
+            </template>
+          </el-table-column>
+        </template>
 
         <slot name="default">
           <!--配置渲染栏  -->
@@ -211,7 +223,8 @@ import type {
   PlusTableEmits,
   TableFormRefRow,
   FormChangeCallBackParams,
-  FilterTableHeaderEventType
+  FilterTableHeaderEventType,
+  TableSpecialColumnType
 } from './type'
 
 defineOptions({
@@ -249,6 +262,7 @@ const props = withDefaults(defineProps<PlusTableProps>(), {
   defaultSelectedRadioRow: undefined,
   radioProps: undefined,
   expandTableColumnProps: () => ({}),
+  specialColumnsOrder: () => ['radio', 'selection', 'index', 'dragSort', 'expand'],
   editable: false,
   adaptive: false,
   emptyValue: undefined
@@ -279,6 +293,34 @@ const __tableData = computed(() => cachedTableData.value)
 const tableDataLength = computed(() => __tableData.value.length)
 
 const hasAdaptive = computed(() => typeof props.height === 'undefined' && props.adaptive)
+
+const defaultSpecialColumnsOrder: TableSpecialColumnType[] = [
+  'radio',
+  'selection',
+  'index',
+  'dragSort',
+  'expand'
+]
+
+const activeSpecialColumns = computed<TableSpecialColumnType[]>(() => {
+  const columns: TableSpecialColumnType[] = []
+  if (props.isRadio) columns.push('radio')
+  if (props.isSelection) columns.push('selection')
+  if (props.hasIndexColumn) columns.push('index')
+  if (props.dragSortable) columns.push('dragSort')
+  if (props.hasExpand) columns.push('expand')
+  return columns
+})
+
+const sortedSpecialColumns = computed<TableSpecialColumnType[]>(() => {
+  // 只排序已启用的特殊列，未写入配置的启用列按默认顺序追加
+  const order = [...(props.specialColumnsOrder || []), ...defaultSpecialColumnsOrder]
+  const orderedColumns = order.filter((item, index) => order.indexOf(item) === index)
+
+  return orderedColumns.filter(item => activeSpecialColumns.value.includes(item))
+})
+
+console.log('sortedSpecialColumns', sortedSpecialColumns.value)
 
 /**
  * 表单的ref
