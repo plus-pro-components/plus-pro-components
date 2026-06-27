@@ -5,7 +5,7 @@ import VueJsx from '@vitejs/plugin-vue-jsx'
 export default defineConfig({
   plugins: [Vue(), VueJsx()],
   optimizeDeps: {
-    disabled: true
+    noDiscovery: true
   },
   test: {
     clearMocks: true,
