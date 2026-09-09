@@ -43,6 +43,12 @@
     margin-right: 4px;
     margin-top: 1px;
     margin-bottom: 1px;
+    max-width: 100%;
+    span {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
   }
 
   @include e(input) {
