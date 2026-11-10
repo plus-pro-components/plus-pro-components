@@ -48,8 +48,8 @@ importers:
         specifier: 0.24.0
         version: 0.24.0
       lodash-es:
-        specifier: ^4.17.21
-        version: 4.17.21
+        specifier: ^4.18.1
+        version: 4.18.1
       sortablejs:
         specifier: ^1.15.0
         version: 1.15.0
@@ -377,8 +377,8 @@ importers:
         specifier: ^2.1.0
         version: 2.1.0(vue@3.3.4)
       lodash-es:
-        specifier: ^4.17.21
-        version: 4.17.21
+        specifier: ^4.18.1
+        version: 4.18.1
       sortablejs:
         specifier: ^1.15.0
         version: 1.15.0
@@ -449,8 +449,8 @@ importers:
         specifier: ^3.0.5
         version: 3.0.5
       lodash-es:
-        specifier: ^4.17.21
-        version: 4.17.21
+        specifier: ^4.18.1
+        version: 4.18.1
       numeral:
         specifier: ^2.0.6
         version: 2.0.6
@@ -4641,6 +4641,9 @@ packages:
 
   lodash-es@4.17.21:
     resolution: {integrity: sha512-mKnC+QJ9pWVzv+C4/U3rRsHapFfHvQFoFB92e52xeyGMcX6/OlIl78je1u8vePzYZSkkogMPJ2yjxxsb89cxyw==}
+
+  lodash-es@4.18.1:
+    resolution: {integrity: sha512-J8xewKD/Gk22OZbhpOVSwcs60zhd95ESDwezOFuA3/099925PdHJ7OFHNTGtajL3AlZkykD32HykiMo+BIBI8A==}
 
   lodash-unified@1.0.3:
     resolution: {integrity: sha512-WK9qSozxXOD7ZJQlpSqOT+om2ZfcT4yO+03FuzAHD0wF6S0l0090LRPDx3vhTTLZ8cFKpBn+IOcVXK6qOcIlfQ==}
@@ -10533,8 +10536,8 @@ snapshots:
       dayjs: 1.11.7
       escape-html: 1.0.3
       lodash: 4.17.21
-      lodash-es: 4.17.21
-      lodash-unified: 1.0.3(@types/lodash-es@4.17.7)(lodash-es@4.17.21)(lodash@4.17.21)
+      lodash-es: 4.18.1
+      lodash-unified: 1.0.3(@types/lodash-es@4.17.7)(lodash-es@4.18.1)(lodash@4.17.21)
       memoize-one: 6.0.0
       normalize-wheel-es: 1.2.0
       vue: 3.3.4
@@ -11971,11 +11974,19 @@ snapshots:
 
   lodash-es@4.17.21: {}
 
+  lodash-es@4.18.1: {}
+
   lodash-unified@1.0.3(@types/lodash-es@4.17.7)(lodash-es@4.17.21)(lodash@4.17.21):
     dependencies:
       '@types/lodash-es': 4.17.7
       lodash: 4.17.21
       lodash-es: 4.17.21
+
+  lodash-unified@1.0.3(@types/lodash-es@4.17.7)(lodash-es@4.18.1)(lodash@4.17.21):
+    dependencies:
+      '@types/lodash-es': 4.17.7
+      lodash: 4.17.21
+      lodash-es: 4.18.1
 
   lodash.camelcase@4.3.0: {}
 
